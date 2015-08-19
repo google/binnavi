@@ -1,0 +1,157 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" dir="ltr">
+
+<!-- #BeginTemplate "../master_in.dwt" -->
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="Content-Language" content="en-us" />
+<!-- #BeginEditable "doctitle" -->
+<title>zynamics BinNavi 5.0 Manual - Global Settings</title>
+<style type="text/css">
+
+
+
+.style1 {
+	text-align: center;
+}
+</style>
+<!-- #EndEditable -->
+<link rel="stylesheet" type="text/css" title="CSS" href="../styles/style1.css" media="screen" />
+<style type="text/css">
+</style>
+</head>
+
+<body style="background-image: url('../images/binnaviicon.png')">
+
+<!-- Begin Container -->
+<div id="container">
+	<!-- Begin Masthead -->
+	<div id="masthead">
+		<img src="../images/binnavi_logo4.png" alt="BinNavi Logo"/>
+	</div>
+	<!-- End Masthead -->
+	<!-- Begin iMenu -->
+	<div id="navigation">
+		<ul>
+			<li><a href="../index.htm">Index</a></li>
+			<li><a href="installation.htm">Installation</a></li>
+			<li><a href="usage.htm">Usage</a></li>
+			<li><a href="debugging.htm">Debugging</a></li>
+			<li><a href="scripting.htm">Scripting</a></li>
+			<li><a href="tutorial.htm">Tutorial</a></li>
+			<li><a href="faq.htm">FAQ</a></li>
+			<li><a href="about.htm">About</a></li>
+		</ul>
+	</div>
+	<!-- End iMenu -->
+	<!-- Begin Left Column -->
+	<div id="column_lg">
+		<!-- #BeginEditable "content" -->
+		<h2>Global Settings</h2>
+		<p>The global settings dialog is used to configure settings that are used globally
+		in BinNavi. These settings are specific to your BinNavi installation and are stored
+		locally on your file system.</p>
+
+		<h3>Description of the global settings</h3>
+		
+		<h4>General</h4>
+		
+		<p>The General tab is used to configure general BinNavi settings that do not fit into the other 
+		categories.</p>
+		
+		<p class="style1"><img alt="" src="../images/global_settings_general.png" /></p>
+		
+		<ul>
+			<li><span class="gui_ref">IDA Pro Installation Directory</span>: The location of the IDA Pro 
+			installation directory that is used to export data from IDA Pro to BinNavi. 
+			BinNavi executes either the 32 bit IDA executable for 32 bit 
+			disassemblies or the 64 bit IDA executable for 64 bit disassemblies 
+			to import an IDB 
+			file into the BinNavi PostgreSQL database.</li>
+			<li><span class="gui_ref">Your E-Mail address</span>: We use this 
+			e-mail address to get in contact with you after you have filed a bug 
+			report automatically through one of the error dialogs.</li>
+			<li><span class="gui_ref">Default Scripting Language</span>: The 
+			selected scripting language is used by default when you open new 
+			scripting dialogs. As we currently only support python as scripting 
+			language python is the only selectable scripting language.</li>
+			<li><span class="gui_ref">Log Level</span>: Used to configure the 
+			logging behavior of BinNavi. </li>
+			<li><span class="gui_ref">Log File</span>: The location where the 
+			log file can be found.</li>
+		</ul>
+		
+		<h4>Colors</h4>
+		
+		<p>The Colors tab is used to configure colors used in the main window, the graph
+		window, the debugger, and other places.</p>
+		
+		<p class="style1"><img alt="" src="../images/global_settings_colors.png" /></p>
+		
+		<ul>
+			<li><span class="gui_ref">Normal Function</span>: Color used to display normal functions in the main window tables.</li>
+			<li><span class="gui_ref">Imported Function</span>: Color used to display imported functions in the main window tables.</li>
+			<li><span class="gui_ref">Library Function</span>: Color used to display library functions in the main window tables.</li>
+			<li><span class="gui_ref">Thunk Function</span>: Color used to display thunk functions in the main window tables.</li>
+			<li><span class="gui_ref">Unknown Function</span>: Color used to display unknown functions in the main window tables.</li>
+			<li><span class="gui_ref">Addresses</span>: Color used to display addresses in disassembled code.</li>
+			<li><span class="gui_ref">Mnemonics</span>: Color used to display mnemonics in disassembled code.</li>
+			<li><span class="gui_ref">Immediates</span>: Color used to display immediates in disassembled code.</li>
+			<li><span class="gui_ref">Registers</span>: Color used to display 
+			registers in disassembled code.</li>
+			<li><em class="gui_ref">Functions</em>: Color used to display 
+			function references in disassembled code.</li>
+			<li><em class="gui_ref">Variables</em>: Color used to display 
+			variable names in disassembled&nbsp; code.</li>
+			<li><span class="gui_ref">Expression List</span>: Color used to display expression lists in disassembled code.</li>
+			<li><span class="gui_ref">Memory References</span>: Color used to display memory references in disassembled code.</li>
+			<li><span class="gui_ref">Operators</span>: Color used to display operators in disassembled code.</li>
+			<li><span class="gui_ref">Operand Separators</span>: Color used to display operand separators in disassembled code.</li>
+			<li><span class="gui_ref">Prefixes</span>: Color used to display prefixes in disassembled code.</li>
+			<li><span class="gui_ref">Basic Blocks</span>: Color used to display 
+			the basic blocks in native views.</li>
+			<li><span class="gui_ref">Unconditional Jumps</span>: Edge color used to display unconditional jumps.</li>
+			<li><span class="gui_ref">Conditional Jumps (Taken)</span>: Edge color used to display taken conditional jumps</li>
+			<li><span class="gui_ref">Conditional Jumps (Not Taken)</span>: Edge color used to display untaken conditional jumps</li>
+			<li><span class="gui_ref">Entering Inlined Functions</span>: Edge color used to display edges at the start of an inlined function.</li>
+			<li><span class="gui_ref">Leaving Inlined Functions</span>: Edge color used to display edges at the end of an inlined function.</li>
+			<li><span class="gui_ref">Switches</span>: Edge color used to 
+			display edges that belong to switch statements.</li>
+			<li><span class="gui_ref">Edges to comment nodes</span>: Edge color 
+			used to display edges that connect nodes with comment nodes.</li>
+			<li><span class="gui_ref">Active Line</span>: Color used to display the active line while debugging.</li>
+			<li><span class="gui_ref">Active Breakpoint</span>: Color used to display active breakpoints in the disassembled code.</li>
+			<li><span class="gui_ref">Inactive Breakpoint</span>: Color used to display inactive breakpoints in the disassembled code.</li>
+			<li><span class="gui_ref">Enabled Breakpoint</span>: Color used to display enabled breakpoints in the disassembled code.</li>
+			<li><span class="gui_ref">Disabled Breakpoint</span>: Color used to display disabled breakpoints in the disassembled code.</li>
+			<li><span class="gui_ref">Hit Breakpoint</span>: Color used to display hit breakpoints in the disassembled code.</li>
+			<li><span class="gui_ref">Invalid Breakpoint</span>: Color used to display invalid breakpoints in the disassembled code.</li>
+			<li><span class="gui_ref">Deleting Breakpoint</span>: Color used to display deleting breakpoints in the disassembled code.</li>
+		</ul>
+		
+		<!-- #EndEditable --></div>
+	<!-- End Left Column -->
+	<!-- Begin Right Column -->
+	<!-- End Right Column -->
+	<!-- Begin Footer -->
+	<div id="footer">
+		<p><a href="../index.htm">Index</a>  
+		| <a href="installation.htm">Installation</a> |
+		<a href="usage.htm">Usage</a> |
+		<a href="debugging.htm">Debugging</a> |
+		<a href="scripting.htm">Scripting</a> |
+		<a href="tutorial.htm">Tutorial</a> |
+		<a href="faq.htm">FAQ</a> |
+		<a href="about.htm">About</a></p>
+		<p>Copyright 2005 - 201<span lang="de">4</span>: <span lang="de">Google</span>
+		<span lang="de">Inc.</span></p>
+	</div>
+	<!-- End Footer --></div>
+<!-- End Container -->
+
+</body>
+
+<!-- #EndTemplate -->
+
+</html>

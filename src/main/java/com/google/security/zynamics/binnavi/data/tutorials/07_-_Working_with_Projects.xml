@@ -1,0 +1,150 @@
+<tutorial>
+  <name>Working with Projects</name>
+  <description>Most of the time when you use BinNavi you will probably work with
+    single modules. However, single modules are not enough to analyze how
+    different modules interact with each other. To analyze complex processes
+    built from more than one module you need to use BinNavi projects. The
+    concept of projects allows you to combine different modules to address
+    spaces and different address spaces to projects.&lt;br/&gt; &lt;br/&gt;
+In this tutorial you will learn about the following concepts:&lt;br/&gt;
+&lt;ul&gt;
+&lt;li&gt;Setting up Projects&lt;/li&gt;
+&lt;li&gt;Configuring Projects&lt;/li&gt;
+&lt;li&gt;Forwarding Functions&lt;/li&gt;
+&lt;li&gt;Saving Project Views&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+  <steps>
+    <step>
+      <action>0</action>
+      <description>This tutorial shows you how to create projects and address
+        spaces and how to fill address spaces with modules that can then be
+        analyzed together.&lt;br/&gt; &lt;br/&gt;
+Please click on the Next button to continue.
+</description>
+    </step>
+    <step>
+      <action>0</action>
+      <allowed>-2369159756337681560</allowed>
+      <allowed>-9044865055464757942</allowed>
+      <allowed>8784926684855833953</allowed>
+      <allowed>-7789885643476931774</allowed>
+      <allowed>-8750454886776173497</allowed>
+      <allowed>-5178343179269965998</allowed>
+      <allowed>2804136480786366059</allowed>
+      <description>This tutorial requires you to have a configured database and
+        you need to have a module created from the primes.exe sample file from
+        the tutorials directory of your BinNavi installation. The module created
+        from primes.exe will be used throughout the tutorial and you need to
+        work with this module if you want to understand all aspects of this
+        tutorial.&lt;br/&gt; &lt;br/&gt;
+If you do not have a database with the primes.exe module imported please create
+the database and/or import primes.exe now. If you are ready to work with the
+primes.exe module please click on the next Next button to continue.
+</description>
+    </step>
+    <step>
+      <action>0</action>
+      <allowed>-2369159756337681560</allowed>
+      <allowed>-9044865055464757942</allowed>
+      <allowed>8784926684855833953</allowed>
+      <allowed>-7789885643476931774</allowed>
+      <allowed>-8750454886776173497</allowed>
+      <allowed>-5178343179269965998</allowed>
+      <allowed>2804136480786366059</allowed>
+      <description>In addition to primes.exe this tutorial requires you to have
+        a second module. Please disassemble your kernel32.dll from your Windows
+        directory, import the data from IDA Pro, and load the BinNavi
+        module.&lt;br/&gt; &lt;br/&gt;
+When you have loaded kernel32.dll please click on the Next button to continue.
+</description>
+    </step>
+    <step>
+      <action>391525432360144407</action>
+      <description>To create a new project please right-click on the Projects
+        folder in the Project tree and click on the menu Create Project.
+      </description>
+    </step>
+    <step>
+      <action>0</action>
+      <description>By default each project contains one address space. An
+        address space in BinNavi is equivalent to an address space in a target
+        process and you can place your main module as well as all the linked
+        library the target process uses into the address space. When you have
+        done this you can treat the content of the address space just like one
+        large module. That allows you to do static and dynamic cross-module
+        analysis.&lt;br/&gt; &lt;br/&gt;
+Please add the modules primes.exe and kernel32.dll to the default address space
+of the module you created now. You can do this by drag &amp; dropping the
+modules either from the Project Tree or from any of the tables where the modules
+are listed onto the Project Tree node of the address space.&lt;br/&gt;
+&lt;br/&gt;
+When you have added all modules you want to add please click the Next button to
+continue.  </description>
+    </step>
+    <step>
+      <action>0</action>
+      <allowed>8225196392842501265</allowed>
+      <allowed>4074453405645283084</allowed>
+      <description>One of the big advantages of using projects is that you can
+        forward imported functions of one module to real functions of another
+        module (mostly dynamically loaded libraries). This forwarding makes it
+        possible to treat imported functions completely transparently meaning
+        that whenever an imported function is analyzed, the real function of the
+        library is used instead.&lt;br/&gt; &lt;br/&gt;
+Let's forward the imported functions of primes.exe to kernel32.dll
+now.&lt;br/&gt; &lt;br/&gt;
+If you have disassembled kernel32.dll without debug symbols you can do batch
+forwarding. To do so you need to right-click on the module node of primes.exe
+and click on the menu Resolve Imported Functions. In the dialog that appears you
+select the imported library and to which BinNavi module the imported functions
+should be forwarded.&lt;br/&gt; &lt;br/&gt;
+If you have disassembled kernel32.dll with debug symbols you can not do batch
+forwarding because the names of the functions inside kernel32.dll are mangled.
+This means that a function like Sleep is called _Sleep@4 due to additional
+information from the debug symbols. In this case you need to right-click on a
+function name to forward a function. This needs to be repeated for every
+function.&lt;br/&gt; &lt;br/&gt;
+Please forward the imported kernel32.dll functions of primes.exe to the BinNavi
+module kernel32.dll now. If you only want to forward a single function please
+forward IsDebuggerPresent.  </description>
+    </step>
+    <step>
+      <action>-7167187997929184030</action>
+      <action>-5295816457628962096</action>
+      <allowed>8225196392842501265</allowed>
+      <allowed>4074453405645283084</allowed>
+      <description>To see one of the effects of this function forwarding please
+        open the function ___report_gsfailure of primes.exe.</description>
+    </step>
+    <step>
+      <action>12562710513373420</action>
+      <description>The function ___report_gsfailure issues several function
+        calls to kernel32.dll functions, most importantly IsDebuggerPresent (see
+        address 0x410E27). Right-click on the first basic block of the function
+        and select the menu Inline Subfunction /
+        IsDebuggerPresent.</description> </step>
+    <step>
+      <action>5182263060599434690</action>
+      <allowed>12562710513373420</allowed>
+      <description>The code of the kernel32.dll function IsDebuggerPresent is
+        now visible in the current view. For purposes of analysis, there is now
+        no functional difference between the code of the imported function
+        IsDebuggerPresent and the code of the normal function
+        ___report_gsfailure anymore. Code from both functions can be treated
+        uniformly during analysis.&lt;br/&gt; &lt;br/&gt;
+It is also possible to save the new view. Please do save the view now using the
+View / Save View As menu.  </description>
+    </step>
+    <step>
+      <action>0</action>
+      <description>The new view was saved and can now be found under the Project
+        Views node in the Project Tree.&lt;br/&gt; &lt;br/&gt;
+You have now learned the most important aspects about working with projects. You
+know how to create and configure projects and you know that imported functions
+can be forwarded to dynamic library modules.&lt;br/&gt; &lt;br/&gt;
+Please click the Next button to finish this tutorial.
+</description>
+    </step>
+  </steps>
+</tutorial>

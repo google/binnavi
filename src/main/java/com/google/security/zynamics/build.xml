@@ -1,0 +1,217 @@
+<!--
+  Ant build file for building zylib, reil, binnavi.
+-->
+
+<project name="binnavi" default="build-binnavi-fat-jar" basedir="./">
+
+  <property name="project.dir" location="../../../../../../.."/>
+  <property name="out.dir" location="${project.dir}/target"/>
+  <property name="build.dir" location="${out.dir}/classes"/>
+  <property name="staging.dir" location="${out.dir}/staging"/>
+  <property name="zynamics.dir" location="./"/>
+
+  <!-- Path and fileset definitions needed for the targets below -->
+  <path id="binnavi.class.path">
+    <fileset id="binnavi.build.jars" dir="${project.dir}/target/dependency">
+      <include name="antlr-runtime-3.2.jar"/>
+      <include name="batik-awt-util-1.8.jar"/>
+      <include name="batik-css-1.8.jar"/>
+      <include name="batik-dom-1.8.jar"/>
+      <include name="batik-ext-1.8.jar"/>
+      <include name="batik-svggen-1.8.jar"/>
+      <include name="batik-util-1.8.jar"/>
+      <include name="batik-xml-1.8.jar"/>
+      <include name="javax.inject-1.jar"/>
+      <include name="jide-oss-3.6.9.jar"/>
+      <include name="jython-standalone-2.5.3.jar"/>
+      <include name="postgresql-9.4-1201-jdbc41.jar"/>
+    </fileset>
+  </path>
+  <path id="yfiles.class.path">
+    <fileset id="yfiles.build.jars" dir="${project.dir}/lib/third_party/java/yfiles/v2_10">
+      <include name="y.jar"/>
+      <include name="ysvg.jar"/>
+    </fileset>
+  </path>
+  <path id="guava.class.path">
+    <fileset id="guava.build.jars" dir="${project.dir}/target/dependency">
+      <include name="guava-18.0.jar"/>
+    </fileset>
+  </path>
+  <path id="yfileswrap.class.path">
+    <fileset id="yfileswrap.jar" dir="${zynamics.dir}/lib/">
+      <include name="yfileswrap-obfuscated.jar"/>
+    </fileset>
+  </path>
+  <path id="zylib.class.path">
+    <fileset id="zylib.jar" dir="${out.dir}/">
+      <include name="zylib.jar"/>
+    </fileset>
+  </path>
+  <path id="reil.class.path">
+    <fileset id="reil.jar" dir="${out.dir}/">
+      <include name="reil.jar"/>
+    </fileset>
+  </path>
+
+  <!-- The target to build everything (provided yfiles is present), and throw the
+       components that interact with yfiles into a separate jar file that is then
+       obfuscated -->
+  <target name="build-yfiles-wrapper-jar">
+    <mkdir dir="${out.dir}"/>
+    <mkdir dir="${build.dir}"/>
+    <mkdir dir="${staging.dir}"/>
+    <!-- Compile everything in the entire source tree, the following steps then take only
+         the parts that fall into the yfileswrap subpackages -->
+    <javac destdir="${build.dir}" sourcepath="" includeAntRuntime="false" debug="true">
+      <src path="${zynamics.dir}/binnavi/"/>
+      <src path="${zynamics.dir}/zylib/"/>
+      <src path="${zynamics.dir}/reil/"/>
+      <src path="${zynamics.dir}/common/"/>
+      <classpath refid="binnavi.class.path"/>
+      <classpath refid="yfiles.class.path"/>
+      <classpath refid="guava.class.path"/>
+    </javac>
+
+    <!-- Now take only the files in the yfileswrap subdirectories, the yfiles jars,
+         and throw them into the .jar -->
+    <jar destfile="${staging.dir}/yfileswrap.jar" >
+      <fileset dir="${build.dir}">
+        <include name="com/google/security/zynamics/binnavi/yfileswrap/**/*.class" />
+        <include name="com/google/security/zynamics/zylib/yfileswrap/**/*.class" />
+        <include name="com/google/security/zynamics/reil/yfileswrap/**/*.class" />
+      </fileset>
+      <zipgroupfileset refid="yfiles.build.jars"/>
+    </jar>
+
+    <!-- In the next step run the obfuscator -->
+    <taskdef resource="proguard/ant/task.properties" classpath="${project.dir}/target/dependency/proguard-base-5.2.1.jar"/>
+    <proguard optimize="false">
+      <!-- Specify JAR options in Ant syntax to be able to use refid. -->
+      <injar file="${staging.dir}/yfileswrap.jar"/>
+      <outjar file="${out.dir}/yfileswrap-obfuscated.jar"/>
+      <libraryjar file="${java.home}/lib/rt.jar"/>
+
+      <!-- Specify obfuscation options in ProGuard syntax. -->
+      -dontnote
+      -dontwarn
+      -printmapping binnavi.map
+      -keep class !y.**,!yext.** { *; }
+      -keep class y.x.** { *; }
+      -renamesourcefileattribute SourceFile
+      -keepattributes Exception,InnerClasses,Signature,Deprecated,*Annotation*,SourceFile,LineNumberTable,EnclosingMethod
+    </proguard>
+  </target>
+
+  <!-- Build the zylib files and make a jar out of them. -->
+  <target name="build-zylib-jar">
+    <!-- Make sure no leftover class files from creating the yfileswrapper are left -->
+    <delete dir="${build.dir}"/>
+    <mkdir dir="${build.dir}"/>
+    <javac destdir="${build.dir}" sourcepath="" includeAntRuntime="false" debug="true">
+      <src path="${zynamics.dir}/zylib"/>
+      <include name="**/*.java"/>
+      <exclude name="yfileswrap/**/*.java"/>
+      <classpath refid="binnavi.class.path"/>
+      <classpath refid="guava.class.path"/>
+      <classpath refid="yfileswrap.class.path"/>
+    </javac>
+
+    <!-- Copy resources to the appropriate packages. -->
+    <copy todir="${build.dir}/com/google/security/zynamics/zylib/resources">
+      <fileset dir="${zynamics.dir}/zylib/resources">
+        <exclude name="**/*.java"/>
+      </fileset>
+    </copy>
+
+    <jar destfile="${out.dir}/zylib.jar" >
+      <fileset dir="${build.dir}">
+        <include name="**/*" />
+      </fileset>
+    </jar>
+  </target>
+
+  <!-- Build the REIL files and make a jar out of them. -->
+  <target name="build-reil-jar" depends="build-zylib-jar">
+    <!-- Make sure no leftover class files from creating zylib are floating around. -->
+    <delete dir="${build.dir}"/>
+    <mkdir dir="${build.dir}"/>
+    <javac destdir="${build.dir}" sourcepath="" includeAntRuntime="false" debug="true">
+      <src path="${zynamics.dir}/reil"/>
+      <include name="**/*.java"/>
+      <exclude name="yfileswrap/**/*.java"/>
+      <classpath refid="binnavi.class.path"/>
+      <classpath refid="guava.class.path"/>
+      <classpath refid="yfileswrap.class.path"/>
+      <classpath refid="zylib.class.path"/>
+    </javac>
+
+    <jar destfile="${out.dir}/reil.jar" >
+      <fileset dir="${build.dir}">
+        <include name="**/*.class" />
+      </fileset>
+    </jar>
+  </target>
+
+  <!-- Build the full BinNavi jar file - including the necessary data files. -->
+  <target name="build-binnavi-jar" depends="build-reil-jar">
+    <!-- Make sure no leftover class files from creating zylib are floating around. -->
+    <delete dir="${build.dir}"/>
+    <mkdir dir="${build.dir}"/>
+    <javac destdir="${build.dir}" sourcepath="" includeAntRuntime="false" debug="true">
+      <src path="${zynamics.dir}/binnavi/"/>
+      <src path="${zynamics.dir}/common/"/>
+      <include name="**/*.java"/>
+      <exclude name="yfileswrap/**/*.java"/>
+      <classpath refid="binnavi.class.path"/>
+      <classpath refid="guava.class.path"/>
+      <classpath refid="yfileswrap.class.path"/>
+      <classpath refid="zylib.class.path"/>
+      <classpath refid="reil.class.path"/>
+    </javac>
+
+    <!-- Copy resources to the appropriate packages. -->
+    <copy todir="${build.dir}/com/google/security/zynamics/binnavi/data">
+      <fileset dir="${zynamics.dir}/binnavi/data">
+        <exclude name="**/*.java"/>
+      </fileset>
+    </copy>
+
+    <!-- Copy the exporters. -->
+    <copy todir="${build.dir}/com/google/security/zynamics/binnavi/exporters">
+      <fileset dir="${zynamics.dir}/binnavi/exporters"/>
+    </copy>
+
+    <!-- Copy pathfinder plugin resources to its appropriate place. -->
+    <copy todir="${build.dir}/com/google/security/zynamics/binnavi/standardplugins/pathfinder/resources">
+      <fileset dir="${zynamics.dir}/binnavi/standardplugins/pathfinder/resources">
+        <exclude name="**/*.java"/>
+      </fileset>
+    </copy>
+
+    <!-- Wrap everything, including the data files, into the binnavi.jar -->
+    <jar destfile="${out.dir}/binnavi.jar" >
+      <fileset dir="${build.dir}">
+        <include name="**/*" />
+      </fileset>
+    </jar>
+  </target>
+
+  <!-- Build the full fat BinNavi jar file - includes all dependencies. -->
+  <target name="build-binnavi-fat-jar" depends="build-binnavi-jar">
+    <mkdir dir="${staging.dir}"/>
+
+    <jar destfile="${out.dir}/binnavi-all.jar" basedir="${build.dir}">
+      <zipgroupfileset refid="binnavi.build.jars"/>
+      <zipgroupfileset refid="guava.build.jars"/>
+      <zipgroupfileset refid="yfileswrap.jar"/>
+      <zipgroupfileset refid="zylib.jar"/>
+      <zipgroupfileset refid="reil.jar"/>
+      <zipgroupfileset dir="${out.dir}" includes="binnavi.jar"/>
+      <manifest>
+        <attribute name="Main-Class" value="com.google.security.zynamics.binnavi.CMain"/>
+        <attribute name="SplashScreen-Image" value="com/google/security/zynamics/binnavi/data/splash.jpg"/>
+      </manifest>
+    </jar>
+  </target>
+</project>

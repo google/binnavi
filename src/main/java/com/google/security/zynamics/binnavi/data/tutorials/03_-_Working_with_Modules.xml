@@ -1,0 +1,175 @@
+<tutorial>
+  <name>Working with Modules</name>
+  <description>Once you have imported data from an external disassembler like
+    IDA Pro you want to start working with it. This tutorial introduces you to
+    all the aspects of modules you need to be familiar with when you start to
+    work with them.&lt;br/&gt; &lt;br/&gt;
+In this tutorial you will learn about the following concepts:&lt;br/&gt;
+&lt;ul&gt;
+&lt;li&gt;Callgraph and functions of a module&lt;/li&gt;
+&lt;li&gt;Module views&lt;/li&gt;
+&lt;li&gt;Binary module data&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+  <steps>
+    <step>
+      <action>0</action>
+      <description>This tutorial shows you how to work with modules. Starting
+        with an arbitrary module that already exists in a configured database,
+        the available functionality for this module is explained. At the end of
+        the tutorial you will know about most of the module concepts accessible
+        from the Project Tree.&lt;br/&gt; &lt;br/&gt;
+Please click on the Next button to continue.
+</description>
+    </step>
+    <step>
+      <action>0</action>
+      <allowed>-2369159756337681560</allowed>
+      <allowed>-9044865055464757942</allowed>
+      <allowed>8784926684855833953</allowed>
+      <allowed>-7789885643476931774</allowed>
+      <allowed>-8750454886776173497</allowed>
+      <allowed>-5178343179269965998</allowed>
+      <allowed>2804136480786366059</allowed>
+      <description>If you do not have a database configured and a module
+        imported please do so now. It is recommended that you work with the
+        primes.exe file which you can find in the tutorials directory of your
+        BinNavi installation.&lt;br/&gt; &lt;br/&gt;
+If you have a module imported please click on the next Next button to continue.
+</description>
+    </step>
+    <step>
+      <action>-5435176252593734737</action>
+      <description>When you click on a module in the Project Tree the right-hand
+        side of the main window shows additional information about the module.
+        Among other data, this information includes the name of the module and
+        an optional description which gives more information about the
+        module.&lt;br/&gt; &lt;br/&gt;
+Please change the name or the description of the module and click on the Save
+button to save your changes.&lt;br/&gt; </description>
+    </step>
+    <step>
+      <action>0</action>
+      <description>More interesting than the name and description of the module
+        are the functions which can be found inside the module. You can see
+        module functions in the lower half of the right-hand side of the main
+        window when a module is selected in the Project Tree. Additionally you
+        can find the functions again when you select the Native Flowgraphs node
+        of a module in the Project Tree. You can even filter the list of
+        functions by type when you expand the Native Flowgraphs node and click
+        on one of it children.&lt;br/&gt; &lt;br/&gt;
+Please click on the Native Flowgraphs node now. On the right-hand side of the
+main window you can now see a table that lists all functions that belong to the
+selected module. In addition to the name and the address of the functions you
+can see some structural information about the functions too. The table lists the
+number of basic blocks and the number of edges of all the functions as well as
+the number of incoming and outgoing function calls.&lt;br/&gt; &lt;br/&gt;
+Above the list of functions you can find a small single-line text field named
+Filter. If you enter text here you can filter the table according to your input.
+In the simplest case, only those functions whose name or description contains
+the filter string are shown. To learn how you can create more complex filters,
+please consult the BinNavi manual.&lt;br/&gt; &lt;br/&gt;
+Please click on the Next button to continue.&lt;br/&gt;
+</description>
+    </step>
+    <step>
+      <action>0</action>
+      <description>The functions you have seen in the last step of this tutorial
+        are what we call the native views in BinNavi. Native views are always
+        created from the data that is imported from an external disassembler and
+        they can not be modified after the initial import. Of course you want to
+        modify disassembled data while working whenever you discover new
+        information.&lt;br/&gt; &lt;br/&gt;
+This is where the concept of non-native views come in. Non-native views can be
+arbitrarily created and modified and they can contain any kind of code (or no
+code at all). Initially there are no non-native views in a module but while you
+are working with it you will frequently create new non-native views.&lt;br/&gt;
+&lt;br/&gt;
+Non-native views are shown when you select the Module Views node of a module in
+the Project Tree. The only way to create a new non-native view from the main
+window is to create a copy of an existing view. You do this by drag &amp;
+dropping an existing view from one of the view tables onto the Module Views
+node. Note that this is not the normal way to create a new non-native view. In
+most cases you create new non-native views when saving your modifications of a
+native view.&lt;br/&gt; &lt;br/&gt;
+After you have created a copy of an existing view please click on the Next
+button to continue.  </description>
+    </step>
+    <step>
+      <action>0</action>
+      <description>Functions are not the only views created for a module during
+        its initial import. For each module the import process creates the so
+        called native callgraph too. This native callgraph shows how the
+        functions of the module call each other. You can find the native
+        callgraph when you click on the Native Callgraph node of a
+        module.&lt;br/&gt; &lt;br/&gt;
+There is no difference in treatment between callgraphs and flowgraphs in
+BinNavi. That means you can just as easily create copies of callgraphs as you
+can do of flowgraphs. For this reason it is not necessary to create a non-native
+callgraph view at this point and we can just move on to the next part of the
+tutorial.&lt;br/&gt; &lt;br/&gt;
+Please click on the Next button to continue.
+</description>
+    </step>
+    <step>
+      <action>0</action>
+      <description>The final part of this tutorial is about binary module data
+        that can be associated with each module. Module data is simply the
+        binary file that is the data source of the module. This binary file is
+        not written to the database by default. If you need this data you have
+        to add it manually once you have created the BinNavi module.&lt;br/&gt;
+        &lt;br/&gt;
+Please click on the Next button to continue.
+</description>
+    </step>
+    <step>
+      <action>4173682656470933076</action>
+      <description>You start working with the module data by clicking on the
+        Data node of a module in the Project Tree. If the Data node is
+        selelected a hex editor is shown on the right-hand side of the main
+        window. Once loaded, the module data is then shown in the hex
+        editor.&lt;br/&gt; &lt;br/&gt;
+When you associate data with a module for the first time, you have to load the
+data from a local file. Please do this now by clicking on the Load button next
+to the Store button. Please select the file you want to associate with the
+active module. For the purpose of this tutorial please select the file
+primes.exe from the tutorials subdirectory of your BinNavi
+installation.&lt;br/&gt; </description>
+    </step>
+    <step>
+      <action>-7058938411200766428</action>
+      <allowed>4173682656470933076</allowed>
+      <description>Now that you have loaded the module data from the file you
+        can store the module data in the database. This is not always useful if
+        you have a slow connection and a large input file. You do not want to
+        pull a 50 MB file over a slow connection for example. The file
+        primes.exe is rather small though and can therefore safely be stored in
+        the database.&lt;br/&gt; &lt;br/&gt;
+Please click on the Store button now to store the module data in the
+database.&lt;br/&gt; </description>
+    </step>
+    <step>
+      <action>6407054355352505148</action>
+      <allowed>-7058938411200766428</allowed>
+      <description>The next time you load this module you do not have to load
+        the binary data from the file anymore. You can simply click on the left
+        Load button to load the data from the database instead. Binary data is
+        not loaded automatically because of performance reasons.&lt;br/&gt;
+        &lt;br/&gt;
+Please click on the Load button now to reload the data from the
+database.&lt;br/&gt; </description>
+    </step>
+    <step>
+      <action>0</action>
+      <description>You have now reached the end of this tutorial. At this point
+        you should be familiar with native and non-native views and how they are
+        related to the functions of a module. Furthermore you have learned how
+        to load and view the binary data of a module.&lt;br/&gt; &lt;br/&gt;
+There are other important aspects of modules for example the settings related to
+debugging and tagging. These topics are covered in other tutorials.&lt;br/&gt;
+&lt;br/&gt;
+Please click on the Next button to finish this tutorial.
+</description>
+    </step>
+  </steps>
+</tutorial>

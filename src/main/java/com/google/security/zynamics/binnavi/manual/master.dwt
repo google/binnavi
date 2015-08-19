@@ -1,0 +1,67 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" dir="ltr">
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="Content-Language" content="en-us" />
+<!-- #BeginEditable "doctitle" --><title></title><!-- #EndEditable -->
+<link rel="stylesheet" type="text/css" title="CSS" href="styles/style1.css" media="screen" />
+<style type="text/css">
+</style>
+</head>
+
+<body style="background-image: url('images/binnaviicon.png')">
+
+<!-- Begin Container -->
+<div id="container">
+	<!-- Begin Masthead -->
+	<div id="masthead">
+		<img src="images/binnavi_logo4.png" alt="BinNavi Logo"/>
+	</div>
+	<!-- End Masthead -->
+	<!-- Begin iMenu -->
+	<div id="navigation">
+		<ul>
+			<li><a href="index.htm">Index</a></li>
+			<li><a href="html/installation.htm">Installation</a></li>
+			<li><a href="html/usage.htm">Usage</a></li>
+			<li><a href="html/debugging.htm">Debugging</a></li>
+			<li><a href="html/scripting.htm">Scripting</a></li>
+			<li><a href="html/tutorial.htm">Tutorial</a></li>
+			<li><a href="html/faq.htm">FAQ</a></li>
+			<li><a href="html/about.htm">About</a></li>
+		</ul>
+	</div>
+	<!-- End iMenu -->
+	<!-- Begin Left Column -->
+	<div id="column_l">
+		<!-- #BeginEditable "content" -->
+		<h2>Headline 2</h2>
+		<p>insert content here</p>
+		<!-- #EndEditable --></div>
+	<!-- End Left Column -->
+	<!-- Begin Right Column -->
+	<div id="column_r">
+		<!-- #BeginEditable "sidebar" -->
+		<h3>Headline 3</h3>
+		<p>insert content here</p>
+		<!-- #EndEditable --></div>
+	<!-- End Right Column -->
+	<!-- Begin Footer -->
+	<div id="footer">
+		<p><a href="index.htm">Index</a>  
+		| <a href="html/installation.htm">Installation</a> |
+		<a href="html/usage.htm">Usage</a> |
+		<a href="html/debugging.htm">Debugging</a> |
+		<a href="html/scripting.htm">Scripting</a> |
+		<a href="html/tutorial.htm">Tutorial</a> |
+		<a href="html/faq.htm">FAQ</a> |
+		<a href="html/about.htm">About</a></p>
+		<p>Copyright 2005 - 2010: zynamics GmbH</p>
+	</div>
+	<!-- End Footer --></div>
+<!-- End Container -->
+
+</body>
+
+</html>

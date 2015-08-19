@@ -1,0 +1,14 @@
+# Exclude the downloaded dependencies
+target/**
+
+# Various artifacts we don't want to push
+*.class
+*.pyc
+
+# Editor backup files
+*~
+.*.swp
+.*.swo
+
+# virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
+hs_err_pid*

@@ -1,0 +1,122 @@
+<tutorial>
+  <name>Setting up a MySQL database</name>
+  <description>Setting up a MySQL database is typically the first step for a new
+    user of BinNavi. This database is used to store the data of disassembled
+    files as well as all the changes and annotations the user makes while
+    working.&lt;br/&gt; &lt;br/&gt;
+In this tutorial the user learns about the following concepts:&lt;br/&gt;
+&lt;ul&gt;
+&lt;li&gt;Configuring a connection to a database server&lt;/li&gt;
+&lt;li&gt;Creating a new database&lt;/li&gt;
+&lt;li&gt;Connecting to the new database&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+  <steps>
+    <step>
+      <action>0</action>
+      <description>This tutorial shows you how to set up a MySQL database for
+        use with BinNavi. This database is used to store disassembled data and
+        all the additional information (like comments or tags) you add during
+        your work.&lt;br/&gt; &lt;br/&gt;
+There are no prior requirements necessary for working through this tutorial. You
+can start with this tutorial right now.&lt;br/&gt; &lt;br/&gt;
+Please click on the Next button to continue.
+</description>
+    </step>
+    <step>
+      <action>-7789885643476931774</action>
+      <description>On the left-hand side of the BinNavi main window you can see
+        the so called Project Tree. This Project Tree is the starting point of
+        any work with BinNavi. It shows the configured databases and - once a
+        connection to a database was established - all the necessary information
+        from the database that is important for your work. The Project Tree can
+        be used to configure MySQL databases for BinNavi too.&lt;br/&gt;
+        &lt;br/&gt;
+There are two different ways to create a new database configuration.&lt;br/&gt;
+&lt;ul&gt;
+&lt;li&gt;Click the BinNavi/Add Database menu&lt;/li&gt;
+&lt;li&gt;Right-click the Project Tree and click Add Database&lt;/li&gt;
+&lt;/ul&gt;
+Please note that the MySQL database you want to configure does not need to
+exist. You can just go ahead and create a new database configuration now using
+either of the two methods from above.  </description>
+    </step>
+    <step>
+      <action>0</action>
+      <description>You have successfully created a new BinNavi database
+        configuration. The configuration options for this configuration should
+        now be visible on the right side of the main window. If the
+        configuration options are not visible, please click on the new database
+        configuration in the Project Tree.&lt;br/&gt; &lt;br/&gt;
+In the configuration settings you can specify the location of the MySQL database
+you would like to use and the user data necessary to connect to the database.
+Please enter your personal connection data into the text fields and press the
+Next button to continue with this tutorial.  </description>
+    </step>
+    <step>
+      <action>8784926684855833953</action>
+      <description>Once you have entered the connection data to your database
+        you can test whether BinNavi can establish a connection to that database
+        using the Test Connection button.&lt;br/&gt; &lt;br/&gt;
+Please note that the database you have configured does not have to exist yet. If
+the database does not exist yet, BinNavi asks you if it should create the
+database for you. This makes it easier for you to get started with new databases
+because you do not have to create new databases manually on your database
+server.&lt;br/&gt; &lt;br/&gt;
+Please click on the Test Connection button now to complete this step of the
+tutorial.  </description>
+    </step>
+    <step>
+      <action>-9044865055464757942</action>
+      <allowed>8784926684855833953</allowed>
+      <description>If the connection to the database could be established you
+        can now save your connection data using the Save button. When opening a
+        database, only connection information that was saved is used. This makes
+        it very important that you always click the Save button after changing
+        database connection information.&lt;br/&gt; &lt;br/&gt;
+If BinNavi could not establish the connection to the database, please check your
+database connection settings and whether the MySQL database server you want to
+connect to is running and accessible from your computer.&lt;br/&gt; &lt;br/&gt;
+If BinNavi could establish the connection to the database please click the Save
+button now.  </description>
+    </step>
+    <step>
+      <action>-2369159756337681560</action>
+      <allowed>-9044865055464757942</allowed>
+      <allowed>8784926684855833953</allowed>
+      <description>Congratulations. You have created your first database
+        configuration. In the final step of this tutorial you will now load the
+        content of the configured database. You can load a database doing any of
+        &lt;ul&gt;
+&lt;li&gt;Double-click on the database in the Project Tree&lt;/li&gt;
+&lt;li&gt;Select the database in the Project Tree and click the menu Database /
+Connect to Database &lt;/li&gt; &lt;/ul&gt;
+Please go ahead and connect to the new database now.
+</description>
+    </step>
+    <step>
+      <action>0</action>
+      <description>If the connection to the database could be established you
+        should now see additional entries in the Project Tree. These new entries
+        represent various aspects of useful BinNavi data you can use during your
+        work. Since the database you are working with was just created it is
+        still completely empty. The next step would be to add useful disassembly
+        data to the database. This is covered in the tutorial named Importing
+        data from IDA Pro which you can work through next if you want
+        to.&lt;br/&gt; &lt;br/&gt;
+For now please click on the Next button to move on to the end of the tutorial.
+</description>
+    </step>
+    <step>
+      <action>0</action>
+      <description>Congratulations. You have reached the end of this tutorial.
+        You should now know how to set up a MySQL database for use with BinNavi.
+        If you are having any problems with this tutorial or if you want to have
+        more in-depth explanations of the configuration options we did not talk
+        about in this tutorial, please take a look at the BinNavi
+        manual.&lt;br/&gt; &lt;br/&gt;This tutorial ends when you click the Next
+        button.
+</description>
+    </step>
+  </steps>
+</tutorial>

@@ -1,0 +1,849 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" dir="ltr">
+
+<!-- #BeginTemplate "../master_in.dwt" -->
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="Content-Language" content="en-us" />
+<!-- #BeginEditable "doctitle" -->
+<title>zynamics BinNavi 5.0 Manual - The BinNavi Database Format</title>
+<style type="text/css">
+
+.style1 {
+	border-style: solid;
+	border-width: 1px;
+	border-collapse: collapse;
+}
+.style2 {
+	margin-left: 40px;
+}
+</style>
+<!-- #EndEditable -->
+<link rel="stylesheet" type="text/css" title="CSS" href="../styles/style1.css" media="screen" />
+<style type="text/css">
+</style>
+</head>
+
+<body style="background-image: url('../images/binnaviicon.png')">
+
+<!-- Begin Container -->
+<div id="container">
+	<!-- Begin Masthead -->
+	<div id="masthead">
+		<img src="../images/binnavi_logo4.png" alt="BinNavi Logo"/>
+	</div>
+	<!-- End Masthead -->
+	<!-- Begin iMenu -->
+	<div id="navigation">
+		<ul>
+			<li><a href="../index.htm">Index</a></li>
+			<li><a href="installation.htm">Installation</a></li>
+			<li><a href="usage.htm">Usage</a></li>
+			<li><a href="debugging.htm">Debugging</a></li>
+			<li><a href="scripting.htm">Scripting</a></li>
+			<li><a href="tutorial.htm">Tutorial</a></li>
+			<li><a href="faq.htm">FAQ</a></li>
+			<li><a href="about.htm">About</a></li>
+		</ul>
+	</div>
+	<!-- End iMenu -->
+	<!-- Begin Left Column -->
+	<div id="column_lg">
+		<!-- #BeginEditable "content" -->
+		<h2>The BinNavi Database Format</h2>
+		<p>BinNavi uses an SQL database to store all disassembly data. The 
+		BinNavi database format is open and tries to be a standardized way to 
+		store disassembled code in SQL databases. This part of the manual 
+		describes all necessary tables and gives a few example queries that can 
+		be used to read data from the database.</p>
+		<p>The distinction between exporting data from IDA and converting the exported data into a BinNavi 
+		module is reflected in the database too. Each BinNavi database has tables that contain the exported data (the so 
+		called raw data) and tables that contain the converted data (the so 
+		called BinNavi data). For most users only the layout and content of the 
+		raw data tables is important because this is the simpler database format, 
+		it is less likely to change in the future, and you can always rely on 
+		BinNavi itself to turn raw data into BinNavi data. For this reason only 
+		the raw data database format is described in this manual.</p>
+		<p>For each disassembled module, the exporter creates 14 new tables in 
+		the database: ex_?_address_comments, ex_?_address_references, 
+		ex_?_basic_blocks, ex_?_callgraph, ex_?_control_flow_graphs, ex_?_data, 
+		ex_?_expression_substitutions, ex_?_expression_trees, 
+		ex_?_expression_nodes, ex_?_expression_tree_nodes, ex_?_functions, 
+		ex_?_instructions, ex_?_operands, and ex_?_sections. The question mark in those table names is a 
+		placeholder for a unique ID (like 1, 2, 123, ...) that identifies the module in the database. 
+		Furthermore there is one table called modules in the database.</p>
+		<h3>The Database Scheme</h3>
+		<h4>The modules table</h4>
+		<p>The modules table contains a list of all raw modules stored in the 
+		database.</p>
+		<table style="width: 100%" class="style1">
+			<tr>
+				<td class="columnTableHeader" colspan="3">modules</td>
+			</tr>
+			<tr style="background-color:#FFFFCC">
+				<td class="columnTableNameHeader">Column Name</td>
+				<td class="columnTableTypeHeader">Column Type</td>
+				<td class="columnTableDescriptionHeader">Column Description</td>
+			</tr>
+			<tr>
+				<td class="columnTableName">id</td>
+				<td class="columnTableType">serial NOT NULL</td>
+				<td class="columnTableDescription">Unique identifier of the 
+				module. This is the same identifier used for the question 
+				mark placeholder in the table names of the module.</td>
+			</tr>
+			<tr>
+				<td class="columnTableName">name</td>
+				<td class="columnTableType">text NOT NULL</td>
+				<td class="columnTableDescription">Name of the module. In most 
+				cases this equals the name of the original input file.</td>
+			</tr>
+			<tr>
+				<td class="columnTableName">architecture</td>
+				<td class="columnTableType">character varying(32) NOT NULL</td>
+				<td class="columnTableDescription">Architecture string that 
+				identifies the target architecture of the original input file. 
+				Right now the strings x86-32, PPC-32, and ARM-32 are officially 
+				supported.</td>
+			</tr>
+			<tr>
+				<td class="columnTableName">base_address</td>
+				<td class="columnTableType">bigint</td>
+				<td class="columnTableDescription">The address of the original 
+				input file in memory if no relocation operation is 
+				applied to the file when it is loaded.</td>
+			</tr>
+			<tr>
+				<td class="columnTableName">exporter</td>
+				<td class="columnTableType">character varying(256) NOT NULL</td>
+				<td class="columnTableDescription">String that identifies the 
+				exporter that exported the module.</td>
+			</tr>
+			<tr>
+				<td class="columnTableName">version</td>
+				<td class="columnTableType">integer NOT NULL</td>
+				<td class="columnTableDescription">Version string that 
+				identifies the version of the disassembly table schema. This 
+				value must always be 3.</td>
+			</tr>
+			<tr>
+				<td class="columnTableName">md5</td>
+				<td class="columnTableType">character(32) NOT NULL</td>
+				<td class="columnTableDescription">MD5 hash of the original 
+				input file of the module.</td>
+			</tr>
+			<tr>
+				<td class="columnTableName">sha1</td>
+				<td class="columnTableType">character(40) NOT NULL</td>
+				<td class="columnTableDescription">SHA1 hash of the original 
+				input file of the module.</td>
+			</tr>
+			<tr>
+				<td class="columnTableName">comment</td>
+				<td class="columnTableType">text</td>
+				<td class="columnTableDescription">Arbitrary comment that can be 
+				used to describe the module.</td>
+			</tr>
+			<tr>
+				<td class="columnTableName">import_time</td>
+				<td class="columnTableType">timestamp</td>
+				<td class="columnTableDescription">Timestamp that specifies when 
+				the exporter exported the module to the database.</td>
+			</tr>
+		</table>
+		<p><strong>Additional information</strong>:</p>
+		<ul>
+			<li>Primary Key: id</li>
+			<li>Foreign Keys: -</li>
+		</ul>
+		<h4>The functions table</h4>
+		<p>The table ex_?_functions contains information about all functions of 
+		a module.</p>
+		<p>
+				<table style="width: 100%" class="style1">
+			<tr>
+				<td class="columnTableHeader" colspan="3">ex_?_functions</td>
+			</tr>
+			<tr style="background-color:#FFFFCC">
+				<td class="columnTableNameHeader">Column Name</td>
+				<td class="columnTableTypeHeader">Column Type</td>
+				<td class="columnTableDescriptionHeader">Column Description</td>
+			</tr>
+			<tr>
+				<td class="columnTableName">address</td>
+				<td class="columnTableType">bigint NOT NULL</td>
+				<td class="columnTableDescription">Start address of the 
+				function.</td>
+			</tr>
+			<tr>
+				<td class="columnTableName">name</td>
+				<td class="columnTableType">text NOT NULL</td>
+				<td class="columnTableDescription">Name of the function.</td>
+			</tr>
+			<tr>
+				<td class="columnTableName">has_real_name</td>
+				<td class="columnTableType">boolean NOT NULL</td>
+				<td class="columnTableDescription">Flag that indicates whether 
+				the function name was generated by the disassembler (false) or 
+				whether it is a known function name, for example from an 
+				imported library (true).</td>
+			</tr>
+			<tr>
+				<td class="columnTableName">type</td>
+				<td class="columnTableType">integer NOT NULL DEFAULT 0</td>
+				<td class="columnTableDescription">Identifies the type of the 
+				function. Valid values are 0 (Normal Function), 1 (Library 
+				Function), 2 (Imported Function), 3 (Thunk Function), 4 (Thunk 
+				Adjustor Function), and 5 (Unknown Function).</td>
+			</tr>
+			<tr>
+				<td class="columnTableName">module_name</td>
+				<td class="columnTableType">text</td>
+				<td class="columnTableDescription">In case of imported functions
+				this field contains the name of the dynamic library the function 
+				is imported from. In case of functions that are not imported 
+				this field is null.</td>
+			</tr>
+			</table>
+		</p>
+		<p><strong>Additional information</strong>:</p>
+		<ul>
+			<li>Primary Key: address</li>
+			<li>Foreign Keys: -</li>
+		</ul>
+		<h4>The basic blocks table</h4>
+		<p>The table ex_?_basic_blocks contains information about the basic 
+		blocks of the module. Please note that a basic block is not uniquely 
+		identified through its address because different functions can share the 
+		same basic block.</p>
+		<p>
+				<table style="width: 100%" class="style1">
+			<tr>
+				<td class="columnTableHeader" colspan="3">ex_?_basic_blocks</td>
+			</tr>
+			<tr style="background-color:#FFFFCC">
+				<td class="columnTableNameHeader">Column Name</td>
+				<td class="columnTableTypeHeader">Column Type</td>
+				<td class="columnTableDescriptionHeader">Column Description</td>
+			</tr>
+			<tr>
+				<td class="columnTableName">id</td>
+				<td class="columnTableType">integer NOT NULL</td>
+				<td class="columnTableDescription">Identifier of the basic 
+				block.</td>
+			</tr>
+			<tr>
+				<td class="columnTableName">parent_function</td>
+				<td class="columnTableType">bigint NOT NULL</td>
+				<td class="columnTableDescription">Function the basic block 
+				belongs to.</td>
+			</tr>
+			<tr>
+				<td class="columnTableName">address</td>
+				<td class="columnTableType">bigint NOT NULL</td>
+				<td class="columnTableDescription">Start address of the basic 
+				block.</td>
+			</tr>
+			</table>
+		</p>
+		<p><strong>Additional information</strong>:</p>
+		<ul>
+			<li>Primary Key: id, parent_function</li>
+			<li>Foreign Keys:<ul>
+				<li>parent_function references ex_?_functions(address)</li>
+			</ul>
+			</li>
+		</ul>
+		<h4>The control flow graph table</h4>
+		<p>The table ex_?_control_flow_graphs contains information about the 
+		branches between the different blocks inside each function.</p>
+		<p>
+				<table style="width: 100%" class="style1">
+			<tr>
+				<td class="columnTableHeader" colspan="3">ex_?_control_flow_graphs</td>
+			</tr>
+			<tr style="background-color:#FFFFCC">
+				<td class="columnTableNameHeader">Column Name</td>
+				<td class="columnTableTypeHeader">Column Type</td>
+				<td class="columnTableDescriptionHeader">Column Description</td>
+			</tr>
+			<tr>
+				<td class="columnTableName">id</td>
+				<td class="columnTableType">serial NOT NULL</td>
+				<td class="columnTableDescription">Identifier of the branch.</td>
+			</tr>
+			<tr>
+				<td class="columnTableName">parent_function</td>
+				<td class="columnTableType">bigint NOT NULL</td>
+				<td class="columnTableDescription">Function the branch belongs 
+				to.</td>
+			</tr>
+			<tr>
+				<td class="columnTableName">source</td>
+				<td class="columnTableType">integer NOT NULL</td>
+				<td class="columnTableDescription">Source block of the branch. 
+				Note that the basic block identified by this value must be in 
+				the same function as the branch itself.</td>
+			</tr>
+			<tr>
+				<td class="columnTableName">destination</td>
+				<td class="columnTableType">integer NOT NULL</td>
+				<td class="columnTableDescription">Destination block of the 
+				branch. Note that the basic block identified by this value must 
+				be in the same function as the branch itself.</td>
+			</tr>
+			<tr>
+				<td class="columnTableName">type</td>
+				<td class="columnTableType">integer NOT NULL DEFAULT 0</td>
+				<td class="columnTableDescription">Describes the type of the 
+				branch. Valid values are 0 (conditional branch executed), 1 (conditional 
+				branch not executed), 2 (unconditional branch), and 3 (switch 
+				branch).</td>
+			</tr>
+			</table>
+		</p>
+		<p><strong>Additional information</strong>:</p>
+		<ul>
+			<li>Primary Key: id</li>
+			<li>Foreign Keys:<ul>
+				<li>parent_function references ex_?_functions(address)</li>
+				<li>source references ex_?_basic_blocks(id)</li>
+				<li>destination references ex_?_basic_blocks(id)</li>
+			</ul>
+			</li>
+		</ul>
+		<h4>The instructions table</h4>
+		<p>The table ex_?_instructions contains all disassembled instructions of 
+		the module and the basic blocks they belong to.</p>
+		<p>
+				<table style="width: 100%" class="style1">
+			<tr>
+				<td class="columnTableHeader" colspan="3">ex_?_instructions</td>
+			</tr>
+			<tr style="background-color:#FFFFCC">
+				<td class="columnTableNameHeader">Column Name</td>
+				<td class="columnTableTypeHeader">Column Type</td>
+				<td class="columnTableDescriptionHeader">Column Description</td>
+			</tr>
+			<tr>
+				<td class="columnTableName">address</td>
+				<td class="columnTableType">bigint NOT NULL</td>
+				<td class="columnTableDescription">Address of the instruction.</td>
+			</tr>
+			<tr>
+				<td class="columnTableName">mnemonic</td>
+				<td class="columnTableType">character varying(32) NOT NULL</td>
+				<td class="columnTableDescription">Mnemonic of the instruction.</td>
+			</tr>
+			<tr>
+				<td class="columnTableName">data</td>
+				<td class="columnTableType">bytea NOT NULL</td>
+				<td class="columnTableDescription">Raw data bytes of the 
+				instruction.</td>
+			</tr>
+			</table>
+		</p>
+		<p><strong>Additional information</strong>:</p>
+		<ul>
+			<li>Primary Key: address, basic_block_id</li>
+			<li>Foreign Keys:<ul>
+				<li>basic_block_id references ex_?_basic_blocks(id)</li>
+			</ul>
+			</li>
+		</ul>
+		<h4>The operand table</h4>
+		<p>The table ex_?_operands describes all operands of an 
+		instruction.</p>
+		<p>
+				<table style="width: 100%" class="style1">
+			<tr>
+				<td class="columnTableHeader" colspan="3">ex_?_operands</td>
+			</tr>
+			<tr style="background-color:#FFFFCC">
+				<td class="columnTableNameHeader">Column Name</td>
+				<td class="columnTableTypeHeader">Column Type</td>
+				<td class="columnTableDescriptionHeader">Column Description</td>
+			</tr>
+			<tr>
+				<td class="columnTableName">address</td>
+				<td class="columnTableType">bigint NOT NULL</td>
+				<td class="columnTableDescription">Identifies the instruction an 
+				operand belongs to.</td>
+			</tr>
+			<tr>
+				<td class="columnTableName">expression_tree_id</td>
+				<td class="columnTableType">integer NOT NULL</td>
+				<td class="columnTableDescription">Identifies the expression 
+				tree of the operand.</td>
+			</tr>
+			<tr>
+				<td class="columnTableName">position</td>
+				<td class="columnTableType">integer NOT NULL</td>
+				<td class="columnTableDescription">Gives the position of the 
+				operand. The value 0 means that the operand is the first operand 
+				of the instruction and so on.</td>
+			</tr>
+			</table>
+		</p>
+		<p><strong>Additional information</strong>:</p>
+		<ul>
+			<li>Primary Key: -</li>
+			<li>Foreign Keys:<ul>
+				<li>expression_tree_id references ex_?_expression_trees(id)</li>
+				<li>address references ex_?_instructions(address)</li>
+			</ul>
+			</li>
+		</ul>
+		<h4>The expression trees table</h4>
+		<p>The table ex_?_expression_trees contains the unique identifiers of 
+		the expression trees that can appear as operands.</p>
+				<table style="width: 100%" class="style1">
+			<tr>
+				<td class="columnTableHeader" colspan="3">ex_?_expression_trees</td>
+			</tr>
+			<tr style="background-color:#FFFFCC">
+				<td class="columnTableNameHeader">Column Name</td>
+				<td class="columnTableTypeHeader">Column Type</td>
+				<td class="columnTableDescriptionHeader">Column Description</td>
+			</tr>
+			<tr>
+				<td class="columnTableName">id</td>
+				<td class="columnTableType">serial NOT NULL</td>
+				<td class="columnTableDescription">Identifies an expression 
+				tree.</td>
+			</tr>
+			</table>
+		<h4>The expression nodes table</h4>
+		<p>The table ex_?_expression_nodes contains the expression tree nodes used to build the operand trees for 
+		each operand.</p>
+		<p>
+				<table style="width: 100%" class="style1">
+			<tr>
+				<td class="columnTableHeader" colspan="3">ex_?_expression_nodes</td>
+			</tr>
+			<tr style="background-color:#FFFFCC">
+				<td class="columnTableNameHeader">Column Name</td>
+				<td class="columnTableTypeHeader">Column Type</td>
+				<td class="columnTableDescriptionHeader">Column Description</td>
+			</tr>
+			<tr>
+				<td class="columnTableName">id</td>
+				<td class="columnTableType">serial NOT NULL</td>
+				<td class="columnTableDescription">Identifies an expression.</td>
+			</tr>
+			<tr>
+				<td class="columnTableName">type</td>
+				<td class="columnTableType">integer NOT NULL DEFAULT 0</td>
+				<td class="columnTableDescription">Describes the type of the 
+				expression. Valid values are 2 (Integer Literal), 3 (Float 
+				Literal), 4 (Operator), 5 (Register), 6 (Size Prefix), and 7 
+				(Memory Dereference).</td>
+			</tr>
+			<tr>
+				<td class="columnTableName">symbol</td>
+				<td class="columnTableType">haracter varying(256)</td>
+				<td class="columnTableDescription">Unless the expr_type value is 
+				an integer, this column contains the value of the operand.<br />
+				<br />
+				Valid values for operators are all kinds of infix operators like 
+				&#39;+&#39;, &#39;-&#39;, and &#39;*&#39;, as well as prefix operators like x86 
+				selectors (&#39;ss:&#39;, &#39;cs:&#39;, ...).<br />
+				Valid values for size prefixes are b1 (byte), b2 (word), b4(dword), 
+				and b8 (qword).<br />
+				The only valid value of memory dereferences is &#39;[&#39;.</td>
+			</tr>
+			<tr>
+				<td class="columnTableName">immediate</td>
+				<td class="columnTableType">bigint</td>
+				<td class="columnTableDescription">If the expr_type value is an 
+				integer literal, this column contains the integer value of the 
+				literal.</td>
+			</tr>
+			<tr>
+				<td class="columnTableName">position</td>
+				<td class="columnTableType">integer</td>
+				<td class="columnTableDescription">Specifies the position of the 
+				expression in the operand. This is useful to sort members of the 
+				expression tree (for example in binary expressions like addition).</td>
+			</tr>
+			<tr>
+				<td class="columnTableName">parent_id</td>
+				<td class="columnTableType">integer</td>
+				<td class="columnTableDescription">Parent expression of the 
+				expression or null if the expression is a root expression of the 
+				expression tree.</td>
+			</tr>
+			</table>
+		</p>
+		<p><strong>Additional information</strong>:</p>
+		<ul>
+			<li>Primary Key: id</li>
+			<li>Foreign Keys:<ul>
+				<li>parent_id references ex_?_expression_trees(id)</li>
+			</ul>
+			</li>
+		</ul>
+		<h4>The expression tree nodes table</h4>
+		<p>The table ex_?_expression_tree_nodes specifies what expression tree 
+		nodes belong to what expression tree.</p>
+		<p>
+				<table style="width: 100%" class="style1">
+			<tr>
+				<td class="columnTableHeader" colspan="3">ex_?_expression_tree_nodes</td>
+			</tr>
+			<tr style="background-color:#FFFFCC">
+				<td class="columnTableNameHeader">Column Name</td>
+				<td class="columnTableTypeHeader">Column Type</td>
+				<td class="columnTableDescriptionHeader">Column Description</td>
+			</tr>
+			<tr>
+				<td class="columnTableName">expression_tree_id</td>
+				<td class="columnTableType">integer NOT NULL</td>
+				<td class="columnTableDescription">Identifies an expression tree.</td>
+			</tr>
+			<tr>
+				<td class="columnTableName">expression_node_id</td>
+				<td class="columnTableType">integer NOT NULL</td>
+				<td class="columnTableDescription">Identifies an expression tree 
+				node.</td>
+			</tr>
+			</table>
+		</p>
+		<p><strong>Additional information</strong>:</p>
+		<ul>
+			<li>Primary Key: -</li>
+			<li>Foreign Keys:<ul>
+				<li>expression_tree_id references ex_?_expression_trees(id)</li>
+				<li>expression_node_id references ex_?_expression_nodes</li>
+			</ul>
+			</li>
+		</ul>
+		<h4>The expression substitutions table</h4>
+		<p>The table ex_?_expression_substitutions contains alternative strings 
+		for operand expressions. This is useful to display constants or variable 
+		names instead of raw expressions.</p>
+		<p>
+				<table style="width: 100%" class="style1">
+			<tr>
+				<td class="columnTableHeader" colspan="3">ex_?_expression_substitutions</td>
+			</tr>
+			<tr style="background-color:#FFFFCC">
+				<td class="columnTableNameHeader">Column Name</td>
+				<td class="columnTableTypeHeader">Column Type</td>
+				<td class="columnTableDescriptionHeader">Column Description</td>
+			</tr>
+			<tr>
+				<td class="columnTableName">id</td>
+				<td class="columnTableType">serial NOT NULL</td>
+				<td class="columnTableDescription">Identifies the replacement 
+				operation.</td>
+			</tr>
+			<tr>
+				<td class="columnTableName">address</td>
+				<td class="columnTableType">bigint NOT NULL</td>
+				<td class="columnTableDescription">Instruction that contains the 
+				expression to be replaced.</td>
+			</tr>
+			<tr>
+				<td class="columnTableName">position</td>
+				<td class="columnTableType">integer NOT NULL</td>
+				<td class="columnTableDescription">Position of the operand that contains the 
+				expression to be replaced.</td>
+			</tr>
+			<tr>
+				<td class="columnTableName">expression_node_id</td>
+				<td class="columnTableType">integer NOT NULL</td>
+				<td class="columnTableDescription">Expression to be replaced.</td>
+			</tr>
+			<tr>
+				<td class="columnTableName">replacement</td>
+				<td class="columnTableType">text NOT NULL</td>
+				<td class="columnTableDescription">Alternative text for the 
+				expression.</td>
+			</tr>
+			</table>
+		</p>
+		<p><strong>Additional information</strong>:</p>
+		<ul>
+			<li>Primary Key: -</li>
+			<li>Foreign Keys:<ul>
+				<li>(address, position) references ex_?_operands((address, 
+				position))</li>
+				<li>expression_node_id references ex_?_expression_nodes(id)</li>
+			</ul>
+			</li>
+		</ul>
+		<h4>The address references table</h4>
+		<p>The table ex_?_address_references provides information about offsets 
+		of the module referenced by instruction operands. Instruction operands 
+		can either reference other instructions or arbitrary offsets of the 
+		module.</p>
+		<p>
+				<table style="width: 100%" class="style1">
+			<tr>
+				<td class="columnTableHeader" colspan="3">ex_?_address_references</td>
+			</tr>
+			<tr style="background-color:#FFFFCC">
+				<td class="columnTableNameHeader">Column Name</td>
+				<td class="columnTableTypeHeader">Column Type</td>
+				<td class="columnTableDescriptionHeader">Column Description</td>
+			</tr>
+			<tr>
+				<td class="columnTableName">address</td>
+				<td class="columnTableType">bigint NOT NULL</td>
+				<td class="columnTableDescription">Identifies the instruction 
+				the operand belongs to.</td>
+			</tr>
+			<tr>
+				<td class="columnTableName">position</td>
+				<td class="columnTableType">integer</td>
+				<td class="columnTableDescription">Identifies the operand that 
+				references another address.</td>
+			</tr>
+			<tr>
+				<td class="columnTableName">expression_node_id</td>
+				<td class="columnTableType">integer</td>
+				<td class="columnTableDescription">Identifies the exact 
+				expression that references another address.</td>
+			</tr>
+			<tr>
+				<td class="columnTableName">destination</td>
+				<td class="columnTableType">bigint NOT NULL</td>
+				<td class="columnTableDescription">The memory address referenced 
+				by the expression.</td>
+			</tr>
+			<tr>
+				<td class="columnTableName">type</td>
+				<td class="columnTableType">integer NOT NULL DEFAULT 0</td>
+				<td class="columnTableDescription">Describes the reference. 
+				Valid values are 0 (conditional branch executed), 1 (conditional 
+				branch not executed), 2 (unconditional branch), 3 (switch branch), 
+				4 (direct call), 5 (indirect call), 6 (indirect virtual call), 7 
+				(data), and 8 (data string).</td>
+			</tr>
+			</table>
+		</p>
+		<p><strong>Additional information</strong>:</p>
+		<ul>
+			<li>Primary Key: -</li>
+			<li>Foreign Keys:<ul>
+				<li>(address, position) references ex_?_operands(address, 
+				position)</li>
+			</ul>
+			</li>
+			<ul>
+				<li>expression_node_id references ex_?_expression_nodes(id)</li>
+			</ul>
+		</ul>
+		<h4>The address comments table</h4>
+		<p>The table ex_?_address_comments contains comments associated with 
+		addresses of the module.</p>
+		<p>
+				<table style="width: 100%" class="style1">
+			<tr>
+				<td class="columnTableHeader" colspan="3">ex_?_address_comments</td>
+			</tr>
+			<tr style="background-color:#FFFFCC">
+				<td class="columnTableNameHeader">Column Name</td>
+				<td class="columnTableTypeHeader">Column Type</td>
+				<td class="columnTableDescriptionHeader">Column Description</td>
+			</tr>
+			<tr>
+				<td class="columnTableName">address</td>
+				<td class="columnTableType">bigint NOT NULL</td>
+				<td class="columnTableDescription">Address associated with the 
+				comment.</td>
+			</tr>
+			<tr>
+				<td class="columnTableName">comment</td>
+				<td class="columnTableType">text NOT NULL</td>
+				<td class="columnTableDescription">The comment text.</td>
+			</tr>
+			</table>
+		</p>
+		<p><strong>Additional information</strong>:</p>
+		<ul>
+			<li>Primary Key: address</li>
+			<li>Foreign Keys: -</li>
+		</ul>
+		<h4>&nbsp;The Call graph table</h4>
+		<p>The table ex_?_callgraph describes how the individual functions of a 
+		module call each other. Each row of the table describes a single 
+		function call.</p>
+		<p>
+				<table style="width: 100%" class="style1">
+			<tr>
+				<td class="columnTableHeader" colspan="3">ex_?_callgraph</td>
+			</tr>
+			<tr style="background-color:#FFFFCC">
+				<td class="columnTableNameHeader">Column Name</td>
+				<td class="columnTableTypeHeader">Column Type</td>
+				<td class="columnTableDescriptionHeader">Column Description</td>
+			</tr>
+			<tr>
+				<td class="columnTableName">serial NOT NULL</td>
+				<td class="columnTableType">unsigned int not null</td>
+				<td class="columnTableDescription">Identifies the function call.</td>
+			</tr>
+			<tr>
+				<td class="columnTableName">source</td>
+				<td class="columnTableType">bigint NOT NULL</td>
+				<td class="columnTableDescription">Start address of the function 
+				that contains the function call.</td>
+			</tr>
+			<tr>
+				<td class="columnTableName">source_basic_block_id</td>
+				<td class="columnTableType">integer NOT NULL</td>
+				<td class="columnTableDescription">Basic block that contains the 
+				function call.</td>
+			</tr>
+			<tr>
+				<td class="columnTableName">source_address</td>
+				<td class="columnTableType">bigint NOT NULL</td>
+				<td class="columnTableDescription">Function call instruction.</td>
+			</tr>
+			<tr>
+				<td class="columnTableName">destination</td>
+				<td class="columnTableType">bigint NOT NULL</td>
+				<td class="columnTableDescription">Start address of the called 
+				function.</td>
+			</tr>
+			</table>
+		</p>
+		<p><strong>Additional information</strong>:</p>
+		<ul>
+			<li>Primary Key: id</li>
+			<li>Foreign Keys:<ul>
+				<li>source references ex_?_functions(address)</li>
+				<li>destination references ex_?_functions(address)</li>
+				<li>source_basic_block_id references ex_?_basic_blocks(id)</li>
+				<li>source_address ex_?_instructions(address)</li>
+			</ul>
+			</li>
+		</ul>
+		
+
+
+		<h3>Example Queries</h3>
+		<p>This section contains some sample queries for working with the 
+		database scheme. Some expectations about the disassembled module and how 
+		it is stored in the database lead to pitfalls that should be avoided.</p>
+		<h4>Load all module names stored in the database</h4>
+		<p class="style2">postgresql&gt; select id, name from modules;<br />
+<pre class="style2">+----+-----------------+
+| id | name            |
++----+-----------------+
+|  1 | NOTEPAD.EXE     |
+|  2 | calc.exe        |
+|  3 | kernel32.dll    |
++----+-----------------+</pre></p>
+<h4>Load all function names of calc.exe</h4>
+<p>
+<pre>
+<p class="style2">postgresql> select hex(address), name from ex_2_functions;
++--------------+------------------+
+| hex(address) | name             |
++--------------+------------------+
+| 1001000      | RegOpenKeyExA    |
+| 1001004      | RegQueryValueExA |
+| 1001008      | RegCloseKey      |
+| 1001010      | SetBkColor       |
+| 1001014      | SetTextColor     |
+| 1001028      | GetProcAddress   |
+| 1001030      | GlobalAlloc      |
+| 1001034      | GlobalFree       |
+| 1001038      | GlobalReAlloc    |
+| 1001040      | Sleep            |
+...
+</p></pre></p>
+		<h4>Count the number of basic blocks in calc.exe</h4>
+<p>
+<pre>
+postgresql> select count(distinct(address)) as bbcount from ex_2_basic_blocks;
++---------+
+| bbcount |
++---------+
+|    2141 |
++---------+
+</pre></p>
+<p>Note that the distinct is necessary because one basic block can belong to 
+				more than one function. These blocks should not be counted more 
+than once.</p>
+		<h4>Load instructions of a function</h4>
+		<p>It is possible to load all instructions of a function including all 
+		of their operands in just one SQL query.</p>
+		<p>
+<pre>
+select
+	hex(ex_2_instructions.address),
+	mnemonic,
+	symbol,
+	immediate,
+	ex_2_operand_tuples.position,
+	ex_2_expression_tree.id,
+	ex_2_expression_tree.parent_id,
+	ex_2_expression_tree.position
+from
+  ex_2_basic_blocks,
+	ex_2_instructions,
+	ex_2_operand_tuples,
+	ex_2_operand_expressions,
+	ex_2_expression_tree
+where
+  ex_2_basic_blocks.parent_function = 0x1011569 and
+  ex_2_basic_blocks.id = ex_2_instructions.basic_block_id and
+	ex_2_instructions.address = ex_2_operand_tuples.address and
+	ex_2_operand_expressions.operand_Id = ex_2_operand_tuples.operand_id and
+	ex_2_expression_tree.id = ex_2_operand_expressions.expr_id
+order by
+	ex_2_instructions.address,
+	sequence,
+	ex_2_operand_tuples.position,
+	parent_id
+	
++---------+----------+--------+-----------+----------+------+-----------+----------+
+| address | mnemonic | symbol | immediate | position | id   | parent_id | position |
++---------+----------+--------+-----------+----------+------+-----------+----------+
+| 1011569 | push     | b4     |      NULL |        0 |    1 |      NULL |        0 |
+| 1011569 | push     | esi    |      NULL |        0 |   12 |         1 |        0 |
+| 101156A | push     | b4     |      NULL |        0 |    1 |      NULL |        0 |
+| 101156A | push     | ss:    |      NULL |        0 |    3 |         1 |        0 |
+| 101156A | push     | [      |      NULL |        0 |    4 |         3 |        0 |
+| 101156A | push     | +      |      NULL |        0 |    5 |         4 |        0 |
+| 101156A | push     | esp    |      NULL |        0 |   59 |         5 |        0 |
+| 101156A | push     | NULL   |        12 |        0 |   53 |         5 |        1 |
+| 101156E | mov      | b4     |      NULL |        0 |    1 |      NULL |        0 |
+| 101156E | mov      | esi    |      NULL |        0 |   12 |         1 |        0 |
+| 101156E | mov      | b4     |      NULL |        1 |    1 |      NULL |        0 |
+...
+</pre>
+		<p>&nbsp;</p>
+		
+
+
+		<!-- #EndEditable --></div>
+	<!-- End Left Column -->
+	<!-- Begin Right Column -->
+	<!-- End Right Column -->
+	<!-- Begin Footer -->
+	<div id="footer">
+		<p><a href="../index.htm">Index</a>  
+		| <a href="installation.htm">Installation</a> |
+		<a href="usage.htm">Usage</a> |
+		<a href="debugging.htm">Debugging</a> |
+		<a href="scripting.htm">Scripting</a> |
+		<a href="tutorial.htm">Tutorial</a> |
+		<a href="faq.htm">FAQ</a> |
+		<a href="about.htm">About</a></p>
+		<p>Copyright 2005 - 201<span lang="de">4</span>: <span lang="de">Google</span>
+		<span lang="de">Inc.</span></p>
+	</div>
+	<!-- End Footer --></div>
+<!-- End Container -->
+
+</body>
+
+<!-- #EndTemplate -->
+
+</html>

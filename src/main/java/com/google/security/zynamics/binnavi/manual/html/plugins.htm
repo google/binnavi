@@ -1,0 +1,115 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" dir="ltr">
+
+<!-- #BeginTemplate "../master_in.dwt" -->
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="Content-Language" content="en-us" />
+<!-- #BeginEditable "doctitle" -->
+<title>zynamics BinNavi 5.0 Manual - Writing BinNavi Plugins</title>
+<!-- #EndEditable -->
+<link rel="stylesheet" type="text/css" title="CSS" href="../styles/style1.css" media="screen" />
+<style type="text/css">
+</style>
+</head>
+
+<body style="background-image: url('../images/binnaviicon.png')">
+
+<!-- Begin Container -->
+<div id="container">
+	<!-- Begin Masthead -->
+	<div id="masthead">
+		<img src="../images/binnavi_logo4.png" alt="BinNavi Logo"/>
+	</div>
+	<!-- End Masthead -->
+	<!-- Begin iMenu -->
+	<div id="navigation">
+		<ul>
+			<li><a href="../index.htm">Index</a></li>
+			<li><a href="installation.htm">Installation</a></li>
+			<li><a href="usage.htm">Usage</a></li>
+			<li><a href="debugging.htm">Debugging</a></li>
+			<li><a href="scripting.htm">Scripting</a></li>
+			<li><a href="tutorial.htm">Tutorial</a></li>
+			<li><a href="faq.htm">FAQ</a></li>
+			<li><a href="about.htm">About</a></li>
+		</ul>
+	</div>
+	<!-- End iMenu -->
+	<!-- Begin Left Column -->
+	<div id="column_lg">
+		<!-- #BeginEditable "content" -->
+		<h2>Writing BinNavi Plugins</h2>
+		<h3>Overview</h3>
+		<p>One of BinNavi's main features is its extensibility through plugins written in the
+		Java programming language and other languages. The general idea behind BinNavi plugins
+		is that each BinNavi plugin implements one or more of the plugin interfaces provided
+		by the BinNavi plugin API. Depending on what interfaces a plugin implements, BinNavi
+		gives the plugin access to itself through a well-defined plugin interface.</p>
+		
+		<h3>Writing plugins in Java</h3>
+		
+		<p>Java is the preferred programming language for writing plugins in BinNavi. While plugins
+		written in other languages are not limited in any way by BinNavi, there might be speed concerns
+		when implementing plugins in a language like Ruby for example.</p>
+		
+		<p>To write your own plugins you need to know the following things:<ul>
+			<li>Plugin files are placed relative to the BinNavi.jar in the <em>plugins</em> 
+      or <em>userplugins</em> directory of BinNavi or a subdirectory of it.</li>
+			<li>Plugin files can be either CLASS files (simple plugins) or JAR files (more complex plugins or plugin collections)</li>
+			<li>CLASS file plugins only need to implement one or more of the Plugin interfaces. The CLASS file is instantiated when BinNavi starts and if a valid plugin is found, the plugin is loaded and given access to BinNavi.</li>
+			<li>JAR plugin files must define a main class in their manifest file and this main class must implement the IPluginServer interface. The method getPlugins of this PluginServer object returns a list of all plugins that can be found in the JAR file. These plugins are loaded and given access to BinNavi.</li>
+		</ul>
+		
+		<p>To find out what can be done through plugins please consult the <a href="../API/html/index.html">Plugin API section</a> of this manual. </p>
+		
+		<h3>Writing plugins in scripting languages</h3>
+		
+		<p>In principle, all languages that can be used to write BinNavi scripts
+		can also be used to write BinNavi plugins. By default this includes Python.</p>
+		
+		<p>To write plugins in any of the supported scripting languages, you need
+		to know the following things:</p>
+		
+		<ul>
+			<li>Script files must have the same extension as regular scripts in your
+			language (e.g. .py for Jython scripts).</li>
+			<li>Scripts that implement BinNavi Plugin interfaces must be stored in 
+			<em>scripts</em> subdirectory of BinNavi.
+			These scripts are automatically loaded when BinNavi starts.</li>
+			<li>Each script has access to an object called <em>navi</em> of type PluginInterface.
+			This object gives scripts access to BinNavi. Please consult the section about the
+			Plugin API to find out what you can do with the <em>navi</em> object.</li>
+		</ul>
+		
+		<p>Since accessing Java classes and objects from languages other than
+		Java has some quirks, BinNavi comes with two small sample scripts written
+		in Python that can be used as the starting point for new plugins
+		written in these languages. You can find these sample scripts in the
+		<em>scripts</em> subdirectory of your BinNavi installation.</p>
+		<!-- #EndEditable --></div>
+	<!-- End Left Column -->
+	<!-- Begin Right Column -->
+	<!-- End Right Column -->
+	<!-- Begin Footer -->
+	<div id="footer">
+		<p><a href="../index.htm">Index</a>  
+		| <a href="installation.htm">Installation</a> |
+		<a href="usage.htm">Usage</a> |
+		<a href="debugging.htm">Debugging</a> |
+		<a href="scripting.htm">Scripting</a> |
+		<a href="tutorial.htm">Tutorial</a> |
+		<a href="faq.htm">FAQ</a> |
+		<a href="about.htm">About</a></p>
+		<p>Copyright 2005 - 201<span lang="de">4</span>: <span lang="de">Google</span>
+		<span lang="de">Inc.</span></p>
+	</div>
+	<!-- End Footer --></div>
+<!-- End Container -->
+
+</body>
+
+<!-- #EndTemplate -->
+
+</html>

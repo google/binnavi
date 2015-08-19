@@ -1,0 +1,166 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" dir="ltr">
+
+<!-- #BeginTemplate "../master_in.dwt" -->
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="Content-Language" content="en-us" />
+<!-- #BeginEditable "doctitle" -->
+<title>zynamics BinNavi 5.0 Manual - Using Scripts in BinNavi</title>
+<style type="text/css">
+
+
+
+.style1 {
+	text-align: center;
+}
+</style>
+<!-- #EndEditable -->
+<link rel="stylesheet" type="text/css" title="CSS" href="../styles/style1.css" media="screen" />
+<style type="text/css">
+</style>
+</head>
+
+<body style="background-image: url('../images/binnaviicon.png')">
+
+<!-- Begin Container -->
+<div id="container">
+	<!-- Begin Masthead -->
+	<div id="masthead">
+		<img src="../images/binnavi_logo4.png" alt="BinNavi Logo"/>
+	</div>
+	<!-- End Masthead -->
+	<!-- Begin iMenu -->
+	<div id="navigation">
+		<ul>
+			<li><a href="../index.htm">Index</a></li>
+			<li><a href="installation.htm">Installation</a></li>
+			<li><a href="usage.htm">Usage</a></li>
+			<li><a href="debugging.htm">Debugging</a></li>
+			<li><a href="scripting.htm">Scripting</a></li>
+			<li><a href="tutorial.htm">Tutorial</a></li>
+			<li><a href="faq.htm">FAQ</a></li>
+			<li><a href="about.htm">About</a></li>
+		</ul>
+	</div>
+	<!-- End iMenu -->
+	<!-- Begin Left Column -->
+	<div id="column_lg">
+		<!-- #BeginEditable "content" -->
+		<h2>Using Scripts in BinNavi</h2>
+		<h3>Overview</h3>
+		<p>To execute scripts written in languages like Python or Ruby, BinNavi
+		provides a simple dialog where you can enter and execute these 
+		scripts. This
+		dialog is accessible both from the main menu of the main window and from
+		the main menu of each open graph window.</p>
+		
+		<p>The scripting dialog has two modes that behave differently. The first mode is the so called console mode. In
+		this mode the scripting dialog provides an input field that behaves like a
+		console. The second mode is the edit mode. In this mode the script input
+		field behaves like a text editor.</p>
+		
+		<p>Furthermore, the scripting dialog provides features like the ability
+		to load and save scripts, the ability to undo/redo changes, and the ability
+		to work with the system clipboard.</p>
+		<h3>How to use the scripting dialog</h3>
+		
+		<p>By default the scripting dialog opens with a single console mode scripting tab. In console mode 
+		you can enter one or more lines which
+		are executed as soon as you hit CTRL-ENTER.</p>
+		
+		<p class="style1"><img alt="" src="../images/script_console.png" /></p>
+		
+		<p>Executing scripts in edit mode is a bit different from executing scripts in
+		console mode. To execute a script in edit mode, you have to click the
+		<span class="gui_ref">Execute Script</span> button in the lower right corner of the dialog.</p>
+		<p class="style1">
+		<img alt="" height="528" src="../images/script_editor.png" width="625" /></p>
+		
+		<p>It is important to know that by default there is an object called <i>navi</i>
+		available in the scripting console. This object is used to access BinNavi.
+				
+		The following other pre-defined objects are also available in scripts 
+		executed from the scripting dialog.<ul>
+			<li><em>dbs</em>: A shortcut for navi.getDatabaseManager().getDatabases()</li>
+			<li><em>cdb</em>: Database where the current graph is stored (only 
+			available in scripting dialogs started from a graph window)</li>
+			<li><em>cg</em>: View2D object that can be used to access the current graph (only 
+			available in scripting dialogs started from a graph window)</li>
+			<li><em>cf</em>: GraphFrame object that represents the graph window from 
+			where the scripting dialog was started (only available in scripting 
+			dialogs started from a graph window)</li>
+		</ul>
+		
+		<p>To find out exactly what BinNavi functions and objects are available from scripts,
+		please refer to the <a href="../API/html/index.html">Plugin API documentation</a>. All parts of the plugin API are
+		available from scripts too.</p>
+		<h3>Standalone Scripting</h3>
+		<p>Since BinNavi 2.1 it is also possible to write stand-alone scripts 
+		that can be run from the commandline without having to start BinNavi 
+		itself. An example (standalone_skeleton.px) of a standalone Jython 
+		script can be found in the BinNavi/scripts directory.</p>
+		<p>In theory it is also possible to write stand-alone scripts in 
+		languages other than Jython (especially JRuby) but this was never 
+		tested.</p>
+		
+		<h3>Additional Information</h3>
+		<p>It is possible to define scripts that are automatically executed 
+		whenever a console mode script tab is opened. This is useful to 
+		automatically import files or classes that are often used in the 
+		scripting console. These initialization scripts can be found in the <em>
+		scripts/lib</em> subdirectory of your BinNavi installation. Please read 
+		the readme.txt file in that directory to find more information about 
+		this feature.</p>
+		
+		<h3>Notes on writing Ruby scripts</h3>
+		
+		<ul>
+			<li>The plugin interface object is not called navi but $navi</li>
+			<li>Java methods like set*/get* have their get/set dropped from the name. E.g. use $navi.databaseManager instead of $navi.getDatabaseManager</li>
+		</ul>
+		
+		<h3>Notes on writing Python scripts</h3>
+		
+		<p>Since the Jython engine does not redirect output automatically all BinNavi scripts
+		written in Python that are supposed to display output in the Scripting dialog must redirect output manually.
+		This can be done using the following two lines at the beginning of a script:</p>
+		
+<pre>
+import sys
+sys.stdout = SCRIPT_CONSOLE</pre>
+		<ul>
+			<li>Java methods like set*/get* are available without get/set 
+			prefixes. Parentheses are optional too. This allows the use of navi.databaseManager instead of navi.getDatabaseManager()</li>
+		</ul>
+		
+		<h3>Examples</h3>
+		
+		<p>Please refer to the <em>scripts</em> subdirectory of your BinNavi 
+		installation for sample scripts.</p>
+		<!-- #EndEditable --></div>
+	<!-- End Left Column -->
+	<!-- Begin Right Column -->
+	<!-- End Right Column -->
+	<!-- Begin Footer -->
+	<div id="footer">
+		<p><a href="../index.htm">Index</a>  
+		| <a href="installation.htm">Installation</a> |
+		<a href="usage.htm">Usage</a> |
+		<a href="debugging.htm">Debugging</a> |
+		<a href="scripting.htm">Scripting</a> |
+		<a href="tutorial.htm">Tutorial</a> |
+		<a href="faq.htm">FAQ</a> |
+		<a href="about.htm">About</a></p>
+		<p>Copyright 2005 - 201<span lang="de">4</span>: <span lang="de">Google</span>
+		<span lang="de">Inc.</span></p>
+	</div>
+	<!-- End Footer --></div>
+<!-- End Container -->
+
+</body>
+
+<!-- #EndTemplate -->
+
+</html>

@@ -1,0 +1,223 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" dir="ltr">
+
+<!-- #BeginTemplate "../master_in.dwt" -->
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="Content-Language" content="en-us" />
+<!-- #BeginEditable "doctitle" --><title>zynamics BinNavi 5.0 Manual - 
+Installation</title>
+<style type="text/css">
+
+
+
+
+
+
+
+
+
+.style2 {
+	margin-left: 40px;
+}
+.style3 {
+	text-align: left;
+}
+.auto-style1 {
+	color: #CC5555;
+	text-decoration: underline;
+}
+.auto-style2 {
+	font-weight: normal;
+}
+</style>
+<!-- #EndEditable -->
+<link rel="stylesheet" type="text/css" title="CSS" href="../styles/style1.css" media="screen" />
+<style type="text/css">
+</style>
+</head>
+
+<body style="background-image: url('../images/binnaviicon.png')">
+
+<!-- Begin Container -->
+<div id="container">
+	<!-- Begin Masthead -->
+	<div id="masthead">
+		<img src="../images/binnavi_logo4.png" alt="BinNavi Logo"/>
+	</div>
+	<!-- End Masthead -->
+	<!-- Begin iMenu -->
+	<div id="navigation">
+		<ul>
+			<li><a href="../index.htm">Index</a></li>
+			<li><a href="installation.htm">Installation</a></li>
+			<li><a href="usage.htm">Usage</a></li>
+			<li><a href="debugging.htm">Debugging</a></li>
+			<li><a href="scripting.htm">Scripting</a></li>
+			<li><a href="tutorial.htm">Tutorial</a></li>
+			<li><a href="faq.htm">FAQ</a></li>
+			<li><a href="about.htm">About</a></li>
+		</ul>
+	</div>
+	<!-- End iMenu -->
+	<!-- Begin Left Column -->
+	<div id="column_lg">
+		<!-- #BeginEditable "content" -->
+		<h2>Installation</h2>
+		<h3>Overview</h3>
+		
+		<p>BinNavi is not a stand-alone product. Depending on how you plan to 
+		use BinNavi you have to install additional third-party software 
+		packages. This section 
+		explains what third-party software is required or optional. Each additional third-party software and its installation
+		and configuration is described.</p>
+		
+		<h3>Installation of BinNavi</h3>
+
+		<p>An installation of BinNavi is not necessary, but possible. For either 
+		Windows, Debian/Ubuntu Linux or MacOSX you can also use the provided 
+		installers. If you rather want to handle the process yourself or your OS 
+		of choice does not have an installer package you can also use the .zip 
+		file and just unpack BinNavi in a directory of your choice.&nbsp; </p>
+		
+		<h3>License file</h3>
+		<p>The license of BinNavi is your proof of ownership and should be 
+		copied into the appropriate spot respective your installation directory 
+		for BinNavi. For example if you have installed BinNavi in
+		X:\BinNavi\ then &quot;zynamics 
+		BinNavi License Key.txt&quot should be placed in this directory.</p>
+
+		<h3>Installation of Third-Party Software</h3>
+		<p>No matter how you are using BinNavi, you need to install the 
+		following additional components:</p>
+		
+		<ul>
+			<li><a href="#Java">Java Runtime Environment 6.0+</a></li>
+			<li><a href="#PostgreSQL">PostgreSQL Server <span lang="de">9</span><span class="auto-style1">+</span></a></li>
+		</ul>
+		
+		<p>If you want to use IDA Pro as your primary disassembler, you also 
+		need to install the following components:</p>
+		
+		<ul>
+			<li><a href="#IDA Pro">IDA Pro <span lang="de">6.0</span>+</a></li>
+		</ul>
+		
+		<p>The recommended way to get data from IDA Pro into the PostgreSQL database
+		is to use our exporter plugin. If you want to go this way you also need:</p>
+		
+		<ul>
+			<li>
+			<a href="#vcpp">Microsoft Visual C++ 2013 Redistributable package</a>
+			(note that this software is only required if you are using Microsoft
+			Windows)</li>
+		</ul>
+		
+		<h4>Java Runtime Environment 7.0+</h4>
+		
+		<p>Download Site: <a href="http://java.sun.com/javase/downloads/index.jsp">JRE 7.0 Download Site</a></p>
+		
+		<p>The Java Runtime Environment (JRE) is necessary to run BinNavi. Before
+		proceeding with the installation
+		of BinNavi you should be sure to install at least version 7.0 of the JRE.
+		You can check your version of Java by entering the command</p>
+		<pre>java<span lang="de"> </span>-version</pre>
+		<p>in the shell. The output should look similar to the one below.</p>
+		<pre><p class="style2">java version &quot;1.7.0_55&quot;
+OpenJDK Runtime Environment (IcedTea 2.4.7) (7u55-2.4.7-1ubuntu1)
+OpenJDK 64-Bit Server VM (build 24.51-b03, mixed mode)</p></pre>
+		<p>BinNavi should work if the version output shows some kind of 1.7
+		version.</p>
+		<p>A default installation of the JRE 7.0+ is sufficient for BinNavi.
+		
+		</p>
+		
+		<h4 class="auto-style2"><a name="PostgreSQL"></a><strong>PostgreSQL Server 
+		<span lang="de">9</span>.0+</strong></h4>
+		
+		<p class="style3">Download Site: 
+		<a href="http://www.postgresql.org/download/">PostgreSQL 
+		Server Download Site</a><br />
+		Product Site: <a href="http://www.postgresql.org">
+		<span class="auto-style1">Postgre</span>SQL 
+		Server Product Site</a></p>
+		
+		<p>PostgreSQL Server is always required if you want to use BinNavi because BinNavi stores all information about
+		projects, modules, and assembly code in a PostgreSQL database. At least version 
+		8.0 of PostgreSQL Server is required.
+		</p>
+		
+		<p>A default configuration of PostgreSQL Server works mostly fine with BinNavi but 
+		you might run into problems with mid-sized to large target applications. 
+		Should this happen it is recommended to change the following settings in 
+		your PostgreSQ Server configuration file.</p>
+		<ul>
+			<li>shared_buffers: We recommend to set this value to 1/4 of your 
+			total amount of RAM.</li>
+			<li>effective_cache_size<span lang="de">: </span>We recommend to set 
+			this value to something between 1/2 and 3/4 of your total amount of 
+			memory.</li>
+		</ul>
+		<p>For more information on performance tweaking your PostgreSQL setup 
+		please refer to the official
+		<a href="http://wiki.postgresql.org/wiki/Tuning_Your_PostgreSQL_Server">
+		website</a>.</p>
+		<h4><a name="vcpp"></a>IDA Pro 6.5+</h4>
+		
+		<p>Product Site: <a href="http://www.hex-rays.com/idapro/">IDA Pro Product Site</a></p>
+		
+		<p>IDA Pro is a commercial disassembler that can disassemble binary files from many different platforms.
+		Using IDA Pro is the recommended
+		way of getting data into BinNavi. At least IDA 6.5 is necessary but IDA Pro 6.6 is recommended.</p>
+		
+		<p>A default installation of IDA Pro works fine with BinNavi.</p>
+		
+<h4><a name="IDA Python"></a>Microsoft Visual C++ 2013 Redistributable package (Windows only)</h4>
+		<p>Product Site:
+		<a href="http://www.microsoft.com/en-us/download/confirmation.aspx?id=40784">
+		Microsoft Visual C++ 2013 Redistributable package Download Site</a></p>
+		<p>If you are using BinNavi in Microsoft Windows and you have not yet 
+		installed the Microsoft Visual C++ Redistributable package, you need to 
+		install it for the C++-based exporter to work.</p>
+		
+		<h3>Installation of the IDA Pro Plugin</h3>
+		<p>If you are using IDA Pro as the primary data source for BinNavi you 
+		also have to install the IDA Pro exporter plugin. Note that the 
+		deprecated python plugin is not shipped anymore and has been replaced 
+		with the more mature C++ plugin.</p>
+		<h4>Installation of the C++ plugin</h4>
+		<p>You can install the C++ plugin through the IDA Pro path configuration 
+		dialog in the Global Settings dialog of BinNavi. There is a button that 
+		installs the exporter to the selected IDA Pro directory.</p>
+		<p>If installation of the C++ plugin fails, you can install the plugin 
+		manually. To do so you have to copy all the files (except BinExport.idc) 
+		from the BinNavi/exporters/BinExport directory to your IDA Pro 
+		directory. If you are running recent versions of BinDiff or previous 
+		versions of BinNavi, the exporter plugin zynamics_binexport_*.plw might 
+		already exist in your plugins directory.</p>
+		
+		<!-- #EndEditable --></div>
+	<!-- End Left Column -->
+	<!-- Begin Right Column -->
+	<!-- End Right Column -->
+	<!-- Begin Footer -->
+	<div id="footer">
+		<p><a href="../index.htm">Index</a>  
+		| <a href="installation.htm">Installation</a> |
+		<a href="usage.htm">Usage</a> |
+		<a href="debugging.htm">Debugging</a> |
+		<a href="scripting.htm">Scripting</a> |
+		<a href="tutorial.htm">Tutorial</a> |
+		<a href="faq.htm">FAQ</a> |
+		<a href="about.htm">About</a></p>
+		<p>Copyright 2005 - 2014: Google Inc.</p>
+	</div>
+	<!-- End Footer --></div>
+<!-- End Container -->
+
+</body>
+
+<!-- #EndTemplate -->
+
+</html>

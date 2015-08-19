@@ -1,0 +1,363 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" dir="ltr">
+
+<!-- #BeginTemplate "../master_in.dwt" -->
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="Content-Language" content="en-us" />
+<!-- #BeginEditable "doctitle" -->
+<title>zynamics BinNavi 5.0 Manual - REIL Specification</title>
+<style type="text/css">
+
+
+
+
+
+
+
+.style1 {
+	margin-left: 40px;
+}
+.style2 {
+	font-family: "Courier New", Courier, monospace;
+}
+.style3 {
+	font-weight: bold;
+	color: green;
+	margin-left: 40px;
+}
+</style>
+<!-- #EndEditable -->
+<link rel="stylesheet" type="text/css" title="CSS" href="../styles/style1.css" media="screen" />
+<style type="text/css">
+</style>
+</head>
+
+<body style="background-image: url('../images/binnaviicon.png')">
+
+<!-- Begin Container -->
+<div id="container">
+	<!-- Begin Masthead -->
+	<div id="masthead">
+		<img src="../images/binnavi_logo4.png" alt="BinNavi Logo"/>
+	</div>
+	<!-- End Masthead -->
+	<!-- Begin iMenu -->
+	<div id="navigation">
+		<ul>
+			<li><a href="../index.htm">Index</a></li>
+			<li><a href="installation.htm">Installation</a></li>
+			<li><a href="usage.htm">Usage</a></li>
+			<li><a href="debugging.htm">Debugging</a></li>
+			<li><a href="scripting.htm">Scripting</a></li>
+			<li><a href="tutorial.htm">Tutorial</a></li>
+			<li><a href="faq.htm">FAQ</a></li>
+			<li><a href="about.htm">About</a></li>
+		</ul>
+	</div>
+	<!-- End iMenu -->
+	<!-- Begin Left Column -->
+	<div id="column_lg">
+		<!-- #BeginEditable "content" -->
+		<h2>REIL - The Reverse Engineering Intermediate Language</h2>
+		<ul>
+			<li><a href="#architecture">The REIL architecture</a></li>
+			<li><a href="#instructions">The REIL instruction set</a></li>
+			<li><a href="#usage">Using REIL in BinNavi</a></li>
+		</ul>
+		<p>The Reverse Engineering Intermediate Language (REIL) is a meta-assembly 
+		language that can be used to write platform-independent analysis 
+		algorithms. The basic idea behind REIL-integration in BinNavi is that 
+		REIL translators exist that translate native assembly code into REIL code. 
+		In the current version, BinNavi is shipped with an x86 translator, a PowerPC-32 translator, and an ARM-32 translator. These 
+		translators can be accessed from plugins or scripts.</p>
+		<h3><a name="architecture"></a>The REIL architecture</h3>
+		<p>REIL code is created for a virtual CPU with unlimited memory and an 
+		unlimited number of registers called t0, t1, t2, t3, and so on (where t 
+		stands for temporary register). Furthermore the registers of the target 
+		machine are also available in REIL. That means that registers like <em>eax</em> 
+		or <em>esi</em> can appear in REIL code translated from x86 code. There is no 
+		behavioral difference between REIL registers and native registers in 
+		REIL code though. Registers of both kinds can be treated uniformly.</p>
+		<p>Since REIL code is nearly always longer than the source assembly code 
+		there is no one-to-one correspondence between the offsets of native 
+		instructions and the offsets of REIL instructions. To keep some 
+		similarities between the original offsets of instructions and their REIL 
+		offsets, the REIL offsets are multiplied by 0x100. This means that the 
+		REIL code for an instruction that was at offset 0x402C12 in the original 
+		code can be found at offset 0x402C1200. Alternative notation for REIL 
+		offsets are 0x402C12/00 (slash-notation) or 0x402C12.00 (dot-notation). 
+		When REIL addresses are used as operands, their values are always 
+		specified in dot-notation. Each REIL instruction is exactly one byte large with the consequence 
+		that an original assembly instruction can be translated into up to 256 
+		REIL instructions.</p>
+		<h3><a name="instructions"></a>The REIL instruction set</h3>
+		<p>REIL is a structurally very simple assembly language. The REIL 
+		instruction set knows only 17 different instructions. Each instruction 
+		calculates at most one result value (multiple effects like settings flags 
+		are not allowed) and has exactly three operands (although some operands 
+		can be empty). Furthermore each operand must be a single value. Compound 
+		expressions or implicit instruction arguments as they appear in x86 assembly code are not allowed.</p>
+		<p>REIL operands are defined by their size and their type. The size of a 
+		REIL operand is either b1 (1 byte), b2, (2 bytes), b4 (4 bytes), b8 (8 
+		bytes), or b16 (16 bytes). Valid types for REIL operands are &#39;integer 
+		literal&#39;, &#39;register&#39;, and &#39;REIL offset&#39;. Operands are not explicitly 
+		typed as it is possible to determine the type of an operand from its 
+		value. The first two operands are generally known as input operands, the 
+		third operand is the output operand.</p>
+		<p>REIL instructions can be written in regular assembly syntax (with 
+		reduced information) or in parentheses syntax (with full information).</p>
+		<ul>
+			<li>Regular Syntax: add t1, 4, t2</li>
+			<li>Parentheses Syntax: add (t1, b4), (4, b4), (t2, b8)</li>
+		</ul>
+		<h4>ADD (Addition)</h4>
+		<p>Adds the two values given in the first and second operand and writes the result 
+		to the third operand. The input operands can be literals and register 
+		values. The output operand must be a register.</p>
+		<p class="style1"><span class="reil_example">Example:</span>
+		<span class="style2">add (t1, b4), (4, b4), (t2, b8)</span></p>
+		<p>In the example the value of the register t1 is added to the integer 
+		literal 4. The result of the operation is stored in the register t2 
+		which is larger than both input operands to handle potential overflows.</p>
+		<h4>AND (Binary And)</h4>
+		<p>Binary AND operation that connects the first two operands and stores 
+		the result in the third operand. The input operands can be literals and 
+		register values. The output operand must be a register.</p>
+		<p class="style1"><span class="reil_example">Example:</span> 
+		<span class="style2">and (t1, 
+		b4), (4, b4), (t2, b4)</span></p>
+		<p>In the example the value of the register t1 is AND-ed with the 
+		integer literal 4. The result of the operation is stored in the register 
+		t2.</p>
+		<h4>BISZ (Boolean Is-Zero)</h4>
+		<p>Sets a flag depending on whether another value is zero. The input 
+		operand can be a literal or a register value. The output operand is a 
+		register.</p>
+		<p class="style1"><span class="reil_example">Example:</span> 
+		<span class="style2">bisz (t1, 
+		b4), , (t2, b1)</span></p>
+		<p>In the example the value of the register t1 is compared to 0. The 
+		register t2 is set to 1 if t1 is 0 or to 0 if t1 is not 0.</p>
+		<h4>BSH (Binary Shift)</h4>
+		<p>Performs a logical shift on a value. If the second operand is 
+		positive, the shift is a left-shift. If the second operand is negative, 
+		the shift is a right-shift. The two input operands can be either 
+		registers or literals while the output operand must be a register.</p>
+		<p class="style1"><span class="reil_example">Example:</span> 
+		<span class="style2">bsh (t1, 
+		b4), (t2, b4), (t3, b8)</span></p>
+		<p>In the example the value of the register t1 is shifted by the value 
+		of the register t2. Since the value of the register t2 is not known 
+		without further analysis, the shift can either be a left-shift or a 
+		right-shift. The result of the shift operation is stored in the register 
+		t3.</p>
+		<h4>DIV (Unsigned Division)</h4>
+		<p>Performs an unsigned division on the two input operands. The first 
+		input operand is the dividend, the second input operand is the divisor. 
+		The two input operands can be either registers or literals while the 
+		output operand must be a register.</p>
+		<p class="style1"><span class="reil_example">Example:</span> 
+		<span class="style2">div (t1, 
+		b4), (t2, b4), (t3, b4)</span></p>
+		<p>In the example the value of the register t1 is divided by the value 
+		of the register t2. The result of the operation is stored in the 
+		register t3.</p>
+		<h4>JCC (Jump Conditional)</h4>
+		<p>Performs a conditional jump to another location if the first input 
+		operand is not zero. The first input operand can be either a register or 
+		a literal that specifies the condition. The third operand specifies the 
+		target address of the jump. It can be either a register, a literal, or a 
+		REIL offset.</p>
+		<p class="style1"><span class="reil_example">Example:</span> 
+		<span class="style2">jcc (t0, 
+		b4), ,(t1, b4)</span></p>
+		<p>In the example a jump to the offset specified by the value of the 
+		register t1 is taken in case the value of the register t0 is not 0.</p>
+		<h4>LDM (Load from Memory)</h4>
+		<p>Loads a value from memory. The first operand specifies the address to 
+		read from. It can be either a register or a literal. The third operand 
+		must be a register where the loaded value is stored. The size of the 
+		third operand determines how many bytes are read from memory.</p>
+		<p class="style1"><span class="reil_example">Example:</span> 
+		<span class="style2">ldm (t0, 
+		b4), , (t1, b4)</span></p>
+		<p>In the example a four byte value is loaded from the memory address 
+		specified by the value of the register t0. The loaded bytes are stored 
+		in the register t1.</p>
+		<h4>MOD (Modulo)</h4>
+		<p>Performs a modulo operation on the first two operands. The two input 
+		operands can be either registers or literals while the output operand 
+		must be a register.</p>
+		<p class="style1"><span class="reil_example">Example:</span> 
+		<span class="style2">mod (t0, 
+		b4), (t1, b4), (t2, b4)</span></p>
+		<p>In the example the operation t0 % t1 is performed and the result is 
+		stored in the register t2.</p>
+		<h4>MUL (Unsigned Multiplication)</h4>
+		<p>Performs an unsigned multiplication on the two input operands. The 
+		two input operands can be either registers or literals while the output 
+		operand must be a register.</p>
+		<p class="style1"><span class="reil_example">Example:</span> 
+		<span class="style2">mul (t1, 
+		b4), (t2, b4), (t3, b8)</span></p>
+		<p>In the example the value of the register t1 is multiplied with the 
+		value of the register t2. The result is stored in the register t3.</p>
+		<h4>NOP (No Operation)</h4>
+		<p>Does nothing.</p>
+		<p><span class="style3">Example:</span> <span class="style2">nop , ,</span></p>
+		<h4>OR (Bitwise Or)</h4>
+		<p>Binary OR operation that connects the first two operands and stores 
+		the result in the third operand. The input operands can be literals and 
+		register values. The output operand must be a register.</p>
+		<p class="style1"><span class="reil_example">Example:</span> 
+		<span class="style2">or (t1, 
+		b4), (4, b4), (t2, b8)</span></p>
+		<p>In the example the value of the register t1 is OR-ed with the literal 
+		value 4. The result of the operation is stored in the register t2.</p>
+		<h4>STM (Store to Memory)</h4>
+		<p>Stores a value to memory. The first operand is the register value or 
+		literal to be stored in memory. The third operand is the register value 
+		or literal that contains the memory address where the value is stored. 
+		The size of the first operand determines the number of bytes to be 
+		written to memory.</p>
+		<p class="style1"><span class="reil_example">Example:</span> 
+		<span class="style2">stm (t1, 
+		b4), , (t2, b4)</span></p>
+		<p>In the example the four byte value of register t1 is stored at the 
+		memory address given by the value of the register t2.</p>
+		<h4>STR (Store to Register)</h4>
+		<p>Copies a value to a register. The input operand can be either a 
+		literal or a register. The output operand must be a register.</p>
+		<p class="style1"><span class="reil_example">Example:</span> 
+		<span class="style2">str (t1, 
+		b4), , (t2, b4)</span></p>
+		<p>In the example the value of the register t1 is copied to the register 
+		t2.</p>
+		<h4>SUB (Subtract)</h4>
+		<p>Subtracts the second input operand from the first input operand and 
+		writes the result to the output operand. The input operands can be 
+		literals and register values. The output operand must be a register.</p>
+		<p class="style1"><span class="reil_example">Example:</span>
+		<span class="style2">sub (t1, b4), (4, b4), (t2, b8)</span></p>
+		<p>In the example the value 4 is subtracted from the value of the 
+		register t1. The result of the subtraction is stored in the register t2.</p>
+		<h4>UNDEF (Undefines a Register)</h4>
+		<p>Flags a register value as undefined. This indicates that in the 
+		instructions following the UNDEF instruction, no assumption must be made 
+		about the value of the register until the register is written again.</p>
+		<p class="style1"><span class="reil_example">Example:</span> 
+		<span class="style2">undef , , 
+		(t1, b4)</span></p>
+		<p>In the example the register t1 is marked as undefined.</p>
+		<h4>UNKN (Unknown Instruction)</h4>
+		<p>Placeholder instruction that is used to translate every native 
+		instruction that can not be translated by the REIL translator.</p>
+		<p class="style1"><span class="reil_example">Example:</span> 
+		<span class="style2">unkn , ,</span></p>
+		<h4>XOR (Bitwise Xor)</h4>
+		<p>Binary XOR operation that connects the first two operands and stores 
+		the result in the third operand. The input operands can be literals and 
+		register values. The output operand must be a register.</p>
+		<p class="style1"><span class="reil_example">Example:</span> 
+		<span class="style2">xor (t1, 
+		b4), (4, b4), (t2, b8)</span></p>
+		<p>In the example the value of the register t1 is XOR-ed with the 
+		literal value 4. The result of the operation is stored in the register 
+		t2.</p>
+		<h3><a name="usage"></a>Using REIL in BinNavi</h3>
+		<p>It is possible to translate native assembly code to REIL code using classes 
+		provided by the BinNavi plugin API in the BinNavi.API.reil package. 
+		Certain code-containing API objects have quick-translation functions 
+		called <em>getReilCode() </em>that can be used to translate the code 
+		contained in the object to REIL code. API objects that possess these 
+		quick-translation functions include View, Function, Basic Block, 
+		CodeNode, and Instruction. </p>
+		<p>On the other hand, it is also possible to explicitly use the 
+		ReilTranslator class to convert code to REIL code. The example below 
+		demonstrates how to use the quick-translation function as well as the 
+		manual translation using the ReilTranslator class.</p>
+		<h4>Example: Translating the graph of the current function to REIL code</h4>
+		<p>The following log of a BinNavi Python scripting session shows how to 
+		use the plugin API to translate the code of the current graph (cg) to 
+		REIL.</p>
+		<p>
+		&gt;&gt;&gt; reil_function = cg.view.reilCode<pre>
+<strong>Alternative:</strong></pre>
+<pre>
+>>> from BinNavi.API.reil import ReilTranslator
+>>> reil_function = ReilTranslator.translate(cg.view)</pre>
+		<pre>
+>>> print reil_function</pre>
+		<pre>
+<<< REIL function REIL - sub_01006e4b
+
+>>> print reil_function.graph
+
+<<< REIL graph [21 function nodes, 29 edges]
+
+>>> print reil_function.graph.nodes[0]
+
+<<< 1006E4B00: str edi, , edi
+<<< 1006E4D00: sub esp, 4, esp
+<<< 1006E4D01: and esp, 4294967295, esp
+<<< 1006E4D02: stm ebp, , esp
+<<< 1006E4E00: str esp, , ebp
+<<< 1006E5000: and 804, 2147483648, t0
+<<< 1006E5001: and esp, 2147483648, t1
+<<< 1006E5002: sub 804, esp, t2
+<<< 1006E5003: and t2, 2147483648, t3
+<<< 1006E5004: bsh t3, -31, SF
+<<< 1006E5005: xor t0, t1, t4
+<<< 1006E5006: xor t0, t3, t5
+<<< 1006E5007: and t4, t5, t6
+<<< 1006E5008: bsh t6, -31, OF
+<<< 1006E5009: and t2, 4294967296, t7
+<<< 1006E500A: bsh t7, -32, CF
+<<< 1006E500B: and t2, 4294967295, t8
+<<< 1006E500C: bisz t8, , ZF
+<<< 1006E500D: str t8, , esp
+<<< 1006E5600: ldm 16815620, , t0
+<<< 1006E5601: str t0, , eax
+<<< 1006E5B00: sub esp, 4, esp
+<<< 1006E5B01: and esp, 4294967295, esp
+<<< 1006E5B02: stm esi, , esp
+<<< 1006E5C00: sub esp, 4, esp
+<<< 1006E5C01: and esp, 4294967295, esp
+<<< 1006E5C02: stm t2, , esp
+<<< 1006E5F00: add -4, ebp, t0
+<<< 1006E5F01: and t0, 4294967295, t1
+<<< 1006E5F02: stm eax, , t1
+<<< 1006E6200: sub esp, 4, t0
+<<< 1006E6201: and t0, 4294967295, esp
+<<< 1006E6202: stm 16805479, , esp
+<<< 1006E6203: jcc 1, , 16805367
+</pre>
+
+		</p>
+		<!-- #EndEditable --></div>
+	<!-- End Left Column -->
+	<!-- Begin Right Column -->
+	<!-- End Right Column -->
+	<!-- Begin Footer -->
+	<div id="footer">
+		<p><a href="../index.htm">Index</a>  
+		| <a href="installation.htm">Installation</a> |
+		<a href="usage.htm">Usage</a> |
+		<a href="debugging.htm">Debugging</a> |
+		<a href="scripting.htm">Scripting</a> |
+		<a href="tutorial.htm">Tutorial</a> |
+		<a href="faq.htm">FAQ</a> |
+		<a href="about.htm">About</a></p>
+		<p>Copyright 2005 - 201<span lang="de">4</span>: <span lang="de">Google</span>
+		<span lang="de">Inc.</span></p>
+	</div>
+	<!-- End Footer --></div>
+<!-- End Container -->
+
+</body>
+
+<!-- #EndTemplate -->
+
+</html>

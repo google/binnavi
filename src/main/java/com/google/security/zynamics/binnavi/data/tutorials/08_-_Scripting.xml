@@ -1,0 +1,128 @@
+<tutorial>
+  <name>Scripting</name>
+  <description>When the standard GUI is not powerful enough for whatever you are
+    trying to do you might want to use one of the available scripting languages
+    (Python, Ruby, ECMAScript) to implement the necessary functionality
+    yourself. This tutorial teaches you the basics of scripting and how to
+    access the most common data objects from scripts.&lt;br/&gt; &lt;br/&gt;
+In this tutorial you will learn about the following concepts:&lt;br/&gt;
+&lt;ul&gt;
+&lt;li&gt;Scripting from the main window&lt;/li&gt;
+&lt;li&gt;Scripting from graph windows&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+  <steps>
+    <step>
+      <action>703083415304140168</action>
+      <description>The first part of the tutorial shows you how to use the
+        scripting dialog from the main window. It is accessible through the
+        Plugins / New Scripting Dialog menu.&lt;br/&gt; &lt;br/&gt;
+Please open the scripting dialog now.
+</description>
+    </step>
+    <step>
+      <action>0</action>
+      <allowed>703083415304140168</allowed>
+      <description>By default the scripting dialog is started in console mode.
+        This mode is best used for interactive scripting when you quickly need
+        to get something done. Please switch the scripting language used by the
+        dialog to Python now because all code samples of this tutorial are
+        written in Python.&lt;br/&gt; &lt;br/&gt;
+Let's start. Here is how you can get an idea about the configured databases.
+&lt;br/&gt; &lt;br/&gt;
+print dbs&lt;br/&gt;
+&lt;br/&gt;
+or&lt;br/&gt;
+&lt;br/&gt;
+for db in dbs.databases:&lt;br/&gt;
+____print db (replace the underscores with spaces)&lt;br/&gt;
+&lt;br/&gt;
+Please note that you terminate a line with ENTER unless you want to execute the
+line directly. To execute a line hit CTRL-ENTER. Hitting CTRL-ENTER executes not
+just the last line but all the lines that were added since CTRL-ENTER was hit
+the last time. In practice that means that in the first example you hit
+CTRL-ENTER immediately whereas in the second example you hit ENTER after the
+first line and CTRL-ENTER after the second line.&lt;br/&gt; &lt;br/&gt;
+When you are done playing around with these examples please click on the Next
+button.  </description>
+    </step>
+    <step>
+      <action>0</action>
+      <description>The scripting window of the main window is rather boring
+        because there is just not a whole lot of data to access. Nevertheless
+        here are some other one-liners you might want to try out.&lt;br/&gt;
+        &lt;br/&gt;
+print "Number of modules in the first database: %d" %
+len(dbs.databases[0].modules)&lt;br/&gt; &lt;br/&gt;
+print "Number of views in the first module of the first database: %d" %
+len(dbs.databases[0].modules.views)&lt;br/&gt; &lt;br/&gt;
+dbs.databases[0].modules[0].views[1].name = "New Name (previously %s)" %
+dbs.databases[0].modules[0].views[1].name&lt;br/&gt; &lt;br/&gt;
+When you are done playing around with these examples please click on the Next
+button.  </description>
+    </step>
+    <step>
+      <action>-7167187997929184030</action>
+      <action>-5295816457628962096</action>
+      <description>Let's get to scripting graphs now. Please open a flowgraph
+        view of your choice.</description> </step>
+    <step>
+      <action>3403011209340957215</action>
+      <description>Like in the main window you can open the scripting dialog of
+        graph windows through the Plugins / New Scripting window. Please open
+        the scripting dialog of the graph you entered now.</description> </step>
+    <step>
+      <action>0</action>
+      <description>In addition to the environment variable dbs there are other
+        variables predefined for scripting dialogs of graph windows. You can
+        access the graph of the current view through cg for example. This allows
+        you to write code like&lt;br/&gt; &lt;br/&gt;
+print cg&lt;br/&gt;
+print cg.view&lt;br/&gt;
+print cg.view.graph&lt;br/&gt;
+print cg.view.graph.nodes&lt;br/&gt;
+&lt;br/&gt;
+Please click the Next button to continue.</description>
+    </step>
+    <step>
+      <action>0</action>
+      <description>Whenever you are unsure what objects and methods exist in the
+        scripting environment you can enter&lt;br/&gt; &lt;br/&gt;
+print dir()&lt;br/&gt;
+&lt;br/&gt;
+or&lt;br/&gt;
+&lt;br/&gt;
+print dir(object)&lt;br/&gt;
+&lt;br/&gt;
+to find out. The output tells you what other functions you can explore for an
+object. For a detailed description of the available methods and objects please
+consult the BinNavi manual.&lt;br/&gt; &lt;br/&gt;
+When you are done playing around, please click the Next button to continue.
+</description>
+    </step>
+    <step>
+      <action>0</action>
+      <description>BinNavi scripting supports other interesting features. For
+        example you do not have to use console mode for scripting. You can also
+        use editor mode. This mode is more suitable for complex scripts which
+        you want to write completely before running. You can create a new editor
+        scripting tab from the menu of the scripting dialog.&lt;br/&gt;
+        &lt;br/&gt;
+You should also configure your default scripting environment. By doing so you
+can automatically import external scripts and libraries every time you start a
+scripting dialog. These external modules are then available through scripts. You
+can find information about configuring your scripting environment in the BinNavi
+manual.&lt;br/&gt; &lt;br/&gt;
+Please click on the Next button to continue.      
+</description>
+    </step>
+    <step>
+      <action>0</action>
+      <description>This is the end of this tutorial. You have learned how to use
+        the scripting dialog to enter simple scripts that can help you do work
+        the regular BinNavi GUI does not support.&lt;br/&gt; &lt;br/&gt;
+Please click on the Next button to finish this tutorial.
+</description>
+    </step>
+  </steps>
+</tutorial>

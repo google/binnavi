@@ -1,0 +1,115 @@
+<tutorial>
+  <name>Importing data from IDA Pro</name>
+  <description>One of the first aspects of working with disassembled data is to
+    get the disassembled data from IDA Pro into the BinNavi database.&lt;br/&gt;
+    &lt;br/&gt;
+In this tutorial you will learn&lt;br/&gt;
+&lt;ul&gt;
+&lt;li&gt;how to use IDA Pro as a data source for BinNavi&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+  <steps>
+    <step>
+      <action>0</action>
+      <description>This tutorial shows you how to use IDA Pro as a data source
+        to get data into an existing MySQL database. To do this you will
+        disassemble a test file in IDA Pro and tell BinNavi to convert the data
+        from the created IDB file to the MySQL database. By the end of the
+        tutorial, all disassembled data from the IDB file will be stored in the
+        MySQL database and you can start working with the disassembled
+        data.&lt;br/&gt; &lt;br/&gt;
+Please click on the Next button to continue.
+</description>
+    </step>
+    <step>
+      <action>0</action>
+      <description>Even though you can use any IDB file in this tutorial it is
+        recommended that you disassemble the file primes.exe which you can find
+        in the tutorials subdirectory of your BinNavi installation.&lt;br/&gt;
+        &lt;br/&gt;      
+Please disassemble this file now and save the disassembled data to an IDB file.
+When you are done close IDA Pro. This last step is very important because IDA
+Pro locks the IDB file as long as it is running and BinNavi can not import the
+data from the IDB file while the IDB file is locked.&lt;br/&gt; &lt;br/&gt;
+Please click on the Next button to continue.
+</description>
+    </step>
+    <step>
+      <action>0</action>
+      <allowed>-2369159756337681560</allowed>
+      <allowed>-9044865055464757942</allowed>
+      <allowed>8784926684855833953</allowed>
+      <allowed>-7789885643476931774</allowed>
+      <description>This tutorial requires an existing MySQL database
+        configuration. If you do not yet have a database configured please
+        create the database configuration now.&lt;br/&gt; &lt;br/&gt;
+Once you have created the database, please click on the Next button to continue.
+</description>
+    </step>
+    <step>
+      <action>-8750454886776173497</action>
+      <allowed>-2369159756337681560</allowed>
+      <allowed>-9044865055464757942</allowed>
+      <allowed>8784926684855833953</allowed>
+      <allowed>-7789885643476931774</allowed>
+      <description>Now that the IDB file exists you can tell BinNavi to import
+        the data from the IDB file into a database. You can use the following
+        ways to start the import process: &lt;ul&gt;
+&lt;li&gt;Right-click the database in the Project Tree and click Import IDB
+File&lt;/li&gt; &lt;li&gt;Right-click the Modules node of a database in the
+Project Tree and click Import IDB File&lt;/li&gt;
+&lt;li&gt;Select the database in the Project Tree and click the Database /
+Import IDB File menu&lt;/li&gt; &lt;li&gt;Select the Modules folder in the
+Project Tree and click the Module / Import IDB File menu&lt;/li&gt;
+&lt;/ul&gt;
+Whichever way you choose, you will be asked for the location of your IDA Pro
+executable file (if you did configure that location previously) and the IDB file
+you want to import. The rest of the import process is handled automatically by
+BinNavi. If nothing goes wrong, you can find a new entry in the Modules node of
+the Project Tree. This new entry primes.exe contains all the disassembled data
+that was imported from the IDB file.&lt;br/&gt; &lt;br/&gt;
+If you have not done so yet, you will also be asked to configure the location of
+your IDA Pro executable. In the same dialog you can install the exporters you
+want to use to get data from IDA Pro into BinNavi.  </description>
+    </step>
+    <step>
+      <action>0</action>
+      <allowed>-2369159756337681560</allowed>
+      <allowed>-8750454886776173497</allowed>
+      <description>If the import process of the IDB file was successful you can
+        click the Next button to continue. If something went wrong you can now
+        try to import the IDB file again.</description> </step>
+    <step>
+      <action>-5178343179269965998</action>
+      <allowed>2804136480786366059</allowed>
+      <description>If the module import was successful a new node that
+        represents the BinNavi module of the IDB file should have appeared in
+        the Project Tree. If the import was not successful please try to find
+        out what went wrong and try import the IDB file again.&lt;br/&gt;
+        &lt;br/&gt;      
+In the final step of this tutorial we will load the BinNavi module so that you
+can see the data of the module. You can load a module using any of the following
+ways &lt;ul&gt;
+&lt;li&gt;Double-click on the primes.exe module node in the Project
+Tree&lt;/li&gt; &lt;li&gt;Right-click the primes.exe module node and click the
+Load Module menu&lt;/li&gt;
+&lt;li&gt;Select the primes.exe module node and click the Module / Load Module
+menu&lt;/li&gt; &lt;/ul&gt;
+Please open the module now to continue.
+</description>
+    </step>
+    <step>
+      <action>0</action>
+      <allowed>-5178343179269965998</allowed>
+      <description>Now that the module is loaded you can see the functions of
+        the module or other data of the module on the right-hand side of the
+        main window when you select the module node or one of its children in
+        the Project Tree.&lt;br/&gt;      &lt;br/&gt;
+You have reached the end of this tutorial. You are now familiar with the concept
+of modules and how to get data from IDA Pro into the database.&lt;br/&gt;
+&lt;br/&gt;
+Please click on the Next button to finish this tutorial.
+</description>
+    </step>
+  </steps>
+</tutorial>

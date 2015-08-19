@@ -1,0 +1,122 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" dir="ltr">
+
+<!-- #BeginTemplate "../master_in.dwt" -->
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="Content-Language" content="en-us" />
+<!-- #BeginEditable "doctitle" -->
+<title>zynamics BinNavi 5.0 Manual - Importing data into BinNavi</title>
+<style type="text/css">
+
+
+.style1 {
+	text-align: center;
+}
+.style2 {
+	text-align: left;
+}
+.style3 {
+	text-align: left;
+	background-color: #FF5050;
+}
+</style>
+<!-- #EndEditable -->
+<link rel="stylesheet" type="text/css" title="CSS" href="../styles/style1.css" media="screen" />
+<style type="text/css">
+</style>
+</head>
+
+<body style="background-image: url('../images/binnaviicon.png')">
+
+<!-- Begin Container -->
+<div id="container">
+	<!-- Begin Masthead -->
+	<div id="masthead">
+		<img src="../images/binnavi_logo4.png" alt="BinNavi Logo"/>
+	</div>
+	<!-- End Masthead -->
+	<!-- Begin iMenu -->
+	<div id="navigation">
+		<ul>
+			<li><a href="../index.htm">Index</a></li>
+			<li><a href="installation.htm">Installation</a></li>
+			<li><a href="usage.htm">Usage</a></li>
+			<li><a href="debugging.htm">Debugging</a></li>
+			<li><a href="scripting.htm">Scripting</a></li>
+			<li><a href="tutorial.htm">Tutorial</a></li>
+			<li><a href="faq.htm">FAQ</a></li>
+			<li><a href="about.htm">About</a></li>
+		</ul>
+	</div>
+	<!-- End iMenu -->
+	<!-- Begin Left Column -->
+	<div id="column_lg">
+		<!-- #BeginEditable "content" -->
+		<h2>Importing Data into BinNavi</h2>
+		<p>Out of the box there is one way to get data from 
+		external disassemblers into a BinNavi database. This way is 
+		to use IDA Pro in combination with our IDA exporter plugin. 
+		This section assumes that all required software that is mentioned in the
+		<a href="installation.htm">Installation section</a> of this manual was 
+		installed and configured according to the guidelines.</p>
+		<h3>Importing data from IDA Pro</h3>
+		<p>To import data from IDA Pro it is not even necessary to open IDA Pro. 
+		If you have already created the IDA database (IDB) file you want to import, you can simply right-click on a Database node or a 
+		Module node in 
+		the Project Tree in the BinNavi main window. In the context menu that 
+		pops up, click <span class="gui_ref">Import IDB File</span> and select the appropriate IDB file in 
+		the file selection dialog that is shown. Once selected, BinNavi begins 
+		to import the IDB file to the database. If your version of IDA Pro was 
+		not installed to the default IDA Pro directory, BinNavi will ask you for 
+		the location of your IDA Pro executable before.</p>
+		<p>Note that it is not possible to import IDB files which are currently 
+		open in IDA. Please make sure to close all instances of IDA which are 
+		currently working with the IDB file before starting the import process.</p>
+		<p class="style1">
+		<img alt="" src="../images/importer_window.png" width="655" /></p>
+		<p class="style2">
+		The importer window offers several other options. For example, you can 
+		select a directory from a list of directories from which you previously 
+		exported IDB files. This helps you quickly navigate between your IDB 
+		directories. On the right side of the window you can select multiple IDB 
+		files for batch imports.</p>
+		<p class="style3">
+		If you are importing data on Windows Vista or Windows 7 you can run into 
+		problems with the virtual store. When you create an IDB file in a 
+		directory you are not allowed to write to, Windows places the IDB file 
+		in the virtual store of that directory. In Windows Explorer and other 
+		programs this is completely transparent. In the Java file selection 
+		dialog, the virtual store is not considered though. If you can not 
+		select your IDB file in the BinNavi file selection dialog, copy the IDB 
+		file from the virtual store to a directory you have real write-access to 
+		and import the data from there.</p>
+		
+		<h3>&nbsp;</h3>
+		
+		<!-- #EndEditable --></div>
+	<!-- End Left Column -->
+	<!-- Begin Right Column -->
+	<!-- End Right Column -->
+	<!-- Begin Footer -->
+	<div id="footer">
+		<p><a href="../index.htm">Index</a>  
+		| <a href="installation.htm">Installation</a> |
+		<a href="usage.htm">Usage</a> |
+		<a href="debugging.htm">Debugging</a> |
+		<a href="scripting.htm">Scripting</a> |
+		<a href="tutorial.htm">Tutorial</a> |
+		<a href="faq.htm">FAQ</a> |
+		<a href="about.htm">About</a></p>
+		<p>Copyright 2005 - 201<span lang="de">4</span>: <span lang="de">Google</span>
+		<span lang="de">Inc.</span></p>
+	</div>
+	<!-- End Footer --></div>
+<!-- End Container -->
+
+</body>
+
+<!-- #EndTemplate -->
+
+</html>

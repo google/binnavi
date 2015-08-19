@@ -1,0 +1,1012 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" dir="ltr">
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="Content-Language" content="en-us" />
+<title>zynamics BinNavi 5.0 Manual - Main Window</title>
+<link rel="stylesheet" type="text/css" title="CSS" href="../styles/style1.css" media="screen" />
+<style type="text/css">
+.style1 {
+	text-align: center;
+}
+.style2 {
+	text-align: left;
+}
+.style3 {
+	font-family: "Courier New", Courier, monospace;
+}
+.style4 {
+	color: #CC5555;
+	text-decoration: underline;
+}
+</style>
+</head>
+
+<body style="background-image: url('../images/binnaviicon.png')">
+
+<!-- Begin Container -->
+<div id="container">
+	<!-- Begin Masthead -->
+	<div id="masthead">
+		<img src="../images/binnavi_logo4.png" />
+	</div>
+	<!-- End Masthead -->
+	<!-- Begin iMenu -->
+	<div id="navigation">
+		<ul>
+			<li><a href="../index.htm">Index</a></li>
+			<li><a href="installation.htm">Installation</a></li>
+			<li><a href="usage.htm">Usage</a></li>
+			<li><a href="debugging.htm">Debugging</a></li>
+			<li><a href="scripting.htm">Scripting</a></li>
+			<li><a href="tutorial.htm">Tutorial</a></li>
+			<li><a href="faq.htm">FAQ</a></li>
+			<li><a href="about.htm">About</a></li>
+		</ul>
+	</div>
+	<!-- End iMenu -->
+	<!-- Begin Left Column -->
+	<div id="column_lg">
+		<h2>Using the Main Window</h2>
+		<ul>
+			<li><a href="#Overview">Overview</a></li>
+			<li><a href="#Concepts">Concepts</a></li>
+			<li><a href="#QuickStart">Quick Start</a></li>
+			<li><a href="#Description">Description</a></li>
+			<ul>
+				<li><a href="#MainMenu">The Main Menu</a> - Access useful 
+				features</li>
+				<li><a href="#ProjectTree">The Project Tree</a> - Navigate through projects and modules</li>
+				<li><a href="#DatabaseNodes">Database Nodes</a> - Configure BinNavi databases</li>
+				<li><a href="#ProjectsNodes">Projects Nodes</a> - Get an overview of the projects in a database</li>
+				<li><a href="#ProjectNodes">Project Nodes</a> - Work with a single project</li>
+				<li><a href="#AddressSpaceNodes">Address Space Nodes</a> - Work with a single address space</li>
+				<li><a href="#ModulesNodes">Modules Nodes</a> - Get an overview of the modules in a database</li>
+				<li><a href="#ModuleNodes">Module Nodes</a> - Work with a single module</li>
+				<li><a href="#CallgraphNodes">Native Call graph Nodes</a> - Work with the Call graph of a module</li>
+				<li><a href="#FlowgraphNodes">Native Flow graph Nodes</a> - Work with the Flow graphs of a module</li>
+				<li><a href="#FunctionNodes">Function Nodes</a> - Filter module functions by their type</li>
+				<li><a href="#ModuleViewsNodes">Module Views Nodes</a> - Work with the user-created views of a module</li>
+				<li><a href="#ProjectViewsNodes">Project Views Nodes</a> - Work with the user-created views of a project</li>
+				<li><a href="#ViewsNodes">Call graph Views Nodes, Flow graph Views Nodes, Mixed Graph Views Nodes</a> - Filter user-created views by type</li>
+				<li><a href="#TaggedViewsNodes">Tagged Views Nodes</a> - Filter views by their tags</li>
+				<li><a href="#NodeTaggedViewsNodes">Node-Tagged Views Nodes</a> 
+				- Filter views by the tags of their nodes</li>
+				<li><a href="#TraceNodes">Trace <span class="style4">Nodes</span></a> 
+				- View previously recorded debug traces</li>
+				<li><a href="#DataNodes">Data Nodes</a> - View the binary data 
+				of the input file</li>
+				<li><a href="#GlobalVariablesNodes">Global Variables</a> - View the global variables of a module</li>
+				<li><a href="#DebuggersNodes">Debuggers Nodes</a> - Get an overview of the pre-configured debuggers</li>
+				<li><a href="#DebuggerNodes">Debugger Nodes</a> - Configure individual debuggers</li>
+				<li><a href="#ViewTagsNodes">View Tags Nodes</a> - Get an overview of the existing view tags</li>
+				<li><a href="#ViewTagNodes">View Tag Nodes</a> - Modify a single view tag</li>
+			</ul>
+			<li><a href="#Hotkeys">Hotkeys</a></li>
+		</ul>
+		<h3><a name="Overview"></a>Overview</h3>
+		<p>The main window of BinNavi gives you quick access to all data in your 
+		BinNavi databases. You can browse through disassembled modules, combine 
+		multiple modules into address spaces and projects, or configure the 
+		debuggers you want to use. Read on and find out how to use these and 
+		other features of the main window.</p>
+		<p>The main window is divided into two parts. The left half contains the so called Project Tree that 
+		gives you access 
+		to all configured BinNavi databases and their content. 
+		Among other things, this tree allows you to quickly navigate to all 
+		the projects and modules you have already added to the database during previous work 
+		sessions. The 
+		right half of the main window changes depending on what is selected in 
+		the Project Tree. Here you can find additional information and features that 
+		are useful in the context of the currently selected object.</p>
+		<h3><a name="Concepts"></a>Concepts</h3>
+		<p><ul class="concepts_list"><li>Project Tree: <span class="blacktext">The Project Tree is shown on the
+		left side of the main window. Here you can see the 
+			previously configured 
+			BinNavi databases and their
+		content. The Project Tree is the primary way of navigating through 
+			all the imported modules, their disassembled data, and other things 
+			like the available debuggers or the configured view tags.</span></li></ul></p>
+		<p><ul class="concepts_list"><li>Database: <span class="blacktext">
+			BinNavi uses a PostgreSQL database to store 
+			all data. Many of our customers found it useful to work with more than one 
+			database at the same time so we made it possible to configure and work 
+			with as many databases as you want to. </span></li></ul></p>
+		</p>
+		<ul class="concepts_list"><li>Module: <span class="blacktext">A module 
+			represents a single disassembled file.</span></li></ul></p>
+		<p><ul class="concepts_list"><li>Project: <span class="blacktext">Sometimes 
+			working with a single module is not enough. To analyze the interaction 
+			between two 
+			or more modules (think of an executable and its dynamically loaded 
+			libraries), it is necessary to create a project 
+			and add all required modules to it. Inside projects, sets 
+			of modules are treated and analyzed just like a single module.</span></li></ul></p>
+		<p><ul class="concepts_list"><li>Address Space: <span class="blacktext">
+			In projects you can define one or more address spaces. Each address space represents 
+			the virtual memory of a process on a real machine. Modules can be added to an address 
+			space to simulate the address space of a real process, for example a 
+			running executable and all of its dynamically loaded libraries.</span></li></ul></p>
+		<p><ul class="concepts_list"><li>View: <span class="blacktext">A view is any kind of graph that 
+			is shown 
+			end edited in the <a href="graph_window.htm">graph window</a>. 
+			Typically you start analyzing the control flow graphs of functions 
+			in the module 
+			you are working with. Later on you can create your own graphs to do more 
+			advanced analysis.</span></li></ul></p>
+		<p><ul class="concepts_list"><li>Native View: <span class="blacktext">A native view 
+			is a view that is based on the original data of a disassembled file. 
+			BinNavi creates one native view for each function
+			of a module and one additional call graph view that shows the call 
+			graph of the module.
+			Native views can not be modified.</span></li></ul></p>
+		<p><ul class="concepts_list"><li>Non-Native View: <span class="blacktext">A non-native view is a user-defined view 
+			that represents an arbitrary part of a module. For advanced analysis 
+			you can create non-native views with the help of BinNavi 
+			standard functionality or with your own scripts and plugins. Unlike native 
+			views, non-native views can be modified.</span></li></ul></p>
+		<p><ul class="concepts_list"><li>Flow graph View: <span class="blacktext">A 
+			flow graph view is a view that contains only basic blocks. All native function views and many non-native views are 
+			flow graph views.</span></li></ul></p>
+		<p><ul class="concepts_list"><li>Call graph View: <span class="blacktext">A 
+			call graph view is a view where each node represents a function and 
+			each edge shows how one function calls another function. The original 
+			call graph 
+			of a module is an example of a call graph view. It is also possible 
+			to create non-native call graph views, for example when it is 
+			necessary to cut down a huge native call graph to a smaller, more 
+			manageable call graph view.</span></li></ul></p>
+		<p><ul class="concepts_list"><li>Mixed View: <span class="blacktext">A 
+			mixed view contains both basic blocks (like a flow graph view) and function
+			nodes (like a call graph view). Mixed views are always non-native 
+			views that are created during advanced code analysis.</span></li></ul></p>
+		<p><ul class="concepts_list"><li>Tagged View: <span class="blacktext">A 
+			tagged view is a view that was assigned one or more view tags. View 
+			tagging helps you find views you previously marked as interesting.</span></li></ul></p>
+		<p><ul class="concepts_list"><li>View Tag: <span class="blacktext">A 
+			view tag is a simple descriptor that can be assigned to any kind of view. 
+			Using view tags it is possible to mark views as &quot;already analyzed&quot;, 
+			&quot;interesting&quot;, or any kind of user-defined view tag.</span></li></ul></p>
+		<p><ul class="concepts_list"><li>Module View: <span class="blacktext">A 
+			module view is a view that belongs to a module. It can only contain 
+			elements (nodes, instructions, comments, ...) that from the module.</span></li></ul></p>
+		<p><ul class="concepts_list"><li>Project View: <span class="blacktext">
+			A project view is a view that belongs to a project. A project view 
+			can contain elements (nodes, instructions, comments, ...) from all modules in 
+			the 
+			project.</span></li></ul></p>
+		<p><ul class="concepts_list"><li>Normal Function: <span class="blacktext">
+			A normal function is a function that has no special properties (i.e. 
+			it is not one of the other function types).</span></li></ul></p>
+		<p><ul class="concepts_list"><li>Library Function: <span class="blacktext">
+			A library function is a function that belongs to a library 
+			that was statically linked to a module. Common examples for this 
+			kind of function are the functions of the C standard library.</span></li></ul></p>
+		<p><ul class="concepts_list"><li>Imported Function: <span class="blacktext">
+			An imported function is a dynamically linked function. These functions are not actually present in the module but in a 
+			dynamically linked library.</span></li></ul></p>
+		<p><ul class="concepts_list"><li>Thunk Function: <span class="blacktext">
+			A thunk function is a small function that contains just a single 
+			jump instruction to an imported function.</span></li></ul></p>
+		<p><ul class="concepts_list"><li>Thunk Adjustor Function: <span class="blacktext">
+			A thunk adjustor functions are used for C++ multiple inheritance, by 
+			certain compilers, to solve the vtable layout issue. </span></li></ul></p>
+		<p><ul class="concepts_list"><li>Unknown Function: <span class="blacktext">
+			If a BinNavi <a href="importing.htm">exporter</a> can not determine the type of a function, the 
+			function type defaults to <em>Unknown</em>.</span></li></ul></p>
+		<p><ul class="concepts_list"><li>Debugger: <span class="blacktext">
+			It is possible to configure debuggers that can be used to debug 
+			modules and projects. Each pre-configured debugger can be used to debug
+			many different modules and projects.</span></li></ul></p>
+		
+		<h3><a name="QuickStart"></a>Quick Start</h3>
+		
+		<p><span class="qs_q">Q: What do I do in the main window?</span><br />
+		A: When BinNavi is started for the first time, a new database 
+		called <span class="style3">Click and configure me</span> is shown in 
+		the Project Tree. You can set up the connection to your PostgreSQL database 
+		there. Afterwards you can
+		import files into BinNavi and start to analyze them.</p>
+		<p>You may also want to check out the interactive tutorials which you 
+		can find in the <span class="gui_ref">Help</span> menu of the main 
+		window. These tutorials help you become familiar with the most important 
+		aspects and features of BinNavi.</p>
+		
+		<p><span class="qs_q">Q: How do I add a new Database?</span><br />
+		A: You can either use the menu <span class="gui_ref">BinNavi -&gt; Add 
+		Database</span> or you can right-click on the project tree and choose 
+		the <span class="gui_ref">Add Database</span> menu in the context menu.</p>
+		
+		<p><span class="qs_q">Q: How do I import data?</span><br />
+		A: To import data it is necessary to use one of the BinNavi 
+		<a href="importing.htm">exporters</a>. You can use the IDA exporter from 
+		the BinNavi main window. To do so, right-click on a <span class="gui_ref">
+		Database</span> node or a <span class="gui_ref">Modules</span> node in the project tree 
+		and choose <span class="gui_ref">Import IDB File</span> in the context 
+		menu. Once the import is complete, a new module that represents the 
+		imported data shows up in the project tree.</p>
+		
+		<p><span class="qs_q">Q: How do I create a project?</span><br />
+		A: You can create a project by right-clicking on the <span class="gui_ref">Projects</span> node in 
+		the project tree and choosing the <span class="gui_ref">Create Project</span> menu.</p>
+		
+		<p><span class="qs_q">Q: How do I add a module to an address space?</span><br />
+		A: To add a module to an address space you drag the module node 
+		of the module onto an address space node.</p>
+		
+		<p><span class="qs_q">Q: How do I tag a view?</span><br />
+		A: To tag a view you have to create a tag first by right-clicking on the 
+		<span class="gui_ref">View Tags</span> node and choosing 
+		<span class="gui_ref">Create Root Tag</span>. Once the tag exists you can 
+		drag a view from the views table on the right side of the main window 
+		onto the tag node in the project tree.</p>
+		
+		<h3><a name="Description"></a>Description</h3>
+		
+		<h4><a name="MainMenu"></a>The Main Menu</h4>
+		<p>The main menu on top of the main window can be used to access most 
+		functions available in the main window. Most of the main menu is static 
+		but the second menu option changes depending on what you have selected 
+		in the Project Tree.</p>
+		<p>The following options are always available in the main menu:</p>
+		<ul>
+			<li><span class="gui_ref">BinNavi/Add Database</span>: Adds a new 
+			database node to the Project Tree. A new BinNavi database can be 
+			configured at this node.</li>
+			<li><span class="gui_ref">BinNavi/Exit</span>: Exits BinNavi</li>
+		</ul>
+		<ul>
+			<li><span class="gui_ref">Module/Import IDB file</span>:
+			Opens the import a module dialog.</li>
+			<li><span class="gui_ref">Module/Refresh</span>:
+			Refreshes the modules currently known to BinNavi.</li>
+			<li><span class="gui_ref">Module/Resolve all imported functions</span>:
+			Tries to resolve the imported functions to other modules in the database.</li>	
+			<li><span class="gui_ref">Module/Sort</span>:
+			Sorts the modules either by name or by creation date.</li>		
+		</ul>
+		<ul>
+			<li><span class="gui_ref">Plugins/Open new Scripting dialog</span>: 
+			Opens the scripting dialog of the main window. You can write simple 
+			scripts that access the BinNavi there.</li>
+			<li><span class="gui_ref">Plugins/Open log window</span>: Opens the 
+			scripting log window where you can read the log output produced by 
+			all scripts and plugins.</li>
+			<li><span class="gui_ref">Plugins/Plugin Manager</span>: Shows the 
+			plugin manager dialog. You can configure what plugins should be 
+			loaded and in which order they should be loaded here.</li>
+			<li><span class="gui_ref">Plugins/Reload Plugins</span>: Reloads all 
+			plugins. This is useful when you are developing new plugins and you 
+			want to test changes you have made to your code.</li>
+			<li><span class="gui_ref">Plugins</span>: All plugins that should be 
+			accessible from the main menu can add their menus here.</li>
+		</ul>
+		<ul>
+			<li><span class="gui_ref">Settings/Settings</span>: Shows a dialog 
+			where you can configure global BinNavi options.</li>
+			<li><span class="gui_ref">Settings/Initial Call graph Settings</span>: 
+			Shows a dialog where you can configure settings that are used when a 
+			native call graph view is first shown.</li>
+			<li><span class="gui_ref">Settings/Initial Flow graph Settings</span>: 
+			Shows a dialog where you can configure settings that are used when a 
+			native flow graph view is first shown.</li>
+		</ul>
+		<ul>
+			<li><span class="gui_ref">Help/Manual</span>: Opens the BinNavi manual 
+			in the default web browser.</li>
+			<li><span class="gui_ref">Help/Context Help</span>: Activates 
+			context-sensitive help. In this mode you can click on GUI elements 
+			to pop up a dialog that shows you the purpose of the clicked 
+			elements. Press the right mouse button to leave context-sensitive 
+			help mode.</li>
+			<li><span class="gui_ref">Help/Tutorials</span>: Gives you the 
+			option to 
+			select and work through an interactive BinNavi tutorial.</li>
+			<li><span class="gui_ref">Help/Report a Bug</span>: Opens the 
+			BinNavi bug tracking website where you can report bugs.</li>
+			<li><span class="gui_ref">Help/About</span>: Shows information 
+			about BinNavi.</li>
+		</ul>
+		
+		<h4><a name="ProjectTree"></a>The Project Tree</h4>
+		<p>The Project Tree is the name of the static left-hand side of the main 
+		window. It gives you access to all configured 
+		BinNavi databases and most of the objects stored in them. 
+		Depending on the state of each database and what objects are loaded, the 
+		appearance of the Project Tree changes.</p>
+		<p class="style1">
+		<img alt="" src="../images/project_tree.png" /></p>
+		<p>The screenshot above shows a partially expanded 
+		project tree with two configured databases (<em>Main Database</em> and <em>New Database</em>). The Main Database is loaded and 
+		contains three projects (<em>OpenSSH</em>, <em>Trillian</em>, and <em>CuteFTP</em>).</p>
+		<p>Once a database is loaded, you can navigate 
+		the Project Tree to explore its content. Depending on what node of the 
+		Project Tree is selected, the right side of the Main Window changes to 
+		provide more information about the selected node and the operations you 
+		can execute on it.</p>
+		<p>Most nodes of the project tree have a context menu that pops up when 
+		you right-click on the node. The same options are also available 
+		through the main menu when the node is selected.</p>
+		
+		<h4><a name="DatabaseNodes"></a>Database Nodes</h4>
+		<p>The database nodes are the top-most nodes of the Project Tree. Each 
+		database node represents a BinNavi database. When you select a database node, a panel 
+		to configure the database connection is shown on the right side of the main window. </p>
+		<p class="style1">
+		<img alt="" src="../images/database_control.png" /></p>
+		<ul>
+			<li>
+			<p class="style2"><span class="gui_ref">Description</span>: A name 
+			that identifies the database. This name helps you to identify a 
+			database when you have many databases configured.</p>
+			</li>
+			<li>
+			<p class="style2"><span class="gui_ref">URL</span>: A URL that 
+			identifies the location of the PostgreSQL database. You can configure the 
+			location of the database server, the database server port (if it is 
+			not listening on the default port 5432), and the name of the 
+			database name on the server. </p>
+			</li>
+			<li>
+			<p class="style2"><span class="gui_ref">User</span>: The user that 
+			is used to log in to the database. Please make sure that the 
+			database user has sufficient database access rights. BinNavi 
+			requires the user to be able to create tables, to insert data into 
+			tables, and to delete data from tables.</p>
+			</li>
+			<li>
+			<p class="style2"><span class="gui_ref">Password</span>: The 
+			password of the user that is used to log in to the database.</p>
+			</li>
+			<li>
+			<p class="style2"><span class="gui_ref">Show Password</span>: If 
+			checked, the password in the password field is shown in plain text.</p>
+			</li>
+			<li>
+			<p class="style2"><span class="gui_ref">Save Password</span>: If 
+			checked, the database password is stored in 
+			the BinNavi configuration file on your local hard drive. The password is stored in 
+			plain text.</p>
+			</li>
+			<li>
+			<p class="style2"><span class="gui_ref">Connect automatically</span>: 
+			If checked, a connection to the database is 
+			established automatically when BinNavi starts. Otherwise you have to 
+			connect to this database manually.</p>
+			</li>
+			<li>
+			<p class="style2"><span class="gui_ref">Identity</span>: The 
+			identity field is used for the BinNavi multi user features and 
+			identifies a single user by the string provided. It is essentially a 
+			nick name. Be aware that the multi user feature in BinNavi does not 
+			provide any security. This is due to the fact that everyone works on 
+			the same database and access should be restricted on this level not 
+			on the application level.</p>
+			</li>
+		</ul>
+		<p class="style2">You can use the <span class="gui_ref">Test Connection</span> 
+		button to find out whether BinNavi can connect to the database 
+		using the connection information from the database configuration 
+		panel. If the configured database does not yet exist, BinNavi offers to 
+		create it for you.</p>
+		<p class="style2">When you are done configuring the database, you can click on the <span class="gui_ref">Save</span> button 
+		to store 
+		the database information in the BinNavi configuration file. This is 
+		necessary before you can load the content of the database.</p>
+		<p class="style2">When you select a database node, the following menu 
+		items are added to the main menu:</p>
+		<ul>
+			<li>
+			<p class="style2"><span class="gui_ref">Connect to Database</span>: 
+			Establishes a connection to the database.</p>
+			</li>
+			<li>
+			<p class="style2"><span class="gui_ref">Disconnect from Database</span>: 
+			Closes an established database connection.</p>
+			</li>
+			<li>
+			<p class="style2"><span class="gui_ref">Import IDB file</span>: 
+			Uses IDA Pro to import an IDB file to the database. This is 
+			functionally equivalent to the <span class="gui_ref">Import IDB file </span>menu that is shown in the context menu of 
+			<span class="gui_ref">Modules</span> 
+			nodes.</p>
+			</li>
+			<li>
+			<p class="style2"><span class="gui_ref">Remove Database</span>: 
+			Removes the database configuration from BinNavi. The 
+			content of the database is not deleted from the PostgreSQL server.</p>
+			</li>
+		</ul>
+		<p class="style2">These menu items are also available in the context 
+		menu of a database node that is shown when you right-click on a 
+		database node.</p>
+		
+		<h4><a name="ProjectsNodes"></a>Projects Nodes</h4>
+		<p>Projects Nodes provide an overview of the BinNavi projects stored 
+		in a BinNavi database. Each Projects Node says how many projects are stored in the database.</p>
+		<p>When you right-click on a Projects Node, a context menu with the 
+		following menu items is 
+		shown:</p>
+		<ul>
+			<li><span class="gui_ref">Create Project</span>: Creates a new project in the database.</li>
+		</ul>
+		<p>When you select a Projects Node a table that gives basic information 
+		about all projects is shown on the right side of the main window. </p>
+		<p class="style1">
+		<img alt="" src="../images/projects_control.png" /></p>
+		<p>For each project in a database, the name, description and the number 
+		of views of the 
+		project is shown as well as the date when the project was created and 
+		the date when the project was last modified.</p>
+		<p>You can modify the name and the description of a project in 
+		the table by double-clicking on the corresponding field. If a field 
+		is already selected, you can simply start typing the new name 
+		or the new description.</p>
+		<p>You can filter the entries of the table by name or by description 
+		through entering text in the filter field. Only projects whose names or 
+		descriptions contain your search string are shown.</p>
+		<p>When you right-click on the table, a context menu provides the following options.</p>
+		<ul>
+			<li><span class="gui_ref">Load Project</span>: Loads all information 
+			about the project and the address spaces and modules inside the 
+			project. This option is only available if the project has not yet 
+			been loaded.</li>
+			<li><span class="gui_ref">Search View</span>: Shows a dialog you can 
+			use to search for views inside the project. This option 
+			is only available if exactly one project is selected in the table.</li>
+			<li><span class="gui_ref">Add Address Space</span>: Adds an address 
+			space to the selected project. This option is only available if 
+			exactly one project is selected in the table.</li>
+			<li><span class="gui_ref">Delete Project</span>: Deletes the 
+			selected projects from the database.</li>
+			<li><span class="gui_ref">Search</span>: Shows a dialog that helps 
+			you search for a string in the table.</li>
+			<li><span class="gui_ref">Copy Selection</span>: Copies the content 
+			of the selected rows to the clipboard.</li>
+		</ul>
+		
+		<h4><a name="ProjectNodes"></a>Project Nodes</h4>
+		<p>Project Nodes represent BinNavi projects that contain one or more 
+		disassembled files. Their child nodes provide information about the 
+		address spaces and views of the project. 
+		The number shown in a Project Node tells you how many address spaces are 
+		part of the project.</p>
+		<p>When you right-click on a Project Node a context menu with the same 
+		project options as the context menu of the Projects Nodes 
+		table is shown. Only table-specific options are omitted.</p>
+		<p>When you select a Project Node more detailed information about the project is shown on the right side of the main window.</p>
+		<p class="style1">
+		<img alt="" src="../images/project_control.png" /></p>
+		<p>You can edit the following aspects of the project in the project 
+		information panel:</p>
+		<ul>
+			<li><span class="gui_ref">Name</span>: The name of the project. This 
+			helps you identify the project when you have many projects in your 
+			database.</li>
+			<li><span class="gui_ref">Description</span>: Use this field to 
+			store a longer description of the project.</li>
+			<li><span class="gui_ref">Project Debuggers</span>: You can use the project 
+			debuggers list to select the debuggers you want to use to 
+			debug the modules inside this project. The list contains all 
+			pre-configured debuggers known to BinNavi. If you check a checkbox next to a 
+			debugger, this debugger is made available for debugging 
+			the project.</li>
+		</ul>
+		<p><strong>Note that changes to the project name, the project description, and 
+		the project debuggers are not saved automatically. To save the changes, 
+		you must click on the </strong> <span class="gui_ref"><strong>Save</strong></span><strong> button.</strong></p>
+		<p>The lower part of the project information panel contains a table with information about the address spaces of the project. The names 
+		and descriptions of all address space are shown in the table as well as 
+		the number of modules inside the address spaces, the 
+		dates when the address spaces were first created and when they were last 
+		modified.</p>
+		<p>You can modify the name and the description of each address 
+		space in the table by double-clicking on the corresponding field. If 
+		that field is already selected, you can just start 
+		typing the new name or the new description.</p>
+		<p>You can filter the address spaces table by name or by description. 
+		Additional filtering strings are available in the context menu of the 
+		filter field.</p>
+		<p>When you right-click on the address spaces table, a context menu with 
+		the following menu items is shown:</p>
+		<ul>
+			<li><span class="gui_ref">Load Address Space</span>: Loads the 
+			selected address spaces. This menu is only available if the address spaces 
+			have not yet been loaded.</li>
+			<li><span class="gui_ref">Delete Address Space</span>: Deletes the 
+			selected address spaces from the project and from the database.</li>
+			<li><span class="gui_ref">Create combined callgraph</span>: Creates 
+			a new view that contains the call graphs of all the modules in the 
+			address space.</li>
+			<li><span class="gui_ref">Search</span>: Shows a dialog that helps 
+			you search for a string in the table.</li>
+			<li><span class="gui_ref">Copy Selection</span>: Copies the content 
+			of the selected rows to the clipboard.</li>
+		</ul>
+		
+		<h4><a name="AddressSpaceNodes"></a>Address Space Nodes</h4>
+		<p>Address Space Nodes are child nodes of Project Nodes. Each address 
+		space node represents one address space of a project. The child nodes of 
+		an Address Space Node represent the modules that are part of the address space. The number 
+		in an Address Space Node tells you how many modules belong to the address space.</p>
+		<p>When you right-click on an Address Space Node a context menu 
+		is shown that provides the same options as the context menu of the 
+		Address Spaces table that is shown on the right side of the main window 
+		when a Project Node is selected.</p>
+		<p>When you select an Address Space Node more detailed information 
+		about the address space is shown on the right side of the 
+		main window.</p>
+		<p class="style1">
+		<img alt="" src="../images/aspace_control.png" /></p>
+		<p>You can edit the following aspects of the address space in the 
+		address space information panel:</p>
+		<ul>
+			<li><span class="gui_ref">Name</span>: The name of the address 
+			space. This helps you distinguish between different address spaces 
+			of a project.</li>
+			<li><span class="gui_ref">Description</span>: Use this field to 
+			store a longer description of the address space.</li>
+			<li><span class="gui_ref">Address Space Debugger</span>: The 
+			debugger that is used to debug the address space. 
+			Note that only the debuggers that were configured for use in the 
+			parent project of the address space can be selected here.</li>
+		</ul>
+		<p><strong>Note that changes to the address space name, the address space 
+		description, and the address space debugger are not saved automatically. 
+		To save the changes, you must click on the Save button.</strong></p>
+		<p>The lower part of the address space information panel contains a 
+		table with information about the modules inside the address 
+		space. The names and descriptions of all modules are shown in the table as 
+		well as the number of views that can be found inside the modules, the date 
+		when the modules were first created and when they were last modified.</p>
+		<p>You can modify the name and the description of each module 
+		in the table by double-clicking on the corresponding field. If that 
+		field is already selected you can just start typing 
+		the new name or the new description.</p>
+		<p>When you right-click on the table a context menu with the following 
+		menu items is shown:</p>
+		<ul>
+			<li><span class="gui_ref">Load Module</span>: Loads the module from the database. This option is only available if 
+			the module has not yet been loaded.</li>
+			<li><span class="gui_ref">Star Module</span>: Stars the module. 
+			Stared modules are shown on top of the modules table.</li>
+			<li><span class="gui_ref">Search View</span>: Shows a dialog that 
+			helps you search for views inside the module. This option is 
+			only available if exactly one module is selected.</li>
+			<li><span class="gui_ref">Resolve Imported Functions</span>: Shows a 
+			dialog where you can forward imported functions to real 
+			functions of other modules.</li>
+			<li><span class="gui_ref">Remove Module</span>: Removes a module 
+			from the address space. The module is not deleted from the database 
+			and can still be used in other address spaces or as a stand-alone 
+			module.</li>
+			<li><span class="gui_ref">Search</span>: Shows a dialog that helps 
+			you search for a string in the table.</li>
+			<li><span class="gui_ref">Copy Selection</span>: 
+			Copies the content of the selected rows to the clipboard.</li>
+		</ul>
+		
+		<h4><a name="ModulesNodes"></a>Modules Nodes</h4>
+		<p>Modules Nodes show you what BinNavi modules are stored in 
+		a BinNavi database. The number in the node text tells you how many 
+		modules there are.</p>
+		<p>When you select a Modules Node a table on the right side of the main 
+		window gives you basic information about the modules.</p>
+		<p class="style1">
+		<img alt="" src="../images/modules_control.png" /></p>
+		<p>For each module in a database, the name and description of the module 
+		is shown as well as the date when the module was created and the date 
+		when the module was last modified.</p>
+		<p>You can modify the name and the description of a module in the table 
+		by double-clicking on the corresponding field. If that field is already 
+		selected you can simply start typing the new name or 
+		the new description.</p>
+		<p>You can filter the modules table by the names and descriptions of the 
+		modules. More advanced filtering options are available in the context 
+		menu of the filter field.</p>
+		<p>When you right-click on the table, a context menu is shown that 
+		provides the same options as the modules table that is shown when an 
+		address space node is selected.</p>
+		
+		<h4><a name="ModuleNodes"></a>Module Nodes</h4>
+		<p>Module Nodes represent BinNavi modules which themselves represent 
+		disassembled files. The child nodes of a Module 
+		Node show information about all views of the module. Two numbers are part of each Module Node. The first number 
+		states how many functions there are in the module. The second number 
+		states how many custom views you have already created in the module.</p>
+		<p>When you right-click on a Module Node a context menu is shown 
+		that has the same menu items as the context menu of the Modules Nodes 
+		table. Only the table-specific menu items are omitted.</p>
+		<p>When you select a Module Node more detailed information about the 
+		module is shown on the right side of the main window.</p>
+		<p class="style1">
+		<img alt="" src="../images/module_control.png" /></p>
+		<p>You can edit the following aspects of a module in the module 
+		information panel:</p>
+		<ul>
+			<li><span class="gui_ref">Name</span>: The name of the module. By 
+			default the name is set to the name of the disassembled file.</li>
+			<li><span class="gui_ref">Description</span>: Use this to store 
+			longer descriptions about the module.</li>
+			<li><span class="gui_ref">Debugger</span>: The debugger you want to 
+			use to debug the module. This option is only available if the module 
+			is a stand-alone module. If the module is part of an address space 
+			its debugger must be configured in the address space 
+			information panel.</li>
+			<li><span class="gui_ref">Original Base Address</span>: The base address of the module as 
+			specified in the header of the original input file.</li>
+			<li><span class="gui_ref">Relocated Base Address</span>: The base address of the module as it 
+			can be found in memory. In combination with the file base address 
+			this value is useful for debugging relocated modules.</li>
+		</ul>
+		<p><strong>Note that changes to the module name, the module description, the 
+		module debugger, the file base address, and the image base address are 
+		not saved automatically. To save the changes, you must click on the 
+		Save button.</strong></p>
+		<p>The lower part of the module information panel contains a table that 
+		shows information about the native flow graph views of the module. The 
+		start address, the name, and the description of all function views are 
+		shown in the table as well as their number of basic blocks and edges, 
+		and their indegrees (the number of functions that call a function) 
+		and outdegrees (the number of functions called by a function). For 
+		imported functions that are forwarded to other modules the forwarding 
+		information is also shown in the table.</p>
+		<p>You can modify the name and the description of each view in 
+		the table by double-clicking on the corresponding field. If that field 
+		is already selected, you can simply start typing the new name 
+		or the new description.</p>
+		<p>You can filter the views table by the names and descriptions of the 
+		views. More advanced filtering options are available in the context menu 
+		of the filter field.</p>
+		<p>When you right-click on the table a context menu is shown that 
+		provides the following options.</p>
+		<ul>
+			<li><span class="gui_ref">Open in Last Window</span>: Opens the view 
+			in the graph window that was last used to open a view. This option 
+			is only available if there is at least one graph window already open.</li>
+			<li><span class="gui_ref">Open in New Window</span>: Opens the view 
+			in a new graph window.</li>
+			<li><span class="gui_ref">Open in Window ...</span>: Lets you select in what graph window to 
+			open the view. This option is only available if there is at least 
+			one graph window already open.</li>
+			<li><span class="gui_ref">Show Derived Views</span>: Shows a dialog 
+			that lists views that share instructions with the selected view. 
+			This is very useful to find custom views that were derived from 
+			original functions.</li>
+			<li><span class="gui_ref">Star View</span>: Stars the view. Stared 
+			views are listed first in the table.</li>
+			<li><span class="gui_ref">Set breakpoint on function</span>: Sets a 
+			debugger breakpoint on the start of the function.</li>
+			<li><span class="gui_ref">Copy Selection</span>: Copies the content 
+			of the selected rows to the clipboard.</li>
+			<li><span class="gui_ref">Copy Cell</span>: Copies the content of 
+			the cell that was clicked on to the clipboard.</li>
+			<li><span class="gui_ref">Search</span>: Shows a dialog that helps 
+			you to search for a string in the table.</li>
+		</ul>
+		
+		<h4><a name="CallgraphNodes"></a>Native Call graph Nodes</h4>
+		<p>Native Call graph Nodes are child nodes of Module Nodes. When you 
+		select a Native 
+		Callgraph Node a table is shown on the right side of the 
+		main window that gives information about the native call graph of the 
+		module.</p>
+		<p class="style1">
+		<img alt="" src="../images/ncallgraph_control.png" width="575" height="69" /></p>
+		<p>The table shows the name and the description of the native call graph as well as the number of functions and function calls in the 
+		call graph.</p>
+		<p>You can modify the description of the native 
+		call graph in the table by double-clicking on the corresponding field. If 
+		that field is already selected you can simply start 
+		typing the new description.</p>
+		<p>When you right-click on the table a context menu is shown with the same options as the context menu that is shown in the views 
+		table of the Module Nodes.</p>
+		
+		<h4><a name="FlowgraphNodes"></a>Native Flow graph Nodes</h4>
+		
+		<p>Native Flow graph Nodes are child nodes of Module Nodes. The number in 
+		the Flow graph Node states how many native flow graph views belong to the module. This number 
+		equals the number of functions in the module. When you select a Native Flow graph Node a table 
+		with information about the native flow graphs is shown on the right side of the 
+		main window. </p>
+		<p class="style1"><img alt="" src="../images/nflowgraph_control.png"/></p>
+		<p>The table that gives information about the native flow graph views is
+		the same table as the one that is shown in the lower half of the control
+		that is shown when a Module Node is selected. It provides the same
+		functionality and the same context menu.</p>
+		
+		<h4><a name="FunctionNodes"></a>Function Nodes</h4>
+		
+		<p>The six Function Nodes <span class="gui_ref">Normal Functions</span>, 
+		<span class="gui_ref">Library Functions</span>, <span class="gui_ref">Imported Functions</span>,
+		<span class="gui_ref">Thunk Functions</span>, <span class="gui_ref">Thunk Adjustor Functions</span>, and 
+		<span class="gui_ref">Unknown Functions </span>are child nodes
+		of a Native Flow graph Node. These nodes are used to select subsets of the all
+		the native flow graph views of a module. For example, to see the 
+		imported functions of a module you can select the <span class="gui_ref">
+		Imported Functions</span> node.
+		</p>
+		
+		<p>For each of the Function Nodes, the table that gives information about the views is
+		the same table as the one that is shown in the lower half of the control
+		that is shown when a Module Node is selected. It provides the same
+		functionality and the same context menu.</p>
+		
+		<h4><a name="ModuleViewsNodes"></a>Module Views Nodes</h4>
+		
+		<p>
+		The Module Views Nodes provide an overview of the custom views you have 
+		created so far.The number in each Module Views Node says how many user-created views are part of this module.
+		</p>
+		
+		<p>
+		When you select a Module Views Node more detailed information is shown in three tables
+		on the right side of the main window. There is one table for each view type (flowgraph view,
+		callgraph view, and mixed graph view). 
+		</p>
+		
+		<p class="style1"><img alt="" src="../images/uflowgraph_control.png"/></p>
+		
+		<p>The table that gives information about the module views is
+		the same table as the one that is shown in the lower half of the control
+		that is shown when a Module Node is selected. It provides the same
+		functionality and the same context menu with one exception. Since user-created
+		views can be modified they can be deleted too. Therefore the context menu that
+		is shown when you right-click on the table provides an additional menu
+		for deleting a view.</p>
+		
+		<h4><a name="ProjectViewsNodes"></a>Project Views Nodes</h4>
+		
+		<p>Project Views Nodes are functionally equivalent to Module Views Nodes. The difference
+		between the two node types is that Module Views Nodes show user-created
+		views of modules while Project Views Nodes show user-created
+		views of projects.</p>
+		
+		<h4><a name="ViewsNodes"></a>Callgraph Views Nodes, Flow graph Views Nodes, Mixed Graph Views Nodes</h4>
+		
+		<p>
+		Callgraph Views Nodes, Flow graph Views Nodes, and Mixed Graph Views Nodes are child nodes of the
+		Module Views Nodes and Project Views Nodes. You can use them to filter the existing user-created
+		views by their type. For example a click on Call graph Views Nodes changes the right side of the
+		main window to a single table that shows only the user-created call 
+		graph views of a module/project.</p>
+		
+		<p>The table that gives information about the views of each type is
+		the same table as the one that is shown when a Module/Project Views Node
+		is selected. It provides the same functionality and the same context menu.</p>
+		
+		<h4><a name="TaggedViewsNodes"></a>Tagged Views Nodes</h4>
+		
+		<p>Tagged Views Nodes tell you about the views you have previously 
+		tagged. When you select a Tagged Views Node a table with information about the tagged views
+		is shown on the right side of the main window.</p>
+		
+		<p class="style1"><img alt="" src="../images/taggedviews_control.png"/></p>
+		
+		<p>The table that gives information about the tagged views equals the table 
+		that is shown in the lower half of the control
+		that is shown when a Module Node is selected. It provides the same
+		functionality and the same context menu with one exception. For each tagged
+		view the tag that is used to tag the view is shown in the first column of the table.</p>
+		
+		<p>Tagged Views Nodes have child nodes for each used tag.
+		Using these child nodes it is possible to filter the table shown on the right side
+		of the main window. If you select a child node only those views that are tagged
+		with that tag are shown in the table on the right side of the main window.
+		</p>
+		
+		<h4><a name="NodeTaggedViewsNodes"></a>Node-tagged Views Nodes</h4>
+		<p>Node-tagged views nodes are similar to tagged views nodes. Instead of 
+		telling you the tagged views they tell you which views contain nodes 
+		tagged with node tags. This helps you quickly find exactly those views 
+		whose nodes you have previously tagged.</p>
+		
+		<h4><a name="TraceNodes"></a>Debug Traces Nodes</h4>
+		<p>Debug Traces Nodes provide quick access to the previously recorded 
+		debug traces of a module. The number at a Debug Traces node specifies 
+		the number of available debug traces.</p>
+		<p>When a Debug Traces node is selected, the right side of the main 
+		window changes to the control shown below.</p>
+		<p class="style1">
+		<img alt="" height="780" src="../images/traces_control.png" width="565" /></p>
+		<p>At the top left side of the control, you can select the debug 
+		trace you want to view. At the top right side the debug events of the 
+		selected trace are shown. At the bottom, all views of the module which 
+		contain nodes that were hit by the currently selected trace are shown. 
+		This helps you quickly find the views which are useful to 
+		analyze in combination with the selected trace.
+		</p>
+		<h4><a name="DataNodes"></a>Data Nodes</h4>
+		<p>Data nodes provide an option to view the complete binary data of 
+		modules in a hex view component. The right <span class="gui_ref">Load</span> 
+		button is used to load binary data from a file. The
+		<span class="gui_ref">Store</span> button then writes the data from the 
+		file to the database. From that point on, the stored binary data is 
+		associated with the module and can be loaded from the database again 
+		using the left <span class="gui_ref">Load</span> button.</p>
+		<p class="style1"><img alt="" src="../images/data_control.png" /></p>
+		<p>It is possible to navigate through the binary data by jumping to 
+		offsets or by searching for data.</p>
+		<h4><a name="GlobalVariablesNodes"></a>Global Variable Nodes</h4>
+		
+		<p>
+		The Global Variable Nodes provide an overview of all the global 
+		variables that were recognized in the module. You can use this view to 
+		see what functions reference which global variables and you can change 
+		the names of global variables here.
+		</p>
+		
+		<p class="style1">
+		<img alt="" height="536" src="../images/global_variable_control.png" width="555" /></p>
+		
+		<h4><a name="DebuggersNodes"></a><a name="DebuggersNodes"></a>Debuggers Nodes</h4>
+		
+		<p>The Debuggers Node is the parent node of all pre-configured debuggers that
+		can be used in BinNavi. The number that is part of each Debuggers Node states
+		how many debuggers were already configured.</p>
+		
+		<p>When you right-click on a Debuggers Node a context menu pops up
+		that offers the following options.</p>
+		
+		<ul>
+			<li><span class="gui_ref">Create Debugger</span>: Creates a new debugger with standard options.</li>
+		</ul>
+		
+		<p>When a Debuggers Node is selected, a table that gives information about the
+		configured debuggers is shown on the right side of the main window.</p>
+		
+		<p class="style1"><img alt="" src="../images/debuggers_control.png" /></p>
+		
+		<p>It is possible to modify all fields of the table by double-clicking on them.
+		If the field is already selected, it is also possible to simply start
+		typing the value for that field.</p>
+		
+		<p>When you right-click on the table, a context menu is shown which
+		provides the following options:</p>
+		
+		<ul>
+			<li><span class="gui_ref">Delete Debugger</span>: Deletes the
+			debugger configuration from the database</li>
+			<li><span class="gui_ref">Copy Selection</span>: 
+			Copies the content of the selected rows to the clipboard.</li>
+		</ul>
+		
+		<h4><a name="DebuggerNodes"></a>Debugger Nodes</h4>
+		
+		<p>A debugger node represents the configuration of a single debugger that
+		can be used to debug BinNavi modules and projects.</p>
+		
+		<p>
+		When you right-click on a Debugger Node a context menu is shown that provides
+		the same options as the context menu of the Debuggers Nodes table. 
+		</p>
+		
+		<p>When a Debugger Node is selected, more information about the debugger is shown
+		on the right side of the main window.</p>
+		
+		<p class="style1"><img alt="" src="../images/debugger_control.png" /></p>
+		<p>In the debugger information panel you can edit the following 
+		aspects of a debugger.</p>
+		<ul>
+			<li><span class="gui_ref">Name</span>: The name of the debugger.</li>
+			<li><span class="gui_ref">Host</span>: Location of the debug client.</li>
+			<li><span class="gui_ref">Port</span>: Port used to connect to the debug client.</li>
+		</ul>
+		<p><strong>Note that changes to the debugger settings
+		are not saved automatically. To save the changes, you must click on the 
+		Save button.</strong></p>
+		
+		<h4><a name="ViewTagsNodes"></a>View Tags Nodes</h4>
+		
+		<p>View Tags Nodes are the parent nodes of all tag nodes of a database. They
+		are the starting point for creating new view tags and managing existing view
+		tags. The number that is part of each View Tags Node states the number of
+		view tags stored in the database.
+		</p>
+		
+		<p>When a user right-clicks on a View Tags Node, a context menu is shown that
+		provides the following options.</p>
+		
+		<ul>
+			<li><span class="gui_ref">Create Root Tag</span>: Creates a new view tag with default values.</li>
+		</ul>
+		
+		<p>When a View Tags Node is selected, a table that provides information about
+		the existing view tags is shown on the right side of the main window.</p>
+		
+		<p class="style1"><img alt="" src="../images/tags_control.png" /></p>
+		
+		<p>In this table the following information is shown about each tag:</p>
+		
+		<ul>
+			<li><span class="gui_ref">Name</span>: The name of the tag.</li>
+			<li><span class="gui_ref">Description</span>: The description of the tag.</li>
+			<li><span class="gui_ref">Children</span>: Number of child-tags of this tag.</li>
+		</ul>
+		
+		<p>It is possible to modify the tag name and the tag description
+		of the table by double-clicking on them. If the field is already selected,
+		it is also possible to simply start typing the value for that field.</p>
+		
+		<h4><a name="ViewTagNodes"></a>View Tag Nodes</h4>
+		
+		<p>Each View Tag Node represents a single view tag that can be used
+		to store views in the database. The number that is part of each view tag
+		node states the number of child tags of a tag.</p>
+		
+		<p>When you right-click on a View Tag Node, a context menu is shown
+		that provides the following options.</p>
+		
+		<ul>
+			<li><span class="gui_ref">Append Tag</span>: Creates a new tag as child of the selected tag.</li>
+			<li><span class="gui_ref">Insert Tag</span>: Creates a new tag between the selected tag and its children.</li>
+			<li><span class="gui_ref">Delete Tag</span>: Deletes the view tag from the database.</li>
+			<li><span class="gui_ref">Delete Subtree</span>: Deletes the view tag and all child tags of the tag from the database.</li>
+		</ul>
+		
+		<p>When a Tag Node is selected, more information about the corresponding
+		tag is shown on the right side of the main window.</p>
+		
+		<p class="style1"><img alt="" src="../images/tag_control.png" /></p>
+		
+		<p>In the tag information panel you can edit the following 
+		aspects of a tag.</p>
+		<ul>
+			<li><span class="gui_ref">Name</span>: The name of the tag.</li>
+			<li><span class="gui_ref">Description</span>: The description of the tag.</li>
+		</ul>
+		<p><strong>Note that changes to the tag settings
+		are not saved automatically. To save the changes, you must click on the 
+		Save button.</strong></p>
+		
+		<p>In the lower half of the tag information panel, a table is shown that provides
+		information about the child tags of the tag. This table is functionally equivalent
+		to the tags information table that is shown on the right side of the main window
+		when a View Tags Node is selected.
+		</p>
+		<h3><a name="Hotkeys"></a>Hotkeys</h3>
+		<p>Except for the hotkeys that are made available through the main menu 
+		and the context menus, there are no additional hotkeys available in the 
+		main window. However are a few drag &amp; drop operations available which 
+		are very useful.</p>
+		<ul>
+			<li><strong>Copy a module view:</strong> To create a copy of a 
+			module view, drag a view from a views table onto the Module Views 
+			node.</li>
+			<li><strong>Convert a module view to a project view:</strong> To 
+			create a copy of a module view as a project view drag the module 
+			view you want to copy from the views table onto the Project Views 
+			node.</li>
+			<li><strong>Tag a view:</strong> To tag a view drag the view from a 
+			views table onto the tag node in the tree.</li>
+			<li><strong>Add a module to an address space:</strong> To add a 
+			module to an address space, drag the module from a table or from the 
+			tree onto the node of the address space.</li>
+		</ul>
+		<p>&nbsp;</p>
+		
+		</div>
+	<!-- End Left Column -->
+	<!-- Begin Right Column -->
+	<div id="column_r">
+		</div>
+	<!-- End Right Column -->
+	<!-- Begin Footer -->
+	<div id="footer">
+		<p><a href="../index.htm">Index</a>  
+		| <a href="installation.htm">Installation</a> |
+		<a href="usage.htm">Usage</a> |
+		<a href="debugging.htm">Debugging</a> |
+		<a href="scripting.htm">Scripting</a> |
+		<a href="tutorial.htm">Tutorial</a> |
+		<a href="faq.htm">FAQ</a> |
+		<a href="about.htm">About</a></p>
+		<p>Copyright 2005 - 2010: zynamics GmbH</p>
+	</div>
+	<!-- End Footer --></div>
+<!-- End Container -->
+
+</body>
+
+</html>

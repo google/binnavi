@@ -1,0 +1,50 @@
+﻿/* DIV tags */
+body {
+	margin: 0;
+	padding: 0;
+	border: 0;
+}
+#container {
+	width: 700px;
+	margin: 0 auto;
+	padding: 0;
+	border: 0;
+}
+#masthead {
+	width: 660px;
+	overflow: hidden;
+	margin: 0;
+	padding: 0;
+	border: 0;
+}
+#iMenu {
+	width: 660px;
+	overflow: hidden;
+	margin: 0;
+	padding: 0;
+	border: 0;
+}
+#column_l {
+	position: relative;
+	float: left;
+	margin: 0;
+}
+#column_r {
+	position: relative;
+	float: left;
+	margin: 0;
+}
+#content {
+	width: 630px;
+	margin: 0;
+	padding: 15px;
+	border: 0;
+}
+#footer {
+	width: 100%;
+	overflow: auto;
+	clear: both;
+	margin: 0;
+	padding: 0;
+	border: 0;
+}

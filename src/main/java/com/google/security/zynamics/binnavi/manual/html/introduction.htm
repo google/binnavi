@@ -1,0 +1,337 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" dir="ltr">
+
+<!-- #BeginTemplate "../master_in.dwt" -->
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="Content-Language" content="en-us" />
+<!-- #BeginEditable "doctitle" --><title>zynamics BinNavi 5.0 Manual - 
+Introduction</title>
+<!-- #EndEditable -->
+<link rel="stylesheet" type="text/css" title="CSS" href="../styles/style1.css" media="screen" />
+<style type="text/css">
+</style>
+</head>
+
+<body style="background-image: url('../images/binnaviicon.png')">
+
+<!-- Begin Container -->
+<div id="container">
+	<!-- Begin Masthead -->
+	<div id="masthead">
+		<img src="../images/binnavi_logo4.png" alt="BinNavi Logo"/>
+	</div>
+	<!-- End Masthead -->
+	<!-- Begin iMenu -->
+	<div id="navigation">
+		<ul>
+			<li><a href="../index.htm">Index</a></li>
+			<li><a href="installation.htm">Installation</a></li>
+			<li><a href="usage.htm">Usage</a></li>
+			<li><a href="debugging.htm">Debugging</a></li>
+			<li><a href="scripting.htm">Scripting</a></li>
+			<li><a href="tutorial.htm">Tutorial</a></li>
+			<li><a href="faq.htm">FAQ</a></li>
+			<li><a href="about.htm">About</a></li>
+		</ul>
+	</div>
+	<!-- End iMenu -->
+	<!-- Begin Left Column -->
+	<div id="column_lg">
+		<!-- #BeginEditable "content" -->
+		<h2>Introduction</h2>
+		<ul>
+			<li><a href="#Overview">Overview</a></li>
+			<li><a href="#Components">BinNavi and its components</a></li>
+			<li><a href="#Features">BinNavi features</a></li>
+			<li><a href="#Cases">Use Cases</a><ul>
+				<li><a href="#VulnDev">Vulnerability Auditing: Quickly locate 
+				data</a></li>
+				<li><a href="#Malware">Malware Analysis: Understand code</a></li>
+				<li><a href="#Scripts">Improve your efficiency: Write scripts 
+				and plugins</a></li>
+				<li><a href="#Hardware">Hardware reverse engineering: Analyze cell phones, routers, or 
+		wireless access points</a></li>
+				<li><a href="#Databases">Manage your knowledge: Create a centralized repository for your 
+		databases</a></li>
+				<li><a href="#REIL">Write once, run anywhere: Platform-independent code analysis using 
+		REIL</a></li>
+			</ul>
+			</li>
+		</ul>
+		<h3><a name="Overview"></a>Overview</h3>
+		<p>BinNavi is a platform-independent integrated reverse engineering 
+		environment that helps you dissect and analyze binary files. You can 
+		use it to discover new vulnerabilities in closed-source software, to 
+		analyze the latest piece of malware you found while tracking down a spearfishing attack, or to figure out whether a third-party embedded 
+		device poses a threat to your network.</p>
+		<p>The strength
+		of BinNavi is its graph-based approach to reverse engineering code. The 
+		code of disassembled functions and the interactions between functions 
+		are shown as control flow graphs. This makes it easier for you to follow 
+		interesting control flow paths and ultimately helps
+		you understand disassembled code quicker than traditional text-based disassemblers and reverse engineering tools.</p>
+		<p>
+		If your job requires you to reverse engineer more than x86 code, BinNavi 
+		can help you too. BinNavi supports the analysis of code from different 
+		platforms. No matter what code you are analyzing you will be able to use 
+		the same GUI with the same options across all 
+		platforms. You can analyze target applications from 
+		different platforms without having to learn and master many different 
+		platform-specific reverse engineering tools.
+		BinNavi currently supports code analysis of four different architectures: 32bit x86, 32bit PowerPC,
+		32bit ARM, and 32bit MIPS.</p>
+		<p>
+		If static analysis is not enough for you, 
+		BinNavi also offers the option to debug your target application. BinNavi can debug 
+		applications and processes on a wide range of different architectures. 
+		Examples include Windows Vista on x86 PCs, Windows Mobile on ARM CPUs, 
+		and embedded systems using PowerPC CPUs like Cisco 2600 routers. For a 
+		complete list of supported architectures please refer to the
+		<a href="faq.htm">FAQ section</a> of this manual.</p>
+		<h3>
+		<a name="Components"></a>BinNavi and its components</h3>
+		<p>
+		BinNavi itself is a pure analysis tool. It does not have the ability to 
+		disassemble files itself. Rather it relies on IDA Pro to dump 
+		disassembled code into a SQL database. Once the code has been dumped into 
+		a database, the external disassembler is not required anymore. From this 
+		point on all analysis can be performed in BinNavi.</p>
+		<p>
+		Depending on what external disassembler is used in combination with 
+		BinNavi, different third-party software is required for BinNavi to work 
+		properly. In general, the following different components are part of a 
+		proper BinNavi installation.</p>
+		<ul>
+			<li>BinNavi itself</li>
+			<li>A PostgreSQL database which is used to store all information BinNavi 
+			uses</li>
+			<li>IDA Pro and an IDA Pro plugin to generate and export provide the 
+			disassembly information.</li>
+			<li>A number of debug clients that can be used to debug target 
+			processes and applications. For more information about debug clients 
+			please see the <a href="debugging.htm">section about debugging</a> in this manual.</li>
+		</ul>
+		<h3><a name="Features"></a>BinNavi Features</h3>
+		<p>The following features of BinNavi are the most important ones.</p>
+		<ul>
+			<li>Do <strong>control flow based code analysis</strong> of 
+			disassembled x86, ARM, MIPS, and PowerPC code</li>
+			<li><strong>Cut down on complexity</strong> by removing unimportant 
+			code from functions</li>
+			<li>Use <strong>powerful remote debuggers</strong> to debug programs 
+			on different operating systems</li>
+			<li>Use Differential Debugging to <strong>quickly locate relevant 
+			code</strong></li>
+			<li>Create and assign user-defined tags to <strong>mark important 
+			functions and basic blocks</strong></li>
+			<li>Use <strong>advanced code analysis algorithms</strong> to keep 
+			track of data and code</li>
+			<li>Manage all your reverse engineering projects in <strong>one 
+			central database</strong></li>
+			<li>Write <strong>scripts and plugins to extend BinNavi</strong> to 
+			meet your specific goals</li>
+			<li>Rename and <strong>annotate variables and functions</strong> to 
+			make them self-explanatory</li>
+			<li>Use the REIL meta-language to <strong>write platform-independent 
+			code</strong></li>
+			<li>Create and assign types to <strong>quickly understand</strong> the current disassembly</li>
+			<li>Work in a team on a single disassembly using the <strong>multi user</strong> 
+			tools provided.</li>
+		</ul>
+		<h3><a name="Cases"></a>Use Cases</h3>
+		<h4><a name="VulnDev"></a>Vulnerability Auditing: Quickly locate data</h4>
+		<p>Many of our customers are software security analysts who spend a lot 
+		of time reverse engineering closed-source software hunting for 
+		security-critical bugs. These people are always looking out for the 
+		latest buffer overflows, heap unlinking problems, and privilege 
+		escalations. From them we have learned that data matters. They want to 
+		know where data comes from, how data is used, and where data is going 
+		to. In BinNavi we have implemented ways to quickly find code that 
+		processes relevant data and ways to safely track that data.</p>
+		<p>Imagine you are a security analyst whose job is to audit a complex 
+		FTP server application. This FTP server receives data from connected FTP 
+		clients and sends data back to them. Additionally there is a remote 
+		administration interface that can be used by authorized users to change 
+		the settings of the FTP server. </p>
+		<p>Most interesting for security researchers are those parts of the code 
+		that allow the FTP server to communicate with the outside world. What 
+		code is responsible for granting access to FTP users? Are FTP commands 
+		properly parsed and sanitized or can malformed FTP commands be used to 
+		attack the system? Is the code that checks the administrator credentials 
+		working fine or are there errors in the code that give unauthorized 
+		users the ability to change FTP server settings?</p>
+		<p>Using Differential Debugging, one of the most powerful features of 
+		BinNavi, finding the code that answers all of these questions is just a 
+		matter of seconds. Differential Debugging works by placing trace 
+		breakpoints on all functions or basic blocks of a target application and 
+		recording subsequent trace breakpoint hits. Every time a trace 
+		breakpoint is hit, BinNavi determines the values of all CPU registers 
+		and relevant memory sections and stores it in the active trace.</p>
+		<p>To quickly find the code that is responsible for logging into the FTP 
+		server remote administration interface all you have to do now is to 
+		start a new Differential Debugging trace, enter your login credentials 
+		in the remote administration interface and stop the Differential 
+		Debugging trace again. Within seconds the hit breakpoints show you 
+		exactly the code that is responsible for processing the login 
+		credentials of the remote administration interface.</p>
+		<p>In addition to Differential Debugging, BinNavi provides many more 
+		ways to work with data. Of course we have all the standard options you 
+		might already be familiar with from other reverse engineering tools. For 
+		example, you can see what instructions access local and global 
+		variables. You can get information about calling and called functions. 
+		You can change the way operands are displayed to make the code easier to 
+		understand.</p>
+		<p>BinNavi has more advanced features too. For example it is possible to 
+		track and highlight the effects of a register throughout a function. 
+		Using this feature, security researchers can very quickly figure out 
+		where important information is coming from and where it is going or what 
+		parts of a program are influenced by a given piece of data and what 
+		parts are not. This makes it easier to follow a piece of data around, 
+		for example to figure out how exactly it must be shaped to trigger 
+		conditional jumps to execute specific control flow paths.</p>
+		<h4><a name="Malware"></a>Malware Analysis: Understand code</h4>
+		<p>Once you have found the parts of a program that interest you it is 
+		time to find out what the code does. Depending on what your goals are 
+		you might choose a different approach. Many of our customers use BinNavi 
+		to analyze malware, for example in high profile spearfishing attacks. In 
+		these attacks highly specialized malware is used to penetrate the 
+		networks and computers of commercial or governmental entities to steal 
+		sensitive data like trade secrets or national defense plans.</p>
+		<p>BinNavi makes it easy to understand disassembled code, for example to 
+		figure out what sensitive documents a piece of malware is stealing and 
+		how it sends them back to the attacker. The way BinNavi displays code as 
+		control flow graphs enables users to quickly figure out possible control 
+		flow paths that are of interest for their analysis. Along the way, users 
+		can give names to local and global variables, they can rename functions 
+		and they can annotate instructions and basic blocks with comments that 
+		describe what is going on.</p>
+		<p>Ultimately, the way to understand disassembled code is to extract 
+		more abstract semantic information about the analyzed program. BinNavi 
+		makes it easy for you to create new building blocks of abstract 
+		information. Once you have figured out what one or more basic blocks do, 
+		you can group these basic blocks and replace their code with a new 
+		higher-level description of the underlying code. This process of 
+		reconstructing more abstract meaning can continue iteratively until the 
+		meaning of a function or even the whole program is known.</p>
+		<p>Users of BinNavi are not limited to reading code and deriving meaning 
+		from static analysis. Sometimes it is necessary to debug a program to 
+		find out what it does. BinNavi provides powerful debuggers that can 
+		debug programs on standard platforms like Microsoft Windows or Linux and 
+		even on more exotic platforms like Cisco routers.</p>
+		<p>The BinNavi debuggers support many of the standard features you can 
+		find in other debuggers. You can execute one instruction at a time. You 
+		can set breakpoints. You can read and manipulate the registers and the 
+		memory of target processes. You can receive and display information 
+		about the threads and dynamic modules loaded into target processes. All 
+		of this is done in the same control flow graph based GUI as the static 
+		analysis components of BinNavi. This makes it very simple for users to 
+		combine the strengths of disassembly based static analysis with the 
+		strengths of debugger based dynamic analysis.</p>
+		<h4><a name="Scripts"></a>Improve your efficiency: Write scripts and plugins</h4>
+		<p>We realize that despite our best efforts, many of our customers want 
+		to use BinNavi for more things than we can think of. To make it possible 
+		for them to use BinNavi to meet their specific goals we provide a 
+		powerful API that can be used to access and extend nearly all aspects of 
+		BinNavi. It is easily possible to extend the BinNavi GUI with new menu 
+		items or other GUI elements. If you want to write your own code analysis 
+		algorithm BinNavi provides access to all aspects of disassembled modules 
+		from functions to the individual expressions that form the instruction 
+		operands. If you want to search through the BinNavi database for a 
+		specific piece of code or data you can even directly query our 
+		underlying SQL database to make your search as quick as possible.</p>
+		<p>The BinNavi API can be accessed from scripts and plugins. Scripts can 
+		be written in Jython or JRuby, the Python and Ruby implementations for 
+		the Java Virtual Machine. Plugins can be written in Java, Jython, or 
+		JRuby. No matter what language you use for your scripts and plugins, 
+		they all use the same BinNavi API. No language has access to more 
+		powerful features than any other language.</p>
+		<p>Even on the fly manipulation of code from scripts is possible in 
+		BinNavi. BinNavi provides a scripting console where the user can enter 
+		Jython or JRuby scripts that are executed immediately. This makes it 
+		quick and simple to write short scripts that automatically take care of 
+		tasks that are tedious to execute manually.</p>
+		<p>The BinNavi API is fully documented in the BinNavi manual and 
+		contains many examples that demonstrate how to use the BinNavi API to 
+		extend BinNavi and to write new code analysis algorithms.</p>
+		<h4><a name="Hardware"></a>Hardware reverse engineering: Analyze cell phones, routers, or 
+		wireless access points</h4>
+		<p>Not all of our customers analyze software written for desktop 
+		operating systems. Especially governmental customers are often 
+		interested in analyzing embedded systems to find out whether an embedded 
+		device can safely be used in their sensitive networks. BinNavi is 
+		helping these customers to find security-critical flaws in embedded 
+		systems code and ultimately make decisions for or against specific 
+		embedded devices.</p>
+		<p>&nbsp;The support for embedded devices in BinNavi is just as powerful as 
+		the support for more common platforms like Windows or Linux. All the 
+		features are available and can be used. BinNavi supports the static 
+		analysis of disassembled ARM, MIPS, and PowerPC code and provides 
+		debuggers for several different devices.</p>
+		<h4><a name="Databases"></a>Manage your knowledge: Create a centralized repository for your 
+		databases</h4>
+		<p>Does your team have an endless library of disassembled files that you 
+		have previously analyzed? With BinNavi it is possible to put all these 
+		files into a central database. This makes it more efficient to keep 
+		track of information. Previously discovered information is always 
+		present and can easily be transferred into new disassembled files.<br />
+		The central BinNavi database makes working in teams more efficient too. 
+		Team members can easily work on the same project simultaneously. They 
+		have shared access to the disassembly information in the database and 
+		they can quickly communicate their findings and ideas.</p>
+		<p>The backbone of BinNavi is a PostgreSQL database. This database is used to 
+		store all information processed by BinNavi. Using this open platform 
+		with our publicly documented database schema gives you other advantages 
+		too. For example, you can query data from the database directly using 
+		standard PostgreSQL clients or libraries. That way you can extend your own 
+		custom tools with information stored in the BinNavi database. A fuzzing 
+		tool could use information about basic blocks to figure out what control 
+		flow paths were executed during a fuzzing sessions and what parts of the 
+		code were never touched.</p>
+		<h4><a name="REIL"></a>Write once, run anywhere: Platform-independent code analysis using 
+		REIL</h4>
+		<p>Are you working on many different platforms and are you tired of 
+		writing platform-dependent analysis algorithms? BinNavi is shipped with 
+		REIL (Reverse Engineering Intermediate Language), a platform-independent 
+		pseudo-assembly language that you can use to write platform independent 
+		analysis algorithms.</p>
+		<p>Accessible from scripts and plugins, native assembly code can be 
+		translated into REIL code for further analysis. In addition to the 
+		advantage of writing platform independent analysis algorithms, we have 
+		made sure that REIL code is also much easier to understand and analyze 
+		programmatically than native assembly code. This makes it faster and 
+		cheaper to implement new analysis algorithms.</p>
+		<p>In addition to REIL, BinNavi comes with MonoREIL, a framework for 
+		writing REIL-based analysis algorithms based on the sound mathematical 
+		theory of abstract interpretation. Abstract interpretation with MonoREIL 
+		allows you to reason about abstract properties of programs. Is a 
+		null-pointer dereference possible at a given instruction? Is a negative 
+		index erroneously used to access an array? What effects does a register 
+		have on the future program? REIL and MonoREIL are already being used by 
+		BinNavi internally and by our customers to answer questions like these.</p>
+		<!-- #EndEditable --></div>
+	<!-- End Left Column -->
+	<!-- Begin Right Column -->
+	<!-- End Right Column -->
+	<!-- Begin Footer -->
+	<div id="footer">
+		<p><a href="../index.htm">Index</a>  
+		| <a href="installation.htm">Installation</a> |
+		<a href="usage.htm">Usage</a> |
+		<a href="debugging.htm">Debugging</a> |
+		<a href="scripting.htm">Scripting</a> |
+		<a href="tutorial.htm">Tutorial</a> |
+		<a href="faq.htm">FAQ</a> |
+		<a href="about.htm">About</a></p>
+		<p>Copyright 2005 - 201<span lang="de">4</span>: <span lang="de">Google</span>
+		<span lang="de">Inc.</span></p>
+	</div>
+	<!-- End Footer --></div>
+<!-- End Container -->
+
+</body>
+
+<!-- #EndTemplate -->
+
+</html>

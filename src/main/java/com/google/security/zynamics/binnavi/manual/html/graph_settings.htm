@@ -1,0 +1,217 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" dir="ltr">
+
+<!-- #BeginTemplate "../master_in.dwt" -->
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="Content-Language" content="en-us" />
+<!-- #BeginEditable "doctitle" -->
+<title>zynamics BinNavi 5.0 Manual - Graph Settings</title>
+<style type="text/css">
+
+
+
+.style1 {
+	text-align: center;
+}
+</style>
+<!-- #EndEditable -->
+<link rel="stylesheet" type="text/css" title="CSS" href="../styles/style1.css" media="screen" />
+<style type="text/css">
+</style>
+</head>
+
+<body style="background-image: url('../images/binnaviicon.png')">
+
+<!-- Begin Container -->
+<div id="container">
+	<!-- Begin Masthead -->
+	<div id="masthead">
+		<img src="../images/binnavi_logo4.png" alt="BinNavi Logo"/>
+	</div>
+	<!-- End Masthead -->
+	<!-- Begin iMenu -->
+	<div id="navigation">
+		<ul>
+			<li><a href="../index.htm">Index</a></li>
+			<li><a href="installation.htm">Installation</a></li>
+			<li><a href="usage.htm">Usage</a></li>
+			<li><a href="debugging.htm">Debugging</a></li>
+			<li><a href="scripting.htm">Scripting</a></li>
+			<li><a href="tutorial.htm">Tutorial</a></li>
+			<li><a href="faq.htm">FAQ</a></li>
+			<li><a href="about.htm">About</a></li>
+		</ul>
+	</div>
+	<!-- End iMenu -->
+	<!-- Begin Left Column -->
+	<div id="column_lg">
+		<!-- #BeginEditable "content" -->
+		<h2>Graph Settings</h2>
+		
+		<h3>Overview</h3>
+		
+		<p>The appearance and behavior of graphs can be customized in many different ways
+		using three settings dialogs. Two dialogs (<span class="gui_ref">Initial Call graph Settings</span> and
+		<span class="gui_ref">Initial Flow graph Settings</span>) can be accessed from the main menu of the main
+		window while the third dialog (<span class="gui_ref">Graph Settings</span>) can be accessed from the 
+		Graph menu of graph windows.
+		</p>
+		<p>All three dialogs offer mostly the same options. The 
+		<span class="gui_ref">Initial Call graph
+		Settings</span> dialog is used to configure the appearance and behavior of native
+		call graph views while the <span class="gui_ref">Initial Flow graph Settings</span> dialog is used to configure
+		the appearance and behavior of native flow graph views. Once native views are
+		saved as non-native views, their individual settings can be configured 
+		on a per-graph basis in the
+		<span class="gui_ref">Graph Settings</span> dialog. This makes it possible to use different settings for
+		all non-native graphs.
+		</p>
+		
+		<h3>Available Graph Settings</h3>
+		
+		<p>The settings dialogs offer different tabs where graph settings can
+		be configured.</p>
+		
+		<h4>Automatism</h4>
+		
+		<p>The Automatism tab is used to configure graph settings that are all about
+		automating behavior of the graph depending on the size of the graph. This
+		is especially useful to speed up the initial loading and layout of larger graphs.</p>
+		
+		<p class="style1"><img alt="" src="../images/graph_settings_automatism.png" /></p>
+		
+		<ul>
+			<li><span class="gui_ref">Automatic Layouting</span>: When switched on, the graph is automatically re-layouted on relevant changes of the graph structure.</li>
+			<li><span class="gui_ref">Default Layout Style</span>: Sets the default layout style. Circular style is recommended for 
+			call graphs, hierarchical style is recommended for flow graphs.</li>
+			<li><span class="gui_ref">Proximity Browsing</span>: When switched on, proximity browsing mode is enabled by default.</li>
+			<li><span class="gui_ref">Proximity Browsing Activation Threshold</span>: Graphs with more than the given number of nodes are automatically loaded with proximity mode enabled.</li>
+			<li><span class="gui_ref">Automatic Layouting Deactivation Threshold</span>: Graphs with more than the given number of nodes are automatically loaded with automatic layouting disabled.</li>
+			<li><span class="gui_ref">Layout Calculation Time Threshold</span>: 
+			You are shown a warning when trying to layout a graph with more than the given number of nodes.</li>
+			<li><span class="gui_ref">Visibility Warning Threshold:</span> You 
+			are shown a warning when trying to make too many invisible nodes 
+			visible.</li>
+		</ul>
+		
+		<h4>Edges</h4>
+		
+		<p>The Edges tab is used to configure the appearance and behavior of graph edges.
+		</p>
+		
+		<p class="style1"><img alt="" src="../images/graph_settings_edges.png" /></p>
+		
+		<ul>
+			<li><span class="gui_ref">Display multiple edges as one</span>: In case of multiple edges between two nodes, only one edge is shown. 
+			This is useful to cut down on the number of edges in large graphs.</li>
+			<li><span class="gui_ref">Draw Selected Bends</span>: Draws selected edge bends.</li>
+			<li><span class="gui_ref">Hide Edges when zoomed out</span>: Used to configure whether edges are drawn when zoomed out. 
+			This gives a significant speed boost when zooming out of large 
+			graphs.</li>
+			<li><span class="gui_ref">Edge Hiding Threshold when zoomed out</span>: Minimum number of edges before edges are hidden when the graph is zoomed out.</li>
+		</ul>
+		
+		<h4>Hierarchic</h4>
+		
+		<p>The Hierarchic tab is used to configure settings of hierarchic graph 
+		layouts. This layout mode is the most natural layout mode for
+		flow graphs with the entry node at the top of the graph and the exit nodes at the
+		bottom.</p>
+		
+		<p class="style1"><img alt="" src="../images/graph_settings_hierarchic.png" /></p>
+		
+		<ul>
+			<li><span class="gui_ref">Orientation</span>: Switches between layouting with entry nodes on top and exit nodes on bottom to entry nodes on the left and exit nodes on the right.</li>
+			<li><span class="gui_ref">Edge Routing Style</span>: Lets you switch between different layouting styles for graph edges.</li>
+			<li><span class="gui_ref">Minimum Layer Distance</span>: Minimum number of pixels between the layers of the graph. A graph is a row of nodes of equal distance from the entry node.</li>
+			<li><span class="gui_ref">Minimum Node Distance</span>: Minimum number of pixels between graph nodes.</li>
+			<li><span class="gui_ref">Minimum Edge Distance</span>: Minimum number of pixels between graph edges.</li>
+		</ul>
+		
+		<h4>Orthogonal</h4>
+		
+		<p>The Orthogonal tab is used to configure settings of orthogonal graph 
+		layouts. This layout mode creates the most compact graphs.</p>
+		
+		<p class="style1"><img alt="" src="../images/graph_settings_orthogonal.png" /></p>
+		
+		<ul>
+			<li><span class="gui_ref">Orientation</span>: Switches between layouting nodes from top to bottom 
+			(Vertical) and right to left (Horizontal).</li>
+			<li><span class="gui_ref">Layout Style</span>: Lets you switch between different layouting styles.</li>
+			<li><span class="gui_ref">Minimum Node Distance</span>: Minimum number of pixels between graph nodes.</li>
+		</ul>
+		
+		<h4>Circular</h4>
+		
+		<p>The Circular tab is used to configure settings of circular graph 
+		layouts. This layout mode is by far the fastest mode for layouting large graphs
+		and is recommended for use with call graphs.</p>
+		
+		<p class="style1"><img alt="" src="../images/graph_settings_circular.png" /></p>
+		
+		<ul>
+			<li><span class="gui_ref">Layout Style</span>: Lets you switch between different layouting styles.</li>
+			<li><span class="gui_ref">Minimum Node Distance</span>: Minimum number of pixels between graph nodes.</li>
+		</ul>
+		
+		<h4>Controls</h4>
+		
+		<p>
+		The Controls tab is used to configure graph-related mouse and keyboard settings.
+		</p>
+		
+		<p class="style1"><img alt="" src="../images/graph_settings_controls.png" /></p>
+		
+		<ul>
+			<li><span class="gui_ref">Mousewheel Action</span>: Switches the default 
+			mouse wheel 
+			behavior between zooming and scrolling the graph.</li>
+			<li><span class="gui_ref">Scroll Sensitivity</span>: Value that determines how fast 
+			you can scroll with the mouse wheel.</li>
+			<li><span class="gui_ref">Zoom Sensitivity</span>: Value that determines how fast 
+			you can zoom with the mouse wheel.</li>
+		</ul>
+		
+		<h4>Miscellaneous</h4>
+		
+		<p>The Miscellaneous tab is used to configure all graph-related settings that do not fit into any of the other tabs.</p>
+		
+		<p class="style1"><img alt="" src="../images/graph_settings_misc.png" /></p>
+		
+		<ul>
+			<li><span class="gui_ref">Gradient Background</span>: Switches between a blank white graph background and a colored background.</li>
+			<li><span class="gui_ref">Layout Animation</span>: If switched on, layout changes in the graph are animated.</li>
+			<li><span class="gui_ref">Animation Speed</span>: Speed of the layout change animation.</li>
+			<li><span class="gui_ref">Function Information</span>: If switched 
+			on, call graph function nodes show node and edge information about 
+			the function represented by the nodes.</li>
+		</ul>
+		
+		<!-- #EndEditable --></div>
+	<!-- End Left Column -->
+	<!-- Begin Right Column -->
+	<!-- End Right Column -->
+	<!-- Begin Footer -->
+	<div id="footer">
+		<p><a href="../index.htm">Index</a>  
+		| <a href="installation.htm">Installation</a> |
+		<a href="usage.htm">Usage</a> |
+		<a href="debugging.htm">Debugging</a> |
+		<a href="scripting.htm">Scripting</a> |
+		<a href="tutorial.htm">Tutorial</a> |
+		<a href="faq.htm">FAQ</a> |
+		<a href="about.htm">About</a></p>
+		<p>Copyright 2005 - 201<span lang="de">4</span>: <span lang="de">Google</span>
+		<span lang="de">Inc.</span></p>
+	</div>
+	<!-- End Footer --></div>
+<!-- End Container -->
+
+</body>
+
+<!-- #EndTemplate -->
+
+</html>

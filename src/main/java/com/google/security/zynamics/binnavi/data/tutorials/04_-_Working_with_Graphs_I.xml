@@ -1,0 +1,203 @@
+<tutorial>
+  <name>Working with Graphs - I</name>
+  <description>Once you have successfully imported data from IDA Pro or another
+    external data source and you created the BinNavi module you want to work
+    with, you can begin to analyze the disassembled data yourself. This tutorial
+    introduces you to the basic concepts of working with disassembled data in
+    BinNavi.&lt;br/&gt; &lt;br/&gt;
+In this tutorial you will learn about the following concepts:&lt;br/&gt;
+&lt;ul&gt;
+&lt;li&gt;Opening windows for analyzing code&lt;/li&gt;
+&lt;li&gt;The general layout of the graph window&lt;/li&gt;
+&lt;li&gt;Navigating through disassembled code&lt;/li&gt;
+&lt;li&gt;Adding comments to nodes and instructions&lt;/li&gt;
+&lt;li&gt;Saving changes&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+  <steps>
+    <step>
+      <action>0</action>
+      <description>This tutorial shows you how disassembled data is presented in
+        BinNavi and what the most important concepts for working with
+        disassembled data are. Among other things you will learn how to navigate
+        through disassembled code, how you can annotate the code with comments,
+        and how you can save your changes so that you can use them again at a
+        later point in time.&lt;br/&gt; &lt;br/&gt;
+Please click on the Next button to continue.
+</description>
+    </step>
+    <step>
+      <action>0</action>
+      <allowed>-2369159756337681560</allowed>
+      <allowed>-9044865055464757942</allowed>
+      <allowed>8784926684855833953</allowed>
+      <allowed>-7789885643476931774</allowed>
+      <allowed>-8750454886776173497</allowed>
+      <allowed>-5178343179269965998</allowed>
+      <allowed>2804136480786366059</allowed>
+      <description>This tutorial requires you to have a configured database and
+        you need to have a module created from the primes.exe sample file from
+        the tutorials directory of your BinNavi installation. The module created
+        from primes.exe will be used throughout the tutorial and you need to
+        work with this module if you want to understand all aspects of this
+        tutorial.&lt;br/&gt; &lt;br/&gt;
+If you do not have a database with the primes.exe module imported please create
+the database and/or import primes.exe now. If you are ready to work with the
+primes.exe module please click on the next Next button to continue.
+</description>
+    </step>
+    <step>
+      <action>-7167187997929184030</action>
+      <action>-5295816457628962096</action>
+      <description>The default way of working with disassembled code in BinNavi
+        is to open a new window that contains the code of the function you want
+        to work with. To do so you can simply double-click on the table that
+        shows what functions are available in a module and the function
+        represented by the line you double-clicked on is opened. Make sure not
+        to double-click the Name and Description columns though. These columns
+        are editable and double-clicking on those columns allows you to modify
+        their current values.&lt;br/&gt; &lt;br/&gt;
+Please open the function _main (address 0x401240) of the primes.exe module now.
+To do so simply select the module node of primes.exe in the Project Tree and
+double-click the row of the _main function in the functions table. To find the
+function _main quickly you might want to use the table filter. Alternatively you
+can right-click on the row of the function and select the Open in New Window
+menu.  </description>
+    </step>
+    <step>
+      <action>0</action>
+      <allowed>-7167187997929184030</allowed>
+      <allowed>-5295816457628962096</allowed>
+      <description>If the load operation is successful, a new window that shows
+        the code of the _main function is opened. This so called graph window
+        contains the following core parts: &lt;ul&gt;
+&lt;li&gt;The code is shown as a graph in the center of the window&lt;/li&gt;
+&lt;li&gt;A small overview of the graph in the upper left corner&lt;/li&gt;
+&lt;li&gt;A list of all nodes of the graph on the left-hand side&lt;/li&gt;
+&lt;li&gt;A tree that allows the user to go back and forth between different
+graph states in the lower left corner&lt;/li&gt; &lt;li&gt;Various tabs that
+provide specific graph operations at the bottom of the window&lt;/li&gt;
+&lt;li&gt;Information about the available node tags on the right side of the
+window&lt;/li&gt; &lt;/ul&gt;
+Additionaly there is the main menu and the toolbar of the graph window which
+gives you access to many different ways to work with the graph. Many of the
+options available there are explained in this tutorial and the other tutorials
+about working with graphs.&lt;br/&gt; &lt;br/&gt;
+Please click on the Next button to continue with this tutorial.
+</description>
+    </step>
+    <step>
+      <action>0</action>
+      <description>Even though the graph of the _main function is rather small,
+        it is still useful to know about the basic options you have for
+        navigating through the graph. Most of the time you will simply use your
+        mouse to scroll (drag the graph window using the right mouse button) and
+        zoom (use your mouse wheel) through the graph. There are two other
+        options you should be familiar with though. Using the toolbar of the
+        graph window it is possible to jump to addresses and to search through
+        graphs.&lt;br/&gt; &lt;br/&gt;
+Let's begin with jumping to an address. If you know the address of an
+instruction you want to jump to, you can use the Address field in the toolbar on
+top of the graph window (hotkey CTRL-G). In this field you can enter the address
+of the instruction you want to jump to.&lt;br/&gt; &lt;br/&gt;
+To see how the input field works please enter the address 4012D6 and hit Enter.
+The graph is then zoomed in such a way that the instruction at offset 4012D6 is
+shown in the center of the graph window. If you enter an address which is not
+part of the active graph, the input field changes its color to red to signal
+that it can not process your request.&lt;br/&gt; &lt;br/&gt;
+If you are done playing around with the Address field please hit the Next button
+to continue this tutorial.  </description>
+    </step>
+    <step>
+      <action>0</action>
+      <allowed>-1618510363590582162</allowed>
+      <description>The second major way to navigate through graphs is searching
+        for string data. You can search through the open graph by entering the
+        phrase you want to search for in the Search input field in the toolbar
+        of the graph window. If you hit Enter afterwards, all search results are
+        highlighted in the graph.&lt;br/&gt; &lt;br/&gt;
+Try to search for the prase "eax" now. This search highlights all occurences of
+the register "eax" in the function _main. Repeatedly pressing Enter or
+CTRL-Enter allows you to jump forth and back through the search
+results.&lt;br/&gt; &lt;br/&gt;
+You can also search for more complex phrases. There is a number of search
+options you can configure through the Search menu of the main menu. Turn on the
+option "Regular Expression Search" for example and search for the phrase
+"mov.*eax". This search highlights all "mov" instructions that use the register
+eax.&lt;br/&gt; &lt;br/&gt;
+When you are done playing around with the search feature please click on the
+Next button to continue.  </description>
+    </step>
+    <step>
+      <action>0</action>
+      <allowed>-1618510363590582162</allowed>
+      <description>Simply viewing disassembled code is often not enough.
+        Whenever you are analyzing more complex code you want to add your own
+        comments to basic blocks and instructions. In BinNavi there are two
+        different comment types, global comments and local comments. The
+        difference between these types is simple. Local comments are saved only
+        for the graph in which they are set. Global comments are saved for all
+        elements of the module that have the same type and the same address as
+        the element for which the global comment was saved. This means that if
+        you set the global instruction comment of the instruction at address
+        401030 this instruction comment shows up whenever the instruction at
+        address 401030 is shown, regardless of what graph the instruction
+        belongs to. On the other hand, the local instruction comment of the same
+        instruction is only shown in the graph where it was set.&lt;br/&gt;
+        &lt;br/&gt;
+The quickest way to access the dialog where you can change the instruction of
+nodes and instructions is to hold the ALT key and right-click on the instruction
+whose comments you want to change. This opens the node comments dialog and you
+can directly start typing the new local instruction comment of the instruction
+you clicked on.&lt;br/&gt; &lt;br/&gt;
+In the graph of function _main you can see that there is a conditional branch at
+the end of the first basic block. The red branch (taken if the branch condition
+is false) leads to a code path that sets an error code (1) and exits the
+program. Apparently the jump at address is 0x40127E is very important for the
+control flow of the function. You should put a comment there so that you
+remember to find out when this jump is taken and when it is not
+taken.&lt;br/&gt; &lt;br/&gt;
+To set the comment please hold the ALT key and right-click on instruction
+0x40127E. In the dialog that appears now you can enter a comment like "TODO:
+Find out when this jump is taken".&lt;br/&gt; &lt;br/&gt;
+When you are done playing with comments please click on the Next button to
+continue.  </description>
+    </step>
+    <step>
+      <action>5182263060599434690</action>
+      <description>Local changes to the graph are not automatically saved to the
+        database. You need to save them yourself using the menu View / Save View
+        or View / Save View As. The function _main is a so called native view.
+        Views of this type can not be modified so only the Save View As menu is
+        available.&lt;br/&gt; &lt;br/&gt;
+The Save View As menu creates a copy of the function _main that includes all
+your local changes.&lt;br/&gt; &lt;br/&gt;
+Please use the menu Save View As now to create a modified copy of the function
+_main.  </description>
+    </step>
+    <step>
+      <action>0</action>
+      <description>Congratulations. You have saved your first view. Now you are
+        no longer working with the native view _main but with the non-native
+        copy you just created. From this point on the Save View menu is
+        available in addition to the Save View As menu. Furthermore the view you
+        created is now available from the main window if you want to return to
+        it later. You can find the new view when you click on the Module Views
+        node which you can find in the primes.exe module in the Project
+        Tree.&lt;br/&gt; &lt;br/&gt;
+Please click on the Next button to continue this tutorial.
+</description>
+    </step>
+    <step>
+      <action>0</action>
+      <description>This is the end of this tutorial. You are now familiar with
+        the most basic concepts of working with disassembled code. You know how
+        to open graphs, how to annotate disassembled code with your own
+        comments, and how to save your changes. If you want to know more about
+        working with graphs please check out the more advanced tutorials or the
+        manual.&lt;br/&gt; &lt;br/&gt;
+Please click on the Next button to finish this tutorial.
+</description>
+    </step>
+  </steps>
+</tutorial>

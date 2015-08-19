@@ -1,0 +1,85 @@
+/*
+Copyright 2015 Google Inc. All Rights Reserved.
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+*/
+package com.google.security.zynamics.reil.translators.arm;
+
+import com.google.security.zynamics.reil.OperandSize;
+import com.google.security.zynamics.reil.ReilHelpers;
+import com.google.security.zynamics.reil.ReilInstruction;
+import com.google.security.zynamics.reil.translators.ITranslationEnvironment;
+import com.google.security.zynamics.reil.translators.InternalTranslationException;
+import com.google.security.zynamics.reil.translators.TranslationHelpers;
+import com.google.security.zynamics.zylib.disassembly.IInstruction;
+import com.google.security.zynamics.zylib.disassembly.IOperandTreeNode;
+import com.google.security.zynamics.zylib.general.Pair;
+
+import java.util.List;
+
+
+public class ARMLdrdTranslator extends ARMBaseTranslator {
+  @Override
+  protected void translateCore(final ITranslationEnvironment environment,
+      final IInstruction instruction, final List<ReilInstruction> instructions)
+      throws InternalTranslationException {
+    final Boolean writeBack =
+        instruction.getOperands().get(0).getRootNode().getChildren().get(0).getChildren().size()
+        == 1 ? true : false;
+    final IOperandTreeNode registerOperand1 =
+        instruction.getOperands().get(0).getRootNode().getChildren().get(0).getChildren().size()
+        == 1 ? instruction.getOperands()
+        .get(0).getRootNode().getChildren().get(0).getChildren().get(0)
+        : instruction.getOperands().get(0).getRootNode().getChildren().get(0);
+    final IOperandTreeNode rootNode = instruction.getOperands().get(1).getRootNode();
+
+    final String registerNodeValue = (registerOperand1.getValue());
+
+    final OperandSize bt = OperandSize.BYTE;
+    final OperandSize dw = OperandSize.DWORD;
+
+    long baseOffset = ReilHelpers.nextReilAddress(instruction, instructions);
+
+    final Pair<String, String> resultPair = AddressingModeTwoGenerator.generate(
+        baseOffset, environment, instruction, instructions, rootNode);
+
+    final String tmpAddress = resultPair.first();
+    final String tmpAddress2 = environment.getNextVariableString();
+
+    final int registerNum = Helpers.getRegisterIndex(registerNodeValue);
+
+    if (((registerNum % 2) == 0) && (registerNum != 14)) {
+      instructions.add(ReilHelpers.createLdm(baseOffset++, dw, tmpAddress, dw, registerNodeValue));
+      instructions.add(ReilHelpers.createAdd(
+          baseOffset++, dw, tmpAddress, bt, String.valueOf(4), dw, tmpAddress2));
+      instructions.add(ReilHelpers.createLdm(
+          baseOffset++, dw, tmpAddress2, dw, "R" + String.valueOf(registerNum + 1)));
+      if (writeBack) {
+        instructions.add(
+            ReilHelpers.createStr(baseOffset++, dw, tmpAddress2, dw, registerNodeValue));
+      }
+    } else {
+      instructions.add(ReilHelpers.createUnknown(baseOffset++));
+    }
+  }
+
+  /**
+   * LDR{<cond>}D <Rd>, <addressing_mode>
+   */
+  @Override
+  public void translate(final ITranslationEnvironment environment, final IInstruction instruction,
+      final List<ReilInstruction> instructions) throws InternalTranslationException {
+    TranslationHelpers.checkTranslationArguments(environment, instruction, instructions, "LDR");
+    translateAll(environment, instruction, "LDR", instructions);
+  }
+}

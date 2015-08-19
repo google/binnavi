@@ -1,0 +1,187 @@
+<tutorial>
+  <name>Debugging Modules</name>
+  <description>In addition to static analysis, BinNavi comes with several
+    debuggers that can be used for dynamic analysis. This tutorial shows you how
+    to set up and use the BinNavi Windows debugger.&lt;br/&gt; &lt;br/&gt;
+In this tutorial you will learn about the following concepts:&lt;br/&gt;
+&lt;ul&gt;
+&lt;li&gt;Setting up a module debugger&lt;/li&gt;
+&lt;li&gt;Debugging a module&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+  <steps>
+    <step>
+      <action>0</action>
+      <description>To show you how to debug applications for dynamic analysis
+        this tutorial uses primes.exe as an example program. The program
+        primes.exe contains an artificial upper bound of 100000 meaning only
+        primes up to 100000 can be calculated and printed. Using the debugger
+        you will jump over this bounds check by changing the value of a CPU flag
+        at the right place.&lt;br/&gt; &lt;br/&gt;
+Please click on the Next button to continue.
+</description>
+    </step>
+    <step>
+      <action>0</action>
+      <allowed>-2369159756337681560</allowed>
+      <allowed>-9044865055464757942</allowed>
+      <allowed>8784926684855833953</allowed>
+      <allowed>-7789885643476931774</allowed>
+      <allowed>-8750454886776173497</allowed>
+      <allowed>-5178343179269965998</allowed>
+      <allowed>2804136480786366059</allowed>
+      <description>This tutorial requires you to have a configured database and
+        you need to have a module created from the primes.exe sample file from
+        the tutorials directory of your BinNavi installation. The module created
+        from primes.exe will be used throughout the tutorial and you need to
+        work with this module if you want to understand all aspects of this
+        tutorial.&lt;br/&gt; &lt;br/&gt;
+If you do not have a database with the primes.exe module imported please create
+the database and/or import primes.exe now. If you are ready to work with the
+primes.exe module please click on the next Next button to continue.
+</description>
+    </step>
+    <step>
+      <action>4049078090679021771</action>
+      <action>0</action>
+      <description>Before you can debug a module with BinNavi you have to set up
+        a debugger for the module. It is possible to create so called debugger
+        templates which you can reuse for different modules. After all you do
+        not want to configure the Windows debugger again for every Windows
+        executable you want to debug.&lt;br/&gt; &lt;br/&gt;
+You create a new debugger template by right-clicking on the Debuggers node in
+the Project Tree and selecting the Create Debugger menu. Please do this
+now.&lt;br/&gt; &lt;br/&gt;
+This step is optional. If you already have a configured debugger you want to use
+please click on the Next button.  </description>
+    </step>
+    <step>
+      <action>8909931652747685283</action>
+      <allowed>4049078090679021771</allowed>
+      <description>Each debugger template has a name, a host, and a port. The
+        name of the debugger template is used throughout BinNavi to help you
+        select a debugger when required. The host and port specify the location
+        of your debug client.&lt;br/&gt; &lt;br/&gt;
+If you are running on a Windows machine and port 2222 is not used by another
+application already, you can just change the name of the debugger to Local
+Windows Debugger or something and save the changes. If you want to use a remote
+Windows system or another port you have to configure these debugger properties
+too.&lt;br/&gt; &lt;br/&gt;
+Please configure your debugger settings now and save the settings using the Save
+button.  </description>
+    </step>
+    <step>
+      <action>-5435176252593734737</action>
+      <allowed>8909931652747685283</allowed>
+      <description>Now you need to assign the debugger template to the module
+        you want to debug. Please click on the primes.exe module in the Project
+        Tree and assign the debugger you just created to the module using the
+        Debugger combo box.&lt;br/&gt; &lt;br/&gt;
+When you are done hit the Save button to save this change to the module.
+</description>
+    </step>
+    <step>
+      <action>-7167187997929184030</action>
+      <action>-5295816457628962096</action>
+      <allowed>-5435176252593734737</allowed>
+      <allowed>8909931652747685283</allowed>
+      <description>The debugger is now ready to debug the primes.exe module.
+        Please open the function _main now. This function is used throughout the
+        tutorial.  </description>
+    </step>
+    <step>
+      <action>0</action>
+      <description>The important bounds check can be found at the end of the
+        first basic block. If the jump is taken, the bounds check was OK and the
+        prime numbers are calculated for the given range. Otherwise the prime
+        numbers are not printed and the program exits.&lt;br/&gt; &lt;br/&gt;
+It is now time to start the Windows debug client. You can find it in the
+debug/win32 directory of your BinNavi installation. If you are using the default
+port (2222) you can simply double-click on client32.exe. Otherwise you need to
+start client32.exe with the arguments -p port.&lt;br/&gt; &lt;br/&gt;
+Please click on the Next button to continue.
+</description>
+    </step>
+    <step>
+      <action>4713265658934138478</action>
+      <description>When you open a graph in BinNavi the static analysis
+        perspective is active by default. You can switch to the debug
+        perspective by pressing CTRL-ALT-D or clicking on the Window / Debug
+        Perspective menu.&lt;br/&gt; &lt;br/&gt;
+Please switch to the debug perspective now.
+</description>
+    </step>
+    <step>
+      <action>8544979926623423740</action>
+      <description>The GUI of the debug perspective is different from the
+        standard perspective. On the left side of the graph you can see the
+        register values during debugging. On the bottom various tabs exist that
+        provide useful information about the debugged process.&lt;br/&gt;
+        &lt;br/&gt;
+To connect to the debugger please hit the Start Debugger button on the left-hand
+side of the debugger toolbar.&lt;br/&gt; &lt;br/&gt;
+Please select the target file primes.exe from the tutorials directory of your
+BinNavi installation in the file browsing dialog that pops up after you hit the
+Start Debugger button.&lt;br/&gt; </description>
+    </step>
+    <step>
+      <action>0</action>
+      <description>The debug client started the process primes.exe and started
+        it in suspended mode. BinNavi will ask you if you want to resume the
+        process because the process is stopped at an instruction that does not
+        belong to primes.exe. Please click on NO there.&lt;br/&gt; &lt;br/&gt;
+Click on the Next button to continue when the process is suspended and you can
+see the memory data at the bottom of the window.  </description>
+    </step>
+    <step>
+      <action>-8659378366020899198</action>
+      <description>You can now set breakpoints on instruction. You do this by
+        holding CTRL and right-clicking on an instruction. Please set some
+        breakpoints now and click on the Resume button in the debugger toolbar
+        then.  </description>
+    </step>
+    <step>
+      <action>0</action>
+      <allowed>-2945259974573766830</allowed>
+      <allowed>6797972614447876945</allowed>
+      <allowed>-8659378366020899198</allowed>
+      <description>When a breakpoint is hit, the color of the breakpoint is
+        changed to red. Furthermore the current position of the instruction
+        pointer is shown in the graph by a red line. You can now single-step
+        (F5) or step-over (F6) until you hit the jnz instruction at the end of
+        the basic block.&lt;br/&gt; &lt;br/&gt;
+Note that you have to enter a number into the console window of client32 at one
+point because primes.exe asks for user input. Enter the number 200000 when
+prompted.&lt;br/&gt; &lt;br/&gt;
+Please click on Next to continue when the jnz instruction at the end of the
+basic block is highlighted red.  </description>
+    </step>
+    <step>
+      <action>-8659378366020899198</action>
+      <allowed>-2945259974573766830</allowed>
+      <allowed>6797972614447876945</allowed>
+      <description>You have now reached the end of the first basic block. On the
+        left-hand side of the window you can see that the value of the zero flag
+        ZF is 1. The jump is not taken because you entered a range that is out
+        of bounds. To change the value of the zero flag double click on the
+        value 1.&lt;br/&gt; &lt;br/&gt;
+Please hit the Resume button when you have changed the value of ZF to 0.
+</description>
+    </step>
+    <step>
+      <action>0</action>
+      <description>When you check the console window of client32 now you can see
+        that primes up to 200000 are printed and the former upper bound of
+        100000 is happily ignored. Once all primes are printed, the primes.exe
+        process terminates, and the BinNavi debug GUI is reset.</description>
+    </step>
+    <step>
+      <action>0</action>
+      <description>You have now learned the basics of debugging. To learn more
+        about the advanced features of debugging please take a look at the
+        BinNavi manual.&lt;br/&gt; &lt;br/&gt;
+Please click the Next button to finish this tutorial.
+</description>
+    </step>
+  </steps>
+</tutorial>

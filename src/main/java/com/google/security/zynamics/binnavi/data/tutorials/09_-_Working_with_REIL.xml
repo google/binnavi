@@ -1,0 +1,60 @@
+<tutorial>
+  <name>Using REIL</name>
+  <description>One of the most important features for writing analysis scripts
+    and plugins is REIL. REIL is a platform-independent Reverse Engineering
+    Intermediate Language which you can use to write platform-independent
+    analysis algorithms. This tutorial shows you how to use REIL.
+  </description>
+  <steps>
+    <step>
+      <action>-7167187997929184030</action>
+      <action>-5295816457628962096</action>
+      <allowed>-2369159756337681560</allowed>
+      <allowed>-9044865055464757942</allowed>
+      <allowed>8784926684855833953</allowed>
+      <allowed>-7789885643476931774</allowed>
+      <allowed>-8750454886776173497</allowed>
+      <allowed>-5178343179269965998</allowed>
+      <allowed>2804136480786366059</allowed>
+      <description>Since REIL is primarily used from plugins and scripts, there
+        are only two ways to access REIL from the GUI. Both of these options
+        require an open flowgraph. Please open an arbitrary function now.
+      </description>
+    </step>
+    <step>
+      <action>3403011209340957215</action>
+      <description>One way to access REIL is from the scripting dialog. Please
+        open the scripting dialog of your flowgraph.  </description>
+    </step>
+    <step>
+      <action>0</action>
+      <description>In console mode you can simply enter commands like&lt;br/&gt;
+&lt;br/&gt;
+print cg.view.reilCode&lt;br/&gt;
+print cg.view.reilCode.graph&lt;br/&gt;
+print cg.view.reilCode.graph.nodes&lt;br/&gt;
+print cg.view.reilCode.graph.nodes[0]&lt;br/&gt;
+&lt;br/&gt;
+to access the REIL code of your flowgraph.&lt;br/&gt;
+&lt;br/&gt;
+When you are done playing around with REIL scripting please close the scripting
+dialog again and click the Next button to continue.</description> </step>
+    <step>
+      <action>2478803857892102988</action>
+      <description>Just using the scripting dialog to access REIL code is a bit
+        unwieldly. BinNavi is a graph visualization tool after all, so it should
+        be possible to show the generated REIL code of a view as a graph. This
+        is indeed possible through the Graph / Transform / Show REIL Code menu
+        of the graph window.&lt;br/&gt; &lt;br/&gt;
+Please use this menu now to show the REIL code of your flowgraph.</description>
+    </step>
+    <step>
+      <action>0</action>
+      <description>This is the end of this tutorial already. You are now aware
+        of all the ways to access REIL from the GUI. If you want to use REIL to
+        write your own static analysis algorithms please see the BinNavi manual
+        for detailed information and example algorithms.&lt;br/&gt; &lt;br/&gt;
+Please click the Next button to finish this tutorial. Afterwards you can play
+around with the REIL graph.</description> </step>
+  </steps>
+</tutorial>

@@ -1,0 +1,190 @@
+<tutorial>
+  <name>Working with Graphs - II</name>
+  <description>When you are familiar with the most basic GUI options you have
+    for working with graphs it is important to get an idea how you can use
+    BinNavi to quickly navigate through graphs to find important information.
+    This tutorial introduces a few concepts that are helpful for this
+    purpose.&lt;br/&gt; &lt;br/&gt;
+In this tutorial you will learn about the following concepts:&lt;br/&gt;
+&lt;ul&gt;
+&lt;li&gt;Proximity Browsing&lt;/li&gt;
+&lt;li&gt;Criteria Selection&lt;/li&gt;
+&lt;li&gt;Changing the color of nodes&lt;/li&gt;
+&lt;li&gt;Tagging nodes&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+  <steps>
+    <step>
+      <action>0</action>
+      <description>This tutorial introduces you to intermediate concepts of
+        working with graphs. You will learn how Proximity Browsing helps you
+        reduce the size of graphs, how to select nodes according to specific
+        criteria, and how changing the color of nodes and node tagging helps you
+        make important subsets of graphs easy to see and access.&lt;br/&gt;
+        &lt;br/&gt;
+Please click on the Next button to continue.
+</description>
+    </step>
+    <step>
+      <action>0</action>
+      <allowed>-2369159756337681560</allowed>
+      <allowed>-9044865055464757942</allowed>
+      <allowed>8784926684855833953</allowed>
+      <allowed>-7789885643476931774</allowed>
+      <allowed>-8750454886776173497</allowed>
+      <allowed>-5178343179269965998</allowed>
+      <allowed>2804136480786366059</allowed>
+      <description>This tutorial requires you to have a configured database and
+        you need to have a module created from the primes.exe sample file from
+        the tutorials directory of your BinNavi installation. The module created
+        from primes.exe will be used throughout the tutorial and you need to
+        work with this module if you want to understand all aspects of this
+        tutorial.&lt;br/&gt; &lt;br/&gt;
+If you do not have a database with the primes.exe module imported please create
+the database and/or import primes.exe now. If you are ready to work with the
+primes.exe module please click on the next Next button to continue.
+</description>
+    </step>
+    <step>
+      <action>-7167187997929184030</action>
+      <action>-5295816457628962096</action>
+      <description>Please open the function sub_41C7B5 of the primes.exe module
+        now. This function is used throughout the tutorial.</description>
+    </step>
+    <step>
+      <action>2398734393067804429</action>
+      <description>At first you will notice that only six basic blocks of the
+        function are visible. The other 94 basic blocks are hidden. The reason
+        for this is the so called Proximity Browsing mode. Proximity Browsing
+        was introduced to make it easier to work with large graphs by hiding
+        basic blocks that are not part of the active neighborhood. You can
+        change the active neighborhood of a graph by selecting nodes of a graph
+        or by left- or right-clicking on the small round Proximity Browsing
+        nodes.&lt;br/&gt; &lt;br/&gt;
+Please play around with Proximity Browsing for a bit until you get a feeling for
+what it's like to use Proximity Browsing. When you are done, please disable
+Proximity Browsing mode using ALT-P or the menu Graph / Proximity Browsing.
+</description>
+    </step>
+    <step>
+      <action>0</action>
+      <description>When you disable Proximity Browsing, the whole graph is made
+        visible. This makes sense for a function like sub_41C7B5 with just 100
+        nodes. Think twice before disabling Proximity Browsing mode for huge
+        graphs with some thousands or even some ten-thousands nodes.&lt;br/&gt;
+        &lt;br/&gt;
+Please click the Next Button to continue.
+</description>
+    </step>
+    <step>
+      <action>0</action>
+      <allowed>-1618510363590582162</allowed>
+      <allowed>-5761584425849212530</allowed>
+      <description>The function sub_41C7B5 takes two arguments. Throughout the
+        function the first argument arg_0 is modified. The goal of this step is
+        to find all the locations where arg_0 is written. Your first idea might
+        be to use the Search field of the graph and indeed this is a good idea.
+        I recommend to turn on regular expression search and to use the search
+        phrase "arg_0.*,". When you click on the Results button next to the
+        search field you will notice that arg_0 is used by mov, and, and cmp
+        instructions. Only the mov and and instructions are useful for our
+        desired result because cmp does not modify the value of
+        arg_0.&lt;br/&gt; &lt;br/&gt;
+Now we could use a refined search phrase like "(mov|and).*arg_0.*," in the
+Search field but there is an even better way to find all instructions with this
+phrase. This better way is the so called Search for Criteria dialog.&lt;br/&gt;
+&lt;br/&gt;
+Please click on Next to continue.
+</description>
+    </step>
+    <step>
+      <action>-8412530731075701761</action>
+      <description>In the Select by Criteria dialog you can use a simple GUI
+        interface to create logical formulas that allow you to select just those
+        nodes of the graph whose properties satisfy the logical formula you
+        created. To start building your formula you right-click on the Root Node
+        and select whatever criteria you want to use. The logical operands NOT,
+        OR, and AND are available to connect invididual properties.&lt;br/&gt;
+        &lt;br/&gt;
+Please open this dialog now by clicking on the Selection / Select by Criteria
+menu.  </description>
+    </step>
+    <step>
+      <action>0</action>
+      <allowed>-8412530731075701761</allowed>
+      <description>In this tutorial we only need a very simply formula. You can
+        simply right-click on the Root Node and select the Create Condition /
+        Select Nodes by Text menu. Then you enter the search phrase
+        "(and|cmp).*arg_0.*," and enable regular expression search through the
+        checkbox below the input field. When you click the Execute button now,
+        exactly those nodes that write into arg_0 are selected.&lt;br/&gt;
+        &lt;br/&gt;
+If you are done playing around with the Select by Criteria dialog, please click
+on the Next button to continue. Make sure that the nodes that write arg_0 are
+selected before moving on to the next step of the tutorial.  </description>
+    </step>
+    <step>
+      <action>8015267915010689781</action>
+      <allowed>-8412530731075701761</allowed>
+      <description>Once you have successfully executed a selection by criteria
+        you often want to return to the results quickly later on. There are two
+        common ways to do this. The first way is to color the selected nodes in
+        some special color. Please do this now by clicking on the toolbar button
+        with the paint bucket icon next to the Address field. A dialog pops up
+        where you can select a new color for the selected nodes.</description>
+    </step>
+    <step>
+      <action>8245688852710059696</action>
+      <allowed>-8412530731075701761</allowed>
+      <description>Having important nodes colored differently is very important
+        for quickly navigating through a graph. If you want to select these
+        important nodes later on, simply assigning a different color to these
+        nodes is not sufficient. Instead you can tag nodes with tags that can
+        contain more detailed information why the nodes are
+        important.&lt;br/&gt; &lt;br/&gt;
+To tag a node, you have to create a tag first. To do so please click on the
+Tagging panel on the right side of the graph window. In the menu that pops up
+click Create new Root Tag. A new node tag is created with the default name New
+Root Tag.  </description>
+    </step>
+    <step>
+      <action>-2794171930752365528</action>
+      <allowed>-8412530731075701761</allowed>
+      <description>The default tag name is not very useful. You can change the
+        name of the tag by right-clicking on it and selecting the Edit Tag
+        Description menu. Please do this now and change the name of the tag to
+        "Writes arg_0".  </description>
+    </step>
+    <step>
+      <action>-4588801099566953194</action>
+      <allowed>-8412530731075701761</allowed>
+      <description>If the nodes that write arg_0 are not selected anymore,
+        please select them again. When they are selected please right-click on
+        the tag you created and select the Add Tag to Selected Nodes menu.
+      </description>
+    </step>
+    <step>
+      <action>0</action>
+      <description>The nodes that write arg_0 are tagged now. You can see this
+        when you zoom in to one of the tagged nodes. At the bottom of the node
+        you find an additional line that states that the node is tagged with the
+        tag "Writes arg_0". &lt;br/&gt; &lt;br/&gt;
+Since the nodes are tagged they can quickly be selected again using the tag tree
+on the right side of the graph window. Please expand the tag you created by
+double-clicking on the tag in the tag tree. A new tree element called "Tagged
+Nodes" appears. Clicking on this tag selects or deselects all nodes tagged by
+the tag you created.&lt;br/&gt; &lt;br/&gt;
+If you are done playing around with the tag tree please click on the Next button
+to continue.  </description>
+    </step>
+    <step>
+      <action>0</action>
+      <description>You have reached the final step of this tutorial. You know
+        now how to select nodes according to arbitrary criteria and how to use
+        colors and tagging to highlight subsets of the nodes in a
+        graph.&lt;br/&gt; &lt;br/&gt;
+Please click the Next button to finish this tutorial.
+</description>
+    </step>
+  </steps>
+</tutorial>

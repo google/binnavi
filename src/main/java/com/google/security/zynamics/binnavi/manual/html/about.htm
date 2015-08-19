@@ -1,0 +1,1505 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" dir="ltr">
+
+<!-- #BeginTemplate "../master_in.dwt" -->
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="Content-Language" content="en-us" />
+<!-- #BeginEditable "doctitle" -->
+<title>zynamics BinNavi 5.0.0 Manual - About BinNavi</title>
+<!-- #EndEditable -->
+<link rel="stylesheet" type="text/css" title="CSS" href="../styles/style1.css" media="screen" />
+<style type="text/css">
+</style>
+</head>
+
+<body style="background-image: url('../images/binnaviicon.png')">
+
+<!-- Begin Container -->
+<div id="container">
+	<!-- Begin Masthead -->
+	<div id="masthead">
+		<img src="../images/binnavi_logo4.png" alt="BinNavi Logo"/>
+	</div>
+	<!-- End Masthead -->
+	<!-- Begin iMenu -->
+	<div id="navigation">
+		<ul>
+			<li><a href="../index.htm">Index</a></li>
+			<li><a href="installation.htm">Installation</a></li>
+			<li><a href="usage.htm">Usage</a></li>
+			<li><a href="debugging.htm">Debugging</a></li>
+			<li><a href="scripting.htm">Scripting</a></li>
+			<li><a href="tutorial.htm">Tutorial</a></li>
+			<li><a href="faq.htm">FAQ</a></li>
+			<li><a href="about.htm">About</a></li>
+		</ul>
+	</div>
+	<!-- End iMenu -->
+	<!-- Begin Left Column -->
+	<div id="column_lg">
+		<!-- #BeginEditable "content" -->
+		<h2>About BinNavi</h2>
+		<ul>
+			<li><a href="#information">Information about BinNavi</a></li>
+			<li><a href="#third_party_software">Third-Party Software</a></li>
+			<li><a href="#change_log">Change Log</a></li>
+			<li><a href="#license">License</a></li>
+		</ul>
+		<h3><a name="information"></a>Information about BinNavi</h3>
+		
+		<p>zynamics BinNavi - Copyright 2005 to 2012 by
+		Google Inc.</p>
+		
+		<ul>
+			<li><a href="http://www.zynamics.com/binnavi.html">Product Website</a></li>
+			<li><a href="mailto:zynamics-support">Support E-Mail</a></li>
+		</ul>
+		
+		<h3><a name="third_party_software"></a>Third-Party Software</h3>
+		
+		<p>Many icons used in BinNavi were taken from <a href="http://www.famfamfam.com/lab/icons/silk/">FamFamFam</a> and
+		are licensed under the Creative Commons Attribution 2.5 License.</p>
+		
+		<h3><a name="change_log"></a>Change Log</h3>
+		
+		<h4>Changes in BinNavi 5.0.0 (20th Sept 2012)</h4>
+		<h4>Features:</h4>
+		<p>Type system:</p>
+		<p>The current release of BinNavi features a type system. The type 
+		system allows user to use types and type association within BinNavi. For 
+		more information about the type system and how to use it check out its
+		<a href="graph_window.htm#type_editor">manual page</a>.</p>
+		<p>Multi user collaboration:</p>
+		<p>The current release of BinNavi features a real time collaboration 
+		feature which is aimed at allowing groups of analysts to work together 
+		on the same project simultaneously. This collaboration is enabled for 
+		all comments available in BinNavi (instruction level comments / basic 
+		block level comments / edge level comments / function level comments / 
+		various node type comments) and for information about views and 
+		functions.</p>
+		<p>Database:</p>
+		<ul>
+			<li>Introduced new tables for multi user commenting functionality.</li>
+			<li>Introduced stored procedures for the multi user commenting 
+			functionality.</li>
+			<li>Introduced triggers for automatic notification of comments to 
+			connected database clients.</li>
+			<li>Introduced triggers for automatic notification of view and 
+			function updates.</li>
+			<li>Introduced new tables for the type system.</li>
+			<li>Introduced new tables for the user / identity system used for 
+			multiuser components of BinNavi.</li>
+			<li>Documented the database schema (tables / functions / triggers) 
+			such that third party code can use it more easy then before.</li>
+			<li>Introduced type exporting functions in the exporter plugin for 
+			IDA pro.</li>
+			<li>Build update script for BinNavi 4.0.7 databases such that one 
+			can update to 5.0.0.</li>
+		</ul>
+		<p>GUI:</p>
+		<ul>
+			<li>Added a new dialog to edit comments for local and global 
+			instruction comments.</li>
+			<li>Added a new comment style to code nodes / instructions / edges / 
+			functions / function nodes / text nodes / group nodes. to be able to 
+			display the new multi user comments.</li>
+			<li>Added a new identity field in the database configuration dialog.</li>
+			<li>Added syncing for comments in databases between multiple 
+			instances of BinNavi.</li>
+			<li>Added an user interface for the type system.</li>
+			<li>Added multiple dialogs to add, remove and change </li>
+			<li>Added type information to the operand tree nodes.</li>
+			<li>Added a type dependence graph.</li>
+			<li>Added drag and drop functionality for type information in the graph view.</li>
+		</ul>
+		<p>Misc:</p>
+		<ul>
+			<li>Updated guava library to version 12.0.1.</li>
+			<li>Updated the postgresql library.</li>
+			<li>Updated the jython library.</li>
+			<li>Updated the Jide GUI components library.</li>
+			<li>Updated the version of the BinNavi exporter to Version 6.</li>
+		</ul>
+
+		<h4>Bug fixes:</h4>
+		<ul>
+			<li>Fixed the code node parser such that comments related to any 
+			object which can hold comments are now loaded in a single query 
+			rather then individual queries.</li>
+			<li>Fixed an inlining issue where the code did not guarantee that 
+			the edges included in the inlining action would always come out in 
+			the same order when iterated.</li>
+			<li>Fixed test runs to include tests which were formerly not 
+			included in the test set.</li>
+			<li>Removed the support for ECMAScript.</li>
+		</ul>
+		<h4>Changes in BinNavi 4.0.7 (14th March 2012)</h4>
+		<p>Plugins:</p>
+		<ul>
+			<li>Fixed the IGraphMenuPlugin interface.</li>
+		</ul>
+
+		<h4>Changes in BinNavi 4.0.6 (6 January 2012)</h4>
+		<p>Database:</p>
+		<ul>
+			<li>Fixed a bug related to deleting comments in code nodes.</li>
+			<li>Performance enhancement for storing view settings in the 
+			database.</li>
+		</ul>
+		<p>Misc:</p>
+		<ul>
+			<li>Updated the yfiles version to 2.9.</li>
+			<li>Updated the guava library versions.</li>
+			<li>Better handling of interrupted exceptions.</li>
+			<li>Fixed a listener bug which generated an exception after a series 
+			of view events and actions taking place.</li>
+			<li>More use of preconditions in public functions.</li>
+		</ul>
+
+		<h4>Changes in BinNavi 4.0.5 (17th November 2011)</h4>
+		<p>Database:</p>
+		<ul>
+			<li>Fixed an issue where the old configuration file 
+			on startup was still using a MySQL driver path.</li>
+			<li>Reduced the query timings in database conversion 
+			queries for large databases and large modules smaller queries will 
+			also see some speedup but not as significant.</li>
+			<li>Added some indices to the database exporter 
+			tables to speed up the conversion process.</li>
+		</ul>
+		<p>Debugger:</p>
+		<ul>
+			<li>Reworked the handling of Breakpoints:<ul>
+				<li>Breakpoint commands are now sent in 
+				batches (reduces runtime of set/remove commands)</li>
+				<li>Unified the central component of the 
+				debugger to better handle large amounts of breakpoints (&gt; 
+				100000).</li>
+				<li>Changed the behavior of module loading / 
+				unloading to better perform with large breakpoint counts.</li>
+				<li>Fixed an issue in the debugger where a large 
+				number of threads running in the target process can lead to an 
+				Access Violation Exception. The debug client used to change 
+				pages to RW for breakpoint set / remove operations for threads 
+				accessing this page thus lead to the exception.</li>
+			</ul>
+			</li>
+			<li>Fixed an issue where a right click on a function 
+			call would cause an exception in some debug conditions.</li>
+			<li>Changed boost includes from 1.44 to 1.47.</li>
+		</ul>
+		<p>GUI:</p>
+		<ul>
+			<li>Changed behavior of the Breakpoint table to 
+			allow a more responsive GUI.</li>
+			<li>Added new configuration variables to allow the 
+			graph renderer to decide whether or not to do layout animation.
+			</li>
+			<li>Refresh of the module tree now uses the F5 
+			hotkey by default.</li>
+			<li>Changed the line type of loop edges. 
+			</li>
+			<li>Fixed a zoom issue in the call graph when no 
+			animation was used. </li>
+			<li>Changed the behavior of the refresh module 
+			dialog such that there is no refresh anymore if no modules have been 
+			changed.</li>
+			<li>Added icons which indicate the current state of 
+			a module to the module table. Available states are now 
+			<ul>
+				<li>Loaded (Green).</li>
+				<li>Converted (Dark gray).</li>
+				<li>Imported (Light gray).</li>
+			</ul>
+			</li>
+			<li>Changed the settings dialog such that the user 
+			can now select any of the log files.</li>
+			<li>Added more menus to allow the user to 
+			selectively only import or import and load a module. (Used for batch 
+			imports).</li>
+			<li>Changed the focus behavior of the ongoing 
+			progress dialog to remove the window from popping up over other 
+			windows.</li>
+			<li>Changed the behavior of the import dialog to 
+			allow up to 20 parallel exports. </li>
+			<li>Added various selection mode enhancements to the 
+			flow and call graphs:<ul>
+				<li>Hold shift selection now enables finding 
+				paths in the graph easily (both directions).</li>
+			</ul>
+			</li>
+			<li>Changed the internal algorithms for loop 
+			detection from recursive to iterative to avoid out of stack 
+			space errors for functions with more than 5000 basic blocks.</li>
+			<li>Cleaned up the edge menu.</li>
+			<li>Enhanced the loading of graphs leading to a 
+			speedup for large graphs.</li>
+			<li>Changed the mouse cursor behavior such that 
+			there is no cross arrow displayed anymore if not in drag mode.</li>
+			<li>If nodes are moved there is now a hand cursor.</li>
+			<li>Fixed an issue where the selection mode within a 
+			basic block was not correctly calculated and caused a wrong offset.</li>
+			<li>Proximity edges are now highlighted again in 
+			hover mode.</li>
+			<li>Fixed an issue where tooltips where not shown 
+			anymore when the fine grained renderer is used.</li>
+			<li>Fixed an issue where a node got selected after 
+			drag mode.</li>
+			<li>Fixed an issue where right-clicking on a node with an
+			outgoing cross reference to a function could trigger an exception. </li>
+			<li>Updated y.jar to 2.8.3</li>
+		</ul>
+		<p>API:</p>
+		<ul>
+			<li>Enhanced the API such that a user can now query 
+			if a module has been initialized or not.</li>
+		</ul>
+		<p>MISC:</p>
+		<ul>
+			<li>Introduced log rotation for the BinNavi Debug 
+			logging.</li>
+			<li>Updated to a new Guava version.</li>
+			<li>Splash screen is now decoupled from the Java 
+			code.</li>
+			<li>Changed the IDA selection from file based 
+			selection to directory based selection to be able to use both 
+			exporters based on file ending.</li>
+			<li>Added a check to make sure the exporter is 
+			correctly installed.</li>
+			<li>Improved the performance when loading large modules.</li>
+			<li></li>
+		</ul>
+		<p>Plugins:</p>
+		<ul>
+			<li>Fixed a layout bug in the pathfinder plugin.</li>
+			<li>Fixed a crash in the pathfinder plugin.</li>
+			<li>Fixed the IDA back port script. </li>
+		</ul>
+		<p>REIL:</p>
+		<ul>
+			<li>Fixed an error in the REIL API where the operand 
+			size translation was missing for OWORD operands.</li>
+		</ul>
+		<h4>Changes in BinNavi 4.0.4 (1st August 2011)</h4>
+		<h4>Features:</h4>
+		<p>Database:</p>
+		<ul>
+			<li>Replaced mySQL with PostgreSQL due to license issues and 
+			performance considerations.</li>
+			<li>Made massive speed improvements in the IDA C++ exporter.</li>
+			<li>Implemented Case 1969: Make number of parallel exporter threads 
+			configurable.</li>
+			<li>Changed wording of database-specific messages to be more 
+			database agnostic.</li>
+			<li>Improved module conversion speed by fixing the slow conversion 
+			of edges.</li>
+			<li>Improved module conversion speed by improving the speed needed 
+			to assign instructions to code nodes.</li>
+			<li>Making more database fields able to have &quot;null&quot; values to speed 
+			up loading and reduce memory consumption.</li>
+			<li>Changed some indexes on the postgresql_tables.sql to boost 
+			performance.</li>
+			<li>Changed the behavior of the database update script to default 
+			all function comments where they are empty to null.</li>
+			<li>optimized queries to only use indexes now instead of file sort 
+			and such disturbances.</li>
+		</ul>
+		<p>Debugger:</p>
+		<ul>
+			<li>Debugger options dialog has been enhanced to allow for 
+			configuration of exception handling.</li>
+			<li>Enhanced the debug protocol so the list of ignored exceptions 
+			can be send back to the debug client.</li>
+			<li>Exceptions settings can now be specified in the options dialog.</li>
+			<li>&nbsp;Extended BinNavi to also handle break on dll load events.</li>
+			<li>- Extended protocol of the Win32 debug 
+			client to also transmit the complete module path (as opposed 
+			to solely the module name).</li>
+			<li>- the exception settings are saved per-module in the database.</li>
+			<li>- got rid of the annoying &quot;the debugger stopped outside the 
+			database&quot; dialog; replaced via status panel messages.</li>
+			<li>- modules are now relocated incrementally during startup; also 
+			breakpoints are enabled per module.</li>
+			<li>- the debugger is now able to send a list of known exception to 
+			binnavi</li>
+			<li>- Breakpoints can now be removed in sets which increases speed.</li>
+			<li>- New and better echo breakpoint handling now works with 
+			randomized address spaces and module unload / load events.</li>
+			<li>- Cross module tracing in combined call graphs.</li>
+			<li>- Implemented efficient lookup for breakpoints belonging to a 
+			specific module so load/unload module events are handled 
+			efficiently.</li>
+			<li>- Improved logging when breakpoint is hit.</li>
+			<li>- Changed behavior for the trace stop from determining the 
+			relocated address for each to only if there is a mismatch in the 
+			reply size to the removed breakpoint size.</li>
+			<li>- Established the new debugger protocol infrastructure to 
+			separate synchronizer functionality (high level synchronization of 
+			the target process) and state changes on the side of the debug 
+			client.</li>
+		</ul>
+		<p>GUI:</p>
+		<ul>
+			<li>&nbsp;Code can be copied to clipboard from REIL instruction 
+			dialog. </li>
+			<li>It is now possible to copy only the selected REIL code to the 
+			clipboard.</li>
+			<li>&nbsp;adapted all graph handling to the new copy-less graph 
+			types improves memory consumption.</li>
+			<li>&nbsp;rendering changes to allow different sloppy thresholds for 
+			nodes and edges improves rendering speed.</li>
+			<li>&nbsp;Case 1983: Open Log File button in settings dialog.</li>
+			<li>&nbsp;Case 1984: Get rid of the tooltip configuration options.</li>
+			<li>&nbsp;Case 2273: tooltips in BinNavi are more disturbing then 
+			useful.</li>
+			<li>&nbsp;Case 2970: added a &quot;skip step&quot; button to the tutorial 
+			dialog.</li>
+			<li>&nbsp;Added the REIL register tracking menu when mouse is over 
+			an register while right clicking.</li>
+			<li>&nbsp;Added some more features to the register tracker.</li>
+			<li>&nbsp;Added the capability to rename functions if you right 
+			click on the first line of a basic block.</li>
+			<li>&nbsp;Added the resolve all functions feature which is available 
+			now from module / project / address space menu to save time when 
+			working on large projects.</li>
+			<li>&nbsp;also added the new SCRIPT_CONSOLE in the manual section 
+			where NAVI_CONSOLE was used before.</li>
+			<li>Increased tagging speed significantly (300+ seconds are down to 
+			18s) now.</li>
+		</ul>
+		<p>API:</p>
+		<ul>
+			<li>Introduce a loop finder into the API.</li>
+			<li>Extended PathFinder plugin to allow for searching of functions.</li>
+			<li>Introduce the register tracker in the API.</li>
+		</ul>
+		<p>Misc:</p>
+		<ul>
+			<li>Display application name on top of screen.</li>
+			<li>Place menu bar on top of screen.</li>
+			<li>Cleaned up Double comparisons.</li>
+			<li>Updated JIDE components to the most recent version.</li>
+			<li>Updated yFiles components to the most recent version.</li>
+			<li>Updated the jython components to the most recent version.</li>
+			<li>Updated guava to the most recent version.</li>
+			<li>Begin to rewrite the MonoREIL abstract interpretation 
+			framework.</li>
+		</ul>
+		<h4>Bug fixes:</h4>
+		<p>Debugger:</p>
+		<ul>
+			<li>&nbsp;Fixed breakpoint relocation after module loaded reply from 
+			debugger.</li>
+			<li>Module loaded reply does not implicitly set the active thread 
+			anymore: it was solely used for logging purposes -&gt; less side 
+			effects.</li>
+			<li>Unnecessary information from the debugger target information 
+			reply has been removed.</li>
+			<li>Fixed a bug where the user couldn&#39;t resume the debugged 
+			process after a module was loaded.</li>
+			<li>Fixed debugger toolbar button enable/disable logic.</li>
+			<li>The memory map is now re-requested by 
+			binnavi if an error occurs after a read memory command: <br />
+			The old design of the memory map update 
+			mechanism was a classical tocttou race condition: <br />
+			if the memory map changed in the future all subsequent memory reads 
+			would fail. <br />
+			since the new protocol needs to send the memory map early during 
+			process creation, <br />
+			the memory map is more likely to become outdated.</li>
+			<li>Case 2982: Fixed the bug where consecutive debugger runs always 
+			caused the debug client to break on module load even if the 
+			corresponding settings was not enabled.</li>
+			<li>Case 3067: The container for the graph view is now retrieved 
+			from the graph model which was used to collect the trace.</li>
+			<li>Fixed bug causing remove breakpoint to fail.</li>
+			<li>Fixed bug in the exception parser which throw an exception due 
+			to an empty exception name string.</li>
+			<li>&nbsp;Fixed exception while hitting echo breakpoints.</li>
+			<li>&nbsp;Fixed multiple issues with module loaded/unloaded events 
+			and the synchronization with the debugger toolbar buttons.</li>
+			<li>&nbsp;Fixed layout issue in the debugger options dialog GUI.</li>
+			<li>&nbsp;Unloading of &quot;fake modules&quot; on Win7 X64 during process 
+			creation is now handled gracefully.</li>
+			<li>Changed the layout of the Breakpoint 
+			Table to show also the relocated address and the module name where 
+			the breakpoint has been set in.</li>
+			<li>Changed the location of the get 
+			breakpoints by module filter to the breakpoint storage so that it is 
+			not necessary to copy things around.</li>
+			<li>Fixed the trace panel such as that in a multi module trace the 
+			double click would yield the correct function as zoom result.</li>
+		</ul>
+		<p>Database:</p>
+		<ul>
+			<li>Module deletion from the database now completely removes the 
+			modules information from the database.</li>
+			<li>Fixed a bug where ghost edges could result from a wrongly 
+			optimized query and therefore make the loading of a function 
+			impossible.</li>
+			<li>Converted postgresql_tables.sql to ASCII 
+			encoding.</li>
+			<li>Changed some information in the postgresql_tables.sql such as 
+			adding and verifying that all foreign keys are only set against rows 
+			which have an index. </li>
+			<li>Commit fixes &quot;order by&quot; error which then caused function names 
+			to be not aligned correctly with the functions.</li>
+			<li>Fixed a bug in database version checking.</li>
+			<li>Fixed bug where the exporter process hangs during export of the 
+			IDB.</li>
+			<li>Fixed potential concurrent modification corruption when 
+			importing an IDB.</li>
+			<li>Fixed queries which broke in the mySQL to PostgreSQL switch due 
+			to strong reliance on mySQL default sort order.</li>
+			<li>Added code to update nodes only once per regenerate and not a 
+			lot of times.</li>
+			<li>Added module_id to the temporary table query to drastically 
+			reduce the numbers of items used for the table if there is already 
+			data in the database.</li>
+			<li>Changed the behavior for trace saving by changing it to prepared 
+			statement batch processing in the case of inserts for trace event 
+			values and in case of trace events to use the query splitter. This 
+			change was necessary because given that a database has only a small 
+			max_allowed_packet_size saving the trace values in a single query 
+			would result in an exception.</li>
+			<li>Changed the commit / transaction strategy for the postgres 
+			conversion steps. This should enable us to have uninterrupted 
+			commits to the database which are in themselves save vs. unsafe edge 
+			loosing.</li>
+			<li>removed support for ida2sql from BinNavi due to the switch to 
+			PostgreSQL.</li>
+			<li>Fixed a nasty bug in the database update code which caused some 
+			expression trees to be missing in the converted database as they 
+			where not referenced by the expression_tree_ids table but used as 
+			tree nodes in single places.</li>
+			<li>introduced cache functionality to only do a startup query once 
+			therefore saving raw modules * 50ms - 50ms time on each database 
+			connect.</li>
+			<li>CViewFunctions.java (changed the behavior of view deletion to 
+			fix an error where a deleted view could cause the module loading 
+			process to fail given there where global variables still referenced 
+			in the deleted view but the nodes in the deleted view had not been 
+			deleted.)</li>
+		</ul>
+		<p>Miscellaneous: </p>
+		<ul>
+			<li>Fixed a bug in register tracking which caused highlighting of 
+			wrong lines of code for multi-line function comments.</li>
+			<li>&nbsp;Fixed a bug in graph search.</li>
+			<li>&nbsp;Copy to clipboard from menu bar now copies all the text.</li>
+			<li>&nbsp;Star changed event was not implemented in 
+			cuserviewsmodel.java.</li>
+			<li>&nbsp;Brought back the separation between clickable and editable 
+			objects</li>
+			<li>&nbsp;Fixed a bug that led to crashes when clicking on modules 
+			in address spaces in the project tree</li>
+			<li>&nbsp;Fixed a bug that led to crashes when closing save-as-ed 
+			views</li>
+			<li>&nbsp;Fixed a bug where global function comments were not shown 
+			at each call site of the corresponding function (the comments were 
+			only shown in the call graph)</li>
+			<li>&nbsp;Fixed multiple listener issues that could lead to an 
+			unresponsive user interface.</li>
+			<li>&nbsp;Fixed an issue that led to an exception in the GUI when 
+			creating a new project.</li>
+			<li>&nbsp;Fixed an issue that led to problems when closing 
+			databases.</li>
+			<li>&nbsp;Fixed an issue that led to the operands menu not being 
+			displayed in the code node context menu.</li>
+			<li>&nbsp;Fixed some icon transparency issues.</li>
+			<li>&nbsp;Got rid of the sub-nodes of view nodes and replaced them 
+			with a filter.</li>
+			<li>&nbsp;Got rid of the typed function nodes in the project tree.</li>
+			<li>&nbsp;Ignore the reseller field in license files, we don&#39;t have 
+			any resellers anymore.</li>
+			<li>&nbsp;More defensive output consuming of the IDA exporter 
+			process.</li>
+			<li>&nbsp;Removed support for ruby scripting.</li>
+			<li>&nbsp;Fixed bugs in the python scripting.</li>
+			<li>&nbsp;Replaced MySQL with PostgreSQL in the BinNavi manual where 
+			appropriate</li>
+			<li>&nbsp;A logger option changed so that there is no log file 
+			overflow anymore in ridicules situations. </li>
+			<li>&nbsp;changed the handling of comments so we have a speed 
+			improvement </li>
+			<li>&nbsp;changed the handling of zooming to addresses within graphs 
+			which now makes it possible to zoom to addresses in the combined 
+			call graph correctly.</li>
+			<li>&nbsp;Fixed bug where function inlineing results in an exception 
+			for tree nodes without parents.</li>
+			<li>&nbsp;Fixed (2889) an issue where a project view could not be 
+			loaded given the underlying module was not loaded. </li>
+			<li>&nbsp;Fixed a bug where an exception was generated due to the 
+			fact that inlined functions had a different root node for their 
+			local variables.</li>
+			<li>&nbsp;Fixed a bug where dqword was used instead of the term 
+			oword which is std in all other parts in navi. </li>
+			<li>&nbsp;Fixed a bug where local edge comments = null caused a 
+			exception on new comment store.</li>
+			<li>&nbsp;Fixed a multi threading issue where a private class field 
+			was changed by multiple threads at ones causing a null pointer 
+			exception.</li>
+			<li>&nbsp;Fixed a wrong concept where it was possible to inline 
+			functions multiple times into the same source function leading to an 
+			incorrect code flow.</li>
+			<li>&nbsp;Fixed an error where REIL registers where always present 
+			in the register tracking even though we where not in REIL mode.</li>
+			<li>&nbsp;Fixed an issue where a broken module was killing the 
+			database thread and no rollback was possible.</li>
+			<li>&nbsp;Fixed bug in the view delete function where non saved vies 
+			could trigger an exception </li>
+			<li>&nbsp;Fixed case 2686. Fix was to match if the current node is 
+			of type group node and then do not perform 
+			any mouse coordinate to line mappings with highlighting.</li>
+			<li>&nbsp;Fixed case 2688. A group selection is now possible given 
+			that the number of selected nodes in the current graph is larger 
+			then one.</li>
+			<li>&nbsp;Fixed case 2796 and added the missing bindings so that 
+			future versions can also use SCRIPT_CONSOLE to use the console 
+			feature.</li>
+			<li>&nbsp;Fixed case 2862 by implementing filtering for the other 
+			fields as well. </li>
+			<li>&nbsp;Fixed case 2898. Even though the behavior was already 
+			implemented with a double right click on the line in question it was 
+			rather unreasonable for a user to find the option hidde in such a 
+			way.</li>
+			<li>&nbsp;Fixed case 2967. The issue was a missing .start() in the 
+			progress panel.</li>
+			<li>&nbsp;Fixed case 3066 where given that a memory search was just 
+			canceled an null pointer exception would happen as the called clone 
+			function on a null object will raise this.</li>
+			<li>&nbsp;Fixed case 3072 where the regular expression highlighting 
+			was broken due to a wrong argument to the function.</li>
+			<li>&nbsp;Fixed GUI error where a &quot;never show 
+			again&quot; check box was in place without any reason.</li>
+			<li>&nbsp;Fixed small error in the tutorials/05 - Working with 
+			Graphs II.xml where a regular expression was incorrect. (CASE 3058).</li>
+			<li>&nbsp;Fixed the bug where lines where not properly displayed in 
+			the comment window.</li>
+			<li>&nbsp;Fixed the flow graph part of case 2892. Enhanced the 
+			function node menu by the option to change the function name in the 
+			flow graph.</li>
+			<li>Fixed the go to address dialog now completely it now also works 
+			for the combined call graph case.</li>
+			<li>Fixed the issue where instructions where not properly displayed 
+			in the instruction contexts menu. </li>
+			<li>found issues in REIL where one could not transform a graph from 
+			native instructions to a REIL graph when any operand was larger then 
+			0x8000000000000000. Which was the case with a presumably untested 
+			shld x86 instruction.</li>
+			<li>Fixed functions may be in an integer range larger then the 
+			postgresql integer range allows therefore the function table 
+			argument must be replaced with a bigint type.</li>
+			<li>Fixed sorting bug in case 3004. Bug was Fixed by directly giving 
+			a type to all the columns present in the table model used in this 
+			specific case.</li>
+			<li>Fixed that we could not load all modules by loading the project 
+			combined call graph.</li>
+			<li>Fixed IDA selection dialog files ( changed the behavior of the 
+			install checker from default installed to not installed ).</li>
+			<li>Fixed Case 2277: Added the full path of dynamic libraries to the 
+			debug window.</li>
+			<li>Fixed Case 2386: It is now possible to continue on first pass 
+			exceptions.</li>
+			<li>Fixed Case 2481: REIL code is now available for a complete code 
+			node in the flow graph window as well.</li>
+			<li>Fixed Case 2486: Show REIL code copy to clipboard is now 
+			possible.</li>
+			<li>Fixed Case 2507: Modules are now really deleted from the 
+			database when the delete is performed.</li>
+			<li>Fixed Case 2516: Fixed a bug where the &quot;star view&quot; button column 
+			name was wrong.</li>
+			<li>Fixed Case 2861 where it was not possible to display a
+			REIL graph in the project view.</li>
+			<li>Fixed a bug related to large projects. the bug involved that 
+			given you had two modules in the database with a basic block each at 
+			the same address with the same number of instructions. Then the 
+			query which is Fixed now would find at least one ghost edge between 
+			the basic block in one module and another basic block in the second 
+			module. As nodes are only loaded per view either the source or the 
+			target node of the ghost edge was missing. </li>
+		</ul>
+		<h4>Changes in BinNavi 3.0.0 (August 1st 2010)</h4>
+		<ul>
+			<li>Feature: Added support for the analysis of 32 bit MIPS 
+			code. You can now use BinNavi to analyze code from embedded MIPS 
+			devices like Cisco routers.</li>
+			<li>Feature: Local variables can now be renamed. 
+			This helps you to annotate the disassembled code with more 
+			information.</li>
+			<li>Feature: Global variables can now be renamed (through a 
+			context menu). This helps you annotate the code with more 
+			information.</li>
+			<li>Feature: Cross-references to global variables are now 
+			accessible in the main window. You can use this feature to quickly 
+			find out what functions access what global variables.</li>
+			<li>Feature: Views, modules, and other elements of 
+			BinNavi can now be starred to highlight them as particularly 
+			important or interesting. This is very useful to quickly get back to 
+			functions you previously considered interesting.</li>
+			<li>Feature: Added support for a faster C++ based exporter. 
+			This allows you to import IDB files into the BinNavi database much 
+			faster than the old Python exporter did.</li>
+			<li>Feature: Multiple IDB files can now be imported 
+			simultaneously. This speeds up IDB importing significantly.</li>
+			<li>Feature: Made it easier to select multiple IDB 
+			files from different directories for one batch import process. You 
+			can now easily import modules from different directories in one 
+			step.</li>
+			<li>Feature: Added support for conditional breakpoints. 
+			You can now decide exactly when program execution should be stopped 
+			on breakpoint hits.</li>
+			<li>Feature: The memory of the debugged target process can 
+			now be edited. This allows you to make quick patches to the target 
+			process memory.</li>
+			<li>Feature: Instruction operands like integer literals, 
+			registers, and even complex formulas can now be followed in memory 
+			during debugging.</li>
+			<li>Feature: When recording debug traces, the modules where 
+			the trace events happened, the register values at the time of the 
+			events and important memory sections are now recorded for each debug 
+			event.</li>
+			<li>Feature: It is now possible to apply set operations (union, 
+			intersection, difference) on recorded debug traces to quickly 
+			isolate important debug events.</li>
+			<li>Feature: It is now possible to specify how often 
+			breakpoints can be hit before they are removed during trace mode. 
+			This allows users to record more complete traces than before.</li>
+			<li>Feature: Modified the semantics of trace mode to allow 
+			the user to create new traces from the currently active breakpoints.</li>
+			<li>Feature: Instructions that use local or global 
+			variables can now be highlighted in the disassembled code.</li>
+			<li>Feature: Special instructions like function calls or 
+			memory access instructions can now be highlighted in the 
+			disassembled code.</li>
+			<li>Feature: Optional statistical information 
+			about functions is shown in call graph nodes to quickly give users 
+			an idea about the size of functions.</li>
+			<li>Feature: Added a way to step to the end of a function 
+			during debugging. This is a quick way to leave the current function 
+			and continue debugging in the calling function.</li>
+			<li>Feature: Modules can now be sorted by name. This 
+			makes it easier to find modules in large databases.</li>
+			<li>Feature: Removed the separation between raw modules and 
+			modules to smoothen the BinNavi workflow.</li>
+			<li>Feature: Unsaved changes are now highlighted in the GUI 
+			to show the user what he changed since he saved the last time.</li>
+			<li>Feature: Added non-blocking progress dialogs to allow the user to 
+			continue working while long running tasks run in the background.</li>
+			<li>Feature: Added more hotkeys to make working with the 
+			keyboard more comfortable.</li>
+			<li>Feature: The password to databases can now be shown in 
+			plain text to remind the user of forgotten passwords.</li>
+			<li>Feature: Added a context menu to the tabs in graph 
+			windows to close all graph views but the current one.</li>
+			<li>Feature: When debugging, the memory view now shows the 
+			memory address at the position of the caret. This makes it easier to 
+			navigate through the target process memory.</li>
+			<li>Feature: Added a context menu to the registers 
+			view that allows the user to follow register pointers in the target 
+			process memory.</li>
+			<li>Feature: The output of the scripting console can now be 
+			saved to a file.</li>
+			<li>Feature: Previously created Debug by Criteria 
+			expressions 
+			are now available in a menu of the graph window for quick access.</li>
+			<li>Feature: New improved code editor for writing 
+			scripts.</li>
+			<li>Feature: Renamed functions can have their name reverted 
+			to the original name.</li>
+			<li>Feature: The hierarchy of existing node tags and view 
+			tags can now be reorganized.</li>
+			<li>Feature: The correct thread IDs are now recorded for 
+			debug events in trace mode.</li>
+			<li>Feature: Trace events can now be filtered to show only 
+			those traces with a given register value or whose memory contains 
+			specific values.</li>
+			<li>Feature: The Select by Criteria dialog can now be 
+			extended by plugins.</li>
+			<li>Feature: Breakpoints are now tied to a module. This makes 
+			it possible to relocate breakpoints automatically when the debugged 
+			module is relocated.</li>
+			<li>Feature: The speed of echo breakpoint setting and removal 
+			was improved drastically.</li>
+			<li>Feature: It is now possible to quickly set breakpoints on 
+			the addresses of trace mode debug events.</li>
+			<li>Feature: It is now possible to quickly jump to the 
+			instruction for which a trace mode debug event was recorded.</li>
+			<li>Feature: The user can split one basic blocks into two 
+			basic blocks now. This is useful in combination with stepping to the 
+			next basic block while debugging.</li>
+			<li>Feature: Information about the threads of the debugged 
+			target process is now shown in BinNavi.</li>
+			<li>Feature: The threads of the debugged target process can 
+			now be suspended and resumed.</li>
+			<li>Feature: ALT+Right-Click on local or global comments now 
+			pops up a dialog to edit those comments.</li>
+			<li>Feature: Inlined functions can now be un-inlined.</li>
+			<li>Feature: During debugging the user can now access a panel 
+			that shows the log of the debug events of the current debugging 
+			session.</li>
+			<li>Feature: The addresses of instructions can now be copied 
+			to the clipboard quickly (context menu of instructions in 
+			disassembled code).</li>
+			<li>Feature: When functions references in disassembled code 
+			have their name changed, the disassembled code is updated to reflect 
+			this change.</li>
+			<li>Feature: It is now possible to change the name of 
+			referenced functions in disassembled code through a context menu.</li>
+			<li>Feature: Memory addresses referenced in disassembled code 
+			are now correctly rebased if the module itself is rebased.</li>
+			<li>Feature: Instruction operands in disassembled code can 
+			now be shown as decimal numbers, hexadecimal numbers, or their 
+			symbolic name.</li>
+			<li>Feature: Added context-sensitive help to many elements of 
+			the BinNavi GUI.</li>
+			<li>Feature: Added a way to quickly show the REIL code of a 
+			native instruction (context menu of the instruction).</li>
+			<li>Feature: Added a way to quickly find out what views 
+			contain a given instructions (part of the table filter of views).</li>
+			<li>Feature: The views whose nodes are tagged with node tags 
+			are now shown in the main window.</li>
+			<li>Feature: Stack values can now be copied to the clipboard.</li>
+			<li>Feature: Added more colors to distinguish between 
+			different types of instruction operands.</li>
+			<li>Feature: BinNavi can now check whether exporters are 
+			correctly installed and configured.</li>
+			<li>Feature: Added a way to quickly find views that share 
+			instructions with any given view.</li>
+			<li>Feature: Really long function names are now displayed 
+			more gracefully in the GUI.</li>
+			<li>Feature: Write access to the database has been improved.</li>
+			<li>Feature: Added a way to quickly select all nodes on the 
+			paths between two graph nodes.</li>
+			<li>Bugfix: Open graph views are now notified about changing 
+			debugger configurations.</li>
+			<li>REIL: Added support for 32 bit MIPS</li>
+			<li>Plugin API: The registers of the debugged target 
+			process can now be edited.</li>
+			<li>Plugin API: The memory of the debugged target 
+			process can now be edited.</li>
+			<li>Plugin API: The Select by Criteria dialog can 
+			now be extended using plugins.</li>
+			<li>Plugin API: Debug trace events are now tied to 
+			modules.</li>
+			<li>Plugin API: For each recorded debug trace event, 
+			the register values and the recorded memory can be accessed.</li>
+			<li>Plugin API: Changed the semantics of CodeNode::addInstruction. 
+			Instructions that are being inserted are now cloned before being 
+			added. The cloned instruction is returned by the function.</li>
+			<li>Plugin API: The IOperandExpression listener now 
+			receives information about changing operand expressions.</li>
+			<li>Plugin API: Removed raw modules from the plugin 
+			API.</li>
+			<li>Plugin API: Added the ModuleHelpers class which 
+			provides a few functions for working with modules.</li>
+			<li>Plugin API: Added Module::getId which returns 
+			the database ID of the module.</li>
+			<li>Plugin API: The BreakpointManager::setBreakpoint 
+			functions now return a Breakpoint object.</li>
+			<li>Plugin API: Added a Settings class where global 
+			BinNavi settings can be changed.</li>
+			<li>Plugin API: Added Debugger::toImagebase and 
+			Debugger::toFilebase to convert between relocated and non-relocated 
+			addresses.</li>
+			<li>Plugin API: Added AddressSpace::getProject which 
+			returns the project a address space belongs to.</li>
+			<li>Plugin API: Added Function::getModule which 
+			returns the module a function belongs to.</li>
+		</ul>
+		<h4>Changes in BinNavi 2.2.0 (October 1st 2009)</h4>
+		<ul>
+			<li>Feature: Incoming call-references are now shown in the graph 
+			window. This makes it very easy to find out what functions are 
+			calling the function users are currently analyzing.</li>
+			<li>Feature: Added interactive tutorials for learning how to use BinNavi. 
+			This makes it easier for new users of BinNavi to learn about the 
+			most important BinNavi concepts.</li>
+			<li>Feature: Added the option to select from running processes when 
+			selecting a debug target. This feature allows users to select 
+			running processes of remote platforms from the BinNavi GUI instead 
+			of the console of the remote system.</li>
+			<li>Feature: Added the option to use the BinNavi GUI to select a 
+			file from the remote system for debugging. This allows users to 
+			select a file from the remote system through the BinNavi GUI instead 
+			of the console of the remote system.</li>
+			<li>Feature: REIL code can now be displayed as graphs just like regular code. 
+			This is very useful for people who want to work with REIL code.</li>
+			<li>Feature: Added the option to turn a normal control flow graph into a data 
+			flow graph</li>
+			<li>Feature: Added the option to connect a file with a module. This 
+			makes it possible to display the data of the file in a hex viewer.</li>
+			<li>Feature: Previously recorded debug traces are now shown in the main window. 
+			This feature allows users to quickly see all recorded debug traces 
+			for their modules and to see what views contain nodes that were hit 
+			by previously recorded debug traces.</li>
+			<li>Feature: Made several major improvements to our Windows Mobile 
+			debugger</li>
+			<li>Feature: The debugger now collects information about loaded modules and 
+			displays name, base address, and size of all active modules of a 
+			process. This allows users to keep track of dynamically loaded and 
+			unloaded libraries.</li>
+			<li>Feature: Relocated image bases of modules are automatically corrected 
+			while debugging. It is not necessary anymore to specify the 
+			relocated image bases of modules and dynamically loaded libraries 
+			manually.</li>
+			<li>Feature: Function breakpoints can now be set from the functions table of 
+			the main window. This is quicker than opening a function or the call 
+			graph of a module first.</li>
+			<li>Feature: Added a way to filter the content of larger tables to make it 
+			easier and quicker to find things. Using these filters users can 
+			reduce the lines shown in tables to those lines that are relevant 
+			for them.</li>
+			<li>Feature: Visual feedback is given if searching through a graph produces 
+			no results. This makes it more obvious whether a search operation 
+			produced results or not.</li>
+			<li>Feature: When searching through graphs, previous search strings are now 
+			cached so that the user can easily search for them again at a later 
+			point in time</li>
+			<li>Feature: Added the option to display a dialog that shows all search 
+			results when searching through graphs. This dialog shows all search 
+			results in a list which makes it easy to navigate between 
+			interesting search results.</li>
+			<li>Feature: Addresses the user recently searched for in graphs are now kept 
+			for later reuse. This is useful because users often want to go back 
+			to addresses they previously visited.</li>
+			<li>Feature: Visual feedback is given if the user wants to jump to an address 
+			that does not exist in a graph. This makes it more obvious whether 
+			an instruction address exists in a graph or not.</li>
+			<li>Feature: Function nodes now display additional information about the 
+			function they represent. This allows users to get an idea how large 
+			the functions represented by function nodes are.</li>
+			<li>Feature: The module names of functions are now shown in call 
+			graph 
+			function nodes. Previously it was unclear to which module a function 
+			belongs to if function nodes of multiple modules were shown in one 
+			view.</li>
+			<li>Feature: The original function of a code node can now be opened from the 
+			context menu of the code node. This allows users to quickly open the 
+			original function of a code node from heavily modified views.</li>
+			<li>Feature: Added the option to review the available debugger options. 
+			Previously this information was only shown once when first 
+			connecting to a debugger. Now it is possible to display the 
+			information again from the BinNavi GUI.</li>
+			<li>Feature: Graph windows can now be switched between a default perspective 
+			and a debug perspective. This reduces clutter and makes the GUI less 
+			complex.</li>
+			<li>Feature: Added the option to create non-existing databases right from 
+			BinNavi. This makes it easier to get started with new databases 
+			because it is not necessary to create new databases with external 
+			tools anymore.</li>
+			<li>Feature: Added popup-descriptions to all settings options in the settings 
+			dialog. It is now easier to modify settings without having to 
+			consult the manual.</li>
+			<li>Feature: Using the <a href="http://zynamics.com/binnavi.html">
+			zynamics GDB Agent</a> it is now possible to debug Mac OS 
+			applications.</li>
+			<li>Feature: The zynamics GDB Agent can now be used from Linux and 
+			Mac OS in addition to Windows.</li>
+			<li>Feature: Added a quick information label that displays information about 
+			the last debug events during debugging.</li>
+			<li>Feature: Size information about sections is now shown in the memory 
+			section box. This allows users to get an idea how large individual 
+			memory sections of the target process are while debugging.</li>
+			<li>Feature: Added the option to stop waiting while section memory is loaded</li>
+			<li>Feature: Added the option to inline all called functions of a graph in 
+			one step. This is useful for quickly determining all possible 
+			control flow paths between two nodes including all control flow 
+			paths in subfunctions.</li>
+			<li>Feature: Improved error messages throughout the program. This 
+			allows user to get a better understanding of what went wrong and how 
+			to fix the problem.</li>
+			<li>Feature: The database format can now support multiple instructions per 
+			address. This makes it much easier to experiment with instruction 
+			creation, for example while deobfuscating code.</li>
+			<li>Feature: Freshly created views are now now saved automatically 
+			anymore. This makes it much less tedious to experiment with 
+			automatic view creation because it is not necessary anymore to 
+			delete previously created views.</li>
+			<li>Features: Error messages now have unique error IDs. This makes 
+			it easier for us to find out what went wrong when users come across 
+			bugs and report them to us.</li>
+			<li>Feature: Errors can now be reported using a single button click 
+			in the error dialog. The error description is automatically sent to 
+			our bug tracker and users will receive feedback through the email 
+			address configured in their BinNavi settings.</li>
+			<li>Feature: Added a Python sample script that can be used to export comments 
+			to IDA Pro. While this serves mainly as a demonstration script for 
+			using the plugin API, it is also useful for users that want to 
+			continue working with IDA Pro.</li>
+			<li>Feature: Added a new sample code coverage plugin that demonstrates how to 
+			script the debugger. This plugin keeps track of what nodes of a view 
+			are hit during a debug session and changes their background color 
+			depending on how often they were hit.</li>
+			<li>Feature: Added a way to select function nodes of graphs by 
+			function type.</li>
+			<li>Feature: Added a way to tag all nodes of a debug event trace 
+			with a tag.</li>
+			<li>&nbsp;Feature: The font used in all comment dialogs was changed 
+			to monospace.</li>
+			<li>Feature: The Trace Events table now has a context menu that 
+			provides useful functions.</li>
+			<li>Feature: All comment dialogs can now be closed using CTRL-ENTER.</li>
+			<li>Feature: The DEL key can now be used to delete node tags in the 
+			node tags tree.</li>
+			<li>Feature: The DEL key can now be used to delete traces in the 
+			traces table.</li>
+			<li>Feature: The traces table now has a context menu that provides 
+			useful functions.</li>
+			<li>Feature: Added the option to create combined callgraphs of all 
+			modules of a project.</li>
+			<li>Feature: Memory Reload button now reloads memory shown in the 
+			stack window too.</li>
+			<li>Feature: Improved the Pathfinder example plugin that is shipped 
+			with source.</li>
+			<li>Bugfix: Fixed an issue that led to crashes when thread IDs &gt;= 0x80000000 
+			were seen during debugging</li>
+			<li>Bugfix: Fixed a thread leak that occurred when many modules were 
+			assigned debuggers</li>
+			<li>Bugfix: Fixed an issue that led to problems when loading projects that 
+			included modules that were loaded and other modules that were not 
+			loaded</li>
+			<li>Bugfix: Fixed an issue that led to problems when views for traces with 
+			zero events were requested
+			</li>
+			<li>Bugfix: Fixed an issue that caused breakpoints not to be removed when 
+			clicking the &quot;Remove all breakpoints&quot; button</li>
+			<li>Bugfix: Fixed an issue that led to incorrect register information shown 
+			during debugging for threads that did not cause the last debug event</li>
+			<li>Bugfix: Fixed a bug that made the Save button of projects misbehave when 
+			project debuggers were configured</li>
+			<li>Bugfix: Fixed a bug that led to incorrect behavior when saving/loading 
+			edge colors</li>
+			<li>Bugfix: Fixed an error that led to incorrect results of the backtracking 
+			algorithm when encountering certain XOR instructions</li>
+			<li>Bugfix: Fixed issues in the REIL translation of the x86 instructions 
+			RCL, IMUL, and PUSHF</li>
+			<li>Plugin API: Added the option to execute SQL queries from the 
+			plugin API. This makes it possible for users to query the SQL 
+			database directly if necessary data is not easily available from the 
+			plugin API.</li>
+			<li>Plugin API: Added the option to change the background color of 
+			instructions code nodes. With this feature users can highlight 
+			important instructions programmatically from plugins and scripts. 
+			This improves the visualization of analysis algorithms.</li>
+			<li>Plugin API: Added the ability to create Instruction objects. 
+			This is useful for users that need to create new instructions, for 
+			example when they write analysis algorithms that modify existing 
+			code.</li>
+			<li>Plugin API: Added the option to change the color of edges. This 
+			feature allows users to give edge colors semantic meaning in the 
+			context of their analysis algorithms.</li>
+			<li>Plugin API: Made the frame of GraphWindow objects available. 
+			This frame object can be used by plugins as the parent frame of 
+			dialogs and message boxes.</li>
+			<li>Plugin API: Improved the design of the Breakpoint API</li>
+			<li>Plugin API: Improved the design of the MemoryBookmark API</li>
+			<li>Plugin API: Harmonized the naming scheme of enumerations</li>
+			<li>Plugin API: Harmonized the functions of the MessageBox class</li>
+			<li>Plugin API: Many new methods added to the plugin API</li>
+			<li>Plugin API: Added the option to remove instructions from code nodes to the 
+			plugin API</li>
+			<li>Plugin API: Added the option to remove databases from the plugin API</li>
+			<li>Plugin API: Added the option to listen to changes in DebuggerTemplate API 
+			objects</li>
+			<li>Plugin API: Added the option to add debuggers to projects</li>
+			<li>Plugin API: Added the option to remove debuggers from projects</li>
+			<li>Plugin API: Added the option to retrieve all project debuggers</li>
+			<li>Plugin API: Added the option to delete address spaces</li>
+			<li>Plugin API: Fixed various bugs that left data loaded when 
+			projects were closed</li>
+			<li>Plugin API: Added the option to listen on project debugger 
+			events</li>
+			<li>Plugin API: Changed the behavior of Project::getFunctions to 
+			return the functions of all loaded modules</li>
+			<li>Plugin API: Added a way to close View objects from the plugin 
+			API</li>
+			<li>Plugin API: Text nodes can now be cloned</li>
+			<li>Plugin API: Added the option to determine the tags of a View</li>
+			<li>Plugin API: Added the option to untag views</li>
+			<li>Plugin API: Fixed a bug in View::setDescription</li>
+			<li>Plugin API: Added the opportunity to listen on view edges</li>
+			<li>Plugin API: View Node object listeners now notify about parent 
+			group changes</li>
+			<li>Plugin API: View Node object listeners now notify about 
+			visibility changes</li>
+			<li>Plugin API: Fixed issues in ViewGraphHelpers that led to 
+			internal objects included in signatures</li>
+			<li>Plugin API: Added a way to find instructions by long-address to 
+			ViewGraphHelpers</li>
+			<li>Plugin API: Added a way to get all tags associated with a view 
+			node</li>
+			<li>Plugin API: Added a way to get the debugger template of a module</li>
+			<li>Plugin API: Module listeners are now notified about changing 
+			module debugger templates</li>
+			<li>Plugin API: It is now possible to add listeners to Instruction 
+			objects</li>
+			<li>Plugin API: Changes in Instruction comments are now sent to 
+			listener objects</li>
+			<li>Plugin API: Made the API graph algorithms more generic and made graph 
+			algorithms available to more API graph types</li>
+			<li>Plugin API: The view of a function can now be retrieved from the plugin API</li>
+			<li>Plugin API: Fixed an issue in TreeNode::getChildren() that led to internal 
+			objects being exposed to the plugin API</li>
+			<li>Plugin API: Fixed a bug in the InstructionGraphNode class that caused edges 
+			that were removed from the graph to remain in the children/parents 
+			set of instruction graph nodes</li>
+			<li>Plugin API: CodeNode objects do not required a parent function anymore. This 
+			makes it much less tedious to create new graphs.</li>
+			<li>Feature: Added the option to copy the value of registers to the clipboard</li>
+			<li>Plugin API: Added the option to set the meta-data of a ReilInstruction 
+			object</li>
+			<li>Plugin API: Instructions that cause exceptions when translating code to REIL 
+			are now accessible from the plugin API</li>
+			<li>Plugin API: Added the option to process raw debug events 
+			received from debug clients.</li>
+			<li>Plugin API: Added a global output console that can be used by 
+			plugins to output information.</li>
+			<li>Plugin API: Added a few REIL helper functions</li>
+			<li>Plugin API: Added some helper functions for creating REIL 
+			instructions</li>
+			<li>Plugin API: Fixed various bugs that led to crashes</li>
+			<li>&nbsp;Plugin API: Fixed a bug that led to incorrect 
+			parents/children of nodes</li>
+			<li>Plugin API: Added helper functions for function inlining</li>
+			<li>Plugin API: Added a way to get the incoming and outgoing edges 
+			of nodes</li>
+			<li>Plugin API: ProgressDialog now returns potential exceptions 
+			thrown while the progress dialog is active</li>
+			<li>Plugin API: Added the ViewGenerator class that makes it very 
+			simple to create new views from REIL code</li>
+			<li>REIL: Fixed a few REIL translation issues for various ARM 
+			instructions</li>
+			<li>REIL: Fixed an issue that led to incorrect edge types in REIL 
+			graphs</li>
+			<li>REIL: Added REIL support for the x86 instructions SHRD, SHLD, 
+			XADD, SETALC, BT, BTC, BTR, BTS, SAL, JCXZ, BSR, BSL</li>
+			<li>REIL: Fixed a REIL translation issue for the x86 instruction 
+			XLAT</li>
+		</ul>
+		<h4>Changes in BinNavi 2.1.1 (June 5th 2009)</h4>
+		<ul>
+			<li>Bugfix: Removed excessive debug output in some situations</li>
+			<li>Bugfix: Improved input behavior for hex number fields</li>
+			<li>Bugfix: Improved text copy speed when copying from tables</li>
+			<li>Bugfix: Fixed a bug in the Lengauer-Tarjan algorithm that led to 
+			incorrect dominator trees</li>
+			<li>Bugfix: Clicks on the project debugger control now have an 
+			effect on the status of the Save button</li>
+			<li>Bugfix: Fixed a bug that led to incorrect behavior of the Save 
+			button when module debuggers were selected</li>
+			<li>Bugfix: Special characters like German Umlauts can now be used 
+			in instruction comments</li>
+			<li>Bugfix: The NOT operator now works in the Select by Criteria</li>
+			<li>Bugfix: Fixed a bug that led to incorrect register tracking 
+			results for &quot;call register&quot; instructions</li>
+			<li>Bugfix: Fixed a bug that led to incorrectly displayed trace data 
+			when debug traces were reordered</li>
+			<li>Bugfix: Less &quot;Do you want to Save?&quot; dialogs are shown when 
+			closing the main window of BinNavi while graphs are open</li>
+			<li>Bugfix: Fixed a slight layouting issue that cut off information 
+			about selected module debuggers</li>
+			<li>Bugfix: Fixed a bug that caused breakpoints not be removed when 
+			pressing the &quot;Remove All Breakpoints&quot; button</li>
+			<li>Bugfix: Fixed a bug that led to closed threads not being removed from the 
+			plugin API</li>
+			<li>Plugin API: REIL instructions and REIL graphs can now be easily 
+			created from the plugin API</li>
+		</ul>
+		<h4>Changes in BinNavi 2.1 (April 1st 2009)</h4>
+		<ul>
+			<li>Feature: Added a stack window that displays the stack while 
+			debugging</li>
+			<li>Feature: Added the option to group nodes in graphs</li>
+			<li>Feature: Added the option to statically track register usage</li>
+			<li>Feature: Improved settings dialogs to make it easier to select 
+			settings</li>
+			<li>Feature: ALT-RightClick on instructions pops up the instruction 
+			comment dialog</li>
+			<li>Feature: Double-clicking a node zooms to the node</li>
+			<li>Feature: CPU flags are now shown individually while debugging</li>
+			<li>Feature: Added a quick overview over the available hotkeys in 
+			graph windows</li>
+			<li>Feature: Improved zoom behavior during debugging</li>
+			<li>Feature: When selecting the content of a node, a special context 
+			menu is now shown to work with the selected content</li>
+			<li>Feature: Added a sample Python script that creates the dominator 
+			tree of a graph</li>
+			<li>Feature: Added the option to select the log level in the 
+			settings dialog</li>
+			<li>Feature: Improved the GUI of the main window to make the Save 
+			button only clickable if data was modified</li>
+			<li>Feature: Added the option to delete nodes from a graph while 
+			connecting the parents of the nodes with their children</li>
+			<li>Feature: Added the option to remove instructions from nodes</li>
+			<li>Feature: Added the option to select all nodes of a graph which 
+			belong to the same function</li>
+			<li>Feature: Added the option to follow memory pointers in the 
+			memory view while debugging</li>
+			<li>Feature: Added the options to remove, deactivate, and activate 
+			all active breakpoints</li>
+			<li>Feature: Improved the GUI of the scripting dialog</li>
+			<li>Feature: Added the option to set a preferred scripting language 
+			which is selected by default in scripting dialogs</li>
+			<li>Feature: Added the option to create a copy of a view</li>
+			<li>Feature: Added the option to add bookmarks to instructions</li>
+			<li>Feature: Changed the behavior of proximity browsing to make sure 
+			that comment nodes are always visible when the nodes they are 
+			attached to are visible</li>
+			<li>Feature: Added the option to flip endianness in the memory 
+			viewer while debugging</li>
+			<li>Feature: When closing a window, the user is now asked about 
+			saving in one dialog, instead of having one dialog per open graph</li>
+			<li>Feature: Added a &quot;Report a Bug&quot; menu</li>
+			<li>Feature: Added the option to choose default basic block colors</li>
+			<li>Feature: The appearance of the graph window is now saved between 
+			sessions</li>
+			<li>Feature: Added the option execute arbitrary scripts without 
+			loading them into the script editor first</li>
+			<li>Feature: Added the option to automatically execute a startup 
+			script when opening script dialogs</li>
+			<li>Feature: Improved the way graph windows are brought to the front 
+			while debugging</li>
+			<li>Feature: Added the option to import raw modules to a database 
+			without first establishing a connection to the database</li>
+			<li>Feature: Added the option to delete multiple debug traces in one 
+			step</li>
+			<li>Feature: Edges that belong to loops are now displayed 
+			differently than edges that don&#39;t</li>
+			<li>Feature: Build Numbers are now shown properly in the About 
+			dialog</li>
+			<li>Feature: Added PowerPC and ARM support to REIL</li>
+			<li>Feature: Improved REIL support for x86 assembly</li>
+			<li>Feature: Improved the exporting of ARM code from IDA Pro</li>
+			<li>Feature: Relocated addresses are now shown in callgraphs too</li>
+			<li>Feature: Edges that jump from the end of a loop to its start are 
+			now painted different from normal edges</li>
+			<li style="height: 19px">Bugfix: Fixed a bug that caused x86 
+			functions with SIDT/SGDT/SLDT/LIDT/LGDT/LLDT instructions to fail</li>
+			<li>Bugfix: Fixed a bug that caused useless graph layouting when 
+			settings changed that do not influence the graph layout</li>
+			<li>Bugfix: Fixed some issues that caused minor problems with graph 
+			layouting when loading saved graphs</li>
+			<li>Bugfix: Global comments are now properly synchronized between 
+			open views</li>
+			<li>Bugfix: The border color of blocks split during function 
+			inlining is set correctly now.</li>
+			<li>Bugfix: Fixed a bug that caused debugging highlighting to 
+			disappear from nodes when comments were added to the node</li>
+			<li>Bugfix: Fixed a bug that caused the option to display multiple 
+			edges between two blocks as one to misbehave</li>
+			<li>Bugfix: Fixed a bug that failed to update the scripting dialog 
+			output panel when printing from registered callback objects</li>
+			<li>Plugin API: Added a static analysis framework (MonoREIL) to the 
+			plugin API</li>
+			<li>Plugin API: Added a sample script that shows how to use MonoREIL</li>
+			<li>Plugin API: Fixed an issue that caused node tagging to fail</li>
+			<li>Plugin API: Added Lengauer-Tarjan algorithm to determine the 
+			dominator tree of graphs</li>
+			<li>Plugin API: Added the option to open graphs</li>
+			<li>Plugin API: Added the option to access graph windows</li>
+			<li>Plugin API: Added the option to access the module/project a view 
+			belongs to</li>
+			<li>Plugin API: Made it easier to convert native assembly code to 
+			REIL code</li>
+			<li>Plugin API: Added the option to get the edge type of edges in 
+			REIL graphs</li>
+			<li>Plugin API: Added the option to access REIL instruction 
+			meta-data</li>
+			<li>Plugin API: Added implementations for common module-related 
+			functions</li>
+			<li>Plugin API: Added implementations for common view-related 
+			functions</li>
+			<li>Plugin API: Made it possible to get the function objects 
+			represented by function nodes</li>
+			<li>Plugin API: Added the option to be notified about changes in 
+			code nodes</li>
+			<li>Plugin API: Enumerations are now properly documented in the API 
+			documentation</li>
+			<li>Plugin API: Address objects can now be treated like longs in 
+			Python scripts</li>
+			<li>Plugin API: Added the option to access the BinNavi start path</li>
+			<li>Plugin API: Added the option to access comment nodes from the 
+			plugin API</li>
+			<li>Plugin API: Added the option to access group nodes from the 
+			plugin API</li>
+			<li>Plugin API: Added the option to get the image base of a module 
+			inside an address space</li>
+			<li>Plugin API: Added implementations for common breakpoint-related 
+			functions</li>
+			<li>Plugin API: Added access to the binary data of instructions</li>
+			<li>Plugin API: Improved access to debug traces</li>
+			<li>Plugin API: Added the option to create debug traces from the 
+			plugin API</li>
+			<li>Plugin API: For increased convenience, objects accessed from the 
+			plugin API are not loaded automatically</li>
+			<li>Plugin-API: Added the option to reload plugins without 
+			restarting BinNavi</li>
+			<li>Plugin-API: Improved the convenience of working with BinNavi 
+			objects from Python scripts</li>
+			<li>Plugin API: Fixed a bug that caused an exception when removing a 
+			debugger from a module</li>
+			<li>Plugin API: Made it significantly easier to convert functions 
+			and other code objects to REIL code.</li>
+			<li>Plugin API: Added new example scripts</li>
+			<li>Plugin API: Added the option to add and remove code and data 
+			references to/from instructions</li>
+			<li>Plugin API: Made it possible to write stand-alone scripts that 
+			run from the shell without running BinNavi in the background</li>
+			<li>Plugin API: Added a way to determine the type of a function 
+			(normal, library, imported, ...)</li>
+			<li>Plugin API: Fixed a bug that led to incorrect removal of 
+			breakpoints</li>
+			<li>Plugin API: Added the option to create new REIL instruction</li>
+			<li>Plugin API: Added the option to modify instruction graphs</li>
+		</ul>
+		
+		<h4>Changes in BinNavi 2.0 (October 15th 2008)</h4>
+		
+		<ul>
+			<li>Added the option to bundle multiple modules into address spaces and projects</li>
+			<li>Added the option to analyze and debug dynamically linked modules</li>
+			<li>Added the option to load and analyze multiple modules at the same time</li>
+			<li>Improved the Python scripting API</li>
+			<li>Added support for Ruby and ECMAScript scripts</li>
+			<li>Added a full-featured plugin API</li>
+			<li>Added the option to tag views</li>
+			<li>Added the option to tag nodes</li>
+			<li>Added comment nodes which can be used to store larger comments in graphs</li>
+			<li>Improved the graph overview panel</li>
+			<li>Added the option to copy disassembly data to the clipboard</li>
+			<li>Added the option to export graphs in SVG format</li>
+			<li>Improved graph loading and rendering speed</li>
+			<li>Added the option to associate imported functions with real functions in other modules</li>
+			<li>Added better support for debugger configurations</li>
+			<li>Added support for multiple interface languages (English and German are supported in this version)</li>
+			<li>Improved manual</li>
+			<li>Improved proximity browsing with nodes that give information about hidden nodes</li>
+			<li>New Select by Criteria dialog allows node selection with complicated criteria</li>
+			<li>Added tabbed browsing in graph windows</li>
+			<li>Added better REIL integration</li>
+		</ul>
+		
+		<h4>Changes in BinNavi 1.5 (March 1st 2008)</h4>
+		
+<ul>
+<li>Improved debugger interface</li>
+<li>Single stepping, stepping over calls, and stepping to the next basic block are now possible</li>
+<li>Improved display for registers and memory</li>
+<li>Debugger support for multi-threaded programs</li>
+<li>Memory bookmarks</li>
+<li>Improved breakpoint handling</li>
+<li>Improved graph layout</li>
+<li>Improved graph loading and rendering speed</li>
+<li>Additional layout options</li>
+<li>Support for line comments</li>
+<li>Distinction between local comments and global comments</li>
+<li>Search for functions by address</li>
+<li>Improved search functionality in graphs</li>
+<li>Mousewheel support to zoom graphs</li>
+<li>Improved graph tooltips</li>
+<li>Improved function inlining</li>
+<li>Added magnifying glass mode</li>
+</ul>
+		<span class="Apple-style-span" style="color: rgb(0, 0, 0); font-family: 'Times New Roman'; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; font-size: medium; ">
+		<h3><font face="Arial" size="3"><b>ZYNAMICS BINNAVI END USER LICENSE 
+		AGREEMENT</b></font>&nbsp;<br />
+		</h3>
+		<p><font face="Arial" size="2">PLEASE READ THE TERMS OF THIS SOFTWARE 
+		LICENSE AGREEMENT (&quot;<u>AGREEMENT</u>&quot;) GOVERNING THE USE OF THE SOFTWARE 
+		AND RELATED DOCUMENTATION (AS FURTHER DEFINED BELOW) CAREFULLY BEFORE 
+		USING THE SOFTWARE.&nbsp;</font></p>
+		<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font face="Times New Roman Bold" size="2"><b>1.&nbsp;</b></font><font face="Arial" size="2"><b>Introduction 
+		and Acceptance</b>.&nbsp; This Agreement is a legal agreement between 
+		you (either an individual or an entity) (“YOU” or “YOUR”) and Google 
+		Inc. (“<u>Google</u>”) regarding the use of Google&#39;s software known as 
+		zynamics BinNavi, which includes user documentation provided in 
+		electronic form (together, the &quot;<u>Google Software</u>&quot;).</font></p>
+		<p><font face="Arial" size="2">BEFORE YOU CLICK ON THE &quot;I ACCEPT THE 
+		TERMS IN THE LICENSE AGREEMENT&quot; BUTTON AT THE END OF THIS DOCUMENT, 
+		CAREFULLY READ THE TERMS AND CONDITIONS OF THIS AGREEMENT.&nbsp;&nbsp; 
+		BY CLICKING ON THE &quot;I ACCEPT THE TERMS IN THE LICENSE AGREEMENT&quot; BUTTON, 
+		YOU ARE AGREEING TO BE BOUND BY AND ARE BECOMING A PARTY TO THIS 
+		AGREEMENT.&nbsp;&nbsp; IF YOU DO NOT AGREE TO ALL OF THE TERMS OF THIS 
+		AGREEMENT, CLICK THE &quot;CANCEL&quot; BUTTON AND THE SOFTWARE WILL NOT BE 
+		DOWNLOADED OR INSTALLED ON YOUR COMPUTER.</font></p>
+		<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font face="Times New Roman Bold" size="2"><b>2.&nbsp;</b></font><font face="Arial" size="2"><b>License 
+		Grant</b>.&nbsp; Subject to the restrictions set forth below, this 
+		Agreement grants You a non-exclusive, royalty-free, perpetual license to 
+		download, install and use one (1) copy of the specified version of 
+		Google Software in object code format, for internal purposes only.&nbsp; 
+		You may install and use one (1) copy of Google Software on a single 
+		personal computer running a general purpose consumer operating system 
+		and that does not operate as a server on a network. Google Software is 
+		&quot;in use&quot; on a computer when it is loaded into the temporary memory 
+		(i.e., RAM) or installed into the permanent memory (e.g., hard disk, 
+		CD-ROM, or other storage device) of that computer. You understand and 
+		agree that Google will have no obligation to provide any upgrades, 
+		updates or fixes to Google Software. You further understand and agree 
+		that Google does not provide maintenance for Google Software and will 
+		not be under any obligation to do so. You understand and agree that you 
+		will not use the software for any illegal purposes.</font></p>
+		<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font face="Times New Roman Bold" size="2"><b>3.&nbsp;</b></font><font face="Arial" size="2"><b>Ownership</b>.&nbsp; 
+		The license granted to You hereunder does not constitute a transfer or 
+		sale of Google&#39;s ownership rights in or to Google Software.&nbsp; Except 
+		for the license rights granted above, all right, title and interest, 
+		including all Intellectual Property Rights, in and to Google Software, 
+		and all copies thereof, are owned and retained by Google or its 
+		licensors.&nbsp; &quot;Intellectual Property Rights&quot; means any and all rights 
+		existing from time to time under patent law, copyright law, trade secret 
+		law, trademark law, unfair competition law, and any and all other 
+		proprietary rights, and any and all applications, renewals, extensions 
+		and restorations thereof, now or hereafter in force and effect 
+		worldwide. &nbsp;Google Software is licensed, not sold, to You for use only 
+		under the terms of this Agreement, and Google reserves all rights not 
+		expressly granted to You</font><font face="Times New Roman" size="2">.</font></p>
+		<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font face="Times New Roman Bold" size="2"><b>4. &nbsp;</b></font><font face="Arial" size="2"><b>License 
+		Restrictions</b>.&nbsp; YOU MAY NOT RENT, LEASE, SUBLICENSE, SELL, 
+		ASSIGN, LOAN OR OTHERWISE TRANSFER GOOGLE SOFTWARE OR ANY OF YOUR RIGHTS 
+		AND OBLIGATIONS HEREUNDER. You may not reverse engineer, decompile, or 
+		disassemble Google Software or attempt to circumvent any technical 
+		restrictions included in the code, except to the extent the foregoing 
+		restriction is expressly prohibited by applicable law.&nbsp; You may not 
+		(i) remove or destroy any copyright notices or other proprietary 
+		markings; (ii) modify or adapt Google Software, merge Google Software 
+		into another program or create derivative works based on Google 
+		Software; or (iii) provide, lease, lend, use for timesharing or service 
+		bureau purposes, or otherwise use or allow others to use Google Software 
+		for the benefit of third parties (through the Internet or otherwise).&nbsp;&nbsp;</font></p>
+		<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font face="Times New Roman Bold" size="2"><b>5.&nbsp;</b></font><font face="Arial" size="2"><b>Confidentiality</b>.&nbsp; 
+		You shall hold in the strictest confidence Google Software and any 
+		related materials or information including, but not limited to, any 
+		technical data, research, product plans or know-how provided by Google 
+		to You, either directly or indirectly in writing, orally or by 
+		inspection of tangible objects (“<u>Confidential Information</u>”).&nbsp; 
+		You shall not disclose any Confidential Information to third parties, 
+		including any of Your employees who do not have a need to know such 
+		information and You shall take reasonable measures to protect the 
+		secrecy of, and to avoid disclosure and unauthorized use of, the 
+		Confidential Information.&nbsp; You shall immediately notify Google in 
+		the event of any unauthorized or suspected use or disclosure of the 
+		Confidential Information.</font></p>
+		<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font face="Times New Roman Bold" size="2"><b>6.&nbsp;</b></font><font face="Arial" size="2"><b>Termination</b>.&nbsp; 
+		This Agreement shall be effective upon installation of Google Software 
+		and SHALL TERMINATE UPON THE EARLIER OF: (I) YOUR FAILURE TO COMPLY WITH 
+		ANY TERM OF THIS AGREEMENT; OR (II) DESTRUCTION OR DELETION OF ALL 
+		COPIES OF GOOGLE SOFTWARE IN YOUR POSSESSION.&nbsp; Google&#39;s rights and 
+		Your obligations shall survive the termination of this Agreement.&nbsp; 
+		Upon termination of this Agreement by Google, You shall certify in 
+		writing to Google that all copies off Google Software, or any portion 
+		thereof, have either been returned to Google or otherwise destroyed or 
+		deleted from any of Your computer libraries or storage devices.</font></p>
+		<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font face="Times New Roman Bold" size="2"><b>7.&nbsp;</b></font><font face="Arial" size="2"><b>NO 
+		WARRANTIES</b></font><font face="Times New Roman" size="2"><b>.</b></font><font face="Arial" size="2">&nbsp; 
+		TO THE MAXIMUM EXTENT PERMITTED BY APPLICABLE LAW, GOOGLE AND ITS 
+		LICENSORS PROVIDE THE SOFTWARE &quot;AS IS&quot; AND WITHOUT WARRANTY OF ANY KIND 
+		AND EXPRESSLY DISCLAIMS WITH RESPECT TO THE SOFTWARE ALL WARRANTIES AND 
+		CONDITIONS, WHETHER EXPRESS, IMPLIED, OR STATUTORY, INCLUDING, BUT NOT 
+		LIMITED TO, ANY WARRANTIES, DUTIES OR CONDITIONS OF OR RELATED TO: 
+		MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, CORRESPONDENCE TO 
+		DESCRIPTION, NON-INFRINGEMENT OF THIRD PARTY RIGHTS, LACK OF VIRUSES, 
+		ACCURACY OR COMPLETENESS OF RESPONSES, RESULTS, WORKMANLIKE EFFORT AND 
+		LACK OF NEGLIGENCE. ALSO, THERE IS NO WARRANTY, DUTY OR CONDITION OF 
+		TITLE, QUIET ENJOYMENT, OR QUIET POSSESSION. YOU ARE SOLELY RESPONSIBLE 
+		FOR ANY DAMAGE TO YOUR COMPUTER, MOBILE DEVICE, OR ANY OTHER DEVICE, OR 
+		LOSS OF DATA THAT RESULTS FROM YOUR USE OF THE SOFTWARE.</font></p>
+		<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font face="Times New Roman Bold" size="2"><b>8.&nbsp;</b></font><font face="Arial" size="2"><b>LIMITATION 
+		OF LIABILITY</b>. UNDER NO CIRCUMSTANCES WILL GOOGLE BE LIABLE FOR ANY 
+		CONSEQUENTIAL, SPECIAL, INDIRECT, INCIDENTAL OR PUNITIVE DAMAGES 
+		WHATSOEVER (INCLUDING, WITHOUT LIMITATION, DAMAGES FOR LOSS OF BUSINESS 
+		PROFITS, BUSINESS INTERRUPTION, LOSS OF BUSINESS INFORMATION, LOSS OF 
+		DATA OR OTHER<b><span class="Apple-converted-space"/>&nbsp;</b>SUCH 
+		PECUNIARY LOSS) ARISING OUT OF THE USE OR INABILITY TO USE THE SOFTWARE, 
+		EVEN IF GOOGLE HAS BEEN ADVISED OF THE POSSIBILITY OF SUCH DAMAGES.&nbsp;&nbsp; 
+		IN NO EVENT SHALL GOOGLE&#39;S AGGREGATE LIABILITY FOR DAMAGES ARISING OUT 
+		OF THIS AGREEMENT EXCEED THE GREATOR OF (1) THE AMOUNT PAID TO GOOGLE 
+		FOR THE SOFTWARE UNDER THIS AGREEMENT OR (2) U.S. $100.00.</font></p>
+		<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font face="Times New Roman Bold" size="2"><b>9.&nbsp;</b></font><font face="Arial" size="2"><b>INDEMNITY</b>.&nbsp; 
+		You agree to defend, indemnify and hold harmless Google, its officers, 
+		directors, employees, and agents, from and against any and all claims, 
+		damages, obligations, losses, liabilities, costs or debt, and expenses 
+		(including but not limited to attorney&#39;s fees) arising from: (i) Your 
+		use of and access to Google Software; (ii) Your violation of any of the 
+		terms of this Agreement; or (iii) Your violation of any third party 
+		right, including without limitation any copyright, property, or privacy 
+		right, arising out of Your use of and access to Google Software. This 
+		defense and indemnification obligation will survive this Agreement and 
+		Your use of Google Software</font><font face="Times New Roman" size="2">.</font></p>
+		<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font face="Times New Roman Bold" size="2"><b>10.&nbsp;</b></font><font face="Arial" size="2"><b>Privacy</b>.&nbsp; 
+		For information about Google&#39;s data protection practices, please read 
+		Google&#39;s privacy policy at&nbsp;<a href="http://www.google.com/privacy.html" target="_blank">http://www.google.com/<wbr>privacy.html. 
+		This policy explains how Google treats Your personal information, and 
+		protects your privacy.&nbsp; Your acceptance of this Agreement means 
+		that You agree to the use of your data in accordance with Google&#39;s 
+		privacy policies.</font>&nbsp;<br />
+		</p>
+		<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font face="Times New Roman Bold" size="2"><b>11.&nbsp;</b></font><font face="Arial" size="2"><b>Export 
+		Restrictions</b>.&nbsp; You may not export or re-export: (i) Google 
+		Software without the prior written consent of Google; and (ii) Google 
+		Software without complying with applicable export control laws and 
+		obtaining any necessary permits and licenses.</font>&nbsp;<br />
+		</p>
+		<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font face="Times New Roman Bold" size="2"><b>12.&nbsp;</b></font><font face="Arial" size="2"><b>Changes 
+		to the terms of this Agreement.&nbsp;<span class="Apple-converted-space"/>&nbsp;</b>Google 
+		may make changes to this Agreement from time to time. When these changes 
+		are made, Google will make any new/additional terms available to You.&nbsp; 
+		You understand and agree that if You use Google Software after the date 
+		on which terms have changed, Google will treat Your use as acceptance of 
+		the new/additional terms.</font></p>
+		<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font face="Times New Roman Bold" size="2"><b>13.&nbsp;</b></font><font face="Arial" size="2"><b>General</b>.&nbsp; 
+		This Agreement is governed by the laws of the State of California, 
+		excluding its conflicts of laws principles.&nbsp; You agree to the 
+		exclusive jurisdiction and venue of the state and federal courts located 
+		in County of San Mateo, California.&nbsp; If any provision of this 
+		Agreement is held by a court of competent jurisdiction to be contrary to 
+		law, such provision shall be changed and interpreted so as to best 
+		accomplish the objectives of the original provision to the fullest 
+		extent allowed by law and the remaining provisions of this Agreement 
+		shall remain in full force and effect.&nbsp; The headings in this 
+		Agreement are inserted for convenience only and do not affect its 
+		interpretation.&nbsp; You may not assign this Agreement, whether by 
+		operation of law, merger or reorganization, without the prior written 
+		consent of Google; any attempted assignment in violation of the 
+		foregoing will be void.&nbsp; Google may assign this Agreement in 
+		connection with a reorganization, reincorporation, merger, or sale of 
+		all, or substantially all of the shares or assets of Google.&nbsp; This 
+		Agreement constitutes the final, complete and exclusive agreement 
+		between the parties with respect to Your use of Google Software and 
+		supersedes any prior or contemporaneous representations or agreements, 
+		whether written or oral.&nbsp; Any company names, logos, and product 
+		names displayed in Google Software are subject to United States&#39; and 
+		international copyright, trademark and intellectual property laws and 
+		You may not reproduce or distribute any such company names, logos or 
+		product names without the express written consent of their respective 
+		owners.</font></p>
+		<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font face="Times New Roman Bold" size="2"><b>14.&nbsp;</b></font><font face="Arial" size="2"><b>Questions</b>.<span class="Apple-converted-space">&nbsp;Should 
+		You have any questions concerning this Agreement, or if You desire to 
+		contact Google for any reason, please contact:<span class="Apple-converted-space">&nbsp;<a href="mailto:zynamics-support" target="_blank">zynamics-support</a>.</font></p>
+		
+		<!-- #EndEditable --></div>
+	<!-- End Left Column -->
+	<!-- Begin Right Column -->
+	<!-- End Right Column -->
+	<!-- Begin Footer -->
+	<div id="footer">
+		<p><a href="../index.htm">Index</a>  
+		| <a href="installation.htm">Installation</a> |
+		<a href="usage.htm">Usage</a> |
+		<a href="debugging.htm">Debugging</a> |
+		<a href="scripting.htm">Scripting</a> |
+		<a href="tutorial.htm">Tutorial</a> |
+		<a href="faq.htm">FAQ</a> |
+		<a href="about.htm">About</a></p>
+		<p>Copyright 2005 - 20121: Google
+		Inc.</p>
+	</div>
+	<!-- End Footer --></div>
+<!-- End Container -->
+
+</body>
+
+<!-- #EndTemplate -->
+
+</html>

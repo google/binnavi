@@ -1,0 +1,399 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" dir="ltr">
+
+<!-- #BeginTemplate "../master_in.dwt" -->
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="Content-Language" content="en-us" />
+<!-- #BeginEditable "doctitle" -->
+<title>zynamics BinNavi 5.0 Manual - Tutorial</title>
+<style type="text/css">
+
+
+
+
+.style1 {
+	margin-left: 40px;
+}
+.style2 {
+	text-align: center;
+}
+.style3 {
+	border-width: 0px;
+}
+</style>
+<!-- #EndEditable -->
+<link rel="stylesheet" type="text/css" title="CSS" href="../styles/style1.css" media="screen" />
+<style type="text/css">
+</style>
+</head>
+
+<body style="background-image: url('../images/binnaviicon.png')">
+
+<!-- Begin Container -->
+<div id="container">
+	<!-- Begin Masthead -->
+	<div id="masthead">
+		<img src="../images/binnavi_logo4.png" alt="BinNavi Logo"/>
+	</div>
+	<!-- End Masthead -->
+	<!-- Begin iMenu -->
+	<div id="navigation">
+		<ul>
+			<li><a href="../index.htm">Index</a></li>
+			<li><a href="installation.htm">Installation</a></li>
+			<li><a href="usage.htm">Usage</a></li>
+			<li><a href="debugging.htm">Debugging</a></li>
+			<li><a href="scripting.htm">Scripting</a></li>
+			<li><a href="tutorial.htm">Tutorial</a></li>
+			<li><a href="faq.htm">FAQ</a></li>
+			<li><a href="about.htm">About</a></li>
+		</ul>
+	</div>
+	<!-- End iMenu -->
+	<!-- Begin Left Column -->
+	<div id="column_lg">
+		<!-- #BeginEditable "content" -->
+		<h2>Tutorial - Crafting input with zynamics BinNavi</h2>
+		<p>Crafting input to reach a particular location in the code is a 
+		frequent task one encounters in security analysis. Perhaps a particular 
+		location in the executable has been pinpointed by a static analysis 
+		tool, perhaps the use of a tool like
+		<a href="http://www.zynamics.com/bindiff.html">BinDiff</a> leads one to 
+		think a particular location could be &quot;interesting&quot; if reached with the 
+		proper inputs.<br />
+		<br />
+		In the following, we will show that a particular integer overflow 
+		patched in 
+		<a href="http://www.microsoft.com/technet/security/Bulletin/MS08-062.mspx">MS08-062</a> was not actually dangerous: A potential integer 
+		overflow was patched, but we will see that there appears to be no way to 
+		trigger this particular integer overflow.<br />
+		<br />
+		We have used BinDiff (or a similar tool) to compare the patched against 
+		the unpatched version, and suspect that the following code might be one 
+		of the security vulnerabilities fixed in this update:</p>
+		<pre><p class="style1">5FEFF0DB shr   esi, byte 10
+5FEFF0DE inc   esi
+5FEFF0DF shl   esi, byte 10
+5FEFF0E2 add   esi, eax
+5FEFF0E4 push  esi // int
+5FEFF0E5 push  eax // int
+5FEFF0E6 push  ds:[ebx+0x18] // void 
+5FEFF0E9 mov   ss:[ebp+arg_0], esi
+5FEFF0EC call  cs:_webRealloc@12
+5FEFF0F1 cmp   eax, edi
+5FEFF0F3 jz    byte cs:loc_5FEFF167</p>
+</pre>
+		<p>The right-shift-left-shift trickery has been replaced by prudent 
+		checking for integer overflows in the patched version - so it is 
+		reasonable to assume that this particular location needs to be reached 
+		with a malicious value of 0xFFFFFFFF in ESI. <br />
+		<br />
+		We also know that msw3prt.dll is an ISAPI component - and that ISAPI 
+		components &quot;begin&quot; their active life in a function call &quot;HttpExtensionProc&quot;.
+		<br />
+		<br />
+		Our goal can now be formulated as follows:</p>
+		<p class="style1">Construct malicious input that triggers the memory 
+		corruption problem discussed above. </p>
+		<p>In doing so, we will get to know some of the core features of BinNavi.</p>
+		<h3>Creating a project</h3>
+		<p>Assuming that you have created and configured access to your central 
+		disassembly storage (e.g. the PostgreSQL server), your screen should look 
+		somewhat like this (click on the picture to enlarge it):</p>
+		<p class="style2"><a href="../images/tut_01.png">
+		<img alt="" class="style3" height="450" src="../images/tut_01tn.png" width="600" /></a></p>
+		<p><br />
+		<br />
+		As a first step, we will now create a new project in which we will work. 
+		Right-click on the database you wish to use, and click
+		<span class="gui_ref">Connect</span>. Once 
+		you are connected, right-click on <span class="gui_ref">Projects</span>, and create a new project 
+		named &quot;MS08-62-.printer integer overflow&quot;. This is where we will keep 
+		all data related to this particular vulnerability.<br />
+		BinNavi supports multiple address spaces per project - this is useful in 
+		many scenarios, for example when a vulnerability involves complicated 
+		interactions between processes. For our purposes, the default address 
+		space will do though. </p>
+		<p>Now, as next step, we need to import the disassembly of the file we&#39;re 
+		dealing with into our database. This is done via right-clicking on 
+		<span class="gui_ref">Raw 
+		Modules</span> and selecting <span class="gui_ref">Import Raw Module</span>. We then select the IDA 
+		database msw3prt.idb. BinNavi will launch an instance of IDA in the 
+		background, and the disassembly will be imported into the database in 
+		the zynamics core database format (see documentation) intended to be 
+		used by all sorts of reverse engineering tools.</p>
+		<p>Before BinNavi can use this data though, it needs to perform some minor 
+		conversions - for this, please right-click on the raw module you just 
+		imported, and convert it to a BinNavi module. Your screen should now 
+		look something like this:</p>
+		<p class="style2"><a href="../images/tut_02.png">
+		<img alt="" class="style3" height="429" src="../images/tut_02tn.png" width="600" /></a></p>
+		<p>Now, since we wish to work with msw3prt.dll, we need to make sure 
+		that this DLL is mapped into our default address space. You can just 
+		drag &amp; drop arbitrary DLLs from the &quot;modules&quot; tree into your address 
+		space. <br />
+		So, let&#39;s get to work.</p>
+		<p>In order to open the Call graph of the DLL we&#39;re working with, click on 
+		the &quot;Default address space-&gt;msw3prt.dll&quot; field. Do a right-click-open on 
+		the &quot;native callgraph&quot; entry in the middle of your screen.<br />
+		Your screen should look roughly like the following:</p>
+		<p class="style2"><a href="../images/tut_03.png">
+		<img alt="" class="style3" height="450" src="../images/tut_03tn.png" width="600" /></a></p>
+		<p>You probably have worked through the <a href="graph_window.htm">Usage-&gt;Graph Window</a> chapter of 
+		this manual. We will nonetheless spend a few minutes getting used to the 
+		user interface before we focus on constructing a path through the 
+		executable again.</p>
+		<h3>&quot;Surfing&quot; through the callgraph</h3>
+		<p>Proximity browsing coupled with the &quot;Undo Selection&quot; and &quot;Redo 
+		Selection&quot;-hotkeys allows &quot;surfing&quot; through the Call graph in a rather 
+		comfortable manner. Please position your cursor in the search field and 
+		type &quot;HttpExtensionProc&quot; followed by &quot;Enter&quot;. The node with this name 
+		will be made visible, the graph layout will be recalculated, and the 
+		node in which the search string was found will be centered on screen. 
+		Click on the HttpExtensionProc node to select it, and click on the 
+		&quot;hierarchical layout&quot; button to have the layout recalculated.<br />
+		Your screen should look somewhat like this:</p>
+		<p class="style2"><a href="../images/tut_04.png">
+		<img alt="" class="style3" height="450" src="../images/tut_04tn.png" width="600" /></a></p>
+		<p>By default, the proximity browsing settings are configured so that 
+		all nodes within a distance of two &quot;hops&quot; from your selection are made 
+		visible. While this is useful for many scenarios, we want to change this 
+		for the Call graph &quot;surfing&quot; we&#39;re about to do. Please go to 
+		<span class="gui_ref">Graph-&gt;Proximity 
+		Browsing Settings</span> and set both slides to 1. After you click 
+		<span class="gui_ref">OK</span>, your 
+		screen should look roughly like this:</p>
+		<p class="style2"><a href="../images/tut_05.png">
+		<img alt="" class="style3" height="450" src="../images/tut_05tn.png" width="600" /></a></p>
+		<p>Our goal is now to understand the way we need to navigate from 
+		HttpExtensionProc to WebIppRcvData. In order to do this, please begin by 
+		clicking on the &quot;hierarchical layout&quot; button.</p>
+		<p>Now click on the node labeled &quot;?ParseQueryString&quot;. This node will become 
+		selected and centered, with its immediate neighbors arranged around it. 
+		Please left-click the &quot;?AllocString&quot;-node now, and then left-click the 
+		&quot;?StringCbCopy&quot;-node, and finally, the &quot;?StringCopyWorker&quot;-node. You 
+		have just traversed the Call graph from the &quot;root&quot; (e.g. 
+		HttpExtensionProc) to one of the &quot;leafs&quot;. If you hit &quot;CTRL-Z&quot; now, your 
+		last selection will be undone - moving you back to the node you had 
+		selected before the current selection. Hit &quot;CTRL-Z&quot; again, and again, to 
+		arrive at &quot;?ParseQueryString&quot; again.</p>
+		<p>If you hit &quot;CTRL-Y&quot;, your selection is &quot;redone&quot; -- moving forwards 
+		again. </p>
+		<p>By using proximity browsing and the selection undo/redo, you can &quot;surf&quot; 
+		through the executable.</p>
+		<h3>Building a path through the executable</h3>
+		<p>In order to build a path through the executable, we will begin by 
+		cutting down the Call graph to only those nodes that are of interest to 
+		us: Functions somewhere on the way between HttpExtensionProc and 
+		WebIppRcvData. Let&#39;s isolate these functions:</p>
+		<p>In the search window, search for WebIppRcvData. Select this node and 
+		click on the &quot;select predecessors&quot; button. Now only node sin the graph 
+		can lead to WebIppRcvData are selected. If you go to 
+		<span class="gui_ref">Graph-&gt;Delete 
+		Unselected</span> Nodes, all nodes that are not on this path will be removed. 
+		Your result should look something like this:</p>
+		<p class="style2"><a href="../images/tut_06.png">
+		<img alt="" class="style3" height="450" src="../images/tut_06tn.png" width="600" /></a></p>
+		<p>This looks rather manageable, eh ? We will not need proximity 
+		browsing in such a small graph, therefore we can switch off proximity 
+		browsing in the Graph menu. Save this view (<span class="gui_ref">View-&gt;Save as</span>) Right-click 
+		on WebIppRcvData and select <span class="gui_ref">Open Function</span>. </p>
+		<p>The integer overflow in question occurred in basic block at address 
+		0x5FEFF0DB in this function. We will now use the BinNavi Pathfinder 
+		plugin to generate a graph that shows us how we need to go about 
+		reaching the target address. In order to do this, switch to the database 
+		window again, and right-click on the msw3prt.dll module in the &quot;modules&quot; 
+		subtree. Your context menu should offer the option of running the 
+		Pathfinder plugin. Once you run it, you need to select a start- and 
+		endpoint for the path to be generated:</p>
+		<p class="style2"><a href="../images/tut_07.png">
+		<img alt="" class="style3" height="450" src="../images/tut_07tn.png" width="600" /></a></p>
+		<p>We select the beginning of HttpExtensionProc, and the target basic 
+		block 0x5FEFF0DB in WebIppRcvData. After we click OK, a new graphview 
+		will have been generated in our address space under msw3prt.dll-&gt;Module 
+		Views with the name &quot;New Pathfinder View&quot;. If you open this view, you 
+		should see something like this:</p>
+		<p class="style2"><a href="../images/tut_08.png">
+		<img alt="" class="style3" height="450" src="../images/tut_08tn.png" width="600" /></a></p>
+		<p>The yellow block is our target block in WebIppRcvData, the green 
+		block is the starting point of HttpExtensionProc. This graph will be our 
+		&quot;map&quot; when we try to adjust our input to reach the vulnerability. </p>
+		<p>The first question is, clearly, how far down this path we can already go 
+		in &quot;regular&quot; execution. For this, we want to attach a debugger to the 
+		process we&#39;re targeting and see what we can reach. </p>
+		<h3>Configuring the debugger</h3>
+		<p>BinNavi can communicate with a multitude of different debuggers over 
+		the network, each associated with a particular address space. This 
+		allows for great flexibility: For example, one could debug a Linux-based 
+		client in &quot;lockstep&quot; with a Win32-based server. </p>
+		<p>In order to configure a debugger for your BinNavi, go to the database 
+		window, and right-click on <span class="gui_ref">Debuggers</span>. Create a new debugger (I call 
+		mine &quot;WinXP VM&quot;) and set the IP address and port to the IP address of 
+		the machine where the BinNavi debugging agent is going to run. </p>
+		<p>Click on the MS08-62 project, and enable this debugger for this project 
+		by clicking the checkbox. Make sure you click on the &quot;save&quot; button after 
+		enabling the debugger. </p>
+		<p>Please select the default address space, and set the debugger to WinXP 
+		VM. Don&#39;t forget to click the save button!<br />
+		Inside my Windows XP VM, I have enabled printer sharing, and configured 
+		IIS so that the .printer extension is properly passed on to msw3prt.dll.
+		</p>
+		<p>The debug agent can be found in /BinNavi/debug/win32/client32.exe and is 
+		launched by supplying the process ID to be debugged as first argument.</p>
+		<p>In order to make sure the msw3prt.dll is loaded, we direct our browser 
+		to<br />
+		http://172.16.155.132/printers/PDFCreator/.printer</p>
+		<p>Now close your views and reopen the path that was constructed (we need to 
+		do that since the views where opened before any debugger was 
+		configured). Click on the &quot;connect to debugger&quot; button in the debugger 
+		pane at the bottom of the screen. You should be greeted with the 
+		following screen:</p>
+		<p class="style2"><a href="../images/tut_09.png">
+		<img alt="" class="style3" height="450" src="../images/tut_09tn.png" width="600" /></a></p>
+		<p>Close the Debugger Options screen by clicking <span class="gui_ref">OK</span>, and click on the 
+		&quot;big red button&quot; in the debugger pane. This will set breakpoints on all 
+		the nodes in the current graph view and allow us to understand which 
+		parts of the code we can already execute, and at which point we&#39;re 
+		taking a &quot;wrong turn&quot;. </p>
+		<p>Now direct your browser to http://172.16.155.132/printers/PDFCreator/.printer 
+		again. The code will execute, and any breakpoints hit during this 
+		execution will be logged. </p>
+		<p class="style2"><a href="../images/tut_10.png">
+		<img alt="" class="style3" height="429" src="../images/tut_10tn.png" width="600" /></a></p>
+		<p>You can visualize which parts of the code you have successfully 
+		executed during this trace by clicking on the <span class="gui_ref">Traces</span> tab. This tab 
+		will list all debug traces you have collected. In this screen, I have 
+		added a description to the debug trace (so that I can remember what I 
+		did to obtain the trace), and used the context menu to select the nodes 
+		executed in this trace.</p>
+		<p>This screen now tells us exactly where our code execution took a &quot;wrong 
+		turn&quot;: The last selected node is exactly where we branched in the 
+		&quot;wrong&quot; direction. Use the paint bucket to color the currently selected 
+		nodes in a light hue of red, and zoom in on the branch we&#39;d like to 
+		take.</p>
+		<p>If you do a shift + right click on any instruction prior to the branch, 
+		you will see that the address turns green. This means you&#39;ve just set a 
+		breakpoint on the instruction in question. If you re-send your request 
+		now, the debugger should suspend on the location on which you set the 
+		breakpoint, and you should be able to inspect the register contents.</p>
+		<p class="style2"><a href="../images/tut_11.png">
+		<img alt="" class="style3" height="450" src="../images/tut_11tn.png" width="600" /></a></p>
+		<p>Single-stepping once, we can see that EAX contains the value &quot;4&quot; when 
+		we would like it to contain the value &quot;1&quot;. Where is this value set ? If 
+		we search for &quot;var_24&quot; in our graph, we arrive at the following 
+		location:</p>
+		<p class="style2"><a href="../images/tut_12.png">
+		<img alt="" class="style3" height="450" src="../images/tut_12tn.png" width="600" /></a></p>
+		<p>We can see that the value is set to whatever was in arg_0-&gt;0x14 - and 
+		scrolling up a bit we see that this arg_0 was passed into the current 
+		function by a &quot;push esi&quot; at address 0x5FEF84FA, and that it was 
+		previously passed to ParseQueryString by these two lines:</p>
+		<pre><p class="style1">5FEF84EE push esi 
+5FEF84EF call cs:?ParseQueryString@@YGHPAUALLINFO@@@Z</p></pre>
+		<p>This leads us to the &quot;guess&quot; that the contents of the structure are 
+		initialized in said function. It would be nice if we could add this 
+		function to our graph, therefore we right-click on the node with the 
+		ParseQueryString-call and select &quot;inline subfunction&quot; for it.</p>
+		<p>The graph then looks like this:</p>
+		<p class="style2"><a href="../images/tut_13.png">
+		<img alt="" class="style3" height="450" src="../images/tut_13tn.png" width="600" /></a></p>
+		<p>We wish to set the value in question to 1 - so let&#39;s search for 
+		&quot;0x14&quot; in this graph and see where it might be set. The nicest way to do 
+		this is by using the &quot;select by criteria&quot;-dialog:</p>
+		<p class="style2"><a href="../images/tut_14.png">
+		<img alt="" class="style3" height="450" src="../images/tut_14tn.png" width="600" /></a></p>
+		<p>After selecting everything that contains 0x14 and coloring it in a 
+		bright yellow, the graph looks like this:</p>
+		<p class="style2"><a href="../images/tut_15.png">
+		<img alt="" class="style3" height="450" src="../images/tut_15tn.png" width="600" /></a></p>
+		<p>We will collect another trace in this graph with the same request, 
+		and select it again. This will immediately locate us the location at 
+		which the value in question was set:</p>
+		<p class="style2"><a href="../images/tut_16.png">
+		<img alt="" class="style3" height="450" src="../images/tut_16tn.png" width="600" /></a></p>
+		<p>The string that 0x5FEF1D74 points to is the string &quot;POST&quot; -- so clearly, 
+		we&#39;d need to supply a &quot;POST&quot; request in order to get where we want to 
+		go. What does our trace look like if we send a simple POST ?<br />
+		Also, we wanted to supply a length value of 0xFFFFFFFF for the integer 
+		overflow to work. Those of us that were around in 2002 remember vaguely 
+		that performing a chunked-encoding post to an IIS server will call the 
+		ISAPI in question with the cbTotalBytes length field set to 0xFFFFFFFF. 
+		We therefore create an artificial request as follows: </p>
+		<pre><p class="style1">POST /printers/PDFCreator/.printer HTTP/1.1
+Accept: */*
+Host: localhost
+Content-Type: application/x-www-form-urlencoded
+Transfer-Encoding: chunked
+Connection: keep-alive
+
+10 
+PADPADPADPADPADP 
+4 
+XXXX
+4 
+XXXX
+0 </p></pre>
+		<p>What does our trace look like now ?</p>
+		<p class="style2"><a href="../images/tut_17.png">
+		<img alt="" class="style3" height="450" src="../images/tut_17tn.png" width="600" /></a></p>
+		<p>We&#39;re much closer to where we want to be !<br />
+		Let&#39;s have a look at the last branch in question:<br />
+		</p>
+		<pre><p class="style1">5FEFF0CC mov ecx, ds:[ebx+0x14]
+5FEFF0CF mov esi, ss:[ebp+arg_8]
+5FEFF0D2 mov eax, ds:[ebx+0x10]
+5FEFF0D5 add ecx, esi
+5FEFF0D7 cmp ecx, eax
+5FEFF0D9 jb byte cs:loc_5FEFF0FB
+</p></pre>
+		<p>We need to be able to set ESI to 0xFFFFFFFF - so where did it come from 
+		? Scrolling through our graph, we find it was passed into the current 
+		function here:</p>
+		<pre><p class="style1">FEF939F push ss:[ebp+arg_18] // int</p></pre>
+		<p>Scrolling up one more block, we see the following code:</p>
+		<pre><p class="style1">5FEF988E push ds:[edi+0x74] // int
+5FEF9891 push ds:[edi+0x78] // hMem
+5FEF9894 push ds:[esi+12] // struct _IPPOBJ *
+5FEF9897 push ds:[esi+8] // unsigned __int16 *
+5FEF989A push ds:[esi+4] // hPrinter
+5FEF989D push ss:[ebp+arg_4] // __int16
+5FEF98A0 push edi // uBytes
+5FEF98A1 call cs:?Spl_IppJobData@@YGHPAU_EXTENSION_CONTROL_BLOCK</p></pre>
+		<p>Unfortunately, this implies that we have no way of triggering this 
+		vulnerability: The argument passed in comes from [edi+0x74] - where edi 
+		points to the EXTENSION_CONTROL_BLOCK structure. This structure contains 
+		two length fields: cbTotalBytes at offset 0x70 which we can set to 
+		0xFFFFFFFF, and cbAvailable which is located at offset 0x74 which we can 
+		only control within &quot;reasonable&quot; boundaries.</p>
+		<p>In the same graph, we can determine that the only other path leading to 
+		the integer overflow also passes the cbAvailable value to our target 
+		block. This means that there should be no way of triggering the integer 
+		overflow in question, irrespective of which path we take.<br />
+		</p>
+		<!-- #EndEditable --></div>
+	<!-- End Left Column -->
+	<!-- Begin Right Column -->
+	<!-- End Right Column -->
+	<!-- Begin Footer -->
+	<div id="footer">
+		<p><a href="../index.htm">Index</a>  
+		| <a href="installation.htm">Installation</a> |
+		<a href="usage.htm">Usage</a> |
+		<a href="debugging.htm">Debugging</a> |
+		<a href="scripting.htm">Scripting</a> |
+		<a href="tutorial.htm">Tutorial</a> |
+		<a href="faq.htm">FAQ</a> |
+		<a href="about.htm">About</a></p>
+		<p>Copyright 2005 - 201<span lang="de">4</span>: <span lang="de">Google</span>
+		<span lang="de">Inc.</span></p>
+	</div>
+	<!-- End Footer --></div>
+<!-- End Container -->
+
+</body>
+
+<!-- #EndTemplate -->
+
+</html>

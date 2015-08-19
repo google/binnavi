@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<BinNavi>
+    <MaxNodesInitialLayout>100</MaxNodesInitialLayout>
+    <IdaDirectory>C:/Program Files/IDA</IdaDirectory>
+    <IdbDirectory>C:/Program Files/IDA</IdbDirectory>
+    <ProjectDirectory>C:/navi-projects</ProjectDirectory>
+    <DebugIpAddress>127.0.0.1:2222</DebugIpAddress>
+    <MouseWheelZoom>true</MouseWheelZoom>
+    <MaxNodesVisibleWarning>50</MaxNodesVisibleWarning>
+    <MaxNodesForAutoLayoutCallGraph>100</MaxNodesForAutoLayoutCallGraph>
+    <MaxNodesForAutoLayoutFunctionGraph>0</MaxNodesForAutoLayoutFunctionGraph>
+    <MinNodesForAutoProximity>50</MinNodesForAutoProximity>
+    <MinNodesForLayoutWarning>300</MinNodesForLayoutWarning>
+    <AutoLayoutAlgorithm>CActionHierarchicLayout</AutoLayoutAlgorithm>
+    <DefaultProximityUp>1</DefaultProximityUp>
+    <DefaultProximityDown>1</DefaultProximityDown>
+    <AntiAliasing>true</AntiAliasing>
+    <SearchCaseSensitive>false</SearchCaseSensitive>
+    <SearchVisibleOnly>false</SearchVisibleOnly>
+    <AnimatedLayouting>true</AnimatedLayouting>
+    <MaxUndoLevel>10</MaxUndoLevel>
+    <ShowAddresses>true</ShowAddresses>
+    <LiveProximityPreview>false</LiveProximityPreview>
+    <SearchSelectionOnly>false</SearchSelectionOnly>
+    <CallAddressRegex>^\s*(call)\s+[a-zA-Z]*\:?([0-9a-fA-F]{8}).*</CallAddressRegex>
+    <SearchSelectionOnly>false</SearchSelectionOnly>
+    <DebugIpAddress0>127.0.0.1:1234</DebugIpAddress0>
+    <DatabaseDriver0>org.postgresql.Driver</DatabaseDriver0>
+    <DatabaseDriver1>sun.jdbc.odbc.JdbcOdbcDriver</DatabaseDriver1>
+    <DatabaseConnectionString0>jdbc:postgres://localhost/dbname</DatabaseConnectionString0>
+    <DatabaseUserName0>dbuser</DatabaseUserName0>
+    <ColorString>0</ColorString>
+    <ColorBracket>0</ColorBracket>
+    <ColorOperator>6684927</ColorOperator>
+    <ColorPrefix>8421504</ColorPrefix>
+    <ColorImmediate>11674146</ColorImmediate>
+    <ColorAddress>8421504</ColorAddress>
+    <ColorMnemonic>2500256</ColorMnemonic>
+    <ColorEdgeTrue>3381504</ColorEdgeTrue>
+    <ColorEdgeFalse>10040064</ColorEdgeFalse>
+    <ColorEdgeUnconditional>0</ColorEdgeUnconditional>
+    <ColorEdgeSwitch>255</ColorEdgeSwitch>
+    <LastMainWndTopPos>176</LastMainWndTopPos>
+    <LastMainWndLeftPos>69</LastMainWndLeftPos>
+    <LastMainWndWidth>1032</LastMainWndWidth>
+    <LastMainWndHeight>748</LastMainWndHeight>
+    <WndWasMinOrMaximzed>false</WndWasMinOrMaximzed>
+    <GradientBackground>false</GradientBackground>
+    <DebugIpAddress1>127.0.0.1:2223</DebugIpAddress1>
+    <DebugIpAddress2>127.0.0.1:2222</DebugIpAddress2>
+    <ProximityEnabelDown>false</ProximityEnabelDown>
+    <ProximityEnabelUp>true</ProximityEnabelUp>
+    <IDAPro.Location>C:/Program Files/IDA5/idag.exe</IDAPro.Location>
+    <GenerelLayout.Animation>ON</GenerelLayout.Animation>
+    <GenerelLayout.AnimationSpeed>4</GenerelLayout.AnimationSpeed>
+    <HierarchicLayout.Orientation>vertical</HierarchicLayout.Orientation>
+    <HierarchicLayout.MinNodeDistance>20</HierarchicLayout.MinNodeDistance>
+    <HierarchicLayout.MinEdgeDistance>20</HierarchicLayout.MinEdgeDistance>
+    <CircularLayout.MinNodeDistance>20</CircularLayout.MinNodeDistance>
+    <OrthogonalLayout.MinNodeDistance>20</OrthogonalLayout.MinNodeDistance>
+    <Controls.SensitivityZoom>3</Controls.SensitivityZoom>
+    <Controls.SensitivityScroll>3</Controls.SensitivityScroll>
+    <Controls.MouseWheel>zooms</Controls.MouseWheel>
+    <HierarchicLayout.LayerDistance>20</HierarchicLayout.LayerDistance>
+    <AnimationSpeed>4</AnimationSpeed>
+    <GeneralLayout.AutoLayout>false</GeneralLayout.AutoLayout>
+    <GeneralLayout.CombineMultibleEdges>true</GeneralLayout.CombineMultibleEdges>
+    <CircularLayout.LayoutStyle>NORMAL STYLE</CircularLayout.LayoutStyle>
+    <OrthogonalLayout.LayoutStyle>NORMAL STYLE</OrthogonalLayout.LayoutStyle>
+    <OrthogonalLayout.GridSize>20</OrthogonalLayout.GridSize>
+    <DatabaseDriver_TestProject>org.postgresql.Driver</DatabaseDriver_TestProject>
+    <DatabaseConnectionString_TestProject>jdbc:postgres://localhost/testproject</DatabaseConnectionString_TestProject>
+    <DatabaseUserName_TestProject>dbuser</DatabaseUserName_TestProject>
+    <DatabaseDescription0>TestProject</DatabaseDescription0>
+    <LastDatabaseDescription>TestProject</LastDatabaseDescription>
+</BinNavi>

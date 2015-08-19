@@ -1,0 +1,152 @@
+﻿@import url("layout.css");
+body {
+	font-family: Georgia, "Times New Roman", Times, serif;
+	font-size: small;
+	background-image: url("../images/background_tile.gif");
+	background-repeat: repeat;
+}
+#container {
+	border-right: 2px solid #595959;
+	border-bottom: 2px solid #595959;
+	border-left: 2px solid #595959;
+	background-color: #fff;
+}
+#masthead {
+	text-align: left;
+	background-color: #fff;
+	background-image: url("../images/masthead_image.jpg");
+	background-repeat: no-repeat;
+}
+#navigation {
+	border-top: 1px solid #808080;
+	border-bottom: 1px solid #808080;
+	background-color: #dbf;
+}
+html>body #navigation {
+	overflow: hidden;
+}
+#column_l {
+	width: 367px;
+	padding: 15px;
+	background-color: #fff;
+}
+html>body #column_l {
+	width: 370px;
+	padding: 0 15px;
+	background-color: #fff;
+}
+#column_r {
+	width: 217px;
+	padding: 15px 10px;
+	background-color: #fff;
+}
+html>body #column_r {
+	width: 220px;
+	padding: 15px 10px;
+	background-color: #fff;
+}
+#content {
+	background-color: #fff;
+}
+#footer {
+	text-align: center;
+	padding-bottom: 10px;
+}
+html>body #footer {
+	text-align: center;
+	padding-bottom: 0;
+}
+/* Masthead */
+#masthead h1 {
+	font-weight: bold;
+	font-style: italic;
+	color: #fff;
+	margin-bottom: 0;
+	margin-left: 0.5em;
+}
+#masthead h3 {
+	font-weight: bold;
+	font-style: italic;
+	color: #fff;
+	margin-top: 0;
+	margin-left: 1em;
+}
+/* Navigation */
+#navigation ul {
+	list-style-type: none;
+	width: 100%;
+	margin: 0;
+	padding: 0;
+}
+#navigation li {
+	float: left;
+}
+#navigation a {
+	font-weight: bold;
+	text-decoration: none;
+	color: #000;
+	display: block;
+	padding: 5px;
+	border: 1px solid #dbf;
+}
+#navigation a:hover {
+	font-weight: bold;
+	text-decoration: none;
+	color: #fff;
+	border: 1px solid #b9d;
+	background-color: #b9d;
+}
+/* Right Column */
+#column_r img {
+	border: 1px solid #808080;
+}
+/* Site typography */
+h1 {
+	font-size: xx-large;
+	color: #000;
+}
+h2 {
+	font-size: x-large;
+	font-style: italic;
+	color: #000;
+}
+h3 {
+	font-size: large;
+	font-style: italic;
+	color: #000;
+}
+h4 {
+	font-size: medium;
+	font-style: italic;
+	color: #000;
+}
+h5 {
+	font-size: x-small;
+	font-style: italic;
+	color: #000;
+}
+h6 {
+	font-size: xx-small;
+	font-style: italic;
+	color: #000;
+}
+/* Footer */
+#footer p {
+	font-size: x-small;
+	color: #000;
+}
+/* Links */
+a {
+	color: #a27;
+	text-decoration: underline;
+}
+a:hover {
+	color: #f72;
+	text-decoration: none;
+}
+.style_bold {
+	font-weight: bold;
+}
+.style_italic {
+	font-style: italic;
+}

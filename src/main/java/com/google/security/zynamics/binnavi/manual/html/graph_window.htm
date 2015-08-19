@@ -1,0 +1,949 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" dir="ltr">
+
+<!-- #BeginTemplate "../master_in.dwt" -->
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="Content-Language" content="en-us" />
+<!-- #BeginEditable "doctitle" --><title>zynamics BinNavi 5.0 Manual - Graph 
+Window</title>
+<style type="text/css">
+
+
+
+
+
+.style1 {
+	text-align: left;
+}
+.style2 {
+	text-align: center;
+}
+</style>
+<!-- #EndEditable -->
+<link rel="stylesheet" type="text/css" title="CSS" href="../styles/style1.css" media="screen" />
+<style type="text/css">
+</style>
+</head>
+
+<body style="background-image: url('../images/binnaviicon.png')">
+
+<!-- Begin Container -->
+<div id="container">
+	<!-- Begin Masthead -->
+	<div id="masthead">
+		<img src="../images/binnavi_logo4.png" alt="BinNavi Logo"/>
+	</div>
+	<!-- End Masthead -->
+	<!-- Begin iMenu -->
+	<div id="navigation">
+		<ul>
+			<li><a href="../index.htm">Index</a></li>
+			<li><a href="installation.htm">Installation</a></li>
+			<li><a href="usage.htm">Usage</a></li>
+			<li><a href="debugging.htm">Debugging</a></li>
+			<li><a href="scripting.htm">Scripting</a></li>
+			<li><a href="tutorial.htm">Tutorial</a></li>
+			<li><a href="faq.htm">FAQ</a></li>
+			<li><a href="about.htm">About</a></li>
+		</ul>
+	</div>
+	<!-- End iMenu -->
+	<!-- Begin Left Column -->
+	<div id="column_lg">
+		<!-- #BeginEditable "content" -->
+		<h2>Using the Graph Window</h2>
+		<ul>
+			<li class="style1"><a href="#Overview">Overview</a></li>
+			<li class="style1"><a href="#Concepts">Concepts</a></li>
+			<li><a href="#Description">Description</a></li>
+			<li><a href="#Hotkeys">Hotkeys</a></li>
+		</ul>
+		<p></p>
+		<h3><a name="Overview"></a>Overview</h3>
+		<p>BinNavi graph windows show disassembled
+		code in graph form. During a code analysis session you will have one or 
+		more of these windows open. Among other things you can use them to navigate through
+		code, to annotate code, to create custom graphs, to tag interesting nodes,
+		or to debug the target module.</p>
+		<p>You can switch graph windows between different perspectives 
+		depending on what you are working on. By default the standard 
+		perspective is active when a new graph window is opened. This 
+		perspective is primarily used for static code analysis. To debug a 
+		target process, you can switch to the so called debug perspective 
+		which offers all the functionality needed for debugging. Switching 
+		perspectives is either possible through the top menu (Window) option or 
+		through the key combination CTRL+ALT-D (debug perspective) / CTRL+ALT-S 
+		(standard perspective).</p>
+		<p>
+		Both the standard perspective and the debug perspective divide graph 
+		windows into roughly four parts. In both cases by far the largest part 
+		of the graph window is the center part where the disassembled code is 
+		shown. When the standard perspective is active, the left side of the 
+		graph window provides a panel with different parts that make it easier 
+		to navigate through the graph. The right side of the graph window is all 
+		about adding information to nodes and organizing nodes. To organize 
+		nodes you can define new node tags 
+		there and assign them to nodes in the graph.
+		To add additional information to nodes and instructions you can create 
+		new types and use the available types from the type manager to associate 
+		them to operands of instructions. The bottom part of the graph window is a panel that contains other 
+		useful features for analyzing disassembled code.<br />
+		When the debug perspective is active, the left, right, and bottom parts 
+		of the graph window are changed to provide useful debugging information. The left side of the window shows the current register 
+		values while the right side shows available debugger options. The bottom 
+		of the graph window contains tabs that show the memory of the active 
+		process, its loaded dynamic libraries, previously recorded debug 
+		traces, and other things.</p>
+		<h3><a name="Concepts"></a>Concepts</h3>
+		<p><ul class="concepts_list"><li>Proximity Browsing: <span class="blacktext">The so called Proximity Browsing mode
+			helps you analyze large graphs. Instead of showing all the nodes and edges in the graph, only
+		a subset of the nodes and edges are shown. Proximity Browsing works by hiding all nodes and edges which are
+		not in the direct neighborhood of the currently selected nodes. Whenever a node selection changes, the
+			neighborhood of the selected nodes is updated and nodes are hidden or shown depending on whether they
+		are in that neighborhood. This ensures that only relevant nodes are shown at any given moment.</span></li></ul></p>
+		<p><ul class="concepts_list"><li>Node Tags: <span class="blacktext">
+			Individual nodes of a graph can be tagged
+		with so called node tags. This makes it easy to categorize different nodes into groups. 
+			Node tags can either be set and unset by manual interaction or by 
+			using one of the various methods BinNavi provides to select nodes on 
+			either behavior or location in the graph.</span></li></ul></p>
+		<p><ul class="concepts_list"><li>Debugging: <span class="blacktext">If a debugger was configured for the module
+		that contains the view shown in the graph window, the executable on 
+			which the disassembly is based can be debugged from the graph window.</span></li></ul></p>
+		<h3><a name="Description"></a>Description</h3>
+		<h4>The main menu</h4>
+		
+		<p>The main menu on top of the graph window provides access to many different
+		functions. At first there is the <span class="gui_ref">View</span> menu. It provides
+		functions related to the view itself.</p>
+		<ul>
+			<li><span class="gui_ref">View/Save View</span>: Saves the view to the database.</li>
+			<li><span class="gui_ref">View/Save View As</span>: Saves a copy of 
+			the view to the database.</li>
+			<li><span class="gui_ref">View/Clone View</span>: Creates a copy of 
+			the current view and opens it.</li>
+			<li><span class="gui_ref">View/Change View Description</span>: Shows a dialog where 
+			you can change the name and description of the view.</li>
+			<li><span class="gui_ref">View/Print View</span>: Prints the view.</li>
+			<li><span class="gui_ref">View/Export</span>: Saves the view to an image file (several different image formats are supported).</li>
+			<li><span class="gui_ref">View/Close View</span>: Closes the view.</li>
+		</ul>
+		
+		<p>Then there is the <span class="gui_ref">Graph</span> menu. The functions available
+		from this menu are comparable to the ones from the View menu but they are connected
+		more closely to the graph itself.</p>
+		
+		<ul>
+			<li><span class="gui_ref">Graph/Automatic Layouting</span>: Enables or disables automatic layouting. 
+			If automatic layouting is enabled, the graph is layouted 
+			automatically after important changes to its structure.</li>
+			<li><span class="gui_ref">Graph/Proximity Browsing</span>: Enables or disables proximity browsing. 
+			If proximity browsing is enabled, only the nodes in the neighborhood 
+			of the currently selected nodes are shown.</li>
+			<li><span class="gui_ref">Graph/Graph Settings</span>: Shows a dialog where the 
+			appearance and behavior of the graph can be changed.</li>
+			<li><span class="gui_ref">Graph/Proximity Browsing Settings</span>: Shows a dialog where the 
+			behavior of the proximity browsing mode can be changed.</li>
+			<li><span class="gui_ref">Graph/Insert View</span>: Used to load 
+			the graph of another view into the current view.</li>
+			<li><span class="gui_ref">Graph/Delete Selected Nodes</span>: Deletes all selected nodes from the graph.</li>
+			<li><span class="gui_ref">Graph/Delete Unselected Nodes</span>: 
+			Deletes all unselected nodes of the graph.</li>
+			<li><span class="gui_ref">Graph/Delete Invisible Nodes</span>: Deletes all invisible nodes from the graph.</li>
+			<li><span class="gui_ref">Graph/Transform/Inline All Functions:</span> 
+			Inlines all functions called by the active view.</li>
+			<li><span class="gui_ref">Graph/Transform/Show REIL Code:</span> 
+			Translates the active view to REIL code and shows the REIL graph.</li>
+			<li><span class="gui_ref">Graph/Transform/Show Dataflow graph:</span> 
+			Shows a dataflow graph for the active view.</li>
+		</ul>
+		
+		<p>The next menu is the <span class="gui_ref">Selection</span> menu. You 
+		can use this menu to select nodes of the graph in different ways.</p>
+		
+		<ul>
+			<li><span class="gui_ref">Selection/Undo Last Selection</span>: Restores the former selection state after a selection changed.</li>
+			<li><span class="gui_ref">Selection/Redo Last Selection</span>: Restores the last selection state after a former selection state was restored using Undo.</li>
+			<li><span class="gui_ref">Selection/Group Selection</span>: Creates 
+			a new node group and adds the selected nodes to the group.</li>
+			<li><span class="gui_ref">Selection/Remove Selected Groups</span>: 
+			Removes all selected node groups.</li>
+			<li><span class="gui_ref">Selection/Open/Close Selected Groups</span>: 
+			Toggles the expansion state of all selected node groups.</li>
+			<li><span class="gui_ref">Selection/Select successors of selection</span>: Selects all successors of the currently selected nodes.</li>
+			<li><span class="gui_ref">Selection/Select ancestors of selection</span>: Selects all ancestors of the currently selected nodes.</li>
+			<li><span class="gui_ref">Selection/Invert selection</span>: Selects all unselected nodes and unselects all selected nodes.</li>
+			<li><span class="gui_ref">Selection/Expand selection down</span>: Selects the direct children of all selected nodes.</li>
+			<li><span class="gui_ref">Selection/Expand selection up</span>: Selects the direct parents of all selected nodes.</li>
+			<li><span class="gui_ref">Selection/Expand selection</span>: Selects the direct children and parents of all selected nodes.</li>
+			<li><span class="gui_ref">Selection/Shrink selection up</span>: Unselects all selected nodes without incoming edges from selected nodes.</li>
+			<li><span class="gui_ref">Selection/Shrink selection down</span>: Unselects all selected nodes without outgoing edges to selected nodes.</li>
+			<li><span class="gui_ref">Selection/Shrink selection</span>: Unselects all selected nodes without incoming edges from selected nodes or outgoing edges to selected nodes.</li>
+			<li><span class="gui_ref">Selection/Select by Criteria</span>: Shows a dialog where 
+			you can select nodes using more complicated criteria.</li>
+		</ul>
+		
+		<p>The next menu is the <span class="gui_ref">Search</span> menu. In this menu
+		the Search settings can be configured that are used by the Search field in the
+		tool bar.</p>
+		
+		<ul>
+			<li><span class="gui_ref">Search/Visible Only Search</span>: If enabled only visible nodes are considered during a search.</li>
+			<li><span class="gui_ref">Search/Selected Only Search</span>: If enabled only selected nodes are considered during a search.</li>
+			<li><span class="gui_ref">Search/Case Sensitive Search</span>: If enabled the search is performed case-sensitively.</li>
+			<li><span class="gui_ref">Search/Regular Expression Search</span>: If enabled the search interprets the search string as a regular expression. 
+			The regular expression syntax used in the search field is equivalent 
+			to the Java regular expression syntax.</li>
+		</ul>
+		
+		<p>The next menu is the Plugins menu. You can use this menu to open a 
+		scripting dialog which you can use to manipulate the active graph. Furthermore, many plugins that work on 
+		views extend this menu to make their functionality accessible.</p>
+		<ul>
+			<li><span class="gui_ref">Plugins/New Scripting Window</span>: 
+			Opens a new scripting dialog that can be used to work with the 
+			current graph</li>
+			<li><span class="gui_ref">Plugins/Log Window</span>: Opens the 
+			plugin log console window.</li>
+		</ul>
+		<p>&nbsp;The last menu is the Window menu.</p>
+		<ul>
+			<li><span class="gui_ref">Window/Standard Perspective</span>: 
+			Switches the graph window into the standard perspective.</li>
+			<li><span class="gui_ref">Window/Debug Perspective</span>: Switches 
+			the graph window into the debug perspective.</li>
+			<li><span class="gui_ref">Window/Show Available Hotkeys</span>: Shows 
+			a dialog that lists the available hotkeys.</li>
+			<li><span class="gui_ref">Window/Context help</span>: Enables 
+			context-sensitive help for the graph window.</li>
+		</ul>
+		
+		<h4>The tool bar</h4>
+		
+		<p>Like the main menu, the tool bar is another way to quickly access many useful
+		graph operations.</p>
+		
+		<p class="style2"><img alt="" src="../images/gw_toolbar.png" /></p>
+		
+		<p>The following buttons are part of the tool bar:</p>
+		
+		<ul>
+			<li><span class="gui_ref">Zoom In</span>: Zooms into the graph.</li>
+			<li><span class="gui_ref">Zoom Out</span>: Zooms out of the graph.</li>
+			<li><span class="gui_ref">Zoom Selected</span>: Zooms to make all selected nodes visible.</li>
+			<li><span class="gui_ref">Fit to Screen</span>: Zooms to make the whole graph visible.</li>
+			<li><span class="gui_ref">Toggle Magnifying Mode</span>: Switches magnifying mode on/off. 
+			In magnifying mode you can use a magnifying glass to zoom into the 
+			graph.</li>
+			<li><span class="gui_ref">Toggle Freeze Mode</span>: Switches freeze mode on/off. 
+			If freeze mode is enabled, changes in the node selection do not 
+			trigger proximity browsing updates.</li>
+			<li><span class="gui_ref">Circular Layout</span>: Layouts the graph in circular mode.</li>
+			<li><span class="gui_ref">Orthogonal Layout</span>: Layouts the graph in orthogonal mode.</li>
+			<li><span class="gui_ref">Hierarchic Layout</span>: Layouts the graph in hierarchic mode.</li>
+			<li><span class="gui_ref">Select successors of selection</span>: Equivalent to the menu <span class="gui_ref">Selection/Select 
+			successors of selection</span></li>
+			<li><span class="gui_ref">Select ancestors of selection</span>: Equivalent to the menu <span class="gui_ref">Selection/Select 
+			ancestors of selection</span></li>
+			<li><span class="gui_ref">Invert selection</span>: Equivalent to the menu <span class="gui_ref">Selection/Invert selection</span></li>
+			<li><span class="gui_ref">Select by Criteria</span>: Equivalent to the menu <span class="gui_ref">Selection/Select by Criteria</span></li>
+			<li><span class="gui_ref">Delete Selected Nodes</span>: Equivalent to the menu <span class="gui_ref">Graph/Delete Selected Nodes</span></li>
+			<li><span class="gui_ref">Delete Selected Nodes (Keep Edges)</span>: 
+			Deletes the selected nodes of the graph and connects the parents of 
+			the deleted nodes with the children of the deleted nodes.</li>
+			<li><span class="gui_ref">Change the color of selected nodes</span>: Shows a dialog where 
+			you can change the background color of the currently selected nodes.</li>
+		</ul>
+		
+		<p class="style2">
+		<img alt="" height="34" src="../images/gw_toolbar_2.png" width="653" /></p>
+		
+		<p>In addition to the buttons, the tool bar provides an address 
+		field and a search field. You can use the address field to jump to the 
+		node that contains a given address. You can use the search field to search through the graph.
+		The exact behavior of the search can be configured through the <span class="gui_ref">Search</span> menu.</p>
+		
+		<p>To search for a search string, you can enter a string in the search field and hit Enter. The first time 
+		you hit Enter, all occurrences of the search string in the graph are highlighted. Consecutive hits of the Enter key
+		show the individual hits. To go back to an earlier hit, you can use CTRL-Enter. 
+		A click on the <span class="gui_ref">Results</span> button shows a list 
+		of all search results.</p>
+		
+		<h4>The Graph View</h4>
+		
+		<p class="style2"><img alt="" src="../images/gw_graph.png" /></p>
+		
+		<p>The Graph View is the central part of the graph window. This is the 
+		part where you can view and work with disassembled code. Using the left mouse button 
+		you can select one or more graph nodes. Using the right mouse button you can navigate through the graph by
+		dragging the graph view. Depending on the current settings (see the section about 
+		<a href="graph_settings.htm">Graph Settings</a>)
+		it is also possible to zoom or scroll the graph window with the mouse wheel.</p>
+		
+		<p>
+		Each graph contains up to five different types of nodes. Disassembled code is shown in so called
+		code nodes, whole functions are represented by so called function nodes, large comments can be put
+		in comment nodes,&nbsp; proximity browsing nodes you navigate while proximity browsing mode is active, 
+		and group nodes let you organize your disassembly. All five types of nodes behave slightly differently and offer different options when 
+		you right-click
+		on them to bring up a context menu. Also the menu is context aware in 
+		regards to where the cursor was located within the node when the right 
+		click was triggered such that a right click on a register yields 
+		slightly different results in the context menu then right clicking on a 
+		local variable.</p>
+		
+		<p class="style2">
+		<img alt="" src="../images/gw_codemenu.png" width="618" /></p>
+		
+		<p>The context menu of code nodes offers the following functions:</p>
+		
+		<ul>
+			<li><span class="gui_ref">Edit Comments</span>: Shows a dialog where 
+			you can edit the node and instruction comments of the code node.</li>
+			<li><span class="gui_ref">Create Comment Node</span>: Creates a comment node that is attached to the code node. 
+			You can store larger comments in comment nodes.</li>
+			<li><span class="gui_ref">Selection/Select predecessors</span>: Selects all predecessors of the node.</li>
+			<li><span class="gui_ref">Selection/Select successors</span>: Selects all 
+			successors of the node.</li>
+			<li><span class="gui_ref">Selection/Select nodes from the same 
+			function</span>: Selects all nodes that belong to the same function 
+			as the clicked node</li>
+			<li><span class="gui_ref">Open Subfunction</span>: Opens a function in a new graph window. This option is offered for each function that is called from the code in the code node.</li>
+			<li><span class="gui_ref">Inline Subfunction</span>: Replaces a function call in the code with the code from the called function. This option is offered for each function that is called from the code in the code node.</li>
+			<li><span class="gui_ref">Unline Subfunction</span>: Undos are 
+			previously performed inlining operation. This operation is only 
+			available if you are clicking on an inlined node.</li>
+			<li><span class="gui_ref">Tag Node</span>: Tags the node with the tag that is currently selected in the tag tree.</li>
+			<li><span class="gui_ref">Tag selected Nodes</span>: Tags all selected nodes with the tag that is currently selected in the tag tree.</li>
+			<li><span class="gui_ref">Clipboard/Copy address to clipboard</span>: 
+			Copies the address of the clicked line to the clipboard.</li>
+			<li><span class="gui_ref">Clipboard/Copy line to clipboard</span>: Copies the 
+			clicked code line to the clipboard.</li>
+			<li><span class="gui_ref">Clipboard/Copy node to clipboard</span>: Copies all the lines from the code node to the clipboard.</li>
+			<li><span class="gui_ref">Instruction/Toggle Breakpoint</span>: Sets or removes a breakpoint from the 
+			clicked line.</li>
+			<li><span class="gui_ref">Instruction/Toggle Breakpoint Status</span>: Enables or disables a breakpoint from the 
+			clicked line.</li>
+			<li><span class="gui_ref">Instruction/Add Bookmark</span>: Adds a 
+			code bookmark to the instruction.</li>
+			<li><span class="gui_ref">Instruction/Operands</span>: Contains 
+			various operations for working with instruction operands. You can 
+			use this menu to track the effects of registers for example.</li>
+			<li><span class="gui_ref">Instruction/Advanced/Delete Instruction</span>: 
+			Removes the instruction from the node.</li>
+			<li><span class="gui_ref">Instruction/Advanced/Split node after 
+			instruction</span>: Splits the node into two nodes.</li>
+			<li><span class="gui_ref">Instruction/Advanced/Show REIL code</span>: 
+			Shows the REIL code of the node.</li>
+			<li><span class="gui_ref">Create type substitution</span>: Opens a 
+			dialog to create a type substitution. This menu item is available 
+			when the right-click was performed with a register under the cursor.</li>
+			<li><span class="gui_ref">Edit type substitution</span>: Opens a 
+			dialog to edit a type substitution. This menu item is available when 
+			the right-click was performed with a type substitution under the 
+			cursor.</li>
+			<li><span class="gui_ref">Delete type substitution</span>: Deletes a 
+			type substitution. This menu item is available when the right-click 
+			was performed with a type substitution under the cursor.</li>
+		</ul>
+		
+		<p>Depending on what parts of the code node you click on, additional 
+		menus become available.</p>
+		<p>If you click on a numeric literal operand you can choose whether this 
+		numerical value is shown as a decimal value, a hexadecimal value, or an 
+		ASCII character value. If you click on a local variable, a global 
+		variable, or a function you can change their names. If you click on a 
+		register you can create a type substitution for the register or remove 
+		it. Also the Operands sub menu will be presented more prominently to 
+		ease the workflow for operand related operations. </p>
+		<p>Since function nodes represent whole functions their context menus 
+		necessarily look quite different.</p>
+		
+		<p class="style2">
+		<img alt="" src="../images/gw_functionmenu.png" width="638" /></p>
+		
+		<p>The context menu of function nodes offers nearly the same options as the context menu
+		of code nodes. The options for breakpoints only become available when a 
+		debugger has been configured and a debug session is running.</p>
+		
+		<ul>
+			<li><span class="gui_ref">Edit Comments</span>: Shows a dialog where 
+			you can edit the node and function comments of the function.</li>
+			<li><span class="gui_ref">Create Comment Node</span>: Creates a comment node that is attached to the function node. 
+			You can store larger comments in comment nodes.</li>
+			<li><span class="gui_ref">Selection/Select predecessors</span>: Selects all predecessors of the node.</li>
+			<li><span class="gui_ref">Selection/Select successors</span>: Selects all 
+			successors of the node.</li>
+			<li><span class="gui_ref">Open function</span>: Opens the function represented by the function node in a new graph window.</li>
+			<li><span class="gui_ref">Inline function</span>: Replaces the function node by the code nodes that form the function.</li>
+			<li><span class="gui_ref">Tag Node</span>: Tags the node with the tag that is currently selected in the tag tree.</li>
+			<li><span class="gui_ref">Tag Selected Nodes</span>: Tags all selected nodes with the tag that is currently selected in the tag tree.</li>
+			<li><span class="gui_ref">Clipboard/Copy line to clipboard</span>: Copies the 
+			clicked line to the clipboard.</li>
+			<li><span class="gui_ref">Clipboard/Copy node to clipboard</span>: Copies all the lines from the function node to the clipboard.</li>
+			<li><span class="gui_ref">Function/Toggle Breakpoint</span>: Sets or removes a breakpoint from the beginning of the function.</li>
+			<li><span class="gui_ref">Function/Toggle Breakpoint Status</span>: Enables or disables a breakpoint at the beginning of the function.</li>
+		</ul>
+		
+		<p>You can use group nodes to group arbitrary sets of nodes into a single 
+		group. Since it is possible to collapse group nodes, you can 
+		replace the appearance of the nodes inside the group by a single group 
+		node that is shown in the graph. This is useful when you are doing a 
+		bottom-up style of reverse engineering where you discover more and more 
+		abstract information along the way.</p>
+		<p class="style2">
+		<img alt="" src="../images/gw_groupmenu.png" width="639" /></p>
+		<p>The context menu of group nodes offers the following options:</p>
+		<ul>
+			<li><span class="gui_ref">Edit Group Comment</span>: Edits the text 
+			that is shown when a group node is collapsed.</li>
+			<li><span class="gui_ref">Collapse Group</span>: Collapses expanded 
+			group nodes.</li>
+			<li><span class="gui_ref">Expand Group</span>: Expands collapsed 
+			group nodes.</li>
+			<li><span class="gui_ref">Remove Group</span>: Removes the group 
+			node from the graph.</li>
+		</ul>
+		
+		<p>Comment nodes can only be deleted or have their text changed. This is reflected in the context menu
+		that is shown when you right-click on a comment node.</p>
+		
+		<p class="style2">
+		<img alt="" src="../images/gw_commentmenu.png" width="638" /></p>
+		
+		<p>Edges that connect the nodes of a graph play another important role in the graph view. Like nodes
+		they support left-clicks and right-clicks too. When you left-click on a node, the screen is
+		zoomed to the target of the edge. This makes it easy to quickly follow 
+		control flow paths in the graph.</p>
+		
+		<p class="style2"><img alt="" src="../images/gw_edgemenu.png" /></p>
+		
+		<p>When you right-click on an edge, a context menu is shown that offers the following options:</p>
+		
+		<ul>
+			<li><span class="gui_ref">Zoom to Source and Destination Node</span>: Zooms the graph to make the source and destination nodes of the edge visible.</li>
+			<li><span class="gui_ref">Zoom to Source Node</span>: Zooms the graph to make the source node of the edge visible.</li>
+			<li><span class="gui_ref">Zoom to Destination Node</span>: Zooms the graph to make the destination node of the edge visible.</li>
+			<li><span class="gui_ref">Delete Edge</span>: Deletes the edge from the graph.</li>
+			<li><span class="gui_ref">Edit Edge Comments</span>: Shows a dialog where the comment text shown on the edge can be changed.</li>
+		</ul>
+		
+		<p>The last of the graph nodes is the circular proximity browsing node. 
+		If proximity browsing mode is active and some graph nodes are hidden, 
+		proximity browsing nodes are attached to the visible graph nodes&nbsp;that 
+		give information about the number of hidden graph nodes.</p>
+		<p class="style2">
+		<img alt="" height="394" src="../images/gw_proxymenu.png" width="505" /></p>
+		<p>In the screenshot above two proximity browsing nodes are visible. You can see from the numbers 3 and 20 that the function CreateProcessInternalA has 20 outgoing edges and 3 incoming edges 
+		connected to nodes that are currently hidden.</p>
+		<p>Right-clicking on a proximity browsing node brings up a context menu 
+		with the following options:</p>
+		<ul>
+			<li><span class="gui_ref">Unhide Nodes</span>: Shows the hidden nodes.</li>
+			<li><span class="gui_ref">Unhide All Parents</span>: Shows all invisible predecessor nodes of the 
+			node.</li>
+			<li><span class="gui_ref">Unhide All Children</span>: Shows all invisible successor nodes of the 
+			node.</li>
+			<li><span class="gui_ref">Unhide and select only</span>: Shows and selects the hidden nodes.</li>
+			<li><span class="gui_ref">Unhide and add to selection</span>: Shows the hidden nodes and adds 
+			them to the current selection.</li>
+		</ul>
+		<h3>The GUI elements of the Standard Perspective</h3>
+		
+		<h4>The Graph Overview</h4>
+		
+		<p>The Graph Overview is a small graph view in the upper left corner of the graph window. This overview
+		displays a minimal version of the graph and highlights the part of the graph that is currently visible
+		in the graph view. You can navigate through the graph by clicking
+		on the graph overview, by dragging the mouse in the graph overview, or by using the arrow keys if
+		the graph overview has the input focus. You can also change the visible section of the graph
+		using the graph overview. To do so, you click on and drag the small black square in the lower right corner
+		of the rectangle that represents the visible part of the graph.
+		
+		<p class="style2"><img alt="" src="../images/gw_overview.png" /></p>
+		
+		<h4>The Graph Nodes List</h4>
+		
+		<p>The Graph Nodes List is another way to quickly navigate through the graph. This list
+		is a small table on the left side of the graph window that lists information about each node of
+		the graph.</p>
+		
+		<p class="style2"><img alt="" src="../images/gw_graphnodes.png" /></p>
+		
+		<p>Four different pieces of information are given about each node. The first column of the table
+		contains the number of edges ending at the node while the second column contains the number
+		of edges starting at the node. The third column contains a small description of the node which
+		varies depending on the type of the node. The fourth column shows the background color of the node.</p>
+		
+		<p>Several different navigation options are available in the table. A single left-click on
+		a row of the table changes the selection state of the corresponding node. A selected node is deselected while
+		an unselected node is selected. A single right-click on the table centers the corresponding
+		node on the screen while a double right-click centers the node and zooms into the graph to
+		maximize the node.</p>
+		
+		<p>The rows of the Graph Nodes List can have different text colors. If a row is printed in
+		black color, the corresponding node is visible. If a row is printed in red color, the node
+		is visible and selected. If a row is printed in gray color, the node is currently hidden
+		by the proximity browsing mode.</p>
+		
+		<h4>The Selection History</h4>
+		
+		<p>In the lower left part of the graph window you can find the Selection History 
+		panel that contains a list of previous node selection states. Every time
+		the selection state of a node changes, a snapshot of the selection state is made and put
+		into the list. You can use this list to return to earlier selection states.</p>
+		
+		<p class="style2"><img alt="" src="../images/gw_selhist.png" /></p>
+		
+		<p>The elements of the Selection History list are either so called selection groups or
+		simple selections. A simple selection is a selection state where just one node is selected.
+		A selection group is a selection state where more than one node of the graph is selected.
+		In either case it is possible to return to the whole selection state (by clicking on the
+		Selection Group or Selection node) or to change the selection state of a single graph node (by
+		clicking on the corresponding tree node).</p>
+
+		<p>Like the entries in the Graph Nodes list, the nodes of the Selection History tree change
+		color depending on the selection state and the visibility state of the corresponding nodes. The
+		colors used in both controls are the same with one difference. Since groups of the Selection
+		History tree can be partly selected and partly invisible a light red color is used to denote
+		selection groups with this state.</p>
+				
+		<h4>The Tagging Panel</h4>
+		
+		<p>The Tagging Panel on the right side of the graph window is used to create new
+		node tags and to assign the tags to nodes of the graph.</p>
+		
+		<p class="style2"><img alt="" src="../images/gw_tagging.png" /></p>
+		
+		<p>A right-click on the tagging panel brings up a context-menu that can be used
+		to create a new Root Tag (like the tag <span class="gui_ref">Analyzed</span> in the screenshot). Subsequent
+		right-clicks on existing tags brings up a more advanced context menu with the
+		following options.</p>
+		
+		<ul>
+			<li><span class="gui_ref">Add Tag to Selected Nodes</span>: Assigns the tag to all currently selected nodes.</li>
+			<li><span class="gui_ref">Remove Tag from Selected Nodes</span>: Removes the tag from all currently selected nodes.</li>
+			<li><span class="gui_ref">Remove Tag from all Nodes</span>: Removes the tag from all nodes.</li>
+			<li><span class="gui_ref">Append Tag</span>: Appends a new child-tag to the tag.</li>
+			<li><span class="gui_ref">Inserts Tag</span>: Inserts a new child-tag between the tag and its existing child tags.</li>
+			<li><span class="gui_ref">Edit Tag Description</span>: Shows a dialog where 
+			you can edit the name and the description of the tag.</li>
+			<li><span class="gui_ref">Delete Tag</span>: Deletes the tag from the database.</li>
+			<li><span class="gui_ref">Delete Subtree</span>: Deletes the tag and all of its children from the database.</li>
+		</ul>
+		
+		<p>For each existing tag, all nodes tagged with that tag are also shown in the Tagging tree. A right-click
+		on the Tagged Nodes tree nodes brings up a context menu with the following options:</p>
+		
+		<ul>
+			<li><span class="gui_ref">Select Nodes</span>: Selects all nodes which are part of this tag group.</li>
+			<li><span class="gui_ref">Select Visible Nodes</span>: Selects all visible nodes which are part of this tag group.</li>
+			<li><span class="gui_ref">Select Subtree Nodes</span>: Selects all nodes which are part of this tag group or of its children.</li>
+			<li><span class="gui_ref">Select Visible Subtree Nodes</span>: Selects all visible nodes which are part of this tag group or of its children.</li>
+			<li><span class="gui_ref">Unselect Nodes</span>: Deselects all nodes which are part of this tag group.</li>
+			<li><span class="gui_ref">Unselect Subtree Nodes</span>: Deselects all nodes which are part of this tag group or of its children.</li>
+		</ul>
+		
+		<p>The meaning of the colors used in the tagging panel equal the ones from the selection history panel.</p>
+		
+		<a name="type_editor"></a></abbr><h4>The Type Editor</h4>
+		<p>The type editor on the right hand side of the graph window is used to work 
+		with the type system and displays all available types of the module 
+		/ project of the view. The editor allows you to create / edit / delete types and 
+		assign types to registers in the graph view. Each type belongs to one of 4 categories
+		which are represented by the following icons:</p>
+		<ul>
+			<li>
+			<img alt="yellow icon with an S" height="16" src="compound_type.png" width="16" />: 
+			Is the icon for compound types.</li>
+			<li>
+			<img alt="red icon with an A" height="16" src="array_type.png" width="16" />: 
+			Is the icon for array types.</li>
+			<li>
+			<img alt="blue icon with a P" height="16" src="pointer_type.png" width="16" />: 
+			Is the icon for pointer types.</li>
+			<li>
+			<img alt="green icon" height="16" src="atomic_type.png" width="16" />: 
+			Is the icon for atomic types.</li>
+		</ul>
+		<p class="style2">
+		<img alt="type editor" height="351" src="../images/type_editor.png" width="380" /></p>
+		<p>A right-click on the type editor brings up a context-menu that can be 
+		used to create a new type (like any of the types in the screenshot) when 
+		no already available type is under the cursor, or it brings up a more 
+		advanced context menu when the right-click is performed on an existing 
+		type --on the root level of the tree-- with the following options:</p>
+		<ul>
+			<li><span class="gui_ref">Edit type</span>: This option brings up a 
+			dialog to edit the selected type. There are 4 different context menus 
+			for each of the type categories, which are described below.</li>
+			<li><span class="gui_ref">Append member</span>: This option brings 
+			up a dialog to append a member to a compound type.</li>
+			<li><span class="gui_ref">Delete type</span>: This option deletes 
+			all currently selected types.</li>
+		</ul>
+		
+		<p>The type editor has support for drag and drop operations. This allows the
+		user to drag a type from the type manager directly into the graph view and drop
+		 it onto a	register. The register which will receive the type substitution,
+		is highlighted while dragging the type. A type substitution is automatically
+		created if a type is dropped onto a register and the graph is updated 
+		with the new type substitution.</p>
+		
+		<h4>Type Editor dialogs</h4>
+		<p>The 4 type editor dialogs are used to create and edit types and are 
+		displayed in two different forms depending on the context of the dialog. 
+		In the case of an edit only the dialog appropriate to the type will be 
+		displayed. In the case of adding a new type all 4 type editor dialogs 
+		will be displayed in one window tabbed.</p>
+		<p class="style2">
+		<img alt="atomic type dialog" height="298" src="../images/create_atomic_type.png" width="508" /></p>
+		<p class="style1">The dialog to create and edit atomic types has four 
+		different elements:</p>
+		<ul>
+			<li><span class="gui_ref">Name</span>: The name of the type to add 
+			/ edit.</li>
+			<li><span class="gui_ref">Name</span>: The size of the type in bits.</li>
+			<li><span class="gui_ref">Signed</span>: A check box if checked the 
+			type is able to represent signed numbers.</li>
+			<li><span class="gui_ref">Preview</span>: A preview of the type 
+			definition.</li>
+		</ul>
+		<p class="style2">
+		<img alt="pointer type dialog" height="298" src="../images/create_pointer_type.png" width="508" /></p>
+		<p class="style1">
+		The dialog to create and edit pointer types has three different 
+		elements:</p>
+		<ul>
+			<li><span class="gui_ref">Base type</span>: The base type of the pointer, select integer for a pointer to an integer.</li>
+			<li><span class="gui_ref">Pointer level</span>: The level of the 
+			pointer, select 1 for a normal pointer, 2 for a pointer to a 
+			pointer, ...</li>
+			<li><span class="gui_ref">Preview</span>: A preview of the type definition.</li>
+		</ul>
+		<p class="style2">
+		<img alt="compound type dialog" height="298" src="../images/create_data_structure.png" width="508" /></p>
+		<ul>
+			<li><span class="gui_ref">Name</span>: The name of the compound 
+			type.</li>
+			<li><span class="gui_ref">Size (bytes)</span>: The size of the 
+			compound type in bytes.</li>
+			<li><span class="gui_ref">Fill with</span>: The type to initially 
+			fill the compound type with.</li>
+			<li><span class="gui_ref">Preview</span>: A preview of the type 
+			definition.</li>
+		</ul>
+		<p class="style2">
+		<img alt="array type dialog" height="298" src="../images/create_array.png" width="508" /></p>
+		<ul>
+			<li><span class="gui_ref">Element type</span>: The element type of the array, integer for an array of integers.</li>
+			<li><span class="gui_ref">Number of elements</span>: The number of elements in the array.</li>
+			<li><span class="gui_ref">Preview</span>: A preview of the type definition</li>
+		</ul>
+		<p class="style2">
+		<img alt="create type substitution dialog" height="109" src="../images/substitution_dialog.png" width="483" /></p>
+		<p class="style1">The create / edit type substitution dialog is shown 
+		on right-clicks for register operands of an instruction since these are the only elements which 
+		can have a type associated to them. The fields in the dialog are the 
+		following:</p>
+		<ol>
+			<li><span class="gui_ref">Offset (in bits)</span>: This field is 
+			optional and is only enabled when the selected type in the combo box 
+			is a compound type, i.e. a struct. Normally you do not have to 
+			fill anything in here as the type system automatically determines 
+			the offset into the struct. But there are cases when you want to 
+			manually specify the offset into a struct and this is the field to 
+			do it. </li>
+			<li><span class="gui_ref">Operator selection radio button</span>: 
+			Determines if the register is a pointer or a value type of the 
+			selected type. </li>
+			<li><span class="gui_ref">Type selector combo box</span>: The type 
+			for the type substitution.</li>
+		</ol>
+		<h4>Variables </h4>
+		<p>The Variables panel is the first panel shown at the bottom of the 
+		graph window in the standard perspective. This panel shows the global 
+		and local variables referenced in the currently open view. Selecting 
+		either a global or local variable in this panel highlights them in the 
+		graph. Right click on a variable allows a rename of the variable. </p>
+		<p class="style2">
+		<img alt="Variables panel" src="../images/gw_variables_panel.pgn.png" width="627" /></p>
+		<h4>Calling Functions</h4>
+		<p>The Calling Functions panel is the second panel shown at the bottom of 
+		the graph window in standard perspective. This panel shows a list of 
+		functions that call the functions of the active view. This means if 
+		there is a basic block that belongs to function X in the active view, 
+		all functions that calls function X are listed in the table.</p>
+		<p class="style2">
+		<img alt="" src="../images/gw_calling_functions.png" width="606" /></p>
+		<p>Right-clicking on the table shows a popup menu that allows you to quickly open calling functions.</p>
+		<h4>Register Tracking</h4>
+		<p>The Register Tracking panel shows the results of a register tracking 
+		operation. You can track the usage of registers by right-clicking on an 
+		instruction and selecting the register you want to track through the
+		<span class="gui_ref">Instructions / Operands</span> menu. The Register 
+		Tracking algorithm then calculates and shows the registers that depend 
+		on the selected register.</p>
+		<p class="style2">
+		<img alt="" src="../images/gw_register_tracking.png" width="602" /></p>
+		<p>The table that shows the results of the Register Tracking calculation 
+		contains the following columns:</p>
+		<ul>
+			<li><span class="gui_ref">Status</span>: Shows the effects of the 
+			instruction on the tracked register.<ul>
+				<li>Start: The instruction where the tracking operation started.</li>
+				<li>Depends on tracked register: Uses the tracked register in 
+				some way.</li>
+				<li>Clears tracked register: The tracked register is overwritten 
+				by this instruction but some indirect effects of the tracked 
+				register are still active.</li>
+				<li>Clears some effects: Clears some indirect effects of the 
+				tracked register.</li>
+				<li>Clears all effects: The tracked register does not have any 
+				effects beyond this instruction.</li>
+				<li>Updates tainted register: The tracked register is read and 
+				written in this instruction.</li>
+				<li>Reads tainted register: The tracked register is used in a 
+				read operation which does not taint the target register.</li>
+			</ul>
+			</li>
+			<li><span class="gui_ref">Address</span>: The address of the 
+			instruction described in the row.</li>
+			<li><span class="gui_ref">Instruction</span>: The instruction 
+			described in the row.</li>
+			<li><span class="gui_ref">Reads</span>: Tracked registers is used by 
+			the instruction as source.</li>
+			<li><span class="gui_ref">Updates</span>: Any register in the taint 
+			set which was in the taint set before the instruction and the 
+			instructions writes to it.</li>
+			<li><span class="gui_ref">Defines</span>: This register is newly 
+			added to the tainted set.</li>
+			<li><span class="gui_ref">Undefines</span>: This register is newly 
+			removed from the tainted set.</li>
+			<li><span class="gui_ref">Tainted</span>: The current set of tainted 
+			registers.</li>
+		</ul>
+		<p>Once Register Tracking calculated something, you can select rows 
+		of the results table to show the results directly in the main graph. By 
+		double-right-clicking on individual rows of the table, you can 
+		directly jump to individual instructions of the results table.</p>
+		<p class="style2">
+		<img alt="" src="../images/gw_register_tracking_2.png" width="590" /></p>
+		<p>To clear all effects from the graph, you can click the left 
+		button of the Results toolbar. The right button creates a new graph from 
+		the register tracking results that only contains the instructions from 
+		the results table.</p>
+		<p>By default, function calls always clear all tracked effects 
+		because the algorithm assumes that function calls overwrite all 
+		registers. You can change this default behavior in the Settings tab 
+		of Register Tracking. To only clear some registers for each function 
+		call uncheck the &quot;clears all registers&quot; check box and supply a list of 
+		comma separated register names in the text field below.</p>
+		<h4>Special Instructions</h4>
+		<p>You can highlight instructions that read from the memory, write to 
+		the memory, or call subfunctions in the graph. This makes it quick and 
+		easy to get an overview of the important instructions of a function.</p>
+		<p>&nbsp;To highlight special instructions you use the Special 
+		Instructions panel.</p>
+		<p class="style2">
+		<img alt="" src="../images/gw_special_instructions.png" width="587" /></p>
+		<p>In the Options tab you can select what instructions you want to 
+		highlight in the graph and what color should be used to display them.
+		</p>
+		<h4>Code Bookmarks</h4>
+		<p>Code bookmarks allow you to quickly navigate to known 
+		instructions in the graph. Setting a code bookmark is done through the
+		<span class="gui_ref">Instruction / Add Bookmark</span> context menu 
+		that appears when right-clicking on an instruction. Returning to a 
+		previously defined instruction is done by clicking on a row of the Code 
+		Bookmarks table.</p>
+		<p class="style2">
+		<img alt="" src="../images/gw_code_bookmarks.png" width="605" /></p>
+		<h3><a name="Hotkeys"></a>The GUI elements of the Debug Perspective</h3>
+		<h3>Registers</h3>
+		<p>When you are debugging a target process, its current register values are shown on the left-hand side of the graph window. 
+		Right above the registers values, the currently active debugger can be 
+		selected if more than one debugger is configured for the active view.&nbsp;</p>
+		<p class="style2">
+		<img alt="" src="../images/gw_register_values.png" />&nbsp;</p>
+		<p>When you right-click on a register value a context menu with the 
+		following options appears:</p>
+		<ul>
+			<li><span class="gui_ref">Copy value to the clipboard</span>: Copies 
+			the register value to the clipboard.</li>
+			<li><span class="gui_ref">Goto offset</span>: Shows the memory 
+			content at the location pointed to by the register value.</li>
+			<li><span class="gui_ref">Zoom to Instruction</span>: Zooms to the 
+			instruction at the register value address. This menu is only 
+			available if there is an instruction with that address in the 
+			current view.</li>
+			<li><span class="gui_ref">Search View</span>: Searches for views 
+			that contain the instruction at the register value address.</li>
+		</ul>
+		<h4>The Debugger Toolbar</h4>
+		<p>The&nbsp; Debugger Toolbar provides many functions that are available 
+		for controlling execution of the the target process.</p>
+		<p class="style2">
+		<img alt="" src="../images/gw_debugger_toolbar.png" />&nbsp;</p>
+		<p>From left to right, the buttons of the debugger toolbar have the 
+		following meaning:</p>
+		<ul>
+			<li>Attach: Connects to the specified debug client.</li>
+			<li>Detach: Detaches the debugger from the target process. The 
+			target process keeps running.</li>
+			<li>Terminate: Terminates the target process.</li>
+			<li>Step Into: Executes the next assembly instruction.</li>
+			<li>Step Over: Executes the next assembly instruction but jumps over 
+			function calls.</li>
+			<li>Step to next block: Executes all assembly instructions until the 
+			next basic block is reached.</li>
+			<li>Step to end of function: Executes all assembly instructions 
+			until the end of the function is reached.</li>
+			<li>Resume: Resumes the target process.</li>
+			<li>Start Trace Mode: Starts trace mode.</li>
+			<li>Stop Trace Mode: Stops trace mode.</li>
+		</ul>
+				
+		<h4>Memory</h4>
+		<p>The memory panel shows the target memory and the stack view of the 
+		active target process.</p>
+		<p>On the left-hand side you can select what memory region you want 
+		to look at. The selected memory region is then shown in the hex window on 
+		the lower left-hand side.</p>
+		<p>The Stack view is shown on the right-hand side of the panel. In this 
+		view you can take a look at the current content of the stack and 
+		the current location of the stack pointer (shown in red)</p>
+		<p>Please note that all BinNavi debuggers are remote debuggers that do 
+		not update the displayed memory and the displayed stack in real time. 
+		If you suspect that the memory content changed, you have to click on the
+		<span class="gui_ref">Refresh</span> button to reload the memory 
+		manually.</p>
+		<p class="style2"><img alt="" src="../images/gw_debugger.png" /></p>
+		<p>Both the memory view and the stack view provide context menus that 
+		pop on on right-clicks. These menus provide display options as well 
+		options for working with the content of the memory.&nbsp;</p>
+		<h3>Modules</h3>
+		<p>The Modules panel provides an overview of the modules that are 
+		loaded into the address space of the target process. You can use this panel to find out about the names of loaded libraries as well as 
+		their locations and sizes inside the address space.</p>
+		<p class="style2">
+		<img alt="" src="../images/gw_modules.png" width="657" />&nbsp;</p>
+		<p>A context menu is available that allows you to quickly display a 
+		module in the memory view is available on right-click.&nbsp;</p>
+		<h4>Threads</h4>
+		<p>The <span class="gui_ref">Threads</span> panel provides an overview 
+		of the active threads of the target process.</p>
+		<p class="style2">
+		<img alt="" height="184" src="../images/gw_threads.png" width="504" /></p>
+		<h4>Breakpoints</h4>
+		<p>The Breakpoints panel shows a list of all active breakpoints as well 
+		as their current state.</p>
+		<p class="style2">
+		<img alt="" height="339" src="../images/gw_breakpoints.png" width="658" />&nbsp;</p>
+		<p>A context menu for enabling, disabling, and removing breakpoints is 
+		available on right-click. Breakpoints can also be disabled in the graph 
+		code node menu. </p>
+		<h3>Traces</h3>
+		<p>The Traces tab shows all previously recorded traces. The left table 
+		shows the individual trace runs. The center&nbsp; table shows the events 
+		of the currently selected trace run. The right table shows the 
+		individual register values and the acquired memory sections.</p>
+		<p class="style2">
+		<img alt="" src="../images/gw_traces.png" />&nbsp;</p>
+		<p>All three tables have context-menus that provide advanced options for 
+		processing the trace data.</p>
+		<h3>Bookmarks</h3>
+		<p>The Bookmarks panel shows a list of all currently active memory 
+		bookmarks. Memory bookmarks can be used to quickly jump to an address in 
+		the memory view.</p>
+		<p class="style2">
+		<img alt="" height="338" src="../images/gw_bookmarks.png" width="654" />&nbsp;</p>
+		<h3>History</h3>
+		<p>The history panel shows a log of the recently received debugger 
+		events. You can use this panel to get an idea about what exactly is 
+		going on in the target process.</p>
+		<p class="style2">
+		<img alt="" height="272" src="../images/gw_history.png" width="619" /></p>
+		<h3>Debugger Options</h3>
+		<p>The Debugger Options panel is shown in the lower right corner of the 
+		graph window. It provides the following options:</p>
+		<ul>
+			<li><span class="gui_ref">Show Relocated Offsets</span>: Shows 
+			relocated offsets in the graph instead of non-relocated offsets.</li>
+			<li><span class="gui_ref">Show Options</span>: Shows options 
+			available to the configured debugger.&nbsp;</li>
+		</ul>
+		
+		<p>For more information on using BinNavi to debug target processes, please see
+		the <a href="debugging.htm">section about debugging with BinNavi</a> in this manual.</p>
+		
+		<h4>Hotkeys</h4>
+		<p>Except for the hotkeys which are available through the menus and the 
+		toolbar buttons, the following hotkeys can be used in the graph window 
+		(a more complete list of available hotkeys is available through the
+		<span class="gui_ref">Help/Show Available Hotkeys</span> menu of the 
+		graph window):</p>
+		<ul>
+			<li><strong>Enable node content selection:</strong> Press the 
+			mouse-wheel or press ALT and left-click into a node to set a caret 
+			into the node. Using this caret and SHIFT and the arrow keys it is 
+			possible to select the content of the node. Pressing CTRL-C copies 
+			the selected content to the clipboard.</li>
+			<li><strong>Copy the content of all selected nodes:</strong> Press 
+			CTRL-C to copy the content of all selected nodes to the clipboard.</li>
+			<li><strong>Focus the search field:</strong> Press CTRL-F to set the 
+			input focus to the search field in the tool bar.</li>
+			<li><strong>Focus the address field:</strong> Press CTRL-G to set 
+			the input focus to the address field in the tool bar.</li>
+			<li><strong>Select all visible nodes:</strong> CTRL-A selects all 
+			visible nodes of the graph</li>
+			<li><strong>Navigate through the graph tabs:</strong> Use 
+			CTRL-PAGEUP and CTRL-PAGEDOWN to navigate through the open graph 
+			tabs of a graph window.</li>
+			<li><strong>Grey out instructions:</strong> Hold CTRL-SHIFT and 
+			right-click on an assembly code line to grey out the line.</li>
+			<li><strong>Highlight instructions:</strong> Hold CTRL-ALT and 
+			right-click on an assembly code line to highlight the line.</li>
+			<li><strong>Set a breakpoint:</strong> Hold SHIFT (or CTRL) and 
+			right-click on an assembly code line to set a breakpoint on the line 
+			or to remove a breakpoint from the line.</li>
+			<li><strong>Toggle between zooming and scrolling:</strong> Hold CTRL 
+			and use the mouse-wheel to switch between zoom mode and scroll mode 
+			(the default behavior of the mouse wheel can be configured in the 
+			settings dialog).</li>
+			<li><strong>Scroll sideways:</strong> When scrolling with the 
+			mouse-wheel hold ALT to switch between top-down scrolling to 
+			right-left scrolling.</li>
+			<li><strong>Change the size of the magnifying glass:</strong> When 
+			magnifying mode is active, hold CTRL and use the mouse-wheel to 
+			change the size of the magnifying glass.</li>
+		</ul>
+		<p></p>
+		
+		<!-- #EndEditable --></div>
+	<!-- End Left Column -->
+	<!-- Begin Right Column -->
+	<!-- End Right Column -->
+	<!-- Begin Footer -->
+	<div id="footer">
+		<p><a href="../index.htm">Index</a>  
+		| <a href="installation.htm">Installation</a> |
+		<a href="usage.htm">Usage</a> |
+		<a href="debugging.htm">Debugging</a> |
+		<a href="scripting.htm">Scripting</a> |
+		<a href="tutorial.htm">Tutorial</a> |
+		<a href="faq.htm">FAQ</a> |
+		<a href="about.htm">About</a></p>
+		<p>Copyright 2005 - 201<span lang="de">4</span>: <span lang="de">Google</span>
+		<span lang="de">Inc.</span></p>
+	</div>
+	<!-- End Footer --></div>
+<!-- End Container -->
+
+</body>
+
+<!-- #EndTemplate -->
+
+</html>
