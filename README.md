@@ -1,4 +1,4 @@
-BinNavi
+BinNavi [![Build Status](https://api.travis-ci.org/google/binnavi.svg?branch=master)](https://travis-ci.org/google/binnavi)
 =======
 
 Copyright 2015 Google Inc.
