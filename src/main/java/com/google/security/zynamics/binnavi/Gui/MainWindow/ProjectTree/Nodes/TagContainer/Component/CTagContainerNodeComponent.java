@@ -128,13 +128,13 @@ public final class CTagContainerNodeComponent extends CAbstractNodeComponent {
     @Override
     public void deletedTag(final CTagManager manager, final ITreeNode<CTag> parent,
         final ITreeNode<CTag> tag) {
-      // container node can´t be deleted
+      // container node can't be deleted
     }
 
     @Override
     public void deletedTagSubtree(final CTagManager manager, final ITreeNode<CTag> parent,
         final ITreeNode<CTag> tag) {
-      // container node subtree can´t be deleted
+      // container node subtree can't be deleted
     }
 
     @Override
