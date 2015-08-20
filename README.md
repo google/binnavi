@@ -20,7 +20,7 @@ displaying and laying out graphs. This library is immensely powerful, and not
 easily replaceable.
 
 In order to perform direct development using yFiles, you need a developer
-license for it. At the same, we want the community to be able to contribute to
+license for it. At the same time, we want the community to be able to contribute to
 BinNavi without needing a commercial yFiles license. In order to do this and
 conform to the yFiles license, all interfaces to yFiles need to be properly
 obfuscated.
