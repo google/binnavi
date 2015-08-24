@@ -18,9 +18,9 @@ package com.google.security.zynamics.binnavi.Gui.GraphWindows.Implementations;
 import com.google.security.zynamics.binnavi.CUtilityFunctions;
 import com.google.security.zynamics.binnavi.Database.Exceptions.CouldntSaveDataException;
 import com.google.security.zynamics.binnavi.Gui.CProgressDialog;
-import com.google.security.zynamics.binnavi.Gui.ErrorDialog.CNaviErrorDialog;
 import com.google.security.zynamics.binnavi.Gui.GraphWindows.CGraphWindow;
 import com.google.security.zynamics.binnavi.Gui.Loaders.CViewOpener;
+import com.google.security.zynamics.binnavi.Gui.errordialog.NaviErrorDialog;
 import com.google.security.zynamics.binnavi.REIL.CReilViewCreator;
 import com.google.security.zynamics.binnavi.disassembly.INaviModule;
 import com.google.security.zynamics.binnavi.disassembly.views.INaviView;
@@ -72,7 +72,7 @@ public final class CReilConverter {
                 new String[] {"This is an internal error which you can not fix yourself. "
                     + "Please report the bug to the zynamics support team."});
 
-        CNaviErrorDialog.show(parent, innerMessage, innerDescription);
+        NaviErrorDialog.show(parent, innerMessage, innerDescription);
       }
 
       return;

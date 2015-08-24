@@ -13,7 +13,7 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 */
-package com.google.security.zynamics.binnavi.Gui.ErrorDialog;
+package com.google.security.zynamics.binnavi.Gui.errordialog;
 
 /**
  * Contains the default error dialog that should be used to tell users about errors.

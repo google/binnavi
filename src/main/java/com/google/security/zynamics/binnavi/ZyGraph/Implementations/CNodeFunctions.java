@@ -26,13 +26,13 @@ import com.google.common.base.Preconditions;
 import com.google.common.collect.Iterables;
 import com.google.security.zynamics.binnavi.CUtilityFunctions;
 import com.google.security.zynamics.binnavi.Exceptions.MaybeNullException;
-import com.google.security.zynamics.binnavi.Gui.ErrorDialog.CNaviErrorDialog;
 import com.google.security.zynamics.binnavi.Gui.GraphWindows.CGraphModel;
 import com.google.security.zynamics.binnavi.Gui.GraphWindows.CommentDialogs.InitialTab;
 import com.google.security.zynamics.binnavi.Gui.GraphWindows.CommentDialogs.CodeNodeComments.DialogEditCodeNodeComment;
 import com.google.security.zynamics.binnavi.Gui.GraphWindows.CommentDialogs.FunctionComments.CDialogEditFunctionNodeComment;
 import com.google.security.zynamics.binnavi.Gui.GraphWindows.CommentDialogs.Interfaces.IComment;
 import com.google.security.zynamics.binnavi.Gui.GraphWindows.CommentDialogs.TextNodeComments.DialogTextNodeComment;
+import com.google.security.zynamics.binnavi.Gui.errordialog.NaviErrorDialog;
 import com.google.security.zynamics.binnavi.disassembly.CNaviViewEdge;
 import com.google.security.zynamics.binnavi.disassembly.CTextNode;
 import com.google.security.zynamics.binnavi.disassembly.INaviCodeNode;
@@ -125,7 +125,7 @@ public final class CNodeFunctions {
               new String[] {"You can not fix this problem yourself. Please contact "
                   + "the BinNavi support."});
 
-      CNaviErrorDialog.show(parent, message, description, e);
+      NaviErrorDialog.show(parent, message, description, e);
     }
     return null;
   }

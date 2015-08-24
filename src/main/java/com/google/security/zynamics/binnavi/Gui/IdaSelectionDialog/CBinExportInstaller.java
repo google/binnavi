@@ -18,7 +18,7 @@ package com.google.security.zynamics.binnavi.Gui.IdaSelectionDialog;
 import com.google.common.io.ByteStreams;
 import com.google.security.zynamics.binnavi.CMain;
 import com.google.security.zynamics.binnavi.CUtilityFunctions;
-import com.google.security.zynamics.binnavi.Gui.ErrorDialog.CNaviErrorDialog;
+import com.google.security.zynamics.binnavi.Gui.errordialog.NaviErrorDialog;
 import com.google.security.zynamics.zylib.gui.CMessageBox;
 import com.google.security.zynamics.zylib.io.FileUtils;
 
@@ -79,7 +79,7 @@ public final class CBinExportInstaller {
                 + "copying the exporters/BinExport directory from your BinNavi installation "
                 + "to the IDA Pro directory."});
 
-    CNaviErrorDialog.show(parent, innerMessage, innerDescription, exception);
+    NaviErrorDialog.show(parent, innerMessage, innerDescription, exception);
   }
 
   /**

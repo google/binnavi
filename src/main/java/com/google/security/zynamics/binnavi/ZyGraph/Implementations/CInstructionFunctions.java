@@ -18,8 +18,8 @@ package com.google.security.zynamics.binnavi.ZyGraph.Implementations;
 import java.awt.Window;
 
 import com.google.security.zynamics.binnavi.CUtilityFunctions;
-import com.google.security.zynamics.binnavi.Gui.ErrorDialog.CNaviErrorDialog;
 import com.google.security.zynamics.binnavi.Gui.ReilInstructionDialog.CReilInstructionDialog;
+import com.google.security.zynamics.binnavi.Gui.errordialog.NaviErrorDialog;
 import com.google.security.zynamics.binnavi.disassembly.INaviCodeNode;
 import com.google.security.zynamics.binnavi.disassembly.INaviInstruction;
 import com.google.security.zynamics.reil.translators.InternalTranslationException;
@@ -55,7 +55,7 @@ public final class CInstructionFunctions {
               new String[] {"You can not fix this problem yourself. Please contact the "
                   + "BinNavi support."});
 
-      CNaviErrorDialog.show(parent, message, description, exception);
+      NaviErrorDialog.show(parent, message, description, exception);
     }
   }
 
@@ -79,7 +79,7 @@ public final class CInstructionFunctions {
               new String[] {"You can not fix this problem yourself. Please contact the "
                   + "BinNavi support."});
 
-      CNaviErrorDialog.show(parent, message, description, exception);
+      NaviErrorDialog.show(parent, message, description, exception);
     }
   }
 }

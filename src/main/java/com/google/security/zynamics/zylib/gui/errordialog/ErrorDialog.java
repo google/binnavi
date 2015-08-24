@@ -35,15 +35,12 @@ import javax.swing.border.TitledBorder;
 import com.google.security.zynamics.zylib.general.StackTrace;
 import com.google.security.zynamics.zylib.gui.CDialogEscaper;
 
-
 public abstract class ErrorDialog extends JDialog {
-  private static final long serialVersionUID = -2246347447228688878L;
+  private final String description;
 
-  private final String m_description;
+  private final Throwable exception;
 
-  private final Throwable m_exception;
-
-  private final String m_message;
+  private final String message;
 
   public ErrorDialog(final Window owner, final String message, final String description) {
     this(owner, message, description, null);
@@ -53,9 +50,9 @@ public abstract class ErrorDialog extends JDialog {
       final Throwable exception) {
     super(owner, ModalityType.APPLICATION_MODAL);
 
-    m_message = message;
-    m_description = description;
-    m_exception = exception;
+    this.message = message;
+    this.description = description;
+    this.exception = exception;
 
     new CDialogEscaper(this);
 
@@ -74,7 +71,7 @@ public abstract class ErrorDialog extends JDialog {
 
     final JTextField messageField = new JTextField();
     messageField.setEditable(false);
-    messageField.setText(m_message);
+    messageField.setText(message);
     messageField.setBackground(Color.WHITE);
 
     messagePanel.add(messageField);
@@ -88,17 +85,17 @@ public abstract class ErrorDialog extends JDialog {
     final JTextArea descriptionArea = new JTextArea();
 
     descriptionArea.setEditable(false);
-    descriptionArea.setText(m_description);
+    descriptionArea.setText(description);
     descriptionArea.setLineWrap(true);
     descriptionArea.setWrapStyleWord(true);
 
     tabbedPane.addTab("Description", descriptionArea);
 
-    if (m_exception != null) {
+    if (exception != null) {
       final JTextArea traceArea = new JTextArea();
 
       traceArea.setEditable(false);
-      traceArea.setText(StackTrace.toString(m_exception.getStackTrace()));
+      traceArea.setText(StackTrace.toString(exception.getStackTrace()));
 
       tabbedPane.addTab("Stack Trace", new JScrollPane(traceArea));
     }
@@ -108,13 +105,10 @@ public abstract class ErrorDialog extends JDialog {
 
     final JPanel bottomButtonPanel = new JPanel(new BorderLayout());
     final JPanel leftButtonPanelBottom = new JPanel();
-    final JButton sendButton = new JButton(new SendAction());
-
-    sendButton.setMinimumSize(new Dimension(180, sendButton.getHeight()));
 
     final JButton reportButton = new JButton(new ReportAction());
+    reportButton.setMinimumSize(new Dimension(180, reportButton.getHeight()));
 
-    leftButtonPanelBottom.add(sendButton);
     leftButtonPanelBottom.add(reportButton);
 
     bottomButtonPanel.add(leftButtonPanelBottom, BorderLayout.WEST);
@@ -132,19 +126,14 @@ public abstract class ErrorDialog extends JDialog {
 
     if (imgURL != null) {
       return new ImageIcon(imgURL, description);
-    } else {
-      System.err.println("Couldn't find file: " + path);
-      return null;
     }
+    System.err.println("Couldn't find file: " + path);
+    return null;
   }
 
   protected abstract void report();
 
-  protected abstract void send(String description, String message, Throwable exception);
-
   private class CloseButtonListener extends AbstractAction {
-    private static final long serialVersionUID = 2709310936594698502L;
-
     private CloseButtonListener() {
       super("Close");
     }
@@ -156,8 +145,6 @@ public abstract class ErrorDialog extends JDialog {
   }
 
   private class ReportAction extends AbstractAction {
-    private static final long serialVersionUID = -5953309819908682475L;
-
     private ReportAction() {
       super("Report");
     }
@@ -165,19 +152,6 @@ public abstract class ErrorDialog extends JDialog {
     @Override
     public void actionPerformed(final ActionEvent e) {
       report();
-    }
-  }
-
-  private class SendAction extends AbstractAction {
-    private static final long serialVersionUID = -6488875605584243902L;
-
-    private SendAction() {
-      super("Send");
-    }
-
-    @Override
-    public void actionPerformed(final ActionEvent event) {
-      send(m_description, m_message, m_exception);
     }
   }
 }

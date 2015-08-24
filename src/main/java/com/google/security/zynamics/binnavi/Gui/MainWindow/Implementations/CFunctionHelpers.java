@@ -19,10 +19,10 @@ import com.google.common.base.Preconditions;
 import com.google.security.zynamics.binnavi.CUtilityFunctions;
 import com.google.security.zynamics.binnavi.Database.Exceptions.CouldntSaveDataException;
 import com.google.security.zynamics.binnavi.Database.Interfaces.IDatabase;
-import com.google.security.zynamics.binnavi.Gui.ErrorDialog.CNaviErrorDialog;
 import com.google.security.zynamics.binnavi.Gui.FunctionSelection.CFunctionSelectionDialog;
 import com.google.security.zynamics.binnavi.Gui.ResolveFunctions.CResolveAllFunctionDialog;
 import com.google.security.zynamics.binnavi.Gui.ResolveFunctions.CResolveFunctionDialog;
+import com.google.security.zynamics.binnavi.Gui.errordialog.NaviErrorDialog;
 import com.google.security.zynamics.binnavi.disassembly.INaviAddressSpace;
 import com.google.security.zynamics.binnavi.disassembly.INaviFunction;
 import com.google.security.zynamics.binnavi.disassembly.INaviModule;
@@ -73,7 +73,7 @@ public final class CFunctionHelpers {
           new String[] {"There was a problem with the database connection."},
           new String[] {"The function forwarding of the selected function remains unchanged."});
 
-      CNaviErrorDialog.show(parent, innerMessage, innerDescription, e);
+      NaviErrorDialog.show(parent, innerMessage, innerDescription, e);
     }
   }
 

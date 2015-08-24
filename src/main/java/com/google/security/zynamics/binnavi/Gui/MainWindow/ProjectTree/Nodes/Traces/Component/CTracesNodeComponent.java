@@ -23,12 +23,12 @@ import com.google.security.zynamics.binnavi.Gui.CProgressDialog;
 import com.google.security.zynamics.binnavi.Gui.Debug.EventLists.CDebugEventListPanel;
 import com.google.security.zynamics.binnavi.Gui.Debug.EventLists.CEventListTableMenu;
 import com.google.security.zynamics.binnavi.Gui.Debug.EventLists.CEventTableMenu;
-import com.google.security.zynamics.binnavi.Gui.ErrorDialog.CNaviErrorDialog;
 import com.google.security.zynamics.binnavi.Gui.FilterPanel.CTablePanel;
 import com.google.security.zynamics.binnavi.Gui.MainWindow.ProjectTree.Nodes.CAbstractNodeComponent;
 import com.google.security.zynamics.binnavi.Gui.MainWindow.ProjectTree.Nodes.Traces.Component.Help.CTracesViewsTableHelp;
 import com.google.security.zynamics.binnavi.Gui.MainWindow.ProjectTree.Nodes.Views.Help.CViewFilterHelp;
 import com.google.security.zynamics.binnavi.Gui.MainWindow.ProjectTree.filters.CViewFilterCreator;
+import com.google.security.zynamics.binnavi.Gui.errordialog.NaviErrorDialog;
 import com.google.security.zynamics.binnavi.debug.models.trace.TraceList;
 import com.google.security.zynamics.binnavi.debug.models.trace.interfaces.ITraceEvent;
 import com.google.security.zynamics.binnavi.disassembly.CProjectContainer;
@@ -244,7 +244,7 @@ public final class CTracesNodeComponent extends CAbstractNodeComponent {
                   new String[] {"There was a problem with the database connection."},
                   new String[] {"The views that belong to the trace can not be shown."});
 
-          CNaviErrorDialog.show(SwingUtilities.getWindowAncestor(getParent()), innerMessage,
+          NaviErrorDialog.show(SwingUtilities.getWindowAncestor(getParent()), innerMessage,
               innerDescription, thread.getException());
         }
       }

@@ -24,8 +24,8 @@ import javax.swing.tree.TreePath;
 import com.google.security.zynamics.binnavi.CUtilityFunctions;
 import com.google.security.zynamics.binnavi.Database.Exceptions.CouldntSaveDataException;
 import com.google.security.zynamics.binnavi.Exceptions.MaybeNullException;
-import com.google.security.zynamics.binnavi.Gui.ErrorDialog.CNaviErrorDialog;
 import com.google.security.zynamics.binnavi.Gui.GraphWindows.NodeTaggingTree.Nodes.CTagTreeNode;
+import com.google.security.zynamics.binnavi.Gui.errordialog.NaviErrorDialog;
 import com.google.security.zynamics.binnavi.Tagging.CTag;
 import com.google.security.zynamics.binnavi.yfileswrap.zygraph.NaviNode;
 import com.google.security.zynamics.binnavi.yfileswrap.zygraph.ZyGraph;
@@ -82,7 +82,7 @@ public final class CTaggingFunctions {
           new String[] {"There was a problem with the database connection."},
           new String[] {"The node remains untagged."});
 
-      CNaviErrorDialog.show(parent, innerMessage, innerDescription, e);
+      NaviErrorDialog.show(parent, innerMessage, innerDescription, e);
     }
   }
 
@@ -140,7 +140,7 @@ public final class CTaggingFunctions {
           new String[] {"There was a problem with the database connection."},
           new String[] {"Some nodes were tagged while other remain untagged."});
 
-      CNaviErrorDialog.show(parent, innerMessage, innerDescription, e);
+      NaviErrorDialog.show(parent, innerMessage, innerDescription, e);
     }
   }
 }

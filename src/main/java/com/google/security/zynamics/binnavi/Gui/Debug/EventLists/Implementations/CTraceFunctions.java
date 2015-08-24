@@ -28,11 +28,11 @@ import com.google.common.base.Preconditions;
 import com.google.security.zynamics.binnavi.CUtilityFunctions;
 import com.google.security.zynamics.binnavi.Database.Exceptions.CouldntDeleteException;
 import com.google.security.zynamics.binnavi.Database.Exceptions.CouldntSaveDataException;
-import com.google.security.zynamics.binnavi.Gui.ErrorDialog.CNaviErrorDialog;
 import com.google.security.zynamics.binnavi.Gui.GraphWindows.NodeTaggingTree.Implementations.CTaggingFunctions;
 import com.google.security.zynamics.binnavi.Gui.GraphWindows.Panels.CDebugPerspectiveModel;
 import com.google.security.zynamics.binnavi.Gui.MainWindow.Implementations.CNameListGenerators;
 import com.google.security.zynamics.binnavi.Gui.Progress.CDefaultProgressOperation;
+import com.google.security.zynamics.binnavi.Gui.errordialog.NaviErrorDialog;
 import com.google.security.zynamics.binnavi.Tagging.CTag;
 import com.google.security.zynamics.binnavi.debug.debugger.interfaces.IDebugger;
 import com.google.security.zynamics.binnavi.debug.models.breakpoints.BreakpointAddress;
@@ -108,7 +108,7 @@ public final class CTraceFunctions {
                       "There was a problem with the database connection."}, new String[] {
                       "The trace list was not deleted. You could try to delete the list again once the connection problem was resolved."});
 
-              CNaviErrorDialog.show(parent, innerMessage, innerDescription, e);
+              NaviErrorDialog.show(parent, innerMessage, innerDescription, e);
             } finally {
               operation.stop();
             }
@@ -184,7 +184,7 @@ public final class CTraceFunctions {
           new String[] {
               "The trace list keeps its old description. You could try changing the description again once the connection problem was resolved."});
 
-      CNaviErrorDialog.show(parent, innerMessage, innerDescription, e);
+      NaviErrorDialog.show(parent, innerMessage, innerDescription, e);
     }
   }
 
@@ -211,7 +211,7 @@ public final class CTraceFunctions {
           new String[] {"There was a problem with the database connection."}, new String[] {
               "The trace list keeps its old name. You could try changing the name again once the connection problem was resolved."});
 
-      CNaviErrorDialog.show(parent, innerMessage, innerDescription, e);
+      NaviErrorDialog.show(parent, innerMessage, innerDescription, e);
     }
   }
 

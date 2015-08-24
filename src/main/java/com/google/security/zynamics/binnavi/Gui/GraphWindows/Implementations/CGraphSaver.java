@@ -19,12 +19,12 @@ import com.google.common.base.Preconditions;
 import com.google.security.zynamics.binnavi.CUtilityFunctions;
 import com.google.security.zynamics.binnavi.Database.Exceptions.CouldntSaveDataException;
 import com.google.security.zynamics.binnavi.Gui.CProgressDialog;
-import com.google.security.zynamics.binnavi.Gui.ErrorDialog.CNaviErrorDialog;
 import com.google.security.zynamics.binnavi.Gui.GraphWindows.CGraphWindow;
 import com.google.security.zynamics.binnavi.Gui.GraphWindows.CViewCommentDialog;
 import com.google.security.zynamics.binnavi.Gui.Loaders.CViewOpener;
 import com.google.security.zynamics.binnavi.Gui.Progress.CGlobalProgressManager;
 import com.google.security.zynamics.binnavi.Gui.Progress.IProgressOperation;
+import com.google.security.zynamics.binnavi.Gui.errordialog.NaviErrorDialog;
 import com.google.security.zynamics.binnavi.disassembly.algorithms.CViewInserter;
 import com.google.security.zynamics.binnavi.disassembly.views.INaviView;
 import com.google.security.zynamics.binnavi.disassembly.views.IViewContainer;
@@ -69,7 +69,7 @@ public final class CGraphSaver {
                   new String[] {"It is unclear why this problem occurred. Please check the stack trace for more information."},
                   new String[] {"The view was not cloned."});
 
-      CNaviErrorDialog.show(parent, innerMessage, innerDescription, cloneThread.getException());
+      NaviErrorDialog.show(parent, innerMessage, innerDescription, cloneThread.getException());
     }
   }
 
@@ -107,7 +107,7 @@ public final class CGraphSaver {
                   new String[] {"There was a problem with the database connection."},
                   new String[] {"The graph remains unsaved."});
 
-          CNaviErrorDialog.show(parent, innerMessage, innerDescription, e);
+          NaviErrorDialog.show(parent, innerMessage, innerDescription, e);
         } finally {
           operation.stop();
 
@@ -170,7 +170,7 @@ public final class CGraphSaver {
                   new String[] {"There was a problem with the database connection."},
                   new String[] {"The new view was not created."});
 
-          CNaviErrorDialog.show(parent, innerMessage, innerDescription, e);
+          NaviErrorDialog.show(parent, innerMessage, innerDescription, e);
         } finally {
           operation.stop();
 

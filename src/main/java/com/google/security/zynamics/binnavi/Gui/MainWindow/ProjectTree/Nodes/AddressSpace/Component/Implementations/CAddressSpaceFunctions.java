@@ -21,7 +21,7 @@ import java.awt.Window;
 
 import com.google.security.zynamics.binnavi.CUtilityFunctions;
 import com.google.security.zynamics.binnavi.Database.Exceptions.CouldntSaveDataException;
-import com.google.security.zynamics.binnavi.Gui.ErrorDialog.CNaviErrorDialog;
+import com.google.security.zynamics.binnavi.Gui.errordialog.NaviErrorDialog;
 import com.google.security.zynamics.binnavi.disassembly.INaviAddressSpace;
 
 
@@ -57,7 +57,7 @@ public final class CAddressSpaceFunctions {
               new String[] {"There was a problem with the database connection."},
               new String[] {"The address space keeps its old description."});
 
-      CNaviErrorDialog.show(parent, innerMessage, innerDescription, e);
+      NaviErrorDialog.show(parent, innerMessage, innerDescription, e);
     }
   }
 
@@ -83,7 +83,7 @@ public final class CAddressSpaceFunctions {
               new String[] {"There was a problem with the database connection."},
               new String[] {"The address space keeps its old name."});
 
-      CNaviErrorDialog.show(parent, innerMessage, innerDescription, e);
+      NaviErrorDialog.show(parent, innerMessage, innerDescription, e);
     }
   }
 

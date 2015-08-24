@@ -24,7 +24,7 @@ import java.io.IOException;
 import com.google.common.io.ByteStreams;
 import com.google.security.zynamics.binnavi.CUtilityFunctions;
 import com.google.security.zynamics.binnavi.Gui.CProgressDialog;
-import com.google.security.zynamics.binnavi.Gui.ErrorDialog.CNaviErrorDialog;
+import com.google.security.zynamics.binnavi.Gui.errordialog.NaviErrorDialog;
 import com.google.security.zynamics.binnavi.disassembly.INaviModule;
 import com.google.security.zynamics.zylib.gui.ProgressDialogs.CEndlessHelperThread;
 
@@ -64,7 +64,7 @@ public final class CDataFunctions {
               new String[] {"There was a problem with the database connection.",},
               new String[] {"The module data was not loaded from the database."});
 
-      CNaviErrorDialog.show(parent, message, description, exception);
+      NaviErrorDialog.show(parent, message, description, exception);
     }
   }
 
@@ -90,7 +90,7 @@ public final class CDataFunctions {
               new String[] {"There was a problem reading the file.",},
               new String[] {"The module data was not loaded."});
 
-      CNaviErrorDialog.show(parent, message, description, exception);
+      NaviErrorDialog.show(parent, message, description, exception);
     }
   }
 
@@ -118,7 +118,7 @@ public final class CDataFunctions {
               new String[] {"There was a problem with the database connection.",},
               new String[] {"The module data was not written to the database."});
 
-      CNaviErrorDialog.show(parent, message, description, exception);
+      NaviErrorDialog.show(parent, message, description, exception);
     }
   }
 

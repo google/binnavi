@@ -29,9 +29,9 @@ import com.google.security.zynamics.binnavi.CUtilityFunctions;
 import com.google.security.zynamics.binnavi.Database.CDatabaseListenerAdapter;
 import com.google.security.zynamics.binnavi.Database.Exceptions.CouldntSaveDataException;
 import com.google.security.zynamics.binnavi.Database.Interfaces.IDatabase;
-import com.google.security.zynamics.binnavi.Gui.ErrorDialog.CNaviErrorDialog;
 import com.google.security.zynamics.binnavi.Gui.FilterPanel.IFilter;
 import com.google.security.zynamics.binnavi.Gui.MainWindow.ProjectTree.Nodes.CAbstractTreeTableModel;
+import com.google.security.zynamics.binnavi.Gui.errordialog.NaviErrorDialog;
 import com.google.security.zynamics.binnavi.disassembly.INaviModule;
 import com.google.security.zynamics.binnavi.disassembly.Modules.CModuleListenerAdapter;
 import com.google.security.zynamics.binnavi.disassembly.algorithms.CStaredItemFunctions;
@@ -293,7 +293,7 @@ public final class CModulesModel extends CAbstractTreeTableModel<INaviModule> {
                     new String[] {"There was a problem with the connection to the database while the module name was saved"},
                     new String[] {"The module name was not saved. Please try to find out what went wrong with the database connection and try to save the module name again."});
 
-        CNaviErrorDialog.show(null, message, description, e);
+        NaviErrorDialog.show(null, message, description, e);
       }
     } else if (col == DESCRIPTION_COLUMN) {
       try {
@@ -309,7 +309,7 @@ public final class CModulesModel extends CAbstractTreeTableModel<INaviModule> {
                     new String[] {"There was a problem with the connection to the database while the module description was saved"},
                     new String[] {"The module description was not saved. Please try to find out what went wrong with the database connection and try to save the module description again."});
 
-        CNaviErrorDialog.show(null, message, description, e);
+        NaviErrorDialog.show(null, message, description, e);
       }
     }
   }

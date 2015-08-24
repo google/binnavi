@@ -17,8 +17,8 @@ package com.google.security.zynamics.binnavi.Startup;
 
 import com.google.common.base.Preconditions;
 import com.google.security.zynamics.binnavi.CUtilityFunctions;
-import com.google.security.zynamics.binnavi.Gui.ErrorDialog.CNaviErrorDialog;
 import com.google.security.zynamics.binnavi.Gui.Scripting.ScriptLoader;
+import com.google.security.zynamics.binnavi.Gui.errordialog.NaviErrorDialog;
 import com.google.security.zynamics.binnavi.Plugins.DisabledPluginReason;
 import com.google.security.zynamics.binnavi.Plugins.IPluginRegistry;
 import com.google.security.zynamics.binnavi.Plugins.JarLoader;
@@ -178,7 +178,7 @@ public final class PluginLoaderThread<T> extends CStandardHelperThread {
         throw new IllegalStateException("IE00001: Encountered an invalid plugin status");
     }
 
-    CNaviErrorDialog.show(parent, message, description);
+    NaviErrorDialog.show(parent, message, description);
   }
 
   @Override
@@ -211,7 +211,7 @@ public final class PluginLoaderThread<T> extends CStandardHelperThread {
             "The plugin file was not loaded and the functionality of "
             + "the script will not be available in BinNavi"});
 
-        CNaviErrorDialog.show(parent, message, description, failedPlugin.second());
+        NaviErrorDialog.show(parent, message, description, failedPlugin.second());
       }
 
       for (final Pair<IPlugin<T>, PluginStatus> pair : plugins.getLoadedPlugins()) {
@@ -250,7 +250,7 @@ public final class PluginLoaderThread<T> extends CStandardHelperThread {
                   "The plugin could not be initialized properly and was removed "
                   + "from the list of loaded plugins."});
 
-          CNaviErrorDialog.show(parent, message, description);
+          NaviErrorDialog.show(parent, message, description);
         }
       }
     }

@@ -8,6 +8,7 @@
   <property name="out.dir" location="${project.dir}/target"/>
   <property name="build.dir" location="${out.dir}/classes"/>
   <property name="staging.dir" location="${out.dir}/staging"/>
+  <property name="resources.dir" location="${build.dir}/com/google/security/zynamics/binnavi/data"/>
   <property name="zynamics.dir" location="./"/>
 
   <!-- Path and fileset definitions needed for the targets below -->
@@ -53,6 +54,30 @@
       <include name="reil.jar"/>
     </fileset>
   </path>
+
+  <available file="${project.dir}/.git" type="dir" property="git.present"/>
+  <target name="build-revision" if="git.present">
+    <exec executable="git" outputproperty="git.revision" failifexecutionfails="false" errorproperty="">
+      <arg value="describe"/>
+      <arg value="--always"/>
+      <arg value="HEAD"/>
+    </exec>
+   <condition property="repository.version" value="${git.revision}" else="&lt;unknown&gt;">
+      <and>
+        <isset property="git.revision"/>
+        <length string="${git.revision}" trim="yes" length="0" when="greater"/>
+      </and>
+    </condition>
+    <mkdir dir="${resources.dir}"/>
+    <propertyfile file="${resources.dir}/build-data.properties">
+      <entry key="build.revision" value="${git.revision}"/>
+    </propertyfile>
+  </target>
+
+  <target name="clean">
+    <!-- Make sure no leftover class files from creating zylib are floating around. -->
+    <delete dir="${build.dir}"/>
+  </target>
 
   <!-- The target to build everything (provided yfiles is present), and throw the
        components that interact with yfiles into a separate jar file that is then
@@ -105,8 +130,6 @@
 
   <!-- Build the zylib files and make a jar out of them. -->
   <target name="build-zylib-jar">
-    <!-- Make sure no leftover class files from creating the yfileswrapper are left -->
-    <delete dir="${build.dir}"/>
     <mkdir dir="${build.dir}"/>
     <javac destdir="${build.dir}" sourcepath="" includeAntRuntime="false" debug="true">
       <src path="${zynamics.dir}/zylib"/>
@@ -133,8 +156,6 @@
 
   <!-- Build the REIL files and make a jar out of them. -->
   <target name="build-reil-jar" depends="build-zylib-jar">
-    <!-- Make sure no leftover class files from creating zylib are floating around. -->
-    <delete dir="${build.dir}"/>
     <mkdir dir="${build.dir}"/>
     <javac destdir="${build.dir}" sourcepath="" includeAntRuntime="false" debug="true">
       <src path="${zynamics.dir}/reil"/>
@@ -154,9 +175,7 @@
   </target>
 
   <!-- Build the full BinNavi jar file - including the necessary data files. -->
-  <target name="build-binnavi-jar" depends="build-reil-jar">
-    <!-- Make sure no leftover class files from creating zylib are floating around. -->
-    <delete dir="${build.dir}"/>
+  <target name="build-binnavi-jar" depends="clean,build-revision,build-reil-jar">
     <mkdir dir="${build.dir}"/>
     <javac destdir="${build.dir}" sourcepath="" includeAntRuntime="false" debug="true">
       <src path="${zynamics.dir}/binnavi/"/>
@@ -171,7 +190,7 @@
     </javac>
 
     <!-- Copy resources to the appropriate packages. -->
-    <copy todir="${build.dir}/com/google/security/zynamics/binnavi/data">
+    <copy todir="${resources.dir}">
       <fileset dir="${zynamics.dir}/binnavi/data">
         <exclude name="**/*.java"/>
       </fileset>

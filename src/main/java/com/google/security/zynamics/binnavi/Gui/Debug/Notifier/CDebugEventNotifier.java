@@ -26,12 +26,12 @@ import com.google.security.zynamics.binnavi.Gui.Debug.BreakpointRemovalNotificat
 import com.google.security.zynamics.binnavi.Gui.Debug.GraphSelectionDialog.CGraphSelectionDialog;
 import com.google.security.zynamics.binnavi.Gui.Debug.RemoteBrowser.Loader.CRemoteFileBrowserLoader;
 import com.google.security.zynamics.binnavi.Gui.Debug.ToolbarPanel.Implementations.CDebuggerFunctions;
-import com.google.security.zynamics.binnavi.Gui.ErrorDialog.CNaviErrorDialog;
 import com.google.security.zynamics.binnavi.Gui.GraphWindows.CGraphWindow;
 import com.google.security.zynamics.binnavi.Gui.GraphWindows.IGraphContainerWindow;
 import com.google.security.zynamics.binnavi.Gui.GraphWindows.IGraphPanel;
 import com.google.security.zynamics.binnavi.Gui.Loaders.CViewOpener;
 import com.google.security.zynamics.binnavi.Gui.WindowManager.CWindowManager;
+import com.google.security.zynamics.binnavi.Gui.errordialog.NaviErrorDialog;
 import com.google.security.zynamics.binnavi.Log.NaviLogger;
 import com.google.security.zynamics.binnavi.Settings.CGlobalSettings;
 import com.google.security.zynamics.binnavi.debug.connection.packets.replies.AnyBreakpointRemovedReply;
@@ -238,7 +238,7 @@ public final class CDebugEventNotifier {
             "BinNavi could not send the debugger event settings to the debug client."),
             new String[] {},
             new String[] {"The default debugger event settings will be used during this session."});
-        CNaviErrorDialog.show(m_parent, message, description, exception);
+        NaviErrorDialog.show(m_parent, message, description, exception);
       } catch (final CouldntLoadDataException exception) {
         CUtilityFunctions.logException(exception);
         final String message = "Debugger event settings could not be retrieved from the database.";
@@ -246,7 +246,7 @@ public final class CDebugEventNotifier {
             "BinNavi could not send the debugger event settings to the debug client."),
             new String[] {},
             new String[] {"The default debugger event settings will be used during this session."});
-        CNaviErrorDialog.show(m_parent, message, description, exception);
+        NaviErrorDialog.show(m_parent, message, description, exception);
       }
     }
 
@@ -269,7 +269,7 @@ public final class CDebugEventNotifier {
                 new String[] {"BinNavi is unable to show the debugger options "
                     + "dialog until the problem is resolved."},
                 new String[] {"The default debugger options will be used during this session."});
-        CNaviErrorDialog.show(m_parent, message, description, exception);
+        NaviErrorDialog.show(m_parent, message, description, exception);
       } catch (final CouldntLoadDataException exception) {
         CUtilityFunctions.logException(exception);
         final String message = "Exception settings could not be loaded.";
@@ -278,7 +278,7 @@ public final class CDebugEventNotifier {
             new String[] {"Communication error while contacting the database"}, new String[] {
                 "BinNavi is unable to read the exception settings from the database.",
                 "The default exception settings will be used during this session."});
-        CNaviErrorDialog.show(m_parent, message, description, exception);
+        NaviErrorDialog.show(m_parent, message, description, exception);
       }
     }
 
@@ -288,7 +288,7 @@ public final class CDebugEventNotifier {
       final String innerDescription =
           "An exception occurred in the BinNavi debugger. You may want to check the stack trace to "
           + "get more information.";
-      CNaviErrorDialog.show(activateWindow(), innerMessage, innerDescription, debugException);
+      NaviErrorDialog.show(activateWindow(), innerMessage, innerDescription, debugException);
     }
 
     @Override

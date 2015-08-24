@@ -33,10 +33,10 @@ import com.google.security.zynamics.binnavi.Database.Interfaces.IDatabase;
 import com.google.security.zynamics.binnavi.Database.Interfaces.IDatabaseListener;
 import com.google.security.zynamics.binnavi.Database.PostgreSQL.PostgreSQLErrorCodes;
 import com.google.security.zynamics.binnavi.Gui.Database.implementations.CDatabaseCreator;
-import com.google.security.zynamics.binnavi.Gui.ErrorDialog.CNaviErrorDialog;
 import com.google.security.zynamics.binnavi.Gui.Progress.CDefaultProgressOperation;
 import com.google.security.zynamics.binnavi.Gui.Progress.CGlobalProgressManager;
 import com.google.security.zynamics.binnavi.Gui.Progress.IProgressOperation;
+import com.google.security.zynamics.binnavi.Gui.errordialog.NaviErrorDialog;
 import com.google.security.zynamics.zylib.gui.CMessageBox;
 import com.google.security.zynamics.zylib.gui.ProgressDialogs.CProgressPanel;
 
@@ -80,7 +80,7 @@ public final class CDatabaseLoader {
               new String[] {"BinNavi can not load data from the given database until the "
                   + "problem is resolved."});
 
-      CNaviErrorDialog.show(parent, message, description, exception);
+      NaviErrorDialog.show(parent, message, description, exception);
     } catch (final CouldntLoadDataException exception) {
       final String message = "E00014: " + "Could not load data from the database";
       final String description =
@@ -91,7 +91,7 @@ public final class CDatabaseLoader {
               new String[] {"Close the database and open it again. Maybe close and re-start "
                   + "BinNavi too. If the program persists, please contact the BinNavi support."});
 
-      CNaviErrorDialog.show(parent, message, description, exception);
+      NaviErrorDialog.show(parent, message, description, exception);
     } catch (final InvalidDatabaseException exception) {
       final String message = "E00015: " + "Database is in an inconsistent state";
       final String description =
@@ -106,7 +106,7 @@ public final class CDatabaseLoader {
                   + "BinNavi. If the database already contains data please contact the BinNavi "
                   + "support."});
 
-      CNaviErrorDialog.show(parent, message, description, exception);
+      NaviErrorDialog.show(parent, message, description, exception);
     } catch (final CouldntInitializeDatabaseException exception) {
       final String message = "E00016: Database could not be initialized";
       final String description =
@@ -119,7 +119,7 @@ public final class CDatabaseLoader {
                   + "fresh database. If you do not want to do this please contact the BinNavi "
                   + "support to find out what other options exist for you."});
 
-      CNaviErrorDialog.show(parent, message, description, exception);
+      NaviErrorDialog.show(parent, message, description, exception);
     } catch (final InvalidExporterDatabaseFormatException exception) {
       final String message = "E00017: " + "Database has invalid exporter tables";
       final String description =
@@ -131,7 +131,7 @@ public final class CDatabaseLoader {
                   + "BinNavi. If you do not want to do this please contact the BinNavi support "
                   + "to find out what other options exist for you."});
 
-      CNaviErrorDialog.show(parent, message, description, exception);
+      NaviErrorDialog.show(parent, message, description, exception);
     } catch (final InvalidDatabaseVersionException exception) {
       if (!exception.getVersion().getString().equals("4.0.0")
           || !exception.getVersion().getString().equals("5.0.0")) {
@@ -177,7 +177,7 @@ public final class CDatabaseLoader {
                         + "works with the database in its current state, partial or total "
                         + "data loss could happen."});
 
-            CNaviErrorDialog.show(parent, message, description, exception);
+            NaviErrorDialog.show(parent, message, description, exception);
           } finally {
             updateOperation.stop();
           }
@@ -215,7 +215,7 @@ public final class CDatabaseLoader {
                 new String[] {"BinNavi can not load data from the given database until the "
                     + "problem is resolved."});
 
-        CNaviErrorDialog.show(parent, message, description, exception);
+        NaviErrorDialog.show(parent, message, description, exception);
       }
     } catch (final LoadCancelledException exception) {
       // We do not signal to the user that he cancelled loading.

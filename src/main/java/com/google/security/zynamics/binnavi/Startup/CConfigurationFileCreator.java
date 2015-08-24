@@ -16,7 +16,7 @@ limitations under the License.
 package com.google.security.zynamics.binnavi.Startup;
 
 import com.google.security.zynamics.binnavi.CUtilityFunctions;
-import com.google.security.zynamics.binnavi.Gui.ErrorDialog.CNaviErrorDialog;
+import com.google.security.zynamics.binnavi.Gui.errordialog.NaviErrorDialog;
 import com.google.security.zynamics.binnavi.Log.NaviLogFormatter;
 import com.google.security.zynamics.binnavi.Log.NaviLogger;
 import com.google.security.zynamics.binnavi.Resources.Constants;
@@ -75,7 +75,7 @@ public final class CConfigurationFileCreator {
               new String[] {"Some kind of IO problem occurred. Please check the stack trace "
                   + "for more details"}, new String[] {"The error log file can not be stored"});
 
-      CNaviErrorDialog.show(null, message, description, exception);
+      NaviErrorDialog.show(null, message, description, exception);
     }
 
     NaviLogger.info("Loading configuration file");
@@ -99,7 +99,7 @@ public final class CConfigurationFileCreator {
                   + "BinNavi with default settings or if you want to repair the configuration "
                   + "file manually."});
 
-      CNaviErrorDialog.show(null, message, description, exception);
+      NaviErrorDialog.show(null, message, description, exception);
 
       if (JOptionPane.YES_OPTION != CMessageBox.showYesNoQuestion(null,
           "Do you want to run BinNavi with default settings? If you choose 'No', "
@@ -121,7 +121,7 @@ public final class CConfigurationFileCreator {
                 new String[] {"BinNavi will exit after you close this error dialog and you "
                     + "will have to delete or fix the malformed configuration file manually."});
 
-        CNaviErrorDialog.show(null, innerMessage, innerDescription);
+        NaviErrorDialog.show(null, innerMessage, innerDescription);
 
         System.exit(0);
       }
@@ -142,7 +142,7 @@ public final class CConfigurationFileCreator {
                     + "find out why the configuration file could not be created. "
                     + "You may also want to contact the BinNavi support at this point."});
 
-        CNaviErrorDialog.show(null, innerMessage, innerDescription);
+        NaviErrorDialog.show(null, innerMessage, innerDescription);
 
         System.exit(0);
       }

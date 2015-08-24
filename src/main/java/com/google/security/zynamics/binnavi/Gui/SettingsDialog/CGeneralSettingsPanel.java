@@ -122,11 +122,11 @@ public final class CGeneralSettingsPanel extends CAbstractSettingsPanel {
     // Support Email
     final JPanel emailBoxPanel = new JPanel(new BorderLayout());
     emailBoxPanel.setBorder(new EmptyBorder(0, 2, 2, 2));
-    final JLabel emailLabel = new JLabel("Your E-Mail address" + ":");
+    final JLabel emailLabel = new JLabel("Your email address" + ":");
 
     emailBoxPanel.add(emailLabel, BorderLayout.CENTER);
     emailBoxPanel.add(CHintCreator.createHintPanel(emailBox,
-        "This E-mail address is used to contact you after you have submitted bugs."),
+        "This email address is used to contact you after you have submitted bugs."),
         BorderLayout.EAST);
     pEdits.add(emailBoxPanel, BorderLayout.CENTER);
 

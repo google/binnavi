@@ -24,7 +24,7 @@ import javax.swing.JFrame;
 
 
 import com.google.common.base.Preconditions;
-import com.google.security.zynamics.binnavi.Gui.ErrorDialog.Implementations.CErrorDialogFunctions;
+import com.google.security.zynamics.binnavi.Gui.errordialog.ErrorDialogFunctions;
 
 /**
  * Action class used for reporting bugs.
@@ -53,6 +53,6 @@ public final class CActionReportBug extends AbstractAction {
 
   @Override
   public void actionPerformed(final ActionEvent event) {
-    CErrorDialogFunctions.reportBug(m_parent);
+    ErrorDialogFunctions.reportBug(m_parent);
   }
 }

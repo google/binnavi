@@ -18,8 +18,8 @@ package com.google.security.zynamics.binnavi.Gui.MainWindow.ProjectTree.Nodes.Tr
 
 
 import com.google.security.zynamics.binnavi.CUtilityFunctions;
-import com.google.security.zynamics.binnavi.Gui.ErrorDialog.CNaviErrorDialog;
 import com.google.security.zynamics.binnavi.Gui.MainWindow.ProjectTree.Nodes.CAbstractTreeViewsTableModel;
+import com.google.security.zynamics.binnavi.Gui.errordialog.NaviErrorDialog;
 import com.google.security.zynamics.binnavi.disassembly.views.INaviView;
 import com.google.security.zynamics.zylib.disassembly.ViewType;
 import com.google.security.zynamics.zylib.general.Pair;
@@ -169,7 +169,7 @@ public final class CArbitraryViewsModel extends CAbstractTreeViewsTableModel {
             new String[] {"There was a problem with the database connection."},
             new String[] {"The view was not updated and the new view name is lost."});
 
-        CNaviErrorDialog.show(null, innerMessage, innerDescription, e);
+        NaviErrorDialog.show(null, innerMessage, innerDescription, e);
       }
     } else if (column == DESCRIPTION_COLUMN) {
       try {
@@ -185,7 +185,7 @@ public final class CArbitraryViewsModel extends CAbstractTreeViewsTableModel {
             new String[] {"There was a problem with the database connection."},
             new String[] {"The view was not updated and the new view description is lost."});
 
-        CNaviErrorDialog.show(null, innerMessage, innerDescription, e);
+        NaviErrorDialog.show(null, innerMessage, innerDescription, e);
       }
     }
   }

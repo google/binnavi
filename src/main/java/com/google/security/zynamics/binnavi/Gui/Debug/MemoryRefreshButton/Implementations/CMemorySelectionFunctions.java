@@ -23,8 +23,8 @@ import javax.swing.JFrame;
 import com.google.common.base.Preconditions;
 import com.google.security.zynamics.binnavi.CUtilityFunctions;
 import com.google.security.zynamics.binnavi.Gui.Debug.MemRangeDialog.CMemoryRangeDialog;
-import com.google.security.zynamics.binnavi.Gui.ErrorDialog.CNaviErrorDialog;
 import com.google.security.zynamics.binnavi.Gui.GraphWindows.Panels.CDebugPerspectiveModel;
+import com.google.security.zynamics.binnavi.Gui.errordialog.NaviErrorDialog;
 import com.google.security.zynamics.binnavi.debug.debugger.DebugExceptionWrapper;
 import com.google.security.zynamics.binnavi.debug.debugger.interfaces.IDebugger;
 import com.google.security.zynamics.binnavi.debug.models.processmanager.MemoryMap;
@@ -116,7 +116,7 @@ public final class CMemorySelectionFunctions {
           new String[] {"There was a problem with the connection to the debug client."},
           new String[] {"The memory data was not refreshed."});
 
-      CNaviErrorDialog.show(parent, innerMessage, innerDescription, exception);
+      NaviErrorDialog.show(parent, innerMessage, innerDescription, exception);
     }
   }
 }

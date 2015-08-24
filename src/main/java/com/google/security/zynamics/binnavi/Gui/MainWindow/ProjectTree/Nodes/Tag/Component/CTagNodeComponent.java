@@ -22,13 +22,13 @@ import com.google.security.zynamics.binnavi.CUtilityFunctions;
 import com.google.security.zynamics.binnavi.Database.Exceptions.CouldntSaveDataException;
 import com.google.security.zynamics.binnavi.Database.Interfaces.IDatabase;
 import com.google.security.zynamics.binnavi.Gui.Actions.CActionProxy;
-import com.google.security.zynamics.binnavi.Gui.ErrorDialog.CNaviErrorDialog;
 import com.google.security.zynamics.binnavi.Gui.MainWindow.ProjectTree.Nodes.CAbstractNodeComponent;
 import com.google.security.zynamics.binnavi.Gui.MainWindow.ProjectTree.Nodes.Tag.Component.Help.CDescriptionHelp;
 import com.google.security.zynamics.binnavi.Gui.MainWindow.ProjectTree.Nodes.Tag.Component.Help.CNameHelp;
 import com.google.security.zynamics.binnavi.Gui.MainWindow.ProjectTree.Nodes.Tag.Component.Help.CSaveHelp;
 import com.google.security.zynamics.binnavi.Gui.SaveFields.CSaveField;
 import com.google.security.zynamics.binnavi.Gui.SaveFields.CSavePane;
+import com.google.security.zynamics.binnavi.Gui.errordialog.NaviErrorDialog;
 import com.google.security.zynamics.binnavi.Help.CHelpButton;
 import com.google.security.zynamics.binnavi.Help.CHelpLabel;
 import com.google.security.zynamics.binnavi.Help.CHelpSaveField;
@@ -229,7 +229,7 @@ public final class CTagNodeComponent extends CAbstractNodeComponent {
                   .getName()), new String[] {"There was a problem with the database connection."},
               new String[] {"The tag name could not be changed."});
 
-      CNaviErrorDialog.show(SwingUtilities.getWindowAncestor(this), innerMessage, innerDescription,
+      NaviErrorDialog.show(SwingUtilities.getWindowAncestor(this), innerMessage, innerDescription,
           e);
     }
 
@@ -245,7 +245,7 @@ public final class CTagNodeComponent extends CAbstractNodeComponent {
                   .getName()), new String[] {"There was a problem with the database connection."},
               new String[] {"The tag description could not be changed."});
 
-      CNaviErrorDialog.show(SwingUtilities.getWindowAncestor(this), innerMessage, innerDescription,
+      NaviErrorDialog.show(SwingUtilities.getWindowAncestor(this), innerMessage, innerDescription,
           e);
     }
   }

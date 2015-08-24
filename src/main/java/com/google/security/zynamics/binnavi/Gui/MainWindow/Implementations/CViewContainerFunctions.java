@@ -19,7 +19,7 @@ package com.google.security.zynamics.binnavi.Gui.MainWindow.Implementations;
 
 import com.google.security.zynamics.binnavi.CUtilityFunctions;
 import com.google.security.zynamics.binnavi.Database.Exceptions.CouldntDeleteException;
-import com.google.security.zynamics.binnavi.Gui.ErrorDialog.CNaviErrorDialog;
+import com.google.security.zynamics.binnavi.Gui.errordialog.NaviErrorDialog;
 import com.google.security.zynamics.binnavi.disassembly.views.INaviView;
 import com.google.security.zynamics.binnavi.disassembly.views.IViewContainer;
 import com.google.security.zynamics.zylib.gui.CMessageBox;
@@ -65,7 +65,7 @@ public final class CViewContainerFunctions {
                   new String[] {"There was a problem with the database connection."},
                   new String[] {"The view was not deleted and can still be used."});
 
-          CNaviErrorDialog.show(parent, innerMessage, innerDescription, exception);
+          NaviErrorDialog.show(parent, innerMessage, innerDescription, exception);
         }
       }
     }

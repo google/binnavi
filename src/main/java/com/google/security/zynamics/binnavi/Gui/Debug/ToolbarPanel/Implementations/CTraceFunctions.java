@@ -20,7 +20,7 @@ import com.google.security.zynamics.binnavi.CUtilityFunctions;
 import com.google.security.zynamics.binnavi.Database.Exceptions.CouldntSaveDataException;
 import com.google.security.zynamics.binnavi.Gui.CProgressDialog;
 import com.google.security.zynamics.binnavi.Gui.Debug.TraceOptionsDialog.CTraceOptionsDialog;
-import com.google.security.zynamics.binnavi.Gui.ErrorDialog.CNaviErrorDialog;
+import com.google.security.zynamics.binnavi.Gui.errordialog.NaviErrorDialog;
 import com.google.security.zynamics.binnavi.debug.debugger.interfaces.IDebugger;
 import com.google.security.zynamics.binnavi.debug.helpers.BreakpointableNodeCounter;
 import com.google.security.zynamics.binnavi.debug.helpers.EchoBreakpointCollector;
@@ -99,7 +99,7 @@ public final class CTraceFunctions {
               "The debugger will not enter trace mode. You can try to start "
               + "trace mode again after you have resolved the database connection problem."});
 
-      CNaviErrorDialog.show(parent, innerMessage, innerDescription, exception);
+      NaviErrorDialog.show(parent, innerMessage, innerDescription, exception);
 
       return null;
     }

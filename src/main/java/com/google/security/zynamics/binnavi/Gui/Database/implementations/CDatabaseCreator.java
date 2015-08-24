@@ -23,9 +23,9 @@ import com.google.security.zynamics.binnavi.Database.CDatabaseConfiguration;
 import com.google.security.zynamics.binnavi.Database.Exceptions.CouldntConnectException;
 import com.google.security.zynamics.binnavi.Database.Exceptions.CouldntLoadDriverException;
 import com.google.security.zynamics.binnavi.Database.PostgreSQL.PostgreSQLErrorCodes;
-import com.google.security.zynamics.binnavi.Gui.ErrorDialog.CNaviErrorDialog;
 import com.google.security.zynamics.binnavi.Gui.Progress.CGlobalProgressManager;
 import com.google.security.zynamics.binnavi.Gui.Progress.IProgressOperation;
+import com.google.security.zynamics.binnavi.Gui.errordialog.NaviErrorDialog;
 import com.google.security.zynamics.zylib.gui.CMessageBox;
 import com.google.security.zynamics.zylib.gui.ProgressDialogs.CProgressPanel;
 
@@ -66,7 +66,7 @@ public final class CDatabaseCreator {
               new String[] {"BinNavi can not load data from the given database until "
                   + "the problem is resolved."});
 
-      CNaviErrorDialog.show(parent, message, description, exception);
+      NaviErrorDialog.show(parent, message, description, exception);
     } catch (final CouldntConnectException exception) {
       if (exception.getSqlState().equalsIgnoreCase(PostgreSQLErrorCodes.INVALID_PASSWORD)) {
         CMessageBox.showInformation(
@@ -83,7 +83,7 @@ public final class CDatabaseCreator {
               new String[] {"BinNavi can not load data from the given database until the "
                   + "problem is resolved."});
 
-      CNaviErrorDialog.show(parent, message, description, exception);
+      NaviErrorDialog.show(parent, message, description, exception);
     } catch (final SQLException exception) {
       final String message = "E00049: " + "Database could not be created";
       final String description =
@@ -94,7 +94,7 @@ public final class CDatabaseCreator {
                   "The database was not created. Please try creating the database again or "
                       + "create it manually if necessary."});
 
-      CNaviErrorDialog.show(parent, message, description, exception);
+      NaviErrorDialog.show(parent, message, description, exception);
     }
   }
 

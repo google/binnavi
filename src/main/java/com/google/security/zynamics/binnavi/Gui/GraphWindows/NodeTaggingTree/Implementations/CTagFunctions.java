@@ -18,8 +18,8 @@ package com.google.security.zynamics.binnavi.Gui.GraphWindows.NodeTaggingTree.Im
 import com.google.security.zynamics.binnavi.CUtilityFunctions;
 import com.google.security.zynamics.binnavi.Database.Exceptions.CouldntDeleteException;
 import com.google.security.zynamics.binnavi.Database.Exceptions.CouldntSaveDataException;
-import com.google.security.zynamics.binnavi.Gui.ErrorDialog.CNaviErrorDialog;
 import com.google.security.zynamics.binnavi.Gui.GraphWindows.CViewCommentDialog;
+import com.google.security.zynamics.binnavi.Gui.errordialog.NaviErrorDialog;
 import com.google.security.zynamics.binnavi.Tagging.CTag;
 import com.google.security.zynamics.binnavi.Tagging.ITagManager;
 import com.google.security.zynamics.binnavi.yfileswrap.zygraph.NaviNode;
@@ -66,7 +66,7 @@ public final class CTagFunctions {
           new String[] {"There was a problem with the database connection."},
           new String[] {"The tag can not be appended."});
 
-      CNaviErrorDialog.show(parent, innerMessage, innerDescription, e);
+      NaviErrorDialog.show(parent, innerMessage, innerDescription, e);
     }
   }
 
@@ -93,7 +93,7 @@ public final class CTagFunctions {
             new String[] {"There was a problem with the database connection."},
             new String[] {"The tag still exists."});
 
-        CNaviErrorDialog.show(parent, innerMessage, innerDescription, e);
+        NaviErrorDialog.show(parent, innerMessage, innerDescription, e);
       }
     }
   }
@@ -121,7 +121,7 @@ public final class CTagFunctions {
             new String[] {"There was a problem with the database connection."},
             new String[] {"The tag and its children still exist."});
 
-        CNaviErrorDialog.show(parent, innerMessage, innerDescription, e);
+        NaviErrorDialog.show(parent, innerMessage, innerDescription, e);
       }
     }
   }
@@ -150,7 +150,7 @@ public final class CTagFunctions {
             new String[] {"There was a problem with the database connection."},
             new String[] {"The tag name could not be changed."});
 
-        CNaviErrorDialog.show(parent, innerMessage, innerDescription, e);
+        NaviErrorDialog.show(parent, innerMessage, innerDescription, e);
       }
 
       try {
@@ -164,7 +164,7 @@ public final class CTagFunctions {
             new String[] {"There was a problem with the database connection."},
             new String[] {"The tag description could not be changed."});
 
-        CNaviErrorDialog.show(parent, innerMessage, innerDescription, e);
+        NaviErrorDialog.show(parent, innerMessage, innerDescription, e);
       }
     }
   }
@@ -190,7 +190,7 @@ public final class CTagFunctions {
           new String[] {"There was a problem with the database connection."},
           new String[] {"The new tag could not be inserted."});
 
-      CNaviErrorDialog.show(parent, innerMessage, innerDescription, e);
+      NaviErrorDialog.show(parent, innerMessage, innerDescription, e);
     }
   }
 
@@ -218,7 +218,7 @@ public final class CTagFunctions {
           new String[] {"There was a problem with the database connection."},
           new String[] {"The tag was removed from some nodes but not from all."});
 
-      CNaviErrorDialog.show(parent, innerMessage, innerDescription, e);
+      NaviErrorDialog.show(parent, innerMessage, innerDescription, e);
     }
   }
 
@@ -246,7 +246,7 @@ public final class CTagFunctions {
           new String[] {"There was a problem with the database connection."},
           new String[] {"The tag was removed from some nodes but not from all."});
 
-      CNaviErrorDialog.show(parent, innerMessage, innerDescription, e);
+      NaviErrorDialog.show(parent, innerMessage, innerDescription, e);
     }
   }
 }

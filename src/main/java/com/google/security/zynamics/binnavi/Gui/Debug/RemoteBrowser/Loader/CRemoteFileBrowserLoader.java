@@ -23,7 +23,7 @@ import com.google.common.base.Preconditions;
 import com.google.security.zynamics.binnavi.CUtilityFunctions;
 import com.google.security.zynamics.binnavi.Gui.CProgressDialog;
 import com.google.security.zynamics.binnavi.Gui.Debug.RemoteBrowser.CRemoteSelectionDialog;
-import com.google.security.zynamics.binnavi.Gui.ErrorDialog.CNaviErrorDialog;
+import com.google.security.zynamics.binnavi.Gui.errordialog.NaviErrorDialog;
 import com.google.security.zynamics.binnavi.debug.connection.packets.replies.ListFilesReply;
 import com.google.security.zynamics.binnavi.debug.connection.packets.replies.ListProcessesReply;
 import com.google.security.zynamics.binnavi.debug.debugger.DebugEventListenerAdapter;
@@ -130,7 +130,7 @@ public final class CRemoteFileBrowserLoader {
                 "The connection to the debug client was closed before"
                 + " the request could be sent."},
             new String[] {"There is still no debug target selected."});
-        CNaviErrorDialog.show(m_parent, message, description, m_loaderThread.getException());
+        NaviErrorDialog.show(m_parent, message, description, m_loaderThread.getException());
       }
     } else if (selectedProcess != null) {
       try {
@@ -145,7 +145,7 @@ public final class CRemoteFileBrowserLoader {
                 "The connection to the debug client was closed before the"
                 + "request could be sent."},
             new String[] {"There is still not debug target selected."});
-        CNaviErrorDialog.show(m_parent, message, description, m_loaderThread.getException());
+        NaviErrorDialog.show(m_parent, message, description, m_loaderThread.getException());
       }
     }
   }
@@ -167,7 +167,7 @@ public final class CRemoteFileBrowserLoader {
               "The connection to the debug client was closed before the request could be sent."},
           new String[] {"You can not select a target file from the remote system."});
 
-      CNaviErrorDialog.show(m_parent, message, description, m_loaderThread.getException());
+      NaviErrorDialog.show(m_parent, message, description, m_loaderThread.getException());
     } else if ((m_fileSystem != null) && (m_processList != null)) {
       showRemoteBrowser();
     }

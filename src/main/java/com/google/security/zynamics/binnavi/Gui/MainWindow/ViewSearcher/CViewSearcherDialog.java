@@ -23,7 +23,7 @@ import com.google.security.zynamics.binnavi.CUtilityFunctions;
 import com.google.security.zynamics.binnavi.Database.Exceptions.CouldntLoadDataException;
 import com.google.security.zynamics.binnavi.Gui.Actions.CActionProxy;
 import com.google.security.zynamics.binnavi.Gui.Debug.GraphSelectionDialog.CGraphSelectionTableModel;
-import com.google.security.zynamics.binnavi.Gui.ErrorDialog.CNaviErrorDialog;
+import com.google.security.zynamics.binnavi.Gui.errordialog.NaviErrorDialog;
 import com.google.security.zynamics.binnavi.disassembly.UnrelocatedAddress;
 import com.google.security.zynamics.binnavi.disassembly.views.INaviView;
 import com.google.security.zynamics.binnavi.disassembly.views.IViewContainer;
@@ -198,7 +198,7 @@ public final class CViewSearcherDialog extends JDialog {
               new String[] {"There was a problem with the database connection."},
               new String[] {"The views with the given address can not be shown."});
 
-      CNaviErrorDialog.show(null, innerMessage, innerDescription, e);
+      NaviErrorDialog.show(null, innerMessage, innerDescription, e);
     }
   }
 

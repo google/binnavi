@@ -25,10 +25,10 @@ import com.google.common.base.Preconditions;
 import com.google.common.util.concurrent.FutureCallback;
 import com.google.security.zynamics.binnavi.CUtilityFunctions;
 import com.google.security.zynamics.binnavi.Database.Interfaces.IDatabase;
-import com.google.security.zynamics.binnavi.Gui.ErrorDialog.CNaviErrorDialog;
 import com.google.security.zynamics.binnavi.Gui.GraphWindows.CGraphWindow;
 import com.google.security.zynamics.binnavi.Gui.GraphWindows.Loader.CGraphOpener;
 import com.google.security.zynamics.binnavi.Gui.MainWindow.Implementations.CFunctionHelpers;
+import com.google.security.zynamics.binnavi.Gui.errordialog.NaviErrorDialog;
 import com.google.security.zynamics.binnavi.disassembly.INaviFunction;
 import com.google.security.zynamics.binnavi.disassembly.INaviModule;
 import com.google.security.zynamics.binnavi.disassembly.Modules.CModuleContainer;
@@ -107,7 +107,7 @@ public final class CViewOpener {
                   + "forwarding target again. Restart BinNavi if the view "
                   + "can still not be opened. Contact the BinNavi support if necessary."});
 
-      CNaviErrorDialog.show(parent, message, description);
+      NaviErrorDialog.show(parent, message, description);
     } else if (forwardedModule.isLoaded()) {
       final IAddress address = function.getForwardedFunctionAddress();
 
@@ -125,7 +125,7 @@ public final class CViewOpener {
                         + "again. Restart BinNavi if the view can still not be opened. Contact the "
                         + "BinNavi support if necessary."});
 
-        CNaviErrorDialog.show(parent, message, description);
+        NaviErrorDialog.show(parent, message, description);
       } else {
         final INaviView forwardedView =
             forwardedModule.getContent().getViewContainer().getView(forwardedFunction);
@@ -140,7 +140,7 @@ public final class CViewOpener {
                       + "again. Restart BinNavi if the view can still not be opened. Contact the "
                       + "BinNavi support if necessary."});
 
-          CNaviErrorDialog.show(parent, message, description);
+          NaviErrorDialog.show(parent, message, description);
         } else {
           CGraphOpener.showGraph(container, forwardedView, window, parent);
         }

@@ -19,8 +19,8 @@ import java.awt.Window;
 
 import com.google.common.base.Preconditions;
 import com.google.security.zynamics.binnavi.Gui.Debug.MemoryPanel.Implementations.CMemoryFunctions;
-import com.google.security.zynamics.binnavi.Gui.ErrorDialog.CNaviErrorDialog;
 import com.google.security.zynamics.binnavi.Gui.GraphWindows.Panels.CDebugPerspectiveModel;
+import com.google.security.zynamics.binnavi.Gui.errordialog.NaviErrorDialog;
 import com.google.security.zynamics.binnavi.debug.debugger.interfaces.IDebugger;
 import com.google.security.zynamics.binnavi.debug.models.processmanager.MemoryMap;
 import com.google.security.zynamics.binnavi.debug.models.processmanager.MemoryModule;
@@ -74,7 +74,7 @@ public final class CModulesPanelFunctions {
               + "Try refreshing the memory map to fix this issue.", module.getName(),
               module.getBaseAddress());
 
-      CNaviErrorDialog.show(parent, message, description);
+      NaviErrorDialog.show(parent, message, description);
     } else {
       CMemoryFunctions
           .gotoOffset(debugPerspectiveModel, module.getBaseAddress().getAddress(), true);

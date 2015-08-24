@@ -27,9 +27,9 @@ import com.google.security.zynamics.binnavi.CUtilityFunctions;
 import com.google.security.zynamics.binnavi.Database.CDatabaseListenerAdapter;
 import com.google.security.zynamics.binnavi.Database.Exceptions.CouldntSaveDataException;
 import com.google.security.zynamics.binnavi.Database.Interfaces.IDatabase;
-import com.google.security.zynamics.binnavi.Gui.ErrorDialog.CNaviErrorDialog;
 import com.google.security.zynamics.binnavi.Gui.FilterPanel.IFilter;
 import com.google.security.zynamics.binnavi.Gui.MainWindow.ProjectTree.Nodes.CAbstractTreeTableModel;
+import com.google.security.zynamics.binnavi.Gui.errordialog.NaviErrorDialog;
 import com.google.security.zynamics.binnavi.disassembly.CProject;
 import com.google.security.zynamics.binnavi.disassembly.CProjectListenerAdapter;
 import com.google.security.zynamics.binnavi.disassembly.INaviProject;
@@ -219,7 +219,7 @@ public final class CProjectsModel extends CAbstractTreeTableModel<INaviProject> 
                 new String[] {"There was a problem with the database connection."},
                 new String[] {"The project keeps its old name."});
 
-        CNaviErrorDialog.show(null, innerMessage, innerDescription, e);
+        NaviErrorDialog.show(null, innerMessage, innerDescription, e);
       }
     } else if (col == DESCRIPTION_COLUMN) {
       try {
@@ -235,7 +235,7 @@ public final class CProjectsModel extends CAbstractTreeTableModel<INaviProject> 
                 new String[] {"There was a problem with the database connection."},
                 new String[] {"The project keeps its old description."});
 
-        CNaviErrorDialog.show(null, innerMessage, innerDescription, e);
+        NaviErrorDialog.show(null, innerMessage, innerDescription, e);
       }
     }
   }

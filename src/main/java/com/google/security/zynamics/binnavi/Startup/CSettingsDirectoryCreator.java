@@ -18,7 +18,7 @@ package com.google.security.zynamics.binnavi.Startup;
 
 
 import com.google.security.zynamics.binnavi.CUtilityFunctions;
-import com.google.security.zynamics.binnavi.Gui.ErrorDialog.CNaviErrorDialog;
+import com.google.security.zynamics.binnavi.Gui.errordialog.NaviErrorDialog;
 import com.google.security.zynamics.binnavi.Resources.Constants;
 import com.google.security.zynamics.common.config.ConfigHelper;
 
@@ -76,7 +76,7 @@ public final class CSettingsDirectoryCreator {
                 new String[] {"Changes to the global settings will not be saved",
                     "The error log file can not be stored"});
 
-    CNaviErrorDialog.show(null, message, description);
+    NaviErrorDialog.show(null, message, description);
   }
 
   /**

@@ -41,7 +41,6 @@ import com.google.security.zynamics.binnavi.API.plugins.PluginInterface;
 import com.google.security.zynamics.binnavi.APIHelpers.ObjectFinders;
 import com.google.security.zynamics.binnavi.Database.Interfaces.IDatabase;
 import com.google.security.zynamics.binnavi.Gui.Actions.CActionProxy;
-import com.google.security.zynamics.binnavi.Gui.ErrorDialog.CNaviErrorDialog;
 import com.google.security.zynamics.binnavi.Gui.MainWindow.ProjectTree.Actions.CAddAddressSpaceAction;
 import com.google.security.zynamics.binnavi.Gui.MainWindow.ProjectTree.Actions.CDeleteProjectAction;
 import com.google.security.zynamics.binnavi.Gui.MainWindow.ProjectTree.Actions.CLoadProjectAction;
@@ -58,6 +57,7 @@ import com.google.security.zynamics.binnavi.Gui.MainWindow.ProjectTree.Updaters.
 import com.google.security.zynamics.binnavi.Gui.MainWindow.ProjectTree.Updaters.CParentSelectionUpdater;
 import com.google.security.zynamics.binnavi.Gui.MainWindow.ProjectTree.Updaters.INodeSelectionUpdater;
 import com.google.security.zynamics.binnavi.Gui.MainWindow.ProjectTree.Updaters.ITreeUpdater;
+import com.google.security.zynamics.binnavi.Gui.errordialog.NaviErrorDialog;
 import com.google.security.zynamics.binnavi.api2.plugins.IPlugin;
 import com.google.security.zynamics.binnavi.disassembly.CProject;
 import com.google.security.zynamics.binnavi.disassembly.CProjectContainer;
@@ -218,7 +218,7 @@ public final class CProjectNodeMenuBuilder extends CAbstractMenuBuilder {
                       new String[] {"The plugin contains a bug."},
                       new String[] {"The plugin probably behaves erroneously from this point on but it remains active"});
 
-          CNaviErrorDialog.show(getParent(), innerMessage, innerDescription, exception);
+          NaviErrorDialog.show(getParent(), innerMessage, innerDescription, exception);
         }
       }
     }

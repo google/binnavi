@@ -20,7 +20,7 @@ import com.google.security.zynamics.binnavi.CUtilityFunctions;
 import com.google.security.zynamics.binnavi.Database.Exceptions.CPartialLoadException;
 import com.google.security.zynamics.binnavi.Database.Exceptions.CouldntLoadDataException;
 import com.google.security.zynamics.binnavi.Gui.CProgressDialog;
-import com.google.security.zynamics.binnavi.Gui.ErrorDialog.CNaviErrorDialog;
+import com.google.security.zynamics.binnavi.Gui.errordialog.NaviErrorDialog;
 import com.google.security.zynamics.binnavi.disassembly.views.INaviView;
 import com.google.security.zynamics.binnavi.disassembly.views.IViewContainer;
 import com.google.security.zynamics.zylib.gui.ProgressDialogs.CEndlessHelperThread;
@@ -73,7 +73,7 @@ public final class CViewLoader {
                     "Malformed data was found in the database."},
                 new String[] {"The view was not loaded."});
 
-        CNaviErrorDialog.show(parent, message, description, exception);
+        NaviErrorDialog.show(parent, message, description, exception);
       } else if (exception instanceof CPartialLoadException) {
         CUtilityFunctions.logException(exception);
 
@@ -89,7 +89,7 @@ public final class CViewLoader {
                 new String[] {String.format(
                     "The view can not be loaded before the module '%s' is loaded.", moduleName)});
 
-        CNaviErrorDialog.show(parent, message, description, exception);
+        NaviErrorDialog.show(parent, message, description, exception);
       }
     }
   }

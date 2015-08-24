@@ -26,10 +26,10 @@ import com.google.common.base.Preconditions;
 import com.google.security.zynamics.binnavi.CUtilityFunctions;
 import com.google.security.zynamics.binnavi.Database.Exceptions.CouldntLoadDataException;
 import com.google.security.zynamics.binnavi.Database.Exceptions.LoadCancelledException;
-import com.google.security.zynamics.binnavi.Gui.ErrorDialog.CNaviErrorDialog;
 import com.google.security.zynamics.binnavi.Gui.MainWindow.Implementations.CNodeExpander;
 import com.google.security.zynamics.binnavi.Gui.Progress.CGlobalProgressManager;
 import com.google.security.zynamics.binnavi.Gui.Progress.IProgressOperation;
+import com.google.security.zynamics.binnavi.Gui.errordialog.NaviErrorDialog;
 import com.google.security.zynamics.binnavi.disassembly.INaviModule;
 import com.google.security.zynamics.binnavi.disassembly.Modules.CModuleListenerAdapter;
 import com.google.security.zynamics.binnavi.disassembly.Modules.IModuleListener;
@@ -94,7 +94,7 @@ public final class CModuleLoader {
                   + "to load the module again. Restart BinNavi if necessary and contact "
                   + "the BinNavi support if the problem persists."});
 
-      CNaviErrorDialog.show(parent, message, description, exception);
+      NaviErrorDialog.show(parent, message, description, exception);
     } catch (final LoadCancelledException e) {
       // Don't show the user that he cancelled the operation.
     } finally {

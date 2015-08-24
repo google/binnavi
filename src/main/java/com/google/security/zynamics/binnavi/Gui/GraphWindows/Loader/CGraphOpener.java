@@ -26,11 +26,11 @@ import com.google.common.util.concurrent.ListeningExecutorService;
 import com.google.common.util.concurrent.MoreExecutors;
 import com.google.security.zynamics.binnavi.CUtilityFunctions;
 import com.google.security.zynamics.binnavi.Database.Exceptions.CPartialLoadException;
-import com.google.security.zynamics.binnavi.Gui.ErrorDialog.CNaviErrorDialog;
 import com.google.security.zynamics.binnavi.Gui.GraphWindows.CGraphWindow;
 import com.google.security.zynamics.binnavi.Gui.Progress.CGlobalProgressManager;
 import com.google.security.zynamics.binnavi.Gui.Progress.IProgressOperation;
 import com.google.security.zynamics.binnavi.Gui.WindowManager.CWindowManager;
+import com.google.security.zynamics.binnavi.Gui.errordialog.NaviErrorDialog;
 import com.google.security.zynamics.binnavi.disassembly.views.INaviView;
 import com.google.security.zynamics.binnavi.disassembly.views.IViewContainer;
 import com.google.security.zynamics.zylib.gui.ProgressDialogs.CProgressPanel;
@@ -83,7 +83,7 @@ public final class CGraphOpener {
               new String[] { "You have to load all necessary modules before opening "
                   + "this view." });
 
-          CNaviErrorDialog.show(parent, innerMessage, innerDescription, exception);
+          NaviErrorDialog.show(parent, innerMessage, innerDescription, exception);
         } catch (final Exception exception) {
           final String innerMessage = "E00122: " + "View could not be opened";
           final String innerDescription = CUtilityFunctions.createDescription(
@@ -92,7 +92,7 @@ public final class CGraphOpener {
               new String[] { "The view can not be opened because not all necessary data "
                   + "was loaded from the database." });
 
-          CNaviErrorDialog.show(parent, innerMessage, innerDescription, exception);
+          NaviErrorDialog.show(parent, innerMessage, innerDescription, exception);
         } finally {
           operation.stop();
         }
@@ -122,7 +122,7 @@ public final class CGraphOpener {
               new String[] { "You have to load all necessary modules before opening "
                   + "this view." });
 
-          CNaviErrorDialog.show(parent, innerMessage, innerDescription, exception);
+          NaviErrorDialog.show(parent, innerMessage, innerDescription, exception);
           return false;
         } catch (final Exception exception) {
           final String innerMessage = "E00122: " + "View could not be opened";
@@ -132,7 +132,7 @@ public final class CGraphOpener {
               new String[] { "The view can not be opened because not all necessary data "
                   + "was loaded from the database." });
 
-          CNaviErrorDialog.show(parent, innerMessage, innerDescription, exception);
+          NaviErrorDialog.show(parent, innerMessage, innerDescription, exception);
           return false;
         } finally {
           operation.stop();

@@ -27,7 +27,6 @@ import com.google.security.zynamics.binnavi.APIHelpers.ObjectFinders;
 import com.google.security.zynamics.binnavi.CUtilityFunctions;
 import com.google.security.zynamics.binnavi.Database.Interfaces.IDatabase;
 import com.google.security.zynamics.binnavi.Gui.Actions.CActionProxy;
-import com.google.security.zynamics.binnavi.Gui.ErrorDialog.CNaviErrorDialog;
 import com.google.security.zynamics.binnavi.Gui.MainWindow.ProjectTree.Actions.CCreateCombinedCallgraphAction;
 import com.google.security.zynamics.binnavi.Gui.MainWindow.ProjectTree.Actions.CDeleteAddressSpaceAction;
 import com.google.security.zynamics.binnavi.Gui.MainWindow.ProjectTree.Actions.CLoadAddressSpaceAction;
@@ -37,6 +36,7 @@ import com.google.security.zynamics.binnavi.Gui.MainWindow.ProjectTree.Nodes.CAb
 import com.google.security.zynamics.binnavi.Gui.MainWindow.ProjectTree.Updaters.CEmptyUpdater;
 import com.google.security.zynamics.binnavi.Gui.MainWindow.ProjectTree.Updaters.CParentSelectionUpdater;
 import com.google.security.zynamics.binnavi.Gui.MainWindow.ProjectTree.Updaters.ITreeUpdater;
+import com.google.security.zynamics.binnavi.Gui.errordialog.NaviErrorDialog;
 import com.google.security.zynamics.binnavi.api2.IPluginInterface;
 import com.google.security.zynamics.binnavi.api2.plugins.IPlugin;
 import com.google.security.zynamics.binnavi.disassembly.AddressSpaces.CAddressSpaceListenerAdapter;
@@ -174,7 +174,7 @@ public final class CAddressSpaceNodeMenuBuilder extends CAbstractMenuBuilder {
           new String[] {"The plugin contains a bug."}, new String[] {
               "The plugin probably behaves erroneously from this point on but it remains active"});
 
-      CNaviErrorDialog.show(getParent(), innerMessage, innerDescription, exception);
+      NaviErrorDialog.show(getParent(), innerMessage, innerDescription, exception);
     }
   }
 

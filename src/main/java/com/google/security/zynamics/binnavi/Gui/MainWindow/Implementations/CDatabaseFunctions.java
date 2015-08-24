@@ -27,10 +27,10 @@ import com.google.security.zynamics.binnavi.Database.Exceptions.CouldntDeleteExc
 import com.google.security.zynamics.binnavi.Database.Exceptions.CouldntLoadDataException;
 import com.google.security.zynamics.binnavi.Database.Exceptions.CouldntSaveDataException;
 import com.google.security.zynamics.binnavi.Database.Interfaces.IDatabase;
-import com.google.security.zynamics.binnavi.Gui.ErrorDialog.CNaviErrorDialog;
 import com.google.security.zynamics.binnavi.Gui.MainWindow.ProjectTree.Updaters.INodeSelectionUpdater;
 import com.google.security.zynamics.binnavi.Gui.MainWindow.ProjectTree.Updaters.ITreeUpdater;
 import com.google.security.zynamics.binnavi.Gui.Progress.CDefaultProgressOperation;
+import com.google.security.zynamics.binnavi.Gui.errordialog.NaviErrorDialog;
 import com.google.security.zynamics.binnavi.config.ConfigManager;
 import com.google.security.zynamics.binnavi.debug.debugger.DebuggerTemplate;
 import com.google.security.zynamics.binnavi.disassembly.INaviProject;
@@ -88,7 +88,7 @@ public final class CDatabaseFunctions {
                   new String[] {"Database connection problems."},
                   new String[] {"The debugger was not created."});
 
-          CNaviErrorDialog.show(parent, message, description, exception);
+          NaviErrorDialog.show(parent, message, description, exception);
         } finally {
           operation.getProgressPanel().next();
           operation.stop();
@@ -154,7 +154,7 @@ public final class CDatabaseFunctions {
                       new String[] {"Database connection problems."},
                       new String[] {"The debugger still exists."});
 
-              CNaviErrorDialog.show(parent, message, description, exception);
+              NaviErrorDialog.show(parent, message, description, exception);
             } finally {
               operation.stop();
             }
@@ -208,7 +208,7 @@ public final class CDatabaseFunctions {
                       new String[] {"Database connection problems."},
                       new String[] {"The project still exists."});
 
-              CNaviErrorDialog.show(parent, message, description, exception);
+              NaviErrorDialog.show(parent, message, description, exception);
             } finally {
               operation.stop();
             }
@@ -249,7 +249,7 @@ public final class CDatabaseFunctions {
                     new String[] {"More raw modules than those shown in "
                         + "the raw modules list might exist in the database."});
 
-            CNaviErrorDialog.show(parent, message, description, exception);
+            NaviErrorDialog.show(parent, message, description, exception);
           }
         } finally {
           operation.getProgressPanel().next();

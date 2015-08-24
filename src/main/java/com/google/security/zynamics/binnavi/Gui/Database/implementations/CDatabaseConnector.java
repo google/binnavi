@@ -21,7 +21,7 @@ import com.google.security.zynamics.binnavi.Database.CDatabaseConfiguration;
 import com.google.security.zynamics.binnavi.Database.Exceptions.CouldntConnectException;
 import com.google.security.zynamics.binnavi.Database.Exceptions.CouldntLoadDriverException;
 import com.google.security.zynamics.binnavi.Database.PostgreSQL.PostgreSQLErrorCodes;
-import com.google.security.zynamics.binnavi.Gui.ErrorDialog.CNaviErrorDialog;
+import com.google.security.zynamics.binnavi.Gui.errordialog.NaviErrorDialog;
 import com.google.security.zynamics.zylib.gui.CMessageBox;
 
 import java.awt.Window;
@@ -149,7 +149,7 @@ public final class CDatabaseConnector {
           "The database driver file could not be found."}, new String[] {
           "BinNavi can not load data from the given database until the " + "problem is resolved."});
 
-      CNaviErrorDialog.show(parent, message, description, exception);
+      NaviErrorDialog.show(parent, message, description, exception);
     } catch (final CouldntConnectException exception) {
       if (exception.getSqlState().equalsIgnoreCase(PostgreSQLErrorCodes.INVALID_PASSWORD)) {
         CMessageBox.showInformation(parent, String.format(
@@ -171,7 +171,7 @@ public final class CDatabaseConnector {
                 "BinNavi can not load data from the given database until the "
                 + "problem is resolved."});
 
-        CNaviErrorDialog.show(parent, message, description, exception);
+        NaviErrorDialog.show(parent, message, description, exception);
       }
     }
   }

@@ -17,8 +17,8 @@ package com.google.security.zynamics.binnavi.Gui.GraphWindows.Implementations;
 
 import com.google.common.base.Preconditions;
 import com.google.security.zynamics.binnavi.CUtilityFunctions;
-import com.google.security.zynamics.binnavi.Gui.ErrorDialog.CNaviErrorDialog;
 import com.google.security.zynamics.binnavi.Gui.LastDirFileChooser;
+import com.google.security.zynamics.binnavi.Gui.errordialog.NaviErrorDialog;
 import com.google.security.zynamics.binnavi.yfileswrap.zygraph.ZyGraph;
 import com.google.security.zynamics.zylib.yfileswrap.gui.zygraph.GraphExporters;
 
@@ -65,7 +65,7 @@ public final class CGraphExporter {
             new String[] {"There was a problem writing the PNG file."},
             new String[] {"The view was not written to the PNG file."});
 
-        CNaviErrorDialog.show(parent, innerMessage, innerDescription, e);
+        NaviErrorDialog.show(parent, innerMessage, innerDescription, e);
       }
     }
   }
@@ -98,7 +98,7 @@ public final class CGraphExporter {
             new String[] {"There was a problem writing the PNG file."},
             new String[] {"The view was not written to the PNG file."});
 
-        CNaviErrorDialog.show(parent, innerMessage, innerDescription, e);
+        NaviErrorDialog.show(parent, innerMessage, innerDescription, e);
       }
     }
   }

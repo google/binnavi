@@ -20,7 +20,6 @@ import com.google.security.zynamics.binnavi.CUtilityFunctions;
 import com.google.security.zynamics.binnavi.API.plugins.IMainWindowMenuPlugin;
 import com.google.security.zynamics.binnavi.API.plugins.PluginInterface;
 import com.google.security.zynamics.binnavi.Gui.Actions.CActionProxy;
-import com.google.security.zynamics.binnavi.Gui.ErrorDialog.CNaviErrorDialog;
 import com.google.security.zynamics.binnavi.Gui.MainWindow.CActionExit;
 import com.google.security.zynamics.binnavi.Gui.MainWindow.ProjectTree.Actions.CActionAbout;
 import com.google.security.zynamics.binnavi.Gui.MainWindow.ProjectTree.Actions.CActionContextHelp;
@@ -36,6 +35,7 @@ import com.google.security.zynamics.binnavi.Gui.MainWindow.ProjectTree.Actions.C
 import com.google.security.zynamics.binnavi.Gui.MainWindow.ProjectTree.Actions.CPluginManagementAction;
 import com.google.security.zynamics.binnavi.Gui.MainWindow.ProjectTree.Actions.CPluginsReloadAction;
 import com.google.security.zynamics.binnavi.Gui.MainWindow.ProjectTree.Actions.CStartTutorialAction;
+import com.google.security.zynamics.binnavi.Gui.errordialog.NaviErrorDialog;
 import com.google.security.zynamics.binnavi.api2.plugins.IPlugin;
 
 import java.util.ArrayList;
@@ -194,7 +194,7 @@ public abstract class CAbstractMenuBuilder {
                     new String[] {"The plugin contains a bug."},
                     new String[] {"The plugin probably behaves erroneously from this point on but it remains active"});
 
-        CNaviErrorDialog.show(getParent(), innerMessage, innerDescription, exception);
+        NaviErrorDialog.show(getParent(), innerMessage, innerDescription, exception);
       }
     }
 

@@ -22,8 +22,8 @@ import javax.swing.SwingUtilities;
 
 import com.google.security.zynamics.binnavi.CUtilityFunctions;
 import com.google.security.zynamics.binnavi.Database.Exceptions.CouldntSaveDataException;
-import com.google.security.zynamics.binnavi.Gui.ErrorDialog.CNaviErrorDialog;
 import com.google.security.zynamics.binnavi.Gui.Loaders.CModuleLoader;
+import com.google.security.zynamics.binnavi.Gui.errordialog.NaviErrorDialog;
 import com.google.security.zynamics.binnavi.disassembly.INaviModule;
 
 
@@ -54,7 +54,7 @@ public final class CModuleInitializationFunctions {
               new String[] {"The imported data is incomplete because the exporter failed."},
               new String[] {"The module was not initialized."});
 
-      CNaviErrorDialog.show(parent, innerMessage, innerDescription);
+      NaviErrorDialog.show(parent, innerMessage, innerDescription);
 
       return;
     }
@@ -77,7 +77,7 @@ public final class CModuleInitializationFunctions {
               new String[] {"There was a problem with the database connection."},
               new String[] {"The module was not initialized."});
 
-      CNaviErrorDialog.show(parent, innerMessage, innerDescription, e);
+      NaviErrorDialog.show(parent, innerMessage, innerDescription, e);
 
       return;
     } finally {

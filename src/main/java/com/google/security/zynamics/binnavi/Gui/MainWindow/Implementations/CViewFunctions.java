@@ -23,7 +23,7 @@ import javax.swing.JFrame;
 
 import com.google.security.zynamics.binnavi.CUtilityFunctions;
 import com.google.security.zynamics.binnavi.Database.Exceptions.CouldntSaveDataException;
-import com.google.security.zynamics.binnavi.Gui.ErrorDialog.CNaviErrorDialog;
+import com.google.security.zynamics.binnavi.Gui.errordialog.NaviErrorDialog;
 import com.google.security.zynamics.binnavi.Tagging.CTag;
 import com.google.security.zynamics.binnavi.disassembly.views.INaviView;
 
@@ -74,7 +74,7 @@ public final class CViewFunctions {
               new String[] {"There was a problem with the database connection."},
               new String[] {"The view was not updated and the new view name is lost."});
 
-      CNaviErrorDialog.show(parent, innerMessage, innerDescription, e);
+      NaviErrorDialog.show(parent, innerMessage, innerDescription, e);
     }
   }
 
@@ -98,7 +98,7 @@ public final class CViewFunctions {
                 new String[] {"There was a problem with the database connection."},
                 new String[] {"The view star was not updated."});
 
-        CNaviErrorDialog.show(parent, innerMessage, innerDescription, e);
+        NaviErrorDialog.show(parent, innerMessage, innerDescription, e);
       }
     }
   }
@@ -123,7 +123,7 @@ public final class CViewFunctions {
               new String[] {"There was a problem with the database connection."},
               new String[] {"The view remains untagged."});
 
-      CNaviErrorDialog.show(parent, innerMessage, innerDescription, e);
+      NaviErrorDialog.show(parent, innerMessage, innerDescription, e);
     }
   }
 
@@ -147,7 +147,7 @@ public final class CViewFunctions {
                 new String[] {"There was a problem with the database connection."},
                 new String[] {"The view star was not updated."});
 
-        CNaviErrorDialog.show(parent, innerMessage, innerDescription, e);
+        NaviErrorDialog.show(parent, innerMessage, innerDescription, e);
       }
     }
   }
@@ -172,7 +172,7 @@ public final class CViewFunctions {
                 new String[] {"There was a problem with the database connection."},
                 new String[] {"The view star was not updated."});
 
-        CNaviErrorDialog.show(parent, innerMessage, innerDescription, e);
+        NaviErrorDialog.show(parent, innerMessage, innerDescription, e);
       }
     }
   }

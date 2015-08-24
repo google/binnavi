@@ -19,7 +19,7 @@ import com.google.common.base.Preconditions;
 import com.google.common.collect.Lists;
 import com.google.security.zynamics.binnavi.CUtilityFunctions;
 import com.google.security.zynamics.binnavi.Gui.CProgressDialog;
-import com.google.security.zynamics.binnavi.Gui.ErrorDialog.CNaviErrorDialog;
+import com.google.security.zynamics.binnavi.Gui.errordialog.NaviErrorDialog;
 import com.google.security.zynamics.binnavi.Log.NaviLogger;
 import com.google.security.zynamics.binnavi.Plugins.IPluginRegistry;
 import com.google.security.zynamics.binnavi.api2.plugins.IPlugin;
@@ -76,7 +76,7 @@ public final class CPluginLoader {
           "It is unclear what caused this problem. Please check the stack trace for more "
           + "information. If the stack trace does not help you fix this problem please contact "
           + "the BinNavi support.", new String[] {}, new String[] {});
-      CNaviErrorDialog.show(null, message, description, thread.getException());
+      NaviErrorDialog.show(null, message, description, thread.getException());
     }
   }
 }

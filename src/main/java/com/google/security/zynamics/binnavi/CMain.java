@@ -93,8 +93,7 @@ public final class CMain {
     // ESCA-JAVA0266:
     // ATTENTION: DO NOT MOVE THE LINE BELOW ABOVE THE CONFIG FILE STUFF
     // Don't remove this line, it actually works from inside JAR files
-    System.out.printf("Starting %s %s Build: %s/%s%n", Constants.PROJECT_NAME,
-        Constants.PROJECT_VERSION, Constants.BUILD_ID, Constants.REVISION_NUMBER);
+    System.out.printf("Starting %s%n", Constants.PROJECT_NAME_VERSION_BUILD);
 
     CGraphPanelExtender.extend();
 

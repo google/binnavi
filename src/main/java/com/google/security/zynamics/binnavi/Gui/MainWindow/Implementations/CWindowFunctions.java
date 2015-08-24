@@ -19,8 +19,8 @@ package com.google.security.zynamics.binnavi.Gui.MainWindow.Implementations;
 import com.google.security.zynamics.binnavi.CMain;
 import com.google.security.zynamics.binnavi.CUtilityFunctions;
 import com.google.security.zynamics.binnavi.API.plugins.PluginInterface;
-import com.google.security.zynamics.binnavi.Gui.ErrorDialog.CNaviErrorDialog;
 import com.google.security.zynamics.binnavi.Gui.Scripting.CScriptingDialog;
+import com.google.security.zynamics.binnavi.Gui.errordialog.NaviErrorDialog;
 import com.google.security.zynamics.binnavi.Help.CHelpManager;
 import com.google.security.zynamics.binnavi.Resources.Constants;
 import com.google.security.zynamics.binnavi.config.ConfigManager;
@@ -79,8 +79,7 @@ public final class CWindowFunctions {
       urls.add(new Pair<>("BinNavi Product Site", new URL("http://www.zynamics.com/binnavi.html")));
       urls.add(new Pair<>("Report Bugs", new URL("mailto:zynamics-support@google.com")));
 
-      final String message =
-          Constants.COMPANY_NAME + " " + Constants.PROJECT_NAME_VERSION_BUILD
+      final String message = Constants.PROJECT_NAME_VERSION_BUILD
           + "\n\nCopyright \u00a92004-2011 zynamics GmbH.\nCopyright \u00a92011-2015 Google Inc.\n";
       final String description =
           "\nParts of this software were created by third parties and have different licensing "
@@ -130,7 +129,7 @@ public final class CWindowFunctions {
           new String[] {"BinNavi could not open the help file. Please try to open the "
               + "help file manually."});
 
-      CNaviErrorDialog.show(parent, message, description, e);
+      NaviErrorDialog.show(parent, message, description, e);
     }
   }
 

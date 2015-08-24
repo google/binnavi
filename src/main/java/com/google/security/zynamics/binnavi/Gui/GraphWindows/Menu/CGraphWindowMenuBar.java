@@ -22,13 +22,13 @@ import com.google.security.zynamics.binnavi.API.plugins.IGraphMenuPlugin;
 import com.google.security.zynamics.binnavi.API.plugins.PluginInterface;
 import com.google.security.zynamics.binnavi.Gui.Actions.CActionProxy;
 import com.google.security.zynamics.binnavi.Gui.CriteriaDialog.Cache.CCriteriumCache;
-import com.google.security.zynamics.binnavi.Gui.ErrorDialog.CNaviErrorDialog;
 import com.google.security.zynamics.binnavi.Gui.GraphWindows.CGraphModel;
 import com.google.security.zynamics.binnavi.Gui.GraphWindows.CGraphWindowMenuBarSynchronizer;
 import com.google.security.zynamics.binnavi.Gui.GraphWindows.IViewSwitcher;
 import com.google.security.zynamics.binnavi.Gui.GraphWindows.Actions.CActionAutomaticLayouting;
 import com.google.security.zynamics.binnavi.Gui.GraphWindows.Actions.CActionProximityBrowsing;
 import com.google.security.zynamics.binnavi.Gui.GraphWindows.Actions.CActionSave;
+import com.google.security.zynamics.binnavi.Gui.errordialog.NaviErrorDialog;
 import com.google.security.zynamics.binnavi.api2.IPluginInterface;
 import com.google.security.zynamics.binnavi.api2.plugins.IPlugin;
 import com.google.security.zynamics.zylib.disassembly.ViewType;
@@ -126,7 +126,7 @@ public final class CGraphWindowMenuBar extends JMenuBar {
             new String[] {"The plugin contains a bug."}, new String[] {
                 "The plugin probably behaves erroneously from this point on but it remains active"});
 
-        CNaviErrorDialog.show(m_model.getParent(), innerMessage, innerDescription, exception);
+        NaviErrorDialog.show(m_model.getParent(), innerMessage, innerDescription, exception);
       }
     }
 

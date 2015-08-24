@@ -26,9 +26,9 @@ import java.util.List;
 import com.google.common.base.Preconditions;
 import com.google.security.zynamics.binnavi.CUtilityFunctions;
 import com.google.security.zynamics.binnavi.Database.Exceptions.CouldntSaveDataException;
-import com.google.security.zynamics.binnavi.Gui.ErrorDialog.CNaviErrorDialog;
 import com.google.security.zynamics.binnavi.Gui.FilterPanel.IFilter;
 import com.google.security.zynamics.binnavi.Gui.MainWindow.ProjectTree.Nodes.CAbstractTreeTableModel;
+import com.google.security.zynamics.binnavi.Gui.errordialog.NaviErrorDialog;
 import com.google.security.zynamics.binnavi.disassembly.INaviAddressSpace;
 import com.google.security.zynamics.binnavi.disassembly.INaviModule;
 import com.google.security.zynamics.binnavi.disassembly.AddressSpaces.CAddressSpaceContent;
@@ -264,7 +264,7 @@ public final class CProjectModulesModel extends CAbstractTreeTableModel<INaviMod
                 new String[] {"There was a problem with the database connection."},
                 new String[] {"The address space keeps its old name."});
 
-        CNaviErrorDialog.show(null, innerMessage, innerDescription, e);
+        NaviErrorDialog.show(null, innerMessage, innerDescription, e);
       }
     } else if (col == DESCRIPTION_COLUMN) {
       try {
@@ -280,7 +280,7 @@ public final class CProjectModulesModel extends CAbstractTreeTableModel<INaviMod
                 new String[] {"There was a problem with the database connection."},
                 new String[] {"The address space keeps its old description."});
 
-        CNaviErrorDialog.show(null, innerMessage, innerDescription, e);
+        NaviErrorDialog.show(null, innerMessage, innerDescription, e);
       }
     }
   }

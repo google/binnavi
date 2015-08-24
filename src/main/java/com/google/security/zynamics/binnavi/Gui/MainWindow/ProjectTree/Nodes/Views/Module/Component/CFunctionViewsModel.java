@@ -27,10 +27,10 @@ import com.google.common.base.Preconditions;
 import com.google.common.collect.ImmutableList;
 import com.google.security.zynamics.binnavi.CUtilityFunctions;
 import com.google.security.zynamics.binnavi.Database.Interfaces.IDatabase;
-import com.google.security.zynamics.binnavi.Gui.ErrorDialog.CNaviErrorDialog;
 import com.google.security.zynamics.binnavi.Gui.FilterPanel.IFilter;
 import com.google.security.zynamics.binnavi.Gui.GraphWindows.CommentDialogs.Interfaces.IComment;
 import com.google.security.zynamics.binnavi.Gui.MainWindow.ProjectTree.Nodes.CAbstractTreeViewsTableModel;
+import com.google.security.zynamics.binnavi.Gui.errordialog.NaviErrorDialog;
 import com.google.security.zynamics.binnavi.debug.debugger.interfaces.IDebugger;
 import com.google.security.zynamics.binnavi.debug.models.breakpoints.Breakpoint;
 import com.google.security.zynamics.binnavi.debug.models.breakpoints.BreakpointManager;
@@ -451,7 +451,7 @@ public class CFunctionViewsModel extends CAbstractTreeViewsTableModel {
                 new String[] {"There was a problem with the database connection."},
                 new String[] {"The view was not updated and the new view name is lost."});
 
-        CNaviErrorDialog.show(null, innerMessage, innerDescription, e);
+        NaviErrorDialog.show(null, innerMessage, innerDescription, e);
       }
     } else if (column == FUNCTIONNAME_COLUM) {
       try {
@@ -467,7 +467,7 @@ public class CFunctionViewsModel extends CAbstractTreeViewsTableModel {
                 new String[] {"There was a problem with the database connection."},
                 new String[] {"The view was not updated and the new view description is lost."});
 
-        CNaviErrorDialog.show(null, innerMessage, innerDescription, e);
+        NaviErrorDialog.show(null, innerMessage, innerDescription, e);
       }
     }
   }

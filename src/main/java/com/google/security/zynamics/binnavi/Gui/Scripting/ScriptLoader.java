@@ -16,7 +16,7 @@ limitations under the License.
  package com.google.security.zynamics.binnavi.Gui.Scripting;
 
 import com.google.security.zynamics.binnavi.CUtilityFunctions;
-import com.google.security.zynamics.binnavi.Gui.ErrorDialog.CNaviErrorDialog;
+import com.google.security.zynamics.binnavi.Gui.errordialog.NaviErrorDialog;
 import com.google.security.zynamics.binnavi.Log.NaviLogger;
 import com.google.security.zynamics.zylib.general.Pair;
 import com.google.security.zynamics.zylib.gui.ProgressDialogs.IStandardDescriptionUpdater;
@@ -78,7 +78,7 @@ public final class ScriptLoader {
       CUtilityFunctions.logException(exception);
       NaviLogger.severe(consoleWriter.getOutput());
 
-      CNaviErrorDialog.show(null, message, description, exception);
+      NaviErrorDialog.show(null, message, description, exception);
     }
   }
 

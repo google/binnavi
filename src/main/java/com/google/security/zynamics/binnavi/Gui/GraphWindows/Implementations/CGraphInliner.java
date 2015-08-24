@@ -25,7 +25,7 @@ import com.google.security.zynamics.binnavi.CUtilityFunctions;
 import com.google.security.zynamics.binnavi.Database.Exceptions.CouldntLoadDataException;
 import com.google.security.zynamics.binnavi.Database.Exceptions.LoadCancelledException;
 import com.google.security.zynamics.binnavi.Database.Interfaces.IDatabase;
-import com.google.security.zynamics.binnavi.Gui.ErrorDialog.CNaviErrorDialog;
+import com.google.security.zynamics.binnavi.Gui.errordialog.NaviErrorDialog;
 import com.google.security.zynamics.binnavi.disassembly.CInliningHelper;
 import com.google.security.zynamics.binnavi.disassembly.INaviCodeNode;
 import com.google.security.zynamics.binnavi.disassembly.INaviEdge;
@@ -65,7 +65,7 @@ public final class CGraphInliner {
             new String[] {"There was a problem with the database connection."},
             new String[] {"The graph remains unchanged because the function was not inlined."});
 
-    CNaviErrorDialog.show(parent, innerMessage, innerDescription, e);
+    NaviErrorDialog.show(parent, innerMessage, innerDescription, e);
   }
 
   /**

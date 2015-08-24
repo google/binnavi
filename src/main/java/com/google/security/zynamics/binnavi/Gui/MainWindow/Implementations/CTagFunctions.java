@@ -23,8 +23,8 @@ import javax.swing.JOptionPane;
 import com.google.security.zynamics.binnavi.CUtilityFunctions;
 import com.google.security.zynamics.binnavi.Database.Exceptions.CouldntDeleteException;
 import com.google.security.zynamics.binnavi.Database.Exceptions.CouldntSaveDataException;
-import com.google.security.zynamics.binnavi.Gui.ErrorDialog.CNaviErrorDialog;
 import com.google.security.zynamics.binnavi.Gui.Progress.CDefaultProgressOperation;
+import com.google.security.zynamics.binnavi.Gui.errordialog.NaviErrorDialog;
 import com.google.security.zynamics.binnavi.Tagging.CTag;
 import com.google.security.zynamics.binnavi.Tagging.ITagManager;
 import com.google.security.zynamics.zylib.gui.CMessageBox;
@@ -77,7 +77,7 @@ public final class CTagFunctions {
                   new String[] {"There was a problem with the database connection."},
                   new String[] {"The tag was not created."});
 
-          CNaviErrorDialog.show(parent, innerMessage, innerDescription, exception);
+          NaviErrorDialog.show(parent, innerMessage, innerDescription, exception);
         }
       }
     }.start();
@@ -119,7 +119,7 @@ public final class CTagFunctions {
                     new String[] {"There was a problem with the database connection."},
                     new String[] {"The tag was not deleted and can still be used."});
 
-            CNaviErrorDialog.show(parent, innerMessage, innerDescription, e);
+            NaviErrorDialog.show(parent, innerMessage, innerDescription, e);
           }
         }
       }.start();
@@ -165,7 +165,7 @@ public final class CTagFunctions {
                         new String[] {"There was a problem with the database connection."},
                         new String[] {"The tag and its children were not deleted and can still be used."});
 
-            CNaviErrorDialog.show(parent, innerMessage, innerDescription, e);
+            NaviErrorDialog.show(parent, innerMessage, innerDescription, e);
           }
         }
       }.start();
@@ -207,7 +207,7 @@ public final class CTagFunctions {
                   new String[] {"There was a problem with the database connection."},
                   new String[] {"The tag was not created."});
 
-          CNaviErrorDialog.show(parent, innerMessage, innerDescription, exception);
+          NaviErrorDialog.show(parent, innerMessage, innerDescription, exception);
         }
       }
     }.start();

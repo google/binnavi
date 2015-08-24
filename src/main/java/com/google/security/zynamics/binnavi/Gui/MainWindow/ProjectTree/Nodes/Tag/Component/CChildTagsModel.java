@@ -26,8 +26,8 @@ import com.google.common.base.Preconditions;
 import com.google.security.zynamics.binnavi.CUtilityFunctions;
 import com.google.security.zynamics.binnavi.Database.Exceptions.CouldntSaveDataException;
 import com.google.security.zynamics.binnavi.Database.Interfaces.IDatabase;
-import com.google.security.zynamics.binnavi.Gui.ErrorDialog.CNaviErrorDialog;
 import com.google.security.zynamics.binnavi.Gui.MainWindow.ProjectTree.Nodes.CAbstractTreeTableModel;
+import com.google.security.zynamics.binnavi.Gui.errordialog.NaviErrorDialog;
 import com.google.security.zynamics.binnavi.Tagging.CTag;
 import com.google.security.zynamics.binnavi.Tagging.CTagManager;
 import com.google.security.zynamics.binnavi.Tagging.ITagListener;
@@ -176,7 +176,7 @@ public final class CChildTagsModel extends CAbstractTreeTableModel<CTag> {
                 new String[] {"There was a problem with the database connection."},
                 new String[] {"The tag name could not be changed."});
 
-        CNaviErrorDialog.show(null, innerMessage, innerDescription, e);
+        NaviErrorDialog.show(null, innerMessage, innerDescription, e);
       }
     } else if (col == DESCRIPTION_COLUMN) {
       try {
@@ -192,7 +192,7 @@ public final class CChildTagsModel extends CAbstractTreeTableModel<CTag> {
                 new String[] {"There was a problem with the database connection."},
                 new String[] {"The tag description could not be changed."});
 
-        CNaviErrorDialog.show(null, innerMessage, innerDescription, e);
+        NaviErrorDialog.show(null, innerMessage, innerDescription, e);
       }
     }
   }

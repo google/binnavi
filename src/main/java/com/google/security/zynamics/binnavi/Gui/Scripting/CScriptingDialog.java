@@ -19,7 +19,7 @@ import com.google.security.zynamics.binnavi.CUtilityFunctions;
 import com.google.security.zynamics.binnavi.API.plugins.PluginInterface;
 import com.google.security.zynamics.binnavi.Gui.CProgressDialog;
 import com.google.security.zynamics.binnavi.Gui.LastDirFileChooser;
-import com.google.security.zynamics.binnavi.Gui.ErrorDialog.CNaviErrorDialog;
+import com.google.security.zynamics.binnavi.Gui.errordialog.NaviErrorDialog;
 import com.google.security.zynamics.zylib.general.Pair;
 import com.google.security.zynamics.zylib.gui.ProgressDialogs.CEndlessHelperThread;
 import com.google.security.zynamics.zylib.gui.scripting.ConsoleWriter;
@@ -212,7 +212,7 @@ public final class CScriptingDialog extends JDialog {
             "The script contains a bug that caused an exception."},
             new String[] {"BinNavi can not read the script file."});
 
-        CNaviErrorDialog.show(CScriptingDialog.this, message, description, thread.getException());
+        NaviErrorDialog.show(CScriptingDialog.this, message, description, thread.getException());
       }
 
       final IScriptPanel panel = (IScriptPanel) scriptTab.getSelectedComponent();

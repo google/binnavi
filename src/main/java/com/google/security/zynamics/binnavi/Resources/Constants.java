@@ -19,66 +19,35 @@ package com.google.security.zynamics.binnavi.Resources;
  * Contains a bunch of project-wide constants.
  */
 public final class Constants {
-  /**
-   * Build id for the BinNavi built. See {@link BuildVersionInformation} for more information.
-   */
-  public static final String BUILD_ID = BuildVersionInformation.getBuildId();
+  /** Repository revision for the BinNavi build. */
+  public static final String REVISION_NUMBER = BuildVersionInformation.getBuildRevision();
 
-  /**
-   * Build change list for the BinNavi built. See {@link BuildVersionInformation} for more
-   * information.
-   */
-  public static final String REVISION_NUMBER = BuildVersionInformation.getBuildChangeList();
-
-  /**
-   * Name of the company.
-   */
+  /** Name of the company. */
   public static final String COMPANY_NAME = "zynamics";
 
-  /**
-   * Name of the product.
-   */
+  /** Name of the product. */
   public static final String PROJECT_NAME = "BinNavi";
 
-  /**
-   * Version number of the product.
-   */
-  public static final String PROJECT_VERSION = "6.0.0";
+  /** Version number of the product. */
+  public static final String PROJECT_VERSION = "6.0";
 
-  /**
-   * Name and version number of the project.
-   */
+  /** Name and version number of the project. */
   public static final String PROJECT_NAME_VERSION = PROJECT_NAME + " " + PROJECT_VERSION;
 
-  /**
-   * Name, version number, and build number of the project.
-   */
+  /** Name, version number, and build number of the project. */
   public static final String PROJECT_NAME_VERSION_BUILD =
-      PROJECT_NAME_VERSION + " " + REVISION_NUMBER;
+      PROJECT_NAME_VERSION + " @ " + REVISION_NUMBER;
 
-  /**
-   * Default window title to be used in all windows.
-   */
-  public static final String DEFAULT_WINDOW_TITLE = COMPANY_NAME + " " + PROJECT_NAME_VERSION;
+  /** Default window title to be used in all windows. */
+  public static final String DEFAULT_WINDOW_TITLE = PROJECT_NAME;
 
-  /**
-   * Root path of the BinNavi installation.
-   */
+  /** Root path of the BinNavi installation. */
   public static String startPath = "";
 
-  /**
-   * The filename of the license file.
-   */
-  public static final String LICENSE_FILE = "zynamics BinNavi License Key.txt";
-
-  /**
-   * The filename of the configuration file.
-   */
+  /** The filename of the configuration file. */
   public static final String CONFIG_FILE_NAME = "config.xml";
 
-  /**
-   * You are not supposed to instantiate this class.
-   */
+  /** You are not supposed to instantiate this class. */
   private Constants() {
     // Do not instantiate me
   }

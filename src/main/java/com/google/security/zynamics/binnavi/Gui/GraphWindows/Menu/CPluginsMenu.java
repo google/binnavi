@@ -26,10 +26,10 @@ import com.google.security.zynamics.binnavi.API.plugins.IGraphMenuPlugin;
 import com.google.security.zynamics.binnavi.API.plugins.IPluginInterfaceListener;
 import com.google.security.zynamics.binnavi.API.plugins.PluginInterface;
 import com.google.security.zynamics.binnavi.Gui.Actions.CActionProxy;
-import com.google.security.zynamics.binnavi.Gui.ErrorDialog.CNaviErrorDialog;
 import com.google.security.zynamics.binnavi.Gui.GraphWindows.CGraphModel;
 import com.google.security.zynamics.binnavi.Gui.GraphWindows.Actions.CActionGraphScripting;
 import com.google.security.zynamics.binnavi.Gui.MainWindow.ProjectTree.Actions.CActionOpenLogConsole;
+import com.google.security.zynamics.binnavi.Gui.errordialog.NaviErrorDialog;
 import com.google.security.zynamics.binnavi.api2.plugins.IPlugin;
 
 
@@ -93,7 +93,7 @@ public final class CPluginsMenu extends JMenu {
           new String[] {"The plugin contains a bug."}, new String[] {
               "The plugin probably behaves erroneously from this point on but it remains active"});
 
-      CNaviErrorDialog.show(m_model.getParent(), innerMessage, innerDescription, exception);
+      NaviErrorDialog.show(m_model.getParent(), innerMessage, innerDescription, exception);
     }
   }
 

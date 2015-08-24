@@ -31,11 +31,11 @@ import com.google.security.zynamics.binnavi.Database.Exceptions.CouldntLoadDataE
 import com.google.security.zynamics.binnavi.Database.Exceptions.CouldntSaveDataException;
 import com.google.security.zynamics.binnavi.Database.Exceptions.LoadCancelledException;
 import com.google.security.zynamics.binnavi.Database.Interfaces.IDatabase;
-import com.google.security.zynamics.binnavi.Gui.ErrorDialog.CNaviErrorDialog;
 import com.google.security.zynamics.binnavi.Gui.Loaders.CProjectLoader;
 import com.google.security.zynamics.binnavi.Gui.MainWindow.ProjectTree.Updaters.INodeSelectionUpdater;
 import com.google.security.zynamics.binnavi.Gui.MainWindow.ProjectTree.Updaters.ITreeUpdater;
 import com.google.security.zynamics.binnavi.Gui.Progress.CDefaultProgressOperation;
+import com.google.security.zynamics.binnavi.Gui.errordialog.NaviErrorDialog;
 import com.google.security.zynamics.binnavi.disassembly.INaviAddressSpace;
 import com.google.security.zynamics.binnavi.disassembly.INaviProject;
 import com.google.security.zynamics.binnavi.disassembly.AddressSpaces.CAddressSpace;
@@ -78,7 +78,7 @@ public final class CProjectFunctions {
                   new String[] {"There was a problem with the database connection."},
                   new String[] {"The new project was created but its default address space could not be loaded."});
 
-      CNaviErrorDialog.show(parent, innerMessage, innerDescription, exception);
+      NaviErrorDialog.show(parent, innerMessage, innerDescription, exception);
     } catch (final LoadCancelledException e) {
       // Do nothing
     }
@@ -126,7 +126,7 @@ public final class CProjectFunctions {
                   new String[] {"There was a problem with the database connection."},
                   new String[] {"The address space was not created."});
 
-          CNaviErrorDialog.show(parent, innerMessage, innerDescription, exception);
+          NaviErrorDialog.show(parent, innerMessage, innerDescription, exception);
         } catch (final CouldntLoadDataException exception) {
           CUtilityFunctions.logException(exception);
 
@@ -138,7 +138,7 @@ public final class CProjectFunctions {
                   new String[] {"There was a problem with the database connection."},
                   new String[] {"The address space was created but not loaded."});
 
-          CNaviErrorDialog.show(parent, innerMessage, innerDescription, exception);
+          NaviErrorDialog.show(parent, innerMessage, innerDescription, exception);
         } catch (final LoadCancelledException e) {
           // Do nothing
         }
@@ -172,7 +172,7 @@ public final class CProjectFunctions {
                 new String[] {"There was a problem with the database connection."},
                 new String[] {"The new view was not created."});
 
-        CNaviErrorDialog.show(parent, innerMessage, innerDescription, e);
+        NaviErrorDialog.show(parent, innerMessage, innerDescription, e);
 
         return;
       } catch (final CPartialLoadException e) {
@@ -201,7 +201,7 @@ public final class CProjectFunctions {
               new String[] {"There was a problem with the database connection."},
               new String[] {"The graph remains unsaved."});
 
-      CNaviErrorDialog.show(parent, innerMessage, innerDescription, exception);
+      NaviErrorDialog.show(parent, innerMessage, innerDescription, exception);
     }
   }
 
@@ -253,7 +253,7 @@ public final class CProjectFunctions {
                   new String[] {"There was a problem with the database connection."},
                   new String[] {"No new project was created in the selected database."});
 
-          CNaviErrorDialog.show(parent, innerMessage, innerDescription, exception);
+          NaviErrorDialog.show(parent, innerMessage, innerDescription, exception);
         } catch (final CouldntLoadDataException exception) {
           CUtilityFunctions.logException(exception);
 
@@ -263,7 +263,7 @@ public final class CProjectFunctions {
                   new String[] {"There was a problem with the database connection."},
                   new String[] {"The new project was created but it could not be loaded."});
 
-          CNaviErrorDialog.show(parent, innerMessage, innerDescription, exception);
+          NaviErrorDialog.show(parent, innerMessage, innerDescription, exception);
         }
       }
     }.start();
@@ -321,7 +321,7 @@ public final class CProjectFunctions {
                       new String[] {"The address space can not be deleted until the delete "
                           + "operation is not vetoed anymore."});
 
-              CNaviErrorDialog.show(parent, innerMessage, innerDescription);
+              NaviErrorDialog.show(parent, innerMessage, innerDescription);
             } else {
               try {
                 project.getContent().removeAddressSpace(addressSpace);
@@ -337,7 +337,7 @@ public final class CProjectFunctions {
                         new String[] {"There was a problem with the database connection."},
                         new String[] {"The address space was not deleted."});
 
-                CNaviErrorDialog.show(parent, innerMessage, innerDescription, exception);
+                NaviErrorDialog.show(parent, innerMessage, innerDescription, exception);
               }
             }
             operation.stop();

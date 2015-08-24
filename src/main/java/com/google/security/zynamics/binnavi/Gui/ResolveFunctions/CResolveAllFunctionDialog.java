@@ -31,8 +31,8 @@ import com.google.security.zynamics.binnavi.Database.Exceptions.CouldntSaveDataE
 import com.google.security.zynamics.binnavi.Database.Exceptions.LoadCancelledException;
 import com.google.security.zynamics.binnavi.Database.Interfaces.IDatabase;
 import com.google.security.zynamics.binnavi.Exceptions.MaybeNullException;
-import com.google.security.zynamics.binnavi.Gui.ErrorDialog.CNaviErrorDialog;
 import com.google.security.zynamics.binnavi.Gui.MainWindow.Implementations.CFunctionHelpers;
+import com.google.security.zynamics.binnavi.Gui.errordialog.NaviErrorDialog;
 import com.google.security.zynamics.binnavi.disassembly.INaviAddressSpace;
 import com.google.security.zynamics.binnavi.disassembly.INaviFunction;
 import com.google.security.zynamics.binnavi.disassembly.INaviModule;
@@ -169,7 +169,7 @@ public class CResolveAllFunctionDialog extends JDialog {
         new String[] {"The database connection was dropped while saving."}, new String[] {
             "The changes in function forwarding were not saved. Try saving function forwarding again. If necessary, close the connection to the database and reconnect."});
 
-    CNaviErrorDialog.show(dialog, message, description, exception);
+    NaviErrorDialog.show(dialog, message, description, exception);
   }
 
   private List<INaviModule> loadModules(final List<INaviModule> modules) {

@@ -41,7 +41,6 @@ import com.google.security.zynamics.binnavi.Database.Interfaces.IDatabase;
 import com.google.security.zynamics.binnavi.Gui.Actions.CActionProxy;
 import com.google.security.zynamics.binnavi.Gui.DebuggerComboBox.CDebuggerComboBox;
 import com.google.security.zynamics.binnavi.Gui.DebuggerComboBox.CDebuggerComboModel;
-import com.google.security.zynamics.binnavi.Gui.ErrorDialog.CNaviErrorDialog;
 import com.google.security.zynamics.binnavi.Gui.FilterPanel.CTablePanel;
 import com.google.security.zynamics.binnavi.Gui.MainWindow.ProjectTree.Nodes.CAbstractNodeComponent;
 import com.google.security.zynamics.binnavi.Gui.MainWindow.ProjectTree.Nodes.AddressSpace.Component.Help.CCreationDateHelp;
@@ -56,6 +55,7 @@ import com.google.security.zynamics.binnavi.Gui.Progress.CDefaultProgressOperati
 import com.google.security.zynamics.binnavi.Gui.StandardEditPanel.CDefaultFieldDescription;
 import com.google.security.zynamics.binnavi.Gui.StandardEditPanel.CStandardEditPanel;
 import com.google.security.zynamics.binnavi.Gui.StandardEditPanel.IInputPanelListener;
+import com.google.security.zynamics.binnavi.Gui.errordialog.NaviErrorDialog;
 import com.google.security.zynamics.binnavi.Help.CHelpButton;
 import com.google.security.zynamics.binnavi.disassembly.INaviAddressSpace;
 import com.google.security.zynamics.binnavi.disassembly.INaviModule;
@@ -282,7 +282,7 @@ public final class CAddressSpaceNodeComponent extends CAbstractNodeComponent {
               new String[] {"There was a problem with the database connection."},
               new String[] {"The address space keeps its old debugger."});
 
-      CNaviErrorDialog.show(SwingUtilities.getWindowAncestor(this), innerMessage, innerDescription,
+      NaviErrorDialog.show(SwingUtilities.getWindowAncestor(this), innerMessage, innerDescription,
           e);
     }
   }

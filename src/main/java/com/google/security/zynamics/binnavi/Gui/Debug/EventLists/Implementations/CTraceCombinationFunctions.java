@@ -25,8 +25,8 @@ import javax.swing.JFrame;
 import com.google.common.collect.Lists;
 import com.google.security.zynamics.binnavi.CUtilityFunctions;
 import com.google.security.zynamics.binnavi.Database.Exceptions.CouldntSaveDataException;
-import com.google.security.zynamics.binnavi.Gui.ErrorDialog.CNaviErrorDialog;
 import com.google.security.zynamics.binnavi.Gui.Progress.CDefaultProgressOperation;
+import com.google.security.zynamics.binnavi.Gui.errordialog.NaviErrorDialog;
 import com.google.security.zynamics.binnavi.debug.models.breakpoints.BreakpointAddress;
 import com.google.security.zynamics.binnavi.debug.models.trace.TraceList;
 import com.google.security.zynamics.binnavi.debug.models.trace.interfaces.ITraceEvent;
@@ -209,7 +209,7 @@ public final class CTraceCombinationFunctions {
               new String[] {"There was a problem with the database connection."}, new String[] {
                   "The trace list was not created. You could try to combine the lists again once the connection problem was resolved."});
 
-          CNaviErrorDialog.show(parent, innerMessage, innerDescription, e);
+          NaviErrorDialog.show(parent, innerMessage, innerDescription, e);
         }
       }
     }.start();
@@ -255,7 +255,7 @@ public final class CTraceCombinationFunctions {
               new String[] {"There was a problem with the database connection."}, new String[] {
                   "The trace list was not created. You could try to combine the lists again once the connection problem was resolved."});
 
-          CNaviErrorDialog.show(parent, innerMessage, innerDescription, e);
+          NaviErrorDialog.show(parent, innerMessage, innerDescription, e);
         }
       }
     }.start();
@@ -301,7 +301,7 @@ public final class CTraceCombinationFunctions {
               new String[] {"There was a problem with the database connection."}, new String[] {
                   "The trace list was not created. You could try to combine the lists again once the connection problem was resolved."});
 
-          CNaviErrorDialog.show(parent, innerMessage, innerDescription, e);
+          NaviErrorDialog.show(parent, innerMessage, innerDescription, e);
         }
       }
     }.start();

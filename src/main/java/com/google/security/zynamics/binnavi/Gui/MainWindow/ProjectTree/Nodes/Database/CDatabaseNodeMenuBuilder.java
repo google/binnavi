@@ -25,13 +25,13 @@ import com.google.security.zynamics.binnavi.API.plugins.PluginInterface;
 import com.google.security.zynamics.binnavi.Database.CDatabaseListenerAdapter;
 import com.google.security.zynamics.binnavi.Database.Interfaces.IDatabase;
 import com.google.security.zynamics.binnavi.Gui.Actions.CActionProxy;
-import com.google.security.zynamics.binnavi.Gui.ErrorDialog.CNaviErrorDialog;
 import com.google.security.zynamics.binnavi.Gui.MainWindow.ProjectTree.Actions.CCloseDatabaseAction;
 import com.google.security.zynamics.binnavi.Gui.MainWindow.ProjectTree.Actions.CDeleteDatabaseAction;
 import com.google.security.zynamics.binnavi.Gui.MainWindow.ProjectTree.Actions.CImportModuleAction;
 import com.google.security.zynamics.binnavi.Gui.MainWindow.ProjectTree.Actions.COpenDatabaseAction;
 import com.google.security.zynamics.binnavi.Gui.MainWindow.ProjectTree.Nodes.CAbstractMenuBuilder;
 import com.google.security.zynamics.binnavi.Gui.MainWindow.ProjectTree.Updaters.CParentSelectionUpdater;
+import com.google.security.zynamics.binnavi.Gui.errordialog.NaviErrorDialog;
 import com.google.security.zynamics.binnavi.api2.IPluginInterface;
 import com.google.security.zynamics.binnavi.api2.plugins.IPlugin;
 
@@ -141,7 +141,7 @@ public final class CDatabaseNodeMenuBuilder extends CAbstractMenuBuilder {
                   "The plugin probably behaves errorneously from this "
                   + "point on but it remains active"});
 
-          CNaviErrorDialog.show(getParent(), innerMessage, innerDescription, exception);
+          NaviErrorDialog.show(getParent(), innerMessage, innerDescription, exception);
         }
       }
     }

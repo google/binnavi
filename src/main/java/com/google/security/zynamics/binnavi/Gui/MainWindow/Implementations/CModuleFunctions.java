@@ -22,10 +22,10 @@ import com.google.security.zynamics.binnavi.Database.Exceptions.CouldntDeleteExc
 import com.google.security.zynamics.binnavi.Database.Exceptions.CouldntLoadDataException;
 import com.google.security.zynamics.binnavi.Database.Exceptions.LoadCancelledException;
 import com.google.security.zynamics.binnavi.Database.Interfaces.IDatabase;
-import com.google.security.zynamics.binnavi.Gui.ErrorDialog.CNaviErrorDialog;
 import com.google.security.zynamics.binnavi.Gui.Loaders.CModuleLoader;
 import com.google.security.zynamics.binnavi.Gui.MainWindow.ProjectTree.Updaters.ITreeUpdater;
 import com.google.security.zynamics.binnavi.Gui.Progress.CDefaultProgressOperation;
+import com.google.security.zynamics.binnavi.Gui.errordialog.NaviErrorDialog;
 import com.google.security.zynamics.binnavi.Importers.CFailedImport;
 import com.google.security.zynamics.binnavi.Importers.CImporterFactory;
 import com.google.security.zynamics.binnavi.disassembly.INaviModule;
@@ -80,7 +80,7 @@ public final class CModuleFunctions {
                   new String[] {"There was a problem with the database connection."},
                   new String[] {"The new view was not created."});
 
-          CNaviErrorDialog.show(parent, innerMessage, innerDescription, e);
+          NaviErrorDialog.show(parent, innerMessage, innerDescription, e);
 
           return;
         } catch (final CPartialLoadException e) {
@@ -144,7 +144,7 @@ public final class CModuleFunctions {
                           new String[] {"Database connection problems."},
                           new String[] {"The module still exists."});
 
-              CNaviErrorDialog.show(parent, message, description, e);
+              NaviErrorDialog.show(parent, message, description, e);
             } finally {
               operation.stop();
             }
@@ -178,7 +178,7 @@ public final class CModuleFunctions {
                     new String[] {"The IDB file was imported partially. A raw module in an "
                         + "incosistent state was created. This raw module should be deleted."});
 
-            CNaviErrorDialog.show(parent, message, description, failedImport.getImportException());
+            NaviErrorDialog.show(parent, message, description, failedImport.getImportException());
           }
 
           if (database.isConnected() && hasImportedModules) {
@@ -195,7 +195,7 @@ public final class CModuleFunctions {
                   new String[] {"Invalid IDA Pro executable file specified.",},
                   new String[] {"The IDB file was not imported."});
 
-          CNaviErrorDialog.show(parent, message, description, exception);
+          NaviErrorDialog.show(parent, message, description, exception);
         } catch (final InterruptedException exception) {
           CUtilityFunctions.logException(exception);
 
@@ -206,7 +206,7 @@ public final class CModuleFunctions {
                   new String[] {"Background threads were interrupted.",},
                   new String[] {"One or more IDB files were not imported."});
 
-          CNaviErrorDialog.show(parent, message, description, exception);
+          NaviErrorDialog.show(parent, message, description, exception);
           Thread.currentThread().interrupt();
         } catch (final ExecutionException exception) {
           CUtilityFunctions.logException(exception);
@@ -218,7 +218,7 @@ public final class CModuleFunctions {
                   new String[] {"Background threads threw an exception.",},
                   new String[] {"One or more IDB files were not imported."});
 
-          CNaviErrorDialog.show(parent, message, description, exception);
+          NaviErrorDialog.show(parent, message, description, exception);
         }
       }
     }.start();

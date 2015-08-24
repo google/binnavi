@@ -38,7 +38,6 @@ import com.google.security.zynamics.binnavi.CUtilityFunctions;
 import com.google.security.zynamics.binnavi.Database.Exceptions.CouldntSaveDataException;
 import com.google.security.zynamics.binnavi.Database.Interfaces.IDatabase;
 import com.google.security.zynamics.binnavi.Gui.Actions.CActionProxy;
-import com.google.security.zynamics.binnavi.Gui.ErrorDialog.CNaviErrorDialog;
 import com.google.security.zynamics.binnavi.Gui.MainWindow.ProjectTree.Nodes.Module.Component.Help.CCreationDateHelp;
 import com.google.security.zynamics.binnavi.Gui.MainWindow.ProjectTree.Nodes.Module.Component.Help.CDescriptionHelp;
 import com.google.security.zynamics.binnavi.Gui.MainWindow.ProjectTree.Nodes.Module.Component.Help.CModificationDateHelp;
@@ -52,6 +51,7 @@ import com.google.security.zynamics.binnavi.Gui.Progress.CDefaultProgressOperati
 import com.google.security.zynamics.binnavi.Gui.StandardEditPanel.CDefaultFieldDescription;
 import com.google.security.zynamics.binnavi.Gui.StandardEditPanel.CStandardEditPanel;
 import com.google.security.zynamics.binnavi.Gui.StandardEditPanel.IInputPanelListener;
+import com.google.security.zynamics.binnavi.Gui.errordialog.NaviErrorDialog;
 import com.google.security.zynamics.binnavi.Help.CHelpButton;
 import com.google.security.zynamics.binnavi.disassembly.INaviAddressSpace;
 import com.google.security.zynamics.binnavi.disassembly.INaviModule;
@@ -330,7 +330,7 @@ public final class CModuleOverviewPanel extends JPanel {
                     new String[] {"There was a problem with the connection to the database while the debugger was saved"},
                     new String[] {"The debugger was not saved. Please try to find out what went wrong with the database connection and try to save the debugger again."});
 
-        CNaviErrorDialog.show(SwingUtilities.getWindowAncestor(this), message, description, e);
+        NaviErrorDialog.show(SwingUtilities.getWindowAncestor(this), message, description, e);
       }
     }
   }
@@ -352,7 +352,7 @@ public final class CModuleOverviewPanel extends JPanel {
                   new String[] {"There was a problem with the connection to the database while the module description was saved"},
                   new String[] {"The module description was not saved. Please try to find out what went wrong with the database connection and try to save the module description again."});
 
-      CNaviErrorDialog.show(SwingUtilities.getWindowAncestor(this), message, description, e);
+      NaviErrorDialog.show(SwingUtilities.getWindowAncestor(this), message, description, e);
     }
   }
 
@@ -377,7 +377,7 @@ public final class CModuleOverviewPanel extends JPanel {
                   new String[] {"There was a problem with the connection to the database while the module file base was saved"},
                   new String[] {"The module file base was not saved. Please try to find out what went wrong with the database connection and try to save the module file base again."});
 
-      CNaviErrorDialog.show(SwingUtilities.getWindowAncestor(this), message, description, e);
+      NaviErrorDialog.show(SwingUtilities.getWindowAncestor(this), message, description, e);
     }
   }
 
@@ -405,7 +405,7 @@ public final class CModuleOverviewPanel extends JPanel {
                   new String[] {"There was a problem with the connection to the database while the module image base was saved"},
                   new String[] {"The module image base was not saved. Please try to find out what went wrong with the database connection and try to save the module image base again."});
 
-      CNaviErrorDialog.show(SwingUtilities.getWindowAncestor(this), message, description, e);
+      NaviErrorDialog.show(SwingUtilities.getWindowAncestor(this), message, description, e);
     }
   }
 
@@ -426,7 +426,7 @@ public final class CModuleOverviewPanel extends JPanel {
                   new String[] {"There was a problem with the connection to the database while the module name was saved"},
                   new String[] {"The module name was not saved. Please try to find out what went wrong with the database connection and try to save the module name again."});
 
-      CNaviErrorDialog.show(SwingUtilities.getWindowAncestor(this), message, description, e);
+      NaviErrorDialog.show(SwingUtilities.getWindowAncestor(this), message, description, e);
     }
   }
 

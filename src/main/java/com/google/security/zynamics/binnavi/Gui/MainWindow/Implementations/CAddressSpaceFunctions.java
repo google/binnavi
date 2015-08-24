@@ -22,8 +22,8 @@ import com.google.security.zynamics.binnavi.Database.Exceptions.CouldntDeleteExc
 import com.google.security.zynamics.binnavi.Database.Exceptions.CouldntLoadDataException;
 import com.google.security.zynamics.binnavi.Database.Exceptions.CouldntSaveDataException;
 import com.google.security.zynamics.binnavi.Database.Exceptions.LoadCancelledException;
-import com.google.security.zynamics.binnavi.Gui.ErrorDialog.CNaviErrorDialog;
 import com.google.security.zynamics.binnavi.Gui.Progress.CDefaultProgressOperation;
+import com.google.security.zynamics.binnavi.Gui.errordialog.NaviErrorDialog;
 import com.google.security.zynamics.binnavi.disassembly.INaviAddressSpace;
 import com.google.security.zynamics.binnavi.disassembly.INaviModule;
 import com.google.security.zynamics.binnavi.disassembly.INaviProject;
@@ -88,7 +88,7 @@ public final class CAddressSpaceFunctions {
                         new String[] {"Database connection problems."},
                         new String[] {"The address space remains unchanged."});
 
-            CNaviErrorDialog.show(parent, message, description, exception);
+            NaviErrorDialog.show(parent, message, description, exception);
           }
 
           operation.stop();
@@ -168,7 +168,7 @@ public final class CAddressSpaceFunctions {
                         new String[] {"Database connection problems."},
                         new String[] {"The address space was not loaded."});
 
-            CNaviErrorDialog.show(SwingUtilities.getWindowAncestor(projectTree), message,
+            NaviErrorDialog.show(SwingUtilities.getWindowAncestor(projectTree), message,
                 description, exception);
           } catch (final LoadCancelledException e) {
             // Do nothing
@@ -224,7 +224,7 @@ public final class CAddressSpaceFunctions {
                           new String[] {"Database connection problems."},
                           new String[] {"The address space remains unchanged."});
 
-              CNaviErrorDialog.show(parent, message, description, exception);
+              NaviErrorDialog.show(parent, message, description, exception);
             } catch (final CouldntSaveDataException exception) {
               CUtilityFunctions.logException(exception);
             }

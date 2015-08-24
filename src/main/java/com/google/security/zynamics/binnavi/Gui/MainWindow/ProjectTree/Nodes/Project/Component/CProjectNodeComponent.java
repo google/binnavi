@@ -20,7 +20,6 @@ import com.google.security.zynamics.binnavi.CUtilityFunctions;
 import com.google.security.zynamics.binnavi.Database.Exceptions.CouldntSaveDataException;
 import com.google.security.zynamics.binnavi.Database.Interfaces.IDatabase;
 import com.google.security.zynamics.binnavi.Gui.Actions.CActionProxy;
-import com.google.security.zynamics.binnavi.Gui.ErrorDialog.CNaviErrorDialog;
 import com.google.security.zynamics.binnavi.Gui.FilterPanel.Default.CAddressSpacesTablePanel;
 import com.google.security.zynamics.binnavi.Gui.MainWindow.ProjectTree.Nodes.CAbstractNodeComponent;
 import com.google.security.zynamics.binnavi.Gui.MainWindow.ProjectTree.Nodes.Project.Component.Help.CCreationDateHelp;
@@ -33,6 +32,7 @@ import com.google.security.zynamics.binnavi.Gui.Progress.IProgressOperation;
 import com.google.security.zynamics.binnavi.Gui.StandardEditPanel.CDefaultFieldDescription;
 import com.google.security.zynamics.binnavi.Gui.StandardEditPanel.CStandardEditPanel;
 import com.google.security.zynamics.binnavi.Gui.StandardEditPanel.IInputPanelListener;
+import com.google.security.zynamics.binnavi.Gui.errordialog.NaviErrorDialog;
 import com.google.security.zynamics.binnavi.Help.CHelpButton;
 import com.google.security.zynamics.binnavi.debug.debugger.DebuggerTemplate;
 import com.google.security.zynamics.binnavi.debug.debugger.DebuggerTemplateManager;
@@ -300,7 +300,7 @@ public final class CProjectNodeComponent extends CAbstractNodeComponent {
           new String[] {"There was a problem with the database connection."},
           new String[] {"The project keeps its old debuggers."});
 
-      CNaviErrorDialog.show(SwingUtilities.getWindowAncestor(CProjectNodeComponent.this),
+      NaviErrorDialog.show(SwingUtilities.getWindowAncestor(CProjectNodeComponent.this),
           innerMessage, innerDescription, e);
     }
   }
@@ -319,7 +319,7 @@ public final class CProjectNodeComponent extends CAbstractNodeComponent {
           m_project.getConfiguration().getName()),
           new String[] {"There was a problem with the database connection."},
           new String[] {"The project keeps its old description."});
-      CNaviErrorDialog.show(SwingUtilities.getWindowAncestor(CProjectNodeComponent.this),
+      NaviErrorDialog.show(SwingUtilities.getWindowAncestor(CProjectNodeComponent.this),
           innerMessage, innerDescription, e);
     }
   }
@@ -338,7 +338,7 @@ public final class CProjectNodeComponent extends CAbstractNodeComponent {
           m_project.getConfiguration().getName()),
           new String[] {"There was a problem with the database connection."},
           new String[] {"The project keeps its old name."});
-      CNaviErrorDialog.show(SwingUtilities.getWindowAncestor(CProjectNodeComponent.this),
+      NaviErrorDialog.show(SwingUtilities.getWindowAncestor(CProjectNodeComponent.this),
           innerMessage, innerDescription, e);
     }
   }

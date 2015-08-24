@@ -22,8 +22,8 @@ import com.google.security.zynamics.binnavi.Gui.LastDirFileChooser;
 import com.google.security.zynamics.binnavi.Gui.Debug.Goto.CGotoDialog;
 import com.google.security.zynamics.binnavi.Gui.Debug.MemoryPanel.CMemoryViewer;
 import com.google.security.zynamics.binnavi.Gui.Debug.SearchMemory.CSearchDialog;
-import com.google.security.zynamics.binnavi.Gui.ErrorDialog.CNaviErrorDialog;
 import com.google.security.zynamics.binnavi.Gui.GraphWindows.Panels.CDebugPerspectiveModel;
+import com.google.security.zynamics.binnavi.Gui.errordialog.NaviErrorDialog;
 import com.google.security.zynamics.binnavi.debug.connection.packets.replies.SearchReply;
 import com.google.security.zynamics.binnavi.debug.debugger.interfaces.IDebugger;
 import com.google.security.zynamics.binnavi.debug.models.processmanager.TargetProcessThread;
@@ -130,7 +130,7 @@ public final class CMemoryFunctions {
               "Another program locks the selected file.", "The disk is full."},
               new String[] {"The memory data was not written to the file."});
 
-          CNaviErrorDialog.show(parent, innerMessage, innerDescription, e);
+          NaviErrorDialog.show(parent, innerMessage, innerDescription, e);
         }
       } else {
         final String innerMessage = "E00152: " + "Could not read memory";
@@ -139,7 +139,7 @@ public final class CMemoryFunctions {
             new String[] {"There was a problem with the database connection."}, new String[] {
                 "The memory data could not be read and the output file was not written."});
 
-        CNaviErrorDialog.show(parent, innerMessage, innerDescription);
+        NaviErrorDialog.show(parent, innerMessage, innerDescription);
       }
     }
   }
@@ -218,7 +218,7 @@ public final class CMemoryFunctions {
           new String[] {"There was a problem with the connection to the debug client."},
           new String[] {"The memory data was not loaded."});
 
-      CNaviErrorDialog.show(parent, innerMessage, innerDescription, waiter.getException());
+      NaviErrorDialog.show(parent, innerMessage, innerDescription, waiter.getException());
     }
   }
 
@@ -286,7 +286,7 @@ public final class CMemoryFunctions {
             new String[] {"There was a problem with the connection to the debug client."},
             new String[] {"The search operation could not be started."});
 
-        CNaviErrorDialog.show(parent, innerMessage, innerDescription, waiter.getException());
+        NaviErrorDialog.show(parent, innerMessage, innerDescription, waiter.getException());
       }
     }
   }

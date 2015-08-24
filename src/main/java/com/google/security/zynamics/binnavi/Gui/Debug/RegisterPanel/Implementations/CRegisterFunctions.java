@@ -20,7 +20,7 @@ import java.math.BigInteger;
 import javax.swing.JFrame;
 
 import com.google.security.zynamics.binnavi.CUtilityFunctions;
-import com.google.security.zynamics.binnavi.Gui.ErrorDialog.CNaviErrorDialog;
+import com.google.security.zynamics.binnavi.Gui.errordialog.NaviErrorDialog;
 import com.google.security.zynamics.binnavi.debug.debugger.DebugExceptionWrapper;
 import com.google.security.zynamics.binnavi.debug.debugger.interfaces.IDebugger;
 import com.google.security.zynamics.zylib.gui.JRegisterView.JRegisterView;
@@ -68,7 +68,7 @@ public final class CRegisterFunctions {
                   new String[] {"There was a problem with the connection to the debug client."},
                   new String[] {"The value of the register did not change."});
 
-      CNaviErrorDialog.show(parent, innerMessage, innerDescription, exception);
+      NaviErrorDialog.show(parent, innerMessage, innerDescription, exception);
 
       return null;
     }

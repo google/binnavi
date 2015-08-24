@@ -25,8 +25,8 @@ import com.google.common.base.Preconditions;
 import com.google.security.zynamics.binnavi.CUtilityFunctions;
 import com.google.security.zynamics.binnavi.Database.Exceptions.CouldntSaveDataException;
 import com.google.security.zynamics.binnavi.Database.Interfaces.IDatabase;
-import com.google.security.zynamics.binnavi.Gui.ErrorDialog.CNaviErrorDialog;
 import com.google.security.zynamics.binnavi.Gui.MainWindow.ProjectTree.Nodes.CAbstractTreeTableModel;
+import com.google.security.zynamics.binnavi.Gui.errordialog.NaviErrorDialog;
 import com.google.security.zynamics.binnavi.debug.debugger.DebuggerTemplate;
 import com.google.security.zynamics.binnavi.debug.debugger.DebuggerTemplateManager;
 import com.google.security.zynamics.binnavi.debug.debugger.interfaces.IDebuggerTemplateListener;
@@ -126,7 +126,7 @@ public final class CDebuggersModel extends CAbstractTreeTableModel<DebuggerTempl
                   new String[] {"There was a problem with the connection to the database while the debugger host was saved"},
                   new String[] {"The debugger host was not saved. Please try to find out what went wrong with the database connection and try to save the debugger host again."});
 
-      CNaviErrorDialog.show(null, message, description, e);
+      NaviErrorDialog.show(null, message, description, e);
     }
   }
 
@@ -152,7 +152,7 @@ public final class CDebuggersModel extends CAbstractTreeTableModel<DebuggerTempl
                   new String[] {"There was a problem with the connection to the database while the debugger name was saved"},
                   new String[] {"The debugger name was not saved. Please try to find out what went wrong with the database connection and try to save the debugger name again."});
 
-      CNaviErrorDialog.show(null, message, description, e);
+      NaviErrorDialog.show(null, message, description, e);
     }
   }
 
@@ -181,7 +181,7 @@ public final class CDebuggersModel extends CAbstractTreeTableModel<DebuggerTempl
                   new String[] {"There was a problem with the connection to the database while the debugger port was saved"},
                   new String[] {"The debugger port was not saved. Please try to find out what went wrong with the database connection and try to save the debugger port again."});
 
-      CNaviErrorDialog.show(null, message, description, e);
+      NaviErrorDialog.show(null, message, description, e);
     }
   }
 

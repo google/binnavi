@@ -21,7 +21,7 @@ import com.google.security.zynamics.binnavi.Database.Exceptions.CouldntLoadDataE
 import com.google.security.zynamics.binnavi.Database.Exceptions.CouldntSaveDataException;
 import com.google.security.zynamics.binnavi.Gui.Debug.Notifier.CDebugEventNotifier;
 import com.google.security.zynamics.binnavi.Gui.Debug.OptionsDialog.COptionsDialog;
-import com.google.security.zynamics.binnavi.Gui.ErrorDialog.CNaviErrorDialog;
+import com.google.security.zynamics.binnavi.Gui.errordialog.NaviErrorDialog;
 import com.google.security.zynamics.binnavi.debug.debugger.DebugExceptionWrapper;
 import com.google.security.zynamics.binnavi.debug.debugger.DebugTargetSettings;
 import com.google.security.zynamics.binnavi.debug.debugger.interfaces.IDebugger;
@@ -113,7 +113,7 @@ public final class CDebuggerFunctions {
           "BinNavi could not send the debugger event settings command to the debug client.",
           new String[] {"There was a problem with the connection to the debug client."},
           new String[] {"The state of the debugged process remains unchanged."});
-      CNaviErrorDialog.show(parent, innerMessage, innerDescription, exception);
+      NaviErrorDialog.show(parent, innerMessage, innerDescription, exception);
     }
     return null;
   }
@@ -137,7 +137,7 @@ public final class CDebuggerFunctions {
           "BinNavi could not send the exception settings command to the debug client.",
           new String[] {"There was a problem with the connection to the debug client."},
           new String[] {"The state of the debugged process remains unchanged."});
-      CNaviErrorDialog.show(parent, innerMessage, innerDescription, e);
+      NaviErrorDialog.show(parent, innerMessage, innerDescription, e);
     }
   }
 
@@ -196,7 +196,7 @@ public final class CDebuggerFunctions {
               "There was a problem with the connection to the debug client."}, new String[] {
               "The debugger process was not started yet. You can try to debug "
               + "the client again once you resolved the connection problems."});
-      CNaviErrorDialog.show(parent, innerMessage, innerDescription, exception);
+      NaviErrorDialog.show(parent, innerMessage, innerDescription, exception);
     }
   }
 
@@ -221,7 +221,7 @@ public final class CDebuggerFunctions {
           new String[] {"There was a problem with the connection to the debug client."},
           new String[] {"The debugger remains attached to the debug target."});
 
-      CNaviErrorDialog.show(parent, innerMessage, innerDescription, exception);
+      NaviErrorDialog.show(parent, innerMessage, innerDescription, exception);
     }
   }
 
@@ -246,7 +246,7 @@ public final class CDebuggerFunctions {
           new String[] {"There was a problem with the connection to the debug client."},
           new String[] {"The state of the debugged process remains unchanged."});
 
-      CNaviErrorDialog.show(parent, innerMessage, innerDescription, e);
+      NaviErrorDialog.show(parent, innerMessage, innerDescription, e);
     }
   }
 
@@ -300,7 +300,7 @@ public final class CDebuggerFunctions {
           new String[] {"There was a problem with the connection to the debug client."},
           new String[] {"The state of the debugged process remains unchanged."});
 
-      CNaviErrorDialog.show(parent, innerMessage, innerDescription, e);
+      NaviErrorDialog.show(parent, innerMessage, innerDescription, e);
     }
   }
 
@@ -317,7 +317,7 @@ public final class CDebuggerFunctions {
           String.format("BinNavi could not send the debugger event settings to the debug client."),
           new String[] {},
           new String[] {"The default debugger event settings will be used during this session."});
-      CNaviErrorDialog.show(parent, message, description, exception);
+      NaviErrorDialog.show(parent, message, description, exception);
     } catch (final CouldntLoadDataException exception) {
       CUtilityFunctions.logException(exception);
       final String message = "Debugger event settings could not be retrieved from the database.";
@@ -326,7 +326,7 @@ public final class CDebuggerFunctions {
           new String[] {},
           new String[] {"The default debugger event settings will be used during this session."});
 
-      CNaviErrorDialog.show(parent, message, description, exception);
+      NaviErrorDialog.show(parent, message, description, exception);
     }
   }
 
@@ -370,7 +370,7 @@ public final class CDebuggerFunctions {
           new String[] {"Communication error while contacting the database"}, new String[] {
               "BinNavi is unable to show the debugger options dialog until the problem is resolved."
               + " The default debugger options will be used during this session."});
-      CNaviErrorDialog.show(parent, message, description, exception);
+      NaviErrorDialog.show(parent, message, description, exception);
     }
     final DebuggerEventSettings eventSettings = readDebuggerEventSettings(parent, debugger, target);
     final COptionsDialog dlg = new COptionsDialog(parent, options, eventSettings);
@@ -388,7 +388,7 @@ public final class CDebuggerFunctions {
           new String[] {"Communication error while contacting the database"}, new String[] {
               "BinNavi is unable to store the debugger options in the database.",
               "Nevertheless, the debugger options will be sent to the debugger."});
-      CNaviErrorDialog.show(parent, message, description, exception);
+      NaviErrorDialog.show(parent, message, description, exception);
     }
     sendExceptionSettings(parent, debugger, options.getExceptions());
     sendDebuggerEventSettings(parent, debugger, target);
@@ -438,7 +438,7 @@ public final class CDebuggerFunctions {
             "BinNavi could not send the step block command to the debug client.",
             new String[] {"There was a problem with the connection to the debug client."},
             new String[] {"The state of the debugged process remains unchanged."});
-        CNaviErrorDialog.show(parent, innerMessage, innerDescription, e);
+        NaviErrorDialog.show(parent, innerMessage, innerDescription, e);
       }
     }
   }
@@ -484,7 +484,7 @@ public final class CDebuggerFunctions {
             "BinNavi could not send the step end command to the debug client.",
             new String[] {"There was a problem with the connection to the debug client."},
             new String[] {"The state of the debugged process remains unchanged."});
-        CNaviErrorDialog.show(parent, innerMessage, innerDescription, e);
+        NaviErrorDialog.show(parent, innerMessage, innerDescription, e);
       }
     }
   }
@@ -513,7 +513,7 @@ public final class CDebuggerFunctions {
           "BinNavi could not send the single step command to the debug client.",
           new String[] {"There was a problem with the connection to the debug client."},
           new String[] {"The state of the debugged process remains unchanged."});
-      CNaviErrorDialog.show(parent, innerMessage, innerDescription, e);
+      NaviErrorDialog.show(parent, innerMessage, innerDescription, e);
     }
   }
 
@@ -559,7 +559,7 @@ public final class CDebuggerFunctions {
             "BinNavi could not send the step over command to the debug client.",
             new String[] {"There was a problem with the connection to the debug client."},
             new String[] {"The state of the debugged process remains unchanged."});
-        CNaviErrorDialog.show(parent, innerMessage, innerDescription, e);
+        NaviErrorDialog.show(parent, innerMessage, innerDescription, e);
       }
     }
   }
@@ -584,7 +584,7 @@ public final class CDebuggerFunctions {
           "BinNavi could not send the terminate command to the debug client.",
           new String[] {"There was a problem with the connection to the debug client."},
           new String[] {"The state of the debugged process remains unchanged."});
-      CNaviErrorDialog.show(parent, innerMessage, innerDescription, e);
+      NaviErrorDialog.show(parent, innerMessage, innerDescription, e);
     }
   }
 }

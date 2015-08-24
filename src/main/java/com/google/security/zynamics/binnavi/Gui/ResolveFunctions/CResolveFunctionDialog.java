@@ -20,9 +20,9 @@ import com.google.security.zynamics.binnavi.CUtilityFunctions;
 import com.google.security.zynamics.binnavi.Database.Exceptions.CouldntSaveDataException;
 import com.google.security.zynamics.binnavi.Database.Interfaces.IDatabase;
 import com.google.security.zynamics.binnavi.Exceptions.MaybeNullException;
-import com.google.security.zynamics.binnavi.Gui.ErrorDialog.CNaviErrorDialog;
 import com.google.security.zynamics.binnavi.Gui.Loaders.CModuleLoader;
 import com.google.security.zynamics.binnavi.Gui.MainWindow.Implementations.CFunctionHelpers;
+import com.google.security.zynamics.binnavi.Gui.errordialog.NaviErrorDialog;
 import com.google.security.zynamics.binnavi.disassembly.INaviFunction;
 import com.google.security.zynamics.binnavi.disassembly.INaviModule;
 import com.google.security.zynamics.zylib.gui.CDialogEscaper;
@@ -249,7 +249,7 @@ public final class CResolveFunctionDialog extends JDialog {
                   + "forwarding again. If necessary, close the connection to the database and "
                   + "reconnect."});
 
-          CNaviErrorDialog.show(this, message, description, exception);
+          NaviErrorDialog.show(this, message, description, exception);
         }
       }
     }

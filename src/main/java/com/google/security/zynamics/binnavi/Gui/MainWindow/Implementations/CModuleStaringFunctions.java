@@ -21,7 +21,7 @@ import javax.swing.JFrame;
 
 import com.google.security.zynamics.binnavi.CUtilityFunctions;
 import com.google.security.zynamics.binnavi.Database.Exceptions.CouldntSaveDataException;
-import com.google.security.zynamics.binnavi.Gui.ErrorDialog.CNaviErrorDialog;
+import com.google.security.zynamics.binnavi.Gui.errordialog.NaviErrorDialog;
 import com.google.security.zynamics.binnavi.disassembly.INaviModule;
 
 
@@ -55,7 +55,7 @@ public final class CModuleStaringFunctions {
                 new String[] {"There was a problem with the database connection."},
                 new String[] {"The module star was not updated."});
 
-        CNaviErrorDialog.show(parent, innerMessage, innerDescription, e);
+        NaviErrorDialog.show(parent, innerMessage, innerDescription, e);
       }
     }
   }
@@ -81,7 +81,7 @@ public final class CModuleStaringFunctions {
                 new String[] {"There was a problem with the database connection."},
                 new String[] {"The module star was not updated."});
 
-        CNaviErrorDialog.show(parent, innerMessage, innerDescription, e);
+        NaviErrorDialog.show(parent, innerMessage, innerDescription, e);
       }
     }
   }
@@ -106,7 +106,7 @@ public final class CModuleStaringFunctions {
                 new String[] {"There was a problem with the database connection."},
                 new String[] {"The module star was not updated."});
 
-        CNaviErrorDialog.show(parent, innerMessage, innerDescription, e);
+        NaviErrorDialog.show(parent, innerMessage, innerDescription, e);
       }
     }
   }

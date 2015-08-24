@@ -34,7 +34,6 @@ import com.google.common.base.Preconditions;
 import com.google.security.zynamics.binnavi.CUtilityFunctions;
 import com.google.security.zynamics.binnavi.Database.Exceptions.CouldntSaveDataException;
 import com.google.security.zynamics.binnavi.Gui.Actions.CActionProxy;
-import com.google.security.zynamics.binnavi.Gui.ErrorDialog.CNaviErrorDialog;
 import com.google.security.zynamics.binnavi.Gui.MainWindow.ProjectTree.CLabeledComponent;
 import com.google.security.zynamics.binnavi.Gui.MainWindow.ProjectTree.Nodes.CAbstractNodeComponent;
 import com.google.security.zynamics.binnavi.Gui.MainWindow.ProjectTree.Nodes.Debugger.Component.Help.CHostHelp;
@@ -43,6 +42,7 @@ import com.google.security.zynamics.binnavi.Gui.MainWindow.ProjectTree.Nodes.Deb
 import com.google.security.zynamics.binnavi.Gui.MainWindow.ProjectTree.Nodes.Debugger.Component.Help.CSaveHelp;
 import com.google.security.zynamics.binnavi.Gui.SaveFields.CSaveField;
 import com.google.security.zynamics.binnavi.Gui.SaveFields.CSaveFormattedField;
+import com.google.security.zynamics.binnavi.Gui.errordialog.NaviErrorDialog;
 import com.google.security.zynamics.binnavi.Help.CHelpButton;
 import com.google.security.zynamics.binnavi.Help.CHelpSaveField;
 import com.google.security.zynamics.binnavi.Help.CHelpSaveFormattedField;
@@ -167,7 +167,7 @@ public final class CDebuggerNodeComponent extends CAbstractNodeComponent {
                   new String[] {"There was a problem with the connection to the database while the debugger name was saved"},
                   new String[] {"The debugger name was not saved. Please try to find out what went wrong with the database connection and try to save the debugger name again."});
 
-      CNaviErrorDialog
+      NaviErrorDialog
           .show(SwingUtilities.getWindowAncestor(this), message, description, exception);
     }
 
@@ -184,7 +184,7 @@ public final class CDebuggerNodeComponent extends CAbstractNodeComponent {
                   new String[] {"There was a problem with the connection to the database while the debugger description was saved"},
                   new String[] {"The debugger description was not saved. Please try to find out what went wrong with the database connection and try to save the debugger description again."});
 
-      CNaviErrorDialog
+      NaviErrorDialog
           .show(SwingUtilities.getWindowAncestor(this), message, description, exception);
     }
 
@@ -201,7 +201,7 @@ public final class CDebuggerNodeComponent extends CAbstractNodeComponent {
                   new String[] {"There was a problem with the connection to the database while the debugger port was saved"},
                   new String[] {"The debugger port was not saved. Please try to find out what went wrong with the database connection and try to save the debugger port again."});
 
-      CNaviErrorDialog
+      NaviErrorDialog
           .show(SwingUtilities.getWindowAncestor(this), message, description, exception);
     }
   }
