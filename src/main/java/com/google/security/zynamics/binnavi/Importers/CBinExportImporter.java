@@ -38,7 +38,7 @@ public final class CBinExportImporter extends CBaseExporter {
    */
   private static final String BINEXPORT_VERSION = "zynamics_binexport_8";
   private static final String BINEXPORT_IDC_FILE_CONTENT = "#include <idc.idc>\n" + //
-      "  static main() {\n" + //
+      "static main() {\n" + //
       "  Batch(0);\n" + //
       "  Wait();\n" + //
       "  RunPlugin(\"" + BINEXPORT_VERSION + "\", 1);\n" + //
