@@ -2272,7 +2272,8 @@ DECLARE
   EXECUTE 'INSERT INTO bn_base_types
            SELECT '|| moduleid ||', id, name, size, pointer, signed, category::text::type_category
            FROM ex_'|| rawmoduleid ||'_base_types';
-  EXECUTE 'SELECT setval(''bn_base_types_id_seq'', MAX(id)) FROM bn_base_types';
+  EXECUTE 'SELECT setval(''bn_base_types_id_seq'', COALESCE((SELECT MAX(id) + 1 FROM bn_base_types), 1), false)
+           FROM bn_base_types';
 
   --
   -- import types.
@@ -2282,7 +2283,8 @@ DECLARE
            SELECT '|| moduleid ||', raw_types.id, raw_types.name, raw_types.base_type, raw_types.parent_id,
            raw_types.offset, raw_types.argument, raw_types.number_of_elements
            FROM ex_'|| rawmoduleid ||'_types AS raw_types';
-  EXECUTE 'SELECT setval(''bn_types_id_seq'', MAX(id)) FROM bn_types';
+  EXECUTE 'SELECT setval(''bn_types_id_seq'', COALESCE((SELECT MAX(id) + 1 FROM bn_types), 1), false)
+           FROM bn_types';
 
   --
   -- import expression types.
@@ -2299,7 +2301,8 @@ DECLARE
   EXECUTE 'INSERT INTO bn_sections (module_id, id, name, comment_id, start_address, end_address, permission, data)
            SELECT '|| moduleid ||', id, name, NULL, start_address, end_address, permission::text::permission_type, data
 		   FROM ex_'|| rawmoduleid ||'_sections';
-  EXECUTE 'SELECT setval(''bn_sections_id_seq'', MAX(id)) FROM bn_sections';
+  EXECUTE 'SELECT setval(''bn_sections_id_seq'', COALESCE((SELECT MAX(id) + 1 FROM bn_sections), 1), false)
+           FROM bn_sections';
 
   --
   -- import type instances
@@ -2308,7 +2311,8 @@ DECLARE
   EXECUTE 'INSERT INTO bn_type_instances (module_id, id, name, type_id, section_id, section_offset)
            SELECT '|| moduleid ||', id, name, type_id, section_id, section_offset
            FROM ex_'|| rawmoduleid ||'_type_instances';
-  EXECUTE 'SELECT setval(''bn_type_instances_id_seq'', MAX(id)) FROM bn_type_instances';
+  EXECUTE 'SELECT setval(''bn_type_instances_id_seq'', COALESCE((SELECT MAX(id) + 1 FROM bn_type_instances), 1), false)
+           FROM bn_type_instances';
 
   --
   -- import expression type instances
