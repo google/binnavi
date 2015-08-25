@@ -38,6 +38,7 @@ import com.google.security.zynamics.binnavi.Database.Exceptions.CouldntLoadDataE
 import com.google.security.zynamics.binnavi.Database.Exceptions.CouldntUpdateDatabaseException;
 import com.google.security.zynamics.binnavi.Database.Interfaces.SQLProvider;
 import com.google.security.zynamics.binnavi.Database.PostgreSQL.PostgreSQLHelpers;
+import com.google.security.zynamics.binnavi.Resources.Constants;
 import com.google.security.zynamics.binnavi.debug.debugger.DebuggerTemplate;
 import com.google.security.zynamics.binnavi.debug.debugger.DebuggerTemplateManager;
 import com.google.security.zynamics.binnavi.disassembly.CProject;
@@ -288,7 +289,7 @@ public final class PostgreSQLDatabaseFunctions {
   /**
    * Determines which version the current database has. Each of the checks tries to locate the one
    * database version specific thing that was changed in a version upgrade.
-   * 
+   *
    * @param m_connection The connection to the database.
    * @return A {@link DatabaseVersion} for further processing.
    * @throws CouldntLoadDataException if the version could not be determined.
@@ -300,26 +301,21 @@ public final class PostgreSQLDatabaseFunctions {
     if (PostgreSQLHelpers.hasTable(m_connection, CTableNames.SECTIONS_TABLE)) {
       return new DatabaseVersion("6.0.0");
     }
-
     if (PostgreSQLHelpers.hasTable(m_connection, CTableNames.USER_TABLE)) {
       return new DatabaseVersion("5.0.0");
     }
-
     if (PostgreSQLHelpers.hasTable(m_connection, CTableNames.RAW_MODULES_TABLE)
         && PostgreSQLHelpers.hasTable(m_connection, CTableNames.MODULES_TABLE)) {
       final ArrayList<Integer> rawModuleIds = getRawModuleIDs(m_connection);
       if (rawModuleIds.isEmpty()) {
         return new DatabaseVersion("3.0.0");
-      } else {
-        if (PostgreSQLHelpers.hasTable(m_connection, "ex_" + rawModuleIds.get(0) + "_type_structs")) {
-          return new DatabaseVersion("4.0.0");
-        } else {
-          return new DatabaseVersion("3.0.0");
-        }
       }
-    } else {
-      return new DatabaseVersion("6.0.0");
+      if (PostgreSQLHelpers.hasTable(m_connection, "ex_" + rawModuleIds.get(0) + "_type_structs")) {
+        return new DatabaseVersion("4.0.0");
+      }
+      return new DatabaseVersion("3.0.0");
     }
+    return new DatabaseVersion(Constants.PROJECT_VERSION);
   }
 
   /**

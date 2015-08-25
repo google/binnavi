@@ -25,7 +25,7 @@ public final class DatabaseVersion {
   /**
    * Version string.
    */
-  private final String m_version;
+  private final String version;
 
   /**
    * Creates a new version object.
@@ -34,8 +34,8 @@ public final class DatabaseVersion {
    */
   public DatabaseVersion(final String version) {
     Preconditions.checkArgument(isValidVersionNumber(version),
-        "IE00707: Invalid database version string");
-    m_version = version;
+        "IE00707: Invalid database version string: " + version);
+    this.version = version;
   }
 
   /**
@@ -61,7 +61,6 @@ public final class DatabaseVersion {
         return false;
       }
     }
-
     return true;
   }
 
@@ -80,7 +79,7 @@ public final class DatabaseVersion {
     // - Sub Version Number
     // - Build Version number
 
-    final String[] naviSplit = m_version.split("\\.");
+    final String[] naviSplit = this.version.split("\\.");
 
     final String[] dbSplit = version.getString().split("\\.");
 
@@ -109,8 +108,7 @@ public final class DatabaseVersion {
 
   @Override
   public boolean equals(final Object rhs) {
-    return (rhs instanceof DatabaseVersion)
-        && (m_version.equals(((DatabaseVersion) rhs).m_version));
+    return (rhs instanceof DatabaseVersion) && (version.equals(((DatabaseVersion) rhs).version));
   }
 
   /**
@@ -119,12 +117,12 @@ public final class DatabaseVersion {
    * @return The version string.
    */
   public String getString() {
-    return m_version;
+    return version;
   }
 
   @Override
   public int hashCode() {
-    return m_version.hashCode();
+    return version.hashCode();
   }
 
   /**

@@ -39,8 +39,6 @@ import java.util.List;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 
-
-
 /**
  * Contains helper functions for global main window functions.
  */
