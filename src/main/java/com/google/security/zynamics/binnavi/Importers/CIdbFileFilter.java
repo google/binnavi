@@ -29,7 +29,8 @@ public final class CIdbFileFilter extends FileFilter {
       return true;
     }
 
-    if (file.getName().toLowerCase().endsWith(".idb")) {
+    final String filenameLower = file.getName().toLowerCase();
+    if (filenameLower.endsWith(".idb") || filenameLower.endsWith(".i64")) {
       return true;
     }
 
@@ -38,6 +39,6 @@ public final class CIdbFileFilter extends FileFilter {
 
   @Override
   public String getDescription() {
-    return "IDA Pro Database File (idb)";
+    return "IDA Pro Database File (idb, i64)";
   }
 }
