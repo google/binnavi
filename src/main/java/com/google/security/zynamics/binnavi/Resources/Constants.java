@@ -29,7 +29,7 @@ public final class Constants {
   public static final String PROJECT_NAME = "BinNavi";
 
   /** Version number of the product. Used for fine-grained versioning of the database schema. */
-  public static final String PROJECT_VERSION = "6.0.0";
+  public static final String PROJECT_VERSION = "6.0.1";
 
   /** Version number of the product. */
   public static final String PROJECT_SHORT_VERSION = "6.0";
