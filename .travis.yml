@@ -1,4 +1,6 @@
-script:
-
-  - mvn dependency:copy-dependencies
-  - ant -f src/main/java/com/google/security/zynamics/build.xml build-binnavi-fat-jar
+language: java
+jdk:
+- oraclejdk8
+sudo: false
+script: 
+	gradle install
