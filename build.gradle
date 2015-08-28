@@ -1,1 +1,32 @@
 apply plugin: 'java'
+apply plugin: 'eclipse'
+apply plugin: 'idea'
+
+
+def gradle_version = '2.6'
+
+
+sourceCompatibility = 1.5
+version = '1.0.0'
+
+
+repositories {
+    mavenCentral()
+}
+
+
+dependencies {
+    
+}
+
+
+eclipse {
+    project {
+        name = 'binnavi'
+    }
+}
+
+
+javadoc {
+    failOnError = false
+}
