@@ -132,8 +132,9 @@ public final class PostgreSQLDataImporter {
     connection.executeUpdate(query, true);
 
     final String updateSequence =
-        String.format("SELECT setval('bn_base_types_id_seq', MAX(id)) from %s",
-            CTableNames.BASE_TYPES_TABLE);
+        String.format("SELECT setval('bn_base_types_id_seq', " +
+                      "COALESCE((SELECT MAX(id) + 1 FROM %s), 1), false) from %s",
+            CTableNames.BASE_TYPES_TABLE, CTableNames.BASE_TYPES_TABLE);
     connection.executeQuery(updateSequence, true);
   }
 
@@ -316,7 +317,9 @@ public final class PostgreSQLDataImporter {
     connection.executeUpdate(query, true);
 
     final String updateSequence = String.format(
-        "SELECT setval('bn_types_id_seq', MAX(id)) from %s", CTableNames.TYPE_MEMBERS_TABLE);
+        "SELECT setval('bn_types_id_seq', " +
+        "COALESCE((SELECT MAX(id) + 1 FROM %s), 1), false) from %s",
+        CTableNames.TYPE_MEMBERS_TABLE, CTableNames.TYPE_MEMBERS_TABLE);
     connection.executeQuery(updateSequence, true);
   }
 }
