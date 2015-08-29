@@ -89,7 +89,7 @@ task versionInfo(type:Exec){
     standardOutput = new ByteArrayOutputStream()
 
     doLast {
-        def theDate = '#' + new Date()
-        versionfile.text = theDate + '\n\nbuild.revision=' + standardOutput.toString()
+        def theDate = '#' + new Date() + '\n\n'
+        versionfile.text = theDate + 'build.revision=' + standardOutput.toString()
     }
 }
