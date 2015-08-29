@@ -3,4 +3,4 @@ jdk:
 - oraclejdk8
 sudo: false
 script: 
-	gradle install
+	gradle clean jar
