@@ -1,3 +1,4 @@
+
 script:
 
   - mvn dependency:copy-dependencies

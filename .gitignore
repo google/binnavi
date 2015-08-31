@@ -12,3 +12,25 @@ target/**
 
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
+
+# generated files
+bin/
+gen/
+**/build-data.properties
+
+# Eclipse project files
+.classpath
+.project
+.settings
+
+# Intellij project files
+*.iml
+*.ipr
+*.iws
+.idea/
+
+#Gradle
+.gradletasknamecache
+.gradle/
+build/
+bin/

@@ -1,0 +1,95 @@
+apply plugin: 'java'
+apply plugin: 'eclipse'
+apply plugin: 'idea'
+apply plugin: 'maven'
+
+
+def gradle_version = '2.6'
+
+
+sourceCompatibility = 1.8
+version = '6.0-SNAPSHOT'
+
+
+repositories {
+    mavenCentral()
+    maven {
+        url "lib"
+    }
+}
+
+
+dependencies {
+    compile group: 'org.antlr', name: 'antlr', version: '3.2'
+    compile group: 'org.apache.xmlgraphics', name: 'batik-awt-util', version: '1.8'
+    compile group: 'org.apache.xmlgraphics', name: 'batik-dom', version: '1.8'
+    compile group: 'org.apache.xmlgraphics', name: 'batik-svggen', version: '1.8'
+    compile group: 'org.apache.xmlgraphics', name: 'batik-util', version: '1.8'
+    compile group: 'com.google.guava', name: 'guava', version: '18.0'
+    compile group: 'com.jidesoft', name: 'jide-oss', version: '3.6.9'
+    compile group: 'org.postgresql', name: 'postgresql', version: '9.4-1201-jdbc41'
+    compile group: 'javax.inject', name: 'javax.inject', version: '1'
+    compile group: 'org.python', name: 'jython-standalone', version: '2.5.3'
+    compile group: 'org.w3c.css', name: 'sac', version: '1.3'
+    compile group: 'xml-apis', name: 'xml-apis', version: '1.4.01'
+    compile group: 'xml-apis', name: 'xml-apis-ext', version: '1.3.04'
+    compile group: 'net.sf.proguard', name: 'proguard-base', version: '5.2.1'
+    compile group: 'com.google.security.zynamics.binnavi', name: 'yfileswrap-obfuscated', version: '6.0'
+
+    compile group: 'junit', name: 'junit', version: '4+'
+}
+
+
+sourceSets {
+    main {
+        java {
+            srcDir 'src/main/java'
+
+            exclude '**/yfileswrap/**'
+            exclude 'com/google/security/zynamics/zylib/yfileswrap/**'
+            exclude 'com/google/security/zynamics/reil/yfileswrap/**'
+        }
+        resources {
+            srcDir 'src/main/java'
+            include 'com/google/security/zynamics/binnavi/data/**'
+        }
+    }
+}
+
+
+eclipse {
+    project {
+        name = 'binnavi'
+    }
+}
+
+
+jar {
+
+    dependsOn 'versionInfo'
+    manifest {
+        attributes (
+            "Main-Class": "com.google.security.zynamics.binnavi.CMain", 
+            "SplashScreen-Image": "com/google/security/zynamics/binnavi/data/splash.jpg"
+        )
+    }
+
+    from configurations.compile.collect { it.isDirectory() ? it : zipTree(it) }
+}
+
+
+javadoc {
+    failOnError = false
+}
+
+
+task versionInfo(type:Exec){
+    commandLine 'git describe --always HEAD'.split()
+    ext.versionfile = new File('src/main/java/com/google/security/zynamics/binnavi/data/build-data.properties')
+    standardOutput = new ByteArrayOutputStream()
+
+    doLast {
+        def theDate = '#' + new Date() + '\n\n'
+        versionfile.text = theDate + 'build.revision=' + standardOutput.toString()
+    }
+}
