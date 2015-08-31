@@ -4,12 +4,12 @@
 
 <project name="binnavi" default="build-binnavi-fat-jar" basedir="./">
 
-  <property name="project.dir" location="../../../../../../.."/>
+  <property name="project.dir" location=""/>
   <property name="out.dir" location="${project.dir}/target"/>
   <property name="build.dir" location="${out.dir}/classes"/>
   <property name="staging.dir" location="${out.dir}/staging"/>
   <property name="resources.dir" location="${build.dir}/com/google/security/zynamics/binnavi/data"/>
-  <property name="zynamics.dir" location="./"/>
+  <property name="zynamics.dir" location="${project.dir}/src/main/java/com/google/security/zynamics"/>
 
   <!-- Path and fileset definitions needed for the targets below -->
   <path id="binnavi.class.path">
