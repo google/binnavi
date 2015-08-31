@@ -28,6 +28,7 @@ gen/
 *.ipr
 *.iws
 .idea/
+out/
 
 #Gradle
 .gradletasknamecache
