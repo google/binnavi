@@ -1,0 +1,23 @@
+task buildYFilesWrapperJar(
+	description: 'Builds the yfiles-wrapper-jar.'
+) << {
+    print "!!! UNDER CONSTRUCTION !!!"
+}
+
+task buildReliJar(
+	description: 'Builds the reli-jar.'
+) << {
+    print "!!! UNDER CONSTRUCTION !!!"
+}
+
+task buildZyLibJar(
+	description: 'Builds the zylib-jar.'
+) << {
+    print "!!! UNDER CONSTRUCTION !!!"
+}
+
+task buildBinNaviJar(
+	description: 'Builds the binnavi-jar.'
+) << {
+    print "!!! UNDER CONSTRUCTION !!!"
+}

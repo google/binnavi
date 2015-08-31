@@ -3,6 +3,7 @@ apply plugin: 'eclipse'
 apply plugin: 'idea'
 apply plugin: 'maven'
 
+apply from: 'jarBuilders.gradle'
 apply from: 'deploy.gradle'
 
 def gradle_version = '2.6'
@@ -65,7 +66,7 @@ eclipse {
 
 jar {
 
-    dependsOn 'versionInfo'
+    dependsOn 'buildVersionInfo'
     manifest {
         attributes (
             "Main-Class": "com.google.security.zynamics.binnavi.CMain", 
@@ -82,7 +83,10 @@ javadoc {
 }
 
 
-task versionInfo(type:Exec){
+task buildVersionInfo(
+    type:Exec,
+    description: 'Creates the build-data.properties file.'
+) << {
     commandLine 'git describe --always HEAD'.split()
     ext.versionfile = new File('src/main/java/com/google/security/zynamics/binnavi/data/build-data.properties')
     standardOutput = new ByteArrayOutputStream()
