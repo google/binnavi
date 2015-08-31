@@ -73,6 +73,67 @@ running somewhere accessible to you. You can build/launch BinNavi as follows:
       build-binnavi-fat-jar
     java -jar target/binnavi-all.jar
 
+# Building BinNavi with Gradle
+
+*Please note that at current the Maven build is the authorative build system for BinNavi. 
+Gradle is purely experimental and is likely to change.*
+
+You can build BinNavi with gradle by running the following:
+
+```
+On Linux / OS X:
+  $ ./gradlew clean jar 
+
+On Windows:
+  ./gradlew.bat clean jar
+```
+
+This will produce the jar in the project route under `build/libs/`. 
+
+### Loading the project into Eclipse with Gradle
+
+```
+On Linux / OS X:
+  $ ./gradlew eclipse 
+
+On Windows:
+  ./gradlew.bat eclipse
+```
+
+As part of the project creation process it will download the dependencies. Once complete
+do the following to load into Eclipse:
+
+1. Open Eclipse.
+2. File > Import... from menu bar.
+3. From the window that appears select General > Existing Projects into Workspace.
+4. Ensure the "Select root directory" radio button is selected.
+5. Click Browse... and navigate to the project directory. 
+6. The projects area should now have "binnavi" and a tick next to it.
+7. Press Finish.
+
+You Eclipse workspace is now setup and complete for BinNavi. 
+
+### Loading the project into IntelliJ with Gradle
+
+```
+On Linux / OS X:
+  $ ./gradlew idea
+
+On Windows:
+  ./gradlew.bat idea
+```
+
+As part of the project creation process it will download the dependencies. Once complete
+do the following to load into IntelliJ:
+
+1. Open IntelliJ.
+2. Select "Open" from main window.
+3. Navigate to the project folder and should see the IntelliJ icon. This signifies its a project.
+4. Press Ok and wait for it to import and load. 
+5. IntelliJ might not recognise it as a gradle project. Select enable from the popup window and use local gradle. 
+
+Your IntelliJ environment is now setup and complete for IntelliJ.
+
 ##Loading the project into Eclipse
 
 Loading the code into Eclipse for further development requires a little bit of
