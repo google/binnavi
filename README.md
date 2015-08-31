@@ -31,21 +31,21 @@ In order to achieve this, we did the following:
 project that directly depend on yFiles were split into subpackages called
 "yfileswrap":
 
-  * com.google.security.zynamics.binnavi
-  * com.google.security.zynamics.binnavi.yfileswrap
-  * com.google.security.zynamics.zylib
-  * com.google.security.zynamics.zylib.yfileswrap
-  * com.google.security.zynamics.reil
-  * com.google.security.zynamics.reil.yfileswrap
+  * ``com.google.security.zynamics.binnavi``
+  * ``com.google.security.zynamics.binnavi.yfileswrap``
+  * ``com.google.security.zynamics.zylib``
+  * ``com.google.security.zynamics.zylib.yfileswrap``
+  * ``com.google.security.zynamics.reil``
+  * ``com.google.security.zynamics.reil.yfileswrap``
 
-We are distributing a pre-built JAR file with all the code in the "yfileswrap"
+We are distributing a pre-built JAR file with all the code in the ``yfileswrap``
 subpackages - pre-linked and obfuscated against yFiles. If you wish to change
 or add code in BinNavi and do not have a yFiles license, you can freely do 
 pretty much  whatever you want in the non-yfileswrap packages - you can simply
 put the ``lib/yfileswrap-obfuscated.jar`` into your classpath to test and see
 the results.
 
-If you wish to make changes to the "yfileswrap" subdirectories, please be aware
+If you wish to make changes to the ``yfileswrap`` subdirectories, please be aware
 that you will need a valid yFiles license - and any contribution that you make
 to the BinNavi project has to honor their license agreement. This means that
 you can't simply expose their inner APIs under different names etc.
@@ -60,18 +60,48 @@ BinNavi uses Maven for its dependency management, but not for the actual build
 yet. To build from scratch use these commands:
 
     mvn dependency:copy-dependencies
-    ant -f src/main/java/com/google/security/zynamics/build.xml \
-      build-binnavi-fat-jar
+    ant build-binnavi-fat-jar
 
 #Running BinNavi for the first time
 
 Please be aware that BinNavi makes use of a central PostgreSQL database for
 storing disassemblies/comments/traces - so you need to have such an instance
-running somewhere accessible to you. You can build/launch BinNavi as follows:
+running somewhere accessible to you. You can launch BinNavi as follows:
 
-    ant -f src/main/java/com/google/security/zynamics/build.xml \
-      build-binnavi-fat-jar
     java -jar target/binnavi-all.jar
+
+#Importing the project into Eclipse
+
+Loading the code into Eclipse for further development requires a little bit of
+configuration.
+
+1. Install the dependencies (as described above) and make sure you have a
+   Java SDK with 1.8 language compliance installed.
+2. Create a new "Java Project From Existing Ant Buildfile" and use the file ``build.xml``
+3. Select the "javac" task found in target "build-binnavi-jar"
+4. Open the "Project Properties" dialog and choose "Java build Path" showing the "Source" tab.
+5. Remove all but one source folder and edit it to have the following properties:
+   * Linked Folder Location: ``PROJECT_LOC/src/main/java``
+   * Folder Name: ``java``
+   * Click on "Next"
+6. Add ``**/yfileswrap/**`` to the list of directories to exclude.
+7. Go to "Run->Run As", select "Java Application" and then search for ``CMain``.
+
+You should be ready to go from here.
+
+#Exporting disassemblies from IDA
+
+As part of this project, we are distributing a binary-only (sorry!) IDA pro
+plugin that exports disassemblies from IDA into the Postgresql database format
+that BinNavi requires. When running BinNavi, simply configure the right path
+for IDA, click on the "install plugin" button if necessary -- you should now
+be able to import disassemblies.
+
+#Using other disassemblers than IDA
+
+Right now, we only have the IDA export plugin - but we are hoping very much
+that someone will help us build export functionality for other disassemblers
+in the near future.
 
 # Building BinNavi with Gradle
 
@@ -133,39 +163,3 @@ do the following to load into IntelliJ:
 5. IntelliJ might not recognise it as a gradle project. Select enable from the popup window and use local gradle. 
 
 Your IntelliJ environment is now setup and complete for IntelliJ.
-
-##Loading the project into Eclipse
-
-Loading the code into Eclipse for further development requires a little bit of
-configuration.
-
-1. Download the dependencies (as described above) and make sure you have a
-   Java SDK with 1.8 language compliance installed.
-2. Create a new "Java Project From Existing Ant Buildfile" and use the file
-   src/main/java/com/google/security/zynamics/build.xml
-3. Select '"javac" task found in target "build-binnavi-jar"
-4. Open the "Project Properties" dialog.
-5. Edit the source folders to have the following properties:
-   * Linked Folder Location: ``$SRCDIR/src/main/java``
-   * Folder Name: ``java``
-   * Click on "Next"
-6. Add ``binnavi/yfileswrap``, ``zylib/yfileswrap``, and ``reil/yfileswrap`` to
-   the list of directories to exclude.
-7. Go to Run->Debug Configurations, select "Java Application" and then search
-   for "CMain". 
-
-You should be ready to go from here.
-
-#Exporting disassemblies from IDA
-
-As part of this project, we are distributing a binary-only (sorry!) IDA pro
-plugin that exports disassemblies from IDA into the Postgresql database format
-that BinNavi requires. When running BinNavi, simply configure the right path
-for IDA, click on the "install plugin" button if necessary -- you should now
-be able to import disassemblies.
-
-#Using other disassemblers than IDA
-
-Right now, we only have the IDA export plugin - but we are hoping very much
-that someone will help us build export functionality for other disassemblers
-in the near future.

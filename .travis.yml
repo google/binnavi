@@ -2,4 +2,4 @@
 script:
 
   - mvn dependency:copy-dependencies
-  - ant -f src/main/java/com/google/security/zynamics/build.xml build-binnavi-fat-jar
+  - ant build-binnavi-fat-jar
