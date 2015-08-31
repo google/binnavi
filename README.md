@@ -60,8 +60,7 @@ BinNavi uses Maven for its dependency management, but not for the actual build
 yet. To build from scratch use these commands:
 
     mvn dependency:copy-dependencies
-    ant -f src/main/java/com/google/security/zynamics/build.xml \
-      build-binnavi-fat-jar
+    ant build-binnavi-fat-jar
 
 #Running BinNavi for the first time
 
@@ -71,15 +70,14 @@ running somewhere accessible to you. You can launch BinNavi as follows:
 
     java -jar target/binnavi-all.jar
 
-##Importing the project into Eclipse
+#Importing the project into Eclipse
 
 Loading the code into Eclipse for further development requires a little bit of
 configuration.
 
 1. Install the dependencies (as described above) and make sure you have a
    Java SDK with 1.8 language compliance installed.
-2. Create a new "Java Project From Existing Ant Buildfile" and use the file 
-``src/main/java/com/google/security/zynamics/build.xml``
+2. Create a new "Java Project From Existing Ant Buildfile" and use the file ``build.xml``
 3. Select the "javac" task found in target "build-binnavi-jar"
 4. Open the "Project Properties" dialog and choose "Java build Path" showing the "Source" tab.
 5. Remove all but one source folder and edit it to have the following properties:
