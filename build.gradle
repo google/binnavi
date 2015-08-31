@@ -36,7 +36,7 @@ dependencies {
     compile group: 'net.sf.proguard', name: 'proguard-base', version: '5.2.1'
     compile group: 'com.google.security.zynamics.binnavi', name: 'yfileswrap-obfuscated', version: '6.0'
 
-    compile group: 'junit', name: 'junit', version: '4+'
+    testCompile group: 'junit', name: 'junit', version: '4+'
 }
 
 
@@ -52,6 +52,12 @@ sourceSets {
         resources {
             srcDir 'src/main/java'
             include 'com/google/security/zynamics/binnavi/data/**'
+            include 'com/google/security/zynamics/binnavi/manual/**'
+            include 'com/google/security/zynamics/binnavi/parsers/**'
+            include 'com/google/security/zynamics/binnavi/scripts/**'
+            include 'com/google/security/zynamics/binnavi/standardplugins/**'
+
+            include 'com/google/security/zynamics/zylib/resources/**'
         }
     }
 }
@@ -86,7 +92,7 @@ javadoc {
 task buildVersionInfo(
     type:Exec,
     description: 'Creates the build-data.properties file.'
-) << {
+){
     commandLine 'git describe --always HEAD'.split()
     ext.versionfile = new File('src/main/java/com/google/security/zynamics/binnavi/data/build-data.properties')
     standardOutput = new ByteArrayOutputStream()
