@@ -47,9 +47,7 @@ public enum OperandType {
    * @return True or false, depending on whether the string is a number or not.
    */
   private static boolean isInteger(final String value) {
-    for (int i = 0; i < value.length(); i++) {
-      final char character = value.charAt(i);
-
+    for (final char character : value.toCharArray()) {
       if ((character != '-') && ((character < '0') || (character > '9'))) {
         return false;
       }
