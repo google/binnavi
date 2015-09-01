@@ -104,11 +104,13 @@ public class ReilBlock implements ICodeContainer<ReilInstruction>, Iterable<Reil
   @Override
   public String toString() {
     final StringBuilder builder = new StringBuilder();
-    builder.append("REIL Block " + getAddress().toHexString() + "\n");
+    builder.append("REIL Block ");
+    builder.append(getAddress().toHexString());
+    builder.append("\n");
     for (final ReilInstruction instruction : getInstructions()) {
-      builder.append(instruction.toString() + "\n");
+      builder.append(instruction.toString());
+      builder.append("\n");
     }
-
     return builder.toString();
   }
 }
