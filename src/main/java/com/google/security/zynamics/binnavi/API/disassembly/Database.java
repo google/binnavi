@@ -378,11 +378,9 @@ public final class Database implements ApiObject<IDatabase> {
     if (!isLoaded()) {
       try {
         load();
-      } catch (final CouldntLoadDataException e) {
+      } catch (CouldntLoadDataException | InvalidDatabaseVersionException e) {
         return new ArrayList<Module>();
-      } catch (final InvalidDatabaseVersionException e) {
-        return new ArrayList<Module>();
-      }
+      } 
     }
 
     return new ArrayList<Module>(m_modules);
