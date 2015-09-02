@@ -1,0 +1,434 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+Copyright 2015 Google Inc. All Rights Reserved.
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+-->
+
+<?include "VersionInfo.wxi"?>
+
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi"
+    xmlns:util="http://schemas.microsoft.com/wix/UtilExtension">
+  <Product Id="$(var.Property_ProductCode)"
+      UpgradeCode="$(var.Property_UpgradeCode)"
+      Name="!(loc.Property_ProductName)"
+      Language="!(loc.Property_ProductLanguage)"
+      Version="$(var.Property_ProductVersion)"
+      Manufacturer="!(loc.Property_CompanyName)"
+    >
+
+    <Package Id="*"
+        Comments="!(loc.Package_Comments)"
+        Description="!(loc.Package_Description)"
+        InstallerVersion="405"
+        Compressed="yes"
+      />
+
+    <!-- Enable Windows Installer major upgrade functionality so users can
+         seamlessly install a new version of the product and have the old
+         version automatically uninstalled. See also:
+         http://msdn.microsoft.com/library/default.asp?url=/library/en-us/msi/setup/major_upgrades.asp
+      -->
+    <Upgrade Id="$(var.Property_UpgradeCode)">
+      <UpgradeVersion Minimum="$(var.Property_ProductVersion)"
+          IncludeMinimum="no" OnlyDetect="yes"
+          Property="NEWERVERSIONDETECTED" />
+    </Upgrade>
+
+    <!-- Prevent users from installing if a newer version of this product
+         is already installed. This is part of the Windows Installer major
+         upgrade functionality.
+      -->
+    <CustomAction Id="CA_BlockOlderVersionInstall"
+        Error="!(loc.LaunchCondition_LaterVersion)" />
+
+    <CustomAction Id="CA_SetDefaultIdaDirectory"
+        Property="IDADIRECTORY" Value="[ProgramFilesFolder]IDA\" />
+
+    <CustomAction Id="CA_SetDefaultSysTempFolder"
+        Property="SYSTEMPFOLDER" Value="[WindowsFolder]TEMP" />
+
+    <Condition Message="!(loc.LaunchCondition_WrongOSVersion)">
+      <![CDATA[Installed OR (VersionNT >= 500)]]>
+    </Condition>
+
+    <Condition Message="!(loc.LaunchCondition_AdminPrivs)">
+      Privileged
+    </Condition>
+
+    <!-- Try to provide some forward compatibility -->
+    <Condition Message="!(loc.LaunchCondition_WrongJREVersion)">
+      Installed OR
+      JREVERSION = "1.7" OR
+      JREVERSIONWOW64 = "1.7" OR
+      JREVERSION = "1.8" OR
+      JREVERSIONWOW64 = "1.8"
+    </Condition>
+
+    <Media Id="1"
+        Cabinet="binnavi6.0.cab"
+        EmbedCab="yes"
+      />
+
+    <Property Id="ALLUSERS">1</Property>
+
+    <Property Id="IDADIRECTORY">
+      <RegistrySearch Id="HexRaysIdaRegistry" Type="raw"
+         Root="HKLM" Key="SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\IDA Pro_is1" Name="InstallLocation" />
+      <RegistrySearch Id="HexRaysIdaRegistry66" Type="raw"
+         Root="HKLM" Key="SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\IDA Pro_6.6_is1" Name="InstallLocation" />
+      <RegistrySearch Id="HexRaysIdaRegistry66Wow64" Type="raw" Win64="yes"
+         Root="HKLM" Key="SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\IDA Pro_6.6_is1" Name="InstallLocation" />
+      <RegistrySearch Id="HexRaysIdaRegistry65" Type="raw"
+         Root="HKLM" Key="SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\IDA Pro_6.5_is1" Name="InstallLocation" />
+      <RegistrySearch Id="HexRaysIdaRegistry65Wow64" Type="raw" Win64="yes"
+         Root="HKLM" Key="SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\IDA Pro_6.5_is1" Name="InstallLocation" />
+    </Property>
+
+    <Property Id="JREVERSION">
+      <RegistrySearch Id="JavaSoftRegistry" Type="raw"
+          Root="HKLM" Key="SOFTWARE\JavaSoft\Java Runtime Environment" Name="CurrentVersion" />
+    </Property>
+
+    <Property Id="JREVERSIONWOW64">
+      <!-- Ignore ICE80 here, since BinNavi will work with any installed JRE
+           greater than 1.6, so we need to look at 64-bit registry keys as
+           well
+        -->
+      <RegistrySearch Id="JavaSoftRegistryWow64" Type="raw" Win64="yes"
+          Root="HKLM" Key="SOFTWARE\JavaSoft\Java Runtime Environment" Name="CurrentVersion" />
+    </Property>
+
+    <Property Id="POSTGRESQLVERSION">
+      <!-- Ignore ICE80 here, since BinNavi will work with any installed
+           PostgreSQL version greater than 9.0, so we need to look at 64-bit
+           registry keys as well. We can combine all registry searches into
+           one property, because we're only interested in whether PostgreSQL
+           is installed or not. Order matters, generally prefer 64-bit but
+           prefer newer 32-bit versions over older 64-bit versions. Add new
+           versions as they are released.
+        -->
+      <RegistrySearch Id="PostgreSQLRegistry92Wow64" Type="raw" Win64="yes"
+          Root="HKLM" Key="SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\PostgreSQL 9.2" Name="DisplayVersion"/>
+      <RegistrySearch Id="PostgreSQLRegistry92" Type="raw"
+          Root="HKLM" Key="SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\PostgreSQL 9.2" Name="DisplayVersion"/>
+      <RegistrySearch Id="PostgreSQLRegistry91Wow64" Type="raw" Win64="yes"
+          Root="HKLM" Key="SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\PostgreSQL 9.1" Name="DisplayVersion"/>
+      <RegistrySearch Id="PostgreSQLRegistry91" Type="raw"
+          Root="HKLM" Key="SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\PostgreSQL 9.1" Name="DisplayVersion"/>
+      <RegistrySearch Id="PostgreSQLRegistry90Wow64" Type="raw" Win64="yes"
+          Root="HKLM" Key="SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\PostgreSQL 9.0" Name="DisplayVersion"/>
+      <RegistrySearch Id="PostgreSQLRegistry90" Type="raw"
+          Root="HKLM" Key="SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\PostgreSQL 9.0" Name="DisplayVersion"/>
+    </Property>
+
+    <Property Id="SYSTEMPFOLDER">
+      <RegistrySearch Id="SystemTempRegistry" Type="raw"
+          Root="HKLM" Key="SYSTEM\CurrentControlSet\Control\Session Manager\Environment" Name="TEMP" />
+    </Property>
+
+    <!-- Installation sequence for administrative installations -->
+    <InstallExecuteSequence>
+      <Custom Action="CA_BlockOlderVersionInstall" After="FindRelatedProducts">
+        NEWERVERSIONDETECTED
+      </Custom>
+      <Custom Action="CA_SetDefaultIdaDirectory" After="FindRelatedProducts">
+        IDADIRECTORY = ""
+      </Custom>
+      <Custom Action="CA_SetDefaultSysTempFolder" After="FindRelatedProducts">
+        SYSTEMPFOLDER = ""
+      </Custom>
+      <RemoveExistingProducts After="InstallFinalize" />
+      <LaunchConditions After="AppSearch"/>
+    </InstallExecuteSequence>
+
+    <!-- Default installation sequence -->
+    <InstallUISequence>
+      <Custom Action="CA_BlockOlderVersionInstall" After="FindRelatedProducts">
+        NEWERVERSIONDETECTED
+      </Custom>
+      <Custom Action="CA_SetDefaultIdaDirectory" After="FindRelatedProducts">
+        IDADIRECTORY = ""
+      </Custom>
+      <Custom Action="CA_SetDefaultSysTempFolder" After="FindRelatedProducts">
+        SYSTEMPFOLDER = ""
+      </Custom>
+      <LaunchConditions After="AppSearch"/>
+    </InstallUISequence>
+
+    <!-- Directory Structure -->
+    <Directory Id="TARGETDIR" Name="SourceDir">
+      <Directory Id="ProgramMenuFolder" Name="Programs">
+        <Directory Id="ProgramMenuDir" Name="zynamics BinNavi 6.0" />
+      </Directory>
+      <Directory Id="DesktopFolder" Name="Desktop" />
+      <!-- Ignore ICE48 here, it's only because of the default value set above -->
+      <Directory Id="IDADIRECTORY" FileSource="$(var.ProjectDir)files\ProgramFiles\IDA">
+        <Directory Id="IdaPluginsDir" Name="plugins" />
+      </Directory>
+      <Directory Id="ProgramFilesFolder" Name="ProgramFiles">
+        <Directory Id="zynamicsProgramFiles" Name="zynamics">
+          <Directory Id="INSTALLDIR" Name="BinNavi 6.0">
+            <Directory Id="BinDir" Name="bin" />
+          </Directory>
+        </Directory>
+      </Directory>
+    </Directory>
+
+    <!-- Files and Components  -->
+    <DirectoryRef Id="TARGETDIR" DiskId="1">
+      <!-- These will generate a lot of warnings, each of which can be safely ignored (duh!)
+           See http://blogs.msdn.com/astebner/archive/2007/02/13/building-an-msi-using-wix-v3-0-that-includes-the-vc-8-0-runtime-merge-modules.aspx
+           for details.
+        -->
+      <Merge Id="CRTx86" Language="0" SourceFile="$(var.ProjectDir)\mergemodules\Microsoft_VC120_CRT_x86.msm" />
+    </DirectoryRef>
+
+    <DirectoryRef Id="INSTALLDIR" FileSource="$(var.ZynamicsJavaDir)\binnavi\data">
+      <Component Id="BinNaviLicense"
+          Guid="C6B52250-E953-4717-B167-F75D322EFEEB">
+        <File Id="licenseRTF" Name="license.rtf" KeyPath="yes">
+          <!-- Ignore ICE50 here, if we do it by the book we get no system icons -->
+          <Shortcut Id="startmenuLicense" Directory="ProgramMenuDir"
+              Name="zynamics BinNavi 6.0 License" Advertise="yes"
+              Icon="license.rtf" IconIndex="0" />
+        </File>
+      </Component>
+    </DirectoryRef>
+
+    <DirectoryRef Id="ProgramMenuDir" FileSource="$(var.ProjectDir)files\Startmenu\Programs\zynamics_BinNavi_5.0">
+      <Component Id="ZynamicsHomePageLink"
+          Guid="18B86886-F767-4F84-B1DF-3980DE838C07">
+        <File Id="ZynamicsHomePageURL" Name="zynamics Home Page.url" Source="$(var.ProjectDir)files\zynamics_Home_Page.url" />
+        <File Id="ReportABugURL" Name="Report a bug.url" Source="$(var.ProjectDir)files\Report_a_bug.url" />
+        <RemoveFolder Id="ZynamicsHomePageLink_RemoveShortcutFolder"
+            Directory="ProgramMenuDir" On="uninstall" />
+        <RegistryValue Root="HKCU" Key="SOFTWARE\zynamics\BinNavi\6.0\Shortcut"
+            Type="string" Value="1" KeyPath="yes" />
+      </Component>
+    </DirectoryRef>
+
+    <DirectoryRef Id="IdaPluginsDir">
+      <Component Id="BinExportPlugin"
+          Guid="CA1D9BCF-E31B-4566-84DA-E9866CF57BFC">
+        <File Id="ExporterPLW" Name="zynamics_binexport_8.plw" Source="$(var.OutputDir)\zynamics_binexport_8.plw" />
+      </Component>
+      <Component Id="BinExportPlugin64"
+          Guid="93B799DD-92A9-498B-A140-FFB20A0217D3">
+        <File Id="ExporterP64" Name="zynamics_binexport_8.p64" Source="$(var.OutputDir)\zynamics_binexport_8.p64" />
+      </Component>
+    </DirectoryRef>
+
+    <DirectoryRef Id="INSTALLDIR" FileSource="$(var.ZynamicsJavaDir)\binnavi\data">
+      <Component Id="BinNaviGUIConfig"
+          Guid="9E52F23F-8569-492d-82BF-4E22E7A85209">
+        <RegistryValue Root="HKCU" Key="SOFTWARE\zynamics\BinNavi\6.0\BinNaviGuiConfig"
+            Type="string" Value="1" KeyPath="yes" />
+        <File Id="configXML" Name="config.xml" />
+      </Component>
+
+      <Component Id="MainLauncher"
+          Guid="42B2A0A5-01A3-4d60-B36B-DFA81ACB2B35">
+        <File Id="binnaviCMD" Name="BinNavi.bat" KeyPath="yes">
+          <Shortcut Id="bindiffShortcut" Directory="ProgramMenuDir" Show="minimized"
+              Name="zynamics BinNavi 6.0" Advertise="yes"
+              Icon="binnavi.ico" IconIndex="0" />
+        </File>
+        <File Id="binnaviDbgCMD" Name="BinNavi-Dbg.bat" />
+        <RemoveFolder Id="MainJarFile_RemoveShortcutFolder"
+            Directory="ProgramMenuDir" On="uninstall" />
+      </Component>
+    </DirectoryRef>
+
+    <DirectoryRef Id="BinDir">
+      <Component Id="MainJarFile"
+          Guid="3BFEACEA-2F0B-4932-85BE-8CB1C6C6FAA1">
+        <File Id="binnaviJAR" Name="BinNavi.jar" Source="$(var.OutputDir)\binnavi.jar" />
+      </Component>
+    </DirectoryRef>
+
+    <!-- Product Features -->
+    <Feature Id="AppRootFeature" Level="1"
+        Title="!(loc.Feature_AppRootFeatureTitle)"
+        Description="!(loc.Feature_AppRootFeatureDesc)"
+        ConfigurableDirectory="INSTALLDIR"
+        Absent="disallow"
+        Display="expand"
+        AllowAdvertise="no"
+      >
+      <MergeRef Id="CRTx86" />
+
+      <ComponentRef Id="MainLauncher" />
+      <ComponentRef Id="MainJarFile" />
+      <ComponentRef Id="BinNaviGUIConfig" />
+      <ComponentRef Id="BinNaviLicense" />
+      <ComponentRef Id="BinExportPlugin" />
+      <ComponentRef Id="BinExportPlugin64" />
+      <ComponentGroupRef Id="Exporters" />
+      <ComponentGroupRef Id="Tutorials" />
+      <ComponentRef Id="ZynamicsHomePageLink" />
+
+      <Feature Id="BinNaviManual" Level="1"
+          Title="!(loc.Feature_BinNaviManualTitle)"
+          Description="!(loc.Feature_BinNaviManualDesc)"
+        >
+        <ComponentGroupRef Id="Manual" />
+        <ComponentGroupRef Id="ManualDoxygen" />
+      </Feature>
+
+      <Feature Id="BinNaviDebugClients" Level="1"
+          Title="!(loc.Feature_BinNaviDebugClientsTitle)"
+          Description="!(loc.Feature_BinNaviDebugClientsDesc)"
+        >
+        <ComponentGroupRef Id="DebugClients" />
+      </Feature>
+
+      <Feature Id="BinNaviPlugins" Level="1"
+          Title="!(loc.Feature_BinNaviPluginsTitle)"
+          Description="!(loc.Feature_BinNaviPluginsDesc)"
+        >
+        <ComponentGroupRef Id="BinNaviPlugins" />
+      </Feature>
+
+      <Feature Id="BinNaviScripts" Level="1"
+          Title="!(loc.Feature_BinNaviScriptsTitle)"
+          Description="!(loc.Feature_BinNaviScriptsDesc)"
+        >
+        <ComponentGroupRef Id="BinNaviPluginScripts" />
+      </Feature>
+    </Feature>
+
+    <WixVariable Id="WixUILicenseRtf"
+        Value="$(var.ZynamicsJavaDir)\binnavi\data\license.rtf" />
+    <WixVariable Id="WixUIBannerBmp" Value="$(var.ProjectDir)graphics\banner.bmp" />
+    <WixVariable Id="WixUIDialogBmp" Value="$(var.ProjectDir)graphics\dialog.bmp" />
+
+    <Icon Id="binnavi.ico" SourceFile="$(var.ProjectDir)files\binnavi-icon.ico" />
+    <Icon Id="binnavi50_usermanual.html" SourceFile="$(var.ProjectDir)files\usermanual-icon.html" />
+    <Icon Id="license.rtf" SourceFile="$(var.ProjectDir)files\license-icon.rtf" />
+
+    <Property Id="ARPPRODUCTICON" Value="binnavi.ico" />
+    <Property Id="ARPHELPLINK" Value="!(loc.Property_ArpHelpLink)" />
+    <Property Id="ARPURLINFOABOUT" Value="!(loc.Property_ArpUrlInfoAbout)" />
+
+    <!--
+      First-time install dialog sequence:      Maintenance dialog sequence:
+       - WixUI_WelcomeDlg                     - WixUI_MaintenanceWelcomeDlg
+       - WixUI_LicenseAgreementDlg            - WixUI_MaintenanceTypeDlg
+       - WixUI_CustomizeDlg                     - WixUI_CustomizeDlg
+         - WixUI_VerifyReadyDlg                 - WixUI_VerifyReadyDlg
+         - WixUI_DiskCostDlg                  - BrowseIDADirectoryDlg
+       - BrowseIDADirectoryDlg
+       - PostgreSQLDetectedDlg
+    -->
+    <UIRef Id="WixUI_Common" />
+    <UI>
+      <TextStyle Id="WixUI_Font_Normal" FaceName="Tahoma" Size="8" />
+      <TextStyle Id="WixUI_Font_Bigger" FaceName="Tahoma" Size="12" />
+      <TextStyle Id="WixUI_Font_Title" FaceName="Tahoma" Size="9" Bold="yes" />
+      <TextStyle Id="WixUI_Font_Mono" FaceName="Lucida Console" Size="9" />
+
+      <Property Id="DefaultUIFont" Value="WixUI_Font_Normal" />
+      <Property Id="WixUI_Mode" Value="FeatureTree" />
+
+      <Property Id="WIXUI_INSTALLDIR" Value="IDADIRECTORY" />
+
+      <DialogRef Id="ErrorDlg" />
+      <DialogRef Id="FatalError" />
+      <DialogRef Id="FilesInUse" />
+      <DialogRef Id="MsiRMFilesInUse" />
+      <DialogRef Id="PrepareDlg" />
+      <DialogRef Id="ProgressDlg" />
+      <DialogRef Id="ResumeDlg" />
+      <DialogRef Id="UserExit" />
+
+      <Publish Dialog="ExitDialog" Control="Finish" Event="EndDialog" Value="Return" Order="999">1</Publish>
+
+      <Publish Dialog="WelcomeDlg" Control="Next" Event="NewDialog" Value="LicenseAgreementDlg">1</Publish>
+
+      <Publish Dialog="LicenseAgreementDlg" Control="Back" Event="NewDialog" Value="WelcomeDlg">1</Publish>
+      <Publish Dialog="LicenseAgreementDlg" Control="Next" Event="NewDialog" Value="CustomizeDlg">LicenseAccepted = "1"</Publish>
+
+      <Publish Dialog="CustomizeDlg" Control="Back" Event="NewDialog" Value="MaintenanceTypeDlg" Order="1">Installed</Publish>
+      <Publish Dialog="CustomizeDlg" Control="Back" Event="NewDialog" Value="LicenseAgreementDlg" Order="2">NOT Installed</Publish>
+      <Publish Dialog="CustomizeDlg" Control="Next" Event="NewDialog" Value="BrowseIDADirectoryDlg">1</Publish>
+
+      <Publish Dialog="BrowseIDADirectoryDlg" Control="Back" Event="NewDialog" Value="CustomizeDlg">1</Publish>
+      <Publish Dialog="BrowseIDADirectoryDlg" Control="Next" Event="SetTargetPath" Value="[WIXUI_INSTALLDIR]" Order="1">1</Publish>
+      <Publish Dialog="BrowseIDADirectoryDlg" Control="Next" Event="DoAction" Value="WixUIValidatePath" Order="2">1</Publish>
+      <Publish Dialog="BrowseIDADirectoryDlg" Control="Next" Event="SpawnDialog" Value="InvalidDirDlg" Order="3">
+        <![CDATA[WIXUI_INSTALLDIR_VALID <> "1"]]>
+      </Publish>
+      <Publish Dialog="BrowseIDADirectoryDlg" Control="Next" Event="NewDialog" Value="VerifyReadyDlg" Order="4">
+        <![CDATA[WIXUI_INSTALLDIR_VALID = "1" AND POSTGRESQLVERSION = ""]]>
+      </Publish>
+      <Publish Dialog="BrowseIDADirectoryDlg" Control="Next" Event="NewDialog" Value="PostgreSQLDetectedDlg" Order="5">
+        <![CDATA[WIXUI_INSTALLDIR_VALID = "1" AND POSTGRESQLVERSION <> ""]]>
+      </Publish>
+      <Publish Dialog="BrowseIDADirectoryDlg" Control="ChangeFolder" Property="_BrowseProperty" Value="[WIXUI_INSTALLDIR]" Order="1">1</Publish>
+      <Publish Dialog="BrowseIDADirectoryDlg" Control="ChangeFolder" Event="SpawnDialog" Value="BrowseDlg" Order="2">1</Publish>
+
+      <Publish Dialog="PostgreSQLDetectedDlg" Control="Back" Event="NewDialog" Value="BrowseIDADirectoryDlg">1</Publish>
+      <Publish Dialog="PostgreSQLDetectedDlg" Control="Next" Event="NewDialog" Value="VerifyReadyDlg">1</Publish>
+
+      <Publish Dialog="VerifyReadyDlg" Control="Back" Event="NewDialog" Value="BrowseIDADirectoryDlg" Order="1">
+        <![CDATA[POSTGRESQLVERSION = ""]]>
+      </Publish>
+      <Publish Dialog="VerifyReadyDlg" Control="Back" Event="NewDialog" Value="PostgreSQLDetectedDlg" Order="2">
+        <![CDATA[POSTGRESQLVERSION <> ""]]>
+      </Publish>
+
+      <Publish Dialog="MaintenanceWelcomeDlg" Control="Next" Event="NewDialog" Value="MaintenanceTypeDlg">1</Publish>
+
+      <Publish Dialog="MaintenanceTypeDlg" Control="ChangeButton" Event="NewDialog" Value="CustomizeDlg">1</Publish>
+      <Publish Dialog="MaintenanceTypeDlg" Control="RepairButton" Event="NewDialog" Value="VerifyReadyDlg">1</Publish>
+      <Publish Dialog="MaintenanceTypeDlg" Control="RemoveButton" Event="NewDialog" Value="VerifyReadyDlg">1</Publish>
+      <Publish Dialog="MaintenanceTypeDlg" Control="Back" Event="NewDialog" Value="MaintenanceWelcomeDlg">1</Publish>
+
+      <Dialog Id="BrowseIDADirectoryDlg" Width="370" Height="270" Title="[ProductName] Setup">
+        <Control Id="Next" Type="PushButton" X="236" Y="243" Width="56" Height="17" Default="yes" Text="!(loc.WixUINext)" />
+        <Control Id="Back" Type="PushButton" X="180" Y="243" Width="56" Height="17" Text="!(loc.WixUIBack)" />
+        <Control Id="Cancel" Type="PushButton" X="304" Y="243" Width="56" Height="17" Cancel="yes" Text="!(loc.WixUICancel)">
+          <Publish Event="SpawnDialog" Value="CancelDlg">1</Publish>
+        </Control>
+
+        <Control Id="Title" Type="Text" X="15" Y="6" Width="200" Height="15" Transparent="yes" NoPrefix="yes" Text="{\WixUI_Font_Title}!(loc.BrowseIDADirectoryDlg_Title)" />
+        <Control Id="Description" Type="Text" X="25" Y="23" Width="280" Height="15" Transparent="yes" NoPrefix="yes" Text="!(loc.BrowseIDADirectoryDlg_SelectIdaDirectory)" />
+        <Control Id="BannerBitmap" Type="Bitmap" X="0" Y="0" Width="370" Height="44" TabSkip="no" Text="!(loc.InstallDirDlgBannerBitmap)" />
+        <Control Id="BannerLine" Type="Line" X="0" Y="44" Width="370" Height="0" />
+        <Control Id="BottomLine" Type="Line" X="0" Y="234" Width="370" Height="0" />
+
+        <Control Id="FolderLabel" Type="Text" X="20" Y="60" Width="290" Height="30" NoPrefix="yes" Text="!(loc.BrowseIDADirectoryDlg_IdaDirectoryLabel)" />
+        <Control Id="Folder" Type="PathEdit" X="20" Y="100" Width="320" Height="18" Property="WIXUI_INSTALLDIR" Indirect="yes" />
+        <Control Id="ChangeFolder" Type="PushButton" X="20" Y="120" Width="56" Height="17" Text="!(loc.CustomizeDlgBrowse)" />
+      </Dialog>
+
+      <Dialog Id="PostgreSQLDetectedDlg" Width="370" Height="270" Title="[ProductName] Setup">
+        <Control Id="Next" Type="PushButton" X="236" Y="243" Width="56" Height="17" Default="yes" Text="!(loc.WixUINext)" />
+        <Control Id="Back" Type="PushButton" X="180" Y="243" Width="56" Height="17" Text="!(loc.WixUIBack)" />
+        <Control Id="Cancel" Type="PushButton" X="304" Y="243" Width="56" Height="17" Cancel="yes" Text="!(loc.WixUICancel)">
+          <Publish Event="SpawnDialog" Value="CancelDlg">1</Publish>
+        </Control>
+
+        <Control Id="Title" Type="Text" X="15" Y="6" Width="200" Height="15" Transparent="yes" NoPrefix="yes" Text="{\WixUI_Font_Title}!(loc.PostgreSQLDlg_Title)" />
+        <Control Id="Description" Type="Text" X="25" Y="23" Width="280" Height="15" Transparent="yes" NoPrefix="yes" Text="Information about using PostgreSQL with BinNavi" />
+        <Control Id="BannerBitmap" Type="Bitmap" X="0" Y="0" Width="370" Height="44" TabSkip="no" Text="!(loc.InstallDirDlgBannerBitmap)" />
+        <Control Id="BannerLine" Type="Line" X="0" Y="44" Width="370" Height="0" />
+        <Control Id="BottomLine" Type="Line" X="0" Y="234" Width="370" Height="0" />
+
+        <Control Id="NoteLine1Label" Type="Text" X="20" Y="60" Width="320" Height="40" NoPrefix="yes" Text="An installation of the PostgreSQL database server was found on this computer." />
+        <Control Id="NoteLine2Label" Type="Text" X="20" Y="75" Width="290" Height="30" NoPrefix="yes" Text="For optimum performance, it is recommended that you put the database that you want to use with BinNavi on a separate hard drive (preferrably an SSD) or use a dedicated database server." />
+      </Dialog>
+    </UI>
+  </Product>
+</Wix>

@@ -1,0 +1,251 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--
+Copyright 2015 Google Inc. All Rights Reserved.
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+-->
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+    <Fragment>
+        <DirectoryRef Id="INSTALLDIR">
+            <Directory Id="dir373898302AB12273B8222DC0351AFC37" Name="plugins" />
+        </DirectoryRef>
+    </Fragment>
+    <Fragment>
+        <ComponentGroup Id="BinNaviPlugins">
+            <Component Id="cmpA28CA4088E65C89B24726EE9BCDBF60F" Directory="dirE5527D9F2EC9EB85C4F89A9F1AEF5BF4" Guid="{45AB775A-E1E0-4152-89CC-35D77BBFF97A}">
+                <File Id="filC180EE9F5A52CB570690C718580ABCE1" KeyPath="yes" Source="$(var.ZynamicsJavaDir)\binnavi\standardplugins\PluginLoader.java" />
+            </Component>
+            <Component Id="cmpD2A757CE876768BEF13FFE5029F96F25" Directory="dir652309B590028B5694B740295BD22E6A" Guid="{6E9DB507-ABF6-4027-861B-69AA5947FE44}">
+                <File Id="fil0BB2E6E3D8CB5AE756CB31537845EAF5" KeyPath="yes" Source="$(var.ZynamicsJavaDir)\binnavi\standardplugins\callresolver\accept.png" />
+            </Component>
+            <Component Id="cmpFCD82A9538B38D9E86282A7E778DB019" Directory="dir652309B590028B5694B740295BD22E6A" Guid="{3317266A-E8F0-4B0B-9CAD-4C122BEEDBC6}">
+                <File Id="fil00A5AAD6F936E5BA6BB7F590CF475384" KeyPath="yes" Source="$(var.ZynamicsJavaDir)\binnavi\standardplugins\callresolver\AddressSpaceCallResolverTarget.java" />
+            </Component>
+            <Component Id="cmpF20ADF40D2792C10A654A69BCF06F32D" Directory="dir652309B590028B5694B740295BD22E6A" Guid="{859B7A79-7AAD-416E-967C-22196B084E51}">
+                <File Id="filEFA68231227244B8D99C66CA446C37FD" KeyPath="yes" Source="$(var.ZynamicsJavaDir)\binnavi\standardplugins\callresolver\bullet_blue.png" />
+            </Component>
+            <Component Id="cmp1A2D9F3CF6A994F11F8D643A899118F0" Directory="dir652309B590028B5694B740295BD22E6A" Guid="{5DD371C9-07DC-4C9F-95B6-76BED03FC1B6}">
+                <File Id="fil6584C611F873B9D7F4A856AC6D7A6D0F" KeyPath="yes" Source="$(var.ZynamicsJavaDir)\binnavi\standardplugins\callresolver\CallResolver.java" />
+            </Component>
+            <Component Id="cmpAED886E3A8E646C5C6A85EB987655FD2" Directory="dir652309B590028B5694B740295BD22E6A" Guid="{2588136B-DD5C-4850-BB5D-038391303D0D}">
+                <File Id="fil3296419468CCD9D69EFBB39C628A2A48" KeyPath="yes" Source="$(var.ZynamicsJavaDir)\binnavi\standardplugins\callresolver\CallResolverDialog.java" />
+            </Component>
+            <Component Id="cmpBAC57707C5CBFC5B09015C8263A3CA2C" Directory="dir652309B590028B5694B740295BD22E6A" Guid="{0CBC2476-40BE-496F-AD9E-4B8E9A760705}">
+                <File Id="fil4AA3929C46E65E636FE81E7F5F832954" KeyPath="yes" Source="$(var.ZynamicsJavaDir)\binnavi\standardplugins\callresolver\CallResolverPlugin.java" />
+            </Component>
+            <Component Id="cmp180A2D06FF00D08D22D8DD20F5D99FDC" Directory="dir652309B590028B5694B740295BD22E6A" Guid="{69C9A501-BA51-443B-9956-B9DF0EC55602}">
+                <File Id="fil0416EA8A600748CAFEE33B18E2A76C41" KeyPath="yes" Source="$(var.ZynamicsJavaDir)\binnavi\standardplugins\callresolver\FontHelper.java" />
+            </Component>
+            <Component Id="cmp0C9FE2CF5C830CEC50DDCD65E5ED2282" Directory="dir652309B590028B5694B740295BD22E6A" Guid="{5F62DEA7-4D30-4E79-B577-C92BD0130430}">
+                <File Id="fil1548BBBE15C48B40C476FFE4241F7A9F" KeyPath="yes" Source="$(var.ZynamicsJavaDir)\binnavi\standardplugins\callresolver\ICallResolverTarget.java" />
+            </Component>
+            <Component Id="cmp5F7B57E5E8C4D40D1D41120BE9B391CB" Directory="dir652309B590028B5694B740295BD22E6A" Guid="{6B01E756-7054-48E7-A2AF-78FB44D0A009}">
+                <File Id="filC7C0B7A7951D100FA8B64C1643E13310" KeyPath="yes" Source="$(var.ZynamicsJavaDir)\binnavi\standardplugins\callresolver\ICallResolverTargetListener.java" />
+            </Component>
+            <Component Id="cmpFF4EBCC3F40A3BAB5A26FDBE83B50C96" Directory="dir652309B590028B5694B740295BD22E6A" Guid="{B08EE1AF-1174-48ED-840B-58511D4640C0}">
+                <File Id="fil713342E76924CE2A22FAB4FA791D0A23" KeyPath="yes" Source="$(var.ZynamicsJavaDir)\binnavi\standardplugins\callresolver\IndirectCall.java" />
+            </Component>
+            <Component Id="cmpD29D230B9930AD44FF1E804C29B5EFA8" Directory="dir652309B590028B5694B740295BD22E6A" Guid="{74EDB070-1158-4BB8-ABA2-5ED6541605D8}">
+                <File Id="filAE182D3BEBC91FEE92727D7737BDFBD1" KeyPath="yes" Source="$(var.ZynamicsJavaDir)\binnavi\standardplugins\callresolver\IndirectCallFinder.java" />
+            </Component>
+            <Component Id="cmp06BA47D862361257BD393FBEB056089E" Directory="dir652309B590028B5694B740295BD22E6A" Guid="{031E1CF5-30C9-4978-81CF-E89FA4198ACA}">
+                <File Id="filF3ACCA5B2628896C82DB35080A11701C" KeyPath="yes" Source="$(var.ZynamicsJavaDir)\binnavi\standardplugins\callresolver\IndirectCallResolver.java" />
+            </Component>
+            <Component Id="cmpA8D375DD148988037947D5A8D92A0266" Directory="dir652309B590028B5694B740295BD22E6A" Guid="{CF6F81D7-C6FD-45E6-9E1F-8B8CAAF3CE0F}">
+                <File Id="fil4EF3BFDD211C5454B459F923C042B122" KeyPath="yes" Source="$(var.ZynamicsJavaDir)\binnavi\standardplugins\callresolver\ModuleCallResolverTarget.java" />
+            </Component>
+            <Component Id="cmp1A6C309632A6BEE6281B361740BF6C45" Directory="dir652309B590028B5694B740295BD22E6A" Guid="{C874788E-CB6D-4A37-B8F8-A17FB7A924BD}">
+                <File Id="filDE31EAD5A38A29C0C17F1C9D2DFFF8E2" KeyPath="yes" Source="$(var.ZynamicsJavaDir)\binnavi\standardplugins\callresolver\OutputGraphGenerator.java" />
+            </Component>
+            <Component Id="cmp810BD9EAF150FF66DEF96CF01162833F" Directory="dir652309B590028B5694B740295BD22E6A" Guid="{2B0F51E0-7B42-41FA-9FB7-013ABF9B591B}">
+                <File Id="filABF3481943B3996E6B05A0F126784525" KeyPath="yes" Source="$(var.ZynamicsJavaDir)\binnavi\standardplugins\callresolver\OutputListGenerator.java" />
+            </Component>
+            <Component Id="cmp06D6B5E2F287D860F29E7F96430942BF" Directory="dir652309B590028B5694B740295BD22E6A" Guid="{965627F0-45C8-4DE7-855D-099A830F2F44}">
+                <File Id="filDC3E256AD8854BF630A72478E5377486" KeyPath="yes" Source="$(var.ZynamicsJavaDir)\binnavi\standardplugins\callresolver\ResolveCallsAction.java" />
+            </Component>
+            <Component Id="cmp37C12DBCCE0CC2C60F4FC7BE3567B10A" Directory="dir652309B590028B5694B740295BD22E6A" Guid="{11D83C2A-ADE1-4F30-B422-81FF785A3B90}">
+                <File Id="fil44D35C3B24C96A344CDD1F648ACC1526" KeyPath="yes" Source="$(var.ZynamicsJavaDir)\binnavi\standardplugins\callresolver\ResolvedFunction.java" />
+            </Component>
+            <Component Id="cmp6F913CA8D8985A32FC9867E001E5D9D5" Directory="dir1535C8109A51B9C5F5DE70400970F0E1" Guid="{7F9D6DD5-BC1A-410A-8EAD-3151C07A03E1}">
+                <File Id="filB80832B97A494BB2467C9E8A75487222" KeyPath="yes" Source="$(var.ZynamicsJavaDir)\binnavi\standardplugins\coverage\IVisualCoverageListener.java" />
+            </Component>
+            <Component Id="cmp8590576CE6BFDEE189A833E9A2F9BB23" Directory="dir1535C8109A51B9C5F5DE70400970F0E1" Guid="{3FDD5D46-F620-4C58-9834-540CB1D4C7D1}">
+                <File Id="fil2E1862CDE2C74E7851DC29A03312DDBC" KeyPath="yes" Source="$(var.ZynamicsJavaDir)\binnavi\standardplugins\coverage\VisualCoverage.java" />
+            </Component>
+            <Component Id="cmpA46D8D95C4D60B628F831A5C13B02E1F" Directory="dir1535C8109A51B9C5F5DE70400970F0E1" Guid="{14C0EEC7-F8DB-4F22-B3AD-DCED18A78DCB}">
+                <File Id="fil8290A3596B85EFAC3E76FFE5F87AADF3" KeyPath="yes" Source="$(var.ZynamicsJavaDir)\binnavi\standardplugins\coverage\VisualCoverageAction.java" />
+            </Component>
+            <Component Id="cmp534B3D5D17D69AACD94CDA2789D4F401" Directory="dir1535C8109A51B9C5F5DE70400970F0E1" Guid="{77CA2A03-82D6-4E8E-9453-6A638FF1615A}">
+                <File Id="filAA28228C7EEFF45CF021A6CF26F481D5" KeyPath="yes" Source="$(var.ZynamicsJavaDir)\binnavi\standardplugins\coverage\VisualCoveragePlugin.java" />
+            </Component>
+            <Component Id="cmp76A5AA2DFC3D838FB8218FE958718764" Directory="dirF41E83BD51CD4BE9E4F6B78CD0210552" Guid="{AE684B9C-8C78-472C-ADDE-5AC7D3EE8FB5}">
+                <File Id="fil619F3678FCB412FB036260DD908D0F00" KeyPath="yes" Source="$(var.ZynamicsJavaDir)\binnavi\standardplugins\criterium\LoopSelectionCriteriumPlugin.java" />
+            </Component>
+            <Component Id="cmp1BBA261936A7AC0C966B03D6AA03B10D" Directory="dirD93D5B27832D0C5E1C381C6347AD2F1D" Guid="{D9EE9041-F954-4DDE-8CA3-928570CFEC31}">
+                <File Id="filBF9FDCE8EE3C210C102CD4F77921C52F" KeyPath="yes" Source="$(var.ZynamicsJavaDir)\binnavi\standardplugins\pathfinder\FilteredTreeModel.java" />
+            </Component>
+            <Component Id="cmpF1D4B29C481E27B64C7A518840D0A705" Directory="dirD93D5B27832D0C5E1C381C6347AD2F1D" Guid="{5BEF5801-2F8C-4963-A381-9CF7A5AC67B5}">
+                <File Id="filD665400A5AC9D5A933DB377A0BEE8BB7" KeyPath="yes" Source="$(var.ZynamicsJavaDir)\binnavi\standardplugins\pathfinder\FunctionTree.java" />
+            </Component>
+            <Component Id="cmp031395B9FBF39A365F52FF4287465F60" Directory="dirD93D5B27832D0C5E1C381C6347AD2F1D" Guid="{1D9D8DB3-2CB6-42A1-9C97-EEFAC0E770EC}">
+                <File Id="fil4673B409A39813CD287F09B59DF274D7" KeyPath="yes" Source="$(var.ZynamicsJavaDir)\binnavi\standardplugins\pathfinder\FunctionTreeBlockNode.java" />
+            </Component>
+            <Component Id="cmp329689D704286E4D44A4468F1979A825" Directory="dirD93D5B27832D0C5E1C381C6347AD2F1D" Guid="{EDEB9AE1-25FB-4CD6-B793-5E7C3096A597}">
+                <File Id="filB8AFAE3E9A6C8D5C6B88137ED74C6078" KeyPath="yes" Source="$(var.ZynamicsJavaDir)\binnavi\standardplugins\pathfinder\FunctionTreeFunctionNode.java" />
+            </Component>
+            <Component Id="cmp571B006ACA681419F5A9FC427D1D7A9D" Directory="dirD93D5B27832D0C5E1C381C6347AD2F1D" Guid="{81A937AF-76F8-4324-84F4-154B7763625C}">
+                <File Id="fil0D5A7D515532168D777AF25B51B6CDA1" KeyPath="yes" Source="$(var.ZynamicsJavaDir)\binnavi\standardplugins\pathfinder\FunctionTreeNode.java" />
+            </Component>
+            <Component Id="cmpA1FBF884F7BE1CCC6A9A495D325A9BED" Directory="dirD93D5B27832D0C5E1C381C6347AD2F1D" Guid="{41826BA1-30ED-44A1-9481-4F12D04A5956}">
+                <File Id="fil5DE2F5B5E5D79D0038D57151826FE569" KeyPath="yes" Source="$(var.ZynamicsJavaDir)\binnavi\standardplugins\pathfinder\FunctionTreeRootNode.java" />
+            </Component>
+            <Component Id="cmp14697657A044770002DECAC145DE1DD3" Directory="dirD93D5B27832D0C5E1C381C6347AD2F1D" Guid="{DDEDFB22-FD89-4704-96EC-699AE0BC1B5B}">
+                <File Id="fil7211E4E2DD9570D1A10440092CF766B3" KeyPath="yes" Source="$(var.ZynamicsJavaDir)\binnavi\standardplugins\pathfinder\IFilterableNode.java" />
+            </Component>
+            <Component Id="cmp2E713A5F4A53F27BDFEE6192A1C9C4C9" Directory="dirD93D5B27832D0C5E1C381C6347AD2F1D" Guid="{0C254B3B-4E65-4C2A-A88E-8D5228A90E33}">
+                <File Id="fil23B933F10F05115B938B07303E3B7590" KeyPath="yes" Source="$(var.ZynamicsJavaDir)\binnavi\standardplugins\pathfinder\IFunctionTreeNode.java" />
+            </Component>
+            <Component Id="cmpC0D261D24F4770FECBDAAB7439CD6A49" Directory="dirD93D5B27832D0C5E1C381C6347AD2F1D" Guid="{4C3357A6-12B4-48FE-8725-4831B04FCB87}">
+                <File Id="fil4210EF702BAC2CD231138CDA9E15BBA9" KeyPath="yes" Source="$(var.ZynamicsJavaDir)\binnavi\standardplugins\pathfinder\PathFinder.java" />
+            </Component>
+            <Component Id="cmp7ED9E7332905A52A2BE454304A5A248D" Directory="dirD93D5B27832D0C5E1C381C6347AD2F1D" Guid="{4C00944E-9CB8-466A-A5D2-52925F2DECB2}">
+                <File Id="fil8531702D8376778F0BF8EEE6A63CEA6B" KeyPath="yes" Source="$(var.ZynamicsJavaDir)\binnavi\standardplugins\pathfinder\PathfinderPlugin.java" />
+            </Component>
+            <Component Id="cmp81B844EFA52D1F710D90FA22DF69C99A" Directory="dirD93D5B27832D0C5E1C381C6347AD2F1D" Guid="{E74A6E57-647B-4A20-9511-8A72621F4C75}">
+                <File Id="fil211C69EDFD70988AFC59DD4B26D19D9F" KeyPath="yes" Source="$(var.ZynamicsJavaDir)\binnavi\standardplugins\pathfinder\PathfindingDialog.java" />
+            </Component>
+            <Component Id="cmp14C701F29D00731ABE85034614AAE915" Directory="dirD93D5B27832D0C5E1C381C6347AD2F1D" Guid="{F0C3D208-A43D-468A-8D59-56826A8C5809}">
+                <File Id="fil3B7AA75406E1224092212AA99656BC93" KeyPath="yes" Source="$(var.ZynamicsJavaDir)\binnavi\standardplugins\pathfinder\TextPatternFilter.java" />
+            </Component>
+            <Component Id="cmp6E93E4002C01D1AA6EB21F8940F1B177" Directory="dir47D1548DFD5AAF233C2EF9D8E121B645" Guid="{34FD52E3-2B43-47DA-803A-930E86E56EF4}">
+                <File Id="filAD2858D218051108F6E336B899625199" KeyPath="yes" Source="$(var.ZynamicsJavaDir)\binnavi\standardplugins\pathfinder\resources\brick.png" />
+            </Component>
+            <Component Id="cmp7F6BD0381F924762F5FAC9637BE04221" Directory="dir47D1548DFD5AAF233C2EF9D8E121B645" Guid="{FC77BCEF-EA85-447D-A643-4449AEC1D979}">
+                <File Id="fil012E2938988B3DFAE2CE9F62B69FEC97" KeyPath="yes" Source="$(var.ZynamicsJavaDir)\binnavi\standardplugins\pathfinder\resources\graph2.png" />
+            </Component>
+            <Component Id="cmpE4E6765EFB2343B2F6D9CAE4F5402228" Directory="dir47D1548DFD5AAF233C2EF9D8E121B645" Guid="{1D221182-0259-4AF5-9615-3F4C12EBD0A0}">
+                <File Id="filE46FFD4B9EDC174973964E6EF1C5FE14" KeyPath="yes" Source="$(var.ZynamicsJavaDir)\binnavi\standardplugins\pathfinder\resources\graph2_gray.png" />
+            </Component>
+            <Component Id="cmp3A8D8487B6A164066A59D87482AB248F" Directory="dir884697744AD7D543D08B095BD54EB630" Guid="{B43FDAC6-E984-426C-8085-8135096CD999}">
+                <File Id="fil30328E5FE60A726BB844AE14D19DB18D" KeyPath="yes" Source="$(var.ZynamicsJavaDir)\binnavi\standardplugins\utils\CDialogEscaper.java" />
+            </Component>
+            <Component Id="cmpC2B13202875CC5FA1EDF8996190952B0" Directory="dir884697744AD7D543D08B095BD54EB630" Guid="{AFC98470-8545-4ADA-963A-0EF129B30520}">
+                <File Id="fil61753E248EB61D03BC8EE27D16B2505F" KeyPath="yes" Source="$(var.ZynamicsJavaDir)\binnavi\standardplugins\utils\CPanelTwoButtons.java" />
+            </Component>
+            <Component Id="cmpA9AFA2A1B92CAD18206C03A78AF405B3" Directory="dir884697744AD7D543D08B095BD54EB630" Guid="{7E5DCAFF-4B18-4446-A924-053C158FF912}">
+                <File Id="fil168D1EF5829531287C8079286947E0F5" KeyPath="yes" Source="$(var.ZynamicsJavaDir)\binnavi\standardplugins\utils\DirectorySelecter.java" />
+            </Component>
+            <Component Id="cmp0B8207F243E43D3256F22CA22BA76167" Directory="dir884697744AD7D543D08B095BD54EB630" Guid="{E70BA522-88F6-4F1F-8989-DABAED70428D}">
+                <File Id="fil8DF9F0B28D3294F95F77D9971B77CDC0" KeyPath="yes" Source="$(var.ZynamicsJavaDir)\binnavi\standardplugins\utils\DirUtils.java" />
+            </Component>
+            <Component Id="cmpD81656011329D6C0E7B3B74E61BD9EC9" Directory="dir884697744AD7D543D08B095BD54EB630" Guid="{C7C34F57-0352-4C37-8254-2370B7758C5B}">
+                <File Id="filFF7D2A702C7B3DA1A6ABB88A6A8C01BD" KeyPath="yes" Source="$(var.ZynamicsJavaDir)\binnavi\standardplugins\utils\FilesizeSorter.java" />
+            </Component>
+            <Component Id="cmp271FECCB58369F2C0D29FE45BBA6C0F3" Directory="dir884697744AD7D543D08B095BD54EB630" Guid="{A359EF85-5482-465B-ADB6-57A202F18670}">
+                <File Id="fil518E526B244CE7F238F233F8D4D9C2CC" KeyPath="yes" Source="$(var.ZynamicsJavaDir)\binnavi\standardplugins\utils\FileUtils.java" />
+            </Component>
+            <Component Id="cmp78BF3EFFA60C0AEF485ED2601066FAF4" Directory="dir884697744AD7D543D08B095BD54EB630" Guid="{61AC78D8-9EF9-4E49-A70F-0389A8DFAD72}">
+                <File Id="fil92201D13EC318E67B2A0474F989F421C" KeyPath="yes" Source="$(var.ZynamicsJavaDir)\binnavi\standardplugins\utils\GuiHelper.java" />
+            </Component>
+            <Component Id="cmp19D927323BB5CC8880CCDAF4EDEB4C41" Directory="dir884697744AD7D543D08B095BD54EB630" Guid="{69106B8B-5198-49F1-AC67-86748931AF2F}">
+                <File Id="fil3EF45481D669F8FE095B691F9686EFDC" KeyPath="yes" Source="$(var.ZynamicsJavaDir)\binnavi\standardplugins\utils\IconNode.java" />
+            </Component>
+            <Component Id="cmp29F1086394A9BF6F884FD3CC09040715" Directory="dir884697744AD7D543D08B095BD54EB630" Guid="{3070D5AD-8C11-4AA0-9645-1E5A3FCF35C8}">
+                <File Id="fil7EB416C4F52281EA9B828BD14A6C5012" KeyPath="yes" Source="$(var.ZynamicsJavaDir)\binnavi\standardplugins\utils\IconNodeRenderer.java" />
+            </Component>
+            <Component Id="cmpE5696B042C79E38D95150A36E2D42F54" Directory="dir884697744AD7D543D08B095BD54EB630" Guid="{9CF61F3C-C993-4BF0-8EFD-EBDE5E674670}">
+                <File Id="fil768D91A805D828C56EDE2D97AC6F312E" KeyPath="yes" Source="$(var.ZynamicsJavaDir)\binnavi\standardplugins\utils\IDirectoryTraverselCallback.java" />
+            </Component>
+            <Component Id="cmpE783460D852C1FB9EDC6CFE11E4DEB13" Directory="dir884697744AD7D543D08B095BD54EB630" Guid="{2307163D-2B74-4AFD-88B1-895A49AF9FA5}">
+                <File Id="fil58B510D9E3595939DACAD23865DFA051" KeyPath="yes" Source="$(var.ZynamicsJavaDir)\binnavi\standardplugins\utils\Pair.java" />
+            </Component>
+            <Component Id="cmp8E807B1C8B9FD10BFD4D1C68873DA6A3" Directory="dir884697744AD7D543D08B095BD54EB630" Guid="{00B1FC8E-B05D-4274-8F74-3E1B7FA1FF65}">
+                <File Id="fil2B337FB93EA3FAC700DBEF85A4D7A476" KeyPath="yes" Source="$(var.ZynamicsJavaDir)\binnavi\standardplugins\utils\TreeHelpers.java" />
+            </Component>
+        </ComponentGroup>
+    </Fragment>
+    <Fragment>
+        <DirectoryRef Id="dirD93D5B27832D0C5E1C381C6347AD2F1D" />
+    </Fragment>
+    <Fragment>
+        <DirectoryRef Id="dir884697744AD7D543D08B095BD54EB630" />
+    </Fragment>
+    <Fragment>
+        <DirectoryRef Id="dir47D1548DFD5AAF233C2EF9D8E121B645" />
+    </Fragment>
+    <Fragment>
+        <DirectoryRef Id="dir1535C8109A51B9C5F5DE70400970F0E1" />
+    </Fragment>
+    <Fragment>
+        <DirectoryRef Id="dirF41E83BD51CD4BE9E4F6B78CD0210552" />
+    </Fragment>
+    <Fragment>
+        <DirectoryRef Id="dirE5527D9F2EC9EB85C4F89A9F1AEF5BF4" />
+    </Fragment>
+    <Fragment>
+        <DirectoryRef Id="dir652309B590028B5694B740295BD22E6A" />
+    </Fragment>
+    <Fragment>
+        <DirectoryRef Id="dir373898302AB12273B8222DC0351AFC37" />
+    </Fragment>
+    <Fragment>
+        <DirectoryRef Id="dir13201B007A6780CCAFD285C16D3C3EDB">
+            <Directory Id="dir0FBDFDF33AD9EA527A7B0696E3997357" Name="binnavi" />
+        </DirectoryRef>
+    </Fragment>
+    <Fragment>
+        <DirectoryRef Id="dir5A6B398B9BBFB31C6A3E51A7C704E78C">
+            <Directory Id="dir13201B007A6780CCAFD285C16D3C3EDB" Name="zynamics" />
+        </DirectoryRef>
+    </Fragment>
+    <Fragment>
+        <DirectoryRef Id="dirE5527D9F2EC9EB85C4F89A9F1AEF5BF4">
+            <Directory Id="dir1535C8109A51B9C5F5DE70400970F0E1" Name="coverage" />
+        </DirectoryRef>
+    </Fragment>
+    <Fragment>
+        <DirectoryRef Id="dirD93D5B27832D0C5E1C381C6347AD2F1D">
+            <Directory Id="dir47D1548DFD5AAF233C2EF9D8E121B645" Name="resources" />
+        </DirectoryRef>
+    </Fragment>
+    <Fragment>
+        <DirectoryRef Id="dir373898302AB12273B8222DC0351AFC37">
+            <Directory Id="dir5A6B398B9BBFB31C6A3E51A7C704E78C" Name="com" />
+        </DirectoryRef>
+    </Fragment>
+    <Fragment>
+        <DirectoryRef Id="dirE5527D9F2EC9EB85C4F89A9F1AEF5BF4">
+            <Directory Id="dir652309B590028B5694B740295BD22E6A" Name="callresolver" />
+        </DirectoryRef>
+    </Fragment>
+    <Fragment>
+        <DirectoryRef Id="dirE5527D9F2EC9EB85C4F89A9F1AEF5BF4">
+            <Directory Id="dir884697744AD7D543D08B095BD54EB630" Name="utils" />
+        </DirectoryRef>
+    </Fragment>
+    <Fragment>
+        <DirectoryRef Id="dirE5527D9F2EC9EB85C4F89A9F1AEF5BF4">
+            <Directory Id="dirD93D5B27832D0C5E1C381C6347AD2F1D" Name="pathfinder" />
+        </DirectoryRef>
+    </Fragment>
+    <Fragment>
+        <DirectoryRef Id="dir0FBDFDF33AD9EA527A7B0696E3997357">
+            <Directory Id="dirE5527D9F2EC9EB85C4F89A9F1AEF5BF4" Name="standardplugins" />
+        </DirectoryRef>
+    </Fragment>
+    <Fragment>
+        <DirectoryRef Id="dirE5527D9F2EC9EB85C4F89A9F1AEF5BF4">
+            <Directory Id="dirF41E83BD51CD4BE9E4F6B78CD0210552" Name="criterium" />
+        </DirectoryRef>
+    </Fragment>
+</Wix>

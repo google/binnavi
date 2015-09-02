@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+Copyright 2015 Google Inc. All Rights Reserved.
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+-->
+<WixLocalization Culture="en-us"
+    xmlns="http://schemas.microsoft.com/wix/2006/localization">
+
+  <String Id="LaunchCondition_AdminPrivs">You must have Administrative rights on this machine to install [ProductName].</String>
+  <String Id="LaunchCondition_LaterVersion">A later version of !(loc.Property_ProductName) is already installed.</String>
+  <String Id="LaunchCondition_WrongOSVersion">[ProductName] can only be installed on Microsoft Windows XP or higher.</String>
+  <String Id="LaunchCondition_WrongJREVersion">[ProductName] requires a working Java Runtime Environment (JRE). Install JRE 1.7 or higher first.</String>
+
+  <String Id="Property_ArpHelpLink">http://www.zynamics.com/binnavi.html</String>
+  <String Id="Property_ArpUrlInfoAbout">http://www.zynamics.com/</String>
+  <String Id="Property_ProductLanguage">1033</String>
+  <String Id="Property_ProductName">BinNavi 6.0</String>
+  <String Id="Property_CompanyName">Google Inc.</String>
+
+  <String Id="Package_Description">[ProductName] Installation package</String>
+  <String Id="Package_Comments">This Installer database contains the logic and data required to install [ProductName].</String>
+
+  <String Id="BrowseIDADirectoryDlg_Title">BinNavi Exporter Plugin for IDA</String>
+  <String Id="BrowseIDADirectoryDlg_SelectIdaDirectory">Select your Hex-Rays IDA installation directory.</String>
+  <String Id="BrowseIDADirectoryDlg_IdaDirectoryLabel">Please provide the full path to your IDA installation directory:</String>
+
+  <String Id="PostgreSQLDlg_Title">PostgreSQL Database</String>
+
+  <String Id="Feature_AppRootFeatureTitle">BinNavi</String>
+  <String Id="Feature_AppRootFeatureDesc">BinNavi executables (required).</String>
+
+  <String Id="Feature_BinNaviManualTitle">User Manual</String>
+  <String Id="Feature_BinNaviManualDesc">BinNavi user documentation.</String>
+
+  <String Id="Feature_BinNaviDebugClientsTitle">Debug Clients</String>
+  <String Id="Feature_BinNaviDebugClientsDesc">Install BinNavi debug clients (Windows, Linux, generic GDB)</String>
+
+  <String Id="Feature_BinNaviPluginsTitle">Standard plugins</String>
+  <String Id="Feature_BinNaviPluginsDesc">The BinNavi standard plugins such as the GadgetFinder, etc. Includes source code.</String>
+
+  <String Id="Feature_BinNaviScriptsTitle">Scripts</String>
+  <String Id="Feature_BinNaviScriptsDesc">Sample scripts that demonstrate the scripting API.</String>
+</WixLocalization>

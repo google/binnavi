@@ -1,0 +1,449 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--
+Copyright 2015 Google Inc. All Rights Reserved.
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+-->
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+    <Fragment>
+        <DirectoryRef Id="INSTALLDIR">
+            <Directory Id="dir23C0350488EC36A806C234CEA225AB60" Name="manual" />
+        </DirectoryRef>
+    </Fragment>
+    <Fragment>
+        <ComponentGroup Id="Manual">
+            <Component Id="cmp54D7AD53EC93E2F6A3A6E1B848B8AC72" Directory="dir23C0350488EC36A806C234CEA225AB60" Guid="{F40260E3-ACE2-4854-A47A-81AF9DD203F0}">
+                <File Id="filF7126A39127D5EEBBF5285954450324A" KeyPath="yes" Source="$(var.ZynamicsJavaDir)\binnavi\manual\index.htm" />
+            </Component>
+            <Component Id="cmp22ED6A8851E48393A05331A3810AB933" Directory="dirC69B58DDB7FA6031F4E66DF1FF0F10D7" Guid="{2A1A901C-CA7D-45F3-AE12-2AA0D3A67D57}">
+                <File Id="filE8B203728BF83BD7FDF5A86EFB1FC8C0" KeyPath="yes" Source="$(var.ZynamicsJavaDir)\binnavi\manual\html\about.htm" />
+            </Component>
+            <Component Id="cmpF463557327A5DFEE788717F6B5EE240D" Directory="dirC69B58DDB7FA6031F4E66DF1FF0F10D7" Guid="{3E2BB599-AF07-423D-A8A4-9ECE07D4D2A4}">
+                <File Id="fil630122F668B49E11D348542A685FEBD0" KeyPath="yes" Source="$(var.ZynamicsJavaDir)\binnavi\manual\html\dbformat.htm" />
+            </Component>
+            <Component Id="cmp4E09C6B007703EDF5BA13DEB711953FA" Directory="dirC69B58DDB7FA6031F4E66DF1FF0F10D7" Guid="{2C333747-B12B-4C72-97DD-FAAA00281BEF}">
+                <File Id="filC1698427B97C4899F7C9013DD4E53FA9" KeyPath="yes" Source="$(var.ZynamicsJavaDir)\binnavi\manual\html\debugging.htm" />
+            </Component>
+            <Component Id="cmpE963708D93E96DA6E3B033E1B9A890AF" Directory="dirC69B58DDB7FA6031F4E66DF1FF0F10D7" Guid="{595F20A5-D413-477F-B429-956FA1490DC2}">
+                <File Id="filF2ABB7597C7873AB337C826CA0D7D69E" KeyPath="yes" Source="$(var.ZynamicsJavaDir)\binnavi\manual\html\faq.htm" />
+            </Component>
+            <Component Id="cmpC42618675E010C9D1F909382F239DEEF" Directory="dirC69B58DDB7FA6031F4E66DF1FF0F10D7" Guid="{9DA2C138-BE25-4926-9627-44C1B2F88EB0}">
+                <File Id="filE3A90301A3A125D93F7B1637737E2E58" KeyPath="yes" Source="$(var.ZynamicsJavaDir)\binnavi\manual\html\global_settings.htm" />
+            </Component>
+            <Component Id="cmp6429C27D8CC25AC37B06B51596011C72" Directory="dirC69B58DDB7FA6031F4E66DF1FF0F10D7" Guid="{7DE232E0-4128-4775-BA8B-4BAEF48FAB6A}">
+                <File Id="fil9640DF607AA380E808672A625B181487" KeyPath="yes" Source="$(var.ZynamicsJavaDir)\binnavi\manual\html\graph_settings.htm" />
+            </Component>
+            <Component Id="cmp0F507C12ABF15BEE04D5095C5AD67B73" Directory="dirC69B58DDB7FA6031F4E66DF1FF0F10D7" Guid="{2EB049BD-5967-43B3-B627-BD367E31F1D0}">
+                <File Id="fil1E6653423249F96BB1A8C7208F1292D7" KeyPath="yes" Source="$(var.ZynamicsJavaDir)\binnavi\manual\html\graph_window.htm" />
+            </Component>
+            <Component Id="cmp400FD007B13EA4D73DF3163CB6EA72C1" Directory="dirC69B58DDB7FA6031F4E66DF1FF0F10D7" Guid="{CB8E4566-8556-4992-A3E5-71E630C8E502}">
+                <File Id="filE645E2CC33BD01471F9587287AC58C42" KeyPath="yes" Source="$(var.ZynamicsJavaDir)\binnavi\manual\html\importing.htm" />
+            </Component>
+            <Component Id="cmp82615A82C056F634578D6EBC79DDB980" Directory="dirC69B58DDB7FA6031F4E66DF1FF0F10D7" Guid="{7F95D913-D5F2-4D4E-BDCB-4EC5B2B2C66F}">
+                <File Id="fil2E2C4F6740D51562001C95D454AEF0E2" KeyPath="yes" Source="$(var.ZynamicsJavaDir)\binnavi\manual\html\installation.htm" />
+            </Component>
+            <Component Id="cmpA1FD0832B77B5E6448FD2FED9665F049" Directory="dirC69B58DDB7FA6031F4E66DF1FF0F10D7" Guid="{B51856F0-7C94-4C13-8ADD-083C1A90AD82}">
+                <File Id="fil058B8337BB24FE65ABC12125C7D3FBB0" KeyPath="yes" Source="$(var.ZynamicsJavaDir)\binnavi\manual\html\introduction.htm" />
+            </Component>
+            <Component Id="cmp9E7D06BFE53A3C6D6D5B2B191691BC63" Directory="dirC69B58DDB7FA6031F4E66DF1FF0F10D7" Guid="{92097CA4-603E-406F-83D4-E3823D5E0330}">
+                <File Id="filE9E84684E129938BDF726B882DCE6241" KeyPath="yes" Source="$(var.ZynamicsJavaDir)\binnavi\manual\html\main_window.htm" />
+            </Component>
+            <Component Id="cmp6DE16B1DD66A43C67B27C8A0DC98A8E5" Directory="dirC69B58DDB7FA6031F4E66DF1FF0F10D7" Guid="{019117F2-815C-481B-8BC8-85F5E39221A5}">
+                <File Id="filE6B273FB39D41F202D287DF267D1418B" KeyPath="yes" Source="$(var.ZynamicsJavaDir)\binnavi\manual\html\mono_reil.html" />
+            </Component>
+            <Component Id="cmp3B9933C26F86269AAA9EC21BA7DE066D" Directory="dirC69B58DDB7FA6031F4E66DF1FF0F10D7" Guid="{8201A367-0516-4324-BF44-6672B5AE0993}">
+                <File Id="filCB723A280754B4DC5F73FDE7308A2793" KeyPath="yes" Source="$(var.ZynamicsJavaDir)\binnavi\manual\html\plugins.htm" />
+            </Component>
+            <Component Id="cmp3FEA2961F469C386196989D078D9F123" Directory="dirC69B58DDB7FA6031F4E66DF1FF0F10D7" Guid="{D0795945-6CD2-457C-966B-DD20334E756A}">
+                <File Id="fil884FA482405EF61D40A8587E67E9EE59" KeyPath="yes" Source="$(var.ZynamicsJavaDir)\binnavi\manual\html\reil.htm" />
+            </Component>
+            <Component Id="cmpFC4FDFEBA4E14FD79AECC406F3B4F20F" Directory="dirC69B58DDB7FA6031F4E66DF1FF0F10D7" Guid="{1399765C-C55D-4665-8195-50294ACEC174}">
+                <File Id="fil97987F120185D30226D9DD73B9848FB8" KeyPath="yes" Source="$(var.ZynamicsJavaDir)\binnavi\manual\html\reil_language.htm" />
+            </Component>
+            <Component Id="cmpB65E3FF7E80EEB3B3360110BA4764E21" Directory="dirC69B58DDB7FA6031F4E66DF1FF0F10D7" Guid="{96FD4B5E-FEA7-4944-AFE0-0076A10B14B3}">
+                <File Id="filC2D61F5FBEB7B5B0859079A0831795D0" KeyPath="yes" Source="$(var.ZynamicsJavaDir)\binnavi\manual\html\scripting.htm" />
+            </Component>
+            <Component Id="cmp4C522EF2502AD39B722D464FEA69C1AA" Directory="dirC69B58DDB7FA6031F4E66DF1FF0F10D7" Guid="{0685F4D9-4A44-47E1-B864-B091C61A5023}">
+                <File Id="filD67F35DD2BA9EFDC05DE2AF764296281" KeyPath="yes" Source="$(var.ZynamicsJavaDir)\binnavi\manual\html\scripting_usage.htm" />
+            </Component>
+            <Component Id="cmp3BC30E5C25702C5E8BB38F24E21B9989" Directory="dirC69B58DDB7FA6031F4E66DF1FF0F10D7" Guid="{96466CB7-2F3D-48C1-A817-2F2CCD12F8A8}">
+                <File Id="fil3443AFF35B7C551F66B010F5D1CBE6A2" KeyPath="yes" Source="$(var.ZynamicsJavaDir)\binnavi\manual\html\tutorial.htm" />
+            </Component>
+            <Component Id="cmp135AE32C1327A18A1C7872F0BB191EE6" Directory="dirC69B58DDB7FA6031F4E66DF1FF0F10D7" Guid="{182D22D6-5DB7-4237-A32D-76C21432C8E3}">
+                <File Id="fil3B2690D0ACEC16E3C9633CA7563AF791" KeyPath="yes" Source="$(var.ZynamicsJavaDir)\binnavi\manual\html\updating.htm" />
+            </Component>
+            <Component Id="cmp11286017D942E464115581DDE3E49808" Directory="dirC69B58DDB7FA6031F4E66DF1FF0F10D7" Guid="{68CBEDC7-C8E0-4CD4-B662-B0FA21F295E6}">
+                <File Id="fil339D2DDD0FBB39F0103B46A27430F402" KeyPath="yes" Source="$(var.ZynamicsJavaDir)\binnavi\manual\html\usage.htm" />
+            </Component>
+            <Component Id="cmp9EEE8A8590A2838976FD0DBEE4235030" Directory="dir1D54DF6AE6603B80F8C94E0FE2E1C457" Guid="{C1246B4C-1142-4059-BB03-A495100DFDCE}">
+                <File Id="filA184EF13F386B25D624307AA51D81415" KeyPath="yes" Source="$(var.ZynamicsJavaDir)\binnavi\manual\images\aspace_control.png" />
+            </Component>
+            <Component Id="cmp40F497DDDBF9078FF0BCD77853062E80" Directory="dir1D54DF6AE6603B80F8C94E0FE2E1C457" Guid="{EDE93A01-5DB8-405B-AFC8-B4A7DF5C2B4F}">
+                <File Id="filF184791B137552F517AC8195A4E03F32" KeyPath="yes" Source="$(var.ZynamicsJavaDir)\binnavi\manual\images\binnaviicon.png" />
+            </Component>
+            <Component Id="cmpF7AA1EFB7022BF3011618ECDC7F10700" Directory="dir1D54DF6AE6603B80F8C94E0FE2E1C457" Guid="{99CC90FC-6C34-48F4-BF0E-D0C4C38CF161}">
+                <File Id="fil414AF62B4E20BB4B68C9EC3304452B2D" KeyPath="yes" Source="$(var.ZynamicsJavaDir)\binnavi\manual\images\binnavi_logo4.png" />
+            </Component>
+            <Component Id="cmp71E1AEFCEFF594E9B9A70F3799AB847F" Directory="dir1D54DF6AE6603B80F8C94E0FE2E1C457" Guid="{03D2B24C-02AB-45B8-A0E4-8ACC72D7FB80}">
+                <File Id="filA38858D08FA07B924028282B25CCACC0" KeyPath="yes" Source="$(var.ZynamicsJavaDir)\binnavi\manual\images\database_control.png" />
+            </Component>
+            <Component Id="cmpCD806558007FC6F940E24325678CBC22" Directory="dir1D54DF6AE6603B80F8C94E0FE2E1C457" Guid="{5EBFCE4E-C2EA-4D47-BA5D-03D3F828C146}">
+                <File Id="filC93C9A5A13BDE943B62BA2862D76B245" KeyPath="yes" Source="$(var.ZynamicsJavaDir)\binnavi\manual\images\data_control.png" />
+            </Component>
+            <Component Id="cmp2A0C6AC64598204AC636D9ACABE71594" Directory="dir1D54DF6AE6603B80F8C94E0FE2E1C457" Guid="{C64708E0-88A6-451B-999A-ECF56CA5FFBF}">
+                <File Id="fil76B163DC020B7801C7F02C7668E10DB6" KeyPath="yes" Source="$(var.ZynamicsJavaDir)\binnavi\manual\images\debuggers_control.png" />
+            </Component>
+            <Component Id="cmp3E800FF24671D4F29A26B61E108C5E5F" Directory="dir1D54DF6AE6603B80F8C94E0FE2E1C457" Guid="{1067BF4A-85F6-4AF0-A3CA-588BE311D621}">
+                <File Id="fil0C84B3BC68C4F303F9CABBDB64423BED" KeyPath="yes" Source="$(var.ZynamicsJavaDir)\binnavi\manual\images\debugger_control.png" />
+            </Component>
+            <Component Id="cmp10E79F3BB74F224C322346983FA8E911" Directory="dir1D54DF6AE6603B80F8C94E0FE2E1C457" Guid="{D5F17E00-5A96-4BF0-B298-01FCE7EC0538}">
+                <File Id="filE94905D9BBE32310B71092AAB15CDA3B" KeyPath="yes" Source="$(var.ZynamicsJavaDir)\binnavi\manual\images\dlg_update.png" />
+            </Component>
+            <Component Id="cmpA6CCD192275FB253468430063C5EF5DF" Directory="dir1D54DF6AE6603B80F8C94E0FE2E1C457" Guid="{1F7185FC-B3F1-4258-BF6B-C71405091F39}">
+                <File Id="fil5E7E93A6AF985676E50983B99D68D6FF" KeyPath="yes" Source="$(var.ZynamicsJavaDir)\binnavi\manual\images\global_settings_colors.png" />
+            </Component>
+            <Component Id="cmp8097117202E75D0524CA504B31D8E95B" Directory="dir1D54DF6AE6603B80F8C94E0FE2E1C457" Guid="{85C41932-0DBF-45FF-9172-F2C9B7E749B5}">
+                <File Id="fil6C7D9FB0CCE7BCD9B205CFAB378AAAD2" KeyPath="yes" Source="$(var.ZynamicsJavaDir)\binnavi\manual\images\global_settings_general.png" />
+            </Component>
+            <Component Id="cmpC17153B9DD34E40CCDA9574CD044EC7D" Directory="dir1D54DF6AE6603B80F8C94E0FE2E1C457" Guid="{CD48F9EC-F20B-431D-943D-40E77887190A}">
+                <File Id="filE856D4678A510DCC9D42506988F6D3C5" KeyPath="yes" Source="$(var.ZynamicsJavaDir)\binnavi\manual\images\global_settings_tooltips.png" />
+            </Component>
+            <Component Id="cmp4631B7E8976BC902ED02778FAC3B6C67" Directory="dir1D54DF6AE6603B80F8C94E0FE2E1C457" Guid="{E411AFF8-E0E7-4D4C-8A8C-CD842832E5E1}">
+                <File Id="filEB811E98A126511A04A3B1BAFF1B3967" KeyPath="yes" Source="$(var.ZynamicsJavaDir)\binnavi\manual\images\global_variable_control.png" />
+            </Component>
+            <Component Id="cmp4701574EA98580687D0D5259DC6A722B" Directory="dir1D54DF6AE6603B80F8C94E0FE2E1C457" Guid="{6C5D487F-54E6-4ECB-B245-EF49B876600C}">
+                <File Id="fil2A2DADA3F53E0B095778C63F94A7D9C8" KeyPath="yes" Source="$(var.ZynamicsJavaDir)\binnavi\manual\images\graph_settings_automatism.png" />
+            </Component>
+            <Component Id="cmp80BC422A58D8EA4F31379EE5F2C8CBF6" Directory="dir1D54DF6AE6603B80F8C94E0FE2E1C457" Guid="{777D2856-9E25-45CF-9C1F-C57485CCA7ED}">
+                <File Id="fil3FFAA0F7CB6A6A80D9EFEE676FE034C5" KeyPath="yes" Source="$(var.ZynamicsJavaDir)\binnavi\manual\images\graph_settings_circular.png" />
+            </Component>
+            <Component Id="cmpDBABFE69E54C75E82E3F6F34C99CB64C" Directory="dir1D54DF6AE6603B80F8C94E0FE2E1C457" Guid="{9676C523-32D4-4FC7-8E61-2641731BD230}">
+                <File Id="filB76E6BBF2A7F43097E48C2F286DACFC3" KeyPath="yes" Source="$(var.ZynamicsJavaDir)\binnavi\manual\images\graph_settings_controls.png" />
+            </Component>
+            <Component Id="cmpB44C5E755486EF6AE7BFE12696715BA4" Directory="dir1D54DF6AE6603B80F8C94E0FE2E1C457" Guid="{E023CF2F-CBFF-42EA-9079-029435238DD9}">
+                <File Id="fil5CDB7C2CDC1AB17239E370520BB7CF44" KeyPath="yes" Source="$(var.ZynamicsJavaDir)\binnavi\manual\images\graph_settings_edges.png" />
+            </Component>
+            <Component Id="cmpE108C797B2D08CD08285F73BE8E58B64" Directory="dir1D54DF6AE6603B80F8C94E0FE2E1C457" Guid="{D82D5452-816C-4208-870D-896F434EC0FC}">
+                <File Id="fil07D905077F5CCA46D2FF4436AE7003B4" KeyPath="yes" Source="$(var.ZynamicsJavaDir)\binnavi\manual\images\graph_settings_hierarchic.png" />
+            </Component>
+            <Component Id="cmp2519AA340D11B3E324C7AD5C30E0D095" Directory="dir1D54DF6AE6603B80F8C94E0FE2E1C457" Guid="{2E5EB3EE-43DC-401E-9100-6F45D8197A11}">
+                <File Id="filEEA5455A3AB945DC23DC0CC15DBA7DD6" KeyPath="yes" Source="$(var.ZynamicsJavaDir)\binnavi\manual\images\graph_settings_misc.png" />
+            </Component>
+            <Component Id="cmpC286F2EE60B8589BF3D0CC67F5320642" Directory="dir1D54DF6AE6603B80F8C94E0FE2E1C457" Guid="{51BE9D56-8429-4C0E-88A0-5FCFED15CF24}">
+                <File Id="fil74BE328E530B0EDC254B3BD66700F800" KeyPath="yes" Source="$(var.ZynamicsJavaDir)\binnavi\manual\images\graph_settings_orthogonal.png" />
+            </Component>
+            <Component Id="cmp4FB3023EE5A58720C57E64D7BD395275" Directory="dir1D54DF6AE6603B80F8C94E0FE2E1C457" Guid="{17754F03-E07D-44D6-A8D4-3B1916BD4D9F}">
+                <File Id="filFFDE3A301C7FA87D6B84AEDE6EDB2F67" KeyPath="yes" Source="$(var.ZynamicsJavaDir)\binnavi\manual\images\gw_bookmarks.png" />
+            </Component>
+            <Component Id="cmp2F3805B1E5FD760F1BBF4EEB3000E946" Directory="dir1D54DF6AE6603B80F8C94E0FE2E1C457" Guid="{42E50DCE-307D-4B4F-B5F0-0AFE200653C0}">
+                <File Id="filEB63330D5C339B3D3DF3D19FB50FA266" KeyPath="yes" Source="$(var.ZynamicsJavaDir)\binnavi\manual\images\gw_breakpoints.png" />
+            </Component>
+            <Component Id="cmp96486DF5FF264893B41231D80119A095" Directory="dir1D54DF6AE6603B80F8C94E0FE2E1C457" Guid="{B38F456C-A1BA-44DA-90C6-6D323B6E12A2}">
+                <File Id="filC003616E241F6E9D1DAB11775BBDAB1D" KeyPath="yes" Source="$(var.ZynamicsJavaDir)\binnavi\manual\images\gw_calling_functions.png" />
+            </Component>
+            <Component Id="cmpDC2DB1F000CF06FFE887611DFC3B7ED9" Directory="dir1D54DF6AE6603B80F8C94E0FE2E1C457" Guid="{7372CBFF-7A93-4E19-B1E4-C5A9C4C3B4CE}">
+                <File Id="filD3168C7A219202B60973127D731E4BAA" KeyPath="yes" Source="$(var.ZynamicsJavaDir)\binnavi\manual\images\gw_codemenu.png" />
+            </Component>
+            <Component Id="cmp5B145DF40D0DA9C548EF0A31081B3268" Directory="dir1D54DF6AE6603B80F8C94E0FE2E1C457" Guid="{F6E417A0-66FD-4192-B29A-6157C174B8EC}">
+                <File Id="fil29EDBF549288B2EDB33B07E1CD05FA38" KeyPath="yes" Source="$(var.ZynamicsJavaDir)\binnavi\manual\images\gw_code_bookmarks.png" />
+            </Component>
+            <Component Id="cmpB1512B106DD457527396BC187D2649D2" Directory="dir1D54DF6AE6603B80F8C94E0FE2E1C457" Guid="{C4990DCB-462C-4332-A559-46949AAFEAE3}">
+                <File Id="filE1E2DAEEA61B5A1C2293FE136B82E751" KeyPath="yes" Source="$(var.ZynamicsJavaDir)\binnavi\manual\images\gw_commentmenu.png" />
+            </Component>
+            <Component Id="cmp3DC681F40588878CCF2E47B6C89F5BAB" Directory="dir1D54DF6AE6603B80F8C94E0FE2E1C457" Guid="{3C4EDD08-B853-4C66-AB98-241C274F19AF}">
+                <File Id="filCADFB397EFBD0E35B1D2ED4D12F2C918" KeyPath="yes" Source="$(var.ZynamicsJavaDir)\binnavi\manual\images\gw_debugger.png" />
+            </Component>
+            <Component Id="cmp90A2CCAC8D5297EDD51E527C1A385D2B" Directory="dir1D54DF6AE6603B80F8C94E0FE2E1C457" Guid="{6F633E71-2292-4788-9A71-1A98D0347D85}">
+                <File Id="filB83066BC7FA964EF8BFFA86210DCCADF" KeyPath="yes" Source="$(var.ZynamicsJavaDir)\binnavi\manual\images\gw_debugger_options.png" />
+            </Component>
+            <Component Id="cmpB0C7558CCE19A650DA60381AD5D61782" Directory="dir1D54DF6AE6603B80F8C94E0FE2E1C457" Guid="{5340F4B6-C6B6-4E20-99A5-54E9642A45E4}">
+                <File Id="fil9A111106F9D4CAB2C165767633317934" KeyPath="yes" Source="$(var.ZynamicsJavaDir)\binnavi\manual\images\gw_debugger_toolbar.png" />
+            </Component>
+            <Component Id="cmpD66D8602B08438DF1F272860AE87AE6D" Directory="dir1D54DF6AE6603B80F8C94E0FE2E1C457" Guid="{85BCD7F6-FD32-4F4E-A644-7FEC4BB3463E}">
+                <File Id="filF30206BEE001100CFA6C6FD021AD4F21" KeyPath="yes" Source="$(var.ZynamicsJavaDir)\binnavi\manual\images\gw_edgemenu.png" />
+            </Component>
+            <Component Id="cmpDA7C3F54CCC680040B9D159400E2C92F" Directory="dir1D54DF6AE6603B80F8C94E0FE2E1C457" Guid="{B8BE4986-0CB1-402D-B705-7E2231D5B92B}">
+                <File Id="filC731F662FD99953679B2AE636E1B47E2" KeyPath="yes" Source="$(var.ZynamicsJavaDir)\binnavi\manual\images\gw_functionmenu.png" />
+            </Component>
+            <Component Id="cmpFF689A19E101F2DF3CE3A05935474493" Directory="dir1D54DF6AE6603B80F8C94E0FE2E1C457" Guid="{69194648-9855-4CF1-B103-3343EABC3D80}">
+                <File Id="filC2934E35FCDF3EF2627AC738F8A7DCC0" KeyPath="yes" Source="$(var.ZynamicsJavaDir)\binnavi\manual\images\gw_graph.png" />
+            </Component>
+            <Component Id="cmp6260590AD03A6880352A4CFDC34F0CB3" Directory="dir1D54DF6AE6603B80F8C94E0FE2E1C457" Guid="{1367BD7A-EB7D-4E73-9BD8-0E5F511C0F3F}">
+                <File Id="fil25A647FB6EA658B1B6F4E875A9587010" KeyPath="yes" Source="$(var.ZynamicsJavaDir)\binnavi\manual\images\gw_graphnodes.png" />
+            </Component>
+            <Component Id="cmpC1BD660D21DDFD83087B1170CDA54738" Directory="dir1D54DF6AE6603B80F8C94E0FE2E1C457" Guid="{16E51820-A6C3-4BBC-B056-45F1A20064D3}">
+                <File Id="fil0D5A61657B05AE2B53BE14101A365C6C" KeyPath="yes" Source="$(var.ZynamicsJavaDir)\binnavi\manual\images\gw_groupmenu.png" />
+            </Component>
+            <Component Id="cmp884F259E0178A6B3D582805B4484CA37" Directory="dir1D54DF6AE6603B80F8C94E0FE2E1C457" Guid="{F0C4AFE8-8BB5-4745-A535-773D17573681}">
+                <File Id="filD9FD8A7483BD19A2AFCE494D03BD9F50" KeyPath="yes" Source="$(var.ZynamicsJavaDir)\binnavi\manual\images\gw_history.png" />
+            </Component>
+            <Component Id="cmpDDEC92A1BF83C31AA900C17475C39CDB" Directory="dir1D54DF6AE6603B80F8C94E0FE2E1C457" Guid="{01E2E5A2-A811-4304-9B58-781BA760F6DD}">
+                <File Id="fil6FE1A21ED6C57F4137150E4C2BB0E70A" KeyPath="yes" Source="$(var.ZynamicsJavaDir)\binnavi\manual\images\gw_memory.png" />
+            </Component>
+            <Component Id="cmp4BBC897D2D8D52E4D2DD14F059B3AA04" Directory="dir1D54DF6AE6603B80F8C94E0FE2E1C457" Guid="{99F03D08-2250-4990-88C3-4CD2E56A65CB}">
+                <File Id="fil2BB20FD83C7F3AF0AD1954AAD17AFC0B" KeyPath="yes" Source="$(var.ZynamicsJavaDir)\binnavi\manual\images\gw_modules.png" />
+            </Component>
+            <Component Id="cmpEF7D9512FE1D76B4811BA0774585656B" Directory="dir1D54DF6AE6603B80F8C94E0FE2E1C457" Guid="{3BEFB332-446F-4FA0-9071-3CE7107949B8}">
+                <File Id="fil15620B8F80FD9413BD7853AD7DD220E6" KeyPath="yes" Source="$(var.ZynamicsJavaDir)\binnavi\manual\images\gw_overview.png" />
+            </Component>
+            <Component Id="cmpBA89B18A7FEAD024BD6A3C115CA5E2F0" Directory="dir1D54DF6AE6603B80F8C94E0FE2E1C457" Guid="{C003D9F6-D7CA-49B0-BA4B-2B4CA1964AC2}">
+                <File Id="fil96F19FDE5CBD83E3C2DBC17F147AE661" KeyPath="yes" Source="$(var.ZynamicsJavaDir)\binnavi\manual\images\gw_proxymenu.png" />
+            </Component>
+            <Component Id="cmp2D9CBA9581CF59B1A1385B3F5D7465F2" Directory="dir1D54DF6AE6603B80F8C94E0FE2E1C457" Guid="{BDA316D9-BC8E-4FB3-AF6B-1E970959161F}">
+                <File Id="filEF94E79AAF8BC41BFA173B223B74DDF5" KeyPath="yes" Source="$(var.ZynamicsJavaDir)\binnavi\manual\images\gw_register_tracking.png" />
+            </Component>
+            <Component Id="cmpBB682E03D0A96505C9318C697208B9DD" Directory="dir1D54DF6AE6603B80F8C94E0FE2E1C457" Guid="{25A1BB22-7416-4430-A25E-0A13B52D9CE8}">
+                <File Id="fil1933B9841FE97CCAD78A0B11D4DC3414" KeyPath="yes" Source="$(var.ZynamicsJavaDir)\binnavi\manual\images\gw_register_tracking_2.png" />
+            </Component>
+            <Component Id="cmp4295108EF2E13DF3A3C962D50B798D5E" Directory="dir1D54DF6AE6603B80F8C94E0FE2E1C457" Guid="{8F8A69CA-4778-4626-B8FA-6F0B1E947FE4}">
+                <File Id="filA6B3C75DA01879C4020375821B4E0027" KeyPath="yes" Source="$(var.ZynamicsJavaDir)\binnavi\manual\images\gw_register_values.png" />
+            </Component>
+            <Component Id="cmp0C171E5F5B4D5CD2856E93183198F94E" Directory="dir1D54DF6AE6603B80F8C94E0FE2E1C457" Guid="{8AD55EC0-0E08-458D-9445-4D8218C65B16}">
+                <File Id="filB88C489161FC5D5A61F09FC9172828BA" KeyPath="yes" Source="$(var.ZynamicsJavaDir)\binnavi\manual\images\gw_selhist.png" />
+            </Component>
+            <Component Id="cmp47D723553AC2816893A76C388FE21766" Directory="dir1D54DF6AE6603B80F8C94E0FE2E1C457" Guid="{059E123A-CDB6-4B78-84FC-D33DE5408363}">
+                <File Id="fil02B1B687650784EF4E511C3109EB0E31" KeyPath="yes" Source="$(var.ZynamicsJavaDir)\binnavi\manual\images\gw_special_instructions.png" />
+            </Component>
+            <Component Id="cmp4EB941B7C8DB3524E26FE1AFBE8829F1" Directory="dir1D54DF6AE6603B80F8C94E0FE2E1C457" Guid="{7DF35F42-8654-4F75-8AAA-D642F88D951A}">
+                <File Id="fil65BA238B972AE03964EB264E9B1A7AF6" KeyPath="yes" Source="$(var.ZynamicsJavaDir)\binnavi\manual\images\gw_stack.png" />
+            </Component>
+            <Component Id="cmp16D30522D0C1C0DA5187DAF2B339AF99" Directory="dir1D54DF6AE6603B80F8C94E0FE2E1C457" Guid="{238B5A55-1E87-45C3-9149-B623F3492666}">
+                <File Id="filB57E835A7BF6E10C442FD65E4B060D42" KeyPath="yes" Source="$(var.ZynamicsJavaDir)\binnavi\manual\images\gw_tagging.png" />
+            </Component>
+            <Component Id="cmp0593BE687556E65F1DC31B64ECDB1308" Directory="dir1D54DF6AE6603B80F8C94E0FE2E1C457" Guid="{35068AA8-7E48-4406-8C0A-845A368E3A48}">
+                <File Id="filAFD3EC2393EC01BE285A98BA2F3BBB29" KeyPath="yes" Source="$(var.ZynamicsJavaDir)\binnavi\manual\images\gw_threads.png" />
+            </Component>
+            <Component Id="cmp60C12113D8ADA00794FE3CB42ED0068B" Directory="dir1D54DF6AE6603B80F8C94E0FE2E1C457" Guid="{3174AA5F-82EF-45C1-9443-94488EC7E1CD}">
+                <File Id="filA88E76382DD140F030AC61EB2BAA32C6" KeyPath="yes" Source="$(var.ZynamicsJavaDir)\binnavi\manual\images\gw_toolbar.png" />
+            </Component>
+            <Component Id="cmpF0561C6BE1C56CCFC447BAFD70E8C8C2" Directory="dir1D54DF6AE6603B80F8C94E0FE2E1C457" Guid="{F37B6DE8-703C-465E-A764-B396DAB34389}">
+                <File Id="fil379CAEFBC001D8C6777D6EB739B0AC9C" KeyPath="yes" Source="$(var.ZynamicsJavaDir)\binnavi\manual\images\gw_toolbar_2.png" />
+            </Component>
+            <Component Id="cmp6E6013BFD4DA6C533FEF355714B58596" Directory="dir1D54DF6AE6603B80F8C94E0FE2E1C457" Guid="{4D7B55F6-B023-457C-970F-A3C26AAB5AD6}">
+                <File Id="fil83CD9576C641876DEAD30AA712EC3BE8" KeyPath="yes" Source="$(var.ZynamicsJavaDir)\binnavi\manual\images\gw_traces.png" />
+            </Component>
+            <Component Id="cmpC142CFD49EA8FD97F028E60B7D768AE8" Directory="dir1D54DF6AE6603B80F8C94E0FE2E1C457" Guid="{BD96C334-8E10-4EAE-86F5-BEF32D29F300}">
+                <File Id="filD1890A2D30C1A102EF56A8F5F0394E51" KeyPath="yes" Source="$(var.ZynamicsJavaDir)\binnavi\manual\images\importer_window.png" />
+            </Component>
+            <Component Id="cmpF98ACA6094E11F75E0B1B2B5F7801F4E" Directory="dir1D54DF6AE6603B80F8C94E0FE2E1C457" Guid="{69399E97-9543-4B22-8330-E35F4AD631A1}">
+                <File Id="fil42EA7671B6EC419BCE17988F1CD8E0F8" KeyPath="yes" Source="$(var.ZynamicsJavaDir)\binnavi\manual\images\initial_graph.png" />
+            </Component>
+            <Component Id="cmp0BE4205C951434BB591E7DD7B6FAEFE8" Directory="dir1D54DF6AE6603B80F8C94E0FE2E1C457" Guid="{0243A0AE-DECD-4453-9540-C41C77B35D66}">
+                <File Id="filBE757D0DF975D5C35E8EB30EF65B3A32" KeyPath="yes" Source="$(var.ZynamicsJavaDir)\binnavi\manual\images\initial_graph_and_REIL.png" />
+            </Component>
+            <Component Id="cmp8F002F8F25DE560D0DF963CB98EA1A1F" Directory="dir1D54DF6AE6603B80F8C94E0FE2E1C457" Guid="{BC46DDC1-E3FD-469B-8A8F-308852B9746F}">
+                <File Id="filD63DA27265153BB59E68D0FA2361A5A5" KeyPath="yes" Source="$(var.ZynamicsJavaDir)\binnavi\manual\images\mainimg.png" />
+            </Component>
+            <Component Id="cmp66F9646281D1CF8A70A3BF75CEA9DFD7" Directory="dir1D54DF6AE6603B80F8C94E0FE2E1C457" Guid="{A26E4B05-4737-4FA0-ACC8-382D7D96A2D8}">
+                <File Id="fil49968180E749FC211A67F41E56A1399C" KeyPath="yes" Source="$(var.ZynamicsJavaDir)\binnavi\manual\images\modules_control.png" />
+            </Component>
+            <Component Id="cmp37A12E73A7FF0A7BD6E5C2FBD26F4EA3" Directory="dir1D54DF6AE6603B80F8C94E0FE2E1C457" Guid="{FAD7226E-6682-4816-86C5-0B0094093820}">
+                <File Id="fil57D3CA2206D4248BFEC588E94A41DFB0" KeyPath="yes" Source="$(var.ZynamicsJavaDir)\binnavi\manual\images\module_control.png" />
+            </Component>
+            <Component Id="cmp23DB1462659FDF510005326AE29E2BD9" Directory="dir1D54DF6AE6603B80F8C94E0FE2E1C457" Guid="{B88C0834-F2EC-4082-B6DB-948415063DE4}">
+                <File Id="fil9FFD59F917913F9E5F143041DADFF560" KeyPath="yes" Source="$(var.ZynamicsJavaDir)\binnavi\manual\images\ncallgraph_control.png" />
+            </Component>
+            <Component Id="cmp1F0701EDA46C76F77F9D0F38659FD09C" Directory="dir1D54DF6AE6603B80F8C94E0FE2E1C457" Guid="{41E39494-ABBF-474D-A1BB-EE14BBB3F2DB}">
+                <File Id="filC3D88074999C97EEF3109D52003AFE79" KeyPath="yes" Source="$(var.ZynamicsJavaDir)\binnavi\manual\images\nflowgraph_control.png" />
+            </Component>
+            <Component Id="cmpD646008872B39109BDB7457F35170343" Directory="dir1D54DF6AE6603B80F8C94E0FE2E1C457" Guid="{87BDFEF2-C7FF-4478-9B3C-9417E2AC524C}">
+                <File Id="fil762D1BD53884D461C0574CE2B6BE22DC" KeyPath="yes" Source="$(var.ZynamicsJavaDir)\binnavi\manual\images\projects_control.png" />
+            </Component>
+            <Component Id="cmpC8CB4DFD63CE3AE31EEC6FB57B7D127A" Directory="dir1D54DF6AE6603B80F8C94E0FE2E1C457" Guid="{E9145212-D196-49AB-AD2F-ABB3D664358C}">
+                <File Id="fil539648F0BFCF1E25E72D08457DBD4EBD" KeyPath="yes" Source="$(var.ZynamicsJavaDir)\binnavi\manual\images\project_control.png" />
+            </Component>
+            <Component Id="cmpA2EEE3ABABD492DE5F156969F9BC1058" Directory="dir1D54DF6AE6603B80F8C94E0FE2E1C457" Guid="{913AE3B0-2111-4583-9AE1-E9C08F35715E}">
+                <File Id="fil4B683F1961AA5492EC819CEC67AFCF63" KeyPath="yes" Source="$(var.ZynamicsJavaDir)\binnavi\manual\images\project_tree.png" />
+            </Component>
+            <Component Id="cmpEDC87775B2583E57525EEA7A5F914007" Directory="dir1D54DF6AE6603B80F8C94E0FE2E1C457" Guid="{941C068C-CF21-42DC-8E5D-2554A49208D3}">
+                <File Id="fil55630B3632FD74071E825BA102D25F3F" KeyPath="yes" Source="$(var.ZynamicsJavaDir)\binnavi\manual\images\REIL.png" />
+            </Component>
+            <Component Id="cmpE3B054342D5C077083D63BF68C2A72CE" Directory="dir1D54DF6AE6603B80F8C94E0FE2E1C457" Guid="{7F5B4A32-200F-49B6-AD64-8C8522BA3597}">
+                <File Id="filAEB63CDDC0F056C91C23E72A3E742527" KeyPath="yes" Source="$(var.ZynamicsJavaDir)\binnavi\manual\images\REIL_to_instruction_graph.png" />
+            </Component>
+            <Component Id="cmpE346312277A239E3910BD0E31853C9FD" Directory="dir1D54DF6AE6603B80F8C94E0FE2E1C457" Guid="{B7D0D2F5-D4CB-4413-8DD6-26804313AC8F}">
+                <File Id="fil97ADF8DE6DB6EF2AEEC8B0616BEAAE09" KeyPath="yes" Source="$(var.ZynamicsJavaDir)\binnavi\manual\images\script_console.png" />
+            </Component>
+            <Component Id="cmp39FD9C21461EFEE2DF2728549D38B243" Directory="dir1D54DF6AE6603B80F8C94E0FE2E1C457" Guid="{06C932B9-7412-4869-8801-FBCA201AC4CC}">
+                <File Id="filD09BAADB73FC6AEDA7966B3AEF56AD5D" KeyPath="yes" Source="$(var.ZynamicsJavaDir)\binnavi\manual\images\script_editor.png" />
+            </Component>
+            <Component Id="cmp07A2CCA0B3BC11281B39A43E66D7F3F3" Directory="dir1D54DF6AE6603B80F8C94E0FE2E1C457" Guid="{6DD774E8-4CA1-48B8-85B1-8F44CD4DF84C}">
+                <File Id="filDAB46009DCD77E4EA49BB633C8FC42AE" KeyPath="yes" Source="$(var.ZynamicsJavaDir)\binnavi\manual\images\state_propagation_description.png" />
+            </Component>
+            <Component Id="cmpF5D1904A5036E14A1049430AB9DD69CA" Directory="dir1D54DF6AE6603B80F8C94E0FE2E1C457" Guid="{2EF05E91-E61B-458D-B069-FF1E3B74BC05}">
+                <File Id="fil41C898BAC130372176844115FD9261C2" KeyPath="yes" Source="$(var.ZynamicsJavaDir)\binnavi\manual\images\taggedviews_control.png" />
+            </Component>
+            <Component Id="cmpDC17EF1395088B733139C524FD703100" Directory="dir1D54DF6AE6603B80F8C94E0FE2E1C457" Guid="{ECF900CE-0CF7-4F61-ADAE-B11EE21C4C5F}">
+                <File Id="fil1C42A356F56FD74BE849E372D96DF4EC" KeyPath="yes" Source="$(var.ZynamicsJavaDir)\binnavi\manual\images\tags_control.png" />
+            </Component>
+            <Component Id="cmp28E970E1B453D916C61EE685A8272A0C" Directory="dir1D54DF6AE6603B80F8C94E0FE2E1C457" Guid="{D9D89FD2-5C85-4CF6-BC59-9E6386B160FF}">
+                <File Id="fil38AA7FA807D9F2A0DCC61667661D4A62" KeyPath="yes" Source="$(var.ZynamicsJavaDir)\binnavi\manual\images\tag_control.png" />
+            </Component>
+            <Component Id="cmpE3C1129D606D591D7C834A8B7BE8035B" Directory="dir1D54DF6AE6603B80F8C94E0FE2E1C457" Guid="{0A979194-353F-4407-A5E8-D40E4E1A4402}">
+                <File Id="fil8A789E218C4F30A2BCA1C58B6E076E2F" KeyPath="yes" Source="$(var.ZynamicsJavaDir)\binnavi\manual\images\traces_control.png" />
+            </Component>
+            <Component Id="cmp1B2D54A44287ADE564011474134B57C9" Directory="dir1D54DF6AE6603B80F8C94E0FE2E1C457" Guid="{917D061E-2797-4672-BF46-5A056911BE9C}">
+                <File Id="fil863798407ABEBE4ED1C27872D2B770B5" KeyPath="yes" Source="$(var.ZynamicsJavaDir)\binnavi\manual\images\tut_01.png" />
+            </Component>
+            <Component Id="cmp736C53626A6DDA35D0069524C036C499" Directory="dir1D54DF6AE6603B80F8C94E0FE2E1C457" Guid="{115AC765-6AAE-4879-981A-162A1073DF9A}">
+                <File Id="filD32180C16444BCA530D4066BE82D54E3" KeyPath="yes" Source="$(var.ZynamicsJavaDir)\binnavi\manual\images\tut_01tn.png" />
+            </Component>
+            <Component Id="cmp58549B228D2DDCA1D571F545A217DCC0" Directory="dir1D54DF6AE6603B80F8C94E0FE2E1C457" Guid="{B54C4945-EA93-4342-AD5D-97E90B5B1DC9}">
+                <File Id="fil747E96EB44E10EB0B09A9EA2E34096C4" KeyPath="yes" Source="$(var.ZynamicsJavaDir)\binnavi\manual\images\tut_02.png" />
+            </Component>
+            <Component Id="cmpB91D2606DC2053D820FCBB6381BD75EE" Directory="dir1D54DF6AE6603B80F8C94E0FE2E1C457" Guid="{80A4C0D1-CAEE-45E1-8244-9CAE093434A8}">
+                <File Id="fil071FB8AAE37B8507C40900C724B5A4B0" KeyPath="yes" Source="$(var.ZynamicsJavaDir)\binnavi\manual\images\tut_02tn.png" />
+            </Component>
+            <Component Id="cmp7FCF9F66AF76681E079927FDD4B081E8" Directory="dir1D54DF6AE6603B80F8C94E0FE2E1C457" Guid="{6D973774-0CF5-4B30-B23C-782E8F0E7958}">
+                <File Id="fil5229E439BEF709C832351044760D3972" KeyPath="yes" Source="$(var.ZynamicsJavaDir)\binnavi\manual\images\tut_03.png" />
+            </Component>
+            <Component Id="cmpE30B25B76EC5E429894A5DFB68753B5F" Directory="dir1D54DF6AE6603B80F8C94E0FE2E1C457" Guid="{626BB1B2-2087-407E-BDB0-E763A9D90AE7}">
+                <File Id="filC0CB277B9E9C0E7387999E91576B6895" KeyPath="yes" Source="$(var.ZynamicsJavaDir)\binnavi\manual\images\tut_03tn.png" />
+            </Component>
+            <Component Id="cmp35DB0D3BEB686A3EB0C1499E3609AA23" Directory="dir1D54DF6AE6603B80F8C94E0FE2E1C457" Guid="{946D8AB7-6B34-4DC8-9ED7-90BC680F50FA}">
+                <File Id="filA01C2D46518EBFDD33FF2A9C09F1C1ED" KeyPath="yes" Source="$(var.ZynamicsJavaDir)\binnavi\manual\images\tut_04.png" />
+            </Component>
+            <Component Id="cmpA6F1E7892684A8AD4A04AB99085517FD" Directory="dir1D54DF6AE6603B80F8C94E0FE2E1C457" Guid="{F375A443-F6C8-437F-B921-F5EB7A9BF60D}">
+                <File Id="fil5B2D12C7303BED3A14F0BBEA54835734" KeyPath="yes" Source="$(var.ZynamicsJavaDir)\binnavi\manual\images\tut_04tn.png" />
+            </Component>
+            <Component Id="cmp3773CBE413B06917AED6C37659161B4D" Directory="dir1D54DF6AE6603B80F8C94E0FE2E1C457" Guid="{09F50DFF-268F-4292-A733-FD385C39B779}">
+                <File Id="fil641764874132C1CB711173B53271915E" KeyPath="yes" Source="$(var.ZynamicsJavaDir)\binnavi\manual\images\tut_05.png" />
+            </Component>
+            <Component Id="cmp7FDC0C9EF5E20C250EB0B1943F5EBEC3" Directory="dir1D54DF6AE6603B80F8C94E0FE2E1C457" Guid="{F7893549-0CF9-4757-B348-C67776CD45DC}">
+                <File Id="fil1F7104E7273B3112568C6DFE772B7A9F" KeyPath="yes" Source="$(var.ZynamicsJavaDir)\binnavi\manual\images\tut_05tn.png" />
+            </Component>
+            <Component Id="cmp1E87C38A6ADBFE1EB578905993DAD309" Directory="dir1D54DF6AE6603B80F8C94E0FE2E1C457" Guid="{74139859-9F5D-4533-866A-D1F4E9F5400A}">
+                <File Id="filFA1FC24064FADA49370522310995E434" KeyPath="yes" Source="$(var.ZynamicsJavaDir)\binnavi\manual\images\tut_06.png" />
+            </Component>
+            <Component Id="cmp6476CD1040E4D9263722FC2877EFDD7A" Directory="dir1D54DF6AE6603B80F8C94E0FE2E1C457" Guid="{EF6855CB-2F65-4098-924B-8CAC775B42DA}">
+                <File Id="filCFDB60EF9AC837860E8EC9387E22F464" KeyPath="yes" Source="$(var.ZynamicsJavaDir)\binnavi\manual\images\tut_06tn.png" />
+            </Component>
+            <Component Id="cmp27C14ABEC3A5DD882BC4B146F60ABA4B" Directory="dir1D54DF6AE6603B80F8C94E0FE2E1C457" Guid="{4FF07C5D-DE13-4809-9DA3-8311634FDD1E}">
+                <File Id="fil86D38B8392C75FB5C4D118C941B626DC" KeyPath="yes" Source="$(var.ZynamicsJavaDir)\binnavi\manual\images\tut_07.png" />
+            </Component>
+            <Component Id="cmp56DE384DD60B041EF7D5E7D1F721BD01" Directory="dir1D54DF6AE6603B80F8C94E0FE2E1C457" Guid="{F667F79B-75B3-4056-B5DC-69DE09547344}">
+                <File Id="fil3757C0286E9CEE92A3AF715623D7E8DE" KeyPath="yes" Source="$(var.ZynamicsJavaDir)\binnavi\manual\images\tut_07tn.png" />
+            </Component>
+            <Component Id="cmp244C1A0D29EB36B6088052887F331514" Directory="dir1D54DF6AE6603B80F8C94E0FE2E1C457" Guid="{D011E308-953D-4A2E-813D-E03D014FD2FC}">
+                <File Id="filA4E396390F338753FD7E1501B20920F8" KeyPath="yes" Source="$(var.ZynamicsJavaDir)\binnavi\manual\images\tut_08.png" />
+            </Component>
+            <Component Id="cmp4853526B1A380ED1DFAD7E2448F324EE" Directory="dir1D54DF6AE6603B80F8C94E0FE2E1C457" Guid="{00B18B91-075E-497B-9CC3-2EA3D56EB50B}">
+                <File Id="filE775D4150682DE06E9CD6445F6969277" KeyPath="yes" Source="$(var.ZynamicsJavaDir)\binnavi\manual\images\tut_08tn.png" />
+            </Component>
+            <Component Id="cmp51E1F68021C8AFAB9936BFE259B11012" Directory="dir1D54DF6AE6603B80F8C94E0FE2E1C457" Guid="{21A6CD1B-9A4E-4472-A08B-9AE860474965}">
+                <File Id="fil7E4DAF19CA2E1941D27F93BDAFCD263D" KeyPath="yes" Source="$(var.ZynamicsJavaDir)\binnavi\manual\images\tut_09.png" />
+            </Component>
+            <Component Id="cmp9F99E14FBF5DA42902D751A700FC6D3E" Directory="dir1D54DF6AE6603B80F8C94E0FE2E1C457" Guid="{DA378115-7734-4275-835E-66060BCE54E6}">
+                <File Id="filB1369C400E5895FB6280A2F848CF2097" KeyPath="yes" Source="$(var.ZynamicsJavaDir)\binnavi\manual\images\tut_09tn.png" />
+            </Component>
+            <Component Id="cmp2947104ADAC5AB477D4FB77810A16D0D" Directory="dir1D54DF6AE6603B80F8C94E0FE2E1C457" Guid="{B4F365B8-7A29-4119-A694-02BDFE03948C}">
+                <File Id="fil0A1B54AD8213F5343D95D64F9DD7AD0E" KeyPath="yes" Source="$(var.ZynamicsJavaDir)\binnavi\manual\images\tut_10.png" />
+            </Component>
+            <Component Id="cmp3945201675598E21B9E51F1CB96AAA0B" Directory="dir1D54DF6AE6603B80F8C94E0FE2E1C457" Guid="{40A279AB-EF8D-442A-9B9D-4D21DD90F948}">
+                <File Id="fil49339B786B68065813052B26EA53B428" KeyPath="yes" Source="$(var.ZynamicsJavaDir)\binnavi\manual\images\tut_10tn.png" />
+            </Component>
+            <Component Id="cmp1B7852F6EDBF6C4AFD3E398656BC1A21" Directory="dir1D54DF6AE6603B80F8C94E0FE2E1C457" Guid="{CF85BE68-9D81-4803-9B54-EA3E80B25010}">
+                <File Id="fil8BAA29624D29D5B7D4208A8EE1DCF13A" KeyPath="yes" Source="$(var.ZynamicsJavaDir)\binnavi\manual\images\tut_11.png" />
+            </Component>
+            <Component Id="cmp00BADEE35050CDA2B08DFAC4F8B1D6CC" Directory="dir1D54DF6AE6603B80F8C94E0FE2E1C457" Guid="{BCB65D7E-9827-4BF4-8ADD-997B4260FC68}">
+                <File Id="fil9ED674549BA257BA2D4185D3433B8BB0" KeyPath="yes" Source="$(var.ZynamicsJavaDir)\binnavi\manual\images\tut_11tn.png" />
+            </Component>
+            <Component Id="cmp71BDEA996B378D766B8B6EC568A9B353" Directory="dir1D54DF6AE6603B80F8C94E0FE2E1C457" Guid="{9C137442-4779-4D3C-90FE-8EC016BE91B5}">
+                <File Id="filB9CCEF84709E1EBEADE6B72898533698" KeyPath="yes" Source="$(var.ZynamicsJavaDir)\binnavi\manual\images\tut_12.png" />
+            </Component>
+            <Component Id="cmp56795AA4044C57E1D78EF6B2A732451A" Directory="dir1D54DF6AE6603B80F8C94E0FE2E1C457" Guid="{9118550B-B659-451B-BAC4-D15469BBD133}">
+                <File Id="fil4EAEFB8096E71D3E2DF73BA0836C611E" KeyPath="yes" Source="$(var.ZynamicsJavaDir)\binnavi\manual\images\tut_12tn.png" />
+            </Component>
+            <Component Id="cmpE2017760E257EA37A452D772066826A2" Directory="dir1D54DF6AE6603B80F8C94E0FE2E1C457" Guid="{1C086DDC-EB1D-4D9D-A591-04D56871772F}">
+                <File Id="filBF7FB699AB72CEA2E6B61563941A40D6" KeyPath="yes" Source="$(var.ZynamicsJavaDir)\binnavi\manual\images\tut_13.png" />
+            </Component>
+            <Component Id="cmp33E6612C3BF35CAAC84D0934B2B97294" Directory="dir1D54DF6AE6603B80F8C94E0FE2E1C457" Guid="{23C1A8EB-B003-4240-B5E2-3D55D9ADED77}">
+                <File Id="filDD7B01F085CE5BD0218F5347C497D8EA" KeyPath="yes" Source="$(var.ZynamicsJavaDir)\binnavi\manual\images\tut_13tn.png" />
+            </Component>
+            <Component Id="cmp02835B354B1CEFA1462B95CFF4488A29" Directory="dir1D54DF6AE6603B80F8C94E0FE2E1C457" Guid="{40968029-E277-4D16-BD6C-2F04AE0844F3}">
+                <File Id="fil47B748A7A38A3C4D67D88097495A7F39" KeyPath="yes" Source="$(var.ZynamicsJavaDir)\binnavi\manual\images\tut_14.png" />
+            </Component>
+            <Component Id="cmp6ED82FF5E1919BFDA96B04E4E83596D5" Directory="dir1D54DF6AE6603B80F8C94E0FE2E1C457" Guid="{60B7C1B1-37C4-4F1A-9C6C-049A7E0F026C}">
+                <File Id="fil442FC23E954D7C97DEBA68F3D1B00AE1" KeyPath="yes" Source="$(var.ZynamicsJavaDir)\binnavi\manual\images\tut_14tn.png" />
+            </Component>
+            <Component Id="cmp8D9D6E82C1253759834C09D6200582A5" Directory="dir1D54DF6AE6603B80F8C94E0FE2E1C457" Guid="{907F049B-5288-4A59-9BF6-B538E5A12EF8}">
+                <File Id="fil8240E26873B2489295C4690A857D804E" KeyPath="yes" Source="$(var.ZynamicsJavaDir)\binnavi\manual\images\tut_15.png" />
+            </Component>
+            <Component Id="cmp4A91A23A25B1C12BF580320A17EC08BA" Directory="dir1D54DF6AE6603B80F8C94E0FE2E1C457" Guid="{66117F35-B3C4-4D7F-820D-57F48F5D3C9F}">
+                <File Id="filF37220ADD15093D7270A8F0E658C435A" KeyPath="yes" Source="$(var.ZynamicsJavaDir)\binnavi\manual\images\tut_15tn.png" />
+            </Component>
+            <Component Id="cmpCB40CA7C9B799F8916D410284D5C8F55" Directory="dir1D54DF6AE6603B80F8C94E0FE2E1C457" Guid="{11BA5A87-F3D9-4213-A757-C76DF18C3D07}">
+                <File Id="fil3B472B94EB69A63B2763360ED22E8865" KeyPath="yes" Source="$(var.ZynamicsJavaDir)\binnavi\manual\images\tut_16.png" />
+            </Component>
+            <Component Id="cmp7EAB2DD1D1FD4ED85DBA791091102975" Directory="dir1D54DF6AE6603B80F8C94E0FE2E1C457" Guid="{63044907-839F-4B02-A782-1C637300876F}">
+                <File Id="fil01BA44D7131AFD87B38FD7500B725BA3" KeyPath="yes" Source="$(var.ZynamicsJavaDir)\binnavi\manual\images\tut_16tn.png" />
+            </Component>
+            <Component Id="cmp9526ED1A54E4C927A522E99AE7DECC8E" Directory="dir1D54DF6AE6603B80F8C94E0FE2E1C457" Guid="{527A1B25-AD85-4705-B987-0A6A04049CD4}">
+                <File Id="fil814F7713499AF19C7AFA6A8D26374564" KeyPath="yes" Source="$(var.ZynamicsJavaDir)\binnavi\manual\images\tut_17.png" />
+            </Component>
+            <Component Id="cmp2B54A28C48E5461F83BE5425D616B9F8" Directory="dir1D54DF6AE6603B80F8C94E0FE2E1C457" Guid="{32778249-7F49-4B83-8741-EB86559DDCFC}">
+                <File Id="filCA3E174DE447CF9941B43988FCE48F7A" KeyPath="yes" Source="$(var.ZynamicsJavaDir)\binnavi\manual\images\tut_17tn.png" />
+            </Component>
+            <Component Id="cmpA89CB99245F5141EB5418EFF73D03DA8" Directory="dir1D54DF6AE6603B80F8C94E0FE2E1C457" Guid="{A788EC4D-F2F6-4833-9EB6-E91DE01E35BF}">
+                <File Id="filA6BE9D92A265DE26DE2BD11D8DB44CAC" KeyPath="yes" Source="$(var.ZynamicsJavaDir)\binnavi\manual\images\uflowgraph_control.png" />
+            </Component>
+            <Component Id="cmp81D02FAD6AF21F7D2367779E9428D501" Directory="dir177D11BB0FD00C10D3015566A5052283" Guid="{40CBD7DC-EA73-4CEB-8560-1F501BECCA12}">
+                <File Id="fil27B0FA1AAEFDE355D84F826F01E6A6FC" KeyPath="yes" Source="$(var.ZynamicsJavaDir)\binnavi\manual\styles\layout.css" />
+            </Component>
+            <Component Id="cmp99464B7744443BE5A8A58EE8CC7BC082" Directory="dir177D11BB0FD00C10D3015566A5052283" Guid="{2AC08CC6-A231-4E3E-AE11-DBBC07A0A09D}">
+                <File Id="fil76B4BC38FD516327F6D0B3706A235B09" KeyPath="yes" Source="$(var.ZynamicsJavaDir)\binnavi\manual\styles\style1.css" />
+            </Component>
+            <Component Id="cmpBD246B23CFE033496F3FDBCC6F0E774B" Directory="dir177D11BB0FD00C10D3015566A5052283" Guid="{50027D9E-F1D6-4B0A-B9C8-5248B49F131D}">
+                <File Id="fil1B9D1CD8FC6AFEB2A670B0E5504E39B5" KeyPath="yes" Source="$(var.ZynamicsJavaDir)\binnavi\manual\styles\style2.css" />
+            </Component>
+            <Component Id="cmp6D4F3B7AB5BF4DD4BBFD11C57A53087E" Directory="dir177D11BB0FD00C10D3015566A5052283" Guid="{ACF10149-B281-4FB1-9D26-50A523C42A27}">
+                <File Id="fil6BA61463894DB96F8A829AC94916322A" KeyPath="yes" Source="$(var.ZynamicsJavaDir)\binnavi\manual\styles\style3.css" />
+            </Component>
+        </ComponentGroup>
+    </Fragment>
+    <Fragment>
+        <DirectoryRef Id="dir4CB7DA9FC25D01350DF39CE229505BB2" />
+    </Fragment>
+    <Fragment>
+        <DirectoryRef Id="dirC69B58DDB7FA6031F4E66DF1FF0F10D7" />
+    </Fragment>
+    <Fragment>
+        <DirectoryRef Id="dir23C0350488EC36A806C234CEA225AB60" />
+    </Fragment>
+    <Fragment>
+        <DirectoryRef Id="dir177D11BB0FD00C10D3015566A5052283" />
+    </Fragment>
+    <Fragment>
+        <DirectoryRef Id="dir1D54DF6AE6603B80F8C94E0FE2E1C457" />
+    </Fragment>
+    <Fragment>
+        <DirectoryRef Id="dir23C0350488EC36A806C234CEA225AB60">
+            <Directory Id="dir177D11BB0FD00C10D3015566A5052283" Name="styles" />
+        </DirectoryRef>
+    </Fragment>
+    <Fragment>
+        <DirectoryRef Id="dir23C0350488EC36A806C234CEA225AB60">
+            <Directory Id="dir1D54DF6AE6603B80F8C94E0FE2E1C457" Name="images" />
+        </DirectoryRef>
+    </Fragment>
+    <Fragment>
+        <DirectoryRef Id="dir23C0350488EC36A806C234CEA225AB60">
+            <Directory Id="dir963607EF54F90DDD196F940C0DA61314" Name="API" />
+        </DirectoryRef>
+    </Fragment>
+    <Fragment>
+        <DirectoryRef Id="dir23C0350488EC36A806C234CEA225AB60">
+            <Directory Id="dirC69B58DDB7FA6031F4E66DF1FF0F10D7" Name="html" />
+        </DirectoryRef>
+    </Fragment>
+</Wix>

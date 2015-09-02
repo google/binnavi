@@ -1,0 +1,116 @@
+# Copyright 2015 Google Inc. All Rights Reserved.
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+import os
+# Import calling environment
+Import('env')
+
+# Generate BinNavi manual via Doxygen.
+doxygen_env = env.Clone()
+zynamics_java_path = doxygen_env.Dir('$ZYNAMICS_JAVA_ROOT').abspath
+doxygen_env['ENV']['DESTINATION_ROOT'] = doxygen_env['DESTINATION_ROOT']
+doxygen_env['ENV']['ZYNAMICS_JAVA_ROOT'] = zynamics_java_path
+doxygen_path = '$GOOGLECLIENT/third_party/doxygen/'
+if env.Bit('linux'):
+  doxygen_path += 'linux/doxygen'
+else:
+  doxygen_path += 'win/doxygen.exe'
+
+doxyfile_path = doxygen_env.File('#/apps/binnavi/msi/Doxyfile').abspath
+manual = doxygen_env.Command(
+    target='$DESTINATION_ROOT/html/index.html',
+    source='msi/Doxyfile',
+    action=doxygen_path + ' ' + doxyfile_path)
+doxygen_env.Alias('binnavi_doxygen', manual)
+doxygen_env.Clean('binnavi_doxygen', '$DESTINATION_ROOT/html')
+
+installer_env = env.Clone()
+
+wix_bin = installer_env.Dir('$GOOGLECLIENT/third_party/wix/v3_5_2519/files')
+os.environ['PATH'] += os.pathsep + wix_bin.abspath
+installer_env.Tool('wix')
+
+project_path = installer_env.Dir('#/apps/binnavi/msi').abspath
+debugclient_path = installer_env.Dir('#/apps/debugclient').abspath
+zynamics_path = installer_env.Dir('$ZYNAMICS').abspath
+
+# Use WiX's HEAT to create a wxs for the doxygen output.
+heat_flags = ('-gg -directoryid dir4CB7DA9FC25D01350DF39CE229505BB2 '
+              '-cg ManualDoxygen -var var.DoxygenDir '
+              '-dr dir963607EF54F90DDD196F940C0DA61314')
+
+installer_env.Append(
+    HEAT_TOOL=wix_bin.abspath + '\\heat.exe',
+    HEAT_SOURCE='$DESTINATION_ROOT/html',
+    HEAT_FLAGS=heat_flags,
+    HEAT_OUTPUT='$DESTINATION_ROOT/Doxygen.wxs'
+)
+heat_command = '$HEAT_TOOL dir $HEAT_SOURCE $HEAT_FLAGS -o $HEAT_OUTPUT'
+doxygen_wxs = installer_env.Command(target='$DESTINATION_ROOT/Doxygen.wxs',
+                                    source='', action=heat_command)
+installer_env.Depends(doxygen_wxs, manual)
+
+# Pass flags to the wix compiler.
+installer_env.Append(WIXCANDLEFLAGS=[
+    '-ext', 'WixUtilExtension.dll',
+    '-ext', 'WixUIExtension.dll',
+    '-dProjectDir=' + project_path + '\\',
+    '-dDebugClientsDir=' + debugclient_path + '\\',
+    '-dZynamicsJavaDir=' + zynamics_java_path + '\\',
+    '-dZynamicsDir=' + zynamics_path + '\\',
+    '-dOutputDir=' + installer_env['DESTINATION_ROOT'],
+    '-dDoxygenDir=' + installer_env['DESTINATION_ROOT'] + '\\html\\',
+])
+
+installer_env.Replace(WIXLIGHTFLAGS=[
+    '-cultures:en-US',
+    '-ext', 'WixUtilExtension.dll',
+    '-ext', 'WixUIExtension.dll',
+    '-loc', 'apps/binnavi/msi/Setup-en-us.wxl',
+    '-sval',
+])
+
+# Build installer
+wxs_sources = [
+    'msi/Setup.wxs',
+    'msi/DebugClients.wxs',
+    '$DESTINATION_ROOT/Doxygen.wxs',
+    'msi/Exporters.wxs',
+    'msi/Manual.wxs',
+    'msi/Tutorials.wxs',
+    'msi/BinNaviPlugins.wxs',
+    'msi/binNaviPluginScripts.wxs',
+]
+installer_msi = installer_env.WiX('BinNavi.msi', wxs_sources)
+
+copied_msi = installer_env.Install(
+    '$DESTINATION_ROOT',
+    source=installer_msi
+)
+
+version_wxi_path = installer_env.File('#/apps/binnavi/msi/VersionInfo.wxi')
+installer_env.Depends(['msi/Setup.wxs'], [version_wxi_path])
+
+installer_env.Alias('binnavi_msi', copied_msi)
+
+bundled_dependencies = [
+    '$DESTINATION_ROOT/debugclient.exe',
+    '$DESTINATION_ROOT/gdb_client.exe',
+    '$DESTINATION_ROOT/windbg_client.exe',
+    '$DESTINATION_ROOT/zynamics_binexport_8.p64',
+    '$DESTINATION_ROOT/zynamics_binexport_8.plw',
+    '$DESTINATION_ROOT/binnavi.jar',
+]
+
+installer_env.Depends(installer_msi, bundled_dependencies)
