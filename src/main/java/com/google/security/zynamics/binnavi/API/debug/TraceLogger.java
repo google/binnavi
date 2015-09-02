@@ -85,9 +85,8 @@ public final class TraceLogger {
     Preconditions.checkNotNull(debugger, "Error: Debugger argument can not be null");
     Preconditions.checkNotNull(project, "Error: Project argument can not be null");
 
-    this.debugger = debugger;
+    this(debugger, null);
     this.project = project;
-    this.module = null;
   }
 
   /**
@@ -98,7 +97,7 @@ public final class TraceLogger {
    * @return The converted internal addresses.
    */
   private static Set<BreakpointAddress> convertAddresses(final List<TracePoint> addresses) {
-    final Set<BreakpointAddress> adds = new HashSet<BreakpointAddress>();
+    final Set<BreakpointAddress> adds = new HashSet<>();
 
     for (final TracePoint address : addresses) {
       if (address.getModule() == null) {
