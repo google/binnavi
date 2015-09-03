@@ -669,13 +669,11 @@ public final class View implements ApiObject<INaviView> {
 
     try {
       naviView.load();
-    } catch (final com.google.security.zynamics.binnavi.Database.Exceptions.CouldntLoadDataException e) {
+    } catch (com.google.security.zynamics.binnavi.Database.Exceptions.CouldntLoadDataException | LoadCancelledException e) {
       throw new CouldntLoadDataException(e);
     } catch (final com.google.security.zynamics.binnavi.Database.Exceptions.CPartialLoadException e) {
       throw new PartialLoadException(e);
-    } catch (final LoadCancelledException e) {
-      throw new CouldntLoadDataException(e);
-    }
+    } 
   }
 
   // ! Removes a view listener.

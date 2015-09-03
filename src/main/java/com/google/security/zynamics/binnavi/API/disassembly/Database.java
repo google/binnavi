@@ -201,19 +201,16 @@ public final class Database implements ApiObject<IDatabase> {
       m_database.connect();
     } catch (final com.google.security.zynamics.binnavi.Database.Exceptions.CouldntLoadDriverException e) {
       throw new CouldntLoadDriverException(e);
-    } catch (final com.google.security.zynamics.binnavi.Database.Exceptions.CouldntConnectException e) {
+    } catch (com.google.security.zynamics.binnavi.Database.Exceptions.CouldntConnectException | LoadCancelledException e) {
       throw new CouldntConnectException(e);
     } catch (final com.google.security.zynamics.binnavi.Database.Exceptions.InvalidDatabaseException e) {
       throw new InvalidDatabaseException(e);
     } catch (final com.google.security.zynamics.binnavi.Database.Exceptions.CouldntInitializeDatabaseException e) {
       throw new CouldntInitializeDatabaseException(e);
-    } catch (final com.google.security.zynamics.binnavi.Database.Exceptions.InvalidExporterDatabaseFormatException e) {
+    } catch (com.google.security.zynamics.binnavi.Database.Exceptions.InvalidExporterDatabaseFormatException 
+        | com.google.security.zynamics.binnavi.Database.Exceptions.InvalidDatabaseVersionException e) {
       throw new InvalidDatabaseFormatException(e);
-    } catch (final com.google.security.zynamics.binnavi.Database.Exceptions.InvalidDatabaseVersionException e) {
-      throw new InvalidDatabaseFormatException(e);
-    } catch (final LoadCancelledException e) {
-      throw new CouldntConnectException(e);
-    }
+    } 
   }
 
   // ! Creates a new project.
