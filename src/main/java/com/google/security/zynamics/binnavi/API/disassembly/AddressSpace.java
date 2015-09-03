@@ -336,11 +336,9 @@ public final class AddressSpace implements ApiObject<INaviAddressSpace> {
 
     try {
       m_addressSpace.load();
-    } catch (final com.google.security.zynamics.binnavi.Database.Exceptions.CouldntLoadDataException e) {
+    } catch (com.google.security.zynamics.binnavi.Database.Exceptions.CouldntLoadDataException | LoadCancelledException e) {
       throw new CouldntLoadDataException(e);
-    } catch (final LoadCancelledException e) {
-      throw new CouldntLoadDataException(e);
-    }
+    } 
   }
 
   // ! Removes an address space listener.

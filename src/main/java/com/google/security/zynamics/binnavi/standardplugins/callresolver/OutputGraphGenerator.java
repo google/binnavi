@@ -147,9 +147,7 @@ public final class OutputGraphGenerator {
           try {
             sourceNode.appendComment(start.toString(16).toUpperCase() + " -> "
                 + function.getAddress().toHexString().toUpperCase());
-          } catch (final CouldntSaveDataException e) {
-            e.printStackTrace();
-          } catch (final CouldntLoadDataException e) {
+          } catch (CouldntSaveDataException | CouldntLoadDataException e) {
             e.printStackTrace();
           }
 
@@ -161,22 +159,18 @@ public final class OutputGraphGenerator {
 
           try {
             sourceNode.appendComment(start.toString(16).toUpperCase() + " -> " + targetString);
-          } catch (final CouldntSaveDataException e) {
+          } catch (CouldntSaveDataException | CouldntLoadDataException e) {
             e.printStackTrace();
-          } catch (final CouldntLoadDataException e) {
-            e.printStackTrace();
-          }
+          } 
         } else {
           final String targetString =
               "???!" + targetFunction.getAddress().toHexString().toUpperCase();
 
           try {
             sourceNode.appendComment(start.toString(16).toUpperCase() + " -> " + targetString);
-          } catch (final CouldntSaveDataException e) {
+          } catch (CouldntSaveDataException | CouldntLoadDataException e) {
             e.printStackTrace();
-          } catch (final CouldntLoadDataException e) {
-            e.printStackTrace();
-          }
+          } 
         }
       }
     }

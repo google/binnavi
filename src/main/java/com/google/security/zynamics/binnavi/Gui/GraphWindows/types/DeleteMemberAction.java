@@ -64,10 +64,8 @@ public class DeleteMemberAction extends AbstractAction {
       for (final TypeMember member : members) {
         typeManager.deleteMember(member);
       }
-    } catch (final CouldntDeleteException exception) {
+    } catch (CouldntDeleteException | CouldntSaveDataException exception) {
       CUtilityFunctions.logException(exception);
-    } catch (final CouldntSaveDataException exception) {
-      CUtilityFunctions.logException(exception);
-    }
+    } 
   }
 }

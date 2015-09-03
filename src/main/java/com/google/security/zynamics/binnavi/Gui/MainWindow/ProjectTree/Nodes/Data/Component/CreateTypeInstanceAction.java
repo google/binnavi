@@ -72,9 +72,7 @@ public class CreateTypeInstanceAction extends AbstractAction {
       try {
         instanceContainer.createInstance(dlg.getInstanceName(), null, dlg.getInstanceType(),
             section, dlg.getSectionOffset());
-      } catch (final CouldntSaveDataException exception) {
-        CUtilityFunctions.logException(exception);
-      } catch (final CouldntLoadDataException exception) {
+      } catch (CouldntSaveDataException | CouldntLoadDataException exception) {
         CUtilityFunctions.logException(exception);
       }
     }
