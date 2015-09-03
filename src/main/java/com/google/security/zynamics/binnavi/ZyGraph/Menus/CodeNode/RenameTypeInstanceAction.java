@@ -54,11 +54,9 @@ public class RenameTypeInstanceAction extends AbstractAction {
     if (dialog.wasOkClicked()) {
       try {
         instanceContainer.setInstanceName(typeInstance, dialog.getVariableName());
-      } catch (final CouldntSaveDataException exception) {
+      } catch (CouldntSaveDataException | CouldntLoadDataException exception) {
         CUtilityFunctions.logException(exception);
-      } catch (final CouldntLoadDataException exception) {
-        CUtilityFunctions.logException(exception);
-      }
+      } 
     }
   }
 }
