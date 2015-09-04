@@ -265,17 +265,9 @@ public final class CProjectContent {
 
     try {
       view.load();
-    } catch (final CouldntLoadDataException e) {
+    } catch (CouldntLoadDataException | CPartialLoadException | LoadCancelledException e) {
       // This can not happen; new views with ID -1 do not access the database
       // when they are loaded.
-
-      CUtilityFunctions.logException(e);
-    } catch (final CPartialLoadException e) {
-      // This can not really happen
-
-      CUtilityFunctions.logException(e);
-    } catch (final LoadCancelledException e) {
-      // This can not really happen
 
       CUtilityFunctions.logException(e);
     }
