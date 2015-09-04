@@ -198,9 +198,6 @@ public final class ConfigManager {
       properties.getProperties().loadFromXML(new FileInputStream(filename));
     } catch (final FileNotFoundException e) {
       notFound = true;
-    } catch (final InvalidPropertiesFormatException e) {
-      // Rethrow as FileReadException.
-      throw new FileReadException(e);
     } catch (final IOException e) {
       // Rethrow as FileReadException.
       throw new FileReadException(e);

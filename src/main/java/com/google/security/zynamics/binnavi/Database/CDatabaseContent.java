@@ -179,9 +179,7 @@ public final class CDatabaseContent implements IDatabaseContent {
         if (addressSpace.isLoaded() && addressSpace.getContent().getModules().contains(module)) {
           try {
             addressSpace.getContent().removeModule(module);
-          } catch (final CouldntDeleteException exception) {
-            CUtilityFunctions.logException(exception);
-          } catch (final CouldntSaveDataException exception) {
+          } catch (CouldntDeleteException | CouldntSaveDataException exception) {
             CUtilityFunctions.logException(exception);
           }
         }
@@ -205,9 +203,7 @@ public final class CDatabaseContent implements IDatabaseContent {
       if (!hasModule(modules, rawModule)) {
         try {
           newModules.add(createModule(rawModule));
-        } catch (final CouldntLoadDataException e) {
-          CUtilityFunctions.logException(e);
-        } catch (final CouldntSaveDataException e) {
+        } catch (CouldntLoadDataException | CouldntSaveDataException e) {
           CUtilityFunctions.logException(e);
         }
       }

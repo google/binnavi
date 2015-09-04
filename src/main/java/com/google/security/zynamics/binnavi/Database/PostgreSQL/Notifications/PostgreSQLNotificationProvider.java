@@ -398,11 +398,7 @@ public class PostgreSQLNotificationProvider {
       if (!m_connection.isConnectionValid()) {
         try {
           m_connection = new CConnection(m_configuration);
-        } catch (final CouldntLoadDriverException exception) {
-          NaviLogger.severe(
-              "Error: Could not reestablish the connection with the database backend %s",
-              exception);
-        } catch (final SQLException exception) {
+        } catch (CouldntLoadDriverException | SQLException exception) {
           NaviLogger.severe(
               "Error: Could not reestablish the connection with the database backend %s",
               exception);
