@@ -57,10 +57,7 @@ public abstract class CAbstractDropHandler implements IDropHandler {
   private Object getData(final Transferable transferable) {
     try {
       return transferable.getTransferData(m_flavor);
-    } catch (final UnsupportedFlavorException exception) {
-      CUtilityFunctions.logException(exception);
-      return null;
-    } catch (final IOException exception) {
+    } catch (UnsupportedFlavorException | IOException exception) {
       CUtilityFunctions.logException(exception);
       return null;
     }
