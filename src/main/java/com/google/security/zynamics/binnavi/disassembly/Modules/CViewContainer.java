@@ -244,11 +244,7 @@ public final class CViewContainer {
 
     try {
       view.load();
-    } catch (final CouldntLoadDataException e) {
-      CUtilityFunctions.logException(e);
-    } catch (final CPartialLoadException e) {
-      CUtilityFunctions.logException(e);
-    } catch (final LoadCancelledException e) {
+    } catch (CouldntLoadDataException | CPartialLoadException | LoadCancelledException e) {
       CUtilityFunctions.logException(e);
     }
 

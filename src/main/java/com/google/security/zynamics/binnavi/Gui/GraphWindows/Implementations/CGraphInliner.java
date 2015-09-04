@@ -102,10 +102,7 @@ public final class CGraphInliner {
       if (!module.isLoaded()) {
         try {
           module.load();
-        } catch (final CouldntLoadDataException e) {
-          CUtilityFunctions.logException(e);
-          return null;
-        } catch (final LoadCancelledException e) {
+        } catch (final CouldntLoadDataException | LoadCancelledException e) {
           CUtilityFunctions.logException(e);
           return null;
         }

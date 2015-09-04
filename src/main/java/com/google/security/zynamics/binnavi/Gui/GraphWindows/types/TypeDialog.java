@@ -219,9 +219,7 @@ public class TypeDialog extends JDialog {
         if (currentPanel.createOrUpdateType()) {
           dispose();
         }
-      } catch (final CouldntSaveDataException exception) {
-        CUtilityFunctions.logException(exception);
-      } catch (final CouldntDeleteException exception) {
+      } catch (CouldntSaveDataException | CouldntDeleteException exception) {
         CUtilityFunctions.logException(exception);
       }
     }
