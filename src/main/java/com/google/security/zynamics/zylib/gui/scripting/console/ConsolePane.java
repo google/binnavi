@@ -112,9 +112,7 @@ public class ConsolePane extends AbstractScriptPanel {
           engine.eval(FileUtils.readTextfile(initFile));
 
           getOutputPane().setText(console.getOutput());
-        } catch (final ScriptException e) {
-          getOutputPane().setText(e.getLocalizedMessage());
-        } catch (final IOException e) {
+        } catch (ScriptException | IOException e) {
           getOutputPane().setText(e.getLocalizedMessage());
         }
       }
