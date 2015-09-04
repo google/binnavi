@@ -275,11 +275,7 @@ public final class CProject implements INaviProject {
             addressSpaces,
             views,
             new FilledList<TraceList>(traces));
-      } catch (final CouldntLoadDataException e) {
-        m_isLoading = false;
-
-        throw e;
-      } catch (final LoadCancelledException e) {
+      } catch (CouldntLoadDataException | LoadCancelledException e) {
         m_isLoading = false;
 
         throw e;
