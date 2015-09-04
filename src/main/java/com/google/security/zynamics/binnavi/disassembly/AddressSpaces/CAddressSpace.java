@@ -215,11 +215,7 @@ public final class CAddressSpace implements INaviAddressSpace {
         final List<Pair<IAddress, INaviModule>> modules = m_provider.loadModules(this);
 
         m_content = new CAddressSpaceContent(this, m_provider, modules);
-      } catch (final CouldntLoadDataException e) {
-        m_isLoading = false;
-
-        throw e;
-      } catch (final LoadCancelledException e) {
+      } catch (CouldntLoadDataException | LoadCancelledException e) {
         m_isLoading = false;
 
         throw e;
