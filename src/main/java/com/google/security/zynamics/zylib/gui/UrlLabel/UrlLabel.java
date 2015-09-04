@@ -49,13 +49,10 @@ public class UrlLabel extends JLabel {
 
       try {
         Desktop.getDesktop().browse(self.url.toURI());
-      } catch (final URISyntaxException e) {
+      } catch (URISyntaxException | IOException e) {
         // TODO: This should be properly logged
         System.out.println(e);
-      } catch (final IOException e) {
-        // TODO: This should be properly logged
-        System.out.println(e);
-      }
+      } 
     }
 
     @Override
