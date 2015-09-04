@@ -216,10 +216,6 @@ public final class PathfinderPlugin implements IModuleMenuPlugin {
         view =
             PathFinder.createPath(module, sourceBlock, targetBlock, firstFunction, secondFunction);
         threwException = false;
-      } catch (final CouldntLoadDataException e) {
-        Logger.logException(e);
-        MessageBox.showException(pluginInterface.getMainWindow().getFrame(), e,
-            "Could not create path");
       } catch (final Exception e) {
         Logger.logException(e);
         MessageBox.showException(pluginInterface.getMainWindow().getFrame(), e,
