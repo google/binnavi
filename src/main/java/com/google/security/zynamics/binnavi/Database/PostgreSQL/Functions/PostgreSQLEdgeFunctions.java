@@ -218,11 +218,8 @@ public final class PostgreSQLEdgeFunctions {
         deleteCommentFunction.close();
       }
 
-    } catch (final SQLException exception) {
+    } catch (SQLException | MaybeNullException exception) {
       throw new CouldntDeleteException(exception);
-    } catch (final MaybeNullException exception) {
-      throw new CouldntDeleteException(exception);
-
     }
   }
 
