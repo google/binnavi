@@ -36,6 +36,7 @@ dependencies {
     compile group: 'net.sf.proguard', name: 'proguard-base', version: '5.2.1'
     compile group: 'com.google.security.zynamics.binnavi', name: 'yfileswrap-obfuscated', version: '6.0'
 
+    testCompile group: 'com.google.security.zynamics.binnavi', name: 'yfileswrap-obfuscated', version: '6.0'
     testCompile group: 'junit', name: 'junit', version: '4+'
 }
 
@@ -65,7 +66,19 @@ sourceSets {
 
 eclipse {
     project {
-        name = 'binnavi'
+        name = 'BinNavi'
+    }
+}
+
+idea {
+    module {
+        name = 'BinNavi'
+
+        outputDir = file('./target/classes')
+        testOutputDir = file('./target/tests/classes')
+
+        downloadSources = true
+        downloadJavadoc = true
     }
 }
 
@@ -90,7 +103,7 @@ javadoc {
 
 
 task buildVersionInfo(
-    type:Exec,
+    type: Exec,
     description: 'Creates the build-data.properties file.'
 ){
     commandLine 'git describe --always HEAD'.split()

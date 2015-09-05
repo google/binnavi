@@ -1,23 +1,23 @@
 task buildYFilesWrapperJar(
 	description: 'Builds the yfiles-wrapper-jar.'
 ) << {
-    print "!!! UNDER CONSTRUCTION !!!"
+    print "Warning: Build target not yet implemented."
 }
 
-task buildReliJar(
+task buildReilJar(
 	description: 'Builds the reli-jar.'
 ) << {
-    print "!!! UNDER CONSTRUCTION !!!"
+    print "Warning: Build target not yet implemented."
 }
 
 task buildZyLibJar(
 	description: 'Builds the zylib-jar.'
 ) << {
-    print "!!! UNDER CONSTRUCTION !!!"
+    print "Warning: Build target not yet implemented."
 }
 
 task buildBinNaviJar(
 	description: 'Builds the binnavi-jar.'
 ) << {
-    print "!!! UNDER CONSTRUCTION !!!"
+    print "Warning: Build target not yet implemented."
 }
