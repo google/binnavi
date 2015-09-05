@@ -83,13 +83,10 @@ public final class CModuleFunctions {
           NaviErrorDialog.show(parent, innerMessage, innerDescription, e);
 
           return;
-        } catch (final CPartialLoadException e) {
+        } catch (CPartialLoadException | LoadCancelledException e) {
           CUtilityFunctions.logException(e);
           return;
-        } catch (final LoadCancelledException e) {
-          CUtilityFunctions.logException(e);
-          return;
-        }
+        } 
       }
 
       final CView newView =

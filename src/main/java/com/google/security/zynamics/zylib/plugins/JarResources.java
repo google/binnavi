@@ -139,11 +139,9 @@ public final class JarResources {
       zis.close();
     } catch (final NullPointerException e) {
       System.out.println("done.");
-    } catch (final FileNotFoundException e) {
+    } catch (IOException e) {
       e.printStackTrace();
-    } catch (final IOException e) {
-      e.printStackTrace();
-    }
+    } 
   }
 
   /**

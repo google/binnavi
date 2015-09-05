@@ -150,15 +150,7 @@ public final class RegisterValuesParser {
       }
 
       return new RegisterValues(threads);
-    } catch (final IOException exception) {
-      CUtilityFunctions.logException(exception);
-
-      throw new MessageParserException(exception.getLocalizedMessage());
-    } catch (final ParserConfigurationException exception) {
-      CUtilityFunctions.logException(exception);
-
-      throw new MessageParserException(exception.getLocalizedMessage());
-    } catch (final SAXException exception) {
+    } catch (IOException | ParserConfigurationException | SAXException exception) {
       CUtilityFunctions.logException(exception);
 
       throw new MessageParserException(exception.getLocalizedMessage());

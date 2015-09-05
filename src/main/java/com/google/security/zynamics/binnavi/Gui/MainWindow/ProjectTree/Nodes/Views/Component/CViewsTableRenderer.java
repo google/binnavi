@@ -112,8 +112,7 @@ public class CViewsTableRenderer implements TableCellRenderer {
       try {
         starImage =
             new ImageIcon(CMain.class.getResource("data/star.png").toURI().toURL()).getImage();
-      } catch (final MalformedURLException e) {
-      } catch (final URISyntaxException e) {
+      } catch (MalformedURLException | URISyntaxException e) {
       }
     }
 

@@ -191,13 +191,7 @@ class MemberNodeTransferHandler extends TransferHandler {
       final int delta = determineDestinationOffset(location, parentNode)
           - draggedMembers.get(0).getBitOffset().get();
       typeManager.moveMembers(parentNode.getBaseType(), draggedMembers, delta);
-    } catch (final IOException exception) {
-      CUtilityFunctions.logException(exception);
-      return false;
-    } catch (final UnsupportedFlavorException exception) {
-      CUtilityFunctions.logException(exception);
-      return false;
-    } catch (final CouldntSaveDataException exception) {
+    } catch (IOException | UnsupportedFlavorException | CouldntSaveDataException exception) {
       CUtilityFunctions.logException(exception);
       return false;
     }

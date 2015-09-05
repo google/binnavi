@@ -103,10 +103,8 @@ public final class CAddressLabel extends JLabel {
       try {
         starImage =
             new ImageIcon(CMain.class.getResource("data/star.png").toURI().toURL()).getImage();
-      } catch (final MalformedURLException e) {
+      } catch (MalformedURLException | URISyntaxException e) {
         // Ignore, this should never happen as we have specified the URL correctly.
-      } catch (final URISyntaxException e) {
-        // Ignore, this should never happen as we have specified the URI correctly.
       }
     }
 

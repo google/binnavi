@@ -196,9 +196,7 @@ public final class CGraphGrouper {
 
     try {
       groupNode.appendComment(stringBuilder.toString());
-    } catch (final CouldntSaveDataException exception) {
-      CUtilityFunctions.logException(exception);
-    } catch (final CouldntLoadDataException exception) {
+    } catch (CouldntSaveDataException | CouldntLoadDataException exception) {
       CUtilityFunctions.logException(exception);
     }
   }

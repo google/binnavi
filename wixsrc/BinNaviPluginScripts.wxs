@@ -1,0 +1,81 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--
+Copyright 2015 Google Inc. All Rights Reserved.
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+-->
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+    <Fragment>
+        <DirectoryRef Id="INSTALLDIR">
+            <Directory Id="dir96BD87E1B03A51271552680D369D4F4A" Name="scripts" />
+        </DirectoryRef>
+    </Fragment>
+    <Fragment>
+        <ComponentGroup Id="BinNaviPluginScripts">
+            <Component Id="cmpE65788B2284D7C776499B5B4B8C986FB" Directory="dir96BD87E1B03A51271552680D369D4F4A" Guid="{21BD3F0A-EA70-4E2E-8E53-B7E92AB014DA}">
+                <File Id="filA79DB379D1A48F8E7DEDFC5D8429F430" KeyPath="yes" Source="$(var.ZynamicsJavaDir)\binnavi\scripts\dominator_tree.py" />
+            </Component>
+            <Component Id="cmpF3651B7462867DAB218D8B8A0703836D" Directory="dir96BD87E1B03A51271552680D369D4F4A" Guid="{627C15F7-841B-46FB-AE30-6B8B7B9B7851}">
+                <File Id="fil13D8ED7E068D3723133851B3E3C81535" KeyPath="yes" Source="$(var.ZynamicsJavaDir)\binnavi\scripts\ida_backporter.py" />
+            </Component>
+            <Component Id="cmp727333C063F022939CAE481D2184B052" Directory="dir96BD87E1B03A51271552680D369D4F4A" Guid="{3E924623-854D-4BFE-9A61-194D38CA4F2A}">
+                <File Id="filEEAD59DD5C0717C862A0B875076B695A" KeyPath="yes" Source="$(var.ZynamicsJavaDir)\binnavi\scripts\loop_highlight.py" />
+            </Component>
+            <Component Id="cmp4F8B6A7FC3F518F84032FDE6BDC89FE3" Directory="dir96BD87E1B03A51271552680D369D4F4A" Guid="{7FBDC9B7-796F-411B-B1F9-40BB971BCAD7}">
+                <File Id="filE6E1ACEDE60C56E5913798AC9CE3BFE6" KeyPath="yes" Source="$(var.ZynamicsJavaDir)\binnavi\scripts\sample_plugin.py" />
+            </Component>
+            <Component Id="cmp39F8DB9DF95E79D42CF0469837F88086" Directory="dir96BD87E1B03A51271552680D369D4F4A" Guid="{8915B293-5401-44D4-8F4D-4265FF9B83BE}">
+                <File Id="fil1C738125258532FF67A9BE2955E7FCF1" KeyPath="yes" Source="$(var.ZynamicsJavaDir)\binnavi\scripts\standalone_skeleton.px" />
+            </Component>
+            <Component Id="cmp6841E47EA1AAC02DF374D56064D4B2F9" Directory="dir96BD87E1B03A51271552680D369D4F4A" Guid="{C494B7DE-64D0-45B1-A3D9-9A8B9832CA84}">
+                <File Id="filD5A1F8C40360B58C8A863C6204CC8DF3" KeyPath="yes" Source="$(var.ZynamicsJavaDir)\binnavi\scripts\stats_counter.py" />
+            </Component>
+            <Component Id="cmp60456435294D250CCD0244C54F370706" Directory="dir6818DFAC05FC37E4B567095767FAABAA" Guid="{005BA085-16E5-4B7C-A078-3FB0A7B2ABE4}">
+                <File Id="filDDE10ADCB2C9F470DC9389786BCA8684" KeyPath="yes" Source="$(var.ZynamicsJavaDir)\binnavi\scripts\lib\init.py" />
+            </Component>
+            <Component Id="cmpDB6D329783BE80B9B63C205E6DBCF259" Directory="dir6818DFAC05FC37E4B567095767FAABAA" Guid="{CE20FD77-4E4F-489B-881A-61D8A1296311}">
+                <File Id="filBC81FBAD126FD81BBBAB70120BC76E0D" KeyPath="yes" Source="$(var.ZynamicsJavaDir)\binnavi\scripts\lib\init.rb" />
+            </Component>
+            <Component Id="cmpDA478063381CFC00AEE402104C83BD56" Directory="dir6818DFAC05FC37E4B567095767FAABAA" Guid="{FA43A29A-86EF-4B94-942F-B12E47158EBC}">
+                <File Id="fil73FF1739ED7F03658D14A0FEA9F09564" KeyPath="yes" Source="$(var.ZynamicsJavaDir)\binnavi\scripts\lib\readme.txt" />
+            </Component>
+            <Component Id="cmpC3D07B38998C5F72E71E772C00A34BC0" Directory="dir49ED2543F46CAC34E0550639CC0F067B" Guid="{60CD7196-FE58-4CE1-8AAC-656F2EC90872}">
+                <File Id="fil52303A19F75A061F6CB24E193E2AFDE1" KeyPath="yes" Source="$(var.ZynamicsJavaDir)\binnavi\scripts\mono\sample\sample.py" />
+            </Component>
+        </ComponentGroup>
+    </Fragment>
+    <Fragment>
+        <DirectoryRef Id="dir6818DFAC05FC37E4B567095767FAABAA" />
+    </Fragment>
+    <Fragment>
+        <DirectoryRef Id="dir49ED2543F46CAC34E0550639CC0F067B" />
+    </Fragment>
+    <Fragment>
+        <DirectoryRef Id="dir96BD87E1B03A51271552680D369D4F4A" />
+    </Fragment>
+    <Fragment>
+        <DirectoryRef Id="dir96BD87E1B03A51271552680D369D4F4A">
+            <Directory Id="dir3E8227D782A8DA2C5EAB1EB699857B42" Name="mono" />
+        </DirectoryRef>
+    </Fragment>
+    <Fragment>
+        <DirectoryRef Id="dir3E8227D782A8DA2C5EAB1EB699857B42">
+            <Directory Id="dir49ED2543F46CAC34E0550639CC0F067B" Name="sample" />
+        </DirectoryRef>
+    </Fragment>
+    <Fragment>
+        <DirectoryRef Id="dir96BD87E1B03A51271552680D369D4F4A">
+            <Directory Id="dir6818DFAC05FC37E4B567095767FAABAA" Name="lib" />
+        </DirectoryRef>
+    </Fragment>
+</Wix>

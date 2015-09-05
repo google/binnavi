@@ -56,11 +56,9 @@ public class EditTypeInstanceAction extends AbstractAction {
     if (dlg.wasOkClicked()) {
       try {
         instanceContainer.setInstanceName(instance, dlg.getInstanceName());
-      } catch (final CouldntSaveDataException exception) {
+      } catch (CouldntSaveDataException | CouldntLoadDataException exception) {
         CUtilityFunctions.logException(exception);
-      } catch (final CouldntLoadDataException exception) {
-        CUtilityFunctions.logException(exception);
-      }
+      } 
     }
   }
 }

@@ -1,0 +1,620 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--
+Copyright 2015 Google Inc. All Rights Reserved.
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+-->
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+    <Fragment>
+        <DirectoryRef Id="INSTALLDIR">
+            <Directory Id="dir6D46DBABFAF2F3D9626A552A0180472E" Name="debug" />
+        </DirectoryRef>
+    </Fragment>
+    <Fragment>
+        <ComponentGroup Id="DebugClients">
+            <Component Id="cmpA5D6857F730530C937082DE1BABA48E1" Directory="dir6D46DBABFAF2F3D9626A552A0180472E" Guid="{15E89CB0-3BC6-4077-9743-5CAABE7120FB}">
+                <File Id="filF66CDE1882E0ABF752C43F651F97E765" KeyPath="yes" Source="$(var.DebugClientsDir)\readme.txt" />
+            </Component>
+            <Component Id="cmp085EE49F038DA95B1C9E7ADF3E4A1AA3" Directory="dir307291A11A78A897D9C48608C0FDCC77" Guid="{03A9BCCD-E6B9-43BD-9BED-C0897B7AF4B1}">
+                <File Id="filD612620BA913AFBE27D51D93210BBBFE" KeyPath="yes" Source="$(var.DebugClientsDir)\BaseConnection.cpp" />
+            </Component>
+            <Component Id="cmpB908348F0D4A549D755D0EFF1C4EEE02" Directory="dir307291A11A78A897D9C48608C0FDCC77" Guid="{86FF9C3F-B99D-4638-93C2-DD1092E089AA}">
+                <File Id="filF033EC5CF908CC1C68D0CF1B76A9412C" KeyPath="yes" Source="$(var.DebugClientsDir)\BaseConnection.hpp" />
+            </Component>
+            <Component Id="cmp484DC878227C99B1637FB03BD5A9E4B0" Directory="dir307291A11A78A897D9C48608C0FDCC77" Guid="{6E23170E-606B-4EAE-915B-635F97801D21}">
+                <File Id="fil1C187655956913A8F021ED45D2CED681" KeyPath="yes" Source="$(var.DebugClientsDir)\BaseSystem.cpp" />
+            </Component>
+            <Component Id="cmp86938B59F98708F7D39C5117AE7F459C" Directory="dir307291A11A78A897D9C48608C0FDCC77" Guid="{E7F45F02-FD65-4D65-A0A4-3577DCEAA1ED}">
+                <File Id="filA612D400842FA8C216D60503B958C279" KeyPath="yes" Source="$(var.DebugClientsDir)\BaseSystem.hpp" />
+            </Component>
+            <Component Id="cmp9D93D9B252E36E55B3F19C55711D3238" Directory="dir307291A11A78A897D9C48608C0FDCC77" Guid="{DCD8926C-7576-49CD-9123-6950A85ED740}">
+                <File Id="filE4F815F8C7331E99D865A3C6CC311123" KeyPath="yes" Source="$(var.DebugClientsDir)\commands.cpp" />
+            </Component>
+            <Component Id="cmpB1D51DA75C17C8CFDF743D814435DA24" Directory="dir307291A11A78A897D9C48608C0FDCC77" Guid="{B8DA3DB6-21D3-456C-9914-7DC0519C89AF}">
+                <File Id="fil2FEBAEADDAFE4666F01F900A54DDA37E" KeyPath="yes" Source="$(var.DebugClientsDir)\commands.hpp" />
+            </Component>
+            <Component Id="cmp9A5F19D28C1A2BC4CC46412A208C93C4" Directory="dir307291A11A78A897D9C48608C0FDCC77" Guid="{7B3B7FAD-4B5D-4551-ADA5-742A1F5F3B96}">
+                <File Id="fil7D98CFC6F59CAF04EDFCCB265CA6E1AA" KeyPath="yes" Source="$(var.DebugClientsDir)\ConditionParser.cpp" />
+            </Component>
+            <Component Id="cmp9D55EE407E3BC363B6A3D4469D0F326A" Directory="dir307291A11A78A897D9C48608C0FDCC77" Guid="{9F52D4BE-2050-4DE2-81E7-636D64480769}">
+                <File Id="fil25AC5F7506E77E7AFEF3743CBD639C1F" KeyPath="yes" Source="$(var.DebugClientsDir)\ConditionParser.hpp" />
+            </Component>
+            <Component Id="cmp57A5138A123F28E191EA64C55567077B" Directory="dir307291A11A78A897D9C48608C0FDCC77" Guid="{BF9740A8-F2F8-4D11-8FE7-05D0CF928C06}">
+                <File Id="fil8D3E21CAD5D427A5DD917818D4610E0C" KeyPath="yes" Source="$(var.DebugClientsDir)\DebugClient.cpp" />
+            </Component>
+            <Component Id="cmp843BFEF105F8D91D762F065618F04C27" Directory="dir307291A11A78A897D9C48608C0FDCC77" Guid="{4C169FD9-DFD4-45B2-B347-C73092A94818}">
+                <File Id="fil49E71545CA169B08E40DF41BD15D8DFF" KeyPath="yes" Source="$(var.DebugClientsDir)\DebugClient.hpp" />
+            </Component>
+            <Component Id="cmp93D3C2130428F079AACBF56A67716EB1" Directory="dir307291A11A78A897D9C48608C0FDCC77" Guid="{C53F0995-ACBB-4DE9-8800-F759D402B4FF}">
+                <File Id="fil79E77E5680B044879A6DF91C48B44B01" KeyPath="yes" Source="$(var.DebugClientsDir)\DebugException.hpp" />
+            </Component>
+            <Component Id="cmp4119A398A99150246364EF3028974AE5" Directory="dir307291A11A78A897D9C48608C0FDCC77" Guid="{987A6AC8-38B6-4A9D-997C-8D602C42C739}">
+                <File Id="filD8F1B9A4337F64B1288409F9B467252B" KeyPath="yes" Source="$(var.DebugClientsDir)\DebugExceptionHandlingAction.hpp" />
+            </Component>
+            <Component Id="cmpACB08BC83C00C097BBBD2E0F9E055B62" Directory="dir307291A11A78A897D9C48608C0FDCC77" Guid="{1BA86CD9-EC3F-430E-8E23-4CA42C133BE2}">
+                <File Id="fil937FE69C1694E55BD9359438E152B5AC" KeyPath="yes" Source="$(var.DebugClientsDir)\DebuggerEventSettings.hpp" />
+            </Component>
+            <Component Id="cmp3A1BB3AC938DE3E09E16DA3CD2AE269A" Directory="dir307291A11A78A897D9C48608C0FDCC77" Guid="{07B0DFD6-DE2E-4F9B-A8F2-8F357068E886}">
+                <File Id="filF99B774333A34AA2ED31A07005352320" KeyPath="yes" Source="$(var.DebugClientsDir)\DebuggerOptions.hpp" />
+            </Component>
+            <Component Id="cmp233DC393CBBC6A023CEA82CAB9933D39" Directory="dir307291A11A78A897D9C48608C0FDCC77" Guid="{48D2C99E-F001-4811-8E8F-43E00922CC54}">
+                <File Id="filD414F61C4A944090401598B9C026299F" KeyPath="yes" Source="$(var.DebugClientsDir)\defs.cpp" />
+            </Component>
+            <Component Id="cmp98221FF81FB4F60D3C230A54610EE8AF" Directory="dir307291A11A78A897D9C48608C0FDCC77" Guid="{9AA8DEA1-D6D0-44B7-B52C-A904B9000D84}">
+                <File Id="filD16E08D406EEE315B15B12C57368990B" KeyPath="yes" Source="$(var.DebugClientsDir)\defs.hpp" />
+            </Component>
+            <Component Id="cmp19C6159230E706AEC628C73F58071E41" Directory="dir307291A11A78A897D9C48608C0FDCC77" Guid="{14529E2C-2FD8-425D-8F01-834FD199EBE7}">
+                <File Id="filDA299771DFAD7B684659F5FA24D2CE7D" KeyPath="yes" Source="$(var.DebugClientsDir)\errors.hpp" />
+            </Component>
+            <Component Id="cmpE43280E4825FBD2E0B97CAA0391A4780" Directory="dir307291A11A78A897D9C48608C0FDCC77" Guid="{CA3559CE-DB9C-4E53-9691-01FAA3C3D505}">
+                <File Id="fil5F8A20E4B15748492C2AF1B5A575C5ED" KeyPath="yes" Source="$(var.DebugClientsDir)\includer.hpp" />
+            </Component>
+            <Component Id="cmpF7044BA85F0C628E2378611C876A5AB5" Directory="dir307291A11A78A897D9C48608C0FDCC77" Guid="{043F04BA-75A0-4847-ABF6-D937ABFDCBA1}">
+                <File Id="fil412A68ED3EE7FB828A2B626215AC3A3E" KeyPath="yes" Source="$(var.DebugClientsDir)\InformationProvider.cpp" />
+            </Component>
+            <Component Id="cmp7F5B0CB0F28E4902CF71CE92FB14B9FB" Directory="dir307291A11A78A897D9C48608C0FDCC77" Guid="{6709C78F-C9F5-4F29-8DF2-BA51CB3A2F71}">
+                <File Id="fil44F0598205AC95CEEBB34B2EA2AC94E7" KeyPath="yes" Source="$(var.DebugClientsDir)\InformationProvider.hpp" />
+            </Component>
+<!--            <Component Id="cmp43AFE47B85616256ACA03B8AD5F60229" Directory="dir307291A11A78A897D9C48608C0FDCC77" Guid="{D0E80373-2662-4ABC-9AD6-279B61F61759}">
+                <File Id="fil62F2196A30C6E1125EC284FE50624CC0" KeyPath="yes" Source="$(var.DebugClientsDir)\loadarm.bat" />
+            </Component>
+            <Component Id="cmpB59A502765AC0ED92EB0B6E5405B0638" Directory="dir307291A11A78A897D9C48608C0FDCC77" Guid="{25E47276-8B93-4321-9558-FDE2F87506C5}">
+                <File Id="filA785C4F77730C9F6E4B604A7B4FE9F3F" KeyPath="yes" Source="$(var.DebugClientsDir)\loadw32.bat" />
+            </Component>-->
+            <Component Id="cmp84002B285A1152F52F9FAE9387C12EAC" Directory="dir307291A11A78A897D9C48608C0FDCC77" Guid="{6462C61B-BD3A-443C-B426-2775CBAEB812}">
+                <File Id="filA3278A4852162B6BEC91BEBEAC5C554C" KeyPath="yes" Source="$(var.DebugClientsDir)\logger.hpp" />
+            </Component>
+            <Component Id="cmpA2EF0E75422083BE90E4CD9930C8800F" Directory="dir307291A11A78A897D9C48608C0FDCC77" Guid="{826AE9ED-E957-430A-8C89-B5641DDAB2B8}">
+                <File Id="fil949BCC048C8416C2DBCD7B1726EEE8AE" KeyPath="yes" Source="$(var.DebugClientsDir)\main.cpp" />
+            </Component>
+            <Component Id="cmp9F5DF4C4642A7F74E97A5DC357FDB441" Directory="dir307291A11A78A897D9C48608C0FDCC77" Guid="{64E92504-484F-4857-9F1E-0952E5CE193C}">
+                <File Id="fil08F8339B641C5B99B7F2E07E58032172" KeyPath="yes" Source="$(var.DebugClientsDir)\SideEffectAction.h" />
+            </Component>
+            <Component Id="cmp1DDA91BD14A5D562C4C0DEAF760F051B" Directory="dir307291A11A78A897D9C48608C0FDCC77" Guid="{DF5AE19A-96E5-469D-9AC0-3E6B427937EF}">
+                <File Id="filB823E82DB4E60700DDE2D0C7BEB2A709" KeyPath="yes" Source="$(var.DebugClientsDir)\SideEffectmitigator.cpp" />
+            </Component>
+            <Component Id="cmp6EFD82AAA1A6DAFF10B0F09287341B4D" Directory="dir307291A11A78A897D9C48608C0FDCC77" Guid="{3BC4679C-62E1-47AA-8080-772AA8520C68}">
+                <File Id="fil6AE937A88FDA14E1C73FA698031A61CD" KeyPath="yes" Source="$(var.DebugClientsDir)\SideEffectmitigator.h" />
+            </Component>
+            <Component Id="cmpA865D20A1DDA937FFBCB668466620241" Directory="dir307291A11A78A897D9C48608C0FDCC77" Guid="{08AF6E14-CBCC-4E94-8D45-15EA04FAA98C}">
+                <File Id="fil029285C44914C3D83D98ACA8F9C74549" KeyPath="yes" Source="$(var.DebugClientsDir)\SocketConnection.cpp" />
+            </Component>
+            <Component Id="cmp445DC35F778855905C4E39E44A1B1790" Directory="dir307291A11A78A897D9C48608C0FDCC77" Guid="{76A89B75-9683-41EB-A320-9014100ABA3F}">
+                <File Id="fil41628171D8DC21DDB9A9FF5178C424F7" KeyPath="yes" Source="$(var.DebugClientsDir)\SocketConnection.hpp" />
+            </Component>
+            <Component Id="cmp31702BD21B054466BFCA1DD2CE077C24" Directory="dir716263B4D4309AFF96025CD6284FD6BF" Guid="{92A4694B-0033-4BB0-961B-63DA994878A0}">
+                <File Id="filEEF12DD5842BE8B14ED04519F58006B2" KeyPath="yes" Source="$(var.DebugClientsDir)\conns\GenericSocketFunctions.cpp" />
+            </Component>
+            <Component Id="cmpBDC5216ABDA795224C85B1F9AB1EEC1C" Directory="dir716263B4D4309AFF96025CD6284FD6BF" Guid="{FB2A0558-6F2F-4312-9DB1-264893CF6AEC}">
+                <File Id="filC4935E3BA664683C4FC7D9BA134E59AD" KeyPath="yes" Source="$(var.DebugClientsDir)\conns\GenericSocketFunctions.hpp" />
+            </Component>
+            <Component Id="cmp4D7F13A30AFA5B3E76E2068B331D322D" Directory="dir716263B4D4309AFF96025CD6284FD6BF" Guid="{C27F304E-ACDC-4E3C-9E05-233D52A1B8F2}">
+                <File Id="fil22B65E0C6B7C9FAA3126EDE69F8F7E96" KeyPath="yes" Source="$(var.DebugClientsDir)\conns\LinuxSocket.cpp" />
+            </Component>
+            <Component Id="cmp9185AEE548DC8FFFB97DF43C2DE61203" Directory="dir716263B4D4309AFF96025CD6284FD6BF" Guid="{19143875-5EF5-4F35-AE7F-F9E120030D35}">
+                <File Id="fil637559DB61C03F8F592E413E1903CC0E" KeyPath="yes" Source="$(var.DebugClientsDir)\conns\LinuxSocket.hpp" />
+            </Component>
+            <Component Id="cmp95E7243717D85F458638B1DD5D6B43A4" Directory="dir716263B4D4309AFF96025CD6284FD6BF" Guid="{FD985E7B-8E74-436B-8353-8652D31EF5D4}">
+                <File Id="filC3D6E5851BE28188D907673663D203FC" KeyPath="yes" Source="$(var.DebugClientsDir)\conns\OSXSocket.cpp" />
+            </Component>
+            <Component Id="cmpFAD3454D7AA0B976EA285FF597BFC744" Directory="dir716263B4D4309AFF96025CD6284FD6BF" Guid="{9E9C3419-4994-42AE-9527-DD7AD30C01D1}">
+                <File Id="fil3CEB175EC24D4A0A729521C4A28801A5" KeyPath="yes" Source="$(var.DebugClientsDir)\conns\OSXSocket.hpp" />
+            </Component>
+            <Component Id="cmpCC6E102604178B02A646229DAE60BBE8" Directory="dir716263B4D4309AFF96025CD6284FD6BF" Guid="{B7AF3F0C-84FC-4F4B-817E-8A9F846A7E41}">
+                <File Id="filB8EE504D87B395B92539B4DC5C414B27" KeyPath="yes" Source="$(var.DebugClientsDir)\conns\WinCESocket.cpp" />
+            </Component>
+            <Component Id="cmp9C879318D36D3627A00B067AB048E9E8" Directory="dir716263B4D4309AFF96025CD6284FD6BF" Guid="{D2CF14CA-CA4D-4D03-93AA-7975A869C9A4}">
+                <File Id="fil6A2063D5270341132F497A832F763FFB" KeyPath="yes" Source="$(var.DebugClientsDir)\conns\WinCESocket.hpp" />
+            </Component>
+            <Component Id="cmp0B2FC741C012B25B5F8ED5A406C2FB17" Directory="dir716263B4D4309AFF96025CD6284FD6BF" Guid="{982536CA-02C9-44F5-B731-36C25CD19007}">
+                <File Id="fil5E8E6E9A948116E23B483B1CB9516303" KeyPath="yes" Source="$(var.DebugClientsDir)\conns\WindowsSocket.cpp" />
+            </Component>
+            <Component Id="cmpF299491CD9C93A1263F5457C0A3F3EFD" Directory="dir716263B4D4309AFF96025CD6284FD6BF" Guid="{FCCACBCA-8BFC-4F96-A3F1-C4BE07DB6D5D}">
+                <File Id="filF805529EAE99BD3062688961F810F386" KeyPath="yes" Source="$(var.DebugClientsDir)\conns\WindowsSocket.hpp" />
+            </Component>
+            <Component Id="cmpEE2BEDD60CB3547206674A28A7416CC3" Directory="dir4AD5AC037300C55B25B27B290ED99F09" Guid="{FDE4E3AE-B176-4B07-816C-5794F50481CC}">
+                <File Id="fil375DA9E8BFC36573A26C6EE7FCFA1807" KeyPath="yes" Source="$(var.DebugClientsDir)\gdb\BreakpointHandler.cpp" />
+            </Component>
+            <Component Id="cmp0D4F4D181AA69175A4C589B423B2A2AE" Directory="dir4AD5AC037300C55B25B27B290ED99F09" Guid="{92276510-15C9-4329-B38D-36584708CB1E}">
+                <File Id="filD4E73442B6CB642C888851EAFCCFE0CF" KeyPath="yes" Source="$(var.DebugClientsDir)\gdb\BreakpointHandler.hpp" />
+            </Component>
+            <Component Id="cmpC93E8591FE6F91EB611545C3BAA6FC86" Directory="dir4AD5AC037300C55B25B27B290ED99F09" Guid="{46245B73-3857-4C23-84C1-2F288753A0F4}">
+                <File Id="fil85E011C0DF71BA850C6CE3C773356CB2" KeyPath="yes" Source="$(var.DebugClientsDir)\gdb\GdbFactory.cpp" />
+            </Component>
+            <Component Id="cmp46D537E319A8B3D42F15B50820D1E417" Directory="dir4AD5AC037300C55B25B27B290ED99F09" Guid="{BA82DE96-CA83-41CF-ACAF-13D1B3413444}">
+                <File Id="filC86C8355FE9A19C95C307049B457148D" KeyPath="yes" Source="$(var.DebugClientsDir)\gdb\GdbFactory.hpp" />
+            </Component>
+            <Component Id="cmp37F501F5F6565F26A512995E44C52A5D" Directory="dir4AD5AC037300C55B25B27B290ED99F09" Guid="{074DE971-FA15-47C1-85CE-F2583A333A4D}">
+                <File Id="fil3DC7C4641C2BB461BA263C617CC21EAC" KeyPath="yes" Source="$(var.DebugClientsDir)\gdb\GdbSystem.cpp" />
+            </Component>
+            <Component Id="cmpC0FB1E9D53A074F481465EDA7332DB74" Directory="dir4AD5AC037300C55B25B27B290ED99F09" Guid="{18D94C4B-952F-4CBF-8995-E61B03F77FD2}">
+                <File Id="fil03F7780931706105D02756920F604A10" KeyPath="yes" Source="$(var.DebugClientsDir)\gdb\GdbSystem.hpp" />
+            </Component>
+            <Component Id="cmpB240BB90E2898B657CFDB703A2235D3A" Directory="dir4AD5AC037300C55B25B27B290ED99F09" Guid="{36548F99-8D53-4CE6-B153-623736DD3C2D}">
+                <File Id="fil89D060BEB95D3DC4590C7A5F9FF840A4" KeyPath="yes" Source="$(var.DebugClientsDir)\gdb\IEventCallback.hpp" />
+            </Component>
+            <Component Id="cmpD35B0C4907AAC81D1B966140825F9E88" Directory="dir4AD5AC037300C55B25B27B290ED99F09" Guid="{D505C6B1-F373-4380-8157-4A8FCEEFB0AC}">
+                <File Id="fil6A8FC780E0DCD1EA88EE78CBC9329115" KeyPath="yes" Source="$(var.DebugClientsDir)\gdb\main.cpp" />
+            </Component>
+            <Component Id="cmp0D64BAA7E70EC0D24E39353FB18584F2" Directory="dir4AD5AC037300C55B25B27B290ED99F09" Guid="{A1E5F6D7-EDD5-47D5-A6A3-C89B4932D0C5}">
+                <File Id="fil5AFD22B04D497784FCB9FE80A1F52308" KeyPath="yes" Source="$(var.DebugClientsDir)\gdb\misc.cpp" />
+            </Component>
+            <Component Id="cmpAE7D25BE55EABFCF81243498EC7944C5" Directory="dir4AD5AC037300C55B25B27B290ED99F09" Guid="{4B3C9D70-3438-44CF-BC69-8D5BBC31237C}">
+                <File Id="filE2D64F526D5B3F66DBC319BC6ADECF52" KeyPath="yes" Source="$(var.DebugClientsDir)\gdb\misc.hpp" />
+            </Component>
+            <Component Id="cmp84A962DC04D77C9686E33B2555C59461" Directory="dir4AD5AC037300C55B25B27B290ED99F09" Guid="{23ECE80A-8313-4522-AEA3-24A410688C85}">
+                <File Id="filFF3D76C4F43623A686B62CACD9CF90F8" KeyPath="yes" Source="$(var.DebugClientsDir)\gdb\readme.txt" />
+            </Component>
+            <Component Id="cmp1E1BB74DDFDC43C4389302ED17C429BA" Directory="dir4AD5AC037300C55B25B27B290ED99F09" Guid="{791F2DA5-5A85-4DD1-8D86-6B5DA1F7B6B0}">
+                <File Id="fil929B9E695579AC63A7254A45F79B6E2E" KeyPath="yes" Source="$(var.DebugClientsDir)\gdb\SerialTransport.cpp" />
+            </Component>
+            <Component Id="cmp73FCCBC4AFE663108FCE11BA5A4977D1" Directory="dir4AD5AC037300C55B25B27B290ED99F09" Guid="{00EBA3DE-DF7B-44B8-AAFB-9BA1132F4CA0}">
+                <File Id="fil7EC54DFD2A188D245E261628C37D8A05" KeyPath="yes" Source="$(var.DebugClientsDir)\gdb\SerialTransport.hpp" />
+            </Component>
+            <Component Id="cmpD1E5F65D17D45720DEC1B8F30A86833A" Directory="dir4AD5AC037300C55B25B27B290ED99F09" Guid="{03FAA95B-2498-43BA-8180-7B4DF55D54A0}">
+                <File Id="fil307ED516B86D89D80F3D615E7612E619" KeyPath="yes" Source="$(var.DebugClientsDir)\gdb\SimpleCallback.hpp" />
+            </Component>
+            <Component Id="cmp4C10A419B7B77FF0596CCF8805058F51" Directory="dir4AD5AC037300C55B25B27B290ED99F09" Guid="{809075AA-FF83-4E32-A623-1017CDDCF6B1}">
+                <File Id="fil163B62EAEE66BD06110A6129A246D6C7" KeyPath="yes" Source="$(var.DebugClientsDir)\gdb\TcpTransport.cpp" />
+            </Component>
+            <Component Id="cmp7BA2005A9974C7178ABE4D4EEE472FAF" Directory="dir4AD5AC037300C55B25B27B290ED99F09" Guid="{B93BECD8-F416-4170-BA00-DD056062D4CC}">
+                <File Id="filA1F6A5590F8ECF1645C02C997F56012C" KeyPath="yes" Source="$(var.DebugClientsDir)\gdb\TcpTransport.hpp" />
+            </Component>
+            <Component Id="cmp8293CA93D41822D9F234B4DE737F22F0" Directory="dir4AD5AC037300C55B25B27B290ED99F09" Guid="{5C0A9CCE-DF2C-40A2-B7B9-CC3BF95388CB}">
+                <File Id="filF4FFFE1EECCE51B777FF25CE523E3021" KeyPath="yes" Source="$(var.DebugClientsDir)\gdb\Transport.hpp" />
+            </Component>
+            <Component Id="cmp34100CFED0D41C4E803E44577B883186" Directory="dir4AD5AC037300C55B25B27B290ED99F09" Guid="{E9C8E98B-C9CD-4122-B6F0-131C03343B8E}">
+                <File Id="filC37FE66FB21BD54158F29F489A306C2C" KeyPath="yes" Source="$(var.DebugClientsDir)\gdb\utils.cpp" />
+            </Component>
+            <Component Id="cmp88D3D10A186E036E26BA337633E814E4" Directory="dir4AD5AC037300C55B25B27B290ED99F09" Guid="{6F4BF1C0-18DA-4F1F-B19E-1A26F61397D2}">
+                <File Id="filE1E5F2E44C950BF1897C84DE1E2DC10A" KeyPath="yes" Source="$(var.DebugClientsDir)\gdb\utils.hpp" />
+            </Component>
+            <Component Id="cmp5AAF2801CFD3CB5394CE4FAEF2C04E89" Directory="dir54F8012A0EB2F2F9FC6AA794792AA237" Guid="{F422F92D-47A6-4581-8A32-1CF87C5DAEA2}">
+                <File Id="filFDE53DBD87A620C310C3FA5B504A152E" KeyPath="yes" Source="$(var.DebugClientsDir)\gdb\cpus\ARMLittleEndian.cpp" />
+            </Component>
+            <Component Id="cmp39180C2CBA29FCF01B277FC373F533E2" Directory="dir54F8012A0EB2F2F9FC6AA794792AA237" Guid="{4876CAA5-BB8A-4097-B69D-566BC725DE17}">
+                <File Id="filDC5A5060CACA1C0574D92966E93F5689" KeyPath="yes" Source="$(var.DebugClientsDir)\gdb\cpus\ARMLittleEndian.hpp" />
+            </Component>
+            <Component Id="cmpE357255B179DA9653DFCD02F56753F68" Directory="dir54F8012A0EB2F2F9FC6AA794792AA237" Guid="{67660483-FA40-4D40-939D-937E9ED4E217}">
+                <File Id="fil94424BEF645220AA2A6B18250DD0D86C" KeyPath="yes" Source="$(var.DebugClientsDir)\gdb\cpus\Cisco2600.cpp" />
+            </Component>
+            <Component Id="cmpBA5EF36728C7535C8B99EACDAD275679" Directory="dir54F8012A0EB2F2F9FC6AA794792AA237" Guid="{97C8ECC5-762A-42B3-B149-54D14F901E38}">
+                <File Id="fil2192226F3A5A28D31960985DC3B5DA9A" KeyPath="yes" Source="$(var.DebugClientsDir)\gdb\cpus\Cisco2600.hpp" />
+            </Component>
+            <Component Id="cmpCE19C8E9C6874B93BF082BCB44E09903" Directory="dir54F8012A0EB2F2F9FC6AA794792AA237" Guid="{2650C55A-9372-4BC4-975B-E987192D1F67}">
+                <File Id="fil75C21C05FC8E33050F4C8FD16D0F12FD" KeyPath="yes" Source="$(var.DebugClientsDir)\gdb\cpus\Cisco3600.cpp" />
+            </Component>
+            <Component Id="cmp8694025BABE98500A42F03FC2C90C0CD" Directory="dir54F8012A0EB2F2F9FC6AA794792AA237" Guid="{D6E8532E-FB9F-40A0-8A84-39AA53E34EA6}">
+                <File Id="filA2B4073A9AFD4DA2CA9A9BDC90FA8BEC" KeyPath="yes" Source="$(var.DebugClientsDir)\gdb\cpus\Cisco3600.hpp" />
+            </Component>
+            <Component Id="cmpB7812CD540927B7ABA63E23166ADCF0B" Directory="dir54F8012A0EB2F2F9FC6AA794792AA237" Guid="{0F4C1A46-92DD-4C3A-8556-28FFD3ADA55C}">
+                <File Id="filAF2387051469BBBBA278DF1CFACE33CB" KeyPath="yes" Source="$(var.DebugClientsDir)\gdb\cpus\CpuX86.cpp" />
+            </Component>
+            <Component Id="cmp3D84D19F42F723335D14CECEE3B96937" Directory="dir54F8012A0EB2F2F9FC6AA794792AA237" Guid="{82F52310-B1DA-47E4-9D6A-02F5D6E79139}">
+                <File Id="fil81094299FEFD7589DBCA76C20AAE4343" KeyPath="yes" Source="$(var.DebugClientsDir)\gdb\cpus\CpuX86.hpp" />
+            </Component>
+            <Component Id="cmpD9CA5DB5847D51BF0C26A941D7E0FAFD" Directory="dir54F8012A0EB2F2F9FC6AA794792AA237" Guid="{3647EF1E-5434-45EA-869E-B3BC33B6F09C}">
+                <File Id="filF5AF44C080BF53D8FC66FD22EEB8A372" KeyPath="yes" Source="$(var.DebugClientsDir)\gdb\cpus\GdbCpu.cpp" />
+            </Component>
+            <Component Id="cmp21F350F9E8E4E430869474F775BC7727" Directory="dir54F8012A0EB2F2F9FC6AA794792AA237" Guid="{79DECDC2-8F1D-4E2B-9F88-6968108C71E2}">
+                <File Id="fil4F7931FD2EE05424912D468125FE6170" KeyPath="yes" Source="$(var.DebugClientsDir)\gdb\cpus\GdbCpu.hpp" />
+            </Component>
+            <Component Id="cmp27CC903DE09DE894A96E62FB72671063" Directory="dir54F8012A0EB2F2F9FC6AA794792AA237" Guid="{7717F1CA-28EB-44E4-B148-F894CA475240}">
+                <File Id="fil846C72024D948E991D79E1DE213BA97A" KeyPath="yes" Source="$(var.DebugClientsDir)\gdb\cpus\NS5XT.cpp" />
+            </Component>
+            <Component Id="cmpE3DC4509C7550AD5A4535F7C0B215FDD" Directory="dir54F8012A0EB2F2F9FC6AA794792AA237" Guid="{B2A7AB66-8C8F-4672-A12F-AD1B6B55C008}">
+                <File Id="fil5A31424D1F965B179B1C901165AA5282" KeyPath="yes" Source="$(var.DebugClientsDir)\gdb\cpus\NS5XT.hpp" />
+            </Component>
+            <Component Id="cmp4CC671C860E33784D4414C04B5DE6C17" Directory="dir54F8012A0EB2F2F9FC6AA794792AA237" Guid="{6524B3C9-6AE1-4507-9A93-856C9D83062B}">
+                <File Id="fil8726919A6DAA9EA96DE72A6954A627CC" KeyPath="yes" Source="$(var.DebugClientsDir)\gdb\cpus\PowerPC.cpp" />
+            </Component>
+            <Component Id="cmpFD3EDE98D1418BC442EA210631CB9C96" Directory="dir54F8012A0EB2F2F9FC6AA794792AA237" Guid="{0FED4D8B-1007-444B-9ED3-9609AF5CF992}">
+                <File Id="filF05FC948FC3DDCE94E1DEF128A2119C8" KeyPath="yes" Source="$(var.DebugClientsDir)\gdb\cpus\PowerPC.hpp" />
+            </Component>
+            <Component Id="cmpB6DBB32F1BC7F246B370011213A43ED3" Directory="dir54F8012A0EB2F2F9FC6AA794792AA237" Guid="{C9F79B43-6C1C-4705-9368-F8A742B336F5}">
+                <File Id="filAA7E9E482F4FD144C5A9C1C37FDFB4CF" KeyPath="yes" Source="$(var.DebugClientsDir)\gdb\cpus\PPC603e.cpp" />
+            </Component>
+            <Component Id="cmp115F1F58F98CAC54B5523379BC9CC2F0" Directory="dir54F8012A0EB2F2F9FC6AA794792AA237" Guid="{0F410C06-EA56-4303-9FB3-3F885718EA11}">
+                <File Id="fil8191F9EB739B7AA9BC2B4B72940BBEC8" KeyPath="yes" Source="$(var.DebugClientsDir)\gdb\cpus\PPC603e.hpp" />
+            </Component>
+            <Component Id="cmpEA707DECE2750AC0882DD529E17914E3" Directory="dirD3A6AEE3728E2CAC46DB426F64FBBF8A" Guid="{3497F5C8-3997-46DA-850A-7E58E8E68FB9}">
+                <File Id="fil55C50A736286E2D051613CC3478802D2" KeyPath="yes" Source="$(var.DebugClientsDir)\linux\LinuxSystem.cpp" />
+            </Component>
+            <Component Id="cmp197FA60391C3AF6C10BCE908C3B4B893" Directory="dirD3A6AEE3728E2CAC46DB426F64FBBF8A" Guid="{56D2EF3F-6013-43E5-B9A2-C004764AFC2E}">
+                <File Id="filBD34626FC34BCC5A74E5F32A461B0D09" KeyPath="yes" Source="$(var.DebugClientsDir)\linux\LinuxSystem.hpp" />
+            </Component>
+            <Component Id="cmp7E14F267C847B0BBA4D0C7AAD6EB9449" Directory="dirD3A6AEE3728E2CAC46DB426F64FBBF8A" Guid="{6DE3CBA6-87CF-4FCC-9501-C58183734D83}">
+                <File Id="fil5BA558374C3CEB3D09728047159DB9F8" KeyPath="yes" Source="$(var.DebugClientsDir)\linux\misc.cpp" />
+            </Component>
+            <Component Id="cmp7382FB1B6B0281998080C7421FF5BF76" Directory="dirD3A6AEE3728E2CAC46DB426F64FBBF8A" Guid="{310FA81C-806F-4479-A66F-2B6E64F01829}">
+                <File Id="filBBAD20F96BCB27DFAC5504703653D6D8" KeyPath="yes" Source="$(var.DebugClientsDir)\linux\misc.hpp" />
+            </Component>
+            <Component Id="cmp028B747C83BD3E12D04DF0D7102AB834" Directory="dir637DA637FAA58F02AEE079B7D89AFCC1" Guid="{BBFE5DA2-3C88-458D-8A03-A180655B9103}">
+                <File Id="fil909165B592C4C1ACBA02F4A20BEF43CE" KeyPath="yes" Source="$(var.DebugClientsDir)\wince\gdb_arm.h" />
+            </Component>
+            <Component Id="cmp09D0A3E99115A3CD31802938409110F6" Directory="dir637DA637FAA58F02AEE079B7D89AFCC1" Guid="{C24DB282-3D0F-4C58-9AB7-B9F3CE027B99}">
+                <File Id="fil776D274667E65D28DE0D1E21A8F5BF6D" KeyPath="yes" Source="$(var.DebugClientsDir)\wince\ListBoxWMTarget.cpp" />
+            </Component>
+            <Component Id="cmpCC76237CF5C2E03CC776EF5912AB81B6" Directory="dir637DA637FAA58F02AEE079B7D89AFCC1" Guid="{267989EA-FCD5-4E21-A2CA-190367CCE0D6}">
+                <File Id="fil3EAF23EF4C57208C7AD40E1C5BCE6CDB" KeyPath="yes" Source="$(var.DebugClientsDir)\wince\ListBoxWMTarget.hpp" />
+            </Component>
+            <Component Id="cmpCBA13B093E5F45C6A71EA5BD469B814B" Directory="dir637DA637FAA58F02AEE079B7D89AFCC1" Guid="{951FA5DB-7A86-4E7B-9210-E9692941AAAF}">
+                <File Id="fil8AD65022FAF327593B0BA9AF3D010720" KeyPath="yes" Source="$(var.DebugClientsDir)\wince\main.cpp" />
+            </Component>
+            <Component Id="cmp2A8226038A474A2039CC8260DE537DA4" Directory="dir637DA637FAA58F02AEE079B7D89AFCC1" Guid="{803287D3-D5C5-44A3-AC1B-764F7D39148A}">
+                <File Id="fil4AC907D9AA8A68C824AFA344EB18F579" KeyPath="yes" Source="$(var.DebugClientsDir)\wince\newres.h" />
+            </Component>
+            <Component Id="cmp185BAD63C14A3B2131BABA9290BFD490" Directory="dir637DA637FAA58F02AEE079B7D89AFCC1" Guid="{D03BDBF4-F7C8-4D16-9E3F-0341253D3D6D}">
+                <File Id="fil2E0AA98B31D4FBE0A735CA76F90A90B8" KeyPath="yes" Source="$(var.DebugClientsDir)\wince\ReadMe.txt" />
+            </Component>
+            <Component Id="cmpE21EC8C8D47BE516AA2F365E71913D84" Directory="dir637DA637FAA58F02AEE079B7D89AFCC1" Guid="{816AFE47-9395-409A-BCD9-3F489A273638}">
+                <File Id="fil0E1A199735013DD12F1F0FB99D766780" KeyPath="yes" Source="$(var.DebugClientsDir)\wince\resource.h" />
+            </Component>
+            <Component Id="cmp4B9EF4C3D5B542E2E75D835A9A436578" Directory="dir637DA637FAA58F02AEE079B7D89AFCC1" Guid="{FC8E8ED9-EB09-4840-8454-DEFF8311991E}">
+                <File Id="filF2C629329178F7EF472E7D2A9A2343B0" KeyPath="yes" Source="$(var.DebugClientsDir)\wince\resourceppc.h" />
+            </Component>
+            <Component Id="cmp24D3EAFFF3E2740EF5DC5267C1110087" Directory="dir637DA637FAA58F02AEE079B7D89AFCC1" Guid="{F8A47E5B-D83E-4B04-958A-C728EA1065D0}">
+                <File Id="filC4D6380401FDD727344179FE578380A6" KeyPath="yes" Source="$(var.DebugClientsDir)\wince\WinCESystem.cpp" />
+            </Component>
+            <Component Id="cmpF2456548E1010A9FC21E9A942285E723" Directory="dir637DA637FAA58F02AEE079B7D89AFCC1" Guid="{C1F16CF4-378F-4BF5-9647-993537B30A20}">
+                <File Id="fil88B65F811A8F69E7F7217536A80C8FD7" KeyPath="yes" Source="$(var.DebugClientsDir)\wince\WinCESystem.hpp" />
+            </Component>
+            <Component Id="cmpD952D7E5E5A583F120090C5CE60C8514" Directory="dirC5791C30CE3BB161E3160ECC34826213" Guid="{461CE341-8EDD-42AF-A6F4-2A71DE05C9AC}">
+                <File Id="filD63126CB9A5AE42A19F37743CF8AD9B1" KeyPath="yes" Source="$(var.DebugClientsDir)\windbg\main.cpp" />
+            </Component>
+            <Component Id="cmp5B4F42B99C56565ECC9ACE138E2C982C" Directory="dirC5791C30CE3BB161E3160ECC34826213" Guid="{5ED27856-F74F-41B3-B5AD-CBE91CE4E499}">
+                <File Id="fil915307FF70E742D78722ED8F989ACD36" KeyPath="yes" Source="$(var.DebugClientsDir)\windbg\misc.cpp" />
+            </Component>
+            <Component Id="cmp40A7B1A29F637B93C973C663BD736B21" Directory="dirC5791C30CE3BB161E3160ECC34826213" Guid="{39C28D3C-E43B-4F6C-925B-29A153D52219}">
+                <File Id="fil812E88CA61150E38BB559909D667328D" KeyPath="yes" Source="$(var.DebugClientsDir)\windbg\misc.hpp" />
+            </Component>
+            <Component Id="cmp0921E47D31082E30E05BA7EADA3BD513" Directory="dirC5791C30CE3BB161E3160ECC34826213" Guid="{F4F6BF51-C884-4FD6-96C9-E25E37AA438D}">
+                <File Id="fil267D3EE62D0D33DC3115650DDA9FFA75" KeyPath="yes" Source="$(var.DebugClientsDir)\windbg\WinDbgSystem.cpp" />
+            </Component>
+            <Component Id="cmpBEDDB7A9207AFB7AE316C3FCCFF057BD" Directory="dirC5791C30CE3BB161E3160ECC34826213" Guid="{F03B09E4-418F-4BFC-A4F9-90A0E66F22C8}">
+                <File Id="fil5CE1847E56D69A86A4EF81AB4C86E844" KeyPath="yes" Source="$(var.DebugClientsDir)\windbg\WinDbgSystem.hpp" />
+            </Component>
+            <Component Id="cmp4556A2096C4A0C3E3BF16B9DCB9CDA1B" Directory="dir94E5E56B2CFCB87C74E164EA6951C6CC" Guid="{4487351D-878E-4059-8EAD-CC48672F5547}">
+                <File Id="fil03B842921798C9B396B539D50C6C7FA8" KeyPath="yes" Source="$(var.DebugClientsDir)\windows\misc.cpp" />
+            </Component>
+            <Component Id="cmp28AE54B4F39BB67547AFAB44B0643419" Directory="dir94E5E56B2CFCB87C74E164EA6951C6CC" Guid="{D9AABF85-B204-47E7-BC05-A54DD033E102}">
+                <File Id="fil9C09C3527E06472D6F6583B5FE8115C3" KeyPath="yes" Source="$(var.DebugClientsDir)\windows\misc.hpp" />
+            </Component>
+            <Component Id="cmpFBE3CC4C9D433F8871D57481462CB4A7" Directory="dir94E5E56B2CFCB87C74E164EA6951C6CC" Guid="{9A3D9B3F-9B93-4AB8-ACD5-B36DF4371C15}">
+                <File Id="filF74EED4185A4C525A3876AE63FC211EB" KeyPath="yes" Source="$(var.DebugClientsDir)\windows\NTHeader.cpp" />
+            </Component>
+            <Component Id="cmp9151900C2636DD14338768C4DFE3BD9C" Directory="dir94E5E56B2CFCB87C74E164EA6951C6CC" Guid="{2778CCF6-1DFA-4202-BD63-6E5A652F1506}">
+                <File Id="fil3185F0E91F6988F54EB7739E99DC7807" KeyPath="yes" Source="$(var.DebugClientsDir)\windows\NTHeader.h" />
+            </Component>
+            <Component Id="cmp1B7DF67B15EEBC5668AACE9DF5231470" Directory="dir94E5E56B2CFCB87C74E164EA6951C6CC" Guid="{B125FA0D-8026-4831-AC46-17B2181102FD}">
+                <File Id="filBB77F04EB1C141FE5D222BD9CC0612AA" KeyPath="yes" Source="$(var.DebugClientsDir)\windows\ThreadStateInformation.hpp" />
+            </Component>
+            <Component Id="cmpFA19EF0CB4C5801C603F51C96127B165" Directory="dir94E5E56B2CFCB87C74E164EA6951C6CC" Guid="{DE3EE604-473E-4C63-8C6C-18061C165E07}">
+                <File Id="fil9EB9BFB2DB56A8F9AA1DF50DD1B63FA5" KeyPath="yes" Source="$(var.DebugClientsDir)\windows\WindowsSystem.cpp" />
+            </Component>
+            <Component Id="cmp2C5F7E6B0631CB041DAC76EA47E33B99" Directory="dir94E5E56B2CFCB87C74E164EA6951C6CC" Guid="{EDDC47CC-EF3E-4A89-8740-7EF59BC645B0}">
+                <File Id="fil2CBCC7A1C3C3BD3783ECD85D1C9F5CDE" KeyPath="yes" Source="$(var.DebugClientsDir)\windows\WindowsSystem.hpp" />
+            </Component>
+            <Component Id="cmp4D6AE50540A9C643F3BE14444894621F" Directory="dirC1D5F0816590F4B71349A8BF4598ABFE" Guid="{B4492CF6-09A2-4521-9D11-FB1124EDCB7D}">
+                <File Id="filC33847B7C369C728D09E9FA9C7599951" KeyPath="yes" Source="$(var.DebugClientsDir)\windowscommon\WindowsCommon.cpp" />
+            </Component>
+            <Component Id="cmpA4CE1237D439C2489284172291A8768C" Directory="dirC1D5F0816590F4B71349A8BF4598ABFE" Guid="{5006230D-26A9-4B5D-A731-1D3562C0E290}">
+                <File Id="fil0D8A90DE0272CB99A9900D60ECEFC825" KeyPath="yes" Source="$(var.DebugClientsDir)\windowscommon\WindowsCommon.hpp" />
+            </Component>
+            <Component Id="cmp3EB4322696D8D73018F5771F07E91B30" Directory="dirEDD1648EB1452937A847B647CF76B76C" Guid="{17B509C4-02B0-4211-9398-223E57132FDB}">
+                <File Id="fil0D802204BCB2A4D3E37B969DC148C87D" KeyPath="yes" Source="$(var.ZynamicsDir)\zylibcpp\makefile" />
+            </Component>
+            <Component Id="cmpB621A1908281698FC371371F936E0388" Directory="dirEDD1648EB1452937A847B647CF76B76C" Guid="{79A6420D-7C10-40FB-82FB-C31780CD8B1D}">
+                <File Id="filE76807C48AD7BB0B63844CEA9985F26E" KeyPath="yes" Source="$(var.ZynamicsDir)\zylibcpp\makefile.arm" />
+            </Component>
+            <Component Id="cmp6F73826C1E4A9C11BC88371FD489C6AF" Directory="dirEDD1648EB1452937A847B647CF76B76C" Guid="{3F52EFED-659F-4108-9FAB-238B8F6C4DA8}">
+                <File Id="fil0CCBA9C64C9AFB292331443A2B0E8F01" KeyPath="yes" Source="$(var.ZynamicsDir)\zylibcpp\makefile.win" />
+            </Component>
+            <Component Id="cmp828765F6ECBA0289DA8F189B1BB39E10" Directory="dirE4530C21C921E652B9C92DE87A955B38" Guid="{E1E1A191-E2A9-47C6-8358-F9D61534F765}">
+                <File Id="fil86EE7E67A485FB46E731AC194D70FCCE" KeyPath="yes" Source="$(var.ZynamicsDir)\zylibcpp\zycon\makefile" />
+            </Component>
+            <Component Id="cmp0CFA9710759B485CB9A59F3C1C3D9564" Directory="dirE4530C21C921E652B9C92DE87A955B38" Guid="{EA892671-3C1E-46FB-93C4-CA3ED6784814}">
+                <File Id="filDA404F8871A1D7B324BCE74B24A381C4" KeyPath="yes" Source="$(var.ZynamicsDir)\zylibcpp\zycon\makefile.arm" />
+            </Component>
+            <Component Id="cmp1341CFCA829C7B4271B88038AD2CAB0E" Directory="dirE4530C21C921E652B9C92DE87A955B38" Guid="{6F66597C-2982-41AA-BC9C-B74818A98EC8}">
+                <File Id="filEEB664A42A72BBB34A1C7D3D9D6FF6E0" KeyPath="yes" Source="$(var.ZynamicsDir)\zylibcpp\zycon\makefile.osx" />
+            </Component>
+            <Component Id="cmpA0727465D75A031270934C96F98F1CD9" Directory="dirE4530C21C921E652B9C92DE87A955B38" Guid="{BB37C134-19DC-48A1-A3C1-3FBB15BB887B}">
+                <File Id="fil56AB8E73C2A3DAF48D6277A4585865E4" KeyPath="yes" Source="$(var.ZynamicsDir)\zylibcpp\zycon\makefile.win" />
+            </Component>
+            <Component Id="cmp430E058685CC5E6147AEB66398FDB818" Directory="dirAB23F066D25E4849EB2D00A6DD89614E" Guid="{009AA6A9-009C-41B7-A9F7-0CD1A5FB59B9}">
+                <File Id="filDE3E80CD7D0203C5D71F71F0078A9636" KeyPath="yes" Source="$(var.ZynamicsDir)\zylibcpp\zycon\src\bytebuffer.h" />
+            </Component>
+            <Component Id="cmp35735D00C091454354E098F708B2F8AA" Directory="dirAB23F066D25E4849EB2D00A6DD89614E" Guid="{77B3E624-80ED-41D9-88D3-BA316D6C01FA}">
+                <File Id="filBA20FF7CAF928015F551098925B6670C" KeyPath="yes" Source="$(var.ZynamicsDir)\zylibcpp\zycon\src\bytereader.h" />
+            </Component>
+            <Component Id="cmp816F2A8F8255E12CF8AAAA54301CB5CD" Directory="dirAB23F066D25E4849EB2D00A6DD89614E" Guid="{490ADB13-67A6-4FB8-9240-78E6A53BCC90}">
+                <File Id="filFEFE01BF8ED8B21F1407F960E870D347" KeyPath="yes" Source="$(var.ZynamicsDir)\zylibcpp\zycon\src\zycon.cc" />
+            </Component>
+            <Component Id="cmp9D1624F10D223C2C6C86190C8AE203A5" Directory="dirAB23F066D25E4849EB2D00A6DD89614E" Guid="{51F89CA6-D9C3-408C-8344-242E88E252E7}">
+                <File Id="fil35EC77592490FA30CCBF45C04D307D4C" KeyPath="yes" Source="$(var.ZynamicsDir)\zylibcpp\zycon\src\zycon.h" />
+            </Component>
+            <Component Id="cmp6260EC960778971745C413B95E878EDD" Directory="dir7FC8EC2A38E1D5874CBAC97461E4C3B1" Guid="{428D4793-C6AB-423A-BE57-D2D24E53D98A}">
+                <File Id="fil85FD86865EFBD86FF3D18550FCE34954" KeyPath="yes" Source="$(var.ZynamicsDir)\zylibcpp\zyline\makefile" />
+            </Component>
+            <Component Id="cmpA429E5FAB71A0B23B70DE372C68FB558" Directory="dir7FC8EC2A38E1D5874CBAC97461E4C3B1" Guid="{C6231EA3-6AAF-4AE6-95A9-025A26379546}">
+                <File Id="fil435FE86FA6F3146CE5AF4378D31C5261" KeyPath="yes" Source="$(var.ZynamicsDir)\zylibcpp\zyline\makefile.arm" />
+            </Component>
+            <Component Id="cmp068BDE855F3CC16BC6A57299E291BEC5" Directory="dir7FC8EC2A38E1D5874CBAC97461E4C3B1" Guid="{F0733676-B2BB-4624-A5C3-0131F7EB4026}">
+                <File Id="fil9115D7BA8DB045B963142BFD511A3E33" KeyPath="yes" Source="$(var.ZynamicsDir)\zylibcpp\zyline\makefile.osx" />
+            </Component>
+            <Component Id="cmpDB9646BA141AA852D432C873EBCF3472" Directory="dir7FC8EC2A38E1D5874CBAC97461E4C3B1" Guid="{D61D9F5A-9A4B-42CD-9F32-1496EC095DBA}">
+                <File Id="filDBF160DBA6ABE50EEDCE1FA3DF6F7726" KeyPath="yes" Source="$(var.ZynamicsDir)\zylibcpp\zyline\makefile.win" />
+            </Component>
+            <Component Id="cmp7503EDD6E0635D20868723AC42910AF1" Directory="dir86D68BF80DDFE08B2B3611678908DB83" Guid="{A42C84C2-A57D-4578-ABF3-BD014A4164AB}">
+                <File Id="filB3D9C3478B87A77ADC3854AF5BD5DDE1" KeyPath="yes" Source="$(var.ZynamicsDir)\zylibcpp\zyline\src\zyline.cc" />
+            </Component>
+            <Component Id="cmp44DB4FAF1B526C09ACD997FB95F6F4A4" Directory="dir86D68BF80DDFE08B2B3611678908DB83" Guid="{05AF1538-FBE0-440D-A769-3CE51099A3B3}">
+                <File Id="fil13956177BF4573FEC5762267CBD1E73C" KeyPath="yes" Source="$(var.ZynamicsDir)\zylibcpp\zyline\src\zyline.h" />
+            </Component>
+            <Component Id="cmp8DBACE561E3336305EA9B7337B5F2275" Directory="dir2AE5609181890F02D841A12CB0C99195" Guid="{4B54F815-FAC4-4625-B6E5-56FB3A52DD6D}">
+                <File Id="fil7F3DD24D57151275FD9638F8D6F4B59C" KeyPath="yes" Source="$(var.ZynamicsDir)\zylibcpp\zylog\makefile" />
+            </Component>
+            <Component Id="cmpEE5DC5F90002D73245017D48CC1015EA" Directory="dir2AE5609181890F02D841A12CB0C99195" Guid="{30901C40-E8C6-4CBD-A371-7E246846BCC7}">
+                <File Id="fil7DB89D1EE8459B9277F59A87D3118F29" KeyPath="yes" Source="$(var.ZynamicsDir)\zylibcpp\zylog\makefile.arm" />
+            </Component>
+            <Component Id="cmpB9F8C9CE80B67C3A66CEDBCE6BC7FC41" Directory="dir2AE5609181890F02D841A12CB0C99195" Guid="{2246C1A4-0FD2-41C8-88D1-7377961A1C36}">
+                <File Id="fil01965E3093BFAA8884CE9302CD0CFE72" KeyPath="yes" Source="$(var.ZynamicsDir)\zylibcpp\zylog\makefile.osx" />
+            </Component>
+            <Component Id="cmpC418D47DD5791950F404B8120D40DEB8" Directory="dir2AE5609181890F02D841A12CB0C99195" Guid="{86DEE7AB-4627-4239-A6C1-76856ABE4A68}">
+                <File Id="filFA42D2819605487DF6639E804931388E" KeyPath="yes" Source="$(var.ZynamicsDir)\zylibcpp\zylog\makefile.win" />
+            </Component>
+            <Component Id="cmp9D055ECE5A2DB9B30EBF90D21E97F4B8" Directory="dir7B2C1CCB657C9608E256090616590CEA" Guid="{B5B4BD3A-9FC3-47EA-91D6-78D2999A01AB}">
+                <File Id="fil4138B61A75EE2E85C74F9D19C5186761" KeyPath="yes" Source="$(var.ZynamicsDir)\zylibcpp\zylog\src\consoletarget.cc" />
+            </Component>
+            <Component Id="cmpA03FEC74A72E5BE61CC9243DB80D5F6C" Directory="dir7B2C1CCB657C9608E256090616590CEA" Guid="{629BF55E-D1B3-4805-9CB8-888D245D0D63}">
+                <File Id="fil11A3D859E6902EAE842606ED83ECBFBF" KeyPath="yes" Source="$(var.ZynamicsDir)\zylibcpp\zylog\src\consoletarget.h" />
+            </Component>
+            <Component Id="cmpB533CCB9420933D5EC6A4E6EAAE0474C" Directory="dir7B2C1CCB657C9608E256090616590CEA" Guid="{E1E708D7-3B3E-4A48-B7D9-80E320044388}">
+                <File Id="fil8720903A313871BEA6B8B36B721FCBC7" KeyPath="yes" Source="$(var.ZynamicsDir)\zylibcpp\zylog\src\filetarget.cc" />
+            </Component>
+            <Component Id="cmp782ABCAA0422CDC7D5FD7A772F82E43A" Directory="dir7B2C1CCB657C9608E256090616590CEA" Guid="{E304E7C5-E632-4919-97B2-BD5165958BD2}">
+                <File Id="fil69C3281A8CF381465E92BF860CB7457E" KeyPath="yes" Source="$(var.ZynamicsDir)\zylibcpp\zylog\src\filetarget.h" />
+            </Component>
+            <Component Id="cmpB7E3CBD4F38B8477E34FFB7AFE009216" Directory="dir7B2C1CCB657C9608E256090616590CEA" Guid="{0D955D90-E62A-4505-9931-71D4D4AB3357}">
+                <File Id="filC550B25331A171A9FC74EF63881B3B70" KeyPath="yes" Source="$(var.ZynamicsDir)\zylibcpp\zylog\src\ilogtarget.h" />
+            </Component>
+            <Component Id="cmpD3358E45667B7B2A314B038750D37E41" Directory="dir7B2C1CCB657C9608E256090616590CEA" Guid="{6DA3EAA4-19EA-4201-B817-1C64FD8BC588}">
+                <File Id="fil6BC3F28465DAF3FA45B92462B3E5BE6B" KeyPath="yes" Source="$(var.ZynamicsDir)\zylibcpp\zylog\src\listboxwmtarget.cc" />
+            </Component>
+            <Component Id="cmp4C7EC0E2BBE256C2086EDA3AE2A443FB" Directory="dir7B2C1CCB657C9608E256090616590CEA" Guid="{367446AB-6347-4010-86C0-6F2278787CA7}">
+                <File Id="fil6F402B990BE525C81DB3717E33AC6516" KeyPath="yes" Source="$(var.ZynamicsDir)\zylibcpp\zylog\src\listboxwmtarget.h" />
+            </Component>
+            <Component Id="cmpACB73B4314920185100B37EFF4642828" Directory="dir7B2C1CCB657C9608E256090616590CEA" Guid="{CE831A28-D88D-4A98-BC99-B6274666666C}">
+                <File Id="fil28A45CC0A4E926359B0232D1242CDB16" KeyPath="yes" Source="$(var.ZynamicsDir)\zylibcpp\zylog\src\logger.cc" />
+            </Component>
+            <Component Id="cmp11F94C3518F7F9E60A4EB4C00D1CC109" Directory="dir7B2C1CCB657C9608E256090616590CEA" Guid="{F8F6C65E-4C8A-4102-B734-85850D04D73A}">
+                <File Id="filA02183C7ED3FF6B62DADF5B83E6CDB07" KeyPath="yes" Source="$(var.ZynamicsDir)\zylibcpp\zylog\src\logger.h" />
+            </Component>
+            <Component Id="cmp9092C3481A7D24E99B39DE2652D41E32" Directory="dirBED00E5E10B00FD2E601A6A5D82AF78A" Guid="{41D3C205-0CFB-41A9-9EDE-67B5A2B649B4}">
+                <File Id="fil7FF46DDC9F5A7B99997011B42DDEB7EF" KeyPath="yes" Source="$(var.ZynamicsDir)\zylibcpp\zywin\makefile.win" />
+            </Component>
+            <Component Id="cmp8A779E84CA4C88E7E8CC37F4BF870663" Directory="dir0846EBC8D8134782331BD7CFF01237E8" Guid="{A801441D-54D5-48B5-8C96-010CFFF4CFC1}">
+                <File Id="fil473A5E0E64A4A9D3F6AA79EB8C709EA4" KeyPath="yes" Source="$(var.ZynamicsDir)\zylibcpp\zywin\src\toolhelp.cc" />
+            </Component>
+            <Component Id="cmp975EEE48471BEA4C671398F6B5A30E79" Directory="dir0846EBC8D8134782331BD7CFF01237E8" Guid="{54356628-1139-4042-AD93-1509BFADC379}">
+                <File Id="fil60FF4DEC2EE271E3D29ACE7518E5EAD9" KeyPath="yes" Source="$(var.ZynamicsDir)\zylibcpp\zywin\src\toolhelp.h" />
+            </Component>
+            <Component Id="cmp47F6CFB9CDB3D3ACE4C4B7C75F722748" Directory="dir79FD0F954947D609B225B1A80EDA0AF9" Guid="{79611FBF-1669-4BA6-840F-9319DFCE8618}">
+                <File Id="fil91E6ECB44880360A1ABEEAE6C48A871F" KeyPath="yes" Source="$(var.OutputDir)\debugclient.exe" />
+            </Component>
+            <Component Id="cmpAD92FB7D3E3D7C9ED2C81415226A674B" Directory="dir79FD0F954947D609B225B1A80EDA0AF9" Guid="{615F3EC8-5D3F-4E79-80E9-E3115F8494D7}">
+                <File Id="filE20307553D464A230575C73EE9B57633" KeyPath="yes" Source="$(var.OutputDir)\gdb_client.exe" />
+            </Component>
+            <Component Id="cmpE193FA00F86237A30BAF639E555C0FA2" Directory="dirBB6CEB9C991E6D94B8CD118C7B193508" Guid="{A8E158D5-0FC8-44F8-8F7A-07119E51F44F}">
+                <File Id="filF27A4E079CA82744DE384519EDF27C61" KeyPath="yes" Source="$(var.OutputDir)\windbg_client.exe" />
+            </Component>
+        </ComponentGroup>
+    </Fragment>
+    <Fragment>
+        <DirectoryRef Id="dir637DA637FAA58F02AEE079B7D89AFCC1" />
+    </Fragment>
+    <Fragment>
+        <DirectoryRef Id="dir307291A11A78A897D9C48608C0FDCC77" />
+    </Fragment>
+    <Fragment>
+        <DirectoryRef Id="dir716263B4D4309AFF96025CD6284FD6BF" />
+    </Fragment>
+    <Fragment>
+        <DirectoryRef Id="dirEDD1648EB1452937A847B647CF76B76C" />
+    </Fragment>
+    <Fragment>
+        <DirectoryRef Id="dirAB23F066D25E4849EB2D00A6DD89614E" />
+    </Fragment>
+    <Fragment>
+        <DirectoryRef Id="dir94E5E56B2CFCB87C74E164EA6951C6CC" />
+    </Fragment>
+    <Fragment>
+        <DirectoryRef Id="dir79FD0F954947D609B225B1A80EDA0AF9" />
+    </Fragment>
+    <Fragment>
+        <DirectoryRef Id="dirC1D5F0816590F4B71349A8BF4598ABFE" />
+    </Fragment>
+    <Fragment>
+        <DirectoryRef Id="dir54F8012A0EB2F2F9FC6AA794792AA237" />
+    </Fragment>
+    <Fragment>
+        <DirectoryRef Id="dirAD43844A8B1BFF5F341B207B7804E077" />
+    </Fragment>
+    <Fragment>
+        <DirectoryRef Id="dir7FC8EC2A38E1D5874CBAC97461E4C3B1" />
+    </Fragment>
+    <Fragment>
+        <DirectoryRef Id="dir86D68BF80DDFE08B2B3611678908DB83" />
+    </Fragment>
+    <Fragment>
+        <DirectoryRef Id="dirE4530C21C921E652B9C92DE87A955B38" />
+    </Fragment>
+    <Fragment>
+        <DirectoryRef Id="dir0846EBC8D8134782331BD7CFF01237E8" />
+    </Fragment>
+    <Fragment>
+        <DirectoryRef Id="dir2AE5609181890F02D841A12CB0C99195" />
+    </Fragment>
+    <Fragment>
+        <DirectoryRef Id="dirBED00E5E10B00FD2E601A6A5D82AF78A" />
+    </Fragment>
+    <Fragment>
+        <DirectoryRef Id="dir7B2C1CCB657C9608E256090616590CEA" />
+    </Fragment>
+    <Fragment>
+        <DirectoryRef Id="dir6D46DBABFAF2F3D9626A552A0180472E" />
+    </Fragment>
+    <Fragment>
+        <DirectoryRef Id="dirC5791C30CE3BB161E3160ECC34826213" />
+    </Fragment>
+    <Fragment>
+        <DirectoryRef Id="dirBB6CEB9C991E6D94B8CD118C7B193508" />
+    </Fragment>
+    <Fragment>
+        <DirectoryRef Id="dirD3A6AEE3728E2CAC46DB426F64FBBF8A" />
+    </Fragment>
+    <Fragment>
+        <DirectoryRef Id="dir4AD5AC037300C55B25B27B290ED99F09" />
+    </Fragment>
+    <Fragment>
+        <DirectoryRef Id="dirBED00E5E10B00FD2E601A6A5D82AF78A">
+            <Directory Id="dir0846EBC8D8134782331BD7CFF01237E8" Name="src" />
+        </DirectoryRef>
+    </Fragment>
+    <Fragment>
+        <DirectoryRef Id="dirEDD1648EB1452937A847B647CF76B76C">
+            <Directory Id="dir2AE5609181890F02D841A12CB0C99195" Name="zylog" />
+        </DirectoryRef>
+    </Fragment>
+    <Fragment>
+        <DirectoryRef Id="dirC6CBA326DBD579C9911E4D01F4A70CBB">
+            <Directory Id="dir307291A11A78A897D9C48608C0FDCC77" Name="client" />
+        </DirectoryRef>
+    </Fragment>
+    <Fragment>
+        <DirectoryRef Id="dir307291A11A78A897D9C48608C0FDCC77">
+            <Directory Id="dir4AD5AC037300C55B25B27B290ED99F09" Name="gdb" />
+        </DirectoryRef>
+    </Fragment>
+    <Fragment>
+        <DirectoryRef Id="dir4AD5AC037300C55B25B27B290ED99F09">
+            <Directory Id="dir54F8012A0EB2F2F9FC6AA794792AA237" Name="cpus" />
+        </DirectoryRef>
+    </Fragment>
+    <Fragment>
+        <DirectoryRef Id="dir307291A11A78A897D9C48608C0FDCC77">
+            <Directory Id="dir637DA637FAA58F02AEE079B7D89AFCC1" Name="wince" />
+        </DirectoryRef>
+    </Fragment>
+    <Fragment>
+        <DirectoryRef Id="dir307291A11A78A897D9C48608C0FDCC77">
+            <Directory Id="dir716263B4D4309AFF96025CD6284FD6BF" Name="conns" />
+        </DirectoryRef>
+    </Fragment>
+    <Fragment>
+        <DirectoryRef Id="dir6D46DBABFAF2F3D9626A552A0180472E">
+            <Directory Id="dir79FD0F954947D609B225B1A80EDA0AF9" Name="win32" />
+        </DirectoryRef>
+    </Fragment>
+    <Fragment>
+        <DirectoryRef Id="dir2AE5609181890F02D841A12CB0C99195">
+            <Directory Id="dir7B2C1CCB657C9608E256090616590CEA" Name="src" />
+        </DirectoryRef>
+    </Fragment>
+    <Fragment>
+        <DirectoryRef Id="dirEDD1648EB1452937A847B647CF76B76C">
+            <Directory Id="dir7FC8EC2A38E1D5874CBAC97461E4C3B1" Name="zyline" />
+        </DirectoryRef>
+    </Fragment>
+    <Fragment>
+        <DirectoryRef Id="dir7FC8EC2A38E1D5874CBAC97461E4C3B1">
+            <Directory Id="dir86D68BF80DDFE08B2B3611678908DB83" Name="src" />
+        </DirectoryRef>
+    </Fragment>
+    <Fragment>
+        <DirectoryRef Id="dir307291A11A78A897D9C48608C0FDCC77">
+            <Directory Id="dir94E5E56B2CFCB87C74E164EA6951C6CC" Name="windows" />
+        </DirectoryRef>
+    </Fragment>
+    <Fragment>
+        <DirectoryRef Id="dirE4530C21C921E652B9C92DE87A955B38">
+            <Directory Id="dirAB23F066D25E4849EB2D00A6DD89614E" Name="src" />
+        </DirectoryRef>
+    </Fragment>
+    <Fragment>
+        <DirectoryRef Id="dir6D46DBABFAF2F3D9626A552A0180472E">
+            <Directory Id="dirAD43844A8B1BFF5F341B207B7804E077" Name="linux" />
+        </DirectoryRef>
+    </Fragment>
+    <Fragment>
+        <DirectoryRef Id="dir6D46DBABFAF2F3D9626A552A0180472E">
+            <Directory Id="dirBB6CEB9C991E6D94B8CD118C7B193508" Name="windbg" />
+        </DirectoryRef>
+    </Fragment>
+    <Fragment>
+        <DirectoryRef Id="dirEDD1648EB1452937A847B647CF76B76C">
+            <Directory Id="dirBED00E5E10B00FD2E601A6A5D82AF78A" Name="zywin" />
+        </DirectoryRef>
+    </Fragment>
+    <Fragment>
+        <DirectoryRef Id="dir307291A11A78A897D9C48608C0FDCC77">
+            <Directory Id="dirC1D5F0816590F4B71349A8BF4598ABFE" Name="windowscommon" />
+        </DirectoryRef>
+    </Fragment>
+    <Fragment>
+        <DirectoryRef Id="dir307291A11A78A897D9C48608C0FDCC77">
+            <Directory Id="dirC5791C30CE3BB161E3160ECC34826213" Name="windbg" />
+        </DirectoryRef>
+    </Fragment>
+    <Fragment>
+        <DirectoryRef Id="dir6D46DBABFAF2F3D9626A552A0180472E">
+            <Directory Id="dirC6CBA326DBD579C9911E4D01F4A70CBB" Name="source" />
+        </DirectoryRef>
+    </Fragment>
+    <Fragment>
+        <DirectoryRef Id="dir307291A11A78A897D9C48608C0FDCC77">
+            <Directory Id="dirD3A6AEE3728E2CAC46DB426F64FBBF8A" Name="linux" />
+        </DirectoryRef>
+    </Fragment>
+    <Fragment>
+        <DirectoryRef Id="dirEDD1648EB1452937A847B647CF76B76C">
+            <Directory Id="dirE4530C21C921E652B9C92DE87A955B38" Name="zycon" />
+        </DirectoryRef>
+    </Fragment>
+    <Fragment>
+        <DirectoryRef Id="dirC6CBA326DBD579C9911E4D01F4A70CBB">
+            <Directory Id="dirEDD1648EB1452937A847B647CF76B76C" Name="zylibcpp" />
+        </DirectoryRef>
+    </Fragment>
+</Wix>

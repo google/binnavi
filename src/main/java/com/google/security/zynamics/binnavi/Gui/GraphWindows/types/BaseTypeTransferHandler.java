@@ -106,15 +106,9 @@ public class BaseTypeTransferHandler extends TransferHandler {
     }
     try {
       return createOrUpdateTypeSubstitution(wrapper);
-    } catch (final IOException exception) {
+    } catch (IOException | UnsupportedFlavorException | CouldntSaveDataException exception) {
       CUtilityFunctions.logException(exception);
       return false;
-    } catch (final UnsupportedFlavorException exception) {
-      CUtilityFunctions.logException(exception);
-      return false;
-    } catch (final CouldntSaveDataException exception) {
-      CUtilityFunctions.logException(exception);
-      return false;
-    }
+    } 
   }
 }

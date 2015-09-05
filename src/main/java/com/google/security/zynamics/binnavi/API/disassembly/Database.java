@@ -201,19 +201,16 @@ public final class Database implements ApiObject<IDatabase> {
       m_database.connect();
     } catch (final com.google.security.zynamics.binnavi.Database.Exceptions.CouldntLoadDriverException e) {
       throw new CouldntLoadDriverException(e);
-    } catch (final com.google.security.zynamics.binnavi.Database.Exceptions.CouldntConnectException e) {
+    } catch (com.google.security.zynamics.binnavi.Database.Exceptions.CouldntConnectException | LoadCancelledException e) {
       throw new CouldntConnectException(e);
     } catch (final com.google.security.zynamics.binnavi.Database.Exceptions.InvalidDatabaseException e) {
       throw new InvalidDatabaseException(e);
     } catch (final com.google.security.zynamics.binnavi.Database.Exceptions.CouldntInitializeDatabaseException e) {
       throw new CouldntInitializeDatabaseException(e);
-    } catch (final com.google.security.zynamics.binnavi.Database.Exceptions.InvalidExporterDatabaseFormatException e) {
+    } catch (com.google.security.zynamics.binnavi.Database.Exceptions.InvalidExporterDatabaseFormatException 
+        | com.google.security.zynamics.binnavi.Database.Exceptions.InvalidDatabaseVersionException e) {
       throw new InvalidDatabaseFormatException(e);
-    } catch (final com.google.security.zynamics.binnavi.Database.Exceptions.InvalidDatabaseVersionException e) {
-      throw new InvalidDatabaseFormatException(e);
-    } catch (final LoadCancelledException e) {
-      throw new CouldntConnectException(e);
-    }
+    } 
   }
 
   // ! Creates a new project.
@@ -378,11 +375,9 @@ public final class Database implements ApiObject<IDatabase> {
     if (!isLoaded()) {
       try {
         load();
-      } catch (final CouldntLoadDataException e) {
+      } catch (CouldntLoadDataException | InvalidDatabaseVersionException e) {
         return new ArrayList<Module>();
-      } catch (final InvalidDatabaseVersionException e) {
-        return new ArrayList<Module>();
-      }
+      } 
     }
 
     return new ArrayList<Module>(m_modules);
@@ -434,11 +429,9 @@ public final class Database implements ApiObject<IDatabase> {
     if (!isLoaded()) {
       try {
         load();
-      } catch (final CouldntLoadDataException e) {
+      } catch (CouldntLoadDataException | InvalidDatabaseVersionException e) {
         return new ArrayList<Project>();
-      } catch (final InvalidDatabaseVersionException e) {
-        return new ArrayList<Project>();
-      }
+      } 
     }
 
     return new ArrayList<Project>(m_projects);
@@ -551,13 +544,11 @@ public final class Database implements ApiObject<IDatabase> {
   public void load() throws CouldntLoadDataException, InvalidDatabaseVersionException {
     try {
       m_database.load();
-    } catch (final com.google.security.zynamics.binnavi.Database.Exceptions.CouldntLoadDataException e) {
+    } catch (com.google.security.zynamics.binnavi.Database.Exceptions.CouldntLoadDataException | LoadCancelledException e) {
       throw new CouldntLoadDataException(e);
     } catch (final com.google.security.zynamics.binnavi.Database.Exceptions.InvalidDatabaseVersionException e) {
       throw new InvalidDatabaseVersionException(e);
-    } catch (final LoadCancelledException e) {
-      throw new CouldntLoadDataException(e);
-    }
+    } 
   }
 
   // ! Refreshes the modules list.

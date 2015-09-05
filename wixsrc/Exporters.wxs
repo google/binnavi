@@ -1,0 +1,52 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--
+Copyright 2015 Google Inc. All Rights Reserved.
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+-->
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+    <Fragment>
+        <DirectoryRef Id="INSTALLDIR">
+            <Directory Id="dirD4D32BFC5F17CF8B77B11387139DAF2F" Name="exporters" />
+        </DirectoryRef>
+    </Fragment>
+    <Fragment>
+        <ComponentGroup Id="Exporters">
+            <Component Id="cmp03C87FC2DF5A223345F43BC5CA2AF4EF" Directory="dir06708049CB4250A30EEFFCE39D607F49" Guid="{19DCD7C9-CC5E-4210-97B5-76DC8EC84545}">
+                <File Id="filF24FD9F65FE08098CAFB903725D187C5" KeyPath="yes" Source="$(var.ZynamicsDir)\bindetego\binexport.idc" />
+            </Component>
+            <Component Id="cmpD9C8F0A2285B796B088F418F7F6C4AE9" Directory="dir6256875ED3B425D6DCD317DF9577A329" Guid="{A815C4A6-7943-454B-89FA-9F4ED590DEE9}">
+                <File Id="fil880DDDD6B30318C9160A4968855451D9" KeyPath="yes" Source="$(var.OutputDir)\zynamics_binexport_8.p64" />
+            </Component>
+            <Component Id="cmpBE297F27CDD931183B81A8BAC2815B91" Directory="dir6256875ED3B425D6DCD317DF9577A329" Guid="{E90C0721-0686-4375-BE11-56CEB2F4CCED}">
+                <File Id="fil58B8E8168B33A35B0243D711176F2238" KeyPath="yes" Source="$(var.OutputDir)\zynamics_binexport_8.plw" />
+            </Component>
+        </ComponentGroup>
+    </Fragment>
+    <Fragment>
+        <DirectoryRef Id="dir06708049CB4250A30EEFFCE39D607F49" />
+    </Fragment>
+    <Fragment>
+        <DirectoryRef Id="dir6256875ED3B425D6DCD317DF9577A329" />
+    </Fragment>
+    <Fragment>
+        <DirectoryRef Id="dirD4D32BFC5F17CF8B77B11387139DAF2F">
+            <Directory Id="dir06708049CB4250A30EEFFCE39D607F49" Name="BinExport" />
+        </DirectoryRef>
+    </Fragment>
+    <Fragment>
+        <DirectoryRef Id="dir06708049CB4250A30EEFFCE39D607F49">
+            <Directory Id="dir6256875ED3B425D6DCD317DF9577A329" Name="plugins" />
+        </DirectoryRef>
+    </Fragment>
+</Wix>

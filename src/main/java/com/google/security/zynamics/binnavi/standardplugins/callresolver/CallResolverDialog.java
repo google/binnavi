@@ -345,9 +345,7 @@ public final class CallResolverDialog extends JDialog {
               new ImageIcon(CallResolverDialog.class.getResource("accept.png").toURI().toURL());
           BULLET_IMAGE = new ImageIcon(
               CallResolverDialog.class.getResource("bullet_blue.png").toURI().toURL());
-        } catch (final MalformedURLException e) {
-          e.printStackTrace();
-        } catch (final URISyntaxException e) {
+        } catch (MalformedURLException | URISyntaxException e) {
           e.printStackTrace();
         }
       }

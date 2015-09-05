@@ -1,0 +1,63 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--
+Copyright 2015 Google Inc. All Rights Reserved.
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+-->
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+    <Fragment>
+        <DirectoryRef Id="INSTALLDIR">
+            <Directory Id="dirD5B682714916AD25A60A8579B2B7B63F" Name="tutorials" />
+        </DirectoryRef>
+    </Fragment>
+    <Fragment>
+        <ComponentGroup Id="Tutorials">
+            <Component Id="cmpCCE0EF7DCBF42FAF1F052EF1D5EB5C6B" Directory="dirD5B682714916AD25A60A8579B2B7B63F" Guid="{CBE39E71-053A-4355-BC18-8CB77BD37DE2}">
+                <File Id="fil0FE47B16EEA258E2ED0F0A1F9C227B06" KeyPath="yes" Source="$(var.ZynamicsJavaDir)\binnavi\data\tutorials\01_-_Setting_up_a_Database.xml" />
+            </Component>
+            <Component Id="cmp2B188550628FBF8F3A7A7210B3A6F514" Directory="dirD5B682714916AD25A60A8579B2B7B63F" Guid="{33152288-1399-4C4B-885D-F6939989B431}">
+                <File Id="filE6482DD670897EEDFEE611C7F3DA4925" KeyPath="yes" Source="$(var.ZynamicsJavaDir)\binnavi\data\tutorials\02_-_Importing_Modules.xml" />
+            </Component>
+            <Component Id="cmp867DCCF0FC1E2A9728A0AE1565488868" Directory="dirD5B682714916AD25A60A8579B2B7B63F" Guid="{AA520989-9AA5-4135-B1FC-22CB90BD4FFB}">
+                <File Id="fil0DC8B0515244068B8F5A40233F620E73" KeyPath="yes" Source="$(var.ZynamicsJavaDir)\binnavi\data\tutorials\03_-_Working_with_Modules.xml" />
+            </Component>
+            <Component Id="cmp6AD0A64350B3CA02A4F47C9347A7EB0F" Directory="dirD5B682714916AD25A60A8579B2B7B63F" Guid="{9B0DE1F8-E513-4B10-B4E7-72954EECE89E}">
+                <File Id="fil81D84D57E262194D604C33F8E4252C6A" KeyPath="yes" Source="$(var.ZynamicsJavaDir)\binnavi\data\tutorials\04_-_Working_with_Graphs_I.xml" />
+            </Component>
+            <Component Id="cmp61EB1C64BDA7171D126138AA424C894E" Directory="dirD5B682714916AD25A60A8579B2B7B63F" Guid="{C9DD8951-DA34-444C-A6E3-749BBC1BE726}">
+                <File Id="fil9D094D7738AA95512C07DD5EE148CBD6" KeyPath="yes" Source="$(var.ZynamicsJavaDir)\binnavi\data\tutorials\05_-_Working_with_Graphs_II.xml" />
+            </Component>
+            <Component Id="cmpAD8EB2C57260741CFD2384E61F2A9C29" Directory="dirD5B682714916AD25A60A8579B2B7B63F" Guid="{514A6365-4519-473E-A14C-1D1285AD3912}">
+                <File Id="fil473DF150718F1DC356B8B2230AD010AC" KeyPath="yes" Source="$(var.ZynamicsJavaDir)\binnavi\data\tutorials\06_-_Debugging_Modules.xml" />
+            </Component>
+            <Component Id="cmp98D39D1E4BAA5C02DBF892BF26D63D16" Directory="dirD5B682714916AD25A60A8579B2B7B63F" Guid="{1201AB60-9661-4D31-8950-FB4A843E773C}">
+                <File Id="fil9C5D7C79CFAB5608C78B17562FEA81C9" KeyPath="yes" Source="$(var.ZynamicsJavaDir)\binnavi\data\tutorials\07_-_Working_with_Projects.xml" />
+            </Component>
+            <Component Id="cmpBBCC833DDA673D233DF1017B655D84D8" Directory="dirD5B682714916AD25A60A8579B2B7B63F" Guid="{830D96BB-01DF-49F3-9B6F-FAB9F6CDF711}">
+                <File Id="fil42480C6F831CF0569D8E643A5EB7C1F6" KeyPath="yes" Source="$(var.ZynamicsJavaDir)\binnavi\data\tutorials\08_-_Scripting.xml" />
+            </Component>
+            <Component Id="cmp8317CBB6E7B8F02966B9E47D5E7D9D8E" Directory="dirD5B682714916AD25A60A8579B2B7B63F" Guid="{8AD6679C-1230-4BBA-8418-EF15239064F3}">
+                <File Id="fil39ECE7C2D5CE1763557245318D1F3B6B" KeyPath="yes" Source="$(var.ZynamicsJavaDir)\binnavi\data\tutorials\09_-_Working_with_REIL.xml" />
+            </Component>
+            <Component Id="cmp0ED41FAA85BBEC0B33732F3ED65A59D6" Directory="dirD5B682714916AD25A60A8579B2B7B63F" Guid="{E909C2D4-7A6B-406F-AC71-33191699A8A6}">
+                <File Id="filBA3CAA1A8A6CBF5A32461CF7E8A386E7" KeyPath="yes" Source="$(var.ZynamicsJavaDir)\binnavi\data\tutorials\primes.cpp" />
+            </Component>
+            <Component Id="cmp34D003A8A3B3A95540EACBA6D3907902" Directory="dirD5B682714916AD25A60A8579B2B7B63F" Guid="{652BBCCB-048A-4DB9-B1A1-154795039D45}">
+                <File Id="filEAF6CEC47C5DACD19434568639EC96A8" KeyPath="yes" Source="$(var.ZynamicsJavaDir)\binnavi\data\tutorials\primes.exe" />
+            </Component>
+        </ComponentGroup>
+    </Fragment>
+    <Fragment>
+        <DirectoryRef Id="dirD5B682714916AD25A60A8579B2B7B63F" />
+    </Fragment>
+</Wix>
