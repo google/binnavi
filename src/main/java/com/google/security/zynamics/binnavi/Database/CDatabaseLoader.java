@@ -133,20 +133,18 @@ public final class CDatabaseLoader {
 
       NaviErrorDialog.show(parent, message, description, exception);
     } catch (final InvalidDatabaseVersionException exception) {
-      if (!exception.getVersion().getString().equals("4.0.0")
-          || !exception.getVersion().getString().equals("5.0.0")) {
+      final String exceptionVersion = exception.getVersion().getString();
+      if (!exceptionVersion.equals("4.0.0") || !exceptionVersion.equals("5.0.0")) {
         CMessageBox.showInformation(parent,
             String
                 .format("You are trying to connect to an outdated BinNavi %s database.\n\n"
                     + "Unfortunately you can not upgrade this database. Please create a "
-                    + "new database and export your modules again.", exception.getVersion()
-                    .getString()));
+                    + "new database and export your modules again.", exceptionVersion));
       } else {
         CMessageBox.showInformation(parent,
             String
                 .format("You are trying to connect to an outdated BinNavi %s database.\n\n"
-                    + "You have the option to update the database.", exception.getVersion()
-                    .getString()));
+                    + "You have the option to update the database.", exceptionVersion));
 
         if (JOptionPane.YES_OPTION == CMessageBox.showYesNoQuestion(parent,
             "Do you want to upgrade the database now?\n\n(The upgrade process can take "
