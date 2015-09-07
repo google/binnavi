@@ -91,8 +91,7 @@ public final class Project implements ApiObject<INaviProject>, ViewContainer {
   /**
    * Listeners that are notified about changes in the project.
    */
-  private final ListenerProvider<IProjectListener> m_listeners =
-      new ListenerProvider<IProjectListener>();
+  private final ListenerProvider<IProjectListener> m_listeners = new ListenerProvider<>();
 
   // / @cond INTERNAL
   /**
@@ -428,7 +427,7 @@ public final class Project implements ApiObject<INaviProject>, ViewContainer {
       throw new IllegalStateException("Error: Project is not loaded");
     }
 
-    final List<Function> list = new ArrayList<Function>();
+    final List<Function> list = new ArrayList<>();
 
     for (final AddressSpace addressSpace : m_addressSpaces) {
       if (addressSpace.isLoaded()) {
@@ -610,7 +609,9 @@ public final class Project implements ApiObject<INaviProject>, ViewContainer {
 
         addComma = true;
 
-        spacesString.append("'" + addressSpace.getName() + "'");
+        spacesString.append("'");
+        spacesString.append(addressSpace.getName());
+        spacesString.append("'");
       }
     } else {
       spacesString.append(
