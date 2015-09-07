@@ -148,18 +148,13 @@ public class PostgreSQLHelpers {
   public static int getBackendPID(final CConnection connection) {
     Preconditions.checkNotNull(connection, "IE02410: connection argument can not be null");
 
-    try {
-      final String query = "SELECT pg_backend_pid() AS pid";
+    final String query = "SELECT pg_backend_pid() AS pid";
+    try (ResultSet pidResult = connection.executeQuery(query, true)) {
 
-      final ResultSet pidResult = connection.executeQuery(query, true);
-
-      try {
         while (pidResult.next()) {
           return pidResult.getInt("pid");
         }
-      } finally {
-        pidResult.close();
-      }
+
     } catch (final SQLException exception) {
       CUtilityFunctions.logException(exception);
     }
@@ -206,18 +201,13 @@ public class PostgreSQLHelpers {
     Preconditions.checkNotNull(connection, "IE00602: Connection argument can not be null");
     Preconditions.checkArgument(id >= 0, "IE00605: Id argument can not less then zero");
 
-    try {
-      final String query = "SELECT modification_date FROM " + targetTable + " WHERE id = " + id;
+    final String query = "SELECT modification_date FROM " + targetTable + " WHERE id = " + id;
+    try (ResultSet dateResult = connection.executeQuery(query, true)) {
 
-      final ResultSet dateResult = connection.executeQuery(query, true);
-
-      try {
         while (dateResult.next()) {
           return dateResult.getTimestamp("modification_date");
         }
-      } finally {
-        dateResult.close();
-      }
+      
     } catch (final SQLException e) {
       throw new CouldntLoadDataException(e);
     }
@@ -250,21 +240,14 @@ public class PostgreSQLHelpers {
 
     final IFilledList<INaviView> views = new FilledList<INaviView>();
 
-    try {
-      final ResultSet resultSet = connection.executeQuery(query, true);
-
-      try {
+    try (ResultSet resultSet = connection.executeQuery(query, true)) {
+        
         while (resultSet.next()) {
           final int containerId = resultSet.getInt(columnName);
           final int viewId = resultSet.getInt("view_id");
-
           final INaviView view = finder.findView(containerId, viewId);
-
           views.add(view);
         }
-      } finally {
-        resultSet.close();
-      }
 
       return views;
     } catch (final SQLException exception) {
@@ -292,14 +275,10 @@ public class PostgreSQLHelpers {
         + " (SELECT oid FROM pg_class WHERE relname = '%s') AND attname = '%s';", tableName,
         columnName);
 
-    try {
-      final ResultSet result = connection.executeQuery(query, true);
+    try (ResultSet result = connection.executeQuery(query, true)) {
 
-      try {
-        return result.first();
-      } finally {
-        result.close();
-      }
+      return result.first();
+
     } catch (final SQLException e) {
       return false;
     }
@@ -322,14 +301,10 @@ public class PostgreSQLHelpers {
 
     final String query = "SELECT relname FROM pg_class WHERE relname = '" + tableName + "'";
 
-    try {
-      final ResultSet result = connection.executeQuery(query, true);
+    try (ResultSet result = connection.executeQuery(query, true)) {
 
-      try {
-        return result.first();
-      } finally {
-        result.close();
-      }
+      return result.first();
+      
     } catch (final SQLException e) {
       throw new CouldntLoadDataException(e);
     }
@@ -358,16 +333,12 @@ public class PostgreSQLHelpers {
     builder.deleteCharAt(builder.length() - 1);
     builder.append(")");
 
-    try {
-      final ResultSet result = connection.executeQuery(builder.toString(), true);
+    try (ResultSet result = connection.executeQuery(builder.toString(), true)) {
 
-      try {
         while (result.next()) {
           return result.getInt("count");
         }
-      } finally {
-        result.close();
-      }
+      
     } catch (final SQLException e) {
       throw new CouldntLoadDataException(e);
     }
@@ -449,17 +420,12 @@ public class PostgreSQLHelpers {
     final String query =
         "UPDATE " + table + " SET description = ?, modification_date = NOW() WHERE id = ?";
 
-    try {
-      final PreparedStatement statement = connection.getConnection().prepareStatement(query);
-
-      try {
-        statement.setString(1, description);
-        statement.setInt(2, id);
-
-        statement.executeUpdate();
-      } finally {
-        statement.close();
-      }
+    try (PreparedStatement statement = connection.getConnection().prepareStatement(query)) {
+    
+      statement.setString(1, description);
+      statement.setInt(2, id);
+      statement.executeUpdate();
+      
     } catch (final SQLException e) {
       throw new CouldntSaveDataException(e);
     }
@@ -487,17 +453,12 @@ public class PostgreSQLHelpers {
     final String query =
         "UPDATE " + tableName + " SET name = ?, modification_date = NOW() WHERE id = ?";
 
-    try {
-      final PreparedStatement statement = connection.getConnection().prepareStatement(query);
-
-      try {
-        statement.setString(1, name);
-        statement.setInt(2, id);
-
-        statement.executeUpdate();
-      } finally {
-        statement.close();
-      }
+    try (PreparedStatement statement = connection.getConnection().prepareStatement(query)) {
+    
+      statement.setString(1, name);
+      statement.setInt(2, id);
+      statement.executeUpdate();
+      
     } catch (final SQLException e) {
       throw new CouldntSaveDataException(e);
     }
@@ -519,15 +480,11 @@ public class PostgreSQLHelpers {
 
     final String query = "UPDATE " + tableName + " SET modification_date = NOW() WHERE id = ?";
 
-    try {
-      final PreparedStatement statement = connection.getConnection().prepareStatement(query);
-      try {
-        statement.setInt(1, id);
-
-        statement.executeUpdate();
-      } finally {
-        statement.close();
-      }
+    try (PreparedStatement statement = connection.getConnection().prepareStatement(query)) {
+      
+      statement.setInt(1, id);
+      statement.executeUpdate();
+      
     } catch (final SQLException e) {
       throw new CouldntSaveDataException(e);
     }
