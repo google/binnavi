@@ -100,10 +100,9 @@ public final class OperandTreeNode {
       final Integer instanceId,
       final int operandPosition,
       final IAddress address) {
-    Preconditions.checkNotNull(value, "IE01298: Value argument can not be null");
+    m_value = Preconditions.checkNotNull(value, "IE01298: Value argument can not be null");
     m_id = operandId;
     m_type = type;
-    m_value = value;
     m_parentId = parentId;
     m_replacement = replacement;
     m_reference = references;
