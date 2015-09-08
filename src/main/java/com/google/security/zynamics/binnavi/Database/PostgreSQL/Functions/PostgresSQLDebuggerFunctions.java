@@ -71,30 +71,23 @@ public final class PostgresSQLDebuggerFunctions {
 
     final CConnection connection = provider.getConnection();
 
-    try {
-      final String query =
+    final String query =
           "INSERT INTO " + CTableNames.DEBUGGERS_TABLE
               + "(name, host, port) VALUES(?, ?, ?) RETURNING id";
-
-      final PreparedStatement statement = connection.getConnection().prepareStatement(query);
+              
+    try (PreparedStatement statement = connection.getConnection().prepareStatement(query);
+         ResultSet resultSet = statement.executeQuery()) {
 
       statement.setString(1, name);
       statement.setString(2, host);
       statement.setInt(3, port);
 
-      final ResultSet resultSet = statement.executeQuery();
-
       int id = -1;
 
-      try {
         while (resultSet.next()) {
           id = resultSet.getInt("id");
         }
-      } finally {
-        resultSet.close();
-        statement.close();
-      }
-
+      
       return new DebuggerTemplate(id, name, host, port, provider);
 
     } catch (final SQLException e) {
@@ -139,10 +132,8 @@ public final class PostgresSQLDebuggerFunctions {
     final CConnection connection = provider.getConnection();
     final String query = "SELECT * FROM " + CTableNames.DEBUGGERS_TABLE;
 
-    try {
-      final ResultSet resultSet = connection.executeQuery(query, true);
-
-      try {
+    try (ResultSet resultSet = connection.executeQuery(query, true)) {
+        
         while (resultSet.next()) {
           final DebuggerTemplate debugger =
               new DebuggerTemplate(resultSet.getInt("id"), PostgreSQLHelpers.readString(resultSet,
@@ -151,9 +142,7 @@ public final class PostgresSQLDebuggerFunctions {
 
           manager.addDebugger(debugger);
         }
-      } finally {
-        resultSet.close();
-      }
+        
     } catch (final SQLException e) {
       throw new CouldntLoadDataException(e);
     }
@@ -179,18 +168,13 @@ public final class PostgresSQLDebuggerFunctions {
 
     final String query = "UPDATE " + CTableNames.DEBUGGERS_TABLE + " SET host = ? WHERE id = ?";
 
-    try {
-      final PreparedStatement statement =
-          provider.getConnection().getConnection().prepareStatement(query);
-
-      try {
+    try (PreparedStatement statement =
+          provider.getConnection().getConnection().prepareStatement(query)) {
+      
         statement.setString(1, host);
         statement.setInt(2, debugger.getId());
-
         statement.executeUpdate();
-      } finally {
-        statement.close();
-      }
+      
     } catch (final SQLException e) {
       throw new CouldntSaveDataException(e);
     }
@@ -215,18 +199,13 @@ public final class PostgresSQLDebuggerFunctions {
         "IE00427: Debugger is not part of this database");
     final String query = "UPDATE " + CTableNames.DEBUGGERS_TABLE + " SET name = ? WHERE id = ?";
 
-    try {
-      final PreparedStatement statement =
-          provider.getConnection().getConnection().prepareStatement(query);
+    try (PreparedStatement statement =
+          provider.getConnection().getConnection().prepareStatement(query)) {
 
-      try {
         statement.setString(1, name);
         statement.setInt(2, debugger.getId());
-
         statement.executeUpdate();
-      } finally {
-        statement.close();
-      }
+      
     } catch (final SQLException e) {
       throw new CouldntSaveDataException(e);
     }
@@ -253,19 +232,13 @@ public final class PostgresSQLDebuggerFunctions {
 
     final String query = "UPDATE " + CTableNames.DEBUGGERS_TABLE + " SET port = ? WHERE id = ?";
 
-    try {
-      final PreparedStatement statement =
-          provider.getConnection().getConnection().prepareStatement(query);
-
-      try {
+    try (PreparedStatement statement =
+          provider.getConnection().getConnection().prepareStatement(query)) {
+      
         statement.setInt(1, port);
         statement.setInt(2, debugger.getId());
-
         statement.executeUpdate();
-      } finally {
-        statement.close();
-      }
-
+      
     } catch (final SQLException e) {
       throw new CouldntSaveDataException(e);
     }
