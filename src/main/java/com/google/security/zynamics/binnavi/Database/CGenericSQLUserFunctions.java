@@ -54,19 +54,15 @@ public class CGenericSQLUserFunctions {
 
     CUser user = null;
 
-    try {
-      final PreparedStatement statement = connection.prepareStatement(query);
-
-      try {
+    try (PreparedStatement statement = connection.prepareStatement(query);
+         ResultSet resultSet = statement.executeQuery()) {
+        
         statement.setString(1, userName);
-        final ResultSet resultSet = statement.executeQuery();
-
+       
         while (resultSet.next()) {
           user = new CUser(resultSet.getInt(1), userName);
         }
-      } finally {
-        statement.close();
-      }
+     
     } catch (final SQLException exception) {
       throw new CouldntSaveDataException(exception);
     }
@@ -91,15 +87,10 @@ public class CGenericSQLUserFunctions {
 
     final String query = "DELETE FROM " + CTableNames.USER_TABLE + " WHERE user_id = ?;";
 
-    try {
-      final PreparedStatement statement = connection.prepareStatement(query);
-
-      try {
+    try (PreparedStatement statement = connection.prepareStatement(query)) {
+     
         statement.setInt(1, user.getUserId());
         statement.execute();
-      } finally {
-        statement.close();
-      }
 
     } catch (final SQLException exception) {
       throw new CouldntDeleteException(exception);
@@ -127,17 +118,11 @@ public class CGenericSQLUserFunctions {
     final String query =
         "UPDATE " + CTableNames.USER_TABLE + " SET user_name = ? WHERE user_id = ?;";
 
-    try {
-      final PreparedStatement statement = connection.prepareStatement(query);
-
-      try {
+    try (PreparedStatement statement = connection.prepareStatement(query)) {
+      
         statement.setString(1, userName);
         statement.setInt(2, user.getUserId());
-
         statement.execute();
-      } finally {
-        statement.close();
-      }
 
     } catch (final SQLException exception) {
       throw new CouldntSaveDataException(exception);
@@ -161,15 +146,13 @@ public class CGenericSQLUserFunctions {
 
     final String query = "SELECT user_id, user_name FROM " + CTableNames.USER_TABLE;
 
-    final ArrayList<IUser> users = new ArrayList<IUser>();
+    final ArrayList<IUser> users = new ArrayList<>();
 
-    try {
-      final ResultSet resultSet = connection.executeQuery(query, true);
-
+    try (ResultSet resultSet = connection.executeQuery(query, true)) {
+    
       while (resultSet.next()) {
         final int userId = resultSet.getInt(1);
         final String userName = resultSet.getString(2);
-
         users.add(new CUser(userId, userName));
       }
 
