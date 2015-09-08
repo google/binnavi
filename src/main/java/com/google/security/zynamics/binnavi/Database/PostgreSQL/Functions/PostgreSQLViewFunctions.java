@@ -120,21 +120,21 @@ public final class PostgreSQLViewFunctions {
       return views;
     }
 
-    try {
+    final String query = "SELECT * FROM get_derived_views(?)";
+    try (PreparedStatement statement =
+          provider.getConnection().getConnection().prepareStatement(query);
+         ResultSet resultSet = statement.executeQuery()) {
+   
       // TODO(timkornau): this should be changed to the ViewManager.
       final List<INaviView> moduleViews =
           view.getConfiguration().getModule().getContent().getViewContainer().getViews();
 
-      final String query = "SELECT * FROM get_derived_views(?)";
-      final PreparedStatement statement =
-          provider.getConnection().getConnection().prepareStatement(query);
       statement.setInt(1, view.getConfiguration().getId());
 
-      final ResultSet resultSet = statement.executeQuery();
       if (resultSet == null) {
         return views;
       }
-      try {
+
         while (resultSet.next()) {
           final int viewId = resultSet.getInt(1);
 
@@ -147,9 +147,6 @@ public final class PostgreSQLViewFunctions {
             }
           }
         }
-      } finally {
-        resultSet.close();
-      }
 
       return views;
     } catch (final SQLException e) {
@@ -196,21 +193,17 @@ public final class PostgreSQLViewFunctions {
         "SELECT name, value FROM " + CTableNames.VIEW_SETTINGS_TABLE + " WHERE view_id = "
             + view.getConfiguration().getId();
 
-    try {
-      final ResultSet resultSet = connection.executeQuery(query, true);
+    try (ResultSet resultSet = connection.executeQuery(query, true)) {
 
-      final HashMap<String, String> settings = new HashMap<String, String>();
+      final HashMap<String, String> settings = new HashMap<>();
 
-      try {
         while (resultSet.next()) {
           settings.put(PostgreSQLHelpers.readString(resultSet, "name"),
               PostgreSQLHelpers.readString(resultSet, "value"));
         }
 
         return settings;
-      } finally {
-        resultSet.close();
-      }
+
     } catch (final SQLException exception) {
       throw new CouldntLoadDataException(exception);
     }
