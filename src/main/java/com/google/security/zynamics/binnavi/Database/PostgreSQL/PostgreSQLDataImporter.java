@@ -56,8 +56,9 @@ public final class PostgreSQLDataImporter {
       throws SQLException {
     Preconditions.checkNotNull(connection, "IE00207: provider argument can not be null");
 
+    final String query = "SELECT architecture FROM modules WHERE id = " + rawModuleId;
     try (ResultSet resultSet =
-        connection.executeQuery("SELECT architecture FROM modules WHERE id = " + rawModuleId, true)) {
+        connection.executeQuery(query, true)) {
       while (resultSet.next()) {
         return PostgreSQLHelpers.readString(resultSet, "architecture");
       }
