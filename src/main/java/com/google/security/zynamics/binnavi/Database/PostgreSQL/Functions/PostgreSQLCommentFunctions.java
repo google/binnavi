@@ -59,21 +59,15 @@ public class PostgreSQLCommentFunctions {
 
     final String function = "{ call edit_comment(?, ?, ?) }";
 
-    try {
-      final CallableStatement editCommentFunction =
-          provider.getConnection().getConnection().prepareCall(function);
-      try {
+    try (CallableStatement editCommentFunction =
+          provider.getConnection().getConnection().prepareCall(function)) {
+    
         editCommentFunction.setInt(1, commentId);
         editCommentFunction.setInt(2, userId);
         editCommentFunction.setString(3, newComment);
 
         editCommentFunction.execute();
 
-      } catch (final SQLException exception) {
-        throw new CouldntSaveDataException(exception);
-      } finally {
-        editCommentFunction.close();
-      }
     } catch (final SQLException exception) {
       throw new CouldntSaveDataException(exception);
     }
@@ -93,15 +87,13 @@ public class PostgreSQLCommentFunctions {
 
     Preconditions.checkNotNull(provider, "IE00440: connection argument can not be null");
 
-    final HashMap<Integer, IComment> commentIdToComment = new HashMap<Integer, IComment>();
-    final ArrayList<IComment> comments = new ArrayList<IComment>();
+    final HashMap<Integer, IComment> commentIdToComment = new HashMap<>();
+    final ArrayList<IComment> comments = new ArrayList<>();
 
     final String commentQuery = "SELECT * FROM get_all_comment_ancestors(" + commentRootId + ");";
 
-    try {
-      final ResultSet resultSet = provider.getConnection().executeQuery(commentQuery, true);
-
-      try {
+    try (ResultSet resultSet = provider.getConnection().executeQuery(commentQuery, true)) {
+    
         while (resultSet.next()) {
           resultSet.getInt("level");
           final int commentId = resultSet.getInt("id");
@@ -117,10 +109,7 @@ public class PostgreSQLCommentFunctions {
           commentIdToComment.put(commentId, comment);
           comments.add(comment);
         }
-      } finally {
-        resultSet.close();
-      }
-
+      
     } catch (final SQLException exception) {
       throw new CouldntLoadDataException(exception);
     }
@@ -147,20 +136,17 @@ public class PostgreSQLCommentFunctions {
     Preconditions.checkNotNull(commentIds, "IE00481: commentIds argument can not be null");
 
     final String query = "SELECT * FROM get_all_comment_ancestors_multiple(?)";
-    final HashMap<Integer, IComment> commentIdToComment = new HashMap<Integer, IComment>();
+    final HashMap<Integer, IComment> commentIdToComment = new HashMap<>();
     final Object[] commentIdsArray = commentIds.toArray();
-    final HashMap<Integer, ArrayList<IComment>> commentIdToComments =
-        new HashMap<Integer, ArrayList<IComment>>();
+    final HashMap<Integer, ArrayList<IComment>> commentIdToComments = new HashMap<>();
 
-    try {
-
-      final PreparedStatement statement =
+    try (PreparedStatement statement =
           provider.getConnection().getConnection().prepareCall(query);
+         ResultSet resultSet = statement.executeQuery()) {
+
       statement.setArray(1,
           provider.getConnection().getConnection().createArrayOf("int4", commentIdsArray));
-      final ResultSet resultSet = statement.executeQuery();
 
-      try {
         while (resultSet.next()) {
           final int rootComment = resultSet.getInt("commentid");
           resultSet.getInt("level");
@@ -180,9 +166,7 @@ public class PostgreSQLCommentFunctions {
             commentIdToComments.put(rootComment, Lists.<IComment>newArrayList(comment));
           }
         }
-      } finally {
-        statement.close();
-      }
+     
     } catch (final SQLException exception) {
       throw new CouldntLoadDataException(exception);
     }
