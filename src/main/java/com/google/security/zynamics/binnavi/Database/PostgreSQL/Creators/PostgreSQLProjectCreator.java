@@ -91,10 +91,7 @@ public final class PostgreSQLProjectCreator {
 
     NaviLogger.info("Creating new project %s", name);
 
-    try {
-      final String query =
-
-          "INSERT INTO "
+      final String query = "INSERT INTO "
               + CTableNames.PROJECTS_TABLE
               + "(name, description, creation_date, modification_date) VALUES(?, '', NOW(), NOW()) RETURNING id";
 
