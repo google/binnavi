@@ -150,9 +150,8 @@ public class IntegrationTestSetup {
    * database are initialized. This order is essential to avoid foreign key violations.
    *
    * @param databaseName The name of the database to create.
-   * @throws IOException if the {@link FileReader reader} could not be closed.
    */
-  private void createDatabase(final String databaseName) throws IOException {
+  private void createDatabase(final String databaseName) {
 
     try {
       final Connection connection =
@@ -220,7 +219,7 @@ public class IntegrationTestSetup {
    * @throws SQLException if one of the queries for drop or create fail.
    * @throws IOException
    */
-  public void createIntegrationTestDatabase() throws SQLException, IOException {
+  public void createIntegrationTestDatabase() throws SQLException {
 
     final Connection connection = DriverManager.getConnection(url + "postgres", databaseProperties);
 
