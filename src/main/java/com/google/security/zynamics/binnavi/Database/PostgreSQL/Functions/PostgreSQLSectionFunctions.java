@@ -72,11 +72,9 @@ public class PostgreSQLSectionFunctions {
     Preconditions.checkNotNull(endAddress, "Error: endAddress argument can not be null");
     Preconditions.checkNotNull(permission, "Error: permission argument can not be null");
 
-    try {
+    try (CallableStatement createSectionProcedure = connection.prepareCall(query)) {
       final String query = " { ? = call create_section( ?, ?, ?, ?, ?, ?, ?) } ";
 
-      final CallableStatement createSectionProcedure = connection.prepareCall(query);
-      try {
         createSectionProcedure.registerOutParameter(1, Types.INTEGER);
 
         createSectionProcedure.setInt(2, moduleId);
@@ -97,9 +95,7 @@ public class PostgreSQLSectionFunctions {
           throw new CouldntSaveDataException("Error: Got a section id of null from the database.");
         }
         return sectionId;
-      } finally {
-        createSectionProcedure.close();
-      }
+ 
     } catch (final SQLException exception) {
       throw new CouldntSaveDataException(exception);
     }
@@ -121,16 +117,14 @@ public class PostgreSQLSectionFunctions {
 
     final String query = " { call delete_section(?, ?) } ";
 
-    try {
-      final CallableStatement procedure =
-          provider.getConnection().getConnection().prepareCall(query);
+    try (CallableStatement procedure =
+          provider.getConnection().getConnection().prepareCall(query)) {
+     
       procedure.setInt(1, section.getModule().getConfiguration().getId());
       procedure.setInt(2, section.getId());
-      try {
-        procedure.execute();
-      } finally {
-        procedure.close();
-      }
+    
+      procedure.execute();
+      
     } catch (final SQLException exception) {
       throw new CouldntLoadDataException(exception);
     }
@@ -153,13 +147,13 @@ public class PostgreSQLSectionFunctions {
 
     final HashMap<Section, Integer> sections = Maps.newHashMap();
 
-    try {
-      final String query = "SELECT * FROM get_sections(?)";
-      final PreparedStatement statement =
+    final String query = "SELECT * FROM get_sections(?)";
+    try (PreparedStatement statement =
           provider.getConnection().getConnection().prepareStatement(query);
+         ResultSet result = statement.executeQuery()) {
+      
       statement.setInt(1, module.getConfiguration().getId());
-      try {
-        final ResultSet result = statement.executeQuery();
+
         while (result.next()) {
           final int id = result.getInt("id");
           final String name = result.getString("name");
@@ -175,12 +169,11 @@ public class PostgreSQLSectionFunctions {
           sections.put(new Section(id, name, CommentManager.get(provider), module, startAddress,
               endAddress, permission, data), commentId);
         }
-      } finally {
-        statement.close();
-      }
+      
     } catch (final SQLException exception) {
       throw new CouldntLoadDataException(exception);
     }
+    
     return sections;
   }
 
@@ -202,17 +195,14 @@ public class PostgreSQLSectionFunctions {
         "Error: section id must be greater or equal than zero");
     Preconditions.checkNotNull(name, "Error: name argument can not be null");
 
-    try {
-      final String query = " { call set_section_name(?, ?, ?) } ";
-      final CallableStatement procedure = connection.prepareCall(query);
-      try {
+    final String query = " { call set_section_name(?, ?, ?) } ";
+    try (CallableStatement procedure = connection.prepareCall(query)) {
+     
         procedure.setInt(1, moduleId);
         procedure.setInt(2, sectionId);
         procedure.setString(3, name);
         procedure.execute();
-      } finally {
-        procedure.close();
-      }
+     
     } catch (final SQLException exception) {
       throw new CouldntSaveDataException(exception);
     }
@@ -246,17 +236,14 @@ public class PostgreSQLSectionFunctions {
 
     final String function = " { ? = call append_section_comment(?, ?, ?, ?) } ";
 
-    try {
-      final CallableStatement appendCommentFunction =
-          connection.getConnection().prepareCall(function);
-
-      try {
+    try (CallableStatement appendCommentFunction =
+          connection.getConnection().prepareCall(function)) {
+      
         appendCommentFunction.registerOutParameter(1, Types.INTEGER);
         appendCommentFunction.setInt(2, moduleId);
         appendCommentFunction.setInt(3, sectionId);
         appendCommentFunction.setInt(4, userId);
         appendCommentFunction.setString(5, commentText);
-
         appendCommentFunction.execute();
 
         final int commentId = appendCommentFunction.getInt(1);
@@ -264,9 +251,6 @@ public class PostgreSQLSectionFunctions {
           throw new CouldntSaveDataException("Error: Got an comment id of null from the database");
         }
         return commentId;
-      } finally {
-        appendCommentFunction.close();
-      }
 
     } catch (final SQLException exception) {
       throw new CouldntSaveDataException(exception);
@@ -296,29 +280,20 @@ public class PostgreSQLSectionFunctions {
 
     final String function = " { ? = call delete_section_comment(?, ?, ?, ?) } ";
 
-    try {
+    try (CallableStatement deleteCommentStatement =
+          provider.getConnection().getConnection().prepareCall(function)) {
 
-      final CallableStatement deleteCommentStatement =
-          provider.getConnection().getConnection().prepareCall(function);
-
-      try {
         deleteCommentStatement.registerOutParameter(1, Types.INTEGER);
         deleteCommentStatement.setInt(2, moduleId);
         deleteCommentStatement.setInt(3, sectionId);
         deleteCommentStatement.setInt(4, commentId);
         deleteCommentStatement.setInt(5, userId);
-
         deleteCommentStatement.execute();
-
         deleteCommentStatement.getInt(1);
         if (deleteCommentStatement.wasNull()) {
           throw new IllegalArgumentException(
               "Error: The comment id returned from the database was null.");
         }
-
-      } finally {
-        deleteCommentStatement.close();
-      }
 
     } catch (final SQLException exception) {
       throw new CouldntDeleteException(exception);
