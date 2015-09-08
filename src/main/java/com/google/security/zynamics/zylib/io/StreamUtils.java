@@ -39,8 +39,8 @@ public class StreamUtils {
    * @throws IOException if an IO error occurs.
    */
   public static List<String> readLinesFromReader(final Reader reader) throws IOException {
-    final BufferedReader br = new BufferedReader(reader);
-    try {
+  
+    try (BufferedReader br = new BufferedReader(reader)) {
       final List<String> lines = new ArrayList<String>();
       String line;
       while (true) {
@@ -50,8 +50,6 @@ public class StreamUtils {
         }
         lines.add(line);
       }
-    } finally {
-      br.close();
     }
   }
 }

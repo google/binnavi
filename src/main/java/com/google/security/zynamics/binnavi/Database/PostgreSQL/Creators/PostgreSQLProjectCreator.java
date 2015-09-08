@@ -55,9 +55,7 @@ public final class PostgreSQLProjectCreator {
         "select id, name, description, creation_date, modification_date from "
             + CTableNames.PROJECTS_TABLE + " where id = " + projectId;
 
-    final ResultSet resultSet = provider.getConnection().executeQuery(query, true);
-
-    try {
+    try (ResultSet resultSet = provider.getConnection().executeQuery(query, true)) {
       while (resultSet.next()) {
         final String name = PostgreSQLHelpers.readString(resultSet, "name");
         final String description = PostgreSQLHelpers.readString(resultSet, "description");
@@ -68,10 +66,8 @@ public final class PostgreSQLProjectCreator {
         return new CProject(projectId, name, description, creationDate, modificationDate,
             addressSpaceCount, new ArrayList<DebuggerTemplate>(), provider);
       }
-    } finally {
-      resultSet.close();
     }
-
+    
     return null;
   }
 
@@ -95,42 +91,29 @@ public final class PostgreSQLProjectCreator {
 
     NaviLogger.info("Creating new project %s", name);
 
-    try {
-      final String query =
-
-          "INSERT INTO "
+      final String query = "INSERT INTO "
               + CTableNames.PROJECTS_TABLE
               + "(name, description, creation_date, modification_date) VALUES(?, '', NOW(), NOW()) RETURNING id";
 
-
-      final PreparedStatement statement =
+        try (PreparedStatement statement =
           connection.getConnection().prepareStatement(query, ResultSet.TYPE_SCROLL_INSENSITIVE,
               ResultSet.CONCUR_READ_ONLY);
-
-      try {
+           ResultSet resultSet = statement.executeQuery()) {
         statement.setString(1, name);
-
-        final ResultSet resultSet = statement.executeQuery();
 
         Integer id = null;
 
-        try {
           while (resultSet.next()) {
             if (resultSet.isFirst()) {
               id = resultSet.getInt(1);
               break;
             }
           }
-        } finally {
-          resultSet.close();
-        }
+        
         Preconditions.checkNotNull(id,
             "IE02044: Error id for a project after creation may not be null");
 
         return PostgreSQLProjectCreator.loadProject(provider, id);
-      } finally {
-        statement.close();
-      }
     } catch (final SQLException e) {
       throw new CouldntSaveDataException(e);
     }
