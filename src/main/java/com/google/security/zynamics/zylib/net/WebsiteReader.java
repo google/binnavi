@@ -50,27 +50,19 @@ public class WebsiteReader {
 
     conn.setDoOutput(true);
 
-    final OutputStreamWriter wr = new OutputStreamWriter(conn.getOutputStream());
-    try {
+    try (OutputStreamWriter wr = new OutputStreamWriter(conn.getOutputStream())) {
       wr.write(encodedData);
       wr.flush();
-    } finally {
-      wr.close();
     }
 
     // Get the response
-    final BufferedReader rd = new BufferedReader(new InputStreamReader(conn.getInputStream()));
-
     final StringBuilder ret = new StringBuilder();
-
     String line;
 
-    try {
+    try (BufferedReader rd = new BufferedReader(new InputStreamReader(conn.getInputStream()))) {
       while ((line = rd.readLine()) != null) {
         ret.append(line);
       }
-    } finally {
-      rd.close();
     }
 
     return ret.toString();
