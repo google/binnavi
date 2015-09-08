@@ -72,11 +72,10 @@ public class PostgreSQLSectionFunctions {
     Preconditions.checkNotNull(endAddress, "Error: endAddress argument can not be null");
     Preconditions.checkNotNull(permission, "Error: permission argument can not be null");
 
+    final String query = " { ? = call create_section( ?, ?, ?, ?, ?, ?, ?) } ";
     try (CallableStatement createSectionProcedure = connection.prepareCall(query)) {
-      final String query = " { ? = call create_section( ?, ?, ?, ?, ?, ?, ?) } ";
 
         createSectionProcedure.registerOutParameter(1, Types.INTEGER);
-
         createSectionProcedure.setInt(2, moduleId);
         createSectionProcedure.setString(3, name);
         if (commentId == null) {
