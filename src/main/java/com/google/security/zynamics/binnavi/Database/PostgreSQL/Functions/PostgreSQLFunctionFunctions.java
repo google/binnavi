@@ -68,17 +68,13 @@ public final class PostgreSQLFunctionFunctions {
 
     final String storedProcedure = " { ? = call append_function_comment( ?, ?, ?, ?) } ";
 
-    try {
-      final CallableStatement appendCommentProcedure = connection.prepareCall(storedProcedure);
+    try (CallableStatement appendCommentProcedure = connection.prepareCall(storedProcedure)) {
 
-      try {
         appendCommentProcedure.registerOutParameter(1, Types.INTEGER);
-
         appendCommentProcedure.setInt(2, moduleId);
         appendCommentProcedure.setObject(3, function.getAddress().toBigInteger(), Types.BIGINT);
         appendCommentProcedure.setInt(4, userId);
         appendCommentProcedure.setString(5, commentText);
-
         appendCommentProcedure.execute();
 
         final int commentId = appendCommentProcedure.getInt(1);
@@ -86,9 +82,6 @@ public final class PostgreSQLFunctionFunctions {
           throw new CouldntSaveDataException("Error: Got an comment id of null from the database");
         }
         return commentId;
-      } finally {
-        appendCommentProcedure.close();
-      }
     } catch (final SQLException exception) {
       throw new CouldntSaveDataException(exception);
     }
@@ -116,27 +109,20 @@ public final class PostgreSQLFunctionFunctions {
 
     final String deleteFunction = " { ? = call delete_function_comment(?, ?, ?, ?) } ";
 
-    try {
-      final CallableStatement deleteCommentStatement =
-          provider.getConnection().getConnection().prepareCall(deleteFunction);
+    try (CallableStatement deleteCommentStatement =
+          provider.getConnection().getConnection().prepareCall(deleteFunction)) {
 
-      try {
         deleteCommentStatement.registerOutParameter(1, Types.INTEGER);
         deleteCommentStatement.setInt(2, function.getModule().getConfiguration().getId());
         deleteCommentStatement.setObject(3, function.getAddress().toBigInteger(), Types.BIGINT);
         deleteCommentStatement.setInt(4, commentId);
         deleteCommentStatement.setInt(5, userId);
-
         deleteCommentStatement.execute();
-
         deleteCommentStatement.getInt(1);
         if (deleteCommentStatement.wasNull()) {
           throw new IllegalArgumentException(
               "Error: The comment id returned by the database was null");
         }
-      } finally {
-        deleteCommentStatement.close();
-      }
     } catch (final SQLException exception) {
       throw new CouldntDeleteException(exception);
     }
@@ -192,11 +178,9 @@ public final class PostgreSQLFunctionFunctions {
     final String query = "UPDATE " + CTableNames.FUNCTIONS_TABLE + " SET parent_module_id = ?, "
         + " parent_module_function = ? WHERE module_id = ? AND address = ?";
 
-    try {
-      final PreparedStatement statement =
-          provider.getConnection().getConnection().prepareStatement(query);
+    try (PreparedStatement statement =
+          provider.getConnection().getConnection().prepareStatement(query)) {
 
-      try {
         if (parentModuleId != null) {
           statement.setInt(1, parentModuleId);
         } else {
@@ -209,12 +193,7 @@ public final class PostgreSQLFunctionFunctions {
         }
         statement.setInt(3, source.getModule().getConfiguration().getId());
         statement.setObject(4, source.getAddress().toBigInteger().toString(), Types.BIGINT);
-
         statement.execute();
-
-      } finally {
-        statement.close();
-      }
 
     } catch (final SQLException e) {
       throw new CouldntSaveDataException(e);
@@ -250,18 +229,13 @@ public final class PostgreSQLFunctionFunctions {
     final String query = "UPDATE " + CTableNames.FUNCTIONS_TABLE
         + " SET description = ? WHERE module_id = ? AND address = ?";
 
-    try {
-      final PreparedStatement statement = connection.getConnection().prepareStatement(query);
+    try (PreparedStatement statement = connection.getConnection().prepareStatement(query)) {
 
-      try {
         statement.setString(1, description);
         statement.setInt(2, module);
         statement.setObject(3, address.toBigInteger(), Types.BIGINT);
-
         statement.executeUpdate();
-      } finally {
-        statement.close();
-      }
+        
     } catch (final SQLException exception) {
       throw new CouldntSaveDataException(exception);
     }
@@ -295,18 +269,13 @@ public final class PostgreSQLFunctionFunctions {
     final String query = "UPDATE " + CTableNames.FUNCTIONS_TABLE
         + " SET name = ? WHERE module_id = ? and address = ?";
 
-    try {
-      final PreparedStatement statement = connection.getConnection().prepareStatement(query);
+    try (PreparedStatement statement = connection.getConnection().prepareStatement(query)) {
 
-      try {
         statement.setString(1, name);
         statement.setInt(2, module);
         statement.setObject(3, address.toBigInteger(), java.sql.Types.BIGINT);
-
         statement.executeUpdate();
-      } finally {
-        statement.close();
-      }
+      
     } catch (final SQLException exception) {
       throw new CouldntSaveDataException(exception);
     }

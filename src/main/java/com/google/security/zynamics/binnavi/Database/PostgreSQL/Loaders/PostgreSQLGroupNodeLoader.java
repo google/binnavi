@@ -74,9 +74,7 @@ public final class PostgreSQLGroupNodeLoader {
             + " FROM " + CTableNames.NODES_TABLE + " JOIN " + CTableNames.GROUP_NODES_TABLE
             + " ON id = node_id WHERE view_id = " + view.getConfiguration().getId();
 
-    final ResultSet resultSet = provider.getConnection().executeQuery(query, true);
-
-    try {
+    try (ResultSet resultSet = provider.getConnection().executeQuery(query, true)) {
       while (resultSet.next()) {
         final int nodeId = resultSet.getInt("id");
         Integer commentId = resultSet.getInt("comment_id");
@@ -115,8 +113,6 @@ public final class PostgreSQLGroupNodeLoader {
         }
       }
 
-    } finally {
-      resultSet.close();
     }
   }
 
@@ -135,13 +131,11 @@ public final class PostgreSQLGroupNodeLoader {
         "SELECT id, parent_id FROM " + CTableNames.NODES_TABLE + " WHERE view_id = "
             + view.getConfiguration().getId() + " ORDER BY id";
 
-    final ResultSet resultSet = connection.executeQuery(query, true);
-
     int counter = 0;
 
     int firstId = -1;
 
-    try {
+    try (ResultSet resultSet = connection.executeQuery(query, true)) {
       while (resultSet.next()) {
         if (firstId == -1) {
           firstId = resultSet.getInt("id");
@@ -159,8 +153,6 @@ public final class PostgreSQLGroupNodeLoader {
 
         counter++;
       }
-    } finally {
-      resultSet.close();
     }
   }
 }

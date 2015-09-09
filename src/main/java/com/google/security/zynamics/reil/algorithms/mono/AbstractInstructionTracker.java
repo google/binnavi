@@ -119,44 +119,43 @@ public abstract class AbstractInstructionTracker<LatticeElement extends ILattice
   {
     final ReilInstruction instruction = node.getInstruction();
 
-    final String mnemonic = instruction.getMnemonic();
-
-    if (mnemonic.equals(ReilHelpers.OPCODE_ADD)) {
-      return transformAdd(instruction, currentState, incomingState);
-    } else if (mnemonic.equals(ReilHelpers.OPCODE_AND)) {
-      return transformAnd(instruction, currentState, incomingState);
-    } else if (mnemonic.equals(ReilHelpers.OPCODE_BISZ)) {
-      return transformBisz(instruction, currentState, incomingState);
-    } else if (mnemonic.equals(ReilHelpers.OPCODE_BSH)) {
-      return transformBsh(instruction, currentState, incomingState);
-    } else if (mnemonic.equals(ReilHelpers.OPCODE_DIV)) {
-      return transformDiv(instruction, currentState, incomingState);
-    } else if (mnemonic.equals(ReilHelpers.OPCODE_JCC)) {
-      return transformJcc(instruction, currentState, incomingState);
-    } else if (mnemonic.equals(ReilHelpers.OPCODE_LDM)) {
-      return transformLdm(instruction, currentState, incomingState);
-    } else if (mnemonic.equals(ReilHelpers.OPCODE_MOD)) {
-      return transformMod(instruction, currentState, incomingState);
-    } else if (mnemonic.equals(ReilHelpers.OPCODE_MUL)) {
-      return transformMul(instruction, currentState, incomingState);
-    } else if (mnemonic.equals(ReilHelpers.OPCODE_NOP)) {
-      return transformNop(instruction, currentState, incomingState);
-    } else if (mnemonic.equals(ReilHelpers.OPCODE_OR)) {
-      return transformOr(instruction, currentState, incomingState);
-    } else if (mnemonic.equals(ReilHelpers.OPCODE_STM)) {
-      return transformStm(instruction, currentState, incomingState);
-    } else if (mnemonic.equals(ReilHelpers.OPCODE_STR)) {
-      return transformStr(instruction, currentState, incomingState);
-    } else if (mnemonic.equals(ReilHelpers.OPCODE_SUB)) {
-      return transformSub(instruction, currentState, incomingState);
-    } else if (mnemonic.equals(ReilHelpers.OPCODE_UNDEF)) {
-      return transformUndef(instruction, currentState, incomingState);
-    } else if (mnemonic.equals(ReilHelpers.OPCODE_UNKNOWN)) {
-      return transformUnknown(instruction, currentState, incomingState);
-    } else if (mnemonic.equals(ReilHelpers.OPCODE_XOR)) {
-      return transformXor(instruction, currentState, incomingState);
-    } else {
-      return transformUnknownOpcode(instruction, currentState, incomingState);
-    }
+    switch (instruction.getMnemonic()) {
+        case ReilHelpers.OPCODE_ADD:
+            return transformAdd(instruction, currentState, incomingState);
+        case ReilHelpers.OPCODE_AND:
+            return transformAnd(instruction, currentState, incomingState);
+        case ReilHelpers.OPCODE_BISZ:
+            return transformBisz(instruction, currentState, incomingState);
+        case ReilHelpers.OPCODE_BSH:
+            return transformBsh(instruction, currentState, incomingState);
+        case ReilHelpers.OPCODE_DIV:
+            return transformDiv(instruction, currentState, incomingState);
+        case ReilHelpers.OPCODE_JCC:
+            return transformJcc(instruction, currentState, incomingState);
+        case ReilHelpers.OPCODE_LDM:
+            return transformLdm(instruction, currentState, incomingState);
+        case ReilHelpers.OPCODE_MOD:
+            return transformMod(instruction, currentState, incomingState);
+        case ReilHelpers.OPCODE_MUL:
+            return transformMul(instruction, currentState, incomingState);
+        case ReilHelpers.OPCODE_NOP:
+            return transformNop(instruction, currentState, incomingState);
+        case ReilHelpers.OPCODE_OR:
+            return transformOr(instruction, currentState, incomingState);
+        case ReilHelpers.OPCODE_STM:
+            return transformStm(instruction, currentState, incomingState);
+        case ReilHelpers.OPCODE_STR:
+            return transformStr(instruction, currentState, incomingState);
+        case ReilHelpers.OPCODE_SUB:
+            return transformSub(instruction, currentState, incomingState);
+        case ReilHelpers.OPCODE_UNDEF:
+            return transformUndef(instruction, currentState, incomingState);
+        case ReilHelpers.OPCODE_UNKNOWN:
+            return transformUnknown(instruction, currentState, incomingState);
+        case ReilHelpers.OPCODE_XOR:
+            return transformXor(instruction, currentState, incomingState);
+        default:
+            return transformUnknownOpcode(instruction, currentState, incomingState);
+    } 
   }
 }

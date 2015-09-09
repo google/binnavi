@@ -124,12 +124,11 @@ public final class PostgreSQLTagFunctions {
         "insert into " + CTableNames.TAGS_TABLE
             + "(parent_id, name, description, type) values(?, ?, ?, ?::tag_type) returning id";
 
-    try {
-      final PreparedStatement statement =
-          connection.getConnection().prepareStatement(query, ResultSet.TYPE_SCROLL_INSENSITIVE,
-              ResultSet.CONCUR_READ_ONLY);
-
-      try {
+    try (PreparedStatement statement =
+            connection.getConnection().prepareStatement(query, ResultSet.TYPE_SCROLL_INSENSITIVE,
+            ResultSet.CONCUR_READ_ONLY);
+         ResultSet resultSet = statement.executeQuery()) {
+      
         if (parent.getId() == 0) {
           statement.setNull(1, Types.INTEGER);
         } else {
@@ -140,29 +139,19 @@ public final class PostgreSQLTagFunctions {
         statement.setString(3, description);
         statement.setString(4, tagToString(type));
 
-        final ResultSet resultSet = statement.executeQuery();
-
         Integer id = null;
 
-        try {
           while (resultSet.next()) {
             if (resultSet.isFirst()) {
               id = resultSet.getInt(1);
             }
           }
-        } finally {
-          resultSet.close();
-        }
 
         if (id != null) {
           return new CTag(id, name, description, type, provider);
         } else {
           throw new IllegalStateException("IE02141: Error id can not be null");
         }
-      } finally {
-        statement.close();
-      }
-
     } catch (final SQLException e) {
       throw new CouldntSaveDataException(e);
     }
@@ -189,24 +178,17 @@ public final class PostgreSQLTagFunctions {
       final String query_1 =
           String.format("UPDATE %s SET parent_id = %s WHERE parent_id = ?", CTableNames.TAGS_TABLE,
               parentId);
-      final PreparedStatement statement_1 = connection.getConnection().prepareStatement(query_1);
 
-      try {
+      try (PreparedStatement statement_1 = connection.getConnection().prepareStatement(query_1)) {
         statement_1.setInt(1, tag.getObject().getId());
         statement_1.executeUpdate();
-      } finally {
-        statement_1.close();
       }
 
       final String query_2 = String.format("DELETE FROM %s WHERE id = ?", CTableNames.TAGS_TABLE);
 
-      final PreparedStatement statement_2 = connection.getConnection().prepareStatement(query_2);
-
-      try {
+      try (PreparedStatement statement_2 = connection.getConnection().prepareStatement(query_2)) {
         statement_2.setInt(1, tag.getObject().getId());
         statement_2.executeUpdate();
-      } finally {
-        statement_2.close();
       }
 
     } catch (final SQLException e) {
@@ -233,7 +215,7 @@ public final class PostgreSQLTagFunctions {
           new StringBuilder(String.format("delete from %s where id = %d", CTableNames.TAGS_TABLE,
               tag.getObject().getId()));
 
-      final List<Integer> idsToDelete = new ArrayList<Integer>();
+      final List<Integer> idsToDelete = new ArrayList<>();
 
       for (final ITreeNode<CTag> child : DepthFirstSorter.getSortedList(tag)) {
         idsToDelete.add(child.getObject().getId());
@@ -268,24 +250,18 @@ public final class PostgreSQLTagFunctions {
     Preconditions.checkNotNull(description, "IE00564: Description argument can not be null");
 
     final CConnection connection = provider.getConnection();
-
-    try {
-      final CTag tag = createTag(provider, parent.getObject(), name, description, type);
-      final String query =
+    
+    final String query =
           String.format("update %s set parent_id = ? where parent_id = ? and id <> ?",
               CTableNames.TAGS_TABLE);
+              
+    try (PreparedStatement statement = connection.getConnection().prepareStatement(query)) {
+      final CTag tag = createTag(provider, parent.getObject(), name, description, type);
 
-      final PreparedStatement statement = connection.getConnection().prepareStatement(query);
-
-      try {
         statement.setInt(1, tag.getId());
         statement.setInt(2, parent.getObject().getId());
         statement.setInt(3, tag.getId());
-
         statement.executeUpdate();
-      } finally {
-        statement.close();
-      }
 
       return tag;
 
@@ -311,12 +287,13 @@ public final class PostgreSQLTagFunctions {
     Preconditions.checkNotNull(newParentNode, "IE02190: Parent argument can not be null");
     Preconditions.checkNotNull(movedNode, "IE02191: Child argument can not be null");
 
-    final List<Integer> childIds = new ArrayList<Integer>();
+    final List<Integer> childIds = new ArrayList<>();
 
     for (final ITreeNode<CTag> childChild : movedNode.getChildren()) {
       childIds.add(childChild.getObject().getId());
     }
-
+    
+    
     try {
       final String childParentId =
           movedNode.getParent().getObject().getId() == 0 ? "null" : String.valueOf(movedNode
@@ -356,20 +333,14 @@ public final class PostgreSQLTagFunctions {
     Preconditions.checkNotNull(description, "IE00713: Description argument can not be null");
 
     final CConnection connection = provider.getConnection();
-
-    try {
-      final PreparedStatement statement =
-          connection.getConnection().prepareStatement(
-              "update " + CTableNames.TAGS_TABLE + " set description = ? where id = ?");
-
-      try {
+    
+    final String query = "update " + CTableNames.TAGS_TABLE + " set description = ? where id = ?";
+    try (PreparedStatement statement = connection.getConnection().prepareStatement(query)) {
+      
         statement.setString(1, description);
         statement.setInt(2, tag.getId());
-
         statement.executeUpdate();
-      } finally {
-        statement.close();
-      }
+      
     } catch (final SQLException e) {
       throw new CouldntSaveDataException(e);
     }
@@ -392,19 +363,13 @@ public final class PostgreSQLTagFunctions {
 
     final CConnection connection = provider.getConnection();
 
-    try {
-      final PreparedStatement statement =
-          connection.getConnection().prepareStatement(
-              "update " + CTableNames.TAGS_TABLE + " set name = ? where id = ?");
-
-      try {
+    final String query = "update " + CTableNames.TAGS_TABLE + " set name = ? where id = ?";
+    try (PreparedStatement statement = connection.getConnection().prepareStatement(query)) {
+      
         statement.setString(1, name);
         statement.setInt(2, tag.getId());
-
         statement.executeUpdate();
-      } finally {
-        statement.close();
-      }
+        
     } catch (final SQLException e) {
       throw new CouldntSaveDataException(e);
     }

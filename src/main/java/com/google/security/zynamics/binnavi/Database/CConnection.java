@@ -243,9 +243,7 @@ public final class CConnection {
 
     int result = 0;
 
-    final PreparedStatement prep = m_connection.prepareStatement(query);
-
-    try {
+    try (PreparedStatement prep = m_connection.prepareStatement(query)) {
       result = prep.executeUpdate();
     } catch (final SQLException error) {
       if (m_performanceOutput) {
@@ -262,9 +260,7 @@ public final class CConnection {
       } else {
         throw error;
       }
-    } finally {
-      prep.close();
-    }
+    } 
 
     if (m_performanceOutput) {
       militime -= new GregorianCalendar().getTimeInMillis();
@@ -297,15 +293,9 @@ public final class CConnection {
     if (m_connection == null) {
       return false;
     }
-    try {
-      final Statement statement = m_connection.createStatement();
+    try (Statement statement = m_connection.createStatement()) {
       // do something about the timeout.
-      try {
         statement.execute("SELECT 1;");
-      } finally {
-        // do something about the timeout.
-        statement.close();
-      }
       return true;
     } catch (final SQLException exception) {
       NaviLogger
