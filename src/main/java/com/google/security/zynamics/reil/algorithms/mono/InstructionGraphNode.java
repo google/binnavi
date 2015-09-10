@@ -17,6 +17,7 @@ package com.google.security.zynamics.reil.algorithms.mono;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import com.google.common.base.Preconditions;
 import com.google.security.zynamics.reil.ReilInstruction;
