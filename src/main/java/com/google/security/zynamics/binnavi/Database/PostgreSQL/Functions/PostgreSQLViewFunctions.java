@@ -122,15 +122,15 @@ public final class PostgreSQLViewFunctions {
 
     final String query = "SELECT * FROM get_derived_views(?)";
     try (PreparedStatement statement =
-          provider.getConnection().getConnection().prepareStatement(query);
-         ResultSet resultSet = statement.executeQuery()) {
+          provider.getConnection().getConnection().prepareStatement(query)) {
    
       // TODO(timkornau): this should be changed to the ViewManager.
       final List<INaviView> moduleViews =
           view.getConfiguration().getModule().getContent().getViewContainer().getViews();
 
       statement.setInt(1, view.getConfiguration().getId());
-
+      
+      final ResultSet resultSet = statement.executeQuery();
       if (resultSet == null) {
         return views;
       }

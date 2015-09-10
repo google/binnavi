@@ -17,6 +17,7 @@ package com.google.security.zynamics.reil.algorithms.mono;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import com.google.common.base.Preconditions;
 import com.google.security.zynamics.reil.ReilInstruction;
@@ -35,12 +36,12 @@ public final class InstructionGraphNode implements IGraphNode<InstructionGraphNo
   /**
    * Outgoing edges of the node.
    */
-  private final List<InstructionGraphEdge> outgoingEdges = new ArrayList<InstructionGraphEdge>();
+  private final List<InstructionGraphEdge> outgoingEdges = new ArrayList<>();
 
   /**
    * Incoming edges of the node.
    */
-  private final List<InstructionGraphEdge> incomingEdges = new ArrayList<InstructionGraphEdge>();
+  private final List<InstructionGraphEdge> incomingEdges = new ArrayList<>();
 
   /**
    * Creates a new instruction graph node.
@@ -71,13 +72,11 @@ public final class InstructionGraphNode implements IGraphNode<InstructionGraphNo
 
   @Override
   public List<InstructionGraphNode> getChildren() {
-    final List<InstructionGraphNode> children = new ArrayList<InstructionGraphNode>();
-
-    for (final InstructionGraphEdge edge : outgoingEdges) {
-      children.add(edge.getTarget());
-    }
-
-    return children;
+  
+    return outgoingEdges
+            .stream()
+            .map(InstructionGraphEdge::getTarget)
+            .collect(Collectors.toList());
   }
 
   /**
@@ -111,13 +110,11 @@ public final class InstructionGraphNode implements IGraphNode<InstructionGraphNo
 
   @Override
   public List<InstructionGraphNode> getParents() {
-    final List<InstructionGraphNode> parents = new ArrayList<InstructionGraphNode>();
-
-    for (final InstructionGraphEdge edge : incomingEdges) {
-      parents.add(edge.getSource());
-    }
-
-    return parents;
+ 
+    return incomingEdges
+            .stream()
+            .map(InstructionGraphEdge::getSource)
+            .collect(Collectors.toList());
   }
 
   @Override
