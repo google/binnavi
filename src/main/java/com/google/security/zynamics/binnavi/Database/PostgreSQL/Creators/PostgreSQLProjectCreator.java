@@ -97,9 +97,10 @@ public final class PostgreSQLProjectCreator {
 
         try (PreparedStatement statement =
           connection.getConnection().prepareStatement(query, ResultSet.TYPE_SCROLL_INSENSITIVE,
-              ResultSet.CONCUR_READ_ONLY);
-           ResultSet resultSet = statement.executeQuery()) {
+              ResultSet.CONCUR_READ_ONLY)) {
         statement.setString(1, name);
+        
+        ResultSet resultSet = statement.executeQuery();
 
         Integer id = null;
 

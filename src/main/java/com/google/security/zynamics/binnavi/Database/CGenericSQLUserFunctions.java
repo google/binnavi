@@ -54,11 +54,11 @@ public class CGenericSQLUserFunctions {
 
     CUser user = null;
 
-    try (PreparedStatement statement = connection.prepareStatement(query);
-         ResultSet resultSet = statement.executeQuery()) {
-        
+    try (PreparedStatement statement = connection.prepareStatement(query)) {
         statement.setString(1, userName);
-       
+        
+        ResultSet resultSet = statement.executeQuery();
+        
         while (resultSet.next()) {
           user = new CUser(resultSet.getInt(1), userName);
         }
