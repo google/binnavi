@@ -75,19 +75,18 @@ public final class PostgresSQLDebuggerFunctions {
           "INSERT INTO " + CTableNames.DEBUGGERS_TABLE
               + "(name, host, port) VALUES(?, ?, ?) RETURNING id";
               
-    try (PreparedStatement statement = connection.getConnection().prepareStatement(query);
-         ResultSet resultSet = statement.executeQuery()) {
+    try (PreparedStatement statement = connection.getConnection().prepareStatement(query)) {
 
       statement.setString(1, name);
       statement.setString(2, host);
       statement.setInt(3, port);
 
       int id = -1;
-
+      try (ResultSet resultSet = statement.executeQuery()) {    
         while (resultSet.next()) {
           id = resultSet.getInt("id");
         }
-      
+      }
       return new DebuggerTemplate(id, name, host, port, provider);
 
     } catch (final SQLException e) {
