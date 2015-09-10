@@ -126,8 +126,7 @@ public final class PostgreSQLTagFunctions {
 
     try (PreparedStatement statement =
             connection.getConnection().prepareStatement(query, ResultSet.TYPE_SCROLL_INSENSITIVE,
-            ResultSet.CONCUR_READ_ONLY);
-         ResultSet resultSet = statement.executeQuery()) {
+            ResultSet.CONCUR_READ_ONLY)) {
       
         if (parent.getId() == 0) {
           statement.setNull(1, Types.INTEGER);
@@ -140,13 +139,13 @@ public final class PostgreSQLTagFunctions {
         statement.setString(4, tagToString(type));
 
         Integer id = null;
-
+        try (ResultSet resultSet = statement.executeQuery()) {
           while (resultSet.next()) {
             if (resultSet.isFirst()) {
               id = resultSet.getInt(1);
             }
           }
-
+        }
         if (id != null) {
           return new CTag(id, name, description, type, provider);
         } else {
