@@ -100,7 +100,7 @@ public final class PostgreSQLProjectCreator {
               ResultSet.CONCUR_READ_ONLY)) {
         statement.setString(1, name);
         
-        ResultSet resultSet = statement.executeQuery()
+        ResultSet resultSet = statement.executeQuery();
 
         Integer id = null;
 
