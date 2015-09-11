@@ -19,6 +19,7 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import com.google.common.base.Preconditions;
 import com.google.security.zynamics.reil.algorithms.mono.interfaces.ILatticeElementMono1;
@@ -27,7 +28,7 @@ import com.google.security.zynamics.reil.algorithms.mono.interfaces.ILatticeElem
  * Lattice element class used for register tracking.
  */
 public final class RegisterSet implements ILatticeElementMono1<RegisterSet>, Iterable<String> {
-  private final Set<String> registers = new HashSet<String>();
+  private final Set<String> registers = new HashSet<>();
 
   public RegisterSet(final List<String> registers) {
     this.registers.addAll(registers);
@@ -118,24 +119,8 @@ public final class RegisterSet implements ILatticeElementMono1<RegisterSet>, Ite
 
   @Override
   public String toString() {
-    final StringBuilder stringBuilder = new StringBuilder();
 
-    stringBuilder.append("{");
-
-    boolean needsComma = false;
-
-    for (final String register : registers) {
-      if (needsComma) {
-        stringBuilder.append(", ");
-      }
-
-      stringBuilder.append(register);
-
-      needsComma = true;
-    }
-
-    stringBuilder.append("}");
-
-    return stringBuilder.toString();
+    return registers.stream()
+            .collect(Collectors.joining(", ", "{", "}"));
   }
 }
