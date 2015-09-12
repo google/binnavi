@@ -95,7 +95,7 @@ public class MonotoneSolver<GraphNode, LatticeElement extends ILatticeElementMon
   private List<IInfluencingState<LatticeElement, ObjectType>> getStates(
       final List<? extends IInfluencingNode<GraphNode, ObjectType>> nodes) {
 
-    return nodes.parallelStream()
+    return nodes.stream()
             .map(node -> new InfluencingState<>(state.getState(node.getNode()), node.getObject()))
             .collect(Collectors.toList());
   }
