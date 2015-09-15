@@ -148,11 +148,10 @@ public class PostgreSQLSectionFunctions {
 
     final String query = "SELECT * FROM get_sections(?)";
     try (PreparedStatement statement =
-          provider.getConnection().getConnection().prepareStatement(query);
-         ResultSet result = statement.executeQuery()) {
-      
-      statement.setInt(1, module.getConfiguration().getId());
+          provider.getConnection().getConnection().prepareStatement(query)) {
 
+        statement.setInt(1, module.getConfiguration().getId());
+        final ResultSet result = statement.executeQuery();
         while (result.next()) {
           final int id = result.getInt("id");
           final String name = result.getString("name");

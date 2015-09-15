@@ -141,11 +141,11 @@ public class PostgreSQLCommentFunctions {
     final HashMap<Integer, ArrayList<IComment>> commentIdToComments = new HashMap<>();
 
     try (PreparedStatement statement =
-          provider.getConnection().getConnection().prepareCall(query);
-         ResultSet resultSet = statement.executeQuery()) {
+          provider.getConnection().getConnection().prepareCall(query)) {
 
-      statement.setArray(1,
+        statement.setArray(1,
           provider.getConnection().getConnection().createArrayOf("int4", commentIdsArray));
+        final ResultSet resultSet = statement.executeQuery();
 
         while (resultSet.next()) {
           final int rootComment = resultSet.getInt("commentid");
