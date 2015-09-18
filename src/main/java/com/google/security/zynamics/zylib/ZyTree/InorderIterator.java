@@ -21,8 +21,7 @@ import java.util.Stack;
 
 
 public class InorderIterator {
-  private final Stack<Pair<IZyTreeNode, Integer>> traversalStack =
-      new Stack<Pair<IZyTreeNode, Integer>>();
+  private final Stack<Pair<IZyTreeNode, Integer>> traversalStack = new Stack<>();
   private final IZyTreeNode m_root;
   private boolean m_started = false;
 
@@ -51,7 +50,6 @@ public class InorderIterator {
   public boolean next() {
     if (!m_started) {
       pushLongestPathFrom(m_root);
-
       m_started = true;
     } else {
       if (traversalStack.empty()) {
@@ -68,16 +66,7 @@ public class InorderIterator {
           // At this point we're done
           return false;
         } else {
-          if (justProcessedNode.getChildren().size() == 0) {
-            throw new RuntimeException("Error");
-          } else if (justProcessedNode.getChildren().size() == 1) {
-            pushLongestPathFrom(justProcessed.first().getChildren()
-                .get(justProcessedChildrenProcessed));
-          } else {
-            traversalStack.push(new Pair<IZyTreeNode, Integer>(justProcessed.first().getChildren()
-                .get(justProcessedChildrenProcessed), 0));
-          }
-
+          checkAndPush(justProcessed, justProcessedNode, justProcessedChildrenProcessed);
         }
       } else {
         if (justProcessedChildrenProcessed == justProcessedNode.getChildren().size()) {
@@ -90,20 +79,26 @@ public class InorderIterator {
           traversalStack.push(new Pair<IZyTreeNode, Integer>(parentProcessed.first(),
               parentProcessed.second() + 1));
         } else {
-          if (justProcessedNode.getChildren().size() == 0) {
-            throw new RuntimeException("Error");
-          } else if (justProcessedNode.getChildren().size() == 1) {
-            pushLongestPathFrom(justProcessed.first().getChildren()
-                .get(justProcessedChildrenProcessed));
-          } else {
-            traversalStack.push(new Pair<IZyTreeNode, Integer>(justProcessed.first().getChildren()
-                .get(justProcessedChildrenProcessed), 0));
-          }
+          checkAndPush(justProcessed, justProcessedNode, justProcessedChildrenProcessed);
         }
       }
     }
 
     return !traversalStack.empty();
+  }
+  
+  private void checkAndPush(Pair<IZyTreeNode, Integer> justProcessed, IZyTreeNode justProcessedNode, int justProcessedChildrenProcessed) {
+        switch (justProcessedNode.getChildren().size()) {
+            case 0:
+                throw new RuntimeException("Error");
+            case 1:
+                pushLongestPathFrom(justProcessed.first().getChildren()
+                .get(justProcessedChildrenProcessed));
+                break;
+            default:
+                traversalStack.push(new Pair<IZyTreeNode, Integer>(justProcessed.first().getChildren()
+                .get(justProcessedChildrenProcessed), 0));
+        }
   }
 
 }
