@@ -21,25 +21,15 @@ import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.net.URL;
 import java.net.URLConnection;
+import java.util.stream.Collectors;
 
 public class WebsiteReader {
   public static String read(final String url) throws IOException {
     // Create a URL for the desired page
     final URL url_ = new URL(url);
-
-    final BufferedReader in = new BufferedReader(new InputStreamReader(url_.openStream()));
-
-    final StringBuilder sb = new StringBuilder();
-
-    String str;
-
-    while ((str = in.readLine()) != null) {
-      sb.append(str);
+    try (BufferedReader in = new BufferedReader(new InputStreamReader(url_.openStream()))) {
+        return in.lines().collect(Collectors.joining());
     }
-
-    in.close();
-
-    return sb.toString();
   }
 
   public static String sendPost(final String urlString, final String encodedData)
@@ -56,15 +46,8 @@ public class WebsiteReader {
     }
 
     // Get the response
-    final StringBuilder ret = new StringBuilder();
-    String line;
-
     try (BufferedReader rd = new BufferedReader(new InputStreamReader(conn.getInputStream()))) {
-      while ((line = rd.readLine()) != null) {
-        ret.append(line);
-      }
+        return rd.lines().collect(Collectors.joining());
     }
-
-    return ret.toString();
   }
 }
