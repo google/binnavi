@@ -66,7 +66,7 @@ public final class ClipboardHelpers {
 
     try {
       return (String) contents.getTransferData(DataFlavor.stringFlavor);
-    } catch (final UnsupportedFlavorException | IOException ex) {
+    } catch (UnsupportedFlavorException | IOException ex) {
       // Eat, cannot happen as we're checking above
     }
 
