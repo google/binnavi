@@ -62,16 +62,11 @@ public class ZyGraphEdge<NodeTypeT extends ZyGraphNode<?>,
    */
   public ZyGraphEdge(final NodeTypeT source, final NodeTypeT target, final Edge edge,
       final ZyEdgeRealizer<EdgeTypeT> realizer, final RawEdgeTypeT rawEdge) {
-    Preconditions.checkNotNull(source, "Source node cannot be null");
-    Preconditions.checkNotNull(target, "Target node cannot be null");
-    Preconditions.checkNotNull(edge, "Edge argument cannot be null");
-    Preconditions.checkNotNull(rawEdge, "Raw edge argument cannot be null");
-
-    m_sourceNode = source;
-    m_targetNode = target;
-
-    m_edge = edge;
-    m_rawEdge = rawEdge;
+    
+    m_sourceNode = Preconditions.checkNotNull(source, "Source node cannot be null");
+    m_targetNode = Preconditions.checkNotNull(target, "Target node cannot be null");
+    m_edge = Preconditions.checkNotNull(edge, "Edge argument cannot be null");
+    m_rawEdge =  Preconditions.checkNotNull(rawEdge, "Raw edge argument cannot be null");
     m_realizer = realizer;
 
     m_realizer.setSelected(rawEdge.isSelected());
@@ -145,7 +140,7 @@ public class ZyGraphEdge<NodeTypeT extends ZyGraphNode<?>,
   public ArrayList<Pair<Double, Double>> getPaths() {
     final int points = getRealizer(m_edge).pointCount();
 
-    final ArrayList<Pair<Double, Double>> pointsList = new ArrayList<Pair<Double, Double>>();
+    final ArrayList<Pair<Double, Double>> pointsList = new ArrayList<>();
 
     for (int i = 0; i < points; i++) {
       final YPoint point = getRealizer(m_edge).getPoint(i);
