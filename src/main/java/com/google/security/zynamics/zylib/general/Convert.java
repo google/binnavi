@@ -102,7 +102,7 @@ public final class Convert {
   public static String hexStringToAsciiString(final String hexString) {
     final String realText = (hexString.length() % 2) == 0 ? hexString : "0" + hexString;
 
-    String asciiString = "";
+    final StringBuilder stringBuilder = new StringBuilder();
 
     for (int i = 0; i < realText.length(); i += 2) {
       final char c1 = realText.charAt(i);
@@ -114,10 +114,10 @@ public final class Convert {
 
       final char code = (char) ((Character.digit(c1, 16) << 4) + Character.digit(c2, 16));
 
-      asciiString += isPrintableCharacter(code) ? code : ".";
+      stringBuilder.append(isPrintableCharacter(code) ? code : ".");
     }
 
-    return asciiString;
+    return stringBuilder.toString();
   }
 
   /**

@@ -15,6 +15,7 @@ limitations under the License.
 */
 package com.google.security.zynamics.zylib.yfileswrap.gui.zygraph.editmode.actions;
 
+import com.google.security.zynamics.binnavi.CUtilityFunctions;
 import com.google.security.zynamics.zylib.gui.zygraph.editmode.IStateAction;
 import com.google.security.zynamics.zylib.yfileswrap.gui.zygraph.AbstractZyGraph;
 import com.google.security.zynamics.zylib.yfileswrap.gui.zygraph.IZyEditModeListener;
@@ -80,7 +81,7 @@ public class CDefaultNodeExitAction<NodeType extends ZyGraphNode<?>, EdgeType ex
         try {
           listener.nodeLeft(node);
         } catch (final Exception exception) {
-          // TODO: log this
+          CUtilityFunctions.logException(e);
         }
       }
     }
