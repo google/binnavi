@@ -87,18 +87,19 @@ public class InorderIterator {
     return !traversalStack.empty();
   }
   
-  private void checkAndPush(Pair<IZyTreeNode, Integer> justProcessed, IZyTreeNode justProcessedNode, int justProcessedChildrenProcessed) {
-        switch (justProcessedNode.getChildren().size()) {
-            case 0:
-                throw new RuntimeException("Error");
-            case 1:
-                pushLongestPathFrom(justProcessed.first().getChildren()
-                .get(justProcessedChildrenProcessed));
-                break;
-            default:
-                traversalStack.push(new Pair<IZyTreeNode, Integer>(justProcessed.first().getChildren()
-                .get(justProcessedChildrenProcessed), 0));
-        }
+  private void checkAndPush(Pair<IZyTreeNode, Integer> justProcessed,
+    IZyTreeNode justProcessedNode, int justProcessedChildrenProcessed) {
+      switch (justProcessedNode.getChildren().size()) {
+        case 0:
+          throw new RuntimeException("Error");
+        case 1:
+          pushLongestPathFrom(justProcessed.first().getChildren()
+            .get(justProcessedChildrenProcessed));
+          break;
+        default:
+          traversalStack.push(new Pair<IZyTreeNode, Integer>(justProcessed.first().getChildren()
+            .get(justProcessedChildrenProcessed), 0));
+      }
   }
 
 }
