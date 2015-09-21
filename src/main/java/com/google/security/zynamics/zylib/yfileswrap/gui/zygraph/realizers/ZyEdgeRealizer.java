@@ -46,16 +46,14 @@ public class ZyEdgeRealizer<EdgeType> extends PolyLineEdgeRealizer implements IZ
 
   private boolean m_isSloppyPainting = false;
 
-  private final ListenerProvider<IZyEdgeRealizerListener<EdgeType>> m_listeners =
-      new ListenerProvider<IZyEdgeRealizerListener<EdgeType>>();
+  private final ListenerProvider<IZyEdgeRealizerListener<EdgeType>> m_listeners = new ListenerProvider<>();
 
   private ZyLabelContent m_content;
 
 
   public ZyEdgeRealizer(final ZyLabelContent content, final IEdgeRealizerUpdater<EdgeType> updater) {
-    Preconditions.checkNotNull(content, "Internal Error: Content cannot be null");
 
-    m_content = content;
+    m_content = Preconditions.checkNotNull(content);
 
     setArrow(Arrow.STANDARD);
     setSmoothedBends(true);
