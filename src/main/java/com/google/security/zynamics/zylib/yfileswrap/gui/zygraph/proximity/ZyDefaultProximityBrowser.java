@@ -53,12 +53,11 @@ public class ZyDefaultProximityBrowser<NodeType extends ZyGraphNode<? extends IV
 
   private final AbstractZyGraph<NodeType, EdgeType> m_graph;
 
-  private final HashMap<Node, ZyProximityNode<?>> m_proximityMap =
-      new HashMap<Node, ZyProximityNode<?>>();
+  private final HashMap<Node, ZyProximityNode<?>> m_proximityMap = new HashMap<>();
 
   private final IProximitySettings m_settings;
 
-  private Set<NodeType> m_lastShown = new HashSet<NodeType>();
+  private Set<NodeType> m_lastShown = new HashSet<>();
 
   private final InternalVisibilityListener m_visibilityListener = new InternalVisibilityListener();
 
@@ -68,8 +67,7 @@ public class ZyDefaultProximityBrowser<NodeType extends ZyGraphNode<? extends IV
 
   private boolean m_doLayout = true;
 
-  private final Map<ZyProximityNode<?>, InternalNodeListener> m_nodeListeners =
-      new HashMap<ZyProximityNode<?>, InternalNodeListener>();
+  private final Map<ZyProximityNode<?>, InternalNodeListener> m_nodeListeners = new HashMap<>();
 
   public ZyDefaultProximityBrowser(final AbstractZyGraph<NodeType, EdgeType> graph,
       final AbstractZyGraphSettings settings) {
@@ -140,7 +138,7 @@ public class ZyDefaultProximityBrowser<NodeType extends ZyGraphNode<? extends IV
     // Note that is is not necessary to set the neighborhood of the
     // selected nodes visible. This is handled by the graph object.
 
-    m_lastShown = new HashSet<NodeType>();
+    m_lastShown = new HashSet<>();
 
     final Collection<NodeType> selectedNodes =
         SelectedVisibleFilter.filter(m_graph.getSelectedNodes());
@@ -188,15 +186,11 @@ public class ZyDefaultProximityBrowser<NodeType extends ZyGraphNode<? extends IV
 
   private void updateProximityBrowsing(final Set<NodeType> toShow) {
     if (!m_graph.getSettings().getProximitySettings().getProximityBrowsing()
-        || m_internallyDisabled) {
+        || m_internallyDisabled || m_lastShown.equals(toShow)) {
       return;
     }
 
-    if (m_lastShown.equals(toShow)) {
-      return;
-    }
-
-    m_lastShown = new HashSet<NodeType>(toShow);
+    m_lastShown = new HashSet<>(toShow);
 
     m_internallyDisabled = true;
 
