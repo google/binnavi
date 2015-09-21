@@ -15,8 +15,8 @@ limitations under the License.
 */
 package com.google.security.zynamics.reil.algorithms.mono;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import com.google.common.base.Preconditions;
 import com.google.security.zynamics.reil.algorithms.mono.interfaces.IGraphWalker;
@@ -32,13 +32,10 @@ public final class UpWalker implements IGraphWalker<InstructionGraphNode, WalkIn
     // When walking upwards, the influenced nodes of a node
     // are the parents of the node.
 
-    final List<InstructionGraphNode> nodes = new ArrayList<InstructionGraphNode>();
-
-    for (final InstructionGraphEdge edge : node.getIncomingEdges()) {
-      nodes.add(edge.getSource());
-    }
-
-    return nodes;
+    return node.getIncomingEdges()
+            .stream()
+            .map(InstructionGraphEdge::getSource)
+            .collect(Collectors.toList());
   }
 
   @Override
@@ -48,12 +45,9 @@ public final class UpWalker implements IGraphWalker<InstructionGraphNode, WalkIn
     // When walking upwards, the influencing nodes of a node
     // are the children of the node.
 
-    final List<InfluencingInstructionNode> nodes = new ArrayList<InfluencingInstructionNode>();
-
-    for (final InstructionGraphEdge edge : node.getOutgoingEdges()) {
-      nodes.add(new InfluencingInstructionNode(edge.getTarget(), new WalkInformation(edge)));
-    }
-
-    return nodes;
+    return node.getOutgoingEdges()
+            .stream()
+            .map(edge -> new InfluencingInstructionNode(edge.getTarget(), new WalkInformation(edge)))
+            .collect(Collectors.toList());
   }
 }

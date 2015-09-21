@@ -15,11 +15,11 @@ limitations under the License.
 */
 package com.google.security.zynamics.reil.algorithms.mono;
 
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import com.google.common.base.Preconditions;
 import com.google.security.zynamics.reil.algorithms.mono.interfaces.IGraphWalker;
@@ -94,15 +94,10 @@ public class MonotoneSolver<GraphNode, LatticeElement extends ILatticeElementMon
    */
   private List<IInfluencingState<LatticeElement, ObjectType>> getStates(
       final List<? extends IInfluencingNode<GraphNode, ObjectType>> nodes) {
-    final List<IInfluencingState<LatticeElement, ObjectType>> states =
-        new ArrayList<IInfluencingState<LatticeElement, ObjectType>>();
 
-    for (final IInfluencingNode<GraphNode, ObjectType> node : nodes) {
-      states.add(new InfluencingState<LatticeElement, ObjectType>(state.getState(node.getNode()),
-          node.getObject()));
-    }
-
-    return states;
+    return nodes.stream()
+            .map(node -> new InfluencingState<>(state.getState(node.getNode()), node.getObject()))
+            .collect(Collectors.toList());
   }
 
   /**
@@ -112,10 +107,9 @@ public class MonotoneSolver<GraphNode, LatticeElement extends ILatticeElementMon
    * @param nodesToUpdate Nodes which must be considered in this transformation step.
    */
   private void transformState(final Set<GraphNode> nodesToUpdate) {
-    final StateVector<GraphNode, LatticeElement> newState =
-        new StateVector<GraphNode, LatticeElement>();
+    final StateVector<GraphNode, LatticeElement> newState = new StateVector<>();
 
-    final Set<GraphNode> newNodesToUpdate = new LinkedHashSet<GraphNode>();
+    final Set<GraphNode> newNodesToUpdate = new LinkedHashSet<>();
 
     for (final GraphNode node : nodesToUpdate) {
       final List<IInfluencingState<LatticeElement, ObjectType>> influencingStates =
@@ -174,7 +168,7 @@ public class MonotoneSolver<GraphNode, LatticeElement extends ILatticeElementMon
    * @return The fixpoint state.
    */
   public IStateVector<GraphNode, LatticeElement> solve() {
-    final HashSet<GraphNode> nodesToUpdate = new LinkedHashSet<GraphNode>(graph.getNodes());
+    final HashSet<GraphNode> nodesToUpdate = new LinkedHashSet<>(graph.getNodes());
 
     while (!nodesToUpdate.isEmpty()) {
       transformState(nodesToUpdate);

@@ -138,12 +138,13 @@ public class ValueTrackerLattice extends AbstractInstructionTracker<ValueTracker
   @Override
   public ValueTrackerElement combine(
       final List<IInfluencingState<ValueTrackerElement, WalkInformation>> states) {
-    if (states.size() == 0) {
-      return new ValueTrackerElement();
-    } else if (states.size() == 1) {
-      return states.get(0).getElement();
-    } else {
-      return StateCombiner.combine(states);
+    switch (states.size()) {
+        case 0:
+            return new ValueTrackerElement();
+        case 1:
+            return states.get(0).getElement();
+        default:
+            return StateCombiner.combine(states);
     }
   }
 }

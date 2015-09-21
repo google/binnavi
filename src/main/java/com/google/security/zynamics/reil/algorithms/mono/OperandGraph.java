@@ -34,6 +34,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 public class OperandGraph extends DirectedGraph<OperandGraphNode, OperandGraphEdge> implements
     ILatticeGraph<OperandGraphNode> {
@@ -229,13 +230,11 @@ public class OperandGraph extends DirectedGraph<OperandGraphNode, OperandGraphEd
   }
 
   private static List<ReilBlock> getParents(final ReilBlock block) {
-    final List<ReilBlock> parents = new ArrayList<ReilBlock>();
-
-    for (final ReilEdge edge : block.getIncomingEdges()) {
-      parents.add(edge.getSource());
-    }
-
-    return parents;
+    
+    return block.getIncomingEdges()
+            .stream()
+            .map(ReilEdge::getSource)
+            .collect(Collectors.toList());
   }
 
   public static OperandGraph create(final ReilGraph graph) {

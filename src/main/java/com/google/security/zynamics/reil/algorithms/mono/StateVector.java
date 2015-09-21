@@ -19,6 +19,7 @@ import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.stream.Collectors;
 
 import com.google.common.base.Preconditions;
 import com.google.security.zynamics.reil.algorithms.mono.interfaces.ILatticeElementMono1;
@@ -33,8 +34,7 @@ public final class StateVector<GraphNode, LatticeElement extends ILatticeElement
   /**
    * Keeps track of the current states of all nodes.
    */
-  private final Map<GraphNode, LatticeElement> mapping =
-      new LinkedHashMap<GraphNode, LatticeElement>();
+  private final Map<GraphNode, LatticeElement> mapping = new LinkedHashMap<>();
 
   /**
    * Returns the state of a node.
@@ -91,17 +91,10 @@ public final class StateVector<GraphNode, LatticeElement extends ILatticeElement
 
   @Override
   public String toString() {
-    final StringBuilder stringBuilder = new StringBuilder();
 
-    stringBuilder.append("[\n");
-
-    for (final Entry<GraphNode, LatticeElement> entry : mapping.entrySet()) {
-      stringBuilder.append(entry.getKey() + " -> " + entry.getValue());
-      stringBuilder.append("\n");
-    }
-
-    stringBuilder.append("]");
-
-    return stringBuilder.toString();
+    return mapping.entrySet()
+            .stream()
+            .map(entry -> entry.getKey() + " -> " + entry.getValue())
+            .collect(Collectors.joining("\n", "[\n", "\n]"));
   }
 }
