@@ -47,7 +47,7 @@ public class ZyEdgeLabel extends EdgeLabel {
 
   public ZyEdgeLabel(final ZyLabelContent content) {
 
-    m_content = Preconditions.checkNotNull(content, "Internal Error: Content can't be null");
+    m_content = Preconditions.checkNotNull(content);
 
     setVisible(true);
     setText("A"); // Dummy; don't remove
