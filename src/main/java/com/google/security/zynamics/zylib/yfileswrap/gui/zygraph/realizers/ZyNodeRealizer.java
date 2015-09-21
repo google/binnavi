@@ -16,6 +16,7 @@ limitations under the License.
 package com.google.security.zynamics.zylib.yfileswrap.gui.zygraph.realizers;
 
 import com.google.common.base.Preconditions;
+import com.google.security.zynamics.binnavi.CUtilityFunctions;
 import com.google.security.zynamics.zylib.general.ListenerProvider;
 import com.google.security.zynamics.zylib.gui.zygraph.nodes.ZyNodeData;
 import com.google.security.zynamics.zylib.gui.zygraph.realizers.IRealizerUpdater;
@@ -54,8 +55,7 @@ implements IZyNodeRealizer {
   /**
    * Listeners that are notified about changes in the node realizer.
    */
-  private final ListenerProvider<IZyNodeRealizerListener<?>> m_listeners =
-      new ListenerProvider<IZyNodeRealizerListener<?>>();
+  private final ListenerProvider<IZyNodeRealizerListener<?>> m_listeners = new ListenerProvider<>();
 
   protected boolean m_isHighLighted = false;
 
@@ -64,7 +64,7 @@ implements IZyNodeRealizer {
       try {
         listener.changedLocation(this, x, y);
       } catch (final Exception exception) {
-        // TODO: Log this
+        CUtilityFunctions.logException(exception);
       }
     }
   }
@@ -74,7 +74,7 @@ implements IZyNodeRealizer {
       try {
         listener.regenerated(this);
       } catch (final Exception exception) {
-        // TODO: Log this
+        CUtilityFunctions.logException(exception);
       }
     }
   }
@@ -264,7 +264,7 @@ implements IZyNodeRealizer {
         try {
           listener.changedSelection(this);
         } catch (final Exception exception) {
-          // TODO: Log this
+          CUtilityFunctions.logException(exception);
         }
       }
     }
@@ -279,7 +279,7 @@ implements IZyNodeRealizer {
         try {
           listener.changedSize(this, x, y);
         } catch (final Exception exception) {
-          // TODO: Log this
+          CUtilityFunctions.logException(exception);
         }
       }
     }
@@ -301,7 +301,7 @@ implements IZyNodeRealizer {
    */
   @Override
   public void setUserData(final ZyNodeData<?> data) {
-    Preconditions.checkNotNull(data, "Error: Invalid node data");
+    Preconditions.checkNotNull(data);
 
     m_userData = data;
   }
@@ -317,7 +317,7 @@ implements IZyNodeRealizer {
         try {
           listener.changedVisibility(this);
         } catch (final Exception exception) {
-          // TODO: Log this
+          CUtilityFunctions.logException(exception);
         }
       }
     }
