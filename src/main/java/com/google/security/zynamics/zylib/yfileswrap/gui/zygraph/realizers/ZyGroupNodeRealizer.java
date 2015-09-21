@@ -16,6 +16,7 @@ limitations under the License.
 package com.google.security.zynamics.zylib.yfileswrap.gui.zygraph.realizers;
 
 import com.google.common.base.Preconditions;
+import com.google.security.zynamics.binnavi.CUtilityFunctions;
 import com.google.security.zynamics.zylib.general.ListenerProvider;
 import com.google.security.zynamics.zylib.gui.zygraph.nodes.IGroupNode;
 import com.google.security.zynamics.zylib.gui.zygraph.nodes.ZyNodeData;
@@ -67,8 +68,7 @@ public class ZyGroupNodeRealizer<NodeType extends ZyGraphNode<?>> extends GroupN
   /**
    * Listeners that are notified about changes in the node realizer.
    */
-  private final ListenerProvider<IZyNodeRealizerListener<?>> m_listeners =
-      new ListenerProvider<IZyNodeRealizerListener<?>>();
+  private final ListenerProvider<IZyNodeRealizerListener<?>> m_listeners = new ListenerProvider<>();
 
   public ZyGroupNodeRealizer(final ZyLabelContent content, final boolean collapsed) {
     setShapeType(ShapeNodeRealizer.ROUND_RECT);
@@ -133,7 +133,7 @@ public class ZyGroupNodeRealizer<NodeType extends ZyGraphNode<?>> extends GroupN
       try {
         listener.changedLocation(this, x, y);
       } catch (final Exception exception) {
-        // TODO: Log this
+        CUtilityFunctions.logException(exception);
       }
     }
   }
@@ -226,7 +226,7 @@ public class ZyGroupNodeRealizer<NodeType extends ZyGraphNode<?>> extends GroupN
       try {
         listener.regenerated(this);
       } catch (final Exception exception) {
-        // TODO (timkornau): Log this
+        CUtilityFunctions.logException(exception);
       }
     }
 
@@ -292,7 +292,7 @@ public class ZyGroupNodeRealizer<NodeType extends ZyGraphNode<?>> extends GroupN
       try {
         listener.changedSelection(this);
       } catch (final Exception exception) {
-        // TODO (timkornau): Log this
+        CUtilityFunctions.logException(exception);
       }
     }
   }
@@ -308,7 +308,7 @@ public class ZyGroupNodeRealizer<NodeType extends ZyGraphNode<?>> extends GroupN
 
   @Override
   public void setUserData(final ZyNodeData<?> data) {
-    Preconditions.checkNotNull(data, "Error: Invalid node data");
+    Preconditions.checkNotNull(data);
     Preconditions.checkArgument((data.getNode().getRawNode() instanceof IGroupNode),
         "Error: User data does not contain a group node");
 
@@ -325,7 +325,7 @@ public class ZyGroupNodeRealizer<NodeType extends ZyGraphNode<?>> extends GroupN
       try {
         listener.changedVisibility(this);
       } catch (final Exception exception) {
-        // TODO (timkornau): Log this
+        CUtilityFunctions.logException(exception);
       }
     }
   }

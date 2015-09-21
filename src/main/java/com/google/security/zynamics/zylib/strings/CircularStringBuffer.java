@@ -17,6 +17,7 @@ package com.google.security.zynamics.zylib.strings;
 
 import java.util.LinkedList;
 import java.util.Queue;
+import java.util.stream.Collectors;
 
 /**
  * Manages a string which behaves like a circular buffer with a fixed number of lines.
@@ -25,7 +26,7 @@ public class CircularStringBuffer {
   /**
    * FIFO string container.
    */
-  private final Queue<String> m_buffer = new LinkedList<String>();
+  private final Queue<String> m_buffer = new LinkedList<>();
 
   /**
    * Maximum number of lines to be held in the buffer.
@@ -81,11 +82,6 @@ public class CircularStringBuffer {
    * @return The whole buffer represented as one string.
    */
   public String getText() {
-    final StringBuilder sb = new StringBuilder();
-    for (final String s : m_buffer) {
-      sb.append(s);
-      sb.append('\n');
-    }
-    return sb.toString();
+    return m_buffer.stream().collect(Collectors.joining("\n", "", "\n"));
   }
 }
