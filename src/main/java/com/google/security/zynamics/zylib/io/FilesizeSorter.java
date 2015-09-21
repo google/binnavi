@@ -27,6 +27,6 @@ public class FilesizeSorter implements Comparator<File>, Serializable {
 
   @Override
   public int compare(final File lhs, final File rhs) {
-    return (int) (lhs.length() - rhs.length());
+    return Long.compare(lhs.length(), rhs.length());
   }
 }

@@ -35,7 +35,7 @@ public class ColoredRange implements Comparable<ColoredRange> {
 
   @Override
   public int compareTo(final ColoredRange range) {
-    return (int) (start - range.start);
+    return Long.compare(start, range.start);
   }
 
   public boolean containsOffset(final long offset) {

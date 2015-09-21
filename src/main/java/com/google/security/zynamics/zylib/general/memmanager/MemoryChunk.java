@@ -42,9 +42,9 @@ public class MemoryChunk implements Comparable<MemoryChunk> {
    * @throws NullPointerException Thrown if the initial data is null.
    */
   public MemoryChunk(final long address, final byte[] data) {
-    Preconditions.checkArgument(address >= 0, "Error: Chunk addresses can't be less than 0");
-    Preconditions.checkNotNull(data, "Error: Initial data can't be null");
-    Preconditions.checkArgument(data.length != 0, "Error: Initial data can't be empty");
+    Preconditions.checkArgument(address >= 0, "Chunk addresses can't be less than 0");
+    Preconditions.checkNotNull(data, "Initial data can't be null");
+    Preconditions.checkArgument(data.length != 0, "Initial data can't be empty");
 
     m_address = address;
     m_data = data;
@@ -52,7 +52,7 @@ public class MemoryChunk implements Comparable<MemoryChunk> {
 
   /**
    * Creates a new memory chunk object that is initialized with bytes of value 0.
-   * 
+   *
    * @param address The start address of the chunk.
    * @param size The size of the chunk.
    */
@@ -65,18 +65,18 @@ public class MemoryChunk implements Comparable<MemoryChunk> {
    */
   @Override
   public int compareTo(final MemoryChunk chunk) {
-    return (int) (m_address - chunk.m_address);
+    return Long.compare(m_address, chunk.m_address);
   }
 
   /**
    * Adds a number of 0-bytes at the end of the memory chunk.
-   * 
+   *
    * @param size The number of 0-bytes to add.
-   * 
+   *
    * @throws IllegalArgumentException Thrown if the number of bytes to add is not positive.
    */
   public void extend(final int size) {
-    Preconditions.checkArgument(size > 0, "Error: The number of bytes to add must be positive");
+    Preconditions.checkArgument(size > 0, "The number of bytes to add must be positive");
 
     final byte[] data = new byte[m_data.length + size];
 
@@ -87,7 +87,7 @@ public class MemoryChunk implements Comparable<MemoryChunk> {
 
   /**
    * Returns the start address of the memory chunk.
-   * 
+   *
    * @return The start address of the memory chunk.
    */
   public long getAddress() {
@@ -96,7 +96,7 @@ public class MemoryChunk implements Comparable<MemoryChunk> {
 
   /**
    * Returns the data of the memory chunk.
-   * 
+   *
    * @return The data of the memory chunk.
    */
   public byte[] getBytes() {
@@ -105,7 +105,7 @@ public class MemoryChunk implements Comparable<MemoryChunk> {
 
   /**
    * Returns the length of the memory chunk.
-   * 
+   *
    * @return The length of the memory chunk.
    */
   public int getLength() {
@@ -114,11 +114,11 @@ public class MemoryChunk implements Comparable<MemoryChunk> {
 
   /**
    * Loads a single byte from the given address.
-   * 
+   *
    * @param address The address where the byte is stored.
-   * 
+   *
    * @return The value of the byte at the given address.
-   * 
+   *
    * @throws IndexOutOfBoundsException Thrown if the address is not part of the memory chunk.
    */
   public byte loadByte(final long address) {
@@ -140,10 +140,10 @@ public class MemoryChunk implements Comparable<MemoryChunk> {
 
   /**
    * Stores a range of bytes in the memory chunk.
-   * 
+   *
    * @param address The start address of the new data.
    * @param data The new data.
-   * 
+   *
    * @throws IndexOutOfBoundsException Thrown if the memory chunk is not large enough to hold the
    *         data.
    * @throws NullPointerException Thrown if the passed data is null.
@@ -154,10 +154,10 @@ public class MemoryChunk implements Comparable<MemoryChunk> {
 
   /**
    * Stores a single byte at the given address.
-   * 
+   *
    * @param address The address where the byte is stored.
    * @param b The value of the byte.
-   * 
+   *
    * @throws IndexOutOfBoundsException Thrown if the address is not part of the memory chunk.
    */
   public void storeByte(final long address, final byte b) {
