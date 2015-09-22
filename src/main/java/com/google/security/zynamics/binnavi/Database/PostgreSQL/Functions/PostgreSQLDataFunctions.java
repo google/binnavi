@@ -64,8 +64,8 @@ public final class PostgreSQLDataFunctions {
       throw new CouldntSaveDataException(exception);
     }
 
-    final String preparedStatement = "insert into " + CTableNames.DATA_PARTS_TABLE
-          + "(module_id, part_id, data) values(?, ?, ?)";
+    final String preparedStatement = "INSERT INTO " + CTableNames.DATA_PARTS_TABLE
+          + "(module_id, part_id, data) VALUES(?, ?, ?)";
           
     try (PreparedStatement statement = 
       provider.getConnection().getConnection().prepareStatement(preparedStatement)) {
