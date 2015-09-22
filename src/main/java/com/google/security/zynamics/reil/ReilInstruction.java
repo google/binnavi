@@ -75,11 +75,11 @@ public final class ReilInstruction implements IInstruction, Comparable<ReilInstr
     Preconditions.checkNotNull(mnemonic, "Argument mnemonic can't be null");
     this.mnemonic = ReilHelpers.MnemonicToMnemonicCode(mnemonic);
     this.firstOperand =
-        Preconditions.checkNotNull(firstOperand, "Argument firstOperand can't be null");
+        Preconditions.checkNotNull(firstOperand);
     this.secondOperand =
-        Preconditions.checkNotNull(secondOperand, "Argument secondOperand can't be null");
+        Preconditions.checkNotNull(secondOperand);
     this.thirdOperand =
-        Preconditions.checkNotNull(thirdOperand, "Argument thirdOperand can't be null");
+        Preconditions.checkNotNull(thirdOperand);
 
     this.address = address;
   }
