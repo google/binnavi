@@ -188,7 +188,7 @@ public class ReilHelpers {
       final String thirdValue,
       final String... meta) {
     Preconditions.checkArgument((meta.length % 2) == 0,
-        "Error: Invalid number of arguments in metadata array.");
+        "Invalid number of arguments in metadata array.");
 
     final ReilOperand firstOperand = createOperand(firstSize, firstValue);
     final ReilOperand secondOperand = createOperand(OperandSize.EMPTY, "");
@@ -236,19 +236,19 @@ public class ReilHelpers {
   private static void checkTrinaryOperandSizeTypes(final OperandSize first,
       final OperandSize second, final OperandSize third) {
     checkBinaryOperandSizeTypes(first, second);
-    Preconditions.checkNotNull(third, "Error: First size argument can not be null.");
+    Preconditions.checkNotNull(third, "First size argument can not be null.");
     Preconditions.checkArgument(third != OperandSize.ADDRESS,
-        "Error: The size for the third argument can not be of type ADDRESS.");
+        "The size for the third argument can not be of type ADDRESS.");
   }
 
   private static void checkBinaryOperandSizeTypes(final OperandSize first,
       final OperandSize second) {
-    Preconditions.checkNotNull(first, "Error: First size argument can not be null.");
-    Preconditions.checkNotNull(second, "Error: Second size argument can not be null.");
+    Preconditions.checkNotNull(first, "First size argument can not be null.");
+    Preconditions.checkNotNull(second, "Second size argument can not be null.");
     Preconditions.checkArgument(first != OperandSize.ADDRESS,
-        "Error: The size for the first argument can not be of type ADDRESS.");
+        "The size for the first argument can not be of type ADDRESS.");
     Preconditions.checkArgument(second != OperandSize.ADDRESS,
-        "Error: The size for the second argument can not be of type ADDRESS.");
+        "The size for the second argument can not be of type ADDRESS.");
   }
 
   /**
@@ -742,7 +742,7 @@ public class ReilHelpers {
    * @return True, if the given instruction is a conditional jump. False, otherwise.
    */
   public static boolean isConditionalJump(final ReilInstruction instruction) {
-    Preconditions.checkNotNull(instruction, "Error: Argument instruction can't be null.");
+    Preconditions.checkNotNull(instruction, "Argument instruction can't be null.");
 
     return instruction.getMnemonic().equals(OPCODE_JCC)
         && (instruction.getFirstOperand().getType() == OperandType.REGISTER);
@@ -764,7 +764,7 @@ public class ReilHelpers {
   }
 
   public static boolean isJump(final ReilInstruction instruction) {
-    Preconditions.checkNotNull(instruction, "Error: Argument instruction can't be null.");
+    Preconditions.checkNotNull(instruction, "Argument instruction can't be null.");
 
     return instruction.getMnemonic().equals(OPCODE_JCC);
   }
@@ -801,7 +801,7 @@ public class ReilHelpers {
    * @return True, if the given instruction is an unconditional jump. False, otherwise.
    */
   public static boolean isUnconditionalJump(final ReilInstruction instruction) {
-    Preconditions.checkNotNull(instruction, "Error: Argument instruction can't be null.");
+    Preconditions.checkNotNull(instruction, "Argument instruction can't be null.");
 
     return instruction.getMnemonic().equals(OPCODE_JCC) && !isConditionalJump(instruction);
   }
@@ -815,7 +815,7 @@ public class ReilHelpers {
   }
 
   public static int MnemonicToMnemonicCode(final String mnemonic) {
-    Preconditions.checkNotNull(mnemonic, "Error: mnemonic argument can not be null.");
+    Preconditions.checkNotNull(mnemonic, "Mnemonic argument can not be null.");
 
     return MnemonicCodeMap.get(mnemonic);
   }
@@ -830,16 +830,14 @@ public class ReilHelpers {
    * function or an exception is thrown.
    */
   public static long subAddressToLong(final String subaddress) {
-    Preconditions.checkNotNull(subaddress, "Error: Argument subaddress can't be null.");
+    Preconditions.checkNotNull(subaddress, "Argument subaddress can't be null.");
 
     if (subaddress.contains(".")) {
 
       final String[] parts = subaddress.split("\\.");
 
       Preconditions.checkArgument(parts.length == 2,
-          "Error: Argument subaddress is not a valid subaddress.");
-
-      // TODO(timkornau): Add a check if the parts are really long numbers?
+          "Argument subaddress is not a valid subaddress.");
 
       final long firstPart = Long.parseLong(parts[0]);
       final long secondPart = Long.parseLong(parts[1]);
@@ -847,7 +845,7 @@ public class ReilHelpers {
       return (firstPart * 0x100) + secondPart;
 
     } else {
-      throw new IllegalArgumentException("Error: Argument subaddress is not a valid subaddress.");
+      throw new IllegalArgumentException("Argument subaddress is not a valid subaddress.");
     }
   }
 
@@ -918,11 +916,8 @@ public class ReilHelpers {
   }
 
   public static boolean writesThirdOperand(final Integer mnemonic) {
-    if (mnemonic.equals(_OPCODE_STM)) {
-      return false;
-    } else if (mnemonic.equals(_OPCODE_JCC)) {
-      return false;
-    } else if (mnemonic.equals(_OPCODE_NOP)) {
+    if (mnemonic.equals(_OPCODE_STM) || mnemonic.equals(_OPCODE_JCC)
+      || mnemonic.equals(_OPCODE_NOP)) {
       return false;
     }
     return true;
