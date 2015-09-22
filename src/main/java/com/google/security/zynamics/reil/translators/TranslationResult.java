@@ -115,9 +115,9 @@ public class TranslationResult {
    */
   public void updateResult(final String result, final OperandSize resultSize, final String address,
       TranslationResultType type) {
-    register = Preconditions.checkNotNull(result, "Result cannot be null.");
-    size = Preconditions.checkNotNull(resultSize, "ResultSize cannot be null.");
-    this.type = Preconditions.checkNotNull(type, "Type cannot be null.");
+    register = Preconditions.checkNotNull(result);
+    size = Preconditions.checkNotNull(resultSize);
+    this.type = Preconditions.checkNotNull(type);
     this.address = address;
   }
 
