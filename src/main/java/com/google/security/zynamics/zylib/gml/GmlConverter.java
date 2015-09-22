@@ -37,23 +37,22 @@ public final class GmlConverter {
    * @return The code generated for the input graph.
    */
   public static String toGml(final IDirectedGraph<?, ? extends IGraphEdge<?>> graph) {
-    Preconditions.checkNotNull(graph, "Error: Graph argument can not be null");
+    Preconditions.checkNotNull(graph, "Graph argument can not be null");
 
     final StringBuilder sb = new StringBuilder();
 
-    sb.append("graph\n");
-    sb.append("[\n");
+    sb.append("graph\n" + "[\n");
 
     int currentId = 0;
 
-    final Map<Object, Integer> nodeMap = new HashMap<Object, Integer>();
+    final Map<Object, Integer> nodeMap = new HashMap<>();
 
     for (final Object node : graph.getNodes()) {
-      sb.append("\tnode\n");
-      sb.append("\t[\n");
-      sb.append("\tid " + currentId + "\n");
-      sb.append("\tlabel \"" + node + "\"\n");
-      sb.append("\t]\n");
+      sb.append("\tnode\n" + "\t[\n" + "\tid " + "\n");
+      sb.append(currentId);
+      sb.append("\tlabel \"");
+      sb.append(node);
+      sb.append("\"\n" + "\t]\n");
 
       nodeMap.put(node, currentId);
 
@@ -61,16 +60,12 @@ public final class GmlConverter {
     }
 
     for (final IGraphEdge<?> edge : graph.getEdges()) {
-      sb.append("\tedge\n");
-      sb.append("\t[\n");
-      sb.append("\tsource " + nodeMap.get(edge.getSource()) + "\n");
-      sb.append("\ttarget " + nodeMap.get(edge.getTarget()) + "\n");
-      sb.append("\tgraphics\n");
-      sb.append("\t[\n");
-      sb.append("\t\tfill \"#000000\"\n");
-      sb.append("\t\ttargetArrow \"standard\"\n");
-      sb.append("\t]\n");
-      sb.append("\t]\n");
+      sb.append("\tedge\n" + "\t[\n" + "\tsource ");
+      sb.append(nodeMap.get(edge.getSource()));
+      sb.append("\n" + "\ttarget ");
+      sb.append(nodeMap.get(edge.getTarget()));
+      sb.append("\n" + "\tgraphics\n" + "\t[\n" + "\t\tfill \"#000000\"\n"
+        + "\t\ttargetArrow \"standard\"\n" + "\t]\n" + "\t]\n");
     }
 
     sb.append("]\n");
@@ -79,28 +74,27 @@ public final class GmlConverter {
   }
 
   public static String toGml(final ITree<?> graph) {
-    Preconditions.checkNotNull(graph, "Error: Graph argument can not be null");
+    Preconditions.checkNotNull(graph, "Graph argument can not be null");
 
     final StringBuilder sb = new StringBuilder();
 
-    sb.append("graph\n");
-    sb.append("[\n");
+    sb.append("graph\n" + "[\n");
 
     int currentId = 0;
 
-    final Map<Object, Integer> nodeMap = new HashMap<Object, Integer>();
+    final Map<Object, Integer> nodeMap = new HashMap<>();
 
-    final Stack<ITreeNode<?>> stack = new Stack<ITreeNode<?>>();
+    final Stack<ITreeNode<?>> stack = new Stack<>();
 
     stack.push(graph.getRootNode());
 
     while (!stack.isEmpty()) {
       final ITreeNode<?> node = stack.pop();
 
-      sb.append("\tnode\n");
-      sb.append("\t[\n");
-      sb.append("\tid " + currentId + "\n");
-      sb.append("\tlabel \"" + node + "\"\n");
+      sb.append("\tnode\n" + "\t[\n" + "\tid ");
+      sb.append(currentId);
+      sb.append("\n" + "\tlabel \"" + "\"\n");
+      sb.append(node);
       sb.append("\t]\n");
 
       nodeMap.put(node, currentId);
@@ -110,16 +104,12 @@ public final class GmlConverter {
       final ITreeNode<?> parent = node.getParent();
 
       if (parent != null) {
-        sb.append("\tedge\n");
-        sb.append("\t[\n");
-        sb.append("\tsource " + nodeMap.get(parent) + "\n");
-        sb.append("\ttarget " + nodeMap.get(node) + "\n");
-        sb.append("\tgraphics\n");
-        sb.append("\t[\n");
-        sb.append("\t\tfill \"#000000\"\n");
-        sb.append("\t\ttargetArrow \"standard\"\n");
-        sb.append("\t]\n");
-        sb.append("\t]\n");
+        sb.append("\tedge\n" + "\t[\n" + "\tsource ");
+        sb.append(nodeMap.get(parent));
+        sb.append("\n" + "\ttarget ");
+        sb.append(nodeMap.get(node));
+        sb.append("\n" + "\tgraphics\n" + "\t[\n" + "\t\tfill \"#000000\"\n" 
+          + "\t\ttargetArrow \"standard\"\n" + "\t]\n" + "\t]\n");
       }
 
       for (final ITreeNode<?> treeNode : node.getChildren()) {

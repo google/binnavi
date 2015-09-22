@@ -35,8 +35,7 @@ public class OperandOrderIterator {
   /**
    * The stack is used to create the proper iteration sequence.
    */
-  private final Stack<Pair<IOperandTreeNode, Integer>> m_traversalStack =
-      new Stack<Pair<IOperandTreeNode, Integer>>();
+  private final Stack<Pair<IOperandTreeNode, Integer>> m_traversalStack = new Stack<>();
 
   /**
    * Root node of the tree to traverse.
@@ -54,9 +53,7 @@ public class OperandOrderIterator {
    * @param root The root node of the tree.
    */
   public OperandOrderIterator(final IOperandTreeNode root) {
-    Preconditions.checkNotNull(root, "Internal Error: Root node can't be null");
-
-    m_root = root;
+    m_root = Preconditions.checkNotNull(root);
   }
 
   /**
