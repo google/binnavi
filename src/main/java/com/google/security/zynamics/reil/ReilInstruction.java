@@ -291,7 +291,7 @@ public final class ReilInstruction implements IInstruction, Comparable<ReilInstr
     stringBuilder.append(thirdOperand.getSize());
     stringBuilder.append(" ");
     stringBuilder.append(thirdOperand);
-     stringBuilder.append("]");
+    stringBuilder.append("]");
     return stringBuilder.toString(); 
   }
 
