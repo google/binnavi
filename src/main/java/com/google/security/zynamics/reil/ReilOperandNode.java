@@ -32,7 +32,7 @@ public class ReilOperandNode implements IOperandTreeNode {
   private final ExpressionType m_type;
 
   public ReilOperandNode(final String value, final ExpressionType type) {
-    m_value = Preconditions.checkNotNull(value, "Value argument can not be null");
+    m_value = Preconditions.checkNotNull(value);
     m_type = type;
   }
 
