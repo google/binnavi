@@ -36,10 +36,10 @@ public class ReilGraph extends DirectedGraph<ReilBlock, ReilEdge> {
       stringBuilder.append(block + "\n");
 
       for (final ReilEdge edge : block.getOutgoingEdges()) {
-
-        stringBuilder.append(block.getAddress() + " ["
-            + Enum.valueOf(EdgeType.class, edge.getType().toString()) + "]-> "
-            + edge.getTarget().getAddress());
+        stringBuilder.append(block.getAddress());
+        stringBuilder.append(" [");
+        stringBuilder.append(Enum.valueOf(EdgeType.class, edge.getType().toString()));
+        stringBuilder.append(edge.getTarget().getAddress());
         stringBuilder.append("\n");
       }
     }
