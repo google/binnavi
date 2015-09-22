@@ -138,7 +138,7 @@ public final class PostgreSQLDatabaseFunctions {
     PostgreSQLDatabaseFunctions.m_cache.clear();
     
     final String query =
-      "select table_name from information_schema.tables  where table_catalog = '"
+      "SELECT table_name FROM information_schema.tables  WHERE table_catalog = '"
         + cacheKey.second() + "' ";
     try (ResultSet result = cacheKey.first().executeQuery(query, true)) {
       while (result.next()) {
@@ -194,7 +194,7 @@ public final class PostgreSQLDatabaseFunctions {
     final List<DebuggerTemplate> debuggerIds = new ArrayList<>();
 
     final String query =
-        String.format("SELECT debugger_id FROM %s where project_id = %d",
+        String.format("SELECT debugger_id FROM %s WHERE project_id = %d",
             CTableNames.PROJECT_DEBUGGERS_TABLE, projectId);
 
     try (ResultSet resultSet = connection.executeQuery(query, true)) {
