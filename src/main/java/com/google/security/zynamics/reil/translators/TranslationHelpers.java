@@ -60,7 +60,7 @@ public class TranslationHelpers {
    * @return The mask.
    */
   public static long generateZeroMask(final int lsb, final int width, final OperandSize size) {
-    Preconditions.checkNotNull(size, "Error: size argument can not be null");
+    Preconditions.checkNotNull(size, "Size argument can not be null");
     Preconditions.checkPositionIndex(lsb, size.getBitSize() - 1);
     Preconditions.checkArgument(width >= 1);
     Preconditions.checkPositionIndex((lsb + width) - 1, size.getBitSize());

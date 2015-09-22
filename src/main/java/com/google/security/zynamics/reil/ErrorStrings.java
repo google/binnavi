@@ -17,9 +17,9 @@ package com.google.security.zynamics.reil;
 
 public class ErrorStrings {
   public final static String ENVIRONMENT_ARGUMENT_ERROR =
-      "Error: Argument environment cannot be null";
+      "Argument environment cannot be null";
   public final static String INSTRUCTION_ARGUMENT_ERROR =
-      "Error: Argument instruction cannot be null";
+      "Argument instruction cannot be null";
   public final static String INSTRUCTIONS_ARGUMENT_ERROR =
-      "Error: Argument instructions cannot be null";
+      "Argument instructions cannot be null";
 }

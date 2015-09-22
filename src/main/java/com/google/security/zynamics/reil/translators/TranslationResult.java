@@ -115,13 +115,10 @@ public class TranslationResult {
    */
   public void updateResult(final String result, final OperandSize resultSize, final String address,
       TranslationResultType type) {
-    Preconditions.checkNotNull(result, "Error: result cannot be null.");
-    Preconditions.checkNotNull(resultSize, "Error: resultSize cannot be null.");
-    Preconditions.checkNotNull(type, "Error: type cannot be null.");
-    register = result;
-    size = resultSize;
+    register = Preconditions.checkNotNull(result);
+    size = Preconditions.checkNotNull(resultSize);
+    this.type = Preconditions.checkNotNull(type);
     this.address = address;
-    this.type = type;
   }
 
   public void updateBaseAndReil(long baseAddress, final List<ReilInstruction> instructions) {

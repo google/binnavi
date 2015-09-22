@@ -27,12 +27,12 @@ import com.google.security.zynamics.zylib.disassembly.IReplacement;
 public class ReilOperandNode implements IOperandTreeNode {
   private final String m_value;
 
-  private final List<IOperandTreeNode> children = new ArrayList<IOperandTreeNode>();
+  private final List<IOperandTreeNode> children = new ArrayList<>();
 
   private final ExpressionType m_type;
 
   public ReilOperandNode(final String value, final ExpressionType type) {
-    m_value = Preconditions.checkNotNull(value, "Error: Value argument can not be null");
+    m_value = Preconditions.checkNotNull(value);
     m_type = type;
   }
 

@@ -30,7 +30,7 @@ public class ReilOperand implements IOperandTree {
    * @param root The root operand node of the operand.
    */
   public ReilOperand(final ReilOperandNode root) {
-    m_root = Preconditions.checkNotNull(root, "Error: Root value can't be null");
+    m_root = Preconditions.checkNotNull(root);
   }
 
   @Override
