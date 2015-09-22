@@ -7,7 +7,7 @@ You may obtain a copy of the License at
 
     http://www.apache.org/licenses/LICENSE-2.0
 
-Unless required by applicable law or agreed to in writing, software
+Unless required by applicable law or agreed to in writing, softwareF
 distributed under the License is distributed on an "AS IS" BASIS,
 WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
@@ -58,7 +58,7 @@ public final class ReilInstruction implements IInstruction, Comparable<ReilInstr
   /**
    * Metadata of the REIL instruction.
    */
-  private final Map<String, String> metaData = new HashMap<String, String>();
+  private final Map<String, String> metaData = new HashMap<>();
 
   /**
    * Creates a new ReilInstruction object.
@@ -72,14 +72,14 @@ public final class ReilInstruction implements IInstruction, Comparable<ReilInstr
   public ReilInstruction(final IAddress address, final String mnemonic,
       final ReilOperand firstOperand, final ReilOperand secondOperand,
       final ReilOperand thirdOperand) {
-    Preconditions.checkNotNull(mnemonic, "Error: Argument mnemonic can't be null");
+    Preconditions.checkNotNull(mnemonic, "Argument mnemonic can't be null");
     this.mnemonic = ReilHelpers.MnemonicToMnemonicCode(mnemonic);
     this.firstOperand =
-        Preconditions.checkNotNull(firstOperand, "Error: Argument firstOperand can't be null");
+        Preconditions.checkNotNull(firstOperand, "Argument firstOperand can't be null");
     this.secondOperand =
-        Preconditions.checkNotNull(secondOperand, "Error: Argument secondOperand can't be null");
+        Preconditions.checkNotNull(secondOperand, "Argument secondOperand can't be null");
     this.thirdOperand =
-        Preconditions.checkNotNull(thirdOperand, "Error: Argument thirdOperand can't be null");
+        Preconditions.checkNotNull(thirdOperand, "Argument thirdOperand can't be null");
 
     this.address = address;
   }
@@ -183,7 +183,7 @@ public final class ReilInstruction implements IInstruction, Comparable<ReilInstr
   public String getMetaData(final String key) {
     // TODO: Handle invalid keys
 
-    Preconditions.checkNotNull(key, "Error: Argument key can't be null");
+    Preconditions.checkNotNull(key, "Argument key can't be null");
 
     return metaData.get(key);
   }
@@ -205,7 +205,7 @@ public final class ReilInstruction implements IInstruction, Comparable<ReilInstr
 
   @Override
   public List<IOperandTree> getOperands() {
-    final List<IOperandTree> operands = new ArrayList<IOperandTree>();
+    final List<IOperandTree> operands = new ArrayList<>();
 
     operands.add(firstOperand);
     operands.add(secondOperand);
@@ -259,7 +259,7 @@ public final class ReilInstruction implements IInstruction, Comparable<ReilInstr
   public void setMetaData(final String key, final String value) {
     // TODO: Check for duplicates.
 
-    Preconditions.checkNotNull(key, "Error: Argument key can't be null");
+    Preconditions.checkNotNull(key, "Argument key can't be null");
 
     if (value == null) {
       metaData.remove(key);
@@ -275,9 +275,24 @@ public final class ReilInstruction implements IInstruction, Comparable<ReilInstr
    */
   @Override
   public String toString() {
-    return address.toHexString() + ": " + ReilHelpers.MnemonicCodeToMnemonic(mnemonic) + " ["
-        + firstOperand.getSize() + " " + firstOperand + ", " + secondOperand.getSize() + " "
-        + secondOperand + ", " + thirdOperand.getSize() + " " + thirdOperand + "]";
+    final StringBuilder stringBuilder = new StringBuilder();
+    stringBuilder.append(address.toHexString());
+    stringBuilder.append(": ");
+    stringBuilder.append(ReilHelpers.MnemonicCodeToMnemonic(mnemonic));
+    stringBuilder.append(" [");
+    stringBuilder.append(firstOperand.getSize());
+    stringBuilder.append(" ");
+    stringBuilder.append(firstOperand);
+    stringBuilder.append(", ");
+    stringBuilder.append(secondOperand.getSize());
+    stringBuilder.append(" ");
+    stringBuilder.append(secondOperand);
+    stringBuilder.append(", ");
+    stringBuilder.append(thirdOperand.getSize());
+    stringBuilder.append(" ");
+    stringBuilder.append(thirdOperand);
+     stringBuilder.append("]");
+    return stringBuilder.toString(); 
   }
 
   /**
