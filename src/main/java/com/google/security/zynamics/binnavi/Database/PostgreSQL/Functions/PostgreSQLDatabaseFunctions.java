@@ -93,7 +93,7 @@ public final class PostgreSQLDatabaseFunctions {
     Preconditions.checkNotNull(connection, "IE02261: Connection argument can not be null");
     Preconditions.checkNotNull(databaseName, "IE02262: Database name argument can not be null");
     Preconditions.checkArgument(rawModuleId > 0,
-        "Error: Raw module id %s must be a positive integer", rawModuleId);
+        "Raw module id %s must be a positive integer", rawModuleId);
 
     final ImmutableSet<String> rawTableNames =
         ImmutableSet.of(String.format(CTableNames.RAW_ADDRESS_COMMENTS_TABLE, rawModuleId),
@@ -116,8 +116,7 @@ public final class PostgreSQLDatabaseFunctions {
             String.format(CTableNames.RAW_TYPE_INSTACES, rawModuleId),
             String.format(CTableNames.RAW_TYPES, rawModuleId));
 
-    final Pair<CConnection, String> cacheKey =
-        new Pair<CConnection, String>(connection, databaseName);
+    final Pair<CConnection, String> cacheKey = new Pair<>(connection, databaseName);
 
     if (PostgreSQLDatabaseFunctions.queryCache(cacheKey, rawTableNames)) {
       return true;
@@ -137,19 +136,13 @@ public final class PostgreSQLDatabaseFunctions {
    */
   protected static boolean fillCache(final Pair<CConnection, String> cacheKey) {
     PostgreSQLDatabaseFunctions.m_cache.clear();
-
-    try {
-      final ResultSet result =
-          cacheKey.first().executeQuery(
-              "select table_name from information_schema.tables " + " where table_catalog = '"
-                  + cacheKey.second() + "' ", true);
-
-      try {
-        while (result.next()) {
-          PostgreSQLDatabaseFunctions.m_cache.put(cacheKey, result.getString(1));
-        }
-      } finally {
-        result.close();
+    
+    final String query =
+      "SELECT table_name FROM information_schema.tables  WHERE table_catalog = '"
+        + cacheKey.second() + "' ";
+    try (ResultSet result = cacheKey.first().executeQuery(query, true)) {
+      while (result.next()) {
+        PostgreSQLDatabaseFunctions.m_cache.put(cacheKey, result.getString(1));
       }
     } catch (final SQLException exception) {
       return false;
@@ -168,7 +161,7 @@ public final class PostgreSQLDatabaseFunctions {
   protected static INaviRawModule findRawModule(final int rawModuleId,
       final List<INaviRawModule> rawModules) {
     Preconditions.checkArgument(rawModuleId > 0,
-        "Error: raw module id %s must be positive integer", rawModuleId);
+        "Raw module id %s must be positive integer", rawModuleId);
     Preconditions.checkNotNull(rawModules, "IE02263: raw modules argument can not be null");
 
     for (final INaviRawModule rawModule : rawModules) {
@@ -193,26 +186,20 @@ public final class PostgreSQLDatabaseFunctions {
       final int projectId, final DebuggerTemplateManager debuggerManager)
       throws CouldntLoadDataException {
     Preconditions.checkNotNull(connection, "IE02264: Connection argument can not be null");
-    Preconditions.checkArgument(projectId > 0, "Error: project id %s must be a positive integer.",
+    Preconditions.checkArgument(projectId > 0, "Project id %s must be a positive integer.",
         projectId);
     Preconditions.checkNotNull(debuggerManager,
         "IE02265: debugger manager argument can not be null");
 
-    final List<DebuggerTemplate> debuggerIds = new ArrayList<DebuggerTemplate>();
+    final List<DebuggerTemplate> debuggerIds = new ArrayList<>();
 
     final String query =
-        String.format("SELECT debugger_id FROM %s where project_id = %d",
+        String.format("SELECT debugger_id FROM %s WHERE project_id = %d",
             CTableNames.PROJECT_DEBUGGERS_TABLE, projectId);
 
-    try {
-      final ResultSet resultSet = connection.executeQuery(query, true);
-
-      try {
-        while (resultSet.next()) {
-          debuggerIds.add(debuggerManager.findDebugger(resultSet.getInt("debugger_id")));
-        }
-      } finally {
-        resultSet.close();
+    try (ResultSet resultSet = connection.executeQuery(query, true)) {
+      while (resultSet.next()) {
+        debuggerIds.add(debuggerManager.findDebugger(resultSet.getInt("debugger_id")));
       }
     } catch (final SQLException exception) {
       throw new CouldntLoadDataException(exception);
@@ -233,23 +220,19 @@ public final class PostgreSQLDatabaseFunctions {
       throws SQLException {
     Preconditions.checkNotNull(connection, "IE02266: Connection argument can not be null");
     Preconditions.checkArgument(rawModuleId > 0,
-        "Error: Raw module id %s must be a positive integer", rawModuleId);
-
-    try {
-      final ResultSet resultSet =
-          connection.executeQuery("SELECT count(*) AS fcount " + " FROM ex_" + rawModuleId
-              + "_functions " + " WHERE address <> 0 " + " OR type <> 3", true);
-      try {
-        while (resultSet.next()) {
-          return resultSet.getInt("fcount");
-        }
-      } finally {
-        resultSet.close();
+        "Raw module id %s must be a positive integer", rawModuleId);
+    
+    final String query = 
+        "SELECT count(*) AS fcount " + " FROM ex_" + rawModuleId
+            + "_functions " + " WHERE address <> 0 " + " OR type <> 3";
+            
+    try (ResultSet resultSet = connection.executeQuery(query, true)) {
+      while (resultSet.next()) {
+        return resultSet.getInt("fcount");
       }
-
-      return 0;
+    return 0;
     } catch (final SQLException exception) {
-      throw new SQLException("Error: could not load function count");
+      throw new SQLException("Could not load function count");
     }
   }
 
@@ -257,16 +240,11 @@ public final class PostgreSQLDatabaseFunctions {
       throws SQLException {
     Preconditions.checkNotNull(connection, "IE02267: Connection argument can not be null");
 
-    final ArrayList<Integer> rawModuleIDs = new ArrayList<Integer>();
-
-    final ResultSet resultSet = connection.executeQuery("SELECT id FROM modules", true);
-    try {
-      try {
-        while (resultSet.next()) {
-          rawModuleIDs.add(resultSet.getInt("id"));
-        }
-      } finally {
-        resultSet.close();
+    final ArrayList<Integer> rawModuleIDs = new ArrayList<>();
+    
+    try (ResultSet resultSet = connection.executeQuery("SELECT id FROM modules", true)) {
+      while (resultSet.next()) {
+        rawModuleIDs.add(resultSet.getInt("id"));
       }
     } catch (final Exception exception) {
       return null;
@@ -335,7 +313,7 @@ public final class PostgreSQLDatabaseFunctions {
     Preconditions.checkNotNull(rawModules, "IE02043: rawModules argument can not be null");
     PostgreSQLDatabaseFunctions.checkArguments(provider, debuggerManager);
 
-    final List<CModule> modules = new ArrayList<CModule>();
+    final List<CModule> modules = new ArrayList<>();
     final CConnection connection = provider.getConnection();
 
     if (!PostgreSQLHelpers.hasTable(connection, CTableNames.MODULES_TABLE)) {
@@ -355,43 +333,36 @@ public final class PostgreSQLDatabaseFunctions {
             + CTableNames.MODULES_TABLE + ".id) " + " AS view_count FROM "
             + CTableNames.MODULES_TABLE + " " + " WHERE raw_module_id IS NOT NULL ORDER BY id";
 
-    try {
-      final ResultSet resultSet = connection.executeQuery(query, true);
+    try (ResultSet resultSet = connection.executeQuery(query, true)) {
+      while (resultSet.next()) {
+        final int moduleId = resultSet.getInt("id");
+        final String name = PostgreSQLHelpers.readString(resultSet, "name");
+        final String md5 = PostgreSQLHelpers.readString(resultSet, "md5");
+        final String sha1 = PostgreSQLHelpers.readString(resultSet, "sha1");
+        final String comment = PostgreSQLHelpers.readString(resultSet, "description");
+        final Timestamp timestamp = resultSet.getTimestamp("import_time");
+        final Timestamp modificationDate = resultSet.getTimestamp("modification_date");
+        int functionCount = resultSet.getInt("function_count");
+        final int viewCount = resultSet.getInt("view_count");
+        final IAddress imageBase = PostgreSQLHelpers.loadAddress(resultSet, "image_base");
+        final IAddress fileBase = PostgreSQLHelpers.loadAddress(resultSet, "file_base");
+        final int debuggerId = resultSet.getInt("debugger_id");
+        final boolean isStared = resultSet.getBoolean("stared");
+        final int initializationState = resultSet.getInt("initialization_state");
 
-      try {
-        while (resultSet.next()) {
-          final int moduleId = resultSet.getInt("id");
+        final DebuggerTemplate description = debuggerManager.findDebugger(debuggerId);
 
-          final String name = PostgreSQLHelpers.readString(resultSet, "name");
-          final String md5 = PostgreSQLHelpers.readString(resultSet, "md5");
-          final String sha1 = PostgreSQLHelpers.readString(resultSet, "sha1");
-          final String comment = PostgreSQLHelpers.readString(resultSet, "description");
-          final Timestamp timestamp = resultSet.getTimestamp("import_time");
-          final Timestamp modificationDate = resultSet.getTimestamp("modification_date");
-          int functionCount = resultSet.getInt("function_count");
-          final int viewCount = resultSet.getInt("view_count");
-          final IAddress imageBase = PostgreSQLHelpers.loadAddress(resultSet, "image_base");
-          final IAddress fileBase = PostgreSQLHelpers.loadAddress(resultSet, "file_base");
-          final int debuggerId = resultSet.getInt("debugger_id");
-          final boolean isStared = resultSet.getBoolean("stared");
-          final int initializationState = resultSet.getInt("initialization_state");
+        final int rawModuleId = resultSet.getInt("raw_module_id");
+        final INaviRawModule rawModule =
+          PostgreSQLDatabaseFunctions.findRawModule(rawModuleId, rawModules);
 
-          final DebuggerTemplate description = debuggerManager.findDebugger(debuggerId);
-
-          final int rawModuleId = resultSet.getInt("raw_module_id");
-          final INaviRawModule rawModule =
-              PostgreSQLDatabaseFunctions.findRawModule(rawModuleId, rawModules);
-
-          if ((functionCount == 0) && (rawModule != null)) {
-            functionCount = rawModule.getFunctionCount();
-          }
-
-          modules.add(new CModule(moduleId, name, comment, timestamp, modificationDate, md5, sha1,
-              functionCount, viewCount, fileBase, imageBase, description, rawModule,
-              initializationState, isStared, provider));
+        if ((functionCount == 0) && (rawModule != null)) {
+          functionCount = rawModule.getFunctionCount();
         }
-      } finally {
-        resultSet.close();
+
+        modules.add(new CModule(moduleId, name, comment, timestamp, modificationDate, md5, sha1,
+          functionCount, viewCount, fileBase, imageBase, description, rawModule,
+          initializationState, isStared, provider));
       }
     } catch (final SQLException e) {
       throw new CouldntLoadDataException(e);
@@ -416,39 +387,34 @@ public final class PostgreSQLDatabaseFunctions {
 
     final CConnection connection = provider.getConnection();
 
-    final List<INaviProject> projects = new ArrayList<INaviProject>();
+    final List<INaviProject> projects = new ArrayList<>();
 
     if (!PostgreSQLHelpers.hasTable(connection, CTableNames.PROJECTS_TABLE)) {
       return projects;
     }
-
-    try {
-      final String query =
+    
+    String query =
           "SELECT id, name, description, creation_date, modification_date, "
               + " (SELECT count(*) FROM " + CTableNames.ADDRESS_SPACES_TABLE
               + " WHERE project_id = " + CTableNames.PROJECTS_TABLE + ".id) "
               + " AS addressspace_count FROM " + CTableNames.PROJECTS_TABLE;
+              
+    try (ResultSet resultSet = connection.executeQuery(query, true)) {
+      while (resultSet.next()) {
+        final int projectId = resultSet.getInt("id");
+        final String name = PostgreSQLHelpers.readString(resultSet, "name");
+        final String description = PostgreSQLHelpers.readString(resultSet, "description");
+        final int addressSpaceCount = resultSet.getInt("addressspace_count");
 
-      final ResultSet resultSet = connection.executeQuery(query, true);
-      try {
-        while (resultSet.next()) {
-          final int projectId = resultSet.getInt("id");
-          final String name = PostgreSQLHelpers.readString(resultSet, "name");
-          final String description = PostgreSQLHelpers.readString(resultSet, "description");
-          final int addressSpaceCount = resultSet.getInt("addressspace_count");
+        final Timestamp creationDate = resultSet.getTimestamp("creation_date");
+        final Timestamp modificationDate = resultSet.getTimestamp("modification_date");
 
-          final Timestamp creationDate = resultSet.getTimestamp("creation_date");
-          final Timestamp modificationDate = resultSet.getTimestamp("modification_date");
+        final List<DebuggerTemplate> debuggers =
+            PostgreSQLDatabaseFunctions.getAssignedDebuggers(connection, projectId,
+                debuggerManager);
 
-          final List<DebuggerTemplate> debuggers =
-              PostgreSQLDatabaseFunctions.getAssignedDebuggers(connection, projectId,
-                  debuggerManager);
-
-          projects.add(new CProject(projectId, name, description == null ? "" : description,
-              creationDate, modificationDate, addressSpaceCount, debuggers, provider));
-        }
-      } finally {
-        resultSet.close();
+        projects.add(new CProject(projectId, name, description == null ? "" : description,
+            creationDate, modificationDate, addressSpaceCount, debuggers, provider));
       }
     } catch (final SQLException e) {
       throw new CouldntLoadDataException(e);
@@ -481,29 +447,23 @@ public final class PostgreSQLDatabaseFunctions {
 
     final String query = "SELECT id, name FROM " + CTableNames.RAW_MODULES_TABLE + " ORDER BY id";
 
-    try {
-      final ResultSet resultSet = connection.executeQuery(query, true);
+    try (ResultSet resultSet = connection.executeQuery(query, true)) {
+      while (resultSet.next()) {
+        final int rawModuleId = resultSet.getInt("id");
+        final String name = PostgreSQLHelpers.readString(resultSet, "name");
 
-      try {
-        while (resultSet.next()) {
-          final int rawModuleId = resultSet.getInt("id");
-          final String name = PostgreSQLHelpers.readString(resultSet, "name");
+        final boolean isComplete =
+            PostgreSQLDatabaseFunctions.checkRawModulesTables(provider.getConnection(),
+                PostgreSQLHelpers.getDatabaseName(provider.getConnection()), rawModuleId);
 
-          final boolean isComplete =
-              PostgreSQLDatabaseFunctions.checkRawModulesTables(provider.getConnection(),
-                  PostgreSQLHelpers.getDatabaseName(provider.getConnection()), rawModuleId);
+        final int functionCount =
+            isComplete ? PostgreSQLDatabaseFunctions.getRawModuleFunctionCount(connection,
+                rawModuleId) : 0;
 
-          final int functionCount =
-              isComplete ? PostgreSQLDatabaseFunctions.getRawModuleFunctionCount(connection,
-                  rawModuleId) : 0;
+        final CRawModule module =
+            new CRawModule(rawModuleId, name, functionCount, isComplete, provider);
 
-          final CRawModule module =
-              new CRawModule(rawModuleId, name, functionCount, isComplete, provider);
-
-          modules.add(module);
-        }
-      } finally {
-        resultSet.close();
+        modules.add(module);
       }
     } catch (final SQLException e) {
       throw new CouldntLoadDataException(e);
@@ -543,14 +503,9 @@ public final class PostgreSQLDatabaseFunctions {
       throw new CouldntUpdateDatabaseException(exception.toString(), 40);
     }
 
-    try {
-      final PreparedStatement statement =
-          connection.getConnection().prepareStatement(contents.toString());
-      try {
-        statement.execute();
-      } finally {
-        statement.close();
-      }
+    try (PreparedStatement statement =
+          connection.getConnection().prepareStatement(contents.toString())) {
+      statement.execute();
     } catch (final SQLException exception) {
       throw new CouldntUpdateDatabaseException(exception.toString(), 41);
     }

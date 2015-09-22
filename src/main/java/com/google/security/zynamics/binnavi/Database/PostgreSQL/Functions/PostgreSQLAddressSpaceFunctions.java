@@ -223,20 +223,12 @@ public final class PostgreSQLAddressSpaceFunctions {
             + CTableNames.MODULES_TABLE + " ON id = module_id WHERE address_space_id = "
             + addressSpace.getConfiguration().getId();
 
-    try {
-      final ResultSet resultSet = connection.executeQuery(query, true);
-
-      try {
-        while (resultSet.next()) {
-          final IAddress imageBase = PostgreSQLHelpers.loadAddress(resultSet, "image_base");
-          final INaviModule module = provider.findModule(resultSet.getInt("id"));
-
-          modules.add(new Pair<IAddress, INaviModule>(imageBase, module));
+    try (ResultSet resultSet = connection.executeQuery(query, true)) {
+      while (resultSet.next()) {
+        final IAddress imageBase = PostgreSQLHelpers.loadAddress(resultSet, "image_base");
+        final INaviModule module = provider.findModule(resultSet.getInt("id"));
+        modules.add(new Pair<IAddress, INaviModule>(imageBase, module));
         }
-      } finally {
-        resultSet.close();
-      }
-
       return modules;
     } catch (final SQLException e) {
       throw new CouldntLoadDataException(e);

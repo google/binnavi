@@ -64,23 +64,15 @@ public final class PostgreSQLDataFunctions {
       throw new CouldntSaveDataException(exception);
     }
 
-    try {
-      final PreparedStatement statement =
-          provider
-              .getConnection()
-              .getConnection()
-              .prepareStatement(
-                  "insert into " + CTableNames.DATA_PARTS_TABLE
-                      + "(module_id, part_id, data) values(?, ?, ?)");
-
-      try {
-        statement.setInt(1, module.getConfiguration().getId());
-        statement.setInt(2, 0);
-        statement.setBinaryStream(3, new ByteArrayInputStream(data, 0, data.length), data.length);
-        statement.execute();
-      } finally {
-        statement.close();
-      }
+    final String preparedStatement = "INSERT INTO " + CTableNames.DATA_PARTS_TABLE
+          + "(module_id, part_id, data) VALUES(?, ?, ?)";
+          
+    try (PreparedStatement statement = 
+      provider.getConnection().getConnection().prepareStatement(preparedStatement)) {
+      statement.setInt(1, module.getConfiguration().getId());
+      statement.setInt(2, 0);
+      statement.setBinaryStream(3, new ByteArrayInputStream(data, 0, data.length), data.length);
+      statement.execute();
     } catch (final SQLException exception) {
       throw new CouldntSaveDataException(exception);
     }
@@ -100,20 +92,16 @@ public final class PostgreSQLDataFunctions {
    */
   public static List<byte[]> loadDataChunks(final AbstractSQLProvider provider, final CModule module)
       throws SQLException {
-    final List<byte[]> dataList = new ArrayList<byte[]>();
+    final List<byte[]> dataList = new ArrayList<>();
 
     final String query =
         "SELECT data FROM " + CTableNames.DATA_PARTS_TABLE + " WHERE module_id = "
             + module.getConfiguration().getId() + " ORDER BY part_id ASC";
 
-    final ResultSet resultSet = provider.executeQuery(query);
-
-    try {
+    try (ResultSet resultSet = provider.executeQuery(query)) {
       while (resultSet.next()) {
         dataList.add(resultSet.getBytes("data"));
       }
-    } finally {
-      resultSet.close();
     }
 
     return dataList;
