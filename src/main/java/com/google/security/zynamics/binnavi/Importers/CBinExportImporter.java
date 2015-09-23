@@ -105,19 +105,12 @@ public final class CBinExportImporter extends CBaseExporter {
 
       // Java manages the streams internally - if they are full, the process blocks, i.e. IDA
       // hangs, so we need to consume them.
-      final BufferedReader reader =
-          new BufferedReader(new InputStreamReader(processInfo.getInputStream()));
-      @SuppressWarnings("unused")
-      String line;
-      try {
-        while ((line = reader.readLine()) != null) {
-          System.out.println(line);
-        }
+      try (BufferedReader reader =
+          new BufferedReader(new InputStreamReader(processInfo.getInputStream()))) {
+        reader.lines().forEach(System.out::println);
       } catch (final IOException exception) {
-        reader.close();
+          //Do nothing
       }
-      reader.close();
-
       return processInfo;
     } catch (final Exception exception) {
       try {
