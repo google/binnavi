@@ -35,23 +35,7 @@ public class ConditionNodeSwitcher {
    * @return The return value of the switched method.
    */
   public static <T> T process(final ConditionNode node, final NodeSwitcher<T> switcher) {
-    if (node instanceof ExpressionNode) {
-      return switcher.process((ExpressionNode) node);
-    } else if (node instanceof FormulaNode) {
-      return switcher.process((FormulaNode) node);
-    } else if (node instanceof IdentifierNode) {
-      return switcher.process((IdentifierNode) node);
-    } else if (node instanceof MemoryNode) {
-      return switcher.process((MemoryNode) node);
-    } else if (node instanceof NumberNode) {
-      return switcher.process((NumberNode) node);
-    } else if (node instanceof RelationNode) {
-      return switcher.process((RelationNode) node);
-    } else if (node instanceof SubNode) {
-      return switcher.process((SubNode) node);
-    } else {
-      throw new IllegalStateException("IE00355: Unknown node type");
-    }
+      return switcher.process(node);
   }
 
   /**
