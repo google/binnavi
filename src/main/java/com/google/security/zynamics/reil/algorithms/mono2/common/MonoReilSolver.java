@@ -63,17 +63,17 @@ public class MonoReilSolver<LatticeElementType extends ILatticeElement<LatticeEl
    * result we skip edges which have not been visited in order to omit artificially inserted entry
    * and exit edges.
    */
-  private final Set<IInstructionGraphEdge> m_traversedEdges = new HashSet<IInstructionGraphEdge>();
+  private final Set<IInstructionGraphEdge> m_traversedEdges = new HashSet<>();
 
   public MonoReilSolver(final IInstructionGraph instructionGraph,
       final AnalysisDirection analysisDirection, final ILattice<LatticeElementType> lattice) {
     m_graph = Preconditions.checkNotNull(instructionGraph,
-        "Error: instruction graph argument can not be null");
+        "Instruction graph argument can not be null");
     m_direction = Preconditions.checkNotNull(analysisDirection,
-        "Error: analysis direction argument can not be null");
-    m_lattice = Preconditions.checkNotNull(lattice, "Error: latice argument can not be null");
+        "Analysis direction argument can not be null");
+    m_lattice = Preconditions.checkNotNull(lattice, "Latice argument can not be null");
 
-    m_workList = MinMaxPriorityQueue.expectedSize(2000).create(); // TODO: Use graph size
+    m_workList = MinMaxPriorityQueue.expectedSize(m_graph.size()).create();
   }
 
   /**
@@ -144,8 +144,8 @@ public class MonoReilSolver<LatticeElementType extends ILatticeElement<LatticeEl
       final Iterable<Pair<IInstructionGraphEdge, LatticeElementType>> initialStates,
       int maximumIteration) {
     Preconditions.checkNotNull(transformationProvider,
-        "Error: transformation provider argument can not be null");
-    Preconditions.checkNotNull(initialStates, "Error: initialStates argument can not be null");
+        "Transformation provider argument can not be null");
+    Preconditions.checkNotNull(initialStates, "InitialStates argument can not be null");
 
     for (final Pair<IInstructionGraphEdge, LatticeElementType> initialState : initialStates) {
       setState(initialState.first(), initialState.second());
