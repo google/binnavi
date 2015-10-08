@@ -145,7 +145,7 @@ public class MonoReilSolver<LatticeElementType extends ILatticeElement<LatticeEl
       int maximumIteration) {
     Preconditions.checkNotNull(transformationProvider,
         "Error: transformation provider argument can not be null");
-    Preconditions.checkNotNull(initialStates, "InitialStates argument can not be null");
+    Preconditions.checkNotNull(initialStates, "Error: initialStates argument can not be null");
 
     for (final Pair<IInstructionGraphEdge, LatticeElementType> initialState : initialStates) {
       setState(initialState.first(), initialState.second());
