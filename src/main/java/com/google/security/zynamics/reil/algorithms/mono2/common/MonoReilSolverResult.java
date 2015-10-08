@@ -70,13 +70,10 @@ public class MonoReilSolverResult<LatticeElementType extends ILatticeElement<Lat
       final Set<IInstructionGraphEdge> traversedEdges) {
     this.graph = Preconditions.checkNotNull(graph, "Error: graph argument can not be null");
     this.lattice = Preconditions.checkNotNull(lattice, "Error: lattice argument can not be null");
-    this.direction =
-        Preconditions.checkNotNull(direction, "Error: direction argument can not be null");
-    this.stateMap =
-        Preconditions.checkNotNull(stateMap, "Error: stateMap argument can not be null");
+    this.direction = Preconditions.checkNotNull(direction, "Error: direction argument can not be null");
+    this.stateMap = Preconditions.checkNotNull(stateMap, "Error: stateMap argument can not be null");
     this.traversedEdges =
-        Preconditions
-            .checkNotNull(traversedEdges, "Error: traversedEdges argument can not be null");
+        Preconditions.checkNotNull(traversedEdges, "Error: traversedEdges argument can not be null");
   }
 
   private Iterator<Pair<IInstructionGraphEdge, LatticeElementType>> resultIterator() {
@@ -96,8 +93,7 @@ public class MonoReilSolverResult<LatticeElementType extends ILatticeElement<Lat
   public Map<IAddress, LatticeElementType> generateAddressToStateMapping(
       final IInstruction startInstruction, final boolean trackIncoming) {
 
-    final Map<IAddress, LatticeElementType> addressToLatticeElementMap =
-        new TreeMap<IAddress, LatticeElementType>();
+    final Map<IAddress, LatticeElementType> addressToLatticeElementMap = new TreeMap<>();
 
     final Iterator<Pair<IInstructionGraphEdge, LatticeElementType>> iter = resultIterator();
 
@@ -118,7 +114,7 @@ public class MonoReilSolverResult<LatticeElementType extends ILatticeElement<Lat
           }
 
           if (addressToLatticeElementMap.containsKey(address)) {
-            final ArrayList<LatticeElementType> combinelist = new ArrayList<LatticeElementType>();
+            final ArrayList<LatticeElementType> combinelist = new ArrayList<>();
             combinelist.add(edgeToLatticeElement.second());
             combinelist.add(addressToLatticeElementMap.get(address));
             addressToLatticeElementMap.put(address, lattice.combine(combinelist));
@@ -180,7 +176,7 @@ public class MonoReilSolverResult<LatticeElementType extends ILatticeElement<Lat
 
     @Override
     public void remove() {
-      throw new IllegalStateException("invalid operation on ProxyIterator: remove !");
+      throw new UnsupportedOperationException("Unsupported operation on ProxyIterator: remove!");
     }
   }
 }

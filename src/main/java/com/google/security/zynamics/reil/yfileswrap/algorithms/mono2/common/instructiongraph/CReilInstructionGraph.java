@@ -254,6 +254,11 @@ public class CReilInstructionGraph implements IInstructionGraph {
         .get(m_internalGraph.getSource(m_edgesMap.inverse().get(instructionGraphEdge)));
   }
 
+  @Override
+  public int size() {
+    return m_internalGraph.edgeCount();
+  }
+  
   /**
    * Because Java iterators and yFiles YCursors are mutually unintelligible, we have to create a
    * proxy class that proxies an EdgeCursor to an Iterable<IInstructionGraphEdge>

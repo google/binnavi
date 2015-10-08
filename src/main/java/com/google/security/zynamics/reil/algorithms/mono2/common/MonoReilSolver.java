@@ -63,7 +63,7 @@ public class MonoReilSolver<LatticeElementType extends ILatticeElement<LatticeEl
    * result we skip edges which have not been visited in order to omit artificially inserted entry
    * and exit edges.
    */
-  private final Set<IInstructionGraphEdge> m_traversedEdges = new HashSet<IInstructionGraphEdge>();
+  private final Set<IInstructionGraphEdge> m_traversedEdges = new HashSet<>();
 
   public MonoReilSolver(final IInstructionGraph instructionGraph,
       final AnalysisDirection analysisDirection, final ILattice<LatticeElementType> lattice) {
@@ -73,7 +73,7 @@ public class MonoReilSolver<LatticeElementType extends ILatticeElement<LatticeEl
         "Error: analysis direction argument can not be null");
     m_lattice = Preconditions.checkNotNull(lattice, "Error: latice argument can not be null");
 
-    m_workList = MinMaxPriorityQueue.expectedSize(2000).create(); // TODO: Use graph size
+    m_workList = MinMaxPriorityQueue.expectedSize(m_graph.size()).create();
   }
 
   /**

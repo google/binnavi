@@ -66,4 +66,11 @@ public interface IInstructionGraph {
    * @return The source node of the instruction graph edge.
    */
   public IInstructionGraphNode getSource(IInstructionGraphEdge edge);
+  
+  /**
+   * Returns the number of edges in this graph.
+   * 
+   * @return The number of edges in this graph.
+   */
+  public int size();
 }
