@@ -68,10 +68,10 @@ public class MonoReilSolver<LatticeElementType extends ILatticeElement<LatticeEl
   public MonoReilSolver(final IInstructionGraph instructionGraph,
       final AnalysisDirection analysisDirection, final ILattice<LatticeElementType> lattice) {
     m_graph = Preconditions.checkNotNull(instructionGraph,
-        "Instruction graph argument can not be null");
+        "Error: instruction graph argument can not be null");
     m_direction = Preconditions.checkNotNull(analysisDirection,
-        "Analysis direction argument can not be null");
-    m_lattice = Preconditions.checkNotNull(lattice, "Latice argument can not be null");
+        "Error: analysis direction argument can not be null");
+    m_lattice = Preconditions.checkNotNull(lattice, "Error: latice argument can not be null");
 
     m_workList = MinMaxPriorityQueue.expectedSize(m_graph.size()).create();
   }
@@ -144,7 +144,7 @@ public class MonoReilSolver<LatticeElementType extends ILatticeElement<LatticeEl
       final Iterable<Pair<IInstructionGraphEdge, LatticeElementType>> initialStates,
       int maximumIteration) {
     Preconditions.checkNotNull(transformationProvider,
-        "Transformation provider argument can not be null");
+        "Error: transformation provider argument can not be null");
     Preconditions.checkNotNull(initialStates, "InitialStates argument can not be null");
 
     for (final Pair<IInstructionGraphEdge, LatticeElementType> initialState : initialStates) {
