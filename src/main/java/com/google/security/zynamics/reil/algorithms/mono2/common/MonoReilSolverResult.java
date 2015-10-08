@@ -68,12 +68,12 @@ public class MonoReilSolverResult<LatticeElementType extends ILatticeElement<Lat
       final ILattice<LatticeElementType> lattice,
       final Map<IInstructionGraphEdge, LatticeElementType> stateMap,
       final Set<IInstructionGraphEdge> traversedEdges) {
-    this.graph = Preconditions.checkNotNull(graph, "Graph argument can not be null");
-    this.lattice = Preconditions.checkNotNull(lattice, "Lattice argument can not be null");
-    this.direction = Preconditions.checkNotNull(direction, "Direction argument can not be null");
-    this.stateMap = Preconditions.checkNotNull(stateMap, "StateMap argument can not be null");
+    this.graph = Preconditions.checkNotNull(graph, "Error: graph argument can not be null");
+    this.lattice = Preconditions.checkNotNull(lattice, "Error: lattice argument can not be null");
+    this.direction = Preconditions.checkNotNull(direction, "Error: direction argument can not be null");
+    this.stateMap = Preconditions.checkNotNull(stateMap, "Error: stateMap argument can not be null");
     this.traversedEdges =
-        Preconditions.checkNotNull(traversedEdges, "TraversedEdges argument can not be null");
+        Preconditions.checkNotNull(traversedEdges, "Error: traversedEdges argument can not be null");
   }
 
   private Iterator<Pair<IInstructionGraphEdge, LatticeElementType>> resultIterator() {
