@@ -42,12 +42,12 @@ public class ReilOperandNode implements IOperandTreeNode {
 
   @Override
   public List<IOperandTreeNode> getChildren() {
-    return new ArrayList<IOperandTreeNode>(children);
+    return new ArrayList<>(children);
   }
 
   @Override
   public List<IReference> getReferences() {
-    throw new RuntimeException("Not yet implemented");
+    throw new UnsupportedOperationException("Not yet implemented");
   }
 
   @Override
