@@ -24,8 +24,8 @@ public class NetHelpers {
 
   public static boolean isValidPort(final String port) {
     try {
-      Integer.parseInt(port);
-      return true;
+      final int portValue = Integer.parseInt(port);
+      return isValidPort(portValue);
     } catch (final NumberFormatException e) {
       return false;
     }
