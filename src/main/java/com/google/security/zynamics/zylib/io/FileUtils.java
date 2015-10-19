@@ -306,19 +306,15 @@ public class FileUtils {
   public static String readTextfile(final File file) throws IOException {
     final StringBuffer contents = new StringBuffer();
 
-    final BufferedReader input = new BufferedReader(new FileReader(file));
-
     final String lineSeparator = System.getProperty("line.separator");
 
-    try {
+    try (BufferedReader input = new BufferedReader(new FileReader(file))) {
       String line = null;
 
       while ((line = input.readLine()) != null) {
         contents.append(line);
         contents.append(lineSeparator);
       }
-    } finally {
-      input.close();
     }
 
     return contents.toString();
@@ -349,12 +345,8 @@ public class FileUtils {
    * @throws IOException
    */
   public static void writeBinaryFile(final File file, final byte[] data) throws IOException {
-    final FileOutputStream fos = new FileOutputStream(file);
-
-    try {
+    try (FileOutputStream fos = new FileOutputStream(file)) {
       fos.write(data);
-    } finally {
-      fos.close();
     }
   }
 
@@ -369,11 +361,8 @@ public class FileUtils {
   public static void writeTextFile(final File file, final String text) throws IOException {
     Preconditions.checkNotNull(file, "Error: file argument can not be null");
     Preconditions.checkNotNull(text, "Error: text argument can not be null");
-    final BufferedWriter writer = new BufferedWriter(new FileWriter(file));
-    try {
+    try (BufferedWriter writer = new BufferedWriter(new FileWriter(file))) {
       writer.write(text);
-    } finally {
-      writer.close();
     }
   }
 }

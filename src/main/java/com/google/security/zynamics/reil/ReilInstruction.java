@@ -24,6 +24,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 /**
  * Class that's used to store REIL instructions.
@@ -90,23 +91,10 @@ public final class ReilInstruction implements IInstruction, Comparable<ReilInstr
    * @return The string representation of meta-data.
    */
   private String getMetaDataString() {
-    final StringBuffer stringBuffer = new StringBuffer();
-
-    String[] keys = new String[0];
-    keys = metaData.keySet().toArray(keys);
-
-    for (int i = 0; i < metaData.size(); i++) {
-
-      stringBuffer.append(keys[i]);
-      stringBuffer.append(" : ");
-      stringBuffer.append(metaData.get(keys[i]));
-
-      if (i != (metaData.size() - 1)) {
-        stringBuffer.append(", ");
-      }
-    }
-
-    return stringBuffer.toString();
+    return metaData.keySet()
+            .stream()
+            .map(key -> key + " : " + metaData.get(key))
+            .collect(Collectors.joining(", "));
   }
 
   @Override
@@ -171,7 +159,7 @@ public final class ReilInstruction implements IInstruction, Comparable<ReilInstr
    * @return A map of metadata information.
    */
   public Map<String, String> getMetaData() {
-    return new HashMap<String, String>(metaData);
+    return new HashMap<>(metaData);
   }
 
   /**

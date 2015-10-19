@@ -17,6 +17,7 @@ package com.google.security.zynamics.zylib.general;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * Contains methods that are useful when working with Pair objects.
@@ -33,13 +34,9 @@ public final class PairHelpers {
    * @return A list of all S elements of the input list.
    */
   public static <S, T> List<S> projectFirst(final List<Pair<S, T>> list) {
-    final List<S> outputList = new ArrayList<S>();
-
-    for (final Pair<S, T> pair : list) {
-      outputList.add(pair.first());
-    }
-
-    return outputList;
+    return list.stream()
+            .map(Pair::first)
+            .collect(Collectors.toList());
   }
 
   /**
@@ -53,12 +50,8 @@ public final class PairHelpers {
    * @return A list of all T elements of the input list.
    */
   public static <S, T> List<T> projectSecond(final List<Pair<S, T>> list) {
-    final List<T> outputList = new ArrayList<T>();
-
-    for (final Pair<?, T> pair : list) {
-      outputList.add(pair.second());
-    }
-
-    return outputList;
+    return list.stream()
+            .map(Pair::second)
+            .collect(Collectors.toList());
   }
 }
