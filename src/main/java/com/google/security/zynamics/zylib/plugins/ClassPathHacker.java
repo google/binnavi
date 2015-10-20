@@ -15,6 +15,8 @@ limitations under the License.
 */
 package com.google.security.zynamics.zylib.plugins;
 
+import com.google.security.zynamics.binnavi.Log.NaviLogger;
+
 import java.io.File;
 import java.lang.reflect.Method;
 import java.net.MalformedURLException;
@@ -30,7 +32,7 @@ public class ClassPathHacker {
       addURL(f.toURI().toURL());
     } catch (final MalformedURLException e) {
       // Should never happen
-      assert false : "Malformed URL from toURI()";
+      throw new AssertionError("Malformed URL from toURI() method");
     }
   }
 
@@ -47,8 +49,7 @@ public class ClassPathHacker {
       method.setAccessible(true);
       method.invoke(sysloader, new Object[] {u});
 
-      // TODO: Reminder for SP (Log this without using System.out.print
-      // System.out.println("Dynamically added " + u.toString() + " to classLoader");
+      NaviLogger.info("Dynamically added " + u.toString() + " to classLoader");
     } catch (final Exception e) {
       e.printStackTrace();
     }
