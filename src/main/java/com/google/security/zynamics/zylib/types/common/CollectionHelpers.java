@@ -18,6 +18,7 @@ package com.google.security.zynamics.zylib.types.common;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import com.google.common.base.Preconditions;
 import com.google.security.zynamics.zylib.general.Pair;
@@ -47,45 +48,30 @@ public class CollectionHelpers {
 
   public static <ItemType> int count(final Collection<? extends ItemType> collection,
       final ItemType item) {
-    int counter = 0;
-
-    for (final ItemType itemType : collection) {
-      if (itemType == item) {
-        counter++;
-      }
-    }
-
-    return counter;
+    
+    return (int) collection.stream()
+                   .filter(itemType -> itemType == item)
+                   .count();
   }
 
   public static <ItemType> int countIf(final Collection<? extends ItemType> collection,
       final ICollectionFilter<ItemType> item) {
-    int counter = 0;
-
-    for (final ItemType itemType : collection) {
-      if (item.qualifies(itemType)) {
-        counter++;
-      }
-    }
-
-    return counter;
+    
+    return (int) collection.stream()
+                   .filter(itemType -> item.qualifies(itemType))
+                   .count();
   }
 
   public static <ItemType> List<ItemType> filter(final Collection<? extends ItemType> collection,
       final ICollectionFilter<ItemType> callback) {
-    final List<ItemType> filteredItems = new ArrayList<ItemType>();
 
-    for (final ItemType item : collection) {
-      if (callback.qualifies(item)) {
-        filteredItems.add(item);
-      }
-    }
-
-    return filteredItems;
+    return collection.stream()
+             .filter(itemType -> item.qualifies(itemType))
+             .collect(Collectors.toList());
   }
 
   public static <T> Collection<T> flatten(final Collection<? extends Collection<T>> second) {
-    final Collection<T> returnList = new ArrayList<T>();
+    final Collection<T> returnList = new ArrayList<>();
 
     for (final Collection<T> collection : second) {
       returnList.addAll(collection);
@@ -152,13 +138,10 @@ public class CollectionHelpers {
   public static <InputType, OutputType> List<OutputType> map(
       final Collection<? extends InputType> elements,
       final ICollectionMapper<InputType, OutputType> mapper) {
-    final List<OutputType> list = new ArrayList<OutputType>();
 
-    for (final InputType element : elements) {
-      list.add(mapper.map(element));
-    }
-
-    return list;
+    return elements.stream()
+             .map(element -> mapper.map(element))
+             .collect(Collectors.toList());
   }
 
   public static <ItemType> ItemType nth(final Collection<? extends ItemType> collection,
@@ -176,14 +159,14 @@ public class CollectionHelpers {
 
   public static <S, T> Pair<Collection<S>, Collection<T>> unzip(
       final Collection<Pair<S, T>> elements) {
-    final Collection<S> firstList = new ArrayList<S>(elements.size());
-    final Collection<T> secondList = new ArrayList<T>(elements.size());
+    final Collection<S> firstList = new ArrayList<>(elements.size());
+    final Collection<T> secondList = new ArrayList<>(elements.size());
 
     for (final Pair<S, T> pair : elements) {
       firstList.add(pair.first());
       secondList.add(pair.second());
     }
 
-    return new Pair<Collection<S>, Collection<T>>(firstList, secondList);
+    return new Pair<>(firstList, secondList);
   }
 }
