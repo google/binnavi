@@ -163,19 +163,13 @@ public class CollectionHelpers {
 
   public static <ItemType> ItemType nth(final Collection<? extends ItemType> collection,
       final ICollectionFilter<ItemType> callback, final int index) {
-    int counter = 0;
-
-    for (final ItemType itemType : collection) {
-      if (callback.qualifies(itemType)) {
-        if (counter == index) {
-          return itemType;
-        }
-
-        counter++;
-      }
+    Object[] array = collection.toArray();
+    ItemType itemType = (ItemType) array[index];
+    if (callback.qualifies(itemType)) {
+      return itemType;
+    } else {
+      throw new IllegalStateException("Error: nth element does not exist");
     }
-
-    throw new IllegalStateException("Error: nth element does not exist");
   }
 
   public static <S, T> Pair<Collection<S>, Collection<T>> unzip(
