@@ -64,10 +64,15 @@ public class CollectionHelpers {
 
   public static <ItemType> List<ItemType> filter(final Collection<? extends ItemType> collection,
       final ICollectionFilter<ItemType> callback) {
-
-    return collection.stream()
-             .filter(itemType -> callback.qualifies(itemType))
-             .collect(Collectors.toList());
+    final List<ItemType> filteredItems = new ArrayList<>();		
+ 		 
+    for (final ItemType item : collection) {		
+      if (callback.qualifies(item)) {	
+        filteredItems.add(item);	
+      }		
+    }		
+		
+    return filteredItems;
   }
 
   public static <T> Collection<T> flatten(final Collection<? extends Collection<T>> second) {
@@ -138,10 +143,13 @@ public class CollectionHelpers {
   public static <InputType, OutputType> List<OutputType> map(
       final Collection<? extends InputType> elements,
       final ICollectionMapper<InputType, OutputType> mapper) {
-
-    return elements.stream()
-             .map(element -> mapper.map(element))
-             .collect(Collectors.toList());
+    final List<OutputType> list = new ArrayList<>();		
+		
+    for (final InputType element : elements) {		
+      list.add(mapper.map(element));		
+    }		
+ 		 
+    return list;
   }
 
   public static <ItemType> ItemType nth(final Collection<? extends ItemType> collection,
