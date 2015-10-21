@@ -34,7 +34,7 @@ public class StringHelper {
   }
 
   /**
-   * Deprecated. Use replaceAll(String regex, String replacement) method
+   * Deprecated. Use replaceAll() method
    * of the java.lang.String class instead;
    * 
    * For example:
