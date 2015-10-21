@@ -66,7 +66,7 @@ public class CollectionHelpers {
       final ICollectionFilter<ItemType> callback) {
 
     return collection.stream()
-             .filter(itemType -> item.qualifies(itemType))
+             .filter(itemType -> callback.qualifies(itemType))
              .collect(Collectors.toList());
   }
 
