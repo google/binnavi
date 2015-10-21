@@ -163,6 +163,8 @@ public class CollectionHelpers {
 
   public static <ItemType> ItemType nth(final Collection<? extends ItemType> collection,
       final ICollectionFilter<ItemType> callback, final int index) {
+    Preconditions.checkArgument(index >= 0 && index < collection.size(), 
+      "Error: Index argument should be between 0 and collection size");
     Object[] array = collection.toArray();
     ItemType itemType = (ItemType) array[index];
     if (callback.qualifies(itemType)) {
