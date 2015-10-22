@@ -150,7 +150,7 @@ public class GraphAlgorithms {
     return nodes.stream()
             // Don't bother to re-select the nodes that are already selected    
             .filter(child -> filter.qualifies(child))
-            .collect(Collectors.toList());
+            .collect(Collectors.toCollection(ArrayList::new));
   }
 
   /**
