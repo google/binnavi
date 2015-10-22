@@ -20,6 +20,7 @@ import com.google.security.zynamics.binnavi.debug.models.targetinformation.Threa
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 
 // ! Contains the known register values of all threads of a process.
@@ -43,13 +44,10 @@ public final class RegisterValues implements Iterable<ThreadRegisterValues> {
   // / @endcond
   public RegisterValues(
       final com.google.security.zynamics.binnavi.debug.models.targetinformation.RegisterValues registerValues) {
-    final List<ThreadRegisterValues> values = new ArrayList<ThreadRegisterValues>();
 
-    for (final ThreadRegisters threadRegisterValues : registerValues) {
-      values.add(new ThreadRegisterValues(threadRegisterValues));
-    }
-
-    this.values = values;
+    this.values = registerValues.stream()
+                    .map(ThreadRegisterValues::new)
+                    .collect(Collectors.toList());
   }
 
   // ! Returns the register values of the individual threads.
