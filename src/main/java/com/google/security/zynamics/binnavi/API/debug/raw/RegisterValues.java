@@ -44,11 +44,15 @@ public final class RegisterValues implements Iterable<ThreadRegisterValues> {
   // / @endcond
   public RegisterValues(
       final com.google.security.zynamics.binnavi.debug.models.targetinformation.RegisterValues registerValues) {
-
-    this.values = registerValues.stream()
-                    .map(ThreadRegisterValues::new)
-                    .collect(Collectors.toList());
-  }
+    
+    final List<ThreadRegisterValues> values = new ArrayList<ThreadRegisterValues>();		
+ 		 
+    for (final ThreadRegisters threadRegisterValues : registerValues) {	
+      values.add(new ThreadRegisterValues(threadRegisterValues));
+    }
+		
+    this.values = values;		
+   }
 
   // ! Returns the register values of the individual threads.
   /**
