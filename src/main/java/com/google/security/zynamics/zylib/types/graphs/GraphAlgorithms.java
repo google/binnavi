@@ -147,10 +147,16 @@ public class GraphAlgorithms {
     Preconditions.checkNotNull(nodes, "Error: Nodes argument can't be null");
     Preconditions.checkNotNull(filter, "Error: Filter argument can't be null");
 
-    return nodes.stream()
-            // Don't bother to re-select the nodes that are already selected    
-            .filter(child -> filter.qualifies(child))
-            .collect(Collectors.toCollection(ArrayList::new));
+    final Collection<NodeType> filteredNodes = new ArrayList<NodeType>();		
+    // Don't bother to re-select the nodes that are already selected    
+    for (final NodeType child : nodes) {
+       // Don't bother to re-select the nodes that are already selected		
+       if (filter.qualifies(child)) {		
+         filteredNodes.add(child);		
+       }		
+     }		
+		
+    return filteredNodes;
   }
 
   /**
