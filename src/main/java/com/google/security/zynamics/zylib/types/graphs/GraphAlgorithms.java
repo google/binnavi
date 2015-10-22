@@ -325,8 +325,12 @@ public class GraphAlgorithms {
       final Collection<NodeType> nodes) {
     Preconditions.checkNotNull(nodes, "Error: Nodes argument can't be null");
 
-    return nodes.stream()
-             .collect(Collectors.toSet());
+    final HashSet<NodeType> predecessors = new HashSet<NodeType>();	
+      for (final NodeType zyGraphNode : nodes) {		
+        predecessors.addAll(getPredecessors(zyGraphNode));		
+      }		
+		
+    return predecessors;
   }
 
   /**
