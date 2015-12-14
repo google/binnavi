@@ -192,6 +192,7 @@ public class TranslatorX86<InstructionType extends IInstruction> implements
       translators.put("repne scasw", new RepneTranslator(new ScasGenerator(), OperandSize.WORD));
       translators.put("repne scasd", new RepneTranslator(new ScasGenerator(), OperandSize.DWORD));
       translators.put("ret", new RetnTranslator());
+      translators.put("retn", new RetnTranslator());
       translators.put("rcl", new RclTranslator());
       translators.put("rcr", new RcrTranslator());
       translators.put("rol", new RolTranslator());
