@@ -1,5 +1,5 @@
 /*
-Copyright 2015 Google Inc. All Rights Reserved.
+Copyright 2011-2016 Google Inc. All Rights Reserved.
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -78,7 +78,7 @@ public final class CWindowFunctions {
       urls.add(new Pair<>("Report Bugs", new URL("mailto:zynamics-support@google.com")));
 
       final String message = Constants.PROJECT_NAME_VERSION_BUILD
-          + "\n\nCopyright \u00a92004-2011 zynamics GmbH.\nCopyright \u00a92011-2015 Google Inc.\n";
+          + "\n\nCopyright \u00a92004-2011 zynamics GmbH.\nCopyright \u00a92011-2016 Google Inc.\n";
       final String description =
           "\nParts of this software were created by third parties and have different licensing "
           + "requirements.\nPlease see the manual file for a complete list.\n";

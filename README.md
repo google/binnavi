@@ -1,7 +1,7 @@
 BinNavi [![Build Status](https://api.travis-ci.org/google/binnavi.svg?branch=master)](https://travis-ci.org/google/binnavi)
 =======
 
-Copyright 2015 Google Inc.
+Copyright 2011-2016 Google Inc.
 
 Disclaimer: This is not an official Google product (experimental or otherwise),
 it is just code that happens to be owned by Google.
