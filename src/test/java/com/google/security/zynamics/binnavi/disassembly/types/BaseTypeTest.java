@@ -34,6 +34,7 @@ import org.junit.runners.JUnit4;
 
 import java.util.Iterator;
 import java.util.List;
+import java.util.TreeSet;
 
 /**
  * Tests all methods related to {@link BaseType base types} without going through the type manager.
@@ -382,7 +383,9 @@ public class BaseTypeTest {
 
   @Test
   public void testMoveMemberInBetween() {
-    typeSystem.simpleStruct.moveMembers(Sets.newTreeSet(typeSystem.ssIntMember), 32);
+    TreeSet<TypeMember> t = Sets.newTreeSet();
+    t.add(typeSystem.ssIntMember);
+    typeSystem.simpleStruct.moveMembers(t, 32);
     assertEquals(Integer.valueOf(0), typeSystem.ssUintMember.getBitOffset().get());
     assertEquals(Integer.valueOf(32), typeSystem.ssIntMember.getBitOffset().get());
     assertEquals(Integer.valueOf(64), typeSystem.ssArrayMember.getBitOffset().get());
@@ -390,19 +393,27 @@ public class BaseTypeTest {
 
   @Test(expected = IllegalArgumentException.class)
   public void testMoveMemberInvalid1() {
-    typeSystem.simpleStruct.moveMembers(Sets.newTreeSet(typeSystem.ssIntMember), -100);
+    TreeSet<TypeMember> t = Sets.newTreeSet();
+    t.add(typeSystem.ssIntMember);
+    typeSystem.simpleStruct.moveMembers(t, -100);
   }
 
   @Test(expected = IllegalArgumentException.class)
   public void testMoveMemberInvalid2() {
+    TreeSet<TypeMember> t = Sets.newTreeSet();
+    t.add(typeSystem.ssIntMember);
+    t.add(typeSystem.ssUintMember);
     typeSystem.simpleStruct.moveMembers(
-        Sets.newTreeSet(typeSystem.ssIntMember, typeSystem.ssUintMember), 999);
+        t, 999);
   }
 
   @Test
   public void testMoveMembersToBeginning() {
+    TreeSet<TypeMember> t = Sets.newTreeSet();
+    t.add(typeSystem.ssUintMember);
+    t.add(typeSystem.ssArrayMember); 
     typeSystem.simpleStruct.moveMembers(
-        Sets.newTreeSet(typeSystem.ssUintMember, typeSystem.ssArrayMember), -32);
+        t, -32);
     assertEquals(Integer.valueOf(0), typeSystem.ssUintMember.getBitOffset().get());
     assertEquals(Integer.valueOf(32), typeSystem.ssArrayMember.getBitOffset().get());
     assertEquals(Integer.valueOf(352), typeSystem.ssIntMember.getBitOffset().get());
@@ -410,8 +421,11 @@ public class BaseTypeTest {
 
   @Test
   public void testMoveMembersToBeginningReverse() {
+    TreeSet<TypeMember> t = Sets.newTreeSet();
+    t.add(typeSystem.ssUintMember);
+    t.add(typeSystem.ssArrayMember); 
     typeSystem.simpleStruct.moveMembers(
-        Sets.newTreeSet(typeSystem.ssArrayMember, typeSystem.ssUintMember), -32);
+       t, -32);
     assertEquals(Integer.valueOf(0), typeSystem.ssUintMember.getBitOffset().get());
     assertEquals(Integer.valueOf(32), typeSystem.ssArrayMember.getBitOffset().get());
     assertEquals(Integer.valueOf(352), typeSystem.ssIntMember.getBitOffset().get());
@@ -419,8 +433,11 @@ public class BaseTypeTest {
 
   @Test
   public void testMoveMembersToEnd() {
+    TreeSet<TypeMember> t = Sets.newTreeSet();
+    t.add(typeSystem.ssIntMember);
+    t.add(typeSystem.ssUintMember); 
     typeSystem.simpleStruct.moveMembers(
-        Sets.<TypeMember>newTreeSet(typeSystem.ssIntMember, typeSystem.ssUintMember), 320);
+        t, 320);
     assertEquals(Integer.valueOf(320), typeSystem.ssIntMember.getBitOffset().get());
     assertEquals(Integer.valueOf(352), typeSystem.ssUintMember.getBitOffset().get());
     assertEquals(Integer.valueOf(0), typeSystem.ssArrayMember.getBitOffset().get());
@@ -428,8 +445,11 @@ public class BaseTypeTest {
 
   @Test
   public void testMoveMembersToEndReverse() {
+    TreeSet<TypeMember> t = Sets.newTreeSet();
+    t.add(typeSystem.ssIntMember);
+    t.add(typeSystem.ssUintMember);   
     typeSystem.simpleStruct.moveMembers(
-        Sets.newTreeSet(typeSystem.ssUintMember, typeSystem.ssIntMember), 320);
+        t, 320);
     assertEquals(Integer.valueOf(320), typeSystem.ssIntMember.getBitOffset().get());
     assertEquals(Integer.valueOf(352), typeSystem.ssUintMember.getBitOffset().get());
     assertEquals(Integer.valueOf(0), typeSystem.ssArrayMember.getBitOffset().get());
@@ -437,7 +457,9 @@ public class BaseTypeTest {
 
   @Test
   public void testMoveMemberToBeginning() {
-    typeSystem.simpleStruct.moveMembers(Sets.newTreeSet(typeSystem.ssUintMember), -32);
+    TreeSet<TypeMember> t = Sets.newTreeSet();
+    t.add(typeSystem.ssUintMember);
+    typeSystem.simpleStruct.moveMembers(t, -32);
     assertEquals(Integer.valueOf(0), typeSystem.ssUintMember.getBitOffset().get());
     assertEquals(Integer.valueOf(32), typeSystem.ssIntMember.getBitOffset().get());
     assertEquals(Integer.valueOf(64), typeSystem.ssArrayMember.getBitOffset().get());
@@ -445,7 +467,9 @@ public class BaseTypeTest {
 
   @Test
   public void testMoveMemberToEnd() {
-    typeSystem.simpleStruct.moveMembers(Sets.newTreeSet(typeSystem.ssIntMember), 64);
+    TreeSet<TypeMember> t = Sets.newTreeSet();
+    t.add(typeSystem.ssIntMember);
+    typeSystem.simpleStruct.moveMembers(t, 64);
     assertEquals(Integer.valueOf(0), typeSystem.ssUintMember.getBitOffset().get());
     assertEquals(Integer.valueOf(32), typeSystem.ssArrayMember.getBitOffset().get());
     assertEquals(Integer.valueOf(64), typeSystem.ssIntMember.getBitOffset().get());
