@@ -7,6 +7,5 @@ right away.
 ``binnavi-all.jar`` is provided for convenience, just run with this command:
     java -jar binnavi-all.jar
 
-The file ``binnavi600-win-x86.msi`` is the current full Windows installer
-package. This also contains the sources for the debug clients which we will
-integrate in a more proper form into this repository at a later date.
+The file ``binnavi600-win-x86.msi`` is the full Windows installer package for
+a slightly outdated version of BinNavi, but which should work out of the box.

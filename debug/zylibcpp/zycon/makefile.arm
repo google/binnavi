@@ -1,0 +1,29 @@
+# Copyright 2011-2016 Google Inc. All Rights Reserved.
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+FILES=src/*.cpp
+FLAGS= /O2 /Os /D "NDEBUG" /D "_WIN32_WCE=0x420" /D "UNDER_CE" /D "WIN32_PLATFORM_PSPC" /D "WINCE" /D "_LIB" /D "ARM" /D "_ARM_" /D "_UNICODE" /D "UNICODE" /Gm /EHsc /MT /fp:fast /GR /c /Fo"lib\\" /W3 /nologo /c /Zi /TP
+
+main:
+	cl $(FLAGS) $(FILES)
+	lib /subsystem:windowsce,4.20 /machine:ARM /OUT:lib/zyconarm.lib lib/*.obj
+	del lib\*.obj
+
+md:
+	cl /MD $(FLAGS) $(FILES)
+	lib /OUT:lib/zyconarmmd.lib lib/*.obj
+	del lib\*.obj
+
+clean:
+	del lib/*
