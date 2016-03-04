@@ -139,7 +139,7 @@ public class CmpxchgTranslator implements IInstructionTranslator {
 
     // Jump to secondWriteBack if not equal.
     // Reserve space for the two JCC and firstWriteBack when calculating target address.
-    final long secondWriteBackOffset = instructions.size() + firstWriteBack.size() + 3;
+    final long secondWriteBackOffset = instructions.size() + firstWriteBack.size() + 2;
     final String secondWriteBackGoal = String.format("%d.%d",
                                                      instruction.getAddress().toLong(),
                                                      secondWriteBackOffset);
@@ -175,7 +175,7 @@ public class CmpxchgTranslator implements IInstructionTranslator {
 
     // Jump to terminatingNop (avoid falling through from firstWriteBack).
     // Reserve addresses for JCC and for secondWriteBack when calculating target address.
-    final long terminatingNopOffset = instructions.size() + secondWriteBack.size() + 2;
+    final long terminatingNopOffset = instructions.size() + secondWriteBack.size() + 1;
     final String terminatingNopGoal = String.format("%d.%d",
                                                     instruction.getAddress().toLong(),
                                                     terminatingNopOffset);
