@@ -159,7 +159,8 @@ public class PostgreSQLGroupNodeCommentTests extends ExpensiveBaseTest {
       LoadCancelledException,
       MaybeNullException,
       CPartialLoadException,
-      CouldntSaveDataException {
+      CouldntSaveDataException,
+      CouldntDeleteException {
 
     final INaviModule module = getProvider().loadModules().get(0);
     module.load();
@@ -177,26 +178,32 @@ public class PostgreSQLGroupNodeCommentTests extends ExpensiveBaseTest {
 
     final ZyGraph graph = CGraphBuilder.buildGraph(view);
 
+    final INaviInstruction instruction =
+            view.getContent().getBasicBlocks().get(0).getLastInstruction();
+
     final INaviView nonNativeView = graph.saveAs(new CModuleContainer(getDatabase(), module),
         " TEST INSTRUCTION COMMENTS IN GROUP NODE ", " TESTING GROUP NODE COMMENTS ");
 
-    final INaviInstruction instruction =
-        view.getContent().getBasicBlocks().get(0).getLastInstruction();
     final IUser user = new UniqueTestUserGenerator(getProvider()).nextActiveUser();
     final String firstCommentString = "TEST INSTRUCTION COMMENT PROPAGATION";
-    final int firstCommentId = getProvider().appendGlobalInstructionComment(instruction,
-        firstCommentString, user.getUserId());
-    final IComment firstComment = new CComment(firstCommentId, user, null, firstCommentString);
+    int firstCommentId = -1;
+    try {
+      firstCommentId = getProvider().appendGlobalInstructionComment(instruction,
+          firstCommentString, user.getUserId());
+      final IComment firstComment = new CComment(firstCommentId, user, null, firstCommentString);
 
-    final ArrayList<IComment> commentsFromDatabase = getProvider().loadCommentById(firstCommentId);
+      final ArrayList<IComment> commentsFromDatabase = getProvider().loadCommentById(firstCommentId);
 
-    assertNotNull(commentsFromDatabase);
-    assertEquals(1, commentsFromDatabase.size());
-    assertTrue(commentsFromDatabase.contains(firstComment));
+      assertNotNull(commentsFromDatabase);
+      assertEquals(1, commentsFromDatabase.size());
+      assertTrue(commentsFromDatabase.contains(firstComment));
 
-    final INaviInstruction instruction2 =
-        nonNativeView.getBasicBlocks().get(0).getLastInstruction();
-    assertEquals(1, instruction2.getGlobalComment().size());
+      final INaviInstruction instruction2 =
+          nonNativeView.getBasicBlocks().get(0).getLastInstruction();
+      assertEquals(1, instruction2.getGlobalComment().size());
+    } finally {
+      getProvider().deleteGlobalInstructionComment(instruction, firstCommentId, user.getUserId());
+    }
   }
 
   @Test(expected = NullPointerException.class)
