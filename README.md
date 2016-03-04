@@ -1,19 +1,18 @@
-BinNavi [![Build Status](https://api.travis-ci.org/google/binnavi.svg?branch=master)](https://travis-ci.org/google/binnavi)
-=======
+# BinNavi [![Build Status](https://api.travis-ci.org/google/binnavi.svg?branch=master)](https://travis-ci.org/google/binnavi)
 
 Copyright 2011-2016 Google Inc.
 
 Disclaimer: This is not an official Google product (experimental or otherwise),
 it is just code that happens to be owned by Google.
 
-#Introduction
+## Introduction
 
 BinNavi is a binary analysis IDE - an environment that allows users to inspect,
 navigate, edit, and annotate control-flow-graphs of disassembled code, do the
 same for the callgraph of the executable, collect and combine execution traces,
 and generally keep track of analysis results among a group of analysts.
 
-#Complications from a third-party dependency
+## Complications from a third-party dependency
 
 BinNavi uses a commercial third-party graph visualisation library (yFiles) for
 displaying and laying out graphs. This library is immensely powerful, and not
@@ -54,7 +53,7 @@ We will enforce this - we're very happy to have found a way to open-source
 BinNavi with the yFiles dependency, and we will make sure that any code we pull
 in respects the yFiles license.
 
-#Building BinNavi from scratch
+## Building BinNavi from scratch
 
 BinNavi uses Maven for its dependency management, but not for the actual build
 yet. To build from scratch use these commands:
@@ -62,7 +61,7 @@ yet. To build from scratch use these commands:
     mvn dependency:copy-dependencies
     ant build-binnavi-fat-jar
 
-#Running BinNavi for the first time
+## Running BinNavi for the first time
 
 Please be aware that BinNavi makes use of a central PostgreSQL database for
 storing disassemblies/comments/traces - so you need to have such an instance
@@ -70,7 +69,7 @@ running somewhere accessible to you. You can launch BinNavi as follows:
 
     java -jar target/binnavi-all.jar
 
-#Importing the project into Eclipse
+## Importing the project into Eclipse
 
 Loading the code into Eclipse for further development requires a little bit of
 configuration.
@@ -89,21 +88,21 @@ configuration.
 
 You should be ready to go from here.
 
-#Exporting disassemblies from IDA
+## Exporting disassemblies from IDA
 
-As part of this project, we are distributing a binary-only (sorry!) IDA pro
-plugin that exports disassemblies from IDA into the Postgresql database format
-that BinNavi requires. When running BinNavi, simply configure the right path
-for IDA, click on the "install plugin" button if necessary -- you should now
-be able to import disassemblies.
+As part of this project, we are distributing an IDA Pro plugin that exports
+disassemblies from IDA into the PostgreSQL database format that BinNavi
+requires. When running BinNavi, simply configure the right path for IDA,
+click on the "install plugin" button if necessary -- you should now be able to
+import disassemblies.
 
-#Using other disassemblers than IDA
+## Using other disassemblers than IDA
 
 Right now, we only have the IDA export plugin - but we are hoping very much
 that someone will help us build export functionality for other disassemblers
 in the near future.
 
-# Building BinNavi with Gradle
+## Building BinNavi with Gradle
 
 *Please note that at current the Maven build is the authorative build system for BinNavi. 
 Gradle is purely experimental and is likely to change.*
