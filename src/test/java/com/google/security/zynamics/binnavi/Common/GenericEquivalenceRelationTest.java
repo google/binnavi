@@ -18,6 +18,7 @@ package com.google.security.zynamics.binnavi.Common;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.JUnit4;
@@ -30,6 +31,7 @@ import org.junit.runners.JUnit4;
  *
  */
 @RunWith(JUnit4.class)
+@Ignore
 public class GenericEquivalenceRelationTest<T> {
   private final GenericEquivalenceRelationFactory<T> factory;
 
