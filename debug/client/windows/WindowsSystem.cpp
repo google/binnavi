@@ -1111,7 +1111,7 @@ NaviError WindowsSystem::getMemmap(std::vector<CPUADDRESS> &addresses) {
     } else {
       consecutiveRegions = 0;
     }
-    offset = (CPUADDRESS)mem.BaseAddress + mem.RegionSize;
+	offset = reinterpret_cast<CPUADDRESS>(mem.BaseAddress) + mem.RegionSize;
     if (offset == 0) {
       break;
     }
