@@ -61,9 +61,10 @@ public class NegTranslator implements IInstructionTranslator {
 
     // Load the operand.
     final TranslationResult result = Helpers.translateOperand(environment, offset, operand, true);
-
-   // Adjust the offset of the next REIL instruction.
-   offset = baseOffset + instructions.size();
+    instructions.addAll(result.getInstructions());
+   
+    // Adjust the offset of the next REIL instruction.
+    offset = baseOffset + instructions.size();
 
     final String operandRegister = result.getRegister();
 
