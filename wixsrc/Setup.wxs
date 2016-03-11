@@ -76,7 +76,7 @@ limitations under the License.
     </Condition>
 
     <Media Id="1"
-        Cabinet="binnavi6.0.cab"
+        Cabinet="binnavi6.1.cab"
         EmbedCab="yes"
       />
 
@@ -169,7 +169,7 @@ limitations under the License.
     <!-- Directory Structure -->
     <Directory Id="TARGETDIR" Name="SourceDir">
       <Directory Id="ProgramMenuFolder" Name="Programs">
-        <Directory Id="ProgramMenuDir" Name="zynamics BinNavi 6.0" />
+        <Directory Id="ProgramMenuDir" Name="zynamics BinNavi 6.1" />
       </Directory>
       <Directory Id="DesktopFolder" Name="Desktop" />
       <!-- Ignore ICE48 here, it's only because of the default value set above -->
@@ -178,7 +178,7 @@ limitations under the License.
       </Directory>
       <Directory Id="ProgramFilesFolder" Name="ProgramFiles">
         <Directory Id="zynamicsProgramFiles" Name="zynamics">
-          <Directory Id="INSTALLDIR" Name="BinNavi 6.0">
+          <Directory Id="INSTALLDIR" Name="BinNavi 6.1">
             <Directory Id="BinDir" Name="bin" />
           </Directory>
         </Directory>
@@ -200,20 +200,20 @@ limitations under the License.
         <File Id="licenseRTF" Name="license.rtf" KeyPath="yes">
           <!-- Ignore ICE50 here, if we do it by the book we get no system icons -->
           <Shortcut Id="startmenuLicense" Directory="ProgramMenuDir"
-              Name="zynamics BinNavi 6.0 License" Advertise="yes"
+              Name="zynamics BinNavi 6.1 License" Advertise="yes"
               Icon="license.rtf" IconIndex="0" />
         </File>
       </Component>
     </DirectoryRef>
 
-    <DirectoryRef Id="ProgramMenuDir" FileSource="$(var.ProjectDir)files\Startmenu\Programs\zynamics_BinNavi_5.0">
+    <DirectoryRef Id="ProgramMenuDir" FileSource="$(var.ProjectDir)files\Startmenu\Programs\zynamics_BinNavi">
       <Component Id="ZynamicsHomePageLink"
           Guid="18B86886-F767-4F84-B1DF-3980DE838C07">
         <File Id="ZynamicsHomePageURL" Name="zynamics Home Page.url" Source="$(var.ProjectDir)files\zynamics_Home_Page.url" />
         <File Id="ReportABugURL" Name="Report a bug.url" Source="$(var.ProjectDir)files\Report_a_bug.url" />
         <RemoveFolder Id="ZynamicsHomePageLink_RemoveShortcutFolder"
             Directory="ProgramMenuDir" On="uninstall" />
-        <RegistryValue Root="HKCU" Key="SOFTWARE\zynamics\BinNavi\6.0\Shortcut"
+        <RegistryValue Root="HKCU" Key="SOFTWARE\zynamics\BinNavi\6.1\Shortcut"
             Type="string" Value="1" KeyPath="yes" />
       </Component>
     </DirectoryRef>
@@ -221,18 +221,18 @@ limitations under the License.
     <DirectoryRef Id="IdaPluginsDir">
       <Component Id="BinExportPlugin"
           Guid="CA1D9BCF-E31B-4566-84DA-E9866CF57BFC">
-        <File Id="ExporterPLW" Name="zynamics_binexport_8.plw" Source="$(var.OutputDir)\zynamics_binexport_8.plw" />
+        <File Id="ExporterPLW" Name="zynamics_binexport_9.plw" Source="$(var.OutputDir)\zynamics_binexport_9.plw" />
       </Component>
       <Component Id="BinExportPlugin64"
           Guid="93B799DD-92A9-498B-A140-FFB20A0217D3">
-        <File Id="ExporterP64" Name="zynamics_binexport_8.p64" Source="$(var.OutputDir)\zynamics_binexport_8.p64" />
+        <File Id="ExporterP64" Name="zynamics_binexport_9.p64" Source="$(var.OutputDir)\zynamics_binexport_9.p64" />
       </Component>
     </DirectoryRef>
 
     <DirectoryRef Id="INSTALLDIR" FileSource="$(var.ZynamicsJavaDir)\binnavi\data">
       <Component Id="BinNaviGUIConfig"
           Guid="9E52F23F-8569-492d-82BF-4E22E7A85209">
-        <RegistryValue Root="HKCU" Key="SOFTWARE\zynamics\BinNavi\6.0\BinNaviGuiConfig"
+        <RegistryValue Root="HKCU" Key="SOFTWARE\zynamics\BinNavi\6.1\BinNaviGuiConfig"
             Type="string" Value="1" KeyPath="yes" />
         <File Id="configXML" Name="config.xml" />
       </Component>
