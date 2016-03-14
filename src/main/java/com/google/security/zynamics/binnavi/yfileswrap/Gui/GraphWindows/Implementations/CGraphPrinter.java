@@ -22,7 +22,7 @@ import java.awt.print.PrinterJob;
 import javax.swing.JFrame;
 
 import com.google.security.zynamics.binnavi.CUtilityFunctions;
-import com.google.security.zynamics.binnavi.Gui.ErrorDialog.CNaviErrorDialog;
+import com.google.security.zynamics.binnavi.Gui.errordialog.NaviErrorDialog;
 import com.google.security.zynamics.binnavi.yfileswrap.zygraph.ZyGraph;
 
 import y.option.OptionHandler;
@@ -97,7 +97,7 @@ public final class CGraphPrinter {
             graph.getRawView().getName()), new String[] {"There was a problem with the printer."},
             new String[] {"The print operation could not be completed."});
 
-        CNaviErrorDialog.show(parent, innerMessage, innerDescription, exception);
+        NaviErrorDialog.show(parent, innerMessage, innerDescription, exception);
       }
     }
   }

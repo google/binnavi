@@ -1,9 +1,11 @@
 # Exclude the downloaded dependencies
 target/**
+third_party/java/yfiles/**
 
 # Various artifacts we don't want to push
 *.class
 *.pyc
+*.pyo
 
 # Editor backup files
 *~
@@ -17,6 +19,7 @@ hs_err_pid*
 bin/
 gen/
 **/build-data.properties
+binnavi.map
 
 # Eclipse project files
 .classpath

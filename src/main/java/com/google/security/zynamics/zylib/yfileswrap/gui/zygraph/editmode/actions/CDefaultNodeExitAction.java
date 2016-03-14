@@ -80,12 +80,11 @@ public class CDefaultNodeExitAction<NodeType extends ZyGraphNode<?>, EdgeType ex
         // ESCA-JAVA0166: Catch Exception because we are calling a listener function
         try {
           listener.nodeLeft(node);
-        } catch (final Exception exception) {
+        } catch (final Exception e) {
           CUtilityFunctions.logException(e);
         }
       }
     }
-
 
     state.getGraph().updateViews();
   }
