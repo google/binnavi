@@ -29,7 +29,7 @@
     </fileset>
   </path>
   <path id="yfiles.class.path">
-    <fileset id="yfiles.build.jars" dir="${project.dir}/lib/third_party/java/yfiles/v2_10">
+    <fileset id="yfiles.build.jars" dir="${project.dir}/third_party/java/yfiles">
       <include name="y.jar"/>
       <include name="ysvg.jar"/>
     </fileset>
@@ -110,7 +110,7 @@
     </jar>
 
     <!-- In the next step run the obfuscator -->
-    <taskdef resource="proguard/ant/task.properties" classpath="${project.dir}/target/dependency/proguard-base-5.2.1.jar"/>
+    <taskdef resource="proguard/ant/task.properties" classpath="${project.dir}/target/dependency/proguard-anttask-5.2.1.jar"/>
     <proguard optimize="false">
       <!-- Specify JAR options in Ant syntax to be able to use refid. -->
       <injar file="${staging.dir}/yfileswrap.jar"/>

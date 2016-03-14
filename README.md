@@ -53,6 +53,19 @@ We will enforce this - we're very happy to have found a way to open-source
 BinNavi with the yFiles dependency, and we will make sure that any code we pull
 in respects the yFiles license.
 
+### Note for maintainers/yFiles license holders
+
+To rebuild the yFiles wrapper library, first copy `y.jar` and `ysvg.jar` to
+`third_party/java/yfiles`. Then rebuild with:
+
+    ant build-yfiles-wrapper-jar
+    mvn install:install-file \
+        -Dfile=target/yfileswrap-obfuscated.jar \
+        -DgroupId=com.google.security.zynamics.binnavi \
+        -Dversion=6.0
+        -Dpackaging=jar \
+        -DlocalRepositoryPath=lib
+
 ## Building BinNavi from scratch
 
 BinNavi uses Maven for its dependency management, but not for the actual build
