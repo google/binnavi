@@ -184,7 +184,7 @@ public final class ConditionTreeFlattener {
    * @return The flattened identifier of the node.
    */
   private static byte[] getType(final ConditionNode node) {
-    return ByteHelpers.toBigEndianDword(
+    return ByteHelpers.toBigEndianDword((int)
         ConditionNodeSwitcher.process(node, new NodeSwitcher<Integer>() {
           @Override
           public Integer process(final ExpressionNode node) {
