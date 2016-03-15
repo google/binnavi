@@ -61,7 +61,8 @@ public class NotTranslator implements IInstructionTranslator {
 
     // Load the operand.
     final TranslationResult result = Helpers.translateOperand(environment, offset, operand, true);
-
+    instructions.addAll(result.getInstructions());
+    
     // Adjust the offset of the next REIL instruction.
     offset = baseOffset + instructions.size();
 

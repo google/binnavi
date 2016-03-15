@@ -87,7 +87,8 @@ public class SetccTranslator implements IInstructionTranslator {
     final OperandSize size = result.getSize();
     final TranslationResultType type = result.getType();
     final String address = result.getAddress();
-
+    instructions.addAll(result.getInstructions());
+    
     // Adjust the offset of the next REIL instruction.
     reilOffset = reilOffsetBase + instructions.size();
 
