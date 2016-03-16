@@ -97,9 +97,9 @@ public class RolTranslator implements IInstructionTranslator {
     final String tempOf = environment.getNextVariableString();
     final String tempOfLsb = environment.getNextVariableString();
 
-    final String msbMask = String.valueOf(TranslationHelpers.getMsbMask(sourceSize));
-    final String modVal = String.valueOf(sourceSize.getBitSize());
-    final String shiftMsbLsb = String.valueOf(TranslationHelpers.getShiftMsbLsbMask(sourceSize));
+    final String msbMask = String.valueOf(TranslationHelpers.getMsbMask(targetSize));
+    final String modVal = String.valueOf(targetSize.getBitSize());
+    final String shiftMsbLsb = String.valueOf(TranslationHelpers.getShiftMsbLsbMask(targetSize));
 
     final int linesBefore = instructions.size();
 
@@ -119,13 +119,13 @@ public class RolTranslator implements IInstructionTranslator {
 
     // Perform the rotate
     instructions.add(ReilHelpers.createBsh(offset + 4, targetSize, targetRegister,
-        OperandSize.BYTE, rotateMask, sourceSize, shledResult));
+        OperandSize.BYTE, rotateMask, targetSize, shledResult));
     instructions.add(ReilHelpers.createAdd(offset + 5, OperandSize.BYTE, "-" + modVal,
         OperandSize.BYTE, rotateMask, OperandSize.BYTE, shrValue));
     instructions.add(ReilHelpers.createBsh(offset + 6, targetSize, targetRegister,
-        OperandSize.BYTE, shrValue, sourceSize, shredResult));
-    instructions.add(ReilHelpers.createOr(offset + 7, sourceSize, shledResult, sourceSize,
-        shredResult, sourceSize, result));
+        OperandSize.BYTE, shrValue, targetSize, shredResult));
+    instructions.add(ReilHelpers.createOr(offset + 7, targetSize, shledResult, targetSize,
+        shredResult, targetSize, result));
 
     // Don't change the flags if the rotate value was zero
     final String jmpGoal =
@@ -134,7 +134,7 @@ public class RolTranslator implements IInstructionTranslator {
         OperandSize.ADDRESS, jmpGoal));
 
     // Set the CF to the new LSB
-    instructions.add(ReilHelpers.createAnd(offset + 9, sourceSize, result, sourceSize, "1",
+    instructions.add(ReilHelpers.createAnd(offset + 9, targetSize, result, sourceSize, "1",
         OperandSize.BYTE, Helpers.CARRY_FLAG));
 
     // The OF needs to be set to a different value if the rotate-mask was 1
@@ -153,9 +153,9 @@ public class RolTranslator implements IInstructionTranslator {
         OperandSize.ADDRESS, jmpGoal3));
 
     // OF = MSB(DEST) XOR CF
-    instructions.add(ReilHelpers.createAnd(offset + 13, sourceSize, result, sourceSize, msbMask,
+    instructions.add(ReilHelpers.createAnd(offset + 13, targetSize, result, targetSize, msbMask,
         sourceSize, tempOf));
-    instructions.add(ReilHelpers.createBsh(offset + 14, sourceSize, tempOf, sourceSize,
+    instructions.add(ReilHelpers.createBsh(offset + 14, targetSize, tempOf, targetSize,
         shiftMsbLsb, OperandSize.BYTE, tempOfLsb));
     instructions.add(ReilHelpers.createBsh(offset + 15, OperandSize.BYTE, tempOfLsb,
         OperandSize.BYTE, Helpers.CARRY_FLAG, OperandSize.BYTE, Helpers.OVERFLOW_FLAG));
