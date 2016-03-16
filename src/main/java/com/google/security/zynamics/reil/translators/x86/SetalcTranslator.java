@@ -66,7 +66,7 @@ public class SetalcTranslator implements IInstructionTranslator {
 
     // Mask new value of AL into EAX
     instructions.add(ReilHelpers.createAnd(offset++, OperandSize.DWORD, "eax", OperandSize.DWORD,
-        String.valueOf(0xFFFFFF00), OperandSize.BYTE, clearedEax));
+        String.valueOf(0xFFFFFF00l), OperandSize.DWORD, clearedEax));
     instructions.add(ReilHelpers.createOr(offset++, OperandSize.DWORD, clearedEax,
         OperandSize.BYTE, truncatedSubResult, OperandSize.DWORD, "eax"));
   }

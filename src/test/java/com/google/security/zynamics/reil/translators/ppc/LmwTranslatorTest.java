@@ -128,8 +128,8 @@ public class LmwTranslatorTest {
     assertEquals(BigInteger.valueOf(0x55555555), interpreter.getVariableValue("%r6"));
     assertEquals(BigInteger.valueOf(0x66666666), interpreter.getVariableValue("%r7"));
     assertEquals(BigInteger.valueOf(0x77777777), interpreter.getVariableValue("%r8"));
-    assertEquals(BigInteger.valueOf(0x88888888), interpreter.getVariableValue("%r9"));
-    assertEquals(BigInteger.valueOf(0x99999999), interpreter.getVariableValue("%r10"));
+    assertEquals(BigInteger.valueOf(0x88888888l), interpreter.getVariableValue("%r9"));
+    assertEquals(BigInteger.valueOf(0x99999999l), interpreter.getVariableValue("%r10"));
     assertEquals(BigInteger.valueOf(0x10101010), interpreter.getVariableValue("%r11"));
     assertEquals(BigInteger.valueOf(0x11111111), interpreter.getVariableValue("%r12"));
     assertEquals(BigInteger.valueOf(0x12121212), interpreter.getVariableValue("%r13"));
@@ -150,7 +150,7 @@ public class LmwTranslatorTest {
     assertEquals(BigInteger.valueOf(0x27272727), interpreter.getVariableValue("%r28"));
     assertEquals(BigInteger.valueOf(0x28282828), interpreter.getVariableValue("%r29"));
     assertEquals(BigInteger.valueOf(0x29292929), interpreter.getVariableValue("%r30"));
-    assertEquals(BigInteger.valueOf(0xFFFFFFFF), interpreter.getVariableValue("%r31"));
+    assertEquals(BigInteger.valueOf(0xFFFFFFFFl), interpreter.getVariableValue("%r31"));
 
     assertEquals(BigInteger.valueOf(120L), BigInteger.valueOf(interpreter.getMemorySize()));
     assertEquals(32, TestHelpers.filterNativeRegisters(interpreter.getDefinedRegisters()).size());

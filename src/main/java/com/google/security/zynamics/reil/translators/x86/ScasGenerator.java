@@ -86,8 +86,8 @@ public class ScasGenerator implements IStringInstructionGenerator {
         OperandSize.ADDRESS, jmpGoal));
     instructions.add(ReilHelpers.createAdd(offset + 2, archSize, "edi", archSize, ediChange,
         resultSize, addResult));
-    instructions.add(ReilHelpers.createAnd(offset + 3, resultSize, addResult, operandSize,
-        truncateMask, operandSize, "edi"));
+    instructions.add(ReilHelpers.createAnd(offset + 3, resultSize, addResult, resultSize,
+        truncateMask, resultSize, "edi"));
 
     final String jmpGoal2 =
         String.format("%d.%d", ReilHelpers.toNativeAddress(new CAddress(baseOffset)).toLong(),
@@ -96,8 +96,8 @@ public class ScasGenerator implements IStringInstructionGenerator {
         jmpGoal2));
     instructions.add(ReilHelpers.createSub(offset + 5, archSize, "edi", archSize, ediChange,
         resultSize, subResult));
-    instructions.add(ReilHelpers.createAnd(offset + 6, resultSize, subResult, operandSize,
-        truncateMask, operandSize, "edi"));
+    instructions.add(ReilHelpers.createAnd(offset + 6, resultSize, subResult, resultSize,
+        truncateMask, resultSize, "edi"));
 
     instructions.add(ReilHelpers.createNop(offset + 7));
 
