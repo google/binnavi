@@ -99,13 +99,13 @@ public class BsfBsrTranslatorCommon {
       instructions.add(ReilHelpers.createStr(offset++, OperandSize.BYTE, "0", OperandSize.BYTE,
           counter));
       instructions.add(ReilHelpers.createAnd(offset++, sourceSize, shiftedValue, sourceSize,
-          "1", OperandSize.BYTE, isolatedMsb));        
+          "1", sourceSize, isolatedMsb));        
     } else {
       instructions.add(ReilHelpers.createStr(offset++, OperandSize.BYTE, "31", OperandSize.BYTE,
           counter));
       // Generate the instruction for a BSR, e.g. bitmask is 0x80000000.
       instructions.add(ReilHelpers.createAnd(offset++, sourceSize, shiftedValue, sourceSize,
-          String.valueOf(TranslationHelpers.getMsbMask(sourceSize)), OperandSize.BYTE, 
+          String.valueOf(TranslationHelpers.getMsbMask(sourceSize)), sourceSize, 
           isolatedMsb));
     }
     instructions.add(ReilHelpers.createJcc(offset++, sourceSize, isolatedMsb, OperandSize.ADDRESS,

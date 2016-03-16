@@ -90,8 +90,8 @@ public class LodsGenerator implements IStringInstructionGenerator {
 
     instructions.add(ReilHelpers.createAdd(offset++, archSize, "esi", archSize, ediChange,
         resultSize, tempEsi1));
-    instructions.add(ReilHelpers.createAnd(offset++, resultSize, tempEsi1, operandSize,
-        truncateMask, operandSize, "esi"));
+    instructions.add(ReilHelpers.createAnd(offset++, resultSize, tempEsi1, archSize,
+        truncateMask, archSize, "esi"));
 
     final String jmpGoal2 =
         String.format("%d.%d", ReilHelpers.toNativeAddress(new CAddress(baseOffset)).toLong(),
@@ -101,8 +101,8 @@ public class LodsGenerator implements IStringInstructionGenerator {
 
     instructions.add(ReilHelpers.createSub(offset++, archSize, "esi", archSize, ediChange,
         resultSize, tempEsi2));
-    instructions.add(ReilHelpers.createAnd(offset++, resultSize, tempEsi2, operandSize,
-        truncateMask, operandSize, "esi"));
+    instructions.add(ReilHelpers.createAnd(offset++, resultSize, tempEsi2, archSize,
+        truncateMask, archSize, "esi"));
 
     instructions.add(ReilHelpers.createNop(offset));
   }

@@ -62,7 +62,7 @@ public class AddisTranslatorTest {
 
   @Test
   public void testSimple() throws InternalTranslationException, InterpreterException {
-    interpreter.setRegister("%r1", BigInteger.valueOf(0x80000000L), OperandSize.BYTE,
+    interpreter.setRegister("%r1", BigInteger.valueOf(0x80000000L), OperandSize.DWORD,
         ReilRegisterStatus.DEFINED);
     interpreter.setRegister("%r0", BigInteger.ZERO, OperandSize.DWORD, ReilRegisterStatus.DEFINED);
 
@@ -95,7 +95,7 @@ public class AddisTranslatorTest {
 
   @Test
   public void testSingExtend() throws InternalTranslationException, InterpreterException {
-    interpreter.setRegister("%r1", BigInteger.ONE, OperandSize.BYTE, ReilRegisterStatus.DEFINED);
+    interpreter.setRegister("%r1", BigInteger.ONE, OperandSize.DWORD, ReilRegisterStatus.DEFINED);
     interpreter.setRegister("%r0", BigInteger.ZERO, OperandSize.DWORD, ReilRegisterStatus.DEFINED);
 
     final MockOperandTree operandTree1 = new MockOperandTree();

@@ -70,7 +70,7 @@ public class LodsdTranslatorTest {
 
     assertEquals(4, TestHelpers.filterNativeRegisters(interpreter.getDefinedRegisters()).size());
 
-    assertEquals(BigInteger.valueOf(0x98765432), interpreter.getVariableValue("eax"));
+    assertEquals(BigInteger.valueOf(0x98765432l), interpreter.getVariableValue("eax"));
     assertEquals(BigInteger.valueOf(0x1004), interpreter.getVariableValue("esi"));
 
     assertEquals(BigInteger.valueOf(4L), BigInteger.valueOf(interpreter.getMemorySize()));
@@ -96,7 +96,7 @@ public class LodsdTranslatorTest {
 
     assertEquals(4, TestHelpers.filterNativeRegisters(interpreter.getDefinedRegisters()).size());
 
-    assertEquals(BigInteger.valueOf(0x98765432), interpreter.getVariableValue("eax"));
+    assertEquals(BigInteger.valueOf(0x98765432l), interpreter.getVariableValue("eax"));
     assertEquals(BigInteger.valueOf(0x0FFC), interpreter.getVariableValue("esi"));
 
     assertEquals(BigInteger.valueOf(4L), BigInteger.valueOf(interpreter.getMemorySize()));
