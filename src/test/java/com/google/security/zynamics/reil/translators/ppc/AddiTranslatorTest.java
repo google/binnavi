@@ -62,7 +62,7 @@ public class AddiTranslatorTest {
 
   @Test
   public void testSimple() throws InternalTranslationException, InterpreterException {
-    interpreter.setRegister("%r1", BigInteger.valueOf(0x80000000L), OperandSize.DWORD,
+    interpreter.setRegister("%r1", BigInteger.valueOf(0x80000000L), OperandSize.BYTE,
         ReilRegisterStatus.DEFINED);
     interpreter.setRegister("%r0", BigInteger.ZERO, OperandSize.DWORD, ReilRegisterStatus.DEFINED);
 

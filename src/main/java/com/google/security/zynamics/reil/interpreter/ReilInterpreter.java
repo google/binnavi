@@ -73,19 +73,16 @@ public class ReilInterpreter {
     this.memory = new ReilMemory(endianness);
   }
 
-  private static BigInteger getTruncateMask(final OperandSize targetSize) {
+  private static long getTruncateMask(final OperandSize targetSize) {
     switch (targetSize) {
       case BYTE:
-        return BigInteger.valueOf(0xFFL);
+        return 0xFFL;
       case DWORD:
-        return BigInteger.valueOf(0xFFFFFFFFL);
+        return 0xFFFFFFFFL;
       case QWORD:
-        return BigInteger.valueOf(0xFFFFFFFFFFFFFFFFL);
-      case OWORD:
-        return BigInteger.valueOf(0xFFFFFFFFFFFFFFL)
-         .shiftLeft(56).add(BigInteger.valueOf(0xFFFFFFFFFFFFFFL)).shiftLeft(16).add(BigInteger.valueOf(0xffffl));
+        return 0xFFFFFFFFFFFFFFFFL;
       case WORD:
-        return BigInteger.valueOf(0xFFFFL);
+        return 0xFFFFL;
       default:
         throw new IllegalStateException("Error: Unknown target size for truncate mask");
     }
@@ -438,7 +435,7 @@ public class ReilInterpreter {
 
       final BigInteger result =
           firstValue.second().subtract(secondValue.second())
-              .and(getTruncateMask(targetSize));
+              .and(BigInteger.valueOf(getTruncateMask(targetSize)));
       final String targetRegister = instruction.getThirdOperand().getValue();
       setRegister(targetRegister, result, targetSize, ReilRegisterStatus.DEFINED);
     } else {
@@ -701,9 +698,7 @@ public class ReilInterpreter {
    */
   public void setRegister(final String register, final BigInteger value, final OperandSize size,
       final ReilRegisterStatus status) {
-    final BigInteger truncatedValue = value.and(getTruncateMask(size));
-
-    final ReilRegister r = new ReilRegister(register, size, truncatedValue);
+    final ReilRegister r = new ReilRegister(register, size, value);
 
     if (registers.containsKey(register)) {
       registers.remove(register);
