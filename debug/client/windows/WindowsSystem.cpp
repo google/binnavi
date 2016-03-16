@@ -925,7 +925,7 @@ NaviError WindowsSystem::readRegisters(RegisterContainer &registers) {
   thread.registers.push_back(
       makeRegisterValue("RBP", zylib::zycon::toHexString(ctx.Rbp)));
   thread.registers.push_back(
-      makeRegisterValue("RIP", zylib::zycon::toHexString(ctx.Rip)));
+      makeRegisterValue("RIP", zylib::zycon::toHexString(ctx.Rip), true));
   thread.registers.push_back(
       makeRegisterValue("EFLAGS", zylib::zycon::toHexString(ctx.EFlags)));
 #else
@@ -1111,7 +1111,7 @@ NaviError WindowsSystem::getMemmap(std::vector<CPUADDRESS> &addresses) {
     } else {
       consecutiveRegions = 0;
     }
-    offset = (unsigned int)mem.BaseAddress + mem.RegionSize;
+	offset = reinterpret_cast<CPUADDRESS>(mem.BaseAddress) + mem.RegionSize;
     if (offset == 0) {
       break;
     }
