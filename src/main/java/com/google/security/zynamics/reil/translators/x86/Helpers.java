@@ -791,8 +791,8 @@ public class Helpers {
     instructions.add(ReilHelpers.createXor(offset, size, value, size, msbMask, size, toggledMsb));
     instructions.add(ReilHelpers.createSub(offset + 1, size, toggledMsb, size, msbMask,
         extendedSize, extendedValue));
-    instructions.add(ReilHelpers.createAnd(offset + 2, extendedSize, extendedValue, size,
-        truncateMask, size, truncatedValue));
+    instructions.add(ReilHelpers.createAnd(offset + 2, extendedSize, extendedValue, extendedSize,
+        truncateMask, extendedSize, truncatedValue));
 
     return new TranslationResult(truncatedValue, extendedSize, TranslationResultType.REGISTER,
         null, instructions, offset);

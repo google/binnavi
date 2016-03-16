@@ -133,8 +133,6 @@ public class ShldTranslatorTest {
 
     interpreter.interpret(TestHelpers.createMapping(instructions), BigInteger.valueOf(0x100));
 
-    System.out.println(instructions);
-
     long counter = 0x10000;
 
     for (final ReilInstruction inst : instructions) {

@@ -54,7 +54,7 @@ public class SetalcTranslatorTest {
   public void testCFCleared() throws InternalTranslationException, InterpreterException {
     interpreter.setRegister("CF", BigInteger.valueOf(0), OperandSize.BYTE,
         ReilRegisterStatus.DEFINED);
-    interpreter.setRegister("eax", BigInteger.valueOf(0x80808080L), OperandSize.BYTE,
+    interpreter.setRegister("eax", BigInteger.valueOf(0x80808080L), OperandSize.DWORD,
         ReilRegisterStatus.DEFINED);
 
     final MockInstruction instruction =
@@ -72,7 +72,7 @@ public class SetalcTranslatorTest {
   public void testCFSet() throws InternalTranslationException, InterpreterException {
     interpreter.setRegister("CF", BigInteger.valueOf(1), OperandSize.BYTE,
         ReilRegisterStatus.DEFINED);
-    interpreter.setRegister("eax", BigInteger.valueOf(0x80808080L), OperandSize.BYTE,
+    interpreter.setRegister("eax", BigInteger.valueOf(0x80808080L), OperandSize.DWORD,
         ReilRegisterStatus.DEFINED);
 
     final MockInstruction instruction =

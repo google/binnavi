@@ -84,7 +84,7 @@ public class CdqTranslatorTest {
 
     assertEquals(3, TestHelpers.filterNativeRegisters(interpreter.getDefinedRegisters()).size());
 
-    assertEquals(BigInteger.valueOf(0x80000000), interpreter.getVariableValue("eax"));
+    assertEquals(BigInteger.valueOf(0x80000000l), interpreter.getVariableValue("eax"));
     assertEquals(BigInteger.valueOf(0xFFFFFFFFL), interpreter.getVariableValue("edx"));
 
     assertEquals(BigInteger.ZERO, BigInteger.valueOf(interpreter.getMemorySize()));
