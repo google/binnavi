@@ -58,11 +58,13 @@ in respects the yFiles license.
 To rebuild the yFiles wrapper library, first copy `y.jar` and `ysvg.jar` to
 `third_party/java/yfiles`. Then rebuild with:
 
+    mvn dependency:copy-dependencies
     ant build-yfiles-wrapper-jar
     mvn install:install-file \
         -Dfile=target/yfileswrap-obfuscated.jar \
         -DgroupId=com.google.security.zynamics.binnavi \
-        -Dversion=6.0
+        -DartifactId=yfileswrap-obfuscated \
+        -Dversion=6.1 \
         -Dpackaging=jar \
         -DlocalRepositoryPath=lib
 
