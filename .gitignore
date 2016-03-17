@@ -15,7 +15,7 @@ third_party/java/yfiles/**
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
 
-# generated files
+# Generated files
 bin/
 gen/
 **/build-data.properties
@@ -32,8 +32,11 @@ binnavi.map
 *.iws
 .idea/
 
-#Gradle
+# Gradle
 .gradletasknamecache
 .gradle/
 build/
 bin/
+
+# BinExport plugins that should be copied over
+src/main/java/com/google/security/zynamics/binnavi/exporters/BinExport/zynamics_binexport_*

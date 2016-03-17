@@ -25,7 +25,7 @@ limitations under the License.
   <String Id="Property_ArpHelpLink">http://www.zynamics.com/binnavi.html</String>
   <String Id="Property_ArpUrlInfoAbout">http://www.zynamics.com/</String>
   <String Id="Property_ProductLanguage">1033</String>
-  <String Id="Property_ProductName">BinNavi 6.0</String>
+  <String Id="Property_ProductName">BinNavi 6.1</String>
   <String Id="Property_CompanyName">Google Inc.</String>
 
   <String Id="Package_Description">[ProductName] Installation package</String>
