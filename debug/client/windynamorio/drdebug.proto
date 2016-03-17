@@ -1,0 +1,368 @@
+// Copyright 2011-2016 Google Inc. All Rights Reserved.
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//     http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
+// Definitions for DynamoRIO debugger communication protocol
+
+// General ideas behind this protocol:
+// - Breakpoints are indentified by a tuple: <address, id>, so dynamorio
+//   debugger user can implement many types of breakpoints and manage them
+//  (like stepping BP vs simple BP)
+// - In response to each <Packet> message debugger sends <ResponsePacket> with
+//   responses to all commands sent
+// - All communication is nonblocking - there're no 'WaitForSomething'
+//   messages/enums
+
+syntax = "proto2";
+
+package security.drdebug;
+
+// Broker -> Dynamorio debugger messages
+
+message CommandPacket {
+  repeated Command command = 1;
+}
+
+message Command {
+  enum CommandType {
+    // checking debugger state
+    PING                  = 19;
+    GET_DEBUG_EVENTS      = 1;
+
+    // execution
+    RESUME_FROM_BP        = 2;
+    RESUME_FROM_HALT      = 3;
+    TERMINATE_PROCESS     = 4;
+    SET_EXCEPTION_ACTION  = 5;
+
+    // breakpoints
+    ADD_BREAKPOINT        = 6;
+    REMOVE_BREAKPOINT     = 7;
+
+    // thread control
+    LIST_THREADS          = 8;
+    SUSPEND_THREAD        = 9;
+    RESUME_THREAD         = 10;
+
+    // registers
+    LIST_REGISTERS        = 11;
+    READ_REGISTERS        = 12;
+    WRITE_REGISTERS       = 13;
+
+    // memory
+    LIST_MEMORY           = 14;
+    READ_MEMORY           = 15;
+    WRITE_MEMORY          = 16;
+    GET_MEMORY_PROTECTION = 17;
+    SET_MEMORY_PROTECTION = 18;
+  }
+
+  optional CommandType command = 1; // required
+
+  // execute the command only on those threads
+  // TODO(mkow): should we move that to specific commands fields?
+  //       not all commands could be executed thread-locally (like write memory)
+  repeated uint64 thread_id = 2;
+
+  // params specific to particular command
+  optional GetDebugEventsArgs      get_debug_event_args       = 3;
+  optional TerminateProcessArgs    terminate_process_args     = 4;
+  optional SetExceptionActionArgs  set_exception_action_args  = 5;
+  optional AddBreakpointArgs       add_breakpoint_args        = 6;
+  optional RemoveBreakpointArgs    remove_breakpoint_args     = 7;
+  optional ListThreadsArgs         list_threads_args          = 8;
+  optional SuspendThreadArgs       suspend_thread_args        = 9;
+  optional ResumeThreadArgs        resume_thread_args         = 10;
+  optional ListRegisterArgs        list_register_args         = 11;
+  optional ReadRegisterArgs        read_register_args         = 12;
+  optional WriteRegisterArgs       write_register_args        = 13;
+  optional ListMemoryArgs          list_memory_args           = 14;
+  optional ReadMemoryArgs          read_memory_args           = 15;
+  optional WriteMemoryArgs         write_memory_args          = 16;
+  optional GetMemoryProtectionArgs get_memory_protection_args = 17;
+  optional SetMemoryProtectionArgs set_memory_protection_args = 18;
+}
+
+message GetDebugEventsArgs {
+}
+
+message TerminateProcessArgs {
+}
+
+message SetExceptionActionArgs {
+  optional uint64          exc_code = 1; // required
+  optional ExceptionAction action   = 2; // required
+}
+
+message AddBreakpointArgs {
+  optional uint64 address = 1; // required
+  optional uint32 id      = 2; // required
+  optional BreakpointCondition condition = 3;
+}
+
+message RemoveBreakpointArgs {
+  optional uint64 address = 1; // required
+  optional uint32 id      = 2; // required
+}
+
+message ListThreadsArgs {
+}
+
+message SuspendThreadArgs {
+}
+
+message ResumeThreadArgs {
+}
+
+message ListRegisterArgs {
+}
+
+message ReadRegisterArgs {
+  repeated string name = 1;
+}
+
+message WriteRegisterArgs {
+  repeated RegValue register = 1;
+}
+
+message ListMemoryArgs {
+}
+
+message ReadMemoryArgs {
+  optional uint64 start_address = 1; // required
+  optional uint64 size          = 2; // required
+}
+
+message WriteMemoryArgs {
+  optional uint64 start_address = 1; // required
+  optional bytes data_to_write  = 2; // required
+}
+
+message GetMemoryProtectionArgs {
+  optional uint64 addresss = 1; // required
+}
+
+message SetMemoryProtectionArgs {
+  optional uint64 address         = 1; // required
+  optional uint64 size            = 2; // required
+  optional bool set_readability   = 3;
+  optional bool set_writability   = 4;
+  optional bool set_executability = 5;
+}
+
+// Dynamorio debugger -> Broker messages
+
+message ResponsePacket {
+  repeated Response response = 1;
+}
+
+message Response {
+  enum ErrorCode {
+    SUCCESS = 1;
+
+    ADDRESS_NOT_MAPPED         = 2;
+    ADDRESS_NOT_READABLE       = 3;
+    ADDRESS_NOT_WRITABLE       = 4;
+    ADDRESS_NOT_ALIGNED        = 5;
+    SIZE_NOT_ALIGNED           = 6;
+    CANNOT_CHANGE_PROTECTION   = 7;
+    WRONG_PROTECTION_FLAGS     = 8;
+
+    BREAKPOINT_ALREADY_PRESENT = 9;
+    NO_SUCH_BREAKPOINT         = 10;
+
+    TERMINATE_PROCESS_FAILED   = 11;
+    UNKNOWN_THREAD             = 12;
+    // Someone tried to resume already running thread.
+    SUSPEND_COUNT_NEGATIVE     = 13;
+    UNKNOWN_REGISTER           = 14;
+    REGISTER_NOT_WRITABLE      = 15;
+
+    // Generic error
+    INVALID_OPERATION          = 16;
+  }
+
+  // error info
+  optional ErrorCode error_code        = 1; // required
+  optional uint64    error_address     = 2;
+  optional string    error_explanation = 3;
+
+  // command results
+  optional GetDebugEventsResult      get_debug_events_result      = 4;
+  optional TerminateProcessResult    terminate_process_result     = 5;
+  optional AddBreakpointResult       add_breakpoint_result        = 6;
+  optional RemoveBreakpointResult    remove_breakpoint_result     = 7;
+  optional ListThreadsResult         list_threads_result          = 8;
+  optional SuspendThreadResult       suspend_thread_result        = 9;
+  optional ResumeThreadResult        resume_thread_result         = 10;
+  optional ListRegisterResult        list_register_result         = 11;
+  optional ReadRegisterResult        read_register_result         = 12;
+  optional WriteRegisterResult       write_register_result        = 13;
+  optional ListMemoryResult          list_memory_result           = 14;
+  optional ReadMemoryResult          read_memory_result           = 15;
+  optional WriteMemoryResult         write_memory_result          = 16;
+  optional GetMemoryProtectionResult get_memory_protection_result = 17;
+  optional SetMemoryProtectionResult set_memory_protection_result = 18;
+}
+
+message GetDebugEventsResult {
+  repeated DebugEvent debug_event = 1;
+}
+
+message TerminateProcessResult {
+}
+
+message AddBreakpointResult {
+}
+
+message RemoveBreakpointResult {
+}
+
+message ListThreadsResult {
+  repeated uint64 thread_id = 1;
+}
+
+message SuspendThreadResult {
+}
+
+message ResumeThreadResult {
+}
+
+message ListRegisterResult {
+  repeated string register = 1;
+}
+
+message ReadRegisterResult {
+  repeated RegValue register = 1;
+}
+
+message WriteRegisterResult {
+}
+
+message ListMemoryResult {
+  repeated MemoryRange memory_block = 1;
+}
+
+message ReadMemoryResult {
+  optional bytes data = 1; // required
+}
+
+message WriteMemoryResult {
+}
+
+message GetMemoryProtectionResult {
+  optional MemoryProtection protection = 1; // required
+}
+
+message SetMemoryProtectionResult {
+}
+
+
+// Common messages/enums
+
+message BreakpointCondition {
+  // TODO(mkow)
+}
+
+enum ExceptionAction {
+  SKIP_APP_HANDLER = 1; // Continue without calling application exception
+                        // handler
+  HALT             = 2; // Pause and wait for resume command
+  PASS_TO_APP      = 3; // Handle exception same way as without any debugger
+}
+
+message RegValue {
+  optional string name  = 1; // required
+  optional uint64 value = 2; // required
+}
+
+message MemoryRange {
+  optional uint64 start                = 1; // required
+  optional uint64 size                 = 2; // required
+  optional MemoryProtection protection = 3; // required
+}
+
+message MemoryProtection {
+  optional bool readable   = 1; // required
+  optional bool writable   = 2; // required
+  optional bool executable = 3; // required
+}
+
+// DebugEvent message
+
+message DebugEvent {
+  enum EventType {
+    BREAKPOINT_HIT   = 1;
+    THREAD_CREATED   = 2;
+    THREAD_EXITED    = 3;
+    MODULE_LOADED    = 4;
+    MODULE_UNLOADED  = 5;
+    PROCESS_STARTED  = 6;
+    PROCESS_EXITED   = 7;
+    EXCEPTION_THROWN = 8;
+  }
+
+  optional EventType type = 1; // required
+
+  optional BreakpointHitInfo   breakpoint_hit_info   = 2;
+  optional ThreadCreatedInfo   thread_created_info   = 3;
+  optional ThreadExitedInfo    thread_exited_info    = 4;
+  optional ModuleLoadedInfo    module_loaded_info    = 5;
+  optional ModuleUnloadedInfo  module_unloaded_info  = 6;
+  optional ProcessStartedInfo  process_started_info  = 7;
+  optional ProcessExitedInfo   process_exited_info   = 8;
+  optional ExceptionThrownInfo exception_thrown_info = 9;
+}
+
+message BreakpointHitInfo {
+  optional uint64 address   = 1; // required
+  optional uint32 bp_id     = 2; // required
+  optional uint64 thread_id = 3; // required
+}
+
+message ThreadCreatedInfo {
+  optional uint64 thread_id = 1; // required
+}
+
+message ThreadExitedInfo {
+  optional uint64 thread_id = 1; // required
+  optional uint64 exit_code = 2; // required
+}
+
+message ModuleLoadedInfo {
+  optional uint64 address = 1; // required
+  optional uint64 size    = 2; // required
+  optional string name    = 3; // required
+  optional string path    = 4; // required
+  optional uint64 thread  = 5; // required
+}
+
+message ModuleUnloadedInfo {
+  optional uint64 address = 1; // required
+}
+
+message ProcessStartedInfo {
+  optional uint64 base_address = 1; // required
+  optional uint64 image_size   = 2; // required
+  optional uint64 thread_id    = 3; // required
+}
+
+message ProcessExitedInfo {
+  optional uint64 exit_code = 1; // required
+}
+
+message ExceptionThrownInfo {
+  optional uint64 thread_id = 1; // required
+  optional uint64 exc_code  = 2; // required
+  optional uint64 address   = 3; // required
+}
