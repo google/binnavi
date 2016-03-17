@@ -32,7 +32,7 @@ binnavi.map
 *.iws
 .idea/
 
-#Gradle
+# Gradle
 .gradletasknamecache
 .gradle/
 build/

@@ -26,19 +26,19 @@ public final class CBinExportFiles {
    * Files to put into the plugins directory of IDA Pro on Windows.
    */
   private static final String[] PLUGIN_FILES_WINDOWS =
-      new String[] {"zynamics_binexport_8.plw", "zynamics_binexport_8.p64"};
+      new String[] {"zynamics_binexport_9.plw", "zynamics_binexport_9.p64"};
 
   /**
    * Files to put into the plugins directory of IDA Pro on Linux.
    */
   private static final String[] PLUGIN_FILES_LINUX =
-      new String[] {"zynamics_binexport_8.plx", "zynamics_binexport_8.plx64"};
+      new String[] {"zynamics_binexport_9.plx", "zynamics_binexport_9.plx64"};
 
   /**
    * Files to put into the plugins directory of IDA Pro on MacOSX.
    */
   private static final String[] PLUGIN_FILES_MACOSX =
-      new String[] {"zynamics_binexport_8.pmc", "zynamics_binexport_8.pmc64"};
+      new String[] {"zynamics_binexport_9.pmc", "zynamics_binexport_9.pmc64"};
 
   /**
    * You are not supposed to instantiate this class.
@@ -48,7 +48,7 @@ public final class CBinExportFiles {
 
   /**
    * Returns the file names of the files to be copied to the IDA Pro plugins directory.
-   * 
+   *
    * @return A list of file names.
    */
   public static String[] getPluginFiles() {
@@ -56,8 +56,7 @@ public final class CBinExportFiles {
       return PLUGIN_FILES_WINDOWS.clone();
     } else if (SystemHelpers.isRunningLinux()) {
       return PLUGIN_FILES_LINUX.clone();
-    } else {
-      return PLUGIN_FILES_MACOSX.clone();
     }
+    return PLUGIN_FILES_MACOSX.clone();
   }
 }

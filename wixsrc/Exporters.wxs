@@ -26,10 +26,10 @@ limitations under the License.
                 <File Id="filF24FD9F65FE08098CAFB903725D187C5" KeyPath="yes" Source="$(var.ZynamicsDir)\bindetego\binexport.idc" />
             </Component>
             <Component Id="cmpD9C8F0A2285B796B088F418F7F6C4AE9" Directory="dir6256875ED3B425D6DCD317DF9577A329" Guid="{A815C4A6-7943-454B-89FA-9F4ED590DEE9}">
-                <File Id="fil880DDDD6B30318C9160A4968855451D9" KeyPath="yes" Source="$(var.OutputDir)\zynamics_binexport_8.p64" />
+                <File Id="fil880DDDD6B30318C9160A4968855451D9" KeyPath="yes" Source="$(var.OutputDir)\zynamics_binexport_9.p64" />
             </Component>
             <Component Id="cmpBE297F27CDD931183B81A8BAC2815B91" Directory="dir6256875ED3B425D6DCD317DF9577A329" Guid="{E90C0721-0686-4375-BE11-56CEB2F4CCED}">
-                <File Id="fil58B8E8168B33A35B0243D711176F2238" KeyPath="yes" Source="$(var.OutputDir)\zynamics_binexport_8.plw" />
+                <File Id="fil58B8E8168B33A35B0243D711176F2238" KeyPath="yes" Source="$(var.OutputDir)\zynamics_binexport_9.plw" />
             </Component>
         </ComponentGroup>
     </Fragment>
