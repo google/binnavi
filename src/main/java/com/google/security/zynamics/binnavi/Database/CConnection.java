@@ -48,12 +48,12 @@ public final class CConnection {
   /**
    * Configuration for the database connection.
    */
-  private static CDatabaseConfiguration m_databaseConfiguration;
+  private CDatabaseConfiguration m_databaseConfiguration;
 
   /**
    * Current database connection properties.
    */
-  private static Properties m_properties;
+  private Properties m_properties;
 
   /**
    * Connection to the database.
