@@ -25,6 +25,7 @@ import com.google.security.zynamics.binnavi.disassembly.COperandTreeNode;
 import com.google.security.zynamics.binnavi.disassembly.INaviModule;
 import com.google.security.zynamics.binnavi.disassembly.types.TypeInstanceContainer;
 import com.google.security.zynamics.binnavi.disassembly.types.TypeManager;
+import com.google.security.zynamics.reil.Architecture;
 import com.google.security.zynamics.zylib.disassembly.IAddress;
 
 /**
@@ -117,7 +118,7 @@ public final class InstructionConverter {
     final String architecture = line.getArchitecture();
 
     final CInstruction instruction = new CInstruction(
-        true, module, address, mnemonic, operands, line.getData(), architecture, provider);
+        true, module, address, mnemonic, operands, line.getData(), Architecture.getArchitecture(architecture), provider);
 
     return instruction;
   }

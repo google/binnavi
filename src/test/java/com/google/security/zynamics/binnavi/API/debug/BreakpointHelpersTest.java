@@ -54,6 +54,7 @@ import com.google.security.zynamics.binnavi.disassembly.MockView;
 import com.google.security.zynamics.binnavi.disassembly.Modules.CModule;
 import com.google.security.zynamics.binnavi.disassembly.UnrelocatedAddress;
 import com.google.security.zynamics.binnavi.disassembly.views.INaviView;
+import com.google.security.zynamics.reil.Architecture;
 import com.google.security.zynamics.zylib.disassembly.CAddress;
 import com.google.security.zynamics.zylib.disassembly.IOperandTree;
 import com.google.security.zynamics.zylib.disassembly.IReference;
@@ -153,7 +154,7 @@ public final class BreakpointHelpersTest {
     final List<COperandTree> operands = Lists.newArrayList(operand1, operand2);
     final CInstruction internalInstruction =
         new CInstruction(true, m_module, new CAddress(0x1234), "mov", operands,
-            new byte[] {1, 2, 3}, "x86-32", mockProvider);
+            new byte[] {1, 2, 3}, Architecture.x86, mockProvider);
 
     m_view = new View(viewContainer, naviView, nodeTagManager, viewTagManager);
     m_node =

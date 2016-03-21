@@ -23,6 +23,7 @@ import com.google.security.zynamics.binnavi.Database.Exceptions.CouldntSaveDataE
 import com.google.security.zynamics.binnavi.Database.Interfaces.SQLProvider;
 import com.google.security.zynamics.binnavi.Gui.GraphWindows.CommentDialogs.Interfaces.IComment;
 import com.google.security.zynamics.binnavi.Gui.Users.CUserManager;
+import com.google.security.zynamics.reil.Architecture;
 import com.google.security.zynamics.zylib.ZyTree.IZyTreeNode;
 import com.google.security.zynamics.zylib.disassembly.IAddress;
 import com.google.security.zynamics.zylib.disassembly.IOperandTree;
@@ -65,7 +66,7 @@ public final class CInstruction implements INaviInstruction {
   /**
    * Architecture identification string of the instruction.
    */
-  private final String m_architecture;
+  private final Architecture m_architecture;
 
   /**
    * SQL provider that is used to update this instruction in the database.
@@ -98,7 +99,7 @@ public final class CInstruction implements INaviInstruction {
    */
   public CInstruction(final boolean saved, final INaviModule module, final IAddress address,
       final String mnemonic, final List<COperandTree> operands, final byte[] data,
-      final String architecture, final SQLProvider provider) {
+      final Architecture architecture, final SQLProvider provider) {
     m_module = Preconditions.checkNotNull(module, "IE00126: Module argument can not be null");
     m_address = Preconditions.checkNotNull(address, "IE00127: Address argument can not be null");
     m_mnemonic = Preconditions.checkNotNull(mnemonic, "IE00128: Mnemonic argument can not be null");
@@ -108,8 +109,6 @@ public final class CInstruction implements INaviInstruction {
     Preconditions.checkNotNull(data, "IE02195: Data argument can not be null");
     m_architecture =
         Preconditions.checkNotNull(architecture, "IE02196: Architecture argument can not be null");
-    Preconditions.checkArgument(!architecture.isEmpty(),
-        "IE02197: Architecture argument can not be empty");
     m_provider =
         Preconditions.checkNotNull(provider, "IE00132: SQL provider argument can not be null");
 
@@ -221,7 +220,7 @@ public final class CInstruction implements INaviInstruction {
   }
 
   @Override
-  public String getArchitecture() {
+  public Architecture getArchitecture() {
     return m_architecture;
   }
 

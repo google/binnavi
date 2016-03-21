@@ -45,6 +45,7 @@ import com.google.security.zynamics.binnavi.disassembly.INaviCodeNode;
 import com.google.security.zynamics.binnavi.disassembly.MockView;
 import com.google.security.zynamics.binnavi.disassembly.Modules.CModule;
 import com.google.security.zynamics.binnavi.disassembly.Modules.MockModule;
+import com.google.security.zynamics.reil.Architecture;
 import com.google.security.zynamics.binnavi.disassembly.UnrelocatedAddress;
 import com.google.security.zynamics.zylib.disassembly.CAddress;
 import com.google.security.zynamics.zylib.disassembly.FunctionType;
@@ -189,7 +190,7 @@ public final class CGraphDebuggerTest {
         "nop",
         new ArrayList<COperandTree>(),
         new byte[] {(byte) 0x90},
-        "x86-32",
+        Architecture.x86,
         m_provider), null);
 
     assertEquals(m_debugger, CGraphDebugger.getDebugger(debuggerProvider,
@@ -409,7 +410,7 @@ public final class CGraphDebuggerTest {
         "nop",
         new ArrayList<COperandTree>(),
         new byte[] {(byte) 0x90},
-        "x86-32",
+        Architecture.x86,
         m_provider), null);
     codeNode.addInstruction(new CInstruction(true,
         module,
@@ -417,7 +418,7 @@ public final class CGraphDebuggerTest {
         "nop",
         new ArrayList<COperandTree>(),
         new byte[] {(byte) 0x90},
-        "x86-32",
+        Architecture.x86,
         m_provider), null);
 
     CGraphDebugger.toggleBreakpoint(debuggerProvider, codeNode, 2);

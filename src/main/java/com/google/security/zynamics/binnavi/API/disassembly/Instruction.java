@@ -32,6 +32,7 @@ import com.google.security.zynamics.binnavi.disassembly.COperandTree;
 import com.google.security.zynamics.binnavi.disassembly.COperandTreeNode;
 import com.google.security.zynamics.binnavi.disassembly.INaviInstruction;
 import com.google.security.zynamics.binnavi.disassembly.INaviModule;
+import com.google.security.zynamics.reil.Architecture;
 import com.google.security.zynamics.reil.translators.ReilTranslator;
 import com.google.security.zynamics.reil.translators.StandardEnvironment;
 import com.google.security.zynamics.zylib.disassembly.CAddress;
@@ -271,7 +272,7 @@ public final class Instruction implements ApiObject<INaviInstruction> {
    * 
    * @return The architecture of the instruction.
    */
-  public String getArchitecture() {
+  public Architecture getArchitecture() {
     return m_instruction.getArchitecture();
   }
 

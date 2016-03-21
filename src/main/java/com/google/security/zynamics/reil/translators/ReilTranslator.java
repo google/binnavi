@@ -25,6 +25,7 @@ import java.util.Map;
 import com.google.common.base.Preconditions;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
+import com.google.security.zynamics.reil.Architecture;
 import com.google.security.zynamics.reil.ReilBlock;
 import com.google.security.zynamics.reil.ReilEdge;
 import com.google.security.zynamics.reil.ReilFunction;
@@ -53,15 +54,15 @@ import com.google.security.zynamics.zylib.types.common.ICollectionMapper;
  * Translates disassembled programs to REIL code.
  */
 public class ReilTranslator<InstructionType extends IInstruction> {
-  private final Map<String, ITranslator<InstructionType>> m_translators =
-      new HashMap<String, ITranslator<InstructionType>>();
+  private final Map<Architecture, ITranslator<InstructionType>> m_translators =
+      new HashMap<Architecture, ITranslator<InstructionType>>();
 
   public ReilTranslator() {
-    m_translators.put("X86-32", new TranslatorX86<InstructionType>());
-    m_translators.put("ARM-32", new TranslatorARM<InstructionType>());
-    m_translators.put("POWERPC-32", new TranslatorPPC<InstructionType>());
-    m_translators.put("REIL", new TranslatorREIL<InstructionType>());
-    m_translators.put("MIPS-32", new TranslatorMIPS<InstructionType>());
+    m_translators.put(Architecture.x86, new TranslatorX86<InstructionType>());
+    m_translators.put(Architecture.ARM, new TranslatorARM<InstructionType>());
+    m_translators.put(Architecture.PPC, new TranslatorPPC<InstructionType>());
+    m_translators.put(Architecture.REIL, new TranslatorREIL<InstructionType>());
+    m_translators.put(Architecture.MIPS, new TranslatorMIPS<InstructionType>());
   }
 
   /**
@@ -445,7 +446,7 @@ public class ReilTranslator<InstructionType extends IInstruction> {
         environment.nextInstruction();
 
         final ITranslator<InstructionType> translator =
-            m_translators.get(instruction.getArchitecture().toUpperCase());
+            m_translators.get(instruction.getArchitecture());
 
         if (translator == null) {
           throw new InternalTranslationException(
@@ -556,7 +557,7 @@ public class ReilTranslator<InstructionType extends IInstruction> {
       environment.nextInstruction();
 
       final ITranslator<InstructionType> translator =
-          m_translators.get(instruction.getArchitecture().toUpperCase());
+          m_translators.get(instruction.getArchitecture());
 
       if (translator == null) {
         throw new InternalTranslationException(
@@ -596,7 +597,7 @@ public class ReilTranslator<InstructionType extends IInstruction> {
     environment.nextInstruction();
 
     final ITranslator<InstructionType> translator =
-        m_translators.get(instruction.getArchitecture().toUpperCase());
+        m_translators.get(instruction.getArchitecture());
 
     if (translator == null) {
       throw new InternalTranslationException(

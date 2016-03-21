@@ -112,7 +112,7 @@ public final class CNodeFunctions {
     final ReilTranslator<INaviInstruction> translator = new ReilTranslator<INaviInstruction>();
 
     try {
-      return translator.translate(new StandardEnvironment(), node);
+      return translator.translate(node.getLastInstruction().getArchitecture().getEnviroment(), node);
     } catch (final InternalTranslationException e) {
       CUtilityFunctions.logException(e);
 

@@ -23,6 +23,7 @@ import com.google.security.zynamics.binnavi.Gui.GraphWindows.CommentDialogs.Inte
 import com.google.security.zynamics.binnavi.Gui.Users.CUserManager;
 import com.google.security.zynamics.binnavi.Gui.Users.Interfaces.IUser;
 import com.google.security.zynamics.binnavi.disassembly.Modules.MockModule;
+import com.google.security.zynamics.reil.Architecture;
 import com.google.security.zynamics.zylib.disassembly.CAddress;
 import com.google.security.zynamics.zylib.disassembly.IAddress;
 
@@ -138,8 +139,8 @@ public final class MockInstruction implements INaviInstruction {
   }
 
   @Override
-  public String getArchitecture() {
-    return "x86-32";
+  public Architecture getArchitecture() {
+    return Architecture.x86;
   }
 
   @Override
