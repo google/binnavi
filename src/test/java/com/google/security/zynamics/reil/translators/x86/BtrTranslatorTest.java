@@ -81,7 +81,7 @@ public class BtrTranslatorTest {
     assertEquals(2, TestHelpers.filterNativeRegisters(interpreter.getDefinedRegisters()).size());
 
     assertEquals(BigInteger.valueOf(1), interpreter.getVariableValue("CF"));
-    assertEquals(0, interpreter.getMemory().load(0, 4));
+    assertEquals(BigInteger.valueOf(0), interpreter.getMemory().load(0, 4));
 
     assertEquals(BigInteger.valueOf(4L), BigInteger.valueOf(interpreter.getMemorySize()));
   }
@@ -112,7 +112,7 @@ public class BtrTranslatorTest {
     assertEquals(2, TestHelpers.filterNativeRegisters(interpreter.getDefinedRegisters()).size());
 
     assertEquals(BigInteger.valueOf(1), interpreter.getVariableValue("CF"));
-    assertEquals(0x7FFFFFFFL, interpreter.getMemory().load(0, 4));
+    assertEquals(BigInteger.valueOf(0x7FFFFFFFL), interpreter.getMemory().load(0, 4));
 
     assertEquals(BigInteger.valueOf(4L), BigInteger.valueOf(interpreter.getMemorySize()));
   }

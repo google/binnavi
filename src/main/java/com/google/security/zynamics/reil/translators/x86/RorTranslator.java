@@ -26,6 +26,7 @@ import com.google.security.zynamics.reil.translators.TranslationResult;
 import com.google.security.zynamics.zylib.disassembly.IInstruction;
 import com.google.security.zynamics.zylib.disassembly.IOperandTree;
 
+import java.math.BigInteger;
 import java.util.List;
 
 /**
@@ -100,10 +101,10 @@ public class RorTranslator implements IInstructionTranslator {
 
     final String msbMask = String.valueOf(TranslationHelpers.getMsbMask(targetSize));
     final String modVal = String.valueOf(targetSize.getBitSize());
-    final String msbMask2nd = String.valueOf(TranslationHelpers.getMsbMask(targetSize) / 2);
+    final String msbMask2nd = new BigInteger(TranslationHelpers.getMsbMask(targetSize)).divide(BigInteger.valueOf(2)).toString();
     final String shiftMsbLsb = String.valueOf(TranslationHelpers.getShiftMsbLsbMask(targetSize));
-    final String shift2ndMsbLsb = String
-        .valueOf(TranslationHelpers.getShiftMsbLsbMask(targetSize) + 1);
+    final String shift2ndMsbLsb =
+        String.valueOf(TranslationHelpers.getShiftMsbLsbMask(targetSize) + 1);
 
     // Make sure to rotate less than the size of the register
     instructions.add(ReilHelpers.createMod(offset, sourceSize, sourceRegister, targetSize, modVal,

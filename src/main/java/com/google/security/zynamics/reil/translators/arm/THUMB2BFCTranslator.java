@@ -24,6 +24,7 @@ import com.google.security.zynamics.reil.translators.TranslationHelpers;
 import com.google.security.zynamics.zylib.disassembly.IInstruction;
 import com.google.security.zynamics.zylib.disassembly.IOperandTreeNode;
 
+import java.math.BigInteger;
 import java.util.List;
 
 
@@ -44,7 +45,7 @@ public class THUMB2BFCTranslator extends ARMBaseTranslator {
     final IOperandTreeNode immediateOperand2 =
         instruction.getOperands().get(2).getRootNode().getChildren().get(0);
 
-    final long clearMask =
+    final BigInteger clearMask =
         TranslationHelpers.generateZeroMask(Integer.parseInt(immediateOperand1.getValue()),
             Integer.parseInt(immediateOperand2.getValue()), OperandSize.DWORD);
 
