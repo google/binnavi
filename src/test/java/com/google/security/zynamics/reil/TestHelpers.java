@@ -32,8 +32,14 @@ public class TestHelpers {
       final ArrayList<ReilInstruction> instructions) {
     final HashMap<BigInteger, List<ReilInstruction>> out =
         new HashMap<BigInteger, List<ReilInstruction>>();
-
-    out.put(BigInteger.valueOf(instructions.get(0).getAddress().toLong()), instructions);
+    for(ReilInstruction instruction : instructions)
+    {
+      BigInteger key = instruction.getAddress().toBigInteger().divide(BigInteger.valueOf(0x100));
+      if(!out.containsKey(key)) {
+        out.put(key, new ArrayList<ReilInstruction>());
+      }
+      out.get(key).add(instruction);
+    }
 
     return out;
   }

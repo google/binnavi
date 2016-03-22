@@ -521,8 +521,8 @@ public class ReilInterpreter {
     for (int i = 0; i < 10; i++) {
       final BigInteger current = pc.add(BigInteger.valueOf(i));
 
-      if (instructions.containsKey(nativeToReil(current))) {
-        setRegister(programCounter, current, OperandSize.DWORD, ReilRegisterStatus.DEFINED);
+      if (instructions.containsKey(current)) {
+        setRegister(programCounter, current, cpuPolicy.getRegisterSize(programCounter), ReilRegisterStatus.DEFINED);
         return true;
       }
     }
@@ -590,7 +590,7 @@ public class ReilInterpreter {
         ReilRegisterStatus.DEFINED);
 
     while (true) {
-      BigInteger pc = nativeToReil(getVariableValue(programCounter));
+      BigInteger pc = getVariableValue(programCounter);
 
       interpreterPolicy.nextInstruction(this);
 
@@ -608,7 +608,7 @@ public class ReilInterpreter {
             "Error: Instruction at offset %X has invalid REIL code", pc));
       }
 
-      setRegister(SUB_PC, BigInteger.ZERO, OperandSize.DWORD, ReilRegisterStatus.DEFINED);
+      setRegister(SUB_PC, BigInteger.ZERO, cpuPolicy.getRegisterSize(programCounter), ReilRegisterStatus.DEFINED);
 
       int subPc = getVariableValue(SUB_PC).intValue();
 
@@ -631,13 +631,13 @@ public class ReilInterpreter {
           subPc = newSubPc;
         }
 
-        setRegister(SUB_PC, BigInteger.valueOf(subPc), OperandSize.DWORD,
+        setRegister(SUB_PC, BigInteger.valueOf(subPc), cpuPolicy.getRegisterSize(programCounter),
             ReilRegisterStatus.DEFINED);
       }
 
       final BigInteger pcNew = getVariableValue(programCounter);
 
-      if (pc.equals(nativeToReil(pcNew))) {
+      if (pc.equals(pcNew)) {
         pc = pcNew.add(BigInteger.ONE);
       } else {
         pc = pcNew;
