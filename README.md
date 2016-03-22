@@ -103,6 +103,16 @@ configuration.
 
 You should be ready to go from here.
 
+## Importing tests into Eclipse
+
+1. Install and configure postgresql server
+2. Configure tests/postgresql.txt for CConfigLoader
+3. Open the "Project Properties" dialog and choose "Java build Path" showing the "Source" tab.
+4. Link new source src/test/java to folder test
+5. Add ``**/GuitarTests.java`` to the list of directories to exclude.
+6. Add junit4 and mockito to Libraries
+7. Run com.google.security.zynamics.binnavi.Main as Java Application
+
 ## Exporting disassemblies from IDA
 
 As part of this project, we are distributing an IDA Pro plugin that exports
