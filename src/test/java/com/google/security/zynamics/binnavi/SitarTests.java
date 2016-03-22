@@ -15,26 +15,42 @@ limitations under the License.
 */
 package com.google.security.zynamics.binnavi;
 
+import com.google.security.zynamics.binnavi.Log.NaviLogger;
+
+import org.junit.BeforeClass;
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
 
+import java.io.IOException;
+import java.sql.SQLException;
+import java.util.logging.Level;
+
+
 @RunWith(Suite.class)
-@SuiteClasses({
-    com.google.security.zynamics.binnavi.Database.PostgreSQLSimpleTests.class,
-    //com.google.security.zynamics.binnavi.models.Bookmarks.memory.AllTests.class,
-    com.google.security.zynamics.binnavi.Database.PostgreSQL.PostgreSQLConvertTests.class,
-    //com.google.security.zynamics.binnavi.disassembly.ExpensiveTests.class,
-    //com.google.security.zynamics.binnavi.ZyGraph.ExpensiveTests.class,
-    //com.google.security.zynamics.binnavi.REIL.ExpensiveTests.class,
-    //com.google.security.zynamics.binnavi.Database.PostgreSQLAllTests.class,
-})
+@SuiteClasses({com.google.security.zynamics.binnavi.models.Bookmarks.memory.AllTests.class,
+  com.google.security.zynamics.binnavi.Database.PostgreSQL.PostgreSQLConvertTests.class,
+  com.google.security.zynamics.binnavi.disassembly.ExpensiveTests.class,
+  com.google.security.zynamics.binnavi.ZyGraph.ExpensiveTests.class,
+  com.google.security.zynamics.binnavi.REIL.ExpensiveTests.class,
+  com.google.security.zynamics.binnavi.Database.PostgreSQLAllTests.class})
 public final class SitarTests {
   static {
     // Need to disable assertions for this package, otherwise tests fail.
     // TODO(cblichmann): Fix the overuse of "assert false" in the codebase.
     SitarTests.class.getClassLoader()
         .setPackageAssertionStatus("com.google.security.zynamics.binnavi", false);
+  }
+
+  @BeforeClass
+  public static void initializeDatabase() {
+    NaviLogger.setLevel(Level.INFO);
+    try {
+      final IntegrationTestSetup setup = new IntegrationTestSetup();
+      setup.createIntegrationTestDatabase();
+    } catch (final SQLException | IOException e) {
+      e.printStackTrace();
+    } 
   }
 }
 
