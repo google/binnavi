@@ -80,7 +80,7 @@ public class RepeScasdTranslatorTest {
     assertEquals(BigInteger.valueOf(0x1004), interpreter.getVariableValue("edi"));
 
     assertEquals(BigInteger.valueOf(4L), BigInteger.valueOf(interpreter.getMemorySize()));
-    assertEquals(0x78337878, interpreter.getMemory().load(0x1000, 4));
+    assertEquals(BigInteger.valueOf(0x78337878), interpreter.getMemory().load(0x1000, 4));
   }
 
   @Test
@@ -111,6 +111,6 @@ public class RepeScasdTranslatorTest {
     assertEquals(BigInteger.valueOf(0x1004), interpreter.getVariableValue("edi"));
 
     assertEquals(BigInteger.valueOf(4L), BigInteger.valueOf(interpreter.getMemorySize()));
-    assertEquals(0x78337878, interpreter.getMemory().load(0x1000, 4));
+    assertEquals(BigInteger.valueOf(0x78337878), interpreter.getMemory().load(0x1000, 4));
   }
 }

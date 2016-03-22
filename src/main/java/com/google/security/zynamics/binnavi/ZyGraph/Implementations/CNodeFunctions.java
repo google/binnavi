@@ -46,6 +46,7 @@ import com.google.security.zynamics.reil.ReilGraph;
 import com.google.security.zynamics.reil.translators.InternalTranslationException;
 import com.google.security.zynamics.reil.translators.ReilTranslator;
 import com.google.security.zynamics.reil.translators.StandardEnvironment;
+import com.google.security.zynamics.reil.translators.StandardEnvironmentx64;
 import com.google.security.zynamics.zylib.gui.GuiHelper;
 import com.google.security.zynamics.zylib.gui.zygraph.edges.EdgeType;
 

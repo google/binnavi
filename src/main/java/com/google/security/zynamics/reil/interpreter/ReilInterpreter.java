@@ -21,6 +21,7 @@ import com.google.security.zynamics.reil.OperandType;
 import com.google.security.zynamics.reil.ReilHelpers;
 import com.google.security.zynamics.reil.ReilInstruction;
 import com.google.security.zynamics.reil.ReilOperand;
+import com.google.security.zynamics.reil.translators.TranslationHelpers;
 import com.google.security.zynamics.zylib.general.Pair;
 
 import java.math.BigInteger;
@@ -80,12 +81,13 @@ public class ReilInterpreter {
       case DWORD:
         return BigInteger.valueOf(0xFFFFFFFFL);
       case QWORD:
-        return BigInteger.valueOf(0xFFFFFFFFFFFFFFFFL);
-      case OWORD:
-        return BigInteger.valueOf(0xFFFFFFFFFFFFFFL)
-         .shiftLeft(56).add(BigInteger.valueOf(0xFFFFFFFFFFFFFFL)).shiftLeft(16).add(BigInteger.valueOf(0xffffl));
+        return TranslationHelpers.getUnsignedBigIntegerValue(0xFFFFFFFFFFFFFFFFL);
       case WORD:
         return BigInteger.valueOf(0xFFFFL);
+      case OWORD:
+        BigInteger result = TranslationHelpers.getUnsignedBigIntegerValue(0xFFFFFFFFFFFFFFFFL)
+          .shiftLeft(64).add(TranslationHelpers.getUnsignedBigIntegerValue(0xFFFFFFFFFFFFFFFFL));
+        return result;
       default:
         throw new IllegalStateException("Error: Unknown target size for truncate mask");
     }
@@ -168,14 +170,11 @@ public class ReilInterpreter {
 
     if (firstValue.first() && secondValue.first()) {
       final boolean isMsbSet =
-          !(secondValue.second().and(
-              BigInteger.valueOf((long) Math.pow(2, instruction.getSecondOperand().getSize()
-                  .getBitSize() - 1))).equals(BigInteger.ZERO));
+          !(secondValue.second().and(BigInteger.valueOf(1 ).shiftLeft(instruction.getSecondOperand().getSize()
+              .getBitSize()-1)).equals(BigInteger.ZERO));
 
       BigInteger result = BigInteger.ZERO;
       if (secondValue.second().compareTo(BigInteger.ZERO) < 0) {
-        System.out.println("F" + firstValue.second());
-        System.out.println("S" + secondValue.second().negate());
 
         result = firstValue.second().shiftRight(secondValue.second().negate().intValue());
       } else if (isMsbSet) {
@@ -435,10 +434,10 @@ public class ReilInterpreter {
 
     if (firstValue.first() && secondValue.first()) {
       final OperandSize targetSize = instruction.getThirdOperand().getSize();
-
+      final BigInteger mask = getTruncateMask(targetSize);
       final BigInteger result =
           firstValue.second().subtract(secondValue.second())
-              .and(getTruncateMask(targetSize));
+              .and(mask);
       final String targetRegister = instruction.getThirdOperand().getValue();
       setRegister(targetRegister, result, targetSize, ReilRegisterStatus.DEFINED);
     } else {
@@ -664,20 +663,20 @@ public class ReilInterpreter {
    * @return True, if the register has a value. False, otherwise.
    */
   public boolean isDefined(final String register) {
-    System.out.println(registers.keySet());
+   // System.out.println(registers.keySet());
     return registers.containsKey(register);
   }
 
   public byte readMemoryByte(final long address) {
-    return (byte) memory.load(address, 1);
+    return memory.load(address, 1).byteValue();
   }
 
   public long readMemoryDword(final long address) {
-    return memory.load(address, 4);
+    return memory.load(address, 4).longValue();
   }
 
   public long readMemoryWord(final long address) {
-    return memory.load(address, 2);
+    return memory.load(address, 2).longValue();
   }
 
   /**
@@ -701,9 +700,7 @@ public class ReilInterpreter {
    */
   public void setRegister(final String register, final BigInteger value, final OperandSize size,
       final ReilRegisterStatus status) {
-    final BigInteger truncatedValue = value.and(getTruncateMask(size));
-
-    final ReilRegister r = new ReilRegister(register, size, truncatedValue);
+    final ReilRegister r = new ReilRegister(register, size, value.and(getTruncateMask(size)));
 
     if (registers.containsKey(register)) {
       registers.remove(register);

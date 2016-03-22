@@ -95,7 +95,7 @@ public class StwbrxTranslatorTest {
     assertEquals(BigInteger.valueOf(0x3fff00ffL), interpreter.getVariableValue("%r0"));
     assertEquals(BigInteger.valueOf(996), interpreter.getVariableValue("%r1"));
     assertEquals(BigInteger.valueOf(4), interpreter.getVariableValue("%r2"));
-    assertEquals(BigInteger.valueOf(0xff00ff3f),
+    assertEquals(BigInteger.valueOf(0xff00ff3fl),
         BigInteger.valueOf(interpreter.readMemoryDword(1000)));
     assertEquals(BigInteger.valueOf(4L), BigInteger.valueOf(interpreter.getMemorySize()));
     assertEquals(4, TestHelpers.filterNativeRegisters(interpreter.getDefinedRegisters()).size());

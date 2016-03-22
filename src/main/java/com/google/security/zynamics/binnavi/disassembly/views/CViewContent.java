@@ -41,9 +41,11 @@ import com.google.security.zynamics.binnavi.disassembly.INaviViewNode;
 import com.google.security.zynamics.binnavi.disassembly.INaviViewNodeListener;
 import com.google.security.zynamics.binnavi.disassembly.algorithms.CFunctionNodeColorizer;
 import com.google.security.zynamics.reil.ReilFunction;
+import com.google.security.zynamics.reil.translators.ITranslationEnvironment;
 import com.google.security.zynamics.reil.translators.InternalTranslationException;
 import com.google.security.zynamics.reil.translators.ReilTranslator;
 import com.google.security.zynamics.reil.translators.StandardEnvironment;
+import com.google.security.zynamics.reil.translators.StandardEnvironmentx64;
 import com.google.security.zynamics.zylib.disassembly.GraphType;
 import com.google.security.zynamics.zylib.disassembly.ICodeContainer;
 import com.google.security.zynamics.zylib.disassembly.ICodeEdge;
@@ -687,7 +689,12 @@ public final class CViewContent implements IViewContent {
   @Override
   public ReilFunction getReilCode() throws InternalTranslationException {
     if (m_reilFunction == null) {
-      final StandardEnvironment env = new StandardEnvironment();
+      ITranslationEnvironment env;
+      if (view.getBasicBlocks().isEmpty()) {
+        env = new StandardEnvironment();
+      } else {
+        env = view.getBasicBlocks().get(0).getLastInstruction().getArchitecture().getEnviroment();
+      }
       m_reilFunction = m_translator.translate(env, view);
     }
     return m_reilFunction;

@@ -88,7 +88,7 @@ public class ScTranslatorTest {
     assertEquals(4, TestHelpers.filterNativeRegisters(interpreter.getDefinedRegisters()).size());
     assertEquals(BigInteger.valueOf(0x1L), interpreter.getVariableValue("$v2"));
     assertEquals(BigInteger.valueOf(4L), BigInteger.valueOf(interpreter.getMemorySize()));
-    assertEquals(BigInteger.valueOf(0xFFFFFFF9),
+    assertEquals(BigInteger.valueOf(0xFFFFFFF9l),
         BigInteger.valueOf(interpreter.readMemoryDword(0x10000000)));
   }
 

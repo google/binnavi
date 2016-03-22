@@ -17,6 +17,8 @@ package com.google.security.zynamics.reil.translators;
 
 import static org.junit.Assert.assertEquals;
 
+import java.math.BigInteger;
+
 import com.google.security.zynamics.reil.OperandSize;
 import com.google.security.zynamics.reil.translators.TranslationHelpers;
 
@@ -28,55 +30,55 @@ import org.junit.runners.JUnit4;
 public class TranslationHelpersTest {
   @Test
   public void testZeroMaskHighestBitBYTE() {
-    final long mask = TranslationHelpers.generateZeroMask(7, 1, OperandSize.BYTE);
-    assertEquals(0x7FL, mask);
+    final BigInteger mask = TranslationHelpers.generateZeroMask(7, 1, OperandSize.BYTE);
+    assertEquals(BigInteger.valueOf(0x7FL), mask);
   }
 
   @Test
   public void testZeroMaskHighestBitDWORD() {
-    final long mask = TranslationHelpers.generateZeroMask(31, 1, OperandSize.DWORD);
-    assertEquals(0x7FFFFFFFL, mask);
+    final BigInteger mask = TranslationHelpers.generateZeroMask(31, 1, OperandSize.DWORD);
+    assertEquals(BigInteger.valueOf(0x7FFFFFFFL), mask);
   }
 
   @Test
   public void testZeroMaskHighestBitQWORD() {
-    final long mask = TranslationHelpers.generateZeroMask(63, 1, OperandSize.QWORD);
-    assertEquals(0x7FFFFFFFFFFFFFFFL, mask);
+    final BigInteger mask = TranslationHelpers.generateZeroMask(63, 1, OperandSize.QWORD);
+    assertEquals(BigInteger.valueOf(0x7FFFFFFFFFFFFFFFL), mask);
   }
 
   @Test
   public void testZeroMaskHighestBitWORD() {
-    final long mask = TranslationHelpers.generateZeroMask(15, 1, OperandSize.WORD);
-    assertEquals(0x7FFFL, mask);
+    final BigInteger mask = TranslationHelpers.generateZeroMask(15, 1, OperandSize.WORD);
+    assertEquals(BigInteger.valueOf(0x7FFFL), mask);
   }
 
   @Test
   public void testZeroMaskLowestBitDWORD() {
-    final long mask = TranslationHelpers.generateZeroMask(0, 1, OperandSize.DWORD);
-    assertEquals(0xFFFFFFFEL, mask);
+    final BigInteger mask = TranslationHelpers.generateZeroMask(0, 1, OperandSize.DWORD);
+    assertEquals(BigInteger.valueOf(0xFFFFFFFEL), mask);
   }
 
   @Test
   public void testZeroMaskSomeBits1() {
-    final long mask = TranslationHelpers.generateZeroMask(16, 16, OperandSize.DWORD);
-    assertEquals(0x0000FFFFL, mask);
+    final BigInteger mask = TranslationHelpers.generateZeroMask(16, 16, OperandSize.DWORD);
+    assertEquals(BigInteger.valueOf(0x0000FFFFL), mask);
   }
 
   @Test
   public void testZeroMaskSomeBits2() {
-    final long mask = TranslationHelpers.generateZeroMask(0, 16, OperandSize.DWORD);
-    assertEquals(0xFFFF0000L, mask);
+    final BigInteger mask = TranslationHelpers.generateZeroMask(0, 16, OperandSize.DWORD);
+    assertEquals(BigInteger.valueOf(0xFFFF0000L), mask);
   }
 
   @Test
   public void testZeroMaskSomeBits3() {
-    final long mask = TranslationHelpers.generateZeroMask(8, 16, OperandSize.DWORD);
-    assertEquals(0xFF0000FFL, mask);
+    final BigInteger mask = TranslationHelpers.generateZeroMask(8, 16, OperandSize.DWORD);
+    assertEquals(BigInteger.valueOf(0xFF0000FFL), mask);
   }
 
   @Test
   public void testZeroMaskSomeBits4() {
-    final long mask = TranslationHelpers.generateZeroMask(1, 30, OperandSize.DWORD);
-    assertEquals(0x80000001L, mask);
+    final BigInteger mask = TranslationHelpers.generateZeroMask(1, 30, OperandSize.DWORD);
+    assertEquals(BigInteger.valueOf(0x80000001L), mask);
   }
 }

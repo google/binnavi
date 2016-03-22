@@ -95,7 +95,7 @@ public class StwuxTranslatorTest {
     assertEquals(BigInteger.valueOf(0x80801111L), interpreter.getVariableValue("%r0"));
     assertEquals(BigInteger.valueOf(1000), interpreter.getVariableValue("%r1"));
     assertEquals(BigInteger.valueOf(4), interpreter.getVariableValue("%r2"));
-    assertEquals(BigInteger.valueOf(0x80801111),
+    assertEquals(BigInteger.valueOf(0x80801111l),
         BigInteger.valueOf(interpreter.readMemoryDword(1000)));
     assertEquals(BigInteger.valueOf(4L), BigInteger.valueOf(interpreter.getMemorySize()));
     assertEquals(4, TestHelpers.filterNativeRegisters(interpreter.getDefinedRegisters()).size());

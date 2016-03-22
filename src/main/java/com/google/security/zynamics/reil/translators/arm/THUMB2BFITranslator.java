@@ -24,6 +24,7 @@ import com.google.security.zynamics.reil.translators.TranslationHelpers;
 import com.google.security.zynamics.zylib.disassembly.IInstruction;
 import com.google.security.zynamics.zylib.disassembly.IOperandTreeNode;
 
+import java.math.BigInteger;
 import java.util.List;
 
 
@@ -56,11 +57,11 @@ public class THUMB2BFITranslator extends ARMBaseTranslator {
     final String tempVar2 = environment.getNextVariableString();
     final String tempVar3 = environment.getNextVariableString();
 
-    final long oneMask =
+    final BigInteger oneMask =
         TranslationHelpers.generateOneMask(0, Integer.parseInt(immediateOperand2.getValue()),
             OperandSize.DWORD);
 
-    final long zeroMask =
+    final BigInteger zeroMask =
         TranslationHelpers.generateZeroMask(Integer.parseInt(immediateOperand1.getValue()),
             Integer.parseInt(immediateOperand2.getValue()), OperandSize.DWORD);
 

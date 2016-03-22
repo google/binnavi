@@ -215,13 +215,13 @@ public class ShldTranslator implements IInstructionTranslator {
 
     final String xoredMsb = environment.getNextVariableString();
     final String maskedMsb = environment.getNextVariableString();
-    final long msbMask = TranslationHelpers.getMsbMask(firstResult.getSize());
+    final String msbMask = TranslationHelpers.getMsbMask(firstResult.getSize());
     final long msbShift = TranslationHelpers.getShiftMsbLsbMask(firstResult.getSize());
 
     instructions.add(ReilHelpers.createXor(offset++, firstResult.getSize(), tempInput,
         firstResult.getSize(), shiftedIsolationResult, firstResult.getSize(), xoredMsb));
     instructions.add(ReilHelpers.createAnd(offset++, firstResult.getSize(), xoredMsb,
-        firstResult.getSize(), String.valueOf(msbMask), firstResult.getSize(), maskedMsb));
+        firstResult.getSize(), msbMask, firstResult.getSize(), maskedMsb));
     instructions.add(ReilHelpers.createBsh(offset++, firstResult.getSize(), maskedMsb,
         OperandSize.BYTE, String.valueOf(msbShift), OperandSize.BYTE, Helpers.OVERFLOW_FLAG));
 
