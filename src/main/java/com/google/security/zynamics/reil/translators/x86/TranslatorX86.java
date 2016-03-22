@@ -100,8 +100,8 @@ public class TranslatorX86<InstructionType extends IInstruction> implements
       translators.put("jae", new JccTranslator(new NotBelowGenerator()));
       translators.put("jb", new JccTranslator(new BelowGenerator()));
       translators.put("jbe", new JccTranslator(new BelowEqualGenerator()));
-      translators.put("jcxz", new JccTranslator(new EcxZeroGenerator()));
-      translators.put("jecxz", new JccTranslator(new CxZeroGenerator()));
+      translators.put("jecxz", new JccTranslator(new EcxZeroGenerator()));
+      translators.put("jcxz", new JccTranslator(new CxZeroGenerator()));
       translators.put("je", new JccTranslator(new ZeroGenerator()));
       translators.put("jg", new JccTranslator(new GreaterGenerator()));
       translators.put("jge", new JccTranslator(new GreaterEqualGenerator()));
