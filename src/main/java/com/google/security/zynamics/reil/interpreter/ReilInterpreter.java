@@ -18,6 +18,8 @@ package com.google.security.zynamics.reil.interpreter;
 import com.google.common.base.Preconditions;
 import com.google.security.zynamics.reil.OperandSize;
 import com.google.security.zynamics.reil.OperandType;
+import com.google.security.zynamics.reil.ReilBlock;
+import com.google.security.zynamics.reil.ReilFunction;
 import com.google.security.zynamics.reil.ReilHelpers;
 import com.google.security.zynamics.reil.ReilInstruction;
 import com.google.security.zynamics.reil.ReilOperand;
@@ -65,11 +67,10 @@ public class ReilInterpreter {
   public ReilInterpreter(final Endianness endianness, final ICpuPolicy cpuPolicy,
       final IInterpreterPolicy interpreterPolicy) {
     Preconditions.checkNotNull(endianness, "Error: Argument endianness can't be null");
-    this.cpuPolicy =
-        Preconditions.checkNotNull(cpuPolicy, "Error: Argument cpuPolicy can't be null");
-    this.interpreterPolicy =
-        Preconditions.checkNotNull(interpreterPolicy,
-            "Error: Argument interpreterPolicy can't be null");
+    this.cpuPolicy = Preconditions.checkNotNull(cpuPolicy,
+        "Error: Argument cpuPolicy can't be null");
+    this.interpreterPolicy = Preconditions.checkNotNull(interpreterPolicy,
+        "Error: Argument interpreterPolicy can't be null");
 
     this.memory = new ReilMemory(endianness);
   }
@@ -86,7 +87,7 @@ public class ReilInterpreter {
         return BigInteger.valueOf(0xFFFFL);
       case OWORD:
         BigInteger result = TranslationHelpers.getUnsignedBigIntegerValue(0xFFFFFFFFFFFFFFFFL)
-          .shiftLeft(64).add(TranslationHelpers.getUnsignedBigIntegerValue(0xFFFFFFFFFFFFFFFFL));
+            .shiftLeft(64).add(TranslationHelpers.getUnsignedBigIntegerValue(0xFFFFFFFFFFFFFFFFL));
         return result;
       default:
         throw new IllegalStateException("Error: Unknown target size for truncate mask");
@@ -149,8 +150,8 @@ public class ReilInterpreter {
     final Pair<Boolean, BigInteger> firstValue = loadLongValue(instruction.getFirstOperand());
 
     if (firstValue.first()) {
-      final BigInteger result =
-          firstValue.second().equals(BigInteger.ZERO) ? BigInteger.ONE : BigInteger.ZERO;
+      final BigInteger result = firstValue.second().equals(BigInteger.ZERO) ? BigInteger.ONE
+          : BigInteger.ZERO;
       final String targetRegister = instruction.getThirdOperand().getValue();
       final OperandSize targetSize = instruction.getThirdOperand().getSize();
       setRegister(targetRegister, result, targetSize, ReilRegisterStatus.DEFINED);
@@ -169,19 +170,18 @@ public class ReilInterpreter {
     final Pair<Boolean, BigInteger> secondValue = loadLongValue(instruction.getSecondOperand());
 
     if (firstValue.first() && secondValue.first()) {
-      final boolean isMsbSet =
-          !(secondValue.second().and(BigInteger.valueOf(1 ).shiftLeft(instruction.getSecondOperand().getSize()
-              .getBitSize()-1)).equals(BigInteger.ZERO));
+      final boolean isMsbSet = !(secondValue.second()
+          .and(BigInteger.valueOf(1)
+              .shiftLeft(instruction.getSecondOperand().getSize().getBitSize() - 1))
+          .equals(BigInteger.ZERO));
 
       BigInteger result = BigInteger.ZERO;
       if (secondValue.second().compareTo(BigInteger.ZERO) < 0) {
 
         result = firstValue.second().shiftRight(secondValue.second().negate().intValue());
       } else if (isMsbSet) {
-        result =
-            firstValue.second().shiftRight(
-                BigInteger.ZERO.subtract(secondValue.second()).and(BigInteger.valueOf(0xFF))
-                    .intValue());
+        result = firstValue.second().shiftRight(BigInteger.ZERO.subtract(secondValue.second())
+            .and(BigInteger.valueOf(0xFF)).intValue());
       } else {
         result = firstValue.second().shiftLeft(secondValue.second().intValue());
       }
@@ -219,7 +219,8 @@ public class ReilInterpreter {
    * @param instruction The REIL instruction to interpret
    * @param programCounter The name of the program counter register
    */
-  private void interpretInstruction(final ReilInstruction instruction, final String programCounter) {
+  private void interpretInstruction(final ReilInstruction instruction,
+      final String programCounter) {
     final Integer mnemonic = instruction.getMnemonicCode();
 
     switch (mnemonic) {
@@ -317,8 +318,8 @@ public class ReilInterpreter {
       final String target = instruction.getThirdOperand().getValue();
       final int targetSize = instruction.getThirdOperand().getSize().getByteSize();
 
-      final BigInteger value =
-          new BigInteger(String.valueOf(memory.load(firstValue.second().longValue(), targetSize)));
+      final BigInteger value = new BigInteger(
+          String.valueOf(memory.load(firstValue.second().longValue(), targetSize)));
 
       setRegister(target, value, instruction.getThirdOperand().getSize(),
           ReilRegisterStatus.DEFINED);
@@ -435,9 +436,7 @@ public class ReilInterpreter {
     if (firstValue.first() && secondValue.first()) {
       final OperandSize targetSize = instruction.getThirdOperand().getSize();
       final BigInteger mask = getTruncateMask(targetSize);
-      final BigInteger result =
-          firstValue.second().subtract(secondValue.second())
-              .and(mask);
+      final BigInteger result = firstValue.second().subtract(secondValue.second()).and(mask);
       final String targetRegister = instruction.getThirdOperand().getValue();
       setRegister(targetRegister, result, targetSize, ReilRegisterStatus.DEFINED);
     } else {
@@ -482,8 +481,8 @@ public class ReilInterpreter {
    * Loads the value of an operand into a long value.
    *
    * @param operand The operand to load
-   * @return A pair made of a bool and a long value. The bool indicates whether loading the value
-   *         was successful.
+   * @return A pair made of a bool and a long value. The bool indicates whether
+   *         loading the value was successful.
    */
   private Pair<Boolean, BigInteger> loadLongValue(final ReilOperand operand) {
     final OperandType type = operand.getType();
@@ -495,14 +494,13 @@ public class ReilInterpreter {
       // Check if we have a negative prefix before the register name. This is
       // a bit of a hack, because we never explicitly stated that we would allow
       // a negation of a register operand in REIL.
-      // TODO(thomasdullien) remove this code once we have introduced explicit 
+      // TODO(thomasdullien) remove this code once we have introduced explicit
       // left-shift and right-shift instructions.
-      value =
-          (value.charAt(0) == '-') ? operand.getValue().substring(1) : value;    
-          
+      value = (value.charAt(0) == '-') ? operand.getValue().substring(1) : value;
+
       return !isDefined(value) ? new Pair<Boolean, BigInteger>(false, BigInteger.ZERO)
           : new Pair<Boolean, BigInteger>(true, getVariableValue(value));
-      } else {
+    } else {
       return new Pair<Boolean, BigInteger>(false, BigInteger.ZERO);
     }
   }
@@ -522,7 +520,8 @@ public class ReilInterpreter {
       final BigInteger current = pc.add(BigInteger.valueOf(i));
 
       if (instructions.containsKey(current)) {
-        setRegister(programCounter, current, cpuPolicy.getRegisterSize(programCounter), ReilRegisterStatus.DEFINED);
+        setRegister(programCounter, current, cpuPolicy.getRegisterSize(programCounter),
+            ReilRegisterStatus.DEFINED);
         return true;
       }
     }
@@ -558,13 +557,37 @@ public class ReilInterpreter {
    *
    * @return The value of the register
    *
-   * @throws IllegalArgumentException Thrown if the register has no assigned value
+   * @throws IllegalArgumentException Thrown if the register has no assigned
+   *           value
    */
   public BigInteger getVariableValue(final String register) {
     Preconditions.checkNotNull(register, "Error: register argument can not be null");
     Preconditions.checkArgument(registers.containsKey(register), "Error: Register has no value");
 
     return registers.get(register).getValue();
+  }
+
+  /**
+   * Interprets a list of instructions in the current REIL interpreter
+   *
+   * @param function The function to interpret
+   * @throws InterpreterException
+   */
+  public void interpret(final ReilFunction function) throws InterpreterException {
+    final HashMap<BigInteger, List<ReilInstruction>> instructionsMap = new HashMap<>();
+    for (ReilBlock block : function.getGraph().getNodes()) {
+      for (ReilInstruction instruction : block.getInstructions()) {
+        BigInteger addr = instruction.getAddress().toBigInteger().divide(BigInteger.valueOf(0x100));
+        if (!instructionsMap.containsKey(addr)) {
+          instructionsMap.put(addr, new ArrayList<>());
+        }
+        instructionsMap.get(addr).add(instruction);
+      }
+    }
+    BigInteger entryPoint = function.getGraph().getNodes().get(0).getAddress().toBigInteger()
+        .divide(BigInteger.valueOf(0x100));
+
+    interpret(instructionsMap, entryPoint);
   }
 
   /**
