@@ -620,18 +620,19 @@ public class ReilInterpreter {
       log("Interpreting: %X%n", pc.longValue());
 
       if (!instructions.containsKey(pc)) {
-        throw new InterpreterException(String.format("Error: Instruction at offset %X not found",
-            pc));
+        throw new InterpreterException(
+            String.format("Error: Instruction at offset %X not found", pc));
       }
 
       final List<ReilInstruction> instructionList = instructions.get(pc);
 
       if ((instructionList == null) || (instructionList.size() == 0)) {
-        throw new InterpreterException(String.format(
-            "Error: Instruction at offset %X has invalid REIL code", pc));
+        throw new InterpreterException(
+            String.format("Error: Instruction at offset %X has invalid REIL code", pc));
       }
 
-      setRegister(SUB_PC, BigInteger.ZERO, cpuPolicy.getRegisterSize(programCounter), ReilRegisterStatus.DEFINED);
+      setRegister(SUB_PC, BigInteger.ZERO, cpuPolicy.getRegisterSize(programCounter),
+          ReilRegisterStatus.DEFINED);
 
       int subPc = getVariableValue(SUB_PC).intValue();
 
@@ -686,7 +687,6 @@ public class ReilInterpreter {
    * @return True, if the register has a value. False, otherwise.
    */
   public boolean isDefined(final String register) {
-   // System.out.println(registers.keySet());
     return registers.containsKey(register);
   }
 

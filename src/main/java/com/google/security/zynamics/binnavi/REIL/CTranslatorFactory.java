@@ -22,6 +22,7 @@ import com.google.security.zynamics.reil.translators.arm.TranslatorARM;
 import com.google.security.zynamics.reil.translators.mips.TranslatorMIPS;
 import com.google.security.zynamics.reil.translators.ppc.TranslatorPPC;
 import com.google.security.zynamics.reil.translators.reil.TranslatorREIL;
+import com.google.security.zynamics.reil.translators.x64.TranslatorX64;
 import com.google.security.zynamics.reil.translators.x86.TranslatorX86;
 
 /**
@@ -54,6 +55,8 @@ public final class CTranslatorFactory {
       return new TranslatorREIL<INaviInstruction>();
     } else if (architecture.equals(Architecture.MIPS)) {
       return new TranslatorMIPS<INaviInstruction>();
+    } else if (architecture.equals(Architecture.x86_64)) {
+      return new TranslatorX64<INaviInstruction>();
     } else {
       return null;
     }

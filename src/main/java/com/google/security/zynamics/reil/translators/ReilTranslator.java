@@ -37,6 +37,7 @@ import com.google.security.zynamics.reil.translators.arm.TranslatorARM;
 import com.google.security.zynamics.reil.translators.mips.TranslatorMIPS;
 import com.google.security.zynamics.reil.translators.ppc.TranslatorPPC;
 import com.google.security.zynamics.reil.translators.reil.TranslatorREIL;
+import com.google.security.zynamics.reil.translators.x64.TranslatorX64;
 import com.google.security.zynamics.reil.translators.x86.TranslatorX86;
 import com.google.security.zynamics.zylib.disassembly.IAddress;
 import com.google.security.zynamics.zylib.disassembly.IBlockContainer;
@@ -59,6 +60,7 @@ public class ReilTranslator<InstructionType extends IInstruction> {
 
   public ReilTranslator() {
     m_translators.put(Architecture.x86, new TranslatorX86<InstructionType>());
+    m_translators.put(Architecture.x86_64, new TranslatorX64<InstructionType>());
     m_translators.put(Architecture.ARM, new TranslatorARM<InstructionType>());
     m_translators.put(Architecture.PPC, new TranslatorPPC<InstructionType>());
     m_translators.put(Architecture.REIL, new TranslatorREIL<InstructionType>());
