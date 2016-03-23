@@ -3516,6 +3516,9 @@ bc.bbcount, ec.edgecount, ic.incount, oc.outcount,
  WHERE ft.module_id = $1 AND ft.address = $2
 
 $$;
+
+ALTER FUNCTION public.load_function_information(moduleid integer, address bigint) OWNER TO postgres;
+
 COMMENT ON FUNCTION load_function_information(IN moduleid integer, IN address bigint)
   IS 'This function provides the information about a single view / function information stored in the database.';
 
@@ -3586,6 +3589,9 @@ bc.bbcount, ec.edgecount, ic.incount, oc.outcount,
 
 $$
   LANGUAGE SQL;
+
+ALTER FUNCTION public.load_function_information(moduleid integer) OWNER TO postgres;
+
 COMMENT ON FUNCTION load_function_information(IN moduleid integer)
   IS 'This function provides the information about all view / function information stored in the database under a specific module id.';
 
