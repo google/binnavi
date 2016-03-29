@@ -42,8 +42,8 @@ public class RorTranslator implements IInstructionTranslator {
    * @param instruction The ROR instruction to translate.
    * @param instructions The generated REIL code will be added to this list
    *
-   * @throws InternalTranslationException if any of the arguments are null the passed instruction is
-   *         not an ROR instruction
+   * @throws InternalTranslationException if any of the arguments are null the
+   *           passed instruction is not an ROR instruction
    */
   @Override
   public void translate(final ITranslationEnvironment environment, final IInstruction instruction,
@@ -63,16 +63,16 @@ public class RorTranslator implements IInstructionTranslator {
     final IOperandTree sourceOperand = operands.get(1);
 
     // Load source operand.
-    final TranslationResult sourceResult =
-        Helpers.translateOperand(environment, offset, sourceOperand, true);
+    final TranslationResult sourceResult = Helpers.translateOperand(environment, offset,
+        sourceOperand, true);
     instructions.addAll(sourceResult.getInstructions());
 
     // Adjust the offset of the next REIL instruction.
     offset = baseOffset + instructions.size();
 
     // Load destination operand.
-    final TranslationResult targetResult =
-        Helpers.translateOperand(environment, offset, targetOperand, true);
+    final TranslationResult targetResult = Helpers.translateOperand(environment, offset,
+        targetOperand, true);
     instructions.addAll(targetResult.getInstructions());
 
     // Adjust the offset of the next REIL instruction.
@@ -102,8 +102,8 @@ public class RorTranslator implements IInstructionTranslator {
     final String modVal = String.valueOf(targetSize.getBitSize());
     final String msbMask2nd = String.valueOf(TranslationHelpers.getMsbMask(targetSize) / 2);
     final String shiftMsbLsb = String.valueOf(TranslationHelpers.getShiftMsbLsbMask(targetSize));
-    final String shift2ndMsbLsb =
-        String.valueOf(TranslationHelpers.getShiftMsbLsbMask(sourceSize) / 2);
+    final String shift2ndMsbLsb = String
+        .valueOf(TranslationHelpers.getShiftMsbLsbMask(targetSize) + 1);
 
     // Make sure to rotate less than the size of the register
     instructions.add(ReilHelpers.createMod(offset, sourceSize, sourceRegister, targetSize, modVal,
@@ -124,30 +124,30 @@ public class RorTranslator implements IInstructionTranslator {
         rotateMask, OperandSize.BYTE, shrValue));
 
     // Perform the rotate
-    instructions.add(ReilHelpers.createBsh(offset + 5, targetSize, targetRegister,
-        OperandSize.BYTE, shrValue, targetSize, shredResult));
+    instructions.add(ReilHelpers.createBsh(offset + 5, targetSize, targetRegister, OperandSize.BYTE,
+        shrValue, targetSize, shredResult));
     instructions.add(ReilHelpers.createSub(offset + 6, OperandSize.BYTE, modVal, OperandSize.BYTE,
         rotateMask, OperandSize.BYTE, shlValue));
-    instructions.add(ReilHelpers.createBsh(offset + 7, targetSize, targetRegister,
-        OperandSize.BYTE, shlValue, targetSize, shledResult));
+    instructions.add(ReilHelpers.createBsh(offset + 7, targetSize, targetRegister, OperandSize.BYTE,
+        shlValue, targetSize, shledResult));
     instructions.add(ReilHelpers.createOr(offset + 8, targetSize, shredResult, targetSize,
         shledResult, targetSize, result));
 
     // Don't change the flags if the rotate value was zero
-    final String jmpGoal =
-        String.format("%d.%d", instruction.getAddress().toLong(), linesBefore + 18);
+    final String jmpGoal = String.format("%d.%d", instruction.getAddress().toLong(),
+        linesBefore + 18);
     instructions.add(ReilHelpers.createJcc(offset + 9, OperandSize.BYTE, rotateMaskZero,
         OperandSize.ADDRESS, jmpGoal));
 
     // Set the CF to the new MSB
     instructions.add(ReilHelpers.createAnd(offset + 10, targetSize, result, targetSize, msbMask,
         targetSize, tempCf));
-    instructions.add(ReilHelpers.createBsh(offset + 11, targetSize, tempCf, targetSize,
-        shiftMsbLsb, OperandSize.BYTE, Helpers.CARRY_FLAG));
+    instructions.add(ReilHelpers.createBsh(offset + 11, targetSize, tempCf, targetSize, shiftMsbLsb,
+        OperandSize.BYTE, Helpers.CARRY_FLAG));
 
     // The OF needs to be set to a different value if the rotate-mask was 1
-    final String jmpGoal2 =
-        String.format("%d.%d", instruction.getAddress().toLong(), linesBefore + 15);
+    final String jmpGoal2 = String.format("%d.%d", instruction.getAddress().toLong(),
+        linesBefore + 15);
     instructions.add(ReilHelpers.createJcc(offset + 12, OperandSize.BYTE, rotateMaskOne,
         OperandSize.ADDRESS, jmpGoal2));
 
@@ -155,17 +155,17 @@ public class RorTranslator implements IInstructionTranslator {
     instructions.add(ReilHelpers.createUndef(offset + 13, OperandSize.BYTE, Helpers.OVERFLOW_FLAG));
 
     // Jump to the end
-    final String jmpGoal3 =
-        String.format("%d.%d", instruction.getAddress().toLong(), linesBefore + 18);
-    instructions.add(ReilHelpers.createJcc(offset + 14, OperandSize.BYTE, "1",
-        OperandSize.ADDRESS, jmpGoal3));
+    final String jmpGoal3 = String.format("%d.%d", instruction.getAddress().toLong(),
+        linesBefore + 18);
+    instructions.add(
+        ReilHelpers.createJcc(offset + 14, OperandSize.BYTE, "1", OperandSize.ADDRESS, jmpGoal3));
 
     // Set the OF to the old MSB
     instructions.add(ReilHelpers.createAnd(offset + 15, targetSize, result, targetSize, msbMask2nd,
         targetSize, tempOf));
-    instructions.add(ReilHelpers.createBsh(offset + 16,targetSize, tempOf, targetSize,
+    instructions.add(ReilHelpers.createBsh(offset + 16, targetSize, tempOf, targetSize,
         shift2ndMsbLsb, OperandSize.BYTE, tempOfLsb));
-    instructions.add(ReilHelpers.createBsh(offset + 17, OperandSize.BYTE, tempOfLsb,
+    instructions.add(ReilHelpers.createXor(offset + 17, OperandSize.BYTE, tempOfLsb,
         OperandSize.BYTE, Helpers.CARRY_FLAG, OperandSize.BYTE, Helpers.OVERFLOW_FLAG));
 
     Helpers.writeBack(environment, offset + 18, targetOperand, result, targetResult.getSize(),
