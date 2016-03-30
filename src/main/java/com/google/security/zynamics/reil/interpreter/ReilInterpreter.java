@@ -294,13 +294,14 @@ public class ReilInterpreter {
 
       assert parts.length == 2;
 
-      setRegister(programCounter, new BigInteger(parts[0]), OperandSize.DWORD,
+      setRegister(programCounter, new BigInteger(parts[0]),
+          cpuPolicy.getRegisterSize(programCounter), ReilRegisterStatus.DEFINED);
+      setRegister(SUB_PC, new BigInteger(parts[1]), cpuPolicy.getRegisterSize(programCounter),
           ReilRegisterStatus.DEFINED);
-      setRegister(SUB_PC, new BigInteger(parts[1]), OperandSize.DWORD, ReilRegisterStatus.DEFINED);
     } else if (!firstValue.second().equals(BigInteger.ZERO)) {
       final Pair<Boolean, BigInteger> secondValue = loadLongValue(instruction.getThirdOperand());
 
-      setRegister(programCounter, secondValue.second(), OperandSize.DWORD,
+      setRegister(programCounter, secondValue.second(), cpuPolicy.getRegisterSize(programCounter),
           ReilRegisterStatus.DEFINED);
     }
 
