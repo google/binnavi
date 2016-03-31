@@ -94,7 +94,7 @@ public class AndTranslator implements IInstructionTranslator {
     Helpers.writeBack(environment, offset, targetOperand, andResult, size,
         targetResult.getAddress(), targetResult.getType(), instructions);
 
-    Helpers.writeParityFlag(environment, offset, size, andResult, instructions);
+    Helpers.writeParityFlag(environment, baseOffset + instructions.size(), size, andResult, instructions);
   }
 
 }
