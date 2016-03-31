@@ -45,11 +45,11 @@ public class NorTranslator implements IInstructionTranslator {
     final OperandSize dw = OperandSize.DWORD;
 
     final long baseOffset = ReilHelpers.toReilAddress(instruction.getAddress()).toLong();
-    final long offset = baseOffset;
+    long offset = baseOffset;
 
     final String temporaryOrResult = environment.getNextVariableString();
 
-    instructions.add(ReilHelpers.createOr(offset, dw, sourceRegister1, dw, sourceRegister2, dw,
+    instructions.add(ReilHelpers.createOr(offset++, dw, sourceRegister1, dw, sourceRegister2, dw,
         temporaryOrResult));
     instructions.add(ReilHelpers.createXor(offset, dw, temporaryOrResult, dw,
         String.valueOf(0xFFFFFFFFL), dw, targetRegister));

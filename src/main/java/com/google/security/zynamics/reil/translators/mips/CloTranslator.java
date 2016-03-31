@@ -107,7 +107,7 @@ public class CloTranslator implements IInstructionTranslator {
     instructions.add(ReilHelpers.createOr(baseOffset++, dw, w, dw, v, dw, z));
 
     // x = z >> 1;
-    instructions.add(ReilHelpers.createBsh(baseOffset, dw, z, dw, String.valueOf(-1L), dw, x));
+    instructions.add(ReilHelpers.createBsh(baseOffset++, dw, z, dw, String.valueOf(-1L), dw, x));
 
     // b = x & 0x55555555;
     instructions.add(ReilHelpers.createAnd(baseOffset++, dw, x, dw, String.valueOf(0x55555555L),
