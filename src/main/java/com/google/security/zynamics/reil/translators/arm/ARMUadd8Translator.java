@@ -26,17 +26,16 @@ import com.google.security.zynamics.zylib.disassembly.IOperandTreeNode;
 
 import java.util.List;
 
-
 public class ARMUadd8Translator extends ARMBaseTranslator {
   @Override
   protected void translateCore(final ITranslationEnvironment environment,
       final IInstruction instruction, final List<ReilInstruction> instructions) {
-    final IOperandTreeNode registerOperand1 =
-        instruction.getOperands().get(0).getRootNode().getChildren().get(0);
-    final IOperandTreeNode registerOperand2 =
-        instruction.getOperands().get(1).getRootNode().getChildren().get(0);
-    final IOperandTreeNode registerOperand3 =
-        instruction.getOperands().get(2).getRootNode().getChildren().get(0);
+    final IOperandTreeNode registerOperand1 = instruction.getOperands().get(0).getRootNode()
+        .getChildren().get(0);
+    final IOperandTreeNode registerOperand2 = instruction.getOperands().get(1).getRootNode()
+        .getChildren().get(0);
+    final IOperandTreeNode registerOperand3 = instruction.getOperands().get(2).getRootNode()
+        .getChildren().get(0);
 
     final String targetRegister = (registerOperand1.getValue());
     final String sourceRegister1 = (registerOperand2.getValue());
@@ -56,28 +55,28 @@ public class ARMUadd8Translator extends ARMBaseTranslator {
         final String sum3 = environment.getNextVariableString();
         final String sum4 = environment.getNextVariableString();
 
-        long baseOffset = offset;
+        long baseOffset = offset - instructions.size();
 
-        instructions.add(ReilHelpers.createAdd(baseOffset++, dw, firstFour[0], dw, secondFour[0],
-            dw, sum1));
-        instructions.add(ReilHelpers.createAdd(baseOffset++, dw, firstFour[1], dw, secondFour[1],
-            dw, sum2));
-        instructions.add(ReilHelpers.createAdd(baseOffset++, dw, firstFour[2], dw, secondFour[2],
-            dw, sum3));
-        instructions.add(ReilHelpers.createAdd(baseOffset, dw, firstFour[3], dw, secondFour[3], dw,
-            sum4));
+        instructions.add(ReilHelpers.createAdd(baseOffset + instructions.size(), dw, firstFour[0],
+            dw, secondFour[0], dw, sum1));
+        instructions.add(ReilHelpers.createAdd(baseOffset + instructions.size(), dw, firstFour[1],
+            dw, secondFour[1], dw, sum2));
+        instructions.add(ReilHelpers.createAdd(baseOffset + instructions.size(), dw, firstFour[2],
+            dw, secondFour[2], dw, sum3));
+        instructions.add(ReilHelpers.createAdd(baseOffset + instructions.size(), dw, firstFour[3],
+            dw, secondFour[3], dw, sum4));
 
         // CPSR GE
-        instructions.add(ReilHelpers.createBsh(baseOffset++, dw, sum1, wd, String.valueOf(-8), bt,
-            "CPSR_GE_0"));
-        instructions.add(ReilHelpers.createBsh(baseOffset++, dw, sum2, wd, String.valueOf(-8), bt,
-            "CPSR_GE_1"));
-        instructions.add(ReilHelpers.createBsh(baseOffset++, dw, sum3, wd, String.valueOf(-8), bt,
-            "CPSR_GE_2"));
-        instructions.add(ReilHelpers.createBsh(baseOffset++, dw, sum4, wd, String.valueOf(-8), bt,
-            "CPSR_GE_3"));
+        instructions.add(ReilHelpers.createBsh(baseOffset + instructions.size(), dw, sum1, wd,
+            String.valueOf(-8), bt, "CPSR_GE_0"));
+        instructions.add(ReilHelpers.createBsh(baseOffset + instructions.size(), dw, sum2, wd,
+            String.valueOf(-8), bt, "CPSR_GE_1"));
+        instructions.add(ReilHelpers.createBsh(baseOffset + instructions.size(), dw, sum3, wd,
+            String.valueOf(-8), bt, "CPSR_GE_2"));
+        instructions.add(ReilHelpers.createBsh(baseOffset + instructions.size(), dw, sum4, wd,
+            String.valueOf(-8), bt, "CPSR_GE_3"));
 
-        return new String[] {sum1, sum2, sum3, sum4};
+        return new String[] { sum1, sum2, sum3, sum4 };
       }
     }.generate(environment, baseOffset, 8, sourceRegister1, sourceRegister2, targetRegister,
         instructions);

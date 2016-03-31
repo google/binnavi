@@ -56,25 +56,25 @@ public class ARMShaddsubxTranslator extends ARMBaseTranslator {
         final String diff1 = environment.getNextVariableString();
         final String trueDiff1 = environment.getNextVariableString();
 
-        long baseOffset = offset;
+        long baseOffset = offset - instructions.size();
 
         // sign extend the operands to reflect the signed operation
-        Helpers.signExtend(baseOffset, environment, instruction, instructions, dw, firstTwo[0], dw,
-            firstTwo[0], 16);
-        Helpers.signExtend(baseOffset, environment, instruction, instructions, dw, firstTwo[1], dw,
-            firstTwo[1], 16);
-        Helpers.signExtend(baseOffset, environment, instruction, instructions, dw, secondTwo[0],
-            dw, secondTwo[0], 16);
-        Helpers.signExtend(baseOffset, environment, instruction, instructions, dw, secondTwo[1],
-            dw, secondTwo[1], 16);
+        Helpers.signExtend(baseOffset + instructions.size(), environment, instruction, instructions,
+            dw, firstTwo[0], dw, firstTwo[0], 16);
+        Helpers.signExtend(baseOffset + instructions.size(), environment, instruction, instructions,
+            dw, firstTwo[1], dw, firstTwo[1], 16);
+        Helpers.signExtend(baseOffset + instructions.size(), environment, instruction, instructions,
+            dw, secondTwo[0], dw, secondTwo[0], 16);
+        Helpers.signExtend(baseOffset + instructions.size(), environment, instruction, instructions,
+            dw, secondTwo[1], dw, secondTwo[1], 16);
 
         // do the add
-        instructions.add(ReilHelpers.createAdd(baseOffset++, dw, firstTwo[1], dw, secondTwo[0], dw,
-            sum1));
+        instructions.add(ReilHelpers.createAdd(baseOffset + instructions.size(), dw, firstTwo[1],
+            dw, secondTwo[0], dw, sum1));
 
         // do the sub
-        Helpers.signedSub(baseOffset, environment, instruction, instructions, secondTwo[1],
-            firstTwo[0], diff1, trueDiff1);
+        Helpers.signedSub(baseOffset + instructions.size(), environment, instruction, instructions,
+            secondTwo[1], firstTwo[0], diff1, trueDiff1);
 
         return new String[] {trueDiff1, sum1};
       }

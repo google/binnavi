@@ -26,19 +26,18 @@ import com.google.security.zynamics.zylib.disassembly.IOperandTreeNode;
 
 import java.util.List;
 
-
 public class ARMSmlsldTranslator extends ARMBaseTranslator {
   @Override
   protected void translateCore(final ITranslationEnvironment environment,
       final IInstruction instruction, final List<ReilInstruction> instructions) {
-    final IOperandTreeNode registerOperand1 =
-        instruction.getOperands().get(0).getRootNode().getChildren().get(0);
-    final IOperandTreeNode registerOperand2 =
-        instruction.getOperands().get(1).getRootNode().getChildren().get(0);
-    final IOperandTreeNode registerOperand3 =
-        instruction.getOperands().get(2).getRootNode().getChildren().get(0);
-    final IOperandTreeNode registerOperand4 =
-        instruction.getOperands().get(3).getRootNode().getChildren().get(0);
+    final IOperandTreeNode registerOperand1 = instruction.getOperands().get(0).getRootNode()
+        .getChildren().get(0);
+    final IOperandTreeNode registerOperand2 = instruction.getOperands().get(1).getRootNode()
+        .getChildren().get(0);
+    final IOperandTreeNode registerOperand3 = instruction.getOperands().get(2).getRootNode()
+        .getChildren().get(0);
+    final IOperandTreeNode registerOperand4 = instruction.getOperands().get(3).getRootNode()
+        .getChildren().get(0);
 
     final String sourceRegister1 = (registerOperand1.getValue());
     final String sourceRegister2 = (registerOperand2.getValue());
@@ -72,36 +71,38 @@ public class ARMSmlsldTranslator extends ARMBaseTranslator {
           String.valueOf(-16), dw, tmpRotate1));
       instructions.add(ReilHelpers.createBsh(baseOffset++, dw, sourceRegister4, bt,
           String.valueOf(16), dw, tmpRotate2));
-      instructions.add(ReilHelpers.createOr(baseOffset++, dw, tmpRotate1, dw, tmpRotate2, dw,
-          operand2));
+      instructions
+          .add(ReilHelpers.createOr(baseOffset++, dw, tmpRotate1, dw, tmpRotate2, dw, operand2));
     } else {
       instructions.add(ReilHelpers.createStr(baseOffset++, dw, sourceRegister4, dw, operand2));
     }
 
     instructions.add(ReilHelpers.createBsh(baseOffset++, dw, sourceRegister2, wd,
         String.valueOf(32), qw, tmpVar1));
-    instructions.add(ReilHelpers.createOr(baseOffset++, dw, sourceRegister1, qw, tmpVar1, qw,
-        accValue));
+    instructions
+        .add(ReilHelpers.createOr(baseOffset++, dw, sourceRegister1, qw, tmpVar1, qw, accValue));
 
     instructions.add(ReilHelpers.createAnd(baseOffset++, dw, operand2, dw, String.valueOf(0xFFFFL),
         dw, operand2from15to0));
-    instructions.add(ReilHelpers.createBsh(baseOffset++, dw, operand2, dw, String.valueOf(-16L),
-        dw, operand2from31to16));
+    instructions.add(ReilHelpers.createBsh(baseOffset++, dw, operand2, dw, String.valueOf(-16L), dw,
+        operand2from31to16));
     instructions.add(ReilHelpers.createAnd(baseOffset++, dw, sourceRegister3, dw,
         String.valueOf(0xFFFFL), dw, registerRm15to0));
     instructions.add(ReilHelpers.createBsh(baseOffset++, dw, sourceRegister3, dw,
         String.valueOf(-16L), dw, registerRm31to16));
 
-    Helpers.signedMul(baseOffset, environment, instruction, instructions, wd, registerRm15to0, wd,
-        operand2from15to0, dw, product1);
-    baseOffset = ReilHelpers.nextReilAddress(instruction, instructions);
-    Helpers.signedMul(baseOffset, environment, instruction, instructions, wd, registerRm31to16, wd,
-        operand2from31to16, dw, product2);
+    Helpers.signedMul(baseOffset, environment,
+        instruction, instructions, wd, registerRm15to0, wd, operand2from15to0, dw, product1);
     baseOffset = ReilHelpers.nextReilAddress(instruction, instructions);
 
-    Helpers.signedSub(baseOffset, environment, instruction, instructions, product2, product1,
-        tmpVar2, tmpVar3);
+    Helpers.signedMul(baseOffset, environment,
+        instruction, instructions, wd, registerRm31to16, wd, operand2from31to16, dw, product2);
+    baseOffset = ReilHelpers.nextReilAddress(instruction, instructions);
 
+    Helpers.signedSub(baseOffset, environment,
+        instruction, instructions, product2, product1, tmpVar2, tmpVar3);
+
+    baseOffset = ReilHelpers.nextReilAddress(instruction, instructions);
     // sign extend
     instructions.add(ReilHelpers.createAdd(baseOffset++, qw, tmpVar2, dw,
         String.valueOf(0x0000000080000000L), qw, tmpVar1));
@@ -124,10 +125,11 @@ public class ARMSmlsldTranslator extends ARMBaseTranslator {
    * 
    * Operation:
    * 
-   * if ConditionPassed(cond) then if X == 1 then operand2 = Rs Rotate_Right 16 else operand2 = Rs
-   * accvalue[31:0] = RdLo accvalue[63:32] = RdHi product1 = Rm[15:0] * operand2[15:0] // Signed
-   * multiplication product2 = Rm[31:16] * operand2[31:16] // Signed multiplication result =
-   * accvalue + product1 - product2 // Signed subtraction RdLo = result[31:0] RdHi = result[63:32]
+   * if ConditionPassed(cond) then if X == 1 then operand2 = Rs Rotate_Right 16
+   * else operand2 = Rs accvalue[31:0] = RdLo accvalue[63:32] = RdHi product1 =
+   * Rm[15:0] * operand2[15:0] // Signed multiplication product2 = Rm[31:16] *
+   * operand2[31:16] // Signed multiplication result = accvalue + product1 -
+   * product2 // Signed subtraction RdLo = result[31:0] RdHi = result[63:32]
    */
 
   @Override

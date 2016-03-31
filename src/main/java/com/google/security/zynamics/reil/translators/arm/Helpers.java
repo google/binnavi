@@ -25,6 +25,7 @@ import com.google.security.zynamics.reil.translators.TranslationHelpers;
 import com.google.security.zynamics.zylib.disassembly.IInstruction;
 import com.google.security.zynamics.zylib.general.Pair;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public final class Helpers {
@@ -620,7 +621,7 @@ public final class Helpers {
   public static void signedSat(final long offset,
       final ITranslationEnvironment environment,
       final IInstruction instruction,
-      final List<ReilInstruction> instructions,
+      final List<ReilInstruction> oldInstructions,
       final OperandSize firstOperandSize,
       final String firstOperand,
       final OperandSize secondOperandSize,
@@ -655,6 +656,7 @@ public final class Helpers {
     final String isPositive = environment.getNextVariableString();
 
     long baseOffset = offset;
+    final List<ReilInstruction> instructions = new ArrayList<ReilInstruction>();
 
     final String addOperation = "ADD";
 
@@ -685,7 +687,7 @@ public final class Helpers {
             overflow,
             size);
       }
-
+      baseOffset = baseOffset + instructions.size();
       // extract the sign of the result to see which way to overflow
       instructions.add(ReilHelpers.createBsh(baseOffset++,
           dw,
@@ -699,7 +701,6 @@ public final class Helpers {
       instructions.add(ReilHelpers.createBisz(baseOffset++, bt, isNegative, bt, isPositive));
 
       // combine the results to get the true answer
-      baseOffset++;
       instructions.add(
           ReilHelpers.createAnd(baseOffset++, bt, isPositive, bt, overflow, bt, isLessCondition));
       instructions.add(ReilHelpers.createAnd(baseOffset++,
@@ -908,6 +909,7 @@ public final class Helpers {
           dw,
           tmpResultVar));
     }
+    oldInstructions.addAll(instructions);
   }
 
   /**
@@ -1363,7 +1365,6 @@ public final class Helpers {
           lowOverflow));
 
       // high overflow
-      baseOffset++;
       instructions.add(
           ReilHelpers.createSub(baseOffset++, dw, highSatResult, dw, firstOperand, dw, xMinusy));
       instructions.add(
