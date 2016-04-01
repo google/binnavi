@@ -28,7 +28,6 @@ import com.google.security.zynamics.zylib.disassembly.IOperandTree;
 
 import java.util.List;
 
-
 /**
  * Translates ADD instructions to REIL code.
  */
