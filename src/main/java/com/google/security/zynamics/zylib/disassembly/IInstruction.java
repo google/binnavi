@@ -17,11 +17,13 @@ package com.google.security.zynamics.zylib.disassembly;
 
 import java.util.List;
 
+import com.google.security.zynamics.reil.Architecture;
+
 public interface IInstruction {
 
   IAddress getAddress();
 
-  String getArchitecture();
+  Architecture getArchitecture();
 
   byte[] getData();
 

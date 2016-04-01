@@ -45,6 +45,7 @@ import com.google.security.zynamics.binnavi.disassembly.types.TypeInstanceContai
 import com.google.security.zynamics.binnavi.disassembly.types.TypeManager;
 import com.google.security.zynamics.binnavi.disassembly.types.TypeManagerDatabaseBackend;
 import com.google.security.zynamics.binnavi.disassembly.views.INaviView;
+import com.google.security.zynamics.reil.Architecture;
 import com.google.security.zynamics.zylib.disassembly.ExpressionType;
 import com.google.security.zynamics.zylib.disassembly.IAddress;
 import com.google.security.zynamics.zylib.disassembly.IReference;
@@ -246,7 +247,7 @@ public final class CModule implements INaviModule {
   public INaviInstruction createInstruction(final IAddress address, final String mnemonic,
       final List<COperandTree> operands, final byte[] data, final String architecture) {
     return new CInstruction(
-        false, this, address, mnemonic, operands, data, architecture, m_provider);
+        false, this, address, mnemonic, operands, data, Architecture.getArchitecture(architecture), m_provider);
   }
 
   @Override

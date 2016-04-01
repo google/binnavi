@@ -111,7 +111,7 @@ public final class ReilInstruction implements IInstruction, Comparable<ReilInstr
     final ReilInstruction rhsInstruction = (ReilInstruction) rhs;
 
     return address.equals(rhsInstruction.getAddress())
-        && rhsInstruction.getMnemonic().equals(mnemonic)
+        && rhsInstruction.getMnemonic().equals(getMnemonic())
         && firstOperand.equals(rhsInstruction.getFirstOperand())
         && secondOperand.equals(rhsInstruction.getSecondOperand())
         && thirdOperand.equals(rhsInstruction.getThirdOperand())
@@ -130,8 +130,8 @@ public final class ReilInstruction implements IInstruction, Comparable<ReilInstr
   }
 
   @Override
-  public String getArchitecture() {
-    return "REIL";
+  public Architecture getArchitecture() {
+    return Architecture.REIL;
   }
 
   @Override

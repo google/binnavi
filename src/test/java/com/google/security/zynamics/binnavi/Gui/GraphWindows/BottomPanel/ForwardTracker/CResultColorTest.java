@@ -29,6 +29,7 @@ import com.google.security.zynamics.binnavi.disassembly.COperandTreeNode;
 import com.google.security.zynamics.binnavi.disassembly.INaviInstruction;
 import com.google.security.zynamics.binnavi.disassembly.Modules.MockModule;
 import com.google.security.zynamics.binnavi.disassembly.views.INaviView;
+import com.google.security.zynamics.reil.Architecture;
 import com.google.security.zynamics.reil.algorithms.mono2.common.enums.AnalysisDirection;
 import com.google.security.zynamics.reil.algorithms.mono2.registertracking.RegisterTrackingOptions;
 import com.google.security.zynamics.reil.translators.InternalTranslationException;
@@ -96,9 +97,8 @@ public final class CResultColorTest {
             .getContent().getTypeInstanceContainer());
     final List<COperandTree> operands1 = Lists.newArrayList(operand1, operand2, operand3);
 
-    final INaviInstruction instruction1 =
-        new CInstruction(false, mockModule, new CAddress(1), "str", operands1, new byte[0], "REIL",
-            mockProvider);
+    final INaviInstruction instruction1 = new CInstruction(false, mockModule, new CAddress(1),
+        "str", operands1, new byte[0], Architecture.REIL, mockProvider);
 
     // str 5, , t0
 
@@ -143,9 +143,8 @@ public final class CResultColorTest {
             .getContent().getTypeInstanceContainer());
     final List<COperandTree> operands2 = Lists.newArrayList(operand4, operand5, operand6);
 
-    final INaviInstruction instruction2 =
-        new CInstruction(false, mockModule, new CAddress(2), "str", operands2, new byte[0], "REIL",
-            mockProvider);
+    final INaviInstruction instruction2 = new CInstruction(false, mockModule, new CAddress(2),
+        "str", operands2, new byte[0], Architecture.REIL, mockProvider);
 
     // add t0, t1, t2
 
@@ -190,9 +189,8 @@ public final class CResultColorTest {
             .getContent().getTypeInstanceContainer());
     final List<COperandTree> operands3 = Lists.newArrayList(operand7, operand8, operand9);
 
-    final INaviInstruction instruction3 =
-        new CInstruction(false, mockModule, new CAddress(3), "add", operands3, new byte[0], "REIL",
-            mockProvider);
+    final INaviInstruction instruction3 = new CInstruction(false, mockModule, new CAddress(3),
+        "add", operands3, new byte[0], Architecture.REIL, mockProvider);
 
     final INaviView view = mockModule.getContent().getViewContainer().createView("", "");
 
@@ -265,9 +263,8 @@ public final class CResultColorTest {
             .getContent().getTypeInstanceContainer());
     final List<COperandTree> operands1 = Lists.newArrayList(operand1, operand2, operand3);
 
-    final INaviInstruction instruction1 =
-        new CInstruction(false, mockModule, new CAddress(1), "str", operands1, new byte[0], "REIL",
-            mockProvider);
+    final INaviInstruction instruction1 = new CInstruction(false, mockModule, new CAddress(1),
+        "str", operands1, new byte[0], Architecture.REIL, mockProvider);
 
     // str t0, , t1
 
@@ -312,9 +309,8 @@ public final class CResultColorTest {
             .getContent().getTypeInstanceContainer());
     final List<COperandTree> operands2 = Lists.newArrayList(operand4, operand5, operand6);
 
-    final INaviInstruction instruction2 =
-        new CInstruction(false, mockModule, new CAddress(2), "str", operands2, new byte[0], "REIL",
-            mockProvider);
+    final INaviInstruction instruction2 = new CInstruction(false, mockModule, new CAddress(2),
+        "str", operands2, new byte[0], Architecture.REIL, mockProvider);
 
     // str t1, , t2
 
@@ -359,9 +355,8 @@ public final class CResultColorTest {
             .getContent().getTypeInstanceContainer());
     final List<COperandTree> operands3 = Lists.newArrayList(operand7, operand8, operand9);
 
-    final INaviInstruction instruction3 =
-        new CInstruction(false, mockModule, new CAddress(3), "str", operands3, new byte[0], "REIL",
-            mockProvider);
+    final INaviInstruction instruction3 = new CInstruction(false, mockModule, new CAddress(3),
+        "str", operands3, new byte[0], Architecture.REIL, mockProvider);
 
     final INaviView view = mockModule.getContent().getViewContainer().createView("", "");
 

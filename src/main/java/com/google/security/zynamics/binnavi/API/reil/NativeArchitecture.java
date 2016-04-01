@@ -23,6 +23,10 @@ package com.google.security.zynamics.binnavi.API.reil;
  */
 public enum NativeArchitecture {
   /**
+   * Identifies input code as 64bit x86 code
+   */
+  X86_64,
+  /**
    * Identifies input code as 32bit x86 code
    */
   X86_32,

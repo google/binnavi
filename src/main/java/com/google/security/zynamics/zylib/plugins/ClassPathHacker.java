@@ -30,7 +30,7 @@ public class ClassPathHacker {
       addURL(f.toURI().toURL());
     } catch (final MalformedURLException e) {
       // Should never happen
-      assert false : "Malformed URL from toURI()";
+      throw new AssertionError("Malformed URL from toURI() method");
     }
   }
 
@@ -47,7 +47,7 @@ public class ClassPathHacker {
       method.setAccessible(true);
       method.invoke(sysloader, new Object[] {u});
 
-      // TODO: Reminder for SP (Log this without using System.out.print
+      // TODO: Reminder for SP (Log this without using
       // System.out.println("Dynamically added " + u.toString() + " to classLoader");
     } catch (final Exception e) {
       e.printStackTrace();

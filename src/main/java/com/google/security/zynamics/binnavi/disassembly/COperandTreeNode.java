@@ -26,6 +26,7 @@ import com.google.security.zynamics.binnavi.disassembly.types.TypeInstanceContai
 import com.google.security.zynamics.binnavi.disassembly.types.TypeInstanceReference;
 import com.google.security.zynamics.binnavi.disassembly.types.TypeManager;
 import com.google.security.zynamics.binnavi.disassembly.types.TypeSubstitution;
+import com.google.security.zynamics.reil.Architecture;
 import com.google.security.zynamics.zylib.disassembly.ExpressionType;
 import com.google.security.zynamics.zylib.disassembly.IAddress;
 import com.google.security.zynamics.zylib.disassembly.IOperandTree;
@@ -334,7 +335,7 @@ public final class COperandTreeNode implements INaviOperandTreeNode {
         determineAddendSibling(this), "Error: operand expression is not a two component sum.");
     // TODO(jannewger): there should be a sane way to determine the architecture of an instruction
     // (e.g. via an enum).
-    if (sibling.getOperand().getInstruction().getArchitecture().equalsIgnoreCase("x86-64")) {
+    if (sibling.getOperand().getInstruction().getArchitecture().equals(Architecture.x86_64)) {
       return new BigInteger(sibling.getValue()).longValue();
     }
     // If the default assumption of a 32-bit architecture doesn't hold we'll get an exception here.

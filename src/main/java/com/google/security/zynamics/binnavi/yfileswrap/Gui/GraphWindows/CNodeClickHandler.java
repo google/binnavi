@@ -43,6 +43,7 @@ import com.google.security.zynamics.binnavi.disassembly.INaviOperandTree;
 import com.google.security.zynamics.binnavi.disassembly.INaviViewNode;
 import com.google.security.zynamics.binnavi.yfileswrap.Gui.GraphWindows.Implementations.CGraphDialogs;
 import com.google.security.zynamics.binnavi.yfileswrap.zygraph.NaviNode;
+import com.google.security.zynamics.reil.Architecture;
 import com.google.security.zynamics.reil.algorithms.mono2.common.enums.AnalysisDirection;
 import com.google.security.zynamics.reil.algorithms.mono2.registertracking.RegisterTrackingOptions;
 import com.google.security.zynamics.reil.translators.InternalTranslationException;
@@ -196,16 +197,16 @@ public final class CNodeClickHandler {
 
     final Set<String> clearedRegisters = Sets.newHashSet();
 
-    if (instruction.getArchitecture().equalsIgnoreCase("x86-32")) {
+    if (instruction.getArchitecture().equals(Architecture.x86)) {
       clearedRegisters.add("eax");
-    } else if (instruction.getArchitecture().equalsIgnoreCase("x86-64")) {
+    } else if (instruction.getArchitecture().equals(Architecture.x86_64)) {
       clearedRegisters.add("rax");
-    } else if (instruction.getArchitecture().equalsIgnoreCase("PowerPC-32")) {
+    } else if (instruction.getArchitecture().equals(Architecture.PPC)) {
       clearedRegisters.addAll(
           Lists.newArrayList("R3", "R4", "R5", "R6", "R7", "R8", "R9", "R10", "R11", "R12"));
-    } else if (instruction.getArchitecture().equalsIgnoreCase("ARM-32")) {
+    } else if (instruction.getArchitecture().equals(Architecture.ARM)) {
       clearedRegisters.addAll(Lists.newArrayList("r0", "r1", "r2", "r3", "r12", "r14"));
-    } else if (instruction.getArchitecture().equalsIgnoreCase("MIPS-32")) {
+    } else if (instruction.getArchitecture().equals(Architecture.MIPS)) {
       clearedRegisters.addAll(Lists.newArrayList("$a0",
           "$a1",
           "$a2",

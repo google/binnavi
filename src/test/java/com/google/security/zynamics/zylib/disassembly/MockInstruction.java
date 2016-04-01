@@ -18,6 +18,8 @@ package com.google.security.zynamics.zylib.disassembly;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.google.security.zynamics.reil.Architecture;
+
 public class MockInstruction implements IInstruction {
   public IAddress address = new MockAddress();
 
@@ -49,8 +51,8 @@ public class MockInstruction implements IInstruction {
   }
 
   @Override
-  public String getArchitecture() {
-    return "x86-32";
+  public Architecture getArchitecture() {
+    return Architecture.x86;
   }
 
   @Override

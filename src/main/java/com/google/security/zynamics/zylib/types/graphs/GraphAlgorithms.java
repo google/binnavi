@@ -22,6 +22,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.Stack;
+import java.util.stream.Collectors;
 
 import com.google.common.base.Preconditions;
 import com.google.common.collect.Sets;
@@ -51,19 +52,14 @@ public class GraphAlgorithms {
    */
   private static <NodeType extends IGraphNode<NodeType>> void getPredecessors(
       final IGraphNode<NodeType> node, final Set<NodeType> predecessors, final Set<NodeType> visited) {
-    for (final NodeType parent : node.getParents()) {
-      // Make sure that each node is only visited once.
-      if (visited.contains(parent)) {
-        continue;
-      }
-
-      visited.add(parent);
-
-      predecessors.add(parent);
-
-      // Recursively find the predecessors of all parent nodes.
-      getPredecessors(parent, predecessors, visited);
-    }
+    
+    node.getParents().stream()
+      .filter(parent -> !visited.contains(parent)) // Make sure that each node is only visited once.
+      .forEach(parent -> {
+          visited.add(parent);
+          // Recursively find the predecessors of all parent nodes.
+          getPredecessors(parent, predecessors, visited);
+      });
   }
 
   private static <NodeType extends IGraphNode<NodeType>> void getPredecessorsInternal(
@@ -71,18 +67,14 @@ public class GraphAlgorithms {
     if (depth <= 0) {
       return;
     }
-
-    for (final NodeType parent : node.getParents()) {
-      if (visited.contains(parent)) {
-        continue;
-      }
-
-      visited.add(parent);
-
-      nodes.add(parent);
-
-      getPredecessorsInternal(parent, depth - 1, nodes, visited);
-    }
+    
+    node.getParents().stream()
+      .filter(parent -> !visited.contains(parent)) // Make sure that each node is only visited once.
+      .forEach(parent -> {
+        visited.add(parent);
+        nodes.add(parent);
+        getPredecessorsInternal(parent, depth - 1, nodes, visited);
+      });
   }
 
   /**
@@ -96,19 +88,15 @@ public class GraphAlgorithms {
    */
   private static <NodeType extends IGraphNode<NodeType>> void getSuccessors(
       final IGraphNode<NodeType> node, final Set<NodeType> successors, final Set<NodeType> visited) {
-    for (final NodeType child : node.getChildren()) {
-      // Make sure that each node is only visited once.
-      if (visited.contains(child)) {
-        continue;
-      }
-
-      visited.add(child);
-
-      successors.add(child);
-
-      // Recursively find the successors of all child nodes.
-      getSuccessors(child, successors, visited);
-    }
+    
+    node.getChildren().stream()
+      .filter(child -> !visited.contains(child)) // Make sure that each node is only visited once.
+      .forEach(child -> {
+          visited.add(child);
+          successors.add(child);
+          // Recursively find the successors of all child nodes.
+          getSuccessors(child, successors, visited);
+      });
   }
 
   private static <NodeType extends IGraphNode<NodeType>> void getSuccessorsInternal(
@@ -118,17 +106,13 @@ public class GraphAlgorithms {
       return;
     }
 
-    for (final NodeType child : node.getChildren()) {
-      if (visited.contains(child)) {
-        continue;
-      }
-
-      visited.add(child);
-
-      nodes.add(child);
-
-      getSuccessorsInternal(child, depth - 1, nodes, visited);
-    }
+    node.getChildren().stream()
+      .filter(child -> !visited.contains(child)) // Make sure that each node is only visited once.
+      .forEach(child -> {
+        visited.add(child);
+        nodes.add(child);
+        getSuccessorsInternal(child, depth - 1, nodes, visited);
+      });
   }
 
   /**
@@ -163,15 +147,15 @@ public class GraphAlgorithms {
     Preconditions.checkNotNull(nodes, "Error: Nodes argument can't be null");
     Preconditions.checkNotNull(filter, "Error: Filter argument can't be null");
 
-    final Collection<NodeType> filteredNodes = new ArrayList<NodeType>();
-
+    final Collection<NodeType> filteredNodes = new ArrayList<NodeType>();		
+    // Don't bother to re-select the nodes that are already selected    
     for (final NodeType child : nodes) {
-      // Don't bother to re-select the nodes that are already selected
-      if (filter.qualifies(child)) {
-        filteredNodes.add(child);
-      }
-    }
-
+       // Don't bother to re-select the nodes that are already selected		
+       if (filter.qualifies(child)) {		
+         filteredNodes.add(child);		
+       }		
+     }		
+		
     return filteredNodes;
   }
 
@@ -208,8 +192,7 @@ public class GraphAlgorithms {
     Preconditions.checkNotNull(graph, "Error: Graph argument can not be null");
     Preconditions.checkNotNull(rootNode, "Error: Root Node argument can not be null");
 
-    final HashMap<NodeType, ArrayList<NodeType>> nodeToBackedges =
-        new HashMap<NodeType, ArrayList<NodeType>>();
+    final HashMap<NodeType, ArrayList<NodeType>> nodeToBackedges = new HashMap<>();
     final Pair<com.google.security.zynamics.zylib.types.trees.Tree<NodeType>, HashMap<NodeType, ITreeNode<NodeType>>> dominatorPair =
         LengauerTarjan.calculate(graph, rootNode);
     final HashMap<NodeType, ITreeNode<NodeType>> dominatorTreeMapping = dominatorPair.second();
@@ -217,7 +200,7 @@ public class GraphAlgorithms {
         TreeAlgorithms.getDominateRelation(dominatorPair.first().getRootNode());
 
     for (final NodeType t : graph.getNodes()) {
-      final ArrayList<NodeType> currentNodesBackedges = new ArrayList<NodeType>();
+      final ArrayList<NodeType> currentNodesBackedges = new ArrayList<>();
 
       final Set<ITreeNode<NodeType>> currentTreeNodeDominateRelation =
           treeNodeDominateRelation.get(dominatorTreeMapping.get(t));
@@ -283,16 +266,16 @@ public class GraphAlgorithms {
   public static <NodeType extends IGraphNode<NodeType>> Set<NodeType> getLoopNodes(
       final NodeType sourceNode, final NodeType destinationNode) {
     if (sourceNode == destinationNode) {
-      final ArrayList<NodeType> nodeList = new ArrayList<NodeType>();
+      final ArrayList<NodeType> nodeList = new ArrayList<>();
       nodeList.add(sourceNode);
-      return new HashSet<NodeType>(nodeList);
+      return new HashSet<>(nodeList);
     }
 
-    final ArrayList<NodeType> upwardsNodes = new ArrayList<NodeType>();
+    final ArrayList<NodeType> upwardsNodes = new ArrayList<>();
     upwardsNodes.add(destinationNode);
 
-    final Set<NodeType> resolveUpwards = new HashSet<NodeType>(upwardsNodes);
-    final Stack<NodeType> upwardsWorkingList = new Stack<NodeType>();
+    final Set<NodeType> resolveUpwards = new HashSet<>(upwardsNodes);
+    final Stack<NodeType> upwardsWorkingList = new Stack<>();
     upwardsWorkingList.push(sourceNode);
 
     while (!upwardsWorkingList.empty()) {
@@ -306,10 +289,10 @@ public class GraphAlgorithms {
       }
     }
 
-    final ArrayList<NodeType> downwardsNodes = new ArrayList<NodeType>();
+    final ArrayList<NodeType> downwardsNodes = new ArrayList<>();
 
-    final Set<NodeType> resolveDownwards = new HashSet<NodeType>(downwardsNodes);
-    final Stack<NodeType> downwardsWorkingList = new Stack<NodeType>();
+    final Set<NodeType> resolveDownwards = new HashSet<>(downwardsNodes);
+    final Stack<NodeType> downwardsWorkingList = new Stack<>();
     downwardsWorkingList.push(destinationNode);
 
     while (!downwardsWorkingList.empty()) {
@@ -342,12 +325,11 @@ public class GraphAlgorithms {
       final Collection<NodeType> nodes) {
     Preconditions.checkNotNull(nodes, "Error: Nodes argument can't be null");
 
-    final HashSet<NodeType> predecessors = new HashSet<NodeType>();
-
-    for (final NodeType zyGraphNode : nodes) {
-      predecessors.addAll(getPredecessors(zyGraphNode));
-    }
-
+    final HashSet<NodeType> predecessors = new HashSet<NodeType>();	
+      for (final NodeType zyGraphNode : nodes) {		
+        predecessors.addAll(getPredecessors(zyGraphNode));		
+      }		
+		
     return predecessors;
   }
 
@@ -365,8 +347,8 @@ public class GraphAlgorithms {
       final IGraphNode<NodeType> node) {
     Preconditions.checkNotNull(node, "Error: Start node can't be null");
 
-    final HashSet<NodeType> predecessors = new HashSet<NodeType>();
-    final HashSet<NodeType> visited = new HashSet<NodeType>();
+    final HashSet<NodeType> predecessors = new HashSet<>();
+    final HashSet<NodeType> visited = new HashSet<>();
 
     getPredecessors(node, predecessors, visited);
 
@@ -391,7 +373,7 @@ public class GraphAlgorithms {
 
   public static <NodeType extends IGraphNode<NodeType>> List<NodeType> getPredecessors(
       final Iterable<NodeType> selectedNodes, final int depth) {
-    final List<NodeType> nodes = new ArrayList<NodeType>();
+    final List<NodeType> nodes = new ArrayList<>();
 
     for (final NodeType node : selectedNodes) {
       nodes.addAll(getPredecessors(node, depth));
@@ -402,7 +384,7 @@ public class GraphAlgorithms {
 
   public static <NodeType extends IGraphNode<NodeType>> List<NodeType> getPredecessors(
       final NodeType node, final int depth) {
-    final List<NodeType> nodes = new ArrayList<NodeType>();
+    final List<NodeType> nodes = new ArrayList<>();
 
     getPredecessorsInternal(node, depth, nodes, new HashSet<NodeType>());
 
@@ -423,7 +405,7 @@ public class GraphAlgorithms {
       final Collection<NodeType> nodes) {
     Preconditions.checkNotNull(nodes, "Error: Nodes argument can't be null");
 
-    final HashSet<NodeType> successors = new HashSet<NodeType>();
+    final HashSet<NodeType> successors = new HashSet<>();
 
     for (final NodeType zyGraphNode : nodes) {
       successors.addAll(getSuccessors(zyGraphNode));
@@ -445,8 +427,8 @@ public class GraphAlgorithms {
       final IGraphNode<NodeType> node) {
     Preconditions.checkNotNull(node, "Error: Start node can't be null");
 
-    final Set<NodeType> successors = new HashSet<NodeType>();
-    final Set<NodeType> visited = new HashSet<NodeType>();
+    final Set<NodeType> successors = new HashSet<>();
+    final Set<NodeType> visited = new HashSet<>();
 
     getSuccessors(node, successors, visited);
 
@@ -459,8 +441,8 @@ public class GraphAlgorithms {
     Preconditions
         .checkNotNull(maximumChildNode, "Error: maximumChildNode argument can not be null");
 
-    final Set<NodeType> successors = new HashSet<NodeType>();
-    final Set<NodeType> visited = new HashSet<NodeType>();
+    final Set<NodeType> successors = new HashSet<>();
+    final Set<NodeType> visited = new HashSet<>();
 
     getSuccessors(parentNode, successors, visited);
 
@@ -469,7 +451,7 @@ public class GraphAlgorithms {
 
   public static <NodeType extends IGraphNode<NodeType>> List<NodeType> getSuccessors(
       final Iterable<NodeType> selectedNodes, final int depth) {
-    final List<NodeType> nodes = new ArrayList<NodeType>();
+    final List<NodeType> nodes = new ArrayList<>();
 
     for (final NodeType node : selectedNodes) {
       nodes.addAll(getSuccessors(node, depth));
@@ -480,7 +462,7 @@ public class GraphAlgorithms {
 
   public static <NodeType extends IGraphNode<NodeType>> List<NodeType> getSuccessors(
       final NodeType node, final int depth) {
-    final List<NodeType> nodes = new ArrayList<NodeType>();
+    final List<NodeType> nodes = new ArrayList<>();
 
     getSuccessorsInternal(node, depth, nodes, new HashSet<NodeType>());
 

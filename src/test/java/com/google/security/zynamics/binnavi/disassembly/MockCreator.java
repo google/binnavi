@@ -34,6 +34,7 @@ import com.google.security.zynamics.binnavi.disassembly.AddressSpaces.CAddressSp
 import com.google.security.zynamics.binnavi.disassembly.Modules.CModule;
 import com.google.security.zynamics.binnavi.disassembly.views.CView;
 import com.google.security.zynamics.binnavi.disassembly.views.INaviView;
+import com.google.security.zynamics.reil.Architecture;
 import com.google.security.zynamics.zylib.disassembly.CAddress;
 import com.google.security.zynamics.zylib.disassembly.FunctionType;
 import com.google.security.zynamics.zylib.disassembly.GraphType;
@@ -72,7 +73,7 @@ public final class MockCreator {
             IOperandTree.NODE_TYPE_IMMEDIATE_INT_ID, "123", null, new ArrayList<IReference>(), sql,
             module.getTypeManager(), module.getContent().getTypeInstanceContainer()), sql, module
             .getTypeManager(), module.getContent().getTypeInstanceContainer())),
-        new byte[] {(byte) 0x41}, "x86-32", sql);
+        new byte[] {(byte) 0x41}, Architecture.x86, sql);
   }
 
   public static CInstruction createInstructionWithOperand(final BigInteger address,
@@ -82,7 +83,7 @@ public final class MockCreator {
             IOperandTree.NODE_TYPE_REGISTER_ID, "eax", null, new ArrayList<IReference>(), sql,
             module.getTypeManager(), module.getContent().getTypeInstanceContainer()), sql, module
             .getTypeManager(), module.getContent().getTypeInstanceContainer())),
-        new byte[] {(byte) 0x90}, "x86-32", sql);
+        new byte[] {(byte) 0x90}, Architecture.x86, sql);
   }
 
   public static CModule createModule() {

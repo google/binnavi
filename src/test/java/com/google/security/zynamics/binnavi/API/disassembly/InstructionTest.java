@@ -37,6 +37,7 @@ import com.google.security.zynamics.binnavi.disassembly.CInstruction;
 import com.google.security.zynamics.binnavi.disassembly.COperandTree;
 import com.google.security.zynamics.binnavi.disassembly.COperandTreeNode;
 import com.google.security.zynamics.binnavi.disassembly.Modules.CModule;
+import com.google.security.zynamics.reil.Architecture;
 import com.google.security.zynamics.zylib.disassembly.CAddress;
 import com.google.security.zynamics.zylib.disassembly.IOperandTree;
 import com.google.security.zynamics.zylib.disassembly.IReference;
@@ -82,7 +83,7 @@ public final class InstructionTest {
     final List<COperandTree> operands = Lists.newArrayList(operand1, operand2);
     final CInstruction internalInstruction =
         new CInstruction(false, internalModule, new CAddress(0x123), "mov", operands, new byte[] {
-            1, 2, 3}, "x86-32", provider);
+            1, 2, 3}, Architecture.x86, provider);
 
     final Instruction instruction = new Instruction(internalInstruction);
 
@@ -133,7 +134,7 @@ public final class InstructionTest {
     final List<COperandTree> operands = Lists.newArrayList(operand1, operand2);
     final CInstruction internalInstruction =
         new CInstruction(false, internalModule, new CAddress(0x123), "mov", operands, new byte[] {
-            1, 2, 3}, "x86-32", provider);
+            1, 2, 3}, Architecture.x86, provider);
 
     final Instruction instruction = new Instruction(internalInstruction);
 
@@ -147,7 +148,7 @@ public final class InstructionTest {
     assertEquals("ebx", instruction.getOperands().get(1).getRootNode().getChildren().get(0)
         .getValue());
     assertEquals("123  mov eax, ebx", instruction.toString());
-    assertEquals("x86-32", instruction.getArchitecture());
+    assertEquals(Architecture.x86, instruction.getArchitecture());
   }
 
   @Test
@@ -225,7 +226,7 @@ public final class InstructionTest {
     final List<COperandTree> operands = Lists.newArrayList(operand1, operand2);
     final CInstruction internalInstruction =
         new CInstruction(false, internalModule, new CAddress(0x123), "mov", operands, new byte[] {
-            1, 2, 3}, "x86-32", provider);
+            1, 2, 3}, Architecture.x86, provider);
 
     final Instruction instruction = new Instruction(internalInstruction);
 

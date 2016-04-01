@@ -42,6 +42,7 @@ import com.google.security.zynamics.binnavi.disassembly.MockTextNode;
 import com.google.security.zynamics.binnavi.disassembly.MockView;
 import com.google.security.zynamics.binnavi.disassembly.Modules.CModule;
 import com.google.security.zynamics.binnavi.disassembly.views.INaviView;
+import com.google.security.zynamics.reil.Architecture;
 import com.google.security.zynamics.zylib.disassembly.CAddress;
 import com.google.security.zynamics.zylib.disassembly.FunctionType;
 import com.google.security.zynamics.zylib.disassembly.GraphType;
@@ -102,11 +103,11 @@ public final class ViewGraphHelpersTest {
     final List<INaviInstruction> instructions = new ArrayList<INaviInstruction>();
 
     instructions.add(new CInstruction(false, internalModule, new CAddress(0x123), "nop",
-        new ArrayList<COperandTree>(), new byte[] {(byte) 0x90}, "x86-32", provider));
+        new ArrayList<COperandTree>(), new byte[] {(byte) 0x90}, Architecture.x86, provider));
     instructions.add(new CInstruction(false, internalModule, new CAddress(0x124), "nop",
-        new ArrayList<COperandTree>(), new byte[] {(byte) 0x90}, "x86-32", provider));
+        new ArrayList<COperandTree>(), new byte[] {(byte) 0x90}, Architecture.x86, provider));
     instructions.add(new CInstruction(false, internalModule, new CAddress(0x125), "nop",
-        new ArrayList<COperandTree>(), new byte[] {(byte) 0x90}, "x86-32", provider));
+        new ArrayList<COperandTree>(), new byte[] {(byte) 0x90}, Architecture.x86, provider));
 
     final INaviCodeNode codeNode = internalView.getContent().createCodeNode(null, instructions);
 

@@ -15,6 +15,8 @@ limitations under the License.
 */
 package com.google.security.zynamics.reil.interpreter;
 
+import java.math.BigInteger;
+
 import com.google.common.base.Preconditions;
 import com.google.security.zynamics.zylib.general.memmanager.Memory;
 
@@ -49,56 +51,76 @@ public class ReilMemory {
   }
 
   private byte[] getDataBig(final long value, final int length) {
-    if (length == 1) {
-      return new byte[] {(byte) (value & 0xFF)};
-    } else if (length == 2) {
-      return new byte[] {(byte) ((value & 0xFF00) >> 8), (byte) (value & 0xFF)};
-    } else if (length == 4) {
-      return new byte[] {(byte) ((value & 0xFF000000) >> 24), (byte) ((value & 0xFF0000) >> 16),
-          (byte) ((value & 0xFF00) >> 8), (byte) ((value & 0xFF))};
-    } else {
-      throw new IllegalArgumentException("Error: Invalid data length");
+
+    if (length > 8 || length <= 0)
+      throw new IllegalArgumentException("Invalid data length");
+    byte result[] = new byte[length];
+    long mask = 1;
+    for (int i = 0; i < length; i++) {
+      result[length - 1 - i] = (byte) ((value & 0xFFL * mask) >> 8 * i);
+      mask *= 0x100;
     }
+
+    return result;
   }
 
   private byte[] getDataLittle(final long value, final int length) {
-    if (length == 1) {
-      return new byte[] {(byte) (value & 0xFF)};
-    } else if (length == 2) {
-      return new byte[] {(byte) (value & 0xFF), (byte) ((value & 0xFF00) >> 8)};
-    } else if (length == 4) {
-      return new byte[] {(byte) (value & 0xFF), (byte) ((value & 0xFF00) >> 8),
-          (byte) ((value & 0xFF0000) >> 16), (byte) ((value & 0xFF000000) >> 24)};
-    } else {
-      throw new IllegalArgumentException("Error: Invalid data length");
+
+    if (length > 8 || length <= 0)
+      throw new IllegalArgumentException("Invalid data length");
+    byte result[] = new byte[length];
+    long mask = 1;
+    for (int i = 0; i < length; i++) {
+      result[i] = (byte) ((value & 0xFFL * mask) >> 8 * i);
+      mask *= 0x100;
     }
+
+    return result;
   }
 
-  private long loadBig(final byte[] data) {
-    switch (data.length) {
+  private BigInteger loadBig(final byte[] data) {
+   switch (data.length) {
       case 1:
-        return data[0] & 0xFF;
+        return BigInteger.valueOf(data[0] & 0xFF);
       case 2:
-        return (data[1] & 0xFF) + ((data[0] & 0xFF) * 0x100);
+        return BigInteger.valueOf((data[1] & 0xFF) + ((data[0] & 0xFF) * 0x100));
       case 4:
-        return (data[3] & 0xFF) + ((data[2] & 0xFF) * 0x100) + ((data[1] & 0xFF) * 0x100 * 0x100)
-            + ((data[0] & 0xFF) * 0x100 * 0x100 * 0x100);
+        return BigInteger.valueOf((data[3] & 0xFF) + ((data[2] & 0xFF) * 0x100) + ((data[1] & 0xFF) * 0x100L * 0x100)
+            + ((data[0] & 0xFF) * 0x100L * 0x100 * 0x100));
+      case 8:
+        return BigInteger.valueOf(
+            (data[7] & 0xFF) 
+            + ((data[6] & 0xFF) * 0x100) 
+            + ((data[5] & 0xFF) * 0x100L * 0x100)
+            + ((data[4] & 0xFF) * 0x100L * 0x100 * 0x100) 
+            + ((data[3] & 0xFF) * 0x100L * 0x100 * 0x100 * 0x100)
+            + ((data[2] & 0xFF) * 0x100L * 0x100 * 0x100 * 0x100 * 0x100) 
+            + ((data[1] & 0xFF) * 0x100L * 0x100 * 0x100 * 0x100 * 0x100 * 0x100))
+            .add(BigInteger.valueOf(data[0] & 0xFF).shiftLeft(56));
       default:
         throw new IllegalArgumentException("Not yet implemented");
     }
   }
 
-  private long loadLittle(final byte[] data) {
+  private BigInteger loadLittle(final byte[] data) {
     switch (data.length) {
       case 1:
-        return data[0] & 0xFF;
+        return BigInteger.valueOf(data[0] & 0xFF);
       case 2:
-        return (data[0] & 0xFF) + ((data[1] & 0xFF) * 0x100);
+        return BigInteger.valueOf((data[0] & 0xFF) + ((data[1] & 0xFF) * 0x100));
       case 3:
-        return (data[0] & 0xFF) + ((data[1] & 0xFF) * 0x100) + ((data[2] & 0xFF) * 0x100 * 0x100);
+        return BigInteger.valueOf((data[0] & 0xFF) + ((data[1] & 0xFF) * 0x100) + ((data[2] & 0xFF) * 0x100 * 0x100));
       case 4:
-        return (data[0] & 0xFF) + ((data[1] & 0xFF) * 0x100) + ((data[2] & 0xFF) * 0x100 * 0x100)
-            + ((data[3] & 0xFF) * 0x100 * 0x100 * 0x100);
+        return BigInteger.valueOf((data[0] & 0xFF) + ((data[1] & 0xFF) * 0x100) + ((data[2] & 0xFF) * 0x100L * 0x100)
+            + ((data[3] & 0xFF) * 0x100L * 0x100 * 0x100));
+      case 8:
+        BigInteger t = BigInteger
+            .valueOf((data[0] & 0xFF) + ((data[1] & 0xFF) * 0x100) + ((data[2] & 0xFF) * 0x100 * 0x100)
+                + ((data[3] & 0xFF) * 0x100L * 0x100 * 0x100) + ((data[4] & 0xFF) * 0x100L * 0x100 * 0x100 * 0x100)
+                + ((data[5] & 0xFF) * 0x100L * 0x100 * 0x100 * 0x100 * 0x100)
+                + ((data[6] & 0xFF) * 0x100L * 0x100 * 0x100 * 0x100 * 0x100 * 0x100))
+            .add(BigInteger.valueOf(data[7] & 0xFF).shiftLeft(56));
+        return t;
       default:
         throw new IllegalArgumentException("Not yet implemented");
     }
@@ -121,7 +143,7 @@ public class ReilMemory {
    * 
    * @return The value
    */
-  public long load(final long address, final int length) {
+  public BigInteger load(final long address, final int length) {
     Preconditions.checkArgument(address >= 0, "Error: Argument address can't be less than 0");
     Preconditions.checkArgument(length > 0, "Error: Argument length must be bigger than 0");
 

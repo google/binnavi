@@ -32,6 +32,7 @@ import com.google.security.zynamics.reil.translators.StandardEnvironment;
 import com.google.security.zynamics.reil.translators.arm.TranslatorARM;
 import com.google.security.zynamics.reil.translators.ppc.TranslatorPPC;
 import com.google.security.zynamics.reil.translators.reil.TranslatorREIL;
+import com.google.security.zynamics.reil.translators.x64.TranslatorX64;
 import com.google.security.zynamics.reil.translators.x86.TranslatorX86;
 
 // / Translates native code to REIL code
@@ -61,6 +62,8 @@ public final class ReilTranslator {
   private static ITranslator<INaviInstruction> getTranslator(
       final NativeArchitecture architecture) {
     switch (architecture) {
+      case X86_64:
+        return new TranslatorX64<INaviInstruction>();
       case X86_32:
         return new TranslatorX86<INaviInstruction>();
       case PPC_32:

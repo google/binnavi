@@ -33,7 +33,6 @@ import com.google.security.zynamics.reil.translators.x86.DecTranslator;
 import com.google.security.zynamics.reil.translators.x86.LoopTranslator;
 import com.google.security.zynamics.zylib.disassembly.CAddress;
 import com.google.security.zynamics.zylib.disassembly.ExpressionType;
-import com.google.security.zynamics.zylib.disassembly.IInstruction;
 import com.google.security.zynamics.zylib.disassembly.MockInstruction;
 import com.google.security.zynamics.zylib.disassembly.MockOperandTree;
 import com.google.security.zynamics.zylib.disassembly.MockOperandTreeNode;
@@ -73,12 +72,13 @@ public class LoopTranslatorTest {
 
     final List<MockOperandTree> operands = Lists.newArrayList(operandTree1);
 
-    final IInstruction instruction = new MockInstruction("dec", operands);
-
+    final MockInstruction instruction = new MockInstruction("dec", operands);
+    instruction.address = new CAddress(0x100);
+    
     final ArrayList<ReilInstruction> instructionsDec = new ArrayList<ReilInstruction>();
 
     decTranslator.translate(environment, instruction, instructionsDec);
-
+    
     final MockOperandTree operandTree2 = new MockOperandTree();
     operandTree2.root = new MockOperandTreeNode(ExpressionType.SIZE_PREFIX, "dword");
     operandTree2.root.m_children.add(new MockOperandTreeNode(ExpressionType.IMMEDIATE_INTEGER,
@@ -87,17 +87,12 @@ public class LoopTranslatorTest {
     final MockInstruction instruction2 =
         new MockInstruction("loop", Lists.newArrayList(operandTree2));
     instruction2.address = new CAddress(0x101);
+    
+    translator.translate(environment, instruction2, instructions);     
 
-    translator.translate(environment, instruction2, instructions);
-
-    final HashMap<BigInteger, List<ReilInstruction>> mapping =
-        new HashMap<BigInteger, List<ReilInstruction>>();
-
-    mapping.put(BigInteger.valueOf(instructions.get(0).getAddress().toLong()), instructions);
-    mapping.put(BigInteger.valueOf(instructionsDec.get(0).getAddress().toLong()), instructionsDec);
-
-    interpreter.interpret(mapping, BigInteger.valueOf(0x100));
-
+    instructions.addAll(0, instructionsDec);
+    
+    interpreter.interpret(TestHelpers.createMapping(instructions), BigInteger.valueOf(0x100));
     assertEquals(6, TestHelpers.filterNativeRegisters(interpreter.getDefinedRegisters()).size());
 
     assertEquals(BigInteger.valueOf(0xFFFFFFFEL), interpreter.getVariableValue("eax"));

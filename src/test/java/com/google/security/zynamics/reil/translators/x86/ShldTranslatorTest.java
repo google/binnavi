@@ -248,7 +248,7 @@ public class ShldTranslatorTest {
 
     assertEquals(5, TestHelpers.filterNativeRegisters(interpreter.getDefinedRegisters()).size());
 
-    assertEquals(0x3C2, interpreter.getMemory().load(100, 4));
+    assertEquals(BigInteger.valueOf(0x3C2), interpreter.getMemory().load(100, 4));
     assertEquals(BigInteger.valueOf(0x80000000L), interpreter.getVariableValue("ebx"));
     assertEquals(BigInteger.valueOf(0L), interpreter.getVariableValue(Helpers.ZERO_FLAG));
     assertEquals(BigInteger.valueOf(0L), interpreter.getVariableValue(Helpers.CARRY_FLAG));

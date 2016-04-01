@@ -72,7 +72,7 @@ public class StoswTranslatorTest {
     assertEquals(BigInteger.valueOf(0x1002), interpreter.getVariableValue("edi"));
 
     assertEquals(BigInteger.valueOf(2L), BigInteger.valueOf(interpreter.getMemorySize()));
-    assertEquals(0x5678, interpreter.getMemory().load(0x1000, 2));
+    assertEquals(BigInteger.valueOf(0x5678), interpreter.getMemory().load(0x1000, 2));
   }
 
   @Test
@@ -97,6 +97,6 @@ public class StoswTranslatorTest {
     assertEquals(BigInteger.valueOf(0x0FFE), interpreter.getVariableValue("edi"));
 
     assertEquals(BigInteger.valueOf(2L), BigInteger.valueOf(interpreter.getMemorySize()));
-    assertEquals(0x5678, interpreter.getMemory().load(0x1000, 2));
+    assertEquals(BigInteger.valueOf(0x5678), interpreter.getMemory().load(0x1000, 2));
   }
 }

@@ -38,6 +38,7 @@ import com.google.security.zynamics.binnavi.disassembly.MockInstruction;
 import com.google.security.zynamics.binnavi.disassembly.MockView;
 import com.google.security.zynamics.binnavi.disassembly.Modules.CModule;
 import com.google.security.zynamics.binnavi.disassembly.Modules.MockModule;
+import com.google.security.zynamics.reil.Architecture;
 import com.google.security.zynamics.zylib.disassembly.CAddress;
 import com.google.security.zynamics.zylib.disassembly.FunctionType;
 
@@ -94,7 +95,7 @@ public final class CodeNodeTest {
             Lists.<IComment>newArrayList(m_globalComment), internalFunction, new HashSet<CTag>(),
             new MockSqlProvider());
     codeNode.addInstruction(new CInstruction(true, internalModule, new CAddress(0x123), "nop",
-        new ArrayList<COperandTree>(), new byte[] {(byte) 0x90}, "x86-32", provider), null);
+        new ArrayList<COperandTree>(), new byte[] {(byte) 0x90}, Architecture.x86, provider), null);
 
     m_node = new CodeNode(view, codeNode, nodeTagManager);
   }
