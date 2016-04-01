@@ -157,7 +157,7 @@ public class RolTranslator implements IInstructionTranslator {
         sourceSize, tempOf));
     instructions.add(ReilHelpers.createBsh(offset + 14, targetSize, tempOf, targetSize,
         shiftMsbLsb, OperandSize.BYTE, tempOfLsb));
-    instructions.add(ReilHelpers.createBsh(offset + 15, OperandSize.BYTE, tempOfLsb,
+    instructions.add(ReilHelpers.createXor(offset + 15, OperandSize.BYTE, tempOfLsb,
         OperandSize.BYTE, Helpers.CARRY_FLAG, OperandSize.BYTE, Helpers.OVERFLOW_FLAG));
 
     Helpers.writeBack(environment, offset + 16, targetOperand, result, targetResult.getSize(),

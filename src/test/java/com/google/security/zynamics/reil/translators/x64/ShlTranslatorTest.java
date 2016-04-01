@@ -109,11 +109,42 @@ public class ShlTranslatorTest {
 
     interpreter.interpret(TestHelpers.createMapping(instructions), BigInteger.valueOf(0x100));
 
-    assertEquals(6, TestHelpers.filterNativeRegisters(interpreter.getDefinedRegisters()).size());
+    assertEquals(7, TestHelpers.filterNativeRegisters(interpreter.getDefinedRegisters()).size());
 
     assertEquals(BigInteger.valueOf(0x202), interpreter.getVariableValue("rax"));
     assertEquals(BigInteger.ZERO, interpreter.getVariableValue("CF"));
+    assertEquals(BigInteger.ZERO, interpreter.getVariableValue("OF"));
+    assertEquals(BigInteger.ZERO, BigInteger.valueOf(interpreter.getMemorySize()));
+  }
 
+  @Test
+  public void testShift2() throws InternalTranslationException, InterpreterException {
+    interpreter.setRegister("CF", BigInteger.ZERO, OperandSize.BYTE, ReilRegisterStatus.DEFINED);
+    interpreter.setRegister("rax", BigInteger.valueOf(0x80), OperandSize.QWORD,
+        ReilRegisterStatus.DEFINED);
+
+    final MockOperandTree operandTree1 = new MockOperandTree();
+    operandTree1.root = new MockOperandTreeNode(ExpressionType.SIZE_PREFIX, "dword");
+    operandTree1.root.m_children.add(new MockOperandTreeNode(ExpressionType.REGISTER, "eax"));
+
+    final MockOperandTree operandTree2 = new MockOperandTree();
+    operandTree2.root = new MockOperandTreeNode(ExpressionType.SIZE_PREFIX, "byte");
+    operandTree2.root.m_children
+        .add(new MockOperandTreeNode(ExpressionType.IMMEDIATE_INTEGER, "24"));
+
+    final List<MockOperandTree> operands = Lists.newArrayList(operandTree1, operandTree2);
+
+    final IInstruction instruction = new MockInstruction("shl", operands);
+
+    translator.translate(environment, instruction, instructions);
+
+    interpreter.interpret(TestHelpers.createMapping(instructions), BigInteger.valueOf(0x100));
+
+    assertEquals(6, TestHelpers.filterNativeRegisters(interpreter.getDefinedRegisters()).size());
+
+    assertEquals(BigInteger.valueOf(0x80000000l), interpreter.getVariableValue("rax"));
+    assertEquals(BigInteger.ZERO, interpreter.getVariableValue("CF"));
+    assertEquals(BigInteger.ONE, interpreter.getVariableValue("PF"));
     assertEquals(BigInteger.ZERO, BigInteger.valueOf(interpreter.getMemorySize()));
   }
 }

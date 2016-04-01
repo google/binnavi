@@ -77,7 +77,7 @@ public class RepeCmpsbTranslatorTest {
 
     interpreter.interpret(TestHelpers.createMapping(instructions), BigInteger.valueOf(0x100));
 
-    assertEquals(10, TestHelpers.filterNativeRegisters(interpreter.getDefinedRegisters()).size());
+    assertEquals(11, TestHelpers.filterNativeRegisters(interpreter.getDefinedRegisters()).size());
 
     assertEquals(BigInteger.valueOf(0x12345678), interpreter.getVariableValue("rax"));
     assertEquals(BigInteger.valueOf(0x1001), interpreter.getVariableValue("rsi"));
@@ -113,7 +113,7 @@ public class RepeCmpsbTranslatorTest {
 
     interpreter.interpret(TestHelpers.createMapping(instructions), BigInteger.valueOf(0x100));
 
-    assertEquals(10, TestHelpers.filterNativeRegisters(interpreter.getDefinedRegisters()).size());
+    assertEquals(11, TestHelpers.filterNativeRegisters(interpreter.getDefinedRegisters()).size());
 
     assertEquals(BigInteger.valueOf(0x12345678), interpreter.getVariableValue("rax"));
     assertEquals(BigInteger.valueOf(0x1004), interpreter.getVariableValue("rsi"));

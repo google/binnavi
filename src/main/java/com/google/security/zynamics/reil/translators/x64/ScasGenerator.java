@@ -63,14 +63,12 @@ public class ScasGenerator implements IStringInstructionGenerator {
     final String result = environment.getNextVariableString();
 
     // Load the value from EDI
-    instructions.add(ReilHelpers.createLdm(offset, archSize, "rdi", operandSize, result));
-    offset++;
+    instructions.add(ReilHelpers.createLdm(offset++, archSize, "rdi", operandSize, result));
 
     if (operandSize != archSize) {
       maskedEax = environment.getNextVariableString();
-      instructions.add(ReilHelpers.createAnd(offset, archSize, "rax", archSize, mask, archSize,
+      instructions.add(ReilHelpers.createAnd(offset++, archSize, "rax", archSize, mask, archSize,
           maskedEax));
-      offset++;
     } else {
       maskedEax = "rax";
     }
@@ -82,25 +80,25 @@ public class ScasGenerator implements IStringInstructionGenerator {
     final String jmpGoal =
         String.format("%d.%d", ReilHelpers.toNativeAddress(new CAddress(baseOffset)).toLong(),
             previousInstructions + 5 + (operandSize != archSize ? 1 : 0));
-    instructions.add(ReilHelpers.createJcc(offset + 1, OperandSize.BYTE, Helpers.DIRECTION_FLAG,
+    instructions.add(ReilHelpers.createJcc(offset++, OperandSize.BYTE, Helpers.DIRECTION_FLAG,
         OperandSize.ADDRESS, jmpGoal));
-    instructions.add(ReilHelpers.createAdd(offset + 2, archSize, "rdi", archSize, ediChange,
+    instructions.add(ReilHelpers.createAdd(offset++, archSize, "rdi", archSize, ediChange,
         archSize, addResult));
-    instructions.add(ReilHelpers.createAnd(offset + 3, archSize, addResult, archSize,
+    instructions.add(ReilHelpers.createAnd(offset++, archSize, addResult, archSize,
         truncateMask, archSize, "rdi"));
 
     final String jmpGoal2 =
         String.format("%d.%d", ReilHelpers.toNativeAddress(new CAddress(baseOffset)).toLong(),
             previousInstructions + 7 + (operandSize != archSize ? 1 : 0));
-    instructions.add(ReilHelpers.createJcc(offset + 4, OperandSize.BYTE, "1", OperandSize.ADDRESS,
+    instructions.add(ReilHelpers.createJcc(offset++, OperandSize.BYTE, "1", OperandSize.ADDRESS,
         jmpGoal2));
-    instructions.add(ReilHelpers.createSub(offset + 5, archSize, "rdi", archSize, ediChange,
+    instructions.add(ReilHelpers.createSub(offset++, archSize, "rdi", archSize, ediChange,
         archSize, subResult));
-    instructions.add(ReilHelpers.createAnd(offset + 6, archSize, subResult, archSize,
+    instructions.add(ReilHelpers.createAnd(offset++, archSize, subResult, archSize,
         truncateMask, archSize, "rdi"));
 
-    instructions.add(ReilHelpers.createNop(offset + 7));
+    instructions.add(ReilHelpers.createNop(offset++));
 
-    Helpers.generateSub(environment, offset + 8, operandSize, maskedEax, result, instructions);
+    Helpers.generateSub(environment, offset++, resultSize, maskedEax, result, instructions);
   }
 }

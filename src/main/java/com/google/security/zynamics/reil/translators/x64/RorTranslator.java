@@ -166,7 +166,7 @@ public class RorTranslator implements IInstructionTranslator {
         sourceSize, tempOf));
     instructions.add(ReilHelpers.createBsh(offset + 16, targetSize, tempOf, targetSize,
         shift2ndMsbLsb, OperandSize.BYTE, tempOfLsb));
-    instructions.add(ReilHelpers.createBsh(offset + 17, OperandSize.BYTE, tempOfLsb,
+    instructions.add(ReilHelpers.createXor(offset + 17, OperandSize.BYTE, tempOfLsb,
         OperandSize.BYTE, Helpers.CARRY_FLAG, OperandSize.BYTE, Helpers.OVERFLOW_FLAG));
 
     Helpers.writeBack(environment, offset + 18, targetOperand, result, targetResult.getSize(),

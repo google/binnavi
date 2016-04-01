@@ -74,7 +74,7 @@ public class RepeScaswTranslatorTest {
 
     interpreter.interpret(TestHelpers.createMapping(instructions), BigInteger.valueOf(0x100));
 
-    assertEquals(9, TestHelpers.filterNativeRegisters(interpreter.getDefinedRegisters()).size());
+    assertEquals(10, TestHelpers.filterNativeRegisters(interpreter.getDefinedRegisters()).size());
 
     assertEquals(BigInteger.valueOf(0x12345678), interpreter.getVariableValue("rax"));
     assertEquals(BigInteger.valueOf(0x1002), interpreter.getVariableValue("rdi"));
@@ -104,7 +104,7 @@ public class RepeScaswTranslatorTest {
 
     interpreter.interpret(TestHelpers.createMapping(instructions), BigInteger.valueOf(0x100));
 
-    assertEquals(9, TestHelpers.filterNativeRegisters(interpreter.getDefinedRegisters()).size());
+    assertEquals(10, TestHelpers.filterNativeRegisters(interpreter.getDefinedRegisters()).size());
 
     assertEquals(BigInteger.valueOf(0x12345678), interpreter.getVariableValue("rax"));
     assertEquals(BigInteger.valueOf(0x1002), interpreter.getVariableValue("rdi"));

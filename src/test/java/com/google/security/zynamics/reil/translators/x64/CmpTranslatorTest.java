@@ -80,7 +80,7 @@ public class CmpTranslatorTest {
 
     interpreter.interpret(TestHelpers.createMapping(instructions), BigInteger.valueOf(0x100));
 
-    assertEquals(6, TestHelpers.filterNativeRegisters(interpreter.getDefinedRegisters()).size());
+    assertEquals(7, TestHelpers.filterNativeRegisters(interpreter.getDefinedRegisters()).size());
 
     assertEquals(BigInteger.ONE, interpreter.getVariableValue("rax"));
     assertEquals(BigInteger.ONE, interpreter.getVariableValue("CF"));
@@ -116,7 +116,7 @@ public class CmpTranslatorTest {
 
     interpreter.interpret(TestHelpers.createMapping(instructions), BigInteger.valueOf(0x100));
 
-    assertEquals(6, TestHelpers.filterNativeRegisters(interpreter.getDefinedRegisters()).size());
+    assertEquals(7, TestHelpers.filterNativeRegisters(interpreter.getDefinedRegisters()).size());
 
     assertEquals(TranslationHelpers.getUnsignedBigIntegerValue(0x7FFFFFFFFFFFFFFFL), interpreter.getVariableValue("rax"));
     assertEquals(BigInteger.ONE, interpreter.getVariableValue("CF"));
@@ -152,7 +152,7 @@ public class CmpTranslatorTest {
 
     interpreter.interpret(TestHelpers.createMapping(instructions), BigInteger.valueOf(0x100));
 
-    assertEquals(6, TestHelpers.filterNativeRegisters(interpreter.getDefinedRegisters()).size());
+    assertEquals(7, TestHelpers.filterNativeRegisters(interpreter.getDefinedRegisters()).size());
 
     assertEquals(TranslationHelpers.getUnsignedBigIntegerValue(0x8000000000000000L), interpreter.getVariableValue("rax"));
     assertEquals(BigInteger.ZERO, interpreter.getVariableValue("CF"));
@@ -189,7 +189,7 @@ public class CmpTranslatorTest {
 
     interpreter.interpret(TestHelpers.createMapping(instructions), BigInteger.valueOf(0x100));
 
-    assertEquals(7, TestHelpers.filterNativeRegisters(interpreter.getDefinedRegisters()).size());
+    assertEquals(8, TestHelpers.filterNativeRegisters(interpreter.getDefinedRegisters()).size());
 
     assertEquals(BigInteger.valueOf(0x2000), interpreter.getVariableValue("rax"));
     assertEquals(BigInteger.valueOf(0x3000), interpreter.getVariableValue("rbx"));
@@ -227,7 +227,7 @@ public class CmpTranslatorTest {
 
     interpreter.interpret(TestHelpers.createMapping(instructions), BigInteger.valueOf(0x100));
 
-    assertEquals(7, TestHelpers.filterNativeRegisters(interpreter.getDefinedRegisters()).size());
+    assertEquals(8, TestHelpers.filterNativeRegisters(interpreter.getDefinedRegisters()).size());
 
     assertEquals(BigInteger.valueOf(0x2000), interpreter.getVariableValue("rax"));
     assertEquals(BigInteger.valueOf(0x3000), interpreter.getVariableValue("rbx"));
@@ -263,7 +263,7 @@ public class CmpTranslatorTest {
 
     interpreter.interpret(TestHelpers.createMapping(instructions), BigInteger.valueOf(0x100));
 
-    assertEquals(6, TestHelpers.filterNativeRegisters(interpreter.getDefinedRegisters()).size());
+    assertEquals(7, TestHelpers.filterNativeRegisters(interpreter.getDefinedRegisters()).size());
 
     assertEquals(BigInteger.valueOf(0x2000), interpreter.getVariableValue("rax"));
     assertEquals(BigInteger.ZERO, interpreter.getVariableValue("CF"));
@@ -298,7 +298,7 @@ public class CmpTranslatorTest {
 
     interpreter.interpret(TestHelpers.createMapping(instructions), BigInteger.valueOf(0x100));
 
-    assertEquals(6, TestHelpers.filterNativeRegisters(interpreter.getDefinedRegisters()).size());
+    assertEquals(7, TestHelpers.filterNativeRegisters(interpreter.getDefinedRegisters()).size());
 
     assertEquals(BigInteger.valueOf(0x2000), interpreter.getVariableValue("rax"));
     assertEquals(BigInteger.ZERO, interpreter.getVariableValue("CF"));

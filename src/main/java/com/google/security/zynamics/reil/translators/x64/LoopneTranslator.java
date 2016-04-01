@@ -93,7 +93,7 @@ public class LoopneTranslator implements IInstructionTranslator {
         OperandSize.BYTE, zfZero, OperandSize.BYTE, condition));
 
     // Jump if ECX != 0 && ZF == 0
-    instructions.add(ReilHelpers.createJcc(baseOffset + 5, OperandSize.BYTE, condition, archSize,
+    instructions.add(ReilHelpers.createJcc(baseOffset + 6, OperandSize.BYTE, condition, archSize,
         loopTarget));
   }
 

@@ -80,7 +80,7 @@ public class SubTranslatorTest {
 
     interpreter.interpret(TestHelpers.createMapping(instructions), BigInteger.valueOf(0x100));
 
-    assertEquals(6, TestHelpers.filterNativeRegisters(interpreter.getDefinedRegisters()).size());
+    assertEquals(8, TestHelpers.filterNativeRegisters(interpreter.getDefinedRegisters()).size());
 
     assertEquals(BigInteger.valueOf(2), interpreter.getVariableValue("rax"));
     assertEquals(BigInteger.ONE, interpreter.getVariableValue("CF"));
@@ -116,7 +116,7 @@ public class SubTranslatorTest {
 
     interpreter.interpret(TestHelpers.createMapping(instructions), BigInteger.valueOf(0x100));
 
-    assertEquals(6, TestHelpers.filterNativeRegisters(interpreter.getDefinedRegisters()).size());
+    assertEquals(8, TestHelpers.filterNativeRegisters(interpreter.getDefinedRegisters()).size());
 
     assertEquals(BigInteger.valueOf(0xFFFFFFFFL), interpreter.getVariableValue("rax"));
     assertEquals(BigInteger.ONE, interpreter.getVariableValue("CF"));
@@ -152,7 +152,7 @@ public class SubTranslatorTest {
 
     interpreter.interpret(TestHelpers.createMapping(instructions), BigInteger.valueOf(0x100));
 
-    assertEquals(6, TestHelpers.filterNativeRegisters(interpreter.getDefinedRegisters()).size());
+    assertEquals(8, TestHelpers.filterNativeRegisters(interpreter.getDefinedRegisters()).size());
 
     assertEquals(BigInteger.valueOf(0x7FFFFFFFL), interpreter.getVariableValue("rax"));
     assertEquals(BigInteger.ZERO, interpreter.getVariableValue("CF"));
@@ -189,7 +189,7 @@ public class SubTranslatorTest {
 
     interpreter.interpret(TestHelpers.createMapping(instructions), BigInteger.valueOf(0x100));
 
-    assertEquals(7, TestHelpers.filterNativeRegisters(interpreter.getDefinedRegisters()).size());
+    assertEquals(9, TestHelpers.filterNativeRegisters(interpreter.getDefinedRegisters()).size());
 
     assertEquals(BigInteger.valueOf(0xFFFFF000L), interpreter.getVariableValue("rax"));
     assertEquals(BigInteger.valueOf(0x3000), interpreter.getVariableValue("rbx"));
@@ -227,7 +227,7 @@ public class SubTranslatorTest {
 
     interpreter.interpret(TestHelpers.createMapping(instructions), BigInteger.valueOf(0x100));
 
-    assertEquals(7, TestHelpers.filterNativeRegisters(interpreter.getDefinedRegisters()).size());
+    assertEquals(9, TestHelpers.filterNativeRegisters(interpreter.getDefinedRegisters()).size());
 
     assertEquals(BigInteger.valueOf(0xFFFFF000L), interpreter.getVariableValue("rax"));
     assertEquals(BigInteger.valueOf(0x3000), interpreter.getVariableValue("rbx"));
@@ -263,7 +263,7 @@ public class SubTranslatorTest {
 
     interpreter.interpret(TestHelpers.createMapping(instructions), BigInteger.valueOf(0x100));
 
-    assertEquals(6, TestHelpers.filterNativeRegisters(interpreter.getDefinedRegisters()).size());
+    assertEquals(8, TestHelpers.filterNativeRegisters(interpreter.getDefinedRegisters()).size());
 
     assertEquals(BigInteger.ZERO, interpreter.getVariableValue("rax"));
     assertEquals(BigInteger.ZERO, interpreter.getVariableValue("CF"));
@@ -298,13 +298,44 @@ public class SubTranslatorTest {
 
     interpreter.interpret(TestHelpers.createMapping(instructions), BigInteger.valueOf(0x100));
 
-    assertEquals(6, TestHelpers.filterNativeRegisters(interpreter.getDefinedRegisters()).size());
+    assertEquals(8, TestHelpers.filterNativeRegisters(interpreter.getDefinedRegisters()).size());
 
     assertEquals(BigInteger.ZERO, interpreter.getVariableValue("rax"));
     assertEquals(BigInteger.ZERO, interpreter.getVariableValue("CF"));
     assertEquals(BigInteger.ZERO, interpreter.getVariableValue("OF"));
     assertEquals(BigInteger.ZERO, interpreter.getVariableValue("SF"));
     assertEquals(BigInteger.ONE, interpreter.getVariableValue("ZF"));
+
+    assertEquals(BigInteger.ZERO, BigInteger.valueOf(interpreter.getMemorySize()));
+  }
+  @Test
+  public void testPF() throws InternalTranslationException, InterpreterException {
+    //sub eax, 70e44324h
+    interpreter.setRegister("CF", BigInteger.ZERO, OperandSize.BYTE, ReilRegisterStatus.DEFINED);
+    interpreter.setRegister("rax", BigInteger.valueOf(0x7CAEDC46L), OperandSize.QWORD,
+        ReilRegisterStatus.DEFINED);
+
+    final MockOperandTree operandTree1 = new MockOperandTree();
+    operandTree1.root = new MockOperandTreeNode(ExpressionType.SIZE_PREFIX, "dword");
+    operandTree1.root.m_children.add(new MockOperandTreeNode(ExpressionType.REGISTER, "eax"));
+
+    final MockOperandTree operandTree2 = new MockOperandTree();
+    operandTree2.root = new MockOperandTreeNode(ExpressionType.SIZE_PREFIX, "dword");
+    operandTree2.root.m_children
+        .add(new MockOperandTreeNode(ExpressionType.IMMEDIATE_INTEGER, "1894007588"));
+
+    final List<MockOperandTree> operands = Lists.newArrayList(operandTree1, operandTree2);
+
+    final IInstruction instruction = new MockInstruction("sub", operands);
+
+    translator.translate(environment, instruction, instructions);
+
+    interpreter.interpret(TestHelpers.createMapping(instructions), BigInteger.valueOf(0x100));
+
+    assertEquals(8, TestHelpers.filterNativeRegisters(interpreter.getDefinedRegisters()).size());
+
+    assertEquals(BigInteger.valueOf(0xBCA9922L), interpreter.getVariableValue("rax"));
+    assertEquals(BigInteger.ONE, interpreter.getVariableValue("PF"));
 
     assertEquals(BigInteger.ZERO, BigInteger.valueOf(interpreter.getMemorySize()));
   }

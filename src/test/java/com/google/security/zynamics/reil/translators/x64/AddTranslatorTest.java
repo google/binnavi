@@ -81,7 +81,7 @@ public class AddTranslatorTest {
 
     interpreter.interpret(TestHelpers.createMapping(instructions), BigInteger.valueOf(0x100));
 
-    assertEquals(6, TestHelpers.filterNativeRegisters(interpreter.getDefinedRegisters()).size());
+    assertEquals(8, TestHelpers.filterNativeRegisters(interpreter.getDefinedRegisters()).size());
 
     assertEquals(BigInteger.ZERO, interpreter.getVariableValue("rax"));
     assertEquals(BigInteger.ONE, interpreter.getVariableValue("CF"));
@@ -117,7 +117,7 @@ public class AddTranslatorTest {
 
     interpreter.interpret(TestHelpers.createMapping(instructions), BigInteger.valueOf(0x100));
 
-    assertEquals(6, TestHelpers.filterNativeRegisters(interpreter.getDefinedRegisters()).size());
+    assertEquals(8, TestHelpers.filterNativeRegisters(interpreter.getDefinedRegisters()).size());
 
     assertEquals(BigInteger.valueOf(0), interpreter.getVariableValue("rax"));
     assertEquals(BigInteger.ONE, interpreter.getVariableValue("CF"));
@@ -153,7 +153,7 @@ public class AddTranslatorTest {
 
     interpreter.interpret(TestHelpers.createMapping(instructions), BigInteger.valueOf(0x100));
 
-    assertEquals(6, TestHelpers.filterNativeRegisters(interpreter.getDefinedRegisters()).size());
+    assertEquals(8, TestHelpers.filterNativeRegisters(interpreter.getDefinedRegisters()).size());
 
     assertEquals(TranslationHelpers.getUnsignedBigIntegerValue(0x8000000000000000L), interpreter.getVariableValue("rax"));
     assertEquals(BigInteger.ZERO, interpreter.getVariableValue("CF"));
@@ -161,6 +161,78 @@ public class AddTranslatorTest {
     assertEquals(BigInteger.ONE, interpreter.getVariableValue("SF"));
     assertEquals(BigInteger.ZERO, interpreter.getVariableValue("ZF"));
 
+    assertEquals(BigInteger.ZERO, BigInteger.valueOf(interpreter.getMemorySize()));
+  }
+
+  @Test
+  public void testAF() throws InternalTranslationException, InterpreterException {
+    // Set overflow but not carry
+
+    interpreter.setRegister("CF", BigInteger.ZERO, OperandSize.BYTE, ReilRegisterStatus.DEFINED);
+    interpreter.setRegister("rax", TranslationHelpers.getUnsignedBigIntegerValue(0x7FFFFFFFDB60l), OperandSize.QWORD,
+        ReilRegisterStatus.DEFINED);
+
+    final MockOperandTree operandTree1 = new MockOperandTree();
+    operandTree1.root = new MockOperandTreeNode(ExpressionType.SIZE_PREFIX, "qword");
+    operandTree1.root.m_children.add(new MockOperandTreeNode(ExpressionType.REGISTER, "rax"));
+
+    final MockOperandTree operandTree2 = new MockOperandTree();
+    operandTree2.root = new MockOperandTreeNode(ExpressionType.SIZE_PREFIX, "byte");
+    operandTree2.root.m_children
+        .add(new MockOperandTreeNode(ExpressionType.IMMEDIATE_INTEGER, "16"));
+
+    final List<MockOperandTree> operands = Lists.newArrayList(operandTree1, operandTree2);
+
+    final IInstruction instruction = new MockInstruction("add", operands);
+
+    translator.translate(environment, instruction, instructions);
+
+    interpreter.interpret(TestHelpers.createMapping(instructions), BigInteger.valueOf(0x100));
+
+    assertEquals(8, TestHelpers.filterNativeRegisters(interpreter.getDefinedRegisters()).size());
+
+    assertEquals(TranslationHelpers.getUnsignedBigIntegerValue(0x7FFFFFFFDB70L), interpreter.getVariableValue("rax"));
+    assertEquals(BigInteger.ZERO, interpreter.getVariableValue("CF"));
+    assertEquals(BigInteger.ZERO, interpreter.getVariableValue("OF"));
+    assertEquals(BigInteger.ZERO, interpreter.getVariableValue("SF"));
+    assertEquals(BigInteger.ZERO, interpreter.getVariableValue("ZF"));
+    assertEquals(BigInteger.ZERO, interpreter.getVariableValue("AF"));
+
+    assertEquals(BigInteger.ZERO, BigInteger.valueOf(interpreter.getMemorySize()));
+  }
+
+  @Test
+  public void testPF() throws InternalTranslationException, InterpreterException {
+
+    interpreter.setRegister("CF", BigInteger.ZERO, OperandSize.BYTE, ReilRegisterStatus.DEFINED);
+    interpreter.setRegister("rax", TranslationHelpers.getUnsignedBigIntegerValue(0x7FFFFFFFDB60L), OperandSize.QWORD,
+        ReilRegisterStatus.DEFINED);
+
+    final MockOperandTree operandTree1 = new MockOperandTree();
+    operandTree1.root = new MockOperandTreeNode(ExpressionType.SIZE_PREFIX, "qword");
+    operandTree1.root.m_children.add(new MockOperandTreeNode(ExpressionType.REGISTER, "rax"));
+
+    final MockOperandTree operandTree2 = new MockOperandTree();
+    operandTree2.root = new MockOperandTreeNode(ExpressionType.SIZE_PREFIX, "byte");
+    operandTree2.root.m_children
+        .add(new MockOperandTreeNode(ExpressionType.IMMEDIATE_INTEGER, "3"));
+
+    final List<MockOperandTree> operands = Lists.newArrayList(operandTree1, operandTree2);
+
+    final IInstruction instruction = new MockInstruction("add", operands);
+
+    translator.translate(environment, instruction, instructions);
+
+    interpreter.interpret(TestHelpers.createMapping(instructions), BigInteger.valueOf(0x100));
+
+    assertEquals(8, TestHelpers.filterNativeRegisters(interpreter.getDefinedRegisters()).size());
+
+    assertEquals(TranslationHelpers.getUnsignedBigIntegerValue(0x7FFFFFFFDB63L), interpreter.getVariableValue("rax"));
+    assertEquals(BigInteger.ZERO, interpreter.getVariableValue("CF"));
+    assertEquals(BigInteger.ZERO, interpreter.getVariableValue("OF"));
+    assertEquals(BigInteger.ZERO, interpreter.getVariableValue("SF"));
+    assertEquals(BigInteger.ZERO, interpreter.getVariableValue("ZF"));
+    assertEquals(BigInteger.ONE, interpreter.getVariableValue("PF"));
     assertEquals(BigInteger.ZERO, BigInteger.valueOf(interpreter.getMemorySize()));
   }
 
@@ -190,7 +262,7 @@ public class AddTranslatorTest {
 
     interpreter.interpret(TestHelpers.createMapping(instructions), BigInteger.valueOf(0x100));
 
-    assertEquals(7, TestHelpers.filterNativeRegisters(interpreter.getDefinedRegisters()).size());
+    assertEquals(9, TestHelpers.filterNativeRegisters(interpreter.getDefinedRegisters()).size());
 
     assertEquals(BigInteger.valueOf(0x5000), interpreter.getVariableValue("rax"));
     assertEquals(BigInteger.valueOf(0x3000), interpreter.getVariableValue("rbx"));
@@ -228,7 +300,7 @@ public class AddTranslatorTest {
 
     interpreter.interpret(TestHelpers.createMapping(instructions), BigInteger.valueOf(0x100));
 
-    assertEquals(7, TestHelpers.filterNativeRegisters(interpreter.getDefinedRegisters()).size());
+    assertEquals(9, TestHelpers.filterNativeRegisters(interpreter.getDefinedRegisters()).size());
 
     assertEquals(BigInteger.valueOf(0x5000), interpreter.getVariableValue("rax"));
     assertEquals(BigInteger.valueOf(0x3000), interpreter.getVariableValue("rbx"));
@@ -264,7 +336,7 @@ public class AddTranslatorTest {
 
     interpreter.interpret(TestHelpers.createMapping(instructions), BigInteger.valueOf(0x100));
 
-    assertEquals(6, TestHelpers.filterNativeRegisters(interpreter.getDefinedRegisters()).size());
+    assertEquals(8, TestHelpers.filterNativeRegisters(interpreter.getDefinedRegisters()).size());
 
     assertEquals(BigInteger.valueOf(0x4000), interpreter.getVariableValue("rax"));
     assertEquals(BigInteger.ZERO, interpreter.getVariableValue("CF"));
@@ -299,7 +371,7 @@ public class AddTranslatorTest {
 
     interpreter.interpret(TestHelpers.createMapping(instructions), BigInteger.valueOf(0x100));
 
-    assertEquals(6, TestHelpers.filterNativeRegisters(interpreter.getDefinedRegisters()).size());
+    assertEquals(8, TestHelpers.filterNativeRegisters(interpreter.getDefinedRegisters()).size());
 
     assertEquals(BigInteger.valueOf(0x4000), interpreter.getVariableValue("rax"));
     assertEquals(BigInteger.ZERO, interpreter.getVariableValue("CF"));

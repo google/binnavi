@@ -108,75 +108,88 @@ public class ShlTranslator implements IInstructionTranslator {
     final String msbResult = environment.getNextVariableString();
     final String carryResult = environment.getNextVariableString();
 
-    final int before = instructions.size();
-
     final List<ReilInstruction> writebackInstructions = new ArrayList<>();
 
-    // Write the result of the SHR operation back into the target register
-    Helpers.writeBack(environment, offset + 16, operands.get(0), truncatedResult, size1,
-        firstResult.getAddress(), firstResult.getType(), writebackInstructions);
-
     // Make sure to shift less than the size1 of the register
-    instructions.add(ReilHelpers.createMod(offset, size2, operand2, size2, modValue, size2,
-        shiftMask));
+    instructions
+        .add(ReilHelpers.createMod(offset++, size2, operand2, size2, modValue, size2, shiftMask));
 
     // Find out if the shift mask is 0 and negate the result
-    instructions.add(ReilHelpers.createBisz(offset + 1, size2, shiftMask, OperandSize.BYTE,
-        shiftMaskZero));
+    instructions
+        .add(ReilHelpers.createBisz(offset++, size2, shiftMask, OperandSize.BYTE, shiftMaskZero));
 
     // Find out if the shift mask is 1
-    instructions.add(ReilHelpers.createSub(offset + 2, size2, "1", size2, shiftMask, size2,
-        shiftMaskLessOne));
-    instructions.add(ReilHelpers.createBisz(offset + 3, size2, shiftMaskLessOne, OperandSize.BYTE,
-        shiftMaskOne));
+    instructions.add(
+        ReilHelpers.createSub(offset++, size2, "1", size2, shiftMask, size2, shiftMaskLessOne));
+    instructions.add(
+        ReilHelpers.createBisz(offset++, size2, shiftMaskLessOne, OperandSize.BYTE, shiftMaskOne));
 
     // Perform the shift
-    instructions.add(ReilHelpers.createBsh(offset + 4, size1, operand1, size2, shiftMask,
-        resultSize, result));
+    instructions.add(
+        ReilHelpers.createBsh(offset++, size1, operand1, size2, shiftMask, resultSize, result));
 
     // Truncate the result to the correct size1
-    instructions.add(ReilHelpers.createAnd(offset + 5, resultSize, result, size1, truncateMask,
-        size1, truncatedResult));
+    instructions.add(ReilHelpers.createAnd(offset++, resultSize, result, size1, truncateMask, size1,
+        truncatedResult));
 
     // Don't change the flags if the shift value was zero (jump to writeBack).
-    final String jmpGoalWriteBack =
-        String.format("%d.%d", instruction.getAddress().toLong(), before + 16);
-    instructions.add(ReilHelpers.createJcc(offset + 6, OperandSize.BYTE, shiftMaskZero,
-        OperandSize.ADDRESS, jmpGoalWriteBack));
+    final long firstJmpPos = offset - baseOffset;
+    instructions.add(ReilHelpers.createNop(offset++));
 
     // Extract the MSB of the result and shift it into the SF
-    instructions.add(ReilHelpers.createAnd(offset + 7, resultSize, result, resultSize, msbMask,
+    instructions.add(ReilHelpers.createAnd(offset++, resultSize, result, resultSize, msbMask,
         resultSize, msbResult));
-    instructions.add(ReilHelpers.createBsh(offset + 8, resultSize, msbResult, resultSize,
+    instructions.add(ReilHelpers.createBsh(offset++, resultSize, msbResult, resultSize,
         shiftMsbLsbValue, OperandSize.BYTE, Helpers.SIGN_FLAG));
 
     // Set the CF to the MSB of the result
-    instructions.add(ReilHelpers.createAnd(offset + 9, resultSize, result, resultSize, carryMask,
+    instructions.add(ReilHelpers.createAnd(offset++, resultSize, result, resultSize, carryMask,
         resultSize, carryResult));
-    instructions.add(ReilHelpers.createBsh(offset + 10, resultSize, carryResult, resultSize,
+    instructions.add(ReilHelpers.createBsh(offset++, resultSize, carryResult, resultSize,
         shiftCarryValue, OperandSize.BYTE, Helpers.CARRY_FLAG));
 
+    instructions.add(ReilHelpers.createUndef(offset++, OperandSize.BYTE, Helpers.AUXILIARY_FLAG));
+    // Set PF
+    Helpers.writeParityFlag(environment, offset++, resultSize, result, instructions);
+    offset = ReilHelpers.nextReilAddress(instruction, instructions);
     // Set the ZF
-    instructions.add(ReilHelpers.createBisz(offset + 11, size1, truncatedResult, OperandSize.BYTE,
+    instructions.add(ReilHelpers.createBisz(offset++, size1, truncatedResult, OperandSize.BYTE,
         Helpers.ZERO_FLAG));
 
     // The OF needs to be set to a different value if the shift-mask was 1
-    final String jmpGoal2 = String.format("%d.%d", instruction.getAddress().toLong(), before + 15);
-    instructions.add(ReilHelpers.createJcc(offset + 12, OperandSize.BYTE, shiftMaskOne,
-        OperandSize.ADDRESS, jmpGoal2));
+    final long secondJmpPos = offset - baseOffset;
+    instructions.add(ReilHelpers.createNop(offset++));
 
     // Set the OF to undefined if the shift-mask was positive but not 1
-    instructions.add(ReilHelpers.createUndef(offset + 13, OperandSize.BYTE, Helpers.OVERFLOW_FLAG));
+    instructions.add(ReilHelpers.createUndef(offset++, OperandSize.BYTE, Helpers.OVERFLOW_FLAG));
 
     // Jump to writeBack.
-    instructions.add(ReilHelpers.createJcc(offset + 14, OperandSize.BYTE, "1",
-        OperandSize.ADDRESS, jmpGoalWriteBack));
+    final long thirdJmpPos = offset - baseOffset;
+    instructions.add(ReilHelpers.createNop(offset++));
 
+    final String jmpGoal2 = String.format("%d.%d", instruction.getAddress().toLong(),
+        instructions.size());
+    instructions.remove((int) (secondJmpPos));
+    instructions.add((int) (secondJmpPos), ReilHelpers.createJcc(secondJmpPos + baseOffset,
+        OperandSize.BYTE, shiftMaskOne, OperandSize.ADDRESS, jmpGoal2));
     // Set the OF if the shift-mask was 1.
-    instructions.add(ReilHelpers.createXor(offset + 15, OperandSize.BYTE, Helpers.SIGN_FLAG,
+    instructions.add(ReilHelpers.createXor(offset++, OperandSize.BYTE, Helpers.SIGN_FLAG,
         OperandSize.BYTE, Helpers.CARRY_FLAG, OperandSize.BYTE, Helpers.OVERFLOW_FLAG));
 
     // Write back to the target register.
+    // Write the result of the SHR operation back into the target register
+    final String jmpGoalWriteBack = String.format("%d.%d", instruction.getAddress().toLong(),
+        instructions.size());
+    instructions.remove((int) (firstJmpPos));
+    instructions.add((int) (firstJmpPos), ReilHelpers.createJcc(firstJmpPos + baseOffset,
+        OperandSize.BYTE, shiftMaskZero, OperandSize.ADDRESS, jmpGoalWriteBack));
+
+    instructions.remove((int) (thirdJmpPos));
+    instructions.add((int) (thirdJmpPos), ReilHelpers.createJcc(thirdJmpPos + baseOffset,
+        OperandSize.BYTE, "1", OperandSize.ADDRESS, jmpGoalWriteBack));
+
+    Helpers.writeBack(environment, offset++, operands.get(0), truncatedResult, size1,
+        firstResult.getAddress(), firstResult.getType(), writebackInstructions);
     instructions.addAll(writebackInstructions);
   }
 
