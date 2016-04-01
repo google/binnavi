@@ -148,9 +148,14 @@ public class AddTranslator implements IInstructionTranslator {
     instructions.add(ReilHelpers.createBisz(offset + 13, size, truncatedResult, OperandSize.BYTE,
         Helpers.ZERO_FLAG));
 
+    Helpers.writeAuxiliaryFlag(environment, offset + 14, ReilHelpers.OPCODE_ADD, targetRegister,
+        sourceRegister, instructions);
+    Helpers.writeParityFlag(environment, baseOffset + instructions.size(), resultSize,
+        truncatedResult, instructions);
+
     // Write the result of the ADD operation back into the target register
-    Helpers.writeBack(environment, offset + 14, targetOperand, truncatedResult, size,
-        targetResult.getAddress(), targetResult.getType(), instructions);
+    Helpers.writeBack(environment, baseOffset + instructions.size(), targetOperand, truncatedResult,
+        size, targetResult.getAddress(), targetResult.getType(), instructions);
   }
 
 }

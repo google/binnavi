@@ -68,7 +68,7 @@ public class ScasbTranslatorTest {
 
     interpreter.interpret(TestHelpers.createMapping(instructions), BigInteger.valueOf(0x100));
 
-    assertEquals(8, TestHelpers.filterNativeRegisters(interpreter.getDefinedRegisters()).size());
+    assertEquals(9, TestHelpers.filterNativeRegisters(interpreter.getDefinedRegisters()).size());
 
     assertEquals(BigInteger.ONE, interpreter.getVariableValue("ZF"));
     assertEquals(BigInteger.valueOf(0x1FFF), interpreter.getVariableValue("rdi"));
@@ -96,7 +96,7 @@ public class ScasbTranslatorTest {
 
     System.out.println(interpreter.getDefinedRegisters());
 
-    assertEquals(8, TestHelpers.filterNativeRegisters(interpreter.getDefinedRegisters()).size());
+    assertEquals(9, TestHelpers.filterNativeRegisters(interpreter.getDefinedRegisters()).size());
 
     assertEquals(BigInteger.ONE, interpreter.getVariableValue("ZF"));
     assertEquals(BigInteger.valueOf(0x2001), interpreter.getVariableValue("rdi"));

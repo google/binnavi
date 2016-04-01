@@ -69,7 +69,7 @@ public class CmpsbTranslatorTest {
 
     interpreter.interpret(TestHelpers.createMapping(instructions), BigInteger.valueOf(0x100));
 
-    assertEquals(8, TestHelpers.filterNativeRegisters(interpreter.getDefinedRegisters()).size());
+    assertEquals(9, TestHelpers.filterNativeRegisters(interpreter.getDefinedRegisters()).size());
 
     assertEquals(BigInteger.ONE, interpreter.getVariableValue("ZF"));
     assertEquals(BigInteger.valueOf(0x0FFF), interpreter.getVariableValue("rsi"));
@@ -97,7 +97,7 @@ public class CmpsbTranslatorTest {
 
     interpreter.interpret(TestHelpers.createMapping(instructions), BigInteger.valueOf(0x100));
 
-    assertEquals(8, TestHelpers.filterNativeRegisters(interpreter.getDefinedRegisters()).size());
+    assertEquals(9, TestHelpers.filterNativeRegisters(interpreter.getDefinedRegisters()).size());
 
     assertEquals(BigInteger.ONE, interpreter.getVariableValue("ZF"));
     assertEquals(BigInteger.valueOf(0x1001), interpreter.getVariableValue("rsi"));

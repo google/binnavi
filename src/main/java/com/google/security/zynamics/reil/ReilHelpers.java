@@ -218,7 +218,7 @@ public class ReilHelpers {
    *
    * @return The created instruction
    */
-  private static ReilInstruction createTrinaryInstruction(final String opcode,
+  public static ReilInstruction createTrinaryInstruction(final String opcode,
       final IAddress offset,
       final OperandSize firstSize,
       final String firstValue,

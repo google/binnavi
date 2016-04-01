@@ -26,6 +26,7 @@ import com.google.security.zynamics.reil.translators.InternalTranslationExceptio
 import com.google.security.zynamics.reil.translators.TranslationHelpers;
 import com.google.security.zynamics.reil.translators.TranslationResult;
 import com.google.security.zynamics.reil.translators.TranslationResultType;
+import com.google.security.zynamics.zylib.disassembly.CAddress;
 import com.google.security.zynamics.zylib.disassembly.IInstruction;
 import com.google.security.zynamics.zylib.disassembly.IOperandTree;
 import com.google.security.zynamics.zylib.disassembly.IOperandTreeNode;
@@ -928,6 +929,8 @@ public class Helpers {
         Helpers.CARRY_FLAG));
     instructions.add(ReilHelpers.createStr(offset + 3, OperandSize.BYTE, "0", OperandSize.BYTE,
         Helpers.OVERFLOW_FLAG));
+    instructions.add(ReilHelpers.createUndef(offset + 4, OperandSize.BYTE, Helpers.AUXILIARY_FLAG));
+    writeParityFlag(environment, offset + 5, resultSize, result, instructions);
   }
 
   /**
@@ -1159,7 +1162,7 @@ public class Helpers {
    *
    * @throws IllegalArgumentException Thrown if any of the arguments are invalid
    */
-  public static String generateSub(final ITranslationEnvironment environment, final long offset,
+  public static String generateSub(final ITranslationEnvironment environment, final long baseOffset,
       final OperandSize size, final String operand1, final String operand2,
       final List<ReilInstruction> instructions) throws IllegalArgumentException {
     Preconditions.checkNotNull(environment, "Error: Argument environment can't be null");
@@ -1184,47 +1187,52 @@ public class Helpers {
     final String tempOf = environment.getNextVariableString();
     final String tempCf = environment.getNextVariableString();
     final String truncatedResult = environment.getNextVariableString();
-
+    long offset = baseOffset;
+    long instructionsBefore = instructions.size();
     // Isolate the MSBs of the two operands
-    instructions.add(ReilHelpers.createAnd(offset, size, operand1, size, msbMask, size, maskedOp1));
-    instructions.add(ReilHelpers.createAnd(offset + 1, size, operand2, size, msbMask, size,
+    instructions.add(ReilHelpers.createAnd(offset++, size, operand1, size, msbMask, size, maskedOp1));
+    instructions.add(ReilHelpers.createAnd(offset++, size, operand2, size, msbMask, size,
         maskedOp2));
 
     // Perform the subtraction
-    instructions.add(ReilHelpers.createSub(offset + 2, size, operand1, size, operand2, resultSize,
+    instructions.add(ReilHelpers.createSub(offset++, size, operand1, size, operand2, resultSize,
         subResult));
 
     // Isolate the MSB of the result and put it into the Sign Flag
-    instructions.add(ReilHelpers.createAnd(offset + 3, resultSize, subResult, resultSize, msbMask,
+    instructions.add(ReilHelpers.createAnd(offset++, resultSize, subResult, resultSize, msbMask,
         size, msbResult));
-    instructions.add(ReilHelpers.createBsh(offset + 4, size, msbResult, size, shiftMsbLsb,
+    instructions.add(ReilHelpers.createBsh(offset++, size, msbResult, size, shiftMsbLsb,
         OperandSize.BYTE, SIGN_FLAG));
 
     // Find out if the MSB of the two operands were different and whether the MSB of the first
     // operand changed
-    instructions.add(ReilHelpers.createXor(offset + 5, size, maskedOp1, size, maskedOp2, size,
+    instructions.add(ReilHelpers.createXor(offset++, size, maskedOp1, size, maskedOp2, size,
         msbSameBefore));
-    instructions.add(ReilHelpers.createXor(offset + 6, size, maskedOp1, size, msbResult, size,
+    instructions.add(ReilHelpers.createXor(offset++, size, maskedOp1, size, msbResult, size,
         msbHasChanged));
-    instructions.add(ReilHelpers.createAnd(offset + 7, size, msbSameBefore, size, msbHasChanged,
+    instructions.add(ReilHelpers.createAnd(offset++, size, msbSameBefore, size, msbHasChanged,
         size, tempOf));
 
     // Write the result into the Overflow Flag
-    instructions.add(ReilHelpers.createBsh(offset + 8, size, tempOf, size, shiftMsbLsb,
+    instructions.add(ReilHelpers.createBsh(offset++, size, tempOf, size, shiftMsbLsb,
         OperandSize.BYTE, OVERFLOW_FLAG));
 
     // Update the Carry Flag
-    instructions.add(ReilHelpers.createAnd(offset + 9, resultSize, subResult, resultSize,
+    instructions.add(ReilHelpers.createAnd(offset++, resultSize, subResult, resultSize,
         carryMask, resultSize, tempCf));
-    instructions.add(ReilHelpers.createBsh(offset + 10, resultSize, tempCf, resultSize,
+    instructions.add(ReilHelpers.createBsh(offset++, resultSize, tempCf, resultSize,
         shiftCarryLsb, OperandSize.BYTE, CARRY_FLAG));
 
+    //Update the  Auxiliary Carry flag
+    writeAuxiliaryFlag(environment, offset, ReilHelpers.OPCODE_SUB, operand1, operand2, instructions);
+    offset = baseOffset + instructions.size() - instructionsBefore;
+
     // Truncate the result to fit into the target
-    instructions.add(ReilHelpers.createAnd(offset + 11, resultSize, subResult, resultSize,
+    instructions.add(ReilHelpers.createAnd(offset++, resultSize, subResult, resultSize,
         truncateMask, size, truncatedResult));
 
     // Update the Zero Flag
-    instructions.add(ReilHelpers.createBisz(offset + 12, size, truncatedResult, OperandSize.BYTE,
+    instructions.add(ReilHelpers.createBisz(offset++, size, truncatedResult, OperandSize.BYTE,
         ZERO_FLAG));
 
     return truncatedResult;
@@ -1258,6 +1266,15 @@ public class Helpers {
     }
 
     throw new IllegalArgumentException("Error: Invalid argument size");
+  }
+
+  /**
+   * Returns a mask to mask out all bits but the auxiliary carry bit (3 bit).
+   *
+   * @return The auxiliary carry mask.
+   */
+  public static String getAuxiliaryCarryMask() {
+    return "16";
   }
 
   /**
@@ -1809,7 +1826,7 @@ public class Helpers {
         resultSize, Helpers.PARITY_FLAG, resultSize, Helpers.PARITY_FLAG));
     // Mask off all but the 4 LSB of PARITY_FLAG.
     instructions.add(ReilHelpers.createAnd(offset + 3, resultSize, Helpers.PARITY_FLAG,
-        resultSize, String.valueOf(0xFFL), OperandSize.WORD, Helpers.PARITY_FLAG));
+        resultSize, String.valueOf(0xFL), OperandSize.WORD, Helpers.PARITY_FLAG));
     // For i = 0, ..., 15, the (16-i)-th rightmost bit of 0x9669 is the parity of i.
     // We set PARITY_FLAG = ((38505 << PARITY_FLAG) & (1 << 15)) >> 15.
     instructions.add(ReilHelpers.createBsh(offset + 4, OperandSize.WORD, String.valueOf(0x9669L),
@@ -1818,6 +1835,47 @@ public class Helpers {
         OperandSize.WORD, String.valueOf(0x8000L), OperandSize.WORD, Helpers.PARITY_FLAG));
     instructions.add(ReilHelpers.createBsh(offset + 6, OperandSize.WORD, Helpers.PARITY_FLAG,
         OperandSize.BYTE, "-15", OperandSize.BYTE, Helpers.PARITY_FLAG));
+  }
+
+  /**
+   * Writes the AUXILIARY flag according to result.
+   *
+   * @param environment A valid translation environment.
+   * @param baseOffset The next unused REIL offset; the new code is written there.
+   * @param opcode Opcode of operation.
+   * @param firstOperand First operand of instruction.
+   * @param secondOperand Second operand of instruction.
+   * @param instructions The new code is added to this list of instructions
+   *
+   * @throws IllegalArgumentException Thrown if invalid arguments were passed to the function.
+   */
+  public static void writeAuxiliaryFlag(final ITranslationEnvironment environment,
+      final long baseOffset, final String opcode, final String firstOperand,
+      final String secondOperand, final List<ReilInstruction> instructions)
+                                     throws IllegalArgumentException {
+    Preconditions.checkNotNull(environment, "Error: Argument environment can't be null");
+    Preconditions.checkNotNull(opcode, "Error: Argument opcode can't be null");
+    Preconditions.checkNotNull(firstOperand, "Error: Argument firstOperand can't be null");
+    Preconditions.checkNotNull(secondOperand, "Error: Argument secondOperand can't be null");
+    Preconditions.checkNotNull(instructions, "Error: Argument instructions can't be null");
+
+    final String auxiliaryCarryResult = environment.getNextVariableString();
+    final String result = environment.getNextVariableString();
+    final String truncatedFirst = environment.getNextVariableString();
+    final String truncatedSecond = environment.getNextVariableString();
+    long offset = baseOffset;
+    instructions.add(ReilHelpers.createAnd(offset++, OperandSize.BYTE, firstOperand, OperandSize.BYTE,
+        "15", OperandSize.BYTE, truncatedFirst));
+    instructions.add(ReilHelpers.createAnd(offset++, OperandSize.BYTE, secondOperand, OperandSize.BYTE,
+        "15", OperandSize.BYTE, truncatedSecond));
+
+    instructions.add( ReilHelpers.createTrinaryInstruction(opcode, new CAddress(offset++), OperandSize.BYTE,
+        truncatedFirst, OperandSize.BYTE, truncatedSecond, OperandSize.BYTE, result));
+
+    instructions.add(ReilHelpers.createAnd(offset++, OperandSize.BYTE, result, OperandSize.BYTE,
+        Helpers.getAuxiliaryCarryMask(), OperandSize.BYTE, auxiliaryCarryResult));
+    instructions.add(ReilHelpers.createBsh(offset++, OperandSize.BYTE, auxiliaryCarryResult,
+        OperandSize.BYTE, "-4", OperandSize.BYTE, Helpers.AUXILIARY_FLAG));
   }
 
   public static ArrayList<ReilInstruction> writeDivResult(

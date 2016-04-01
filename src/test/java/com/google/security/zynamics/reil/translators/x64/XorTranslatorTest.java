@@ -78,13 +78,14 @@ public class XorTranslatorTest {
 
     interpreter.interpret(TestHelpers.createMapping(instructions), BigInteger.valueOf(0x100));
 
-    assertEquals(6, TestHelpers.filterNativeRegisters(interpreter.getDefinedRegisters()).size());
+    assertEquals(7, TestHelpers.filterNativeRegisters(interpreter.getDefinedRegisters()).size());
 
     assertEquals(BigInteger.ZERO, interpreter.getVariableValue("rax"));
     assertEquals(BigInteger.ZERO, interpreter.getVariableValue("CF"));
     assertEquals(BigInteger.ZERO, interpreter.getVariableValue("OF"));
     assertEquals(BigInteger.ZERO, interpreter.getVariableValue("SF"));
     assertEquals(BigInteger.ONE, interpreter.getVariableValue("ZF"));
+    assertEquals(BigInteger.ONE, interpreter.getVariableValue("PF"));
 
     assertEquals(BigInteger.ZERO, BigInteger.valueOf(interpreter.getMemorySize()));
   }

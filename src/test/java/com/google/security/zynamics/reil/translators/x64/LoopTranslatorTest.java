@@ -45,7 +45,6 @@ import org.junit.runners.JUnit4;
 
 import java.math.BigInteger;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 @RunWith(JUnit4.class)
@@ -90,14 +89,9 @@ public class LoopTranslatorTest {
     instruction2.address = new CAddress(0x101);
 
     translator.translate(environment, instruction2, instructions);
+    instructions.addAll(0, instructionsDec);
 
-    final HashMap<BigInteger, List<ReilInstruction>> mapping =
-        new HashMap<BigInteger, List<ReilInstruction>>();
-
-    mapping.put(BigInteger.valueOf(instructions.get(0).getAddress().toLong()/0x100), instructions);
-    mapping.put(BigInteger.valueOf(instructionsDec.get(0).getAddress().toLong()/0x100), instructionsDec);
-
-    interpreter.interpret(mapping, BigInteger.valueOf(0x100));
+    interpreter.interpret(TestHelpers.createMapping(instructions), BigInteger.valueOf(0x100));
 
     assertEquals(6, TestHelpers.filterNativeRegisters(interpreter.getDefinedRegisters()).size());
 
