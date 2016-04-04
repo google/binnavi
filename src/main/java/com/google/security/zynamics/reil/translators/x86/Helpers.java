@@ -84,7 +84,8 @@ public class Helpers {
    * Zero flag constant to be used in REIL code
    */
   public static final String ZERO_FLAG = "ZF";
-
+  
+  public static final OperandSize ArchitectureSize = OperandSize.DWORD;
   /**
    * Extracts a subregister (like AX, AL, AH) from a parent register (like EAX)
    *
@@ -101,7 +102,7 @@ public class Helpers {
     final ArrayList<ReilInstruction> instructions = new ArrayList<ReilInstruction>();
 
     final String parentRegister = getParentRegister(subRegister);
-    final OperandSize archSize = environment.getArchitectureSize();
+    final OperandSize archSize = ArchitectureSize;
 
     if (isHigher8BitRegister(subRegister)) {
       // The sub-register is not at the low end of the parent
@@ -416,7 +417,7 @@ public class Helpers {
       boolean loadOperand,
       TranslationResult intermediateResult) {
 
-    final OperandSize archSize = environment.getArchitectureSize();
+    final OperandSize archSize = ArchitectureSize;
     final String truncationMask =
         String.valueOf(TranslationHelpers.getAllBitsMask(archSize));
 
@@ -486,7 +487,7 @@ public class Helpers {
   private static TranslationResult processSimpleMemoryAccessLiteralOrRegisterLoad(
       ITranslationEnvironment environment, IOperandTreeNode segmentOverride, OperandSize size,
       boolean loadOperand, TranslationResult intermediateResult) {
-    final OperandSize archSize = environment.getArchitectureSize();
+    final OperandSize archSize = ArchitectureSize;
 
     // Get the result of the previous translation.
     final String childResult = intermediateResult.getRegister();
@@ -579,7 +580,7 @@ public class Helpers {
                                         // gets modified inside translateChildrenOfNode
                                         // below.
     final OperandSize childrenSize = isMemoryAccess(currentNodeValue)
-        ? environment.getArchitectureSize() : size;
+        ? ArchitectureSize : size;
     final List<TranslationResult> partialResults =
         translateChildrenOfNode(environment,
         expression,
@@ -632,7 +633,7 @@ public class Helpers {
       final String destination,
       final TranslationResult finalResult
       ) {
-    final OperandSize archSize = environment.getArchitectureSize();
+    final OperandSize archSize = ArchitectureSize;
     final OperandSize resultSize = TranslationHelpers.getNextSize(archSize);
     if (value.equals("+")) {
       finalResult.addInstruction(ReilHelpers.createAdd(0, /* reil address */
@@ -669,7 +670,7 @@ public class Helpers {
       long baseOffset,
       IOperandTreeNode expression) throws InternalTranslationException {
     final String value = expression.getValue();
-    final OperandSize archSize = environment.getArchitectureSize();
+    final OperandSize archSize = ArchitectureSize;
     final OperandSize nextSize = TranslationHelpers.getNextSize(archSize);
 
     // This result will be filled with the merged results from partialResults.
@@ -748,7 +749,7 @@ public class Helpers {
    */
   private static boolean needsExtraction(final ITranslationEnvironment environment,
       final String registerName) throws InternalTranslationException {
-    return (getRegisterSize(registerName) != environment.getArchitectureSize())
+    return (getRegisterSize(registerName) != ArchitectureSize)
         && !isSegment(registerName);
   }
 
@@ -928,7 +929,7 @@ public class Helpers {
 
     long offset = baseOffset;
 
-    final OperandSize archSize = environment.getArchitectureSize();
+    final OperandSize archSize = ArchitectureSize;
 
     if (size == archSize) {
       // Target size == archSize => We can just pop the value
@@ -1022,7 +1023,7 @@ public class Helpers {
     Preconditions.checkNotNull(size, "Error: Argument size can't be null");
     Preconditions.checkNotNull(instructions, "Error: Argument instructions can't be null");
 
-    final OperandSize archSize = environment.getArchitectureSize();
+    final OperandSize archSize = ArchitectureSize;
     final OperandSize resultSize = TranslationHelpers.getNextSize(archSize);
 
     final String loadedValue = target == null ? environment.getNextVariableString() : target;
@@ -1061,7 +1062,7 @@ public class Helpers {
     Preconditions.checkNotNull(size, "Error: Argument size can't be null");
     Preconditions.checkNotNull(instructions, "Error: Argument instructions can't be null");
 
-    final OperandSize archSize = environment.getArchitectureSize();
+    final OperandSize archSize = ArchitectureSize;
     final OperandSize nextSize = TranslationHelpers.getNextSize(archSize);
 
     final String addResult = environment.getNextVariableString();
@@ -1104,7 +1105,7 @@ public class Helpers {
 
     long offset = baseOffset;
 
-    final OperandSize archSize = environment.getArchitectureSize();
+    final OperandSize archSize = ArchitectureSize;
 
     final String tempEsp = environment.getNextVariableString();
 
@@ -1422,7 +1423,7 @@ public class Helpers {
 
     final ArrayList<ReilInstruction> instructions = new ArrayList<ReilInstruction>();
 
-    final OperandSize archSize = environment.getArchitectureSize();
+    final OperandSize archSize = ArchitectureSize;
 
     if (size == OperandSize.BYTE) {
 
@@ -1497,7 +1498,7 @@ public class Helpers {
 
     final OperandSize registerSize = getRegisterSize(subRegister);
     final OperandSize parentRegisterSize = getRegisterSize(parentRegister);
-    final OperandSize archSize = environment.getArchitectureSize();
+    final OperandSize archSize = ArchitectureSize;
 
     // The subregister is too large => Not a subregister
     if (registerSize.getByteSize() >= archSize.getByteSize()) {
@@ -1724,7 +1725,7 @@ public class Helpers {
 
     // TODO: Exact meaning of parameter size
 
-    final OperandSize archSize = environment.getArchitectureSize();
+    final OperandSize archSize = ArchitectureSize;
 
     if (targetType == TranslationResultType.REGISTER) {
 
@@ -1801,7 +1802,7 @@ public class Helpers {
 
     final ArrayList<ReilInstruction> instructions = new ArrayList<ReilInstruction>();
 
-    final OperandSize archSize = environment.getArchitectureSize();
+    final OperandSize archSize = ArchitectureSize;
 
     if (size == OperandSize.BYTE) {
 
@@ -1860,7 +1861,7 @@ public class Helpers {
 
     final ArrayList<ReilInstruction> instructions = new ArrayList<ReilInstruction>();
 
-    final OperandSize archSize = environment.getArchitectureSize();
+    final OperandSize archSize = ArchitectureSize;
 
     if (size == OperandSize.BYTE) {
 

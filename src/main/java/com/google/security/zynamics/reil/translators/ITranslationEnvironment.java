@@ -31,14 +31,7 @@ public interface ITranslationEnvironment {
    */
   int generateNextVariable();
 
-  /**
-   * Returns the size of the standard registers of the source architecture.
-   * 
-   * @return The size of the standard registers of the source architecture.
-   */
-  OperandSize getArchitectureSize();
-
-  /**
+   /**
    * Returns the index of the next unused REIL register.
    * 
    * @return The index of the next unused REIL register.

@@ -230,7 +230,7 @@ public class ImulTranslator implements IInstructionTranslator {
       final OperandSize size1, final List<ReilInstruction> instructions)
       throws InternalTranslationException {
 
-    final OperandSize archSize = environment.getArchitectureSize();
+    final OperandSize archSize = Helpers.ArchitectureSize;
 
     if (size1 == archSize) {
       // The destination is a DWORD => Just write the result

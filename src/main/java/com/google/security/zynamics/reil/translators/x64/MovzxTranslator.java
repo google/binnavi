@@ -77,7 +77,7 @@ public class MovzxTranslator implements IInstructionTranslator {
     final OperandSize destSize = Helpers.getRegisterSize(destRegister);
     final OperandSize sourceSize = sourceResult.getSize();
 
-    if (destSize == environment.getArchitectureSize()) {
+    if (destSize == Helpers.ArchitectureSize) {
       instructions.add(ReilHelpers.createOr(offset, destSize, "0", sourceSize, sourceRegister,
           destSize, destRegister));
     } else {

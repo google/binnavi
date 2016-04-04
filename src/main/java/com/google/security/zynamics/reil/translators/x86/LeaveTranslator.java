@@ -51,7 +51,7 @@ public class LeaveTranslator implements IInstructionTranslator {
         "Error: Argument instruction is not a leave instruction (invalid number of operands)");
     final long baseOffset = instruction.getAddress().toLong() * 0x100;
 
-    final OperandSize archSize = environment.getArchitectureSize();
+    final OperandSize archSize = Helpers.ArchitectureSize;
     final OperandSize resultSize = TranslationHelpers.getNextSize(archSize);
 
     final String truncateMask = String.valueOf(TranslationHelpers.getAllBitsMask(archSize));

@@ -65,7 +65,7 @@ public class XchgTranslator implements IInstructionTranslator {
     final IOperandTree firstOperand = operands.get(0);
     final IOperandTree secondOperand = operands.get(1);
 
-    final OperandSize archSize = environment.getArchitectureSize();
+    final OperandSize archSize = Helpers.ArchitectureSize;
 
     // Load first operand.
     final TranslationResult firstResult =

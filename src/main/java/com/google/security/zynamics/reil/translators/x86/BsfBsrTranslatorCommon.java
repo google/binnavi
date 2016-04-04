@@ -79,7 +79,7 @@ public class BsfBsrTranslatorCommon {
     // Input value is 0
     instructions.add(ReilHelpers.createStr(offset++, OperandSize.BYTE, "1", OperandSize.BYTE,
         Helpers.ZERO_FLAG));
-    instructions.add(ReilHelpers.createUndef(offset++, environment.getArchitectureSize(),
+    instructions.add(ReilHelpers.createUndef(offset++, Helpers.ArchitectureSize,
         targetRegister));
     instructions.add(ReilHelpers.createJcc(offset++, OperandSize.BYTE, "1", OperandSize.ADDRESS,
         labelEnd));

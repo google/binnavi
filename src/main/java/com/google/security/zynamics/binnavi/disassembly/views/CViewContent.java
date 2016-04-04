@@ -689,13 +689,7 @@ public final class CViewContent implements IViewContent {
   @Override
   public ReilFunction getReilCode() throws InternalTranslationException {
     if (m_reilFunction == null) {
-      ITranslationEnvironment env;
-      if (view.getBasicBlocks().isEmpty()) {
-        env = new StandardEnvironment();
-      } else {
-        env = view.getBasicBlocks().get(0).getLastInstruction().getArchitecture().getEnviroment();
-      }
-      m_reilFunction = m_translator.translate(env, view);
+      m_reilFunction = m_translator.translate(new StandardEnvironment(), view);
     }
     return m_reilFunction;
   }

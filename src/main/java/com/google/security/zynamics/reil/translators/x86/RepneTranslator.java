@@ -43,7 +43,7 @@ public class RepneTranslator implements IInstructionTranslator {
     final long baseOffset = ReilHelpers.toReilAddress(instruction.getAddress()).toLong();
     final long offset = baseOffset;
 
-    final OperandSize archSize = environment.getArchitectureSize();
+    final OperandSize archSize = Helpers.ArchitectureSize;
 
     final String invertedEcx = environment.getNextVariableString();
     final List<ReilInstruction> innerInstructions = new ArrayList<ReilInstruction>();

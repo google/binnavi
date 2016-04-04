@@ -52,7 +52,7 @@ public class MovsGenerator implements IStringInstructionGenerator {
     final long offset = baseOffset;
     final int previousInstructions = (int) (baseOffset % 0x100);
 
-    final OperandSize archSize = environment.getArchitectureSize();
+    final OperandSize archSize = Helpers.ArchitectureSize;
     final OperandSize resultSize = TranslationHelpers.getNextSize(operandSize);
 
     final String ediChange = String.valueOf(operandSize.getByteSize());

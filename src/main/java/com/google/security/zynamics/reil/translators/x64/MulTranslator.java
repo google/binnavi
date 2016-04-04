@@ -70,7 +70,7 @@ public class MulTranslator implements IInstructionTranslator {
     final String operand2 = "rax";
 
     final OperandSize size1 = firstResult.getSize();
-    final OperandSize size2 = environment.getArchitectureSize();
+    final OperandSize size2 = Helpers.ArchitectureSize;
     final OperandSize resultSize = TranslationHelpers.getNextSize(size2);
 
     final String result = environment.getNextVariableString();

@@ -70,7 +70,7 @@ public class JmpTranslator implements IInstructionTranslator {
     offset = baseOffset + instructions.size();
 
     instructions.add(ReilHelpers.createJcc(offset, OperandSize.BYTE, "1",
-        environment.getArchitectureSize(), jumpTarget));
+        Helpers.ArchitectureSize, jumpTarget));
   }
 
 }

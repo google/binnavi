@@ -55,7 +55,7 @@ public class BswapTranslator implements IInstructionTranslator {
 
     final long baseOffset = instruction.getAddress().toLong() * 0x100;
 
-    final OperandSize archSize = environment.getArchitectureSize();
+    final OperandSize archSize = Helpers.ArchitectureSize;
 
     final String operand =
         instruction.getOperands().get(0).getRootNode().getChildren().get(0).getValue();

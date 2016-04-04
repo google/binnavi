@@ -107,9 +107,8 @@ public class LeaTranslator implements IInstructionTranslator {
 
         final String truncatedValue = environment.getNextVariableString();
 
-        final OperandSize registerSize =
-            sourceInstructions.size() == 0 ? Helpers.getRegisterSize(sourceRegister) : environment
-                .getArchitectureSize();
+        final OperandSize registerSize = sourceInstructions.size() == 0
+            ? Helpers.getRegisterSize(sourceRegister) : Helpers.ArchitectureSize;
 
         // Add the truncating instruction
         instructions.add(ReilHelpers.createAnd(offset, registerSize, sourceRegister,
@@ -127,7 +126,7 @@ public class LeaTranslator implements IInstructionTranslator {
           TranslationResultType.REGISTER, instructions);
     } else if (size == OperandSize.DWORD) {
       
-   // Destination size is a sub-register
+      // Destination size is a sub-register
 
       final OperandType operandType = OperandType.getOperandType(sourceRegister);
 
@@ -137,7 +136,7 @@ public class LeaTranslator implements IInstructionTranslator {
       if (operandType == OperandType.INTEGER_LITERAL) {
 
         // Integer literals can be truncated directly.
-        sourceRegister = String.valueOf(Long.valueOf(sourceRegister) & 0xFFFFFFFF);
+        sourceRegister = String.valueOf(Long.valueOf(sourceRegister) & 0xFFFFFFFFL);
 
       } else if (operandType == OperandType.REGISTER) {
 
@@ -146,9 +145,8 @@ public class LeaTranslator implements IInstructionTranslator {
 
         final String truncatedValue = environment.getNextVariableString();
 
-        final OperandSize registerSize =
-            sourceInstructions.size() == 0 ? Helpers.getRegisterSize(sourceRegister) : environment
-                .getArchitectureSize();
+        final OperandSize registerSize = sourceInstructions.size() == 0
+            ? Helpers.getRegisterSize(sourceRegister) : Helpers.ArchitectureSize;
 
         // Add the truncating instruction
         instructions.add(ReilHelpers.createAnd(offset, registerSize, sourceRegister,
@@ -174,7 +172,7 @@ public class LeaTranslator implements IInstructionTranslator {
 
     // instructions.addAll(Helpers.writeBack(environment, offset, targetOperand, sourceRegister,
     // size, null, TranslationResultType.REGISTER));
-  }else {
+    } else {
       assert false;
     }
   }

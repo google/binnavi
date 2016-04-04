@@ -54,7 +54,7 @@ public class RetnTranslator implements IInstructionTranslator {
     final long baseOffset = instruction.getAddress().toLong() * 0x100;
     final long offset = baseOffset;
 
-    final OperandSize archSize = environment.getArchitectureSize();
+    final OperandSize archSize = Helpers.ArchitectureSize;
     final OperandSize nextSize = TranslationHelpers.getNextSize(archSize);
 
     final String truncateMask = String.valueOf(TranslationHelpers.getAllBitsMask(archSize));

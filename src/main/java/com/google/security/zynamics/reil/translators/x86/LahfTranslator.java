@@ -54,7 +54,7 @@ public class LahfTranslator implements IInstructionTranslator {
 
     final long baseOffset = instruction.getAddress().toLong() * 0x100;
 
-    final OperandSize archSize = environment.getArchitectureSize();
+    final OperandSize archSize = Helpers.ArchitectureSize;
 
     final String clearedEax = environment.getNextVariableString();
     final String shiftedSf = environment.getNextVariableString();

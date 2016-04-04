@@ -245,10 +245,10 @@ public class ShrdTranslator implements IInstructionTranslator {
       final String operand = Helpers.getLeafValue(inputOperand.getRootNode());
 
       final String undefRegister =
-          Helpers.getOperandSize(inputOperand) == environment.getArchitectureSize() ? operand
+          Helpers.getOperandSize(inputOperand) == Helpers.ArchitectureSize ? operand
               : Helpers.getParentRegister(operand);
 
-      instructions.add(ReilHelpers.createUndef(offset++, environment.getArchitectureSize(),
+      instructions.add(ReilHelpers.createUndef(offset++, Helpers.ArchitectureSize,
           undefRegister));
     }
 
