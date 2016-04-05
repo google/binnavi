@@ -27,7 +27,7 @@ import com.google.security.zynamics.reil.interpreter.InterpreterException;
 import com.google.security.zynamics.reil.interpreter.ReilInterpreter;
 import com.google.security.zynamics.reil.interpreter.ReilRegisterStatus;
 import com.google.security.zynamics.reil.translators.InternalTranslationException;
-import com.google.security.zynamics.reil.translators.StandardEnvironmentx64;
+import com.google.security.zynamics.reil.translators.StandardEnvironment;
 import com.google.security.zynamics.reil.translators.x64.EcxZeroGenerator;
 import com.google.security.zynamics.zylib.general.Pair;
 
@@ -43,7 +43,7 @@ public class EcxZeroGeneratorTest {
   private final ReilInterpreter interpreter = new ReilInterpreter(Endianness.LITTLE_ENDIAN,
       new CpuPolicyX64(), new EmptyInterpreterPolicy());
 
-  private final StandardEnvironmentx64 environment = new StandardEnvironmentx64();
+  private final StandardEnvironment environment = new StandardEnvironment();
 
   private final EcxZeroGenerator generator = new EcxZeroGenerator();
 

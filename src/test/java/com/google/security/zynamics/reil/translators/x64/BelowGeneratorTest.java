@@ -20,7 +20,7 @@ import static org.junit.Assert.assertEquals;
 import com.google.security.zynamics.reil.OperandSize;
 import com.google.security.zynamics.reil.ReilInstruction;
 import com.google.security.zynamics.reil.translators.InternalTranslationException;
-import com.google.security.zynamics.reil.translators.StandardEnvironmentx64;
+import com.google.security.zynamics.reil.translators.StandardEnvironment;
 import com.google.security.zynamics.reil.translators.x64.BelowGenerator;
 import com.google.security.zynamics.zylib.general.Pair;
 
@@ -32,7 +32,7 @@ import java.util.ArrayList;
 
 @RunWith(JUnit4.class)
 public class BelowGeneratorTest {
-  private final StandardEnvironmentx64 environment = new StandardEnvironmentx64();
+  private final StandardEnvironment environment = new StandardEnvironment();
 
   private final BelowGenerator generator = new BelowGenerator();
 

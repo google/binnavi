@@ -39,7 +39,7 @@ import com.google.security.zynamics.reil.interpreter.ReilInterpreter;
 import com.google.security.zynamics.reil.interpreter.ReilRegisterStatus;
 import com.google.security.zynamics.reil.translators.InternalTranslationException;
 import com.google.security.zynamics.reil.translators.ReilTranslator;
-import com.google.security.zynamics.reil.translators.StandardEnvironmentx64;
+import com.google.security.zynamics.reil.translators.StandardEnvironment;
 import com.google.security.zynamics.reil.translators.TranslationHelpers;
 import com.google.security.zynamics.zylib.disassembly.IInstruction;
 
@@ -90,7 +90,7 @@ public class SimpleFunctionTest {
         new CpuPolicyX64(), new EmptyInterpreterPolicy());
     
     ReilTranslator<INaviInstruction> translator = new ReilTranslator<>();
-    ReilFunction func = translator.translate(new StandardEnvironmentx64(), sha_compress);
+    ReilFunction func = translator.translate(new StandardEnvironment(), sha_compress);
     
    // interpreter.setRegister("dsbase", BigInteger.valueOf(0), OperandSize.QWORD,
    //      ReilRegisterStatus.DEFINED);
