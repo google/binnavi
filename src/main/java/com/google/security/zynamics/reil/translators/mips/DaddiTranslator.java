@@ -57,6 +57,7 @@ public class DaddiTranslator implements IInstructionTranslator {
     final String sourceImmediateSignExtended =
         SignExtendGenerator.extend16BitTo64(offset, environment, sourceImmediate, instructions);
 
+    offset = ReilHelpers.nextReilAddress(instruction, instructions);
     instructions.add(ReilHelpers.createAdd(offset++, qw, sourceRegister, qw,
         sourceImmediateSignExtended, ow, temporaryResult));
 

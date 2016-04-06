@@ -25,17 +25,16 @@ import com.google.security.zynamics.zylib.disassembly.IOperandTreeNode;
 
 import java.util.List;
 
-
 public class ARMShsubaddxTranslator extends ARMBaseTranslator {
   @Override
   protected void translateCore(final ITranslationEnvironment environment,
       final IInstruction instruction, final List<ReilInstruction> instructions) {
-    final IOperandTreeNode registerOperand1 =
-        instruction.getOperands().get(0).getRootNode().getChildren().get(0);
-    final IOperandTreeNode registerOperand2 =
-        instruction.getOperands().get(1).getRootNode().getChildren().get(0);
-    final IOperandTreeNode registerOperand3 =
-        instruction.getOperands().get(2).getRootNode().getChildren().get(0);
+    final IOperandTreeNode registerOperand1 = instruction.getOperands().get(0).getRootNode()
+        .getChildren().get(0);
+    final IOperandTreeNode registerOperand2 = instruction.getOperands().get(1).getRootNode()
+        .getChildren().get(0);
+    final IOperandTreeNode registerOperand3 = instruction.getOperands().get(2).getRootNode()
+        .getChildren().get(0);
 
     final String targetRegister = (registerOperand1.getValue());
     final String sourceRegister1 = (registerOperand2.getValue());
@@ -56,27 +55,27 @@ public class ARMShsubaddxTranslator extends ARMBaseTranslator {
         final String diff1 = environment.getNextVariableString();
         final String trueDiff1 = environment.getNextVariableString();
 
-        long baseOffset = offset;
+        long baseOffset = offset - instructions.size();
 
         // sign extend the operands to reflect the signed operation
-        Helpers.signExtend(baseOffset, environment, instruction, instructions, dw, firstTwo[0], dw,
-            firstTwo[0], 16);
-        Helpers.signExtend(baseOffset, environment, instruction, instructions, dw, firstTwo[1], dw,
-            firstTwo[1], 16);
-        Helpers.signExtend(baseOffset, environment, instruction, instructions, dw, secondTwo[0],
-            dw, secondTwo[0], 16);
-        Helpers.signExtend(baseOffset, environment, instruction, instructions, dw, secondTwo[1],
-            dw, secondTwo[1], 16);
+        Helpers.signExtend(baseOffset + instructions.size(), environment, instruction, instructions,
+            dw, firstTwo[0], dw, firstTwo[0], 16);
+        Helpers.signExtend(baseOffset + instructions.size(), environment, instruction, instructions,
+            dw, firstTwo[1], dw, firstTwo[1], 16);
+        Helpers.signExtend(baseOffset + instructions.size(), environment, instruction, instructions,
+            dw, secondTwo[0], dw, secondTwo[0], 16);
+        Helpers.signExtend(baseOffset + instructions.size(), environment, instruction, instructions,
+            dw, secondTwo[1], dw, secondTwo[1], 16);
 
         // do the add
-        instructions.add(ReilHelpers.createAdd(baseOffset++, dw, firstTwo[0], dw, secondTwo[1], dw,
-            sum1));
+        instructions.add(ReilHelpers.createAdd(baseOffset + instructions.size(), dw, firstTwo[0],
+            dw, secondTwo[1], dw, sum1));
 
         // do the sub
-        Helpers.signedSub(baseOffset, environment, instruction, instructions, secondTwo[0],
-            firstTwo[1], diff1, trueDiff1);
+        Helpers.signedSub(baseOffset + instructions.size(), environment, instruction, instructions,
+            secondTwo[0], firstTwo[1], diff1, trueDiff1);
 
-        return new String[] {sum1, trueDiff1};
+        return new String[] { sum1, trueDiff1 };
       }
     }.generate(environment, baseOffset, 16, sourceRegister1, sourceRegister2, targetRegister,
         instructions);
@@ -87,8 +86,9 @@ public class ARMShsubaddxTranslator extends ARMBaseTranslator {
    * 
    * Operation:
    * 
-   * if ConditionPassed(cond) then diff = Rn[31:16] - Rm[15:0] // Signed subtraction Rd[31:16] =
-   * diff[16:1] sum = Rn[15:0] + Rm[31:16] // Signed addition Rd[15:0] = sum[16:1]
+   * if ConditionPassed(cond) then diff = Rn[31:16] - Rm[15:0] // Signed
+   * subtraction Rd[31:16] = diff[16:1] sum = Rn[15:0] + Rm[31:16] // Signed
+   * addition Rd[15:0] = sum[16:1]
    */
 
   @Override

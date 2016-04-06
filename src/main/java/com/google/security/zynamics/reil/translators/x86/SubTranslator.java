@@ -87,7 +87,10 @@ public class SubTranslator implements IInstructionTranslator {
 
     // Adjust the offset of the next REIL instruction.
     offset = baseOffset + instructions.size();
-
+    
+    Helpers.writeParityFlag(environment, offset, size, subResultValue, instructions);
+    offset = baseOffset + instructions.size();
+    
     // Write the result of the value back into the target operand
     Helpers.writeBack(environment, offset, operand1, subResultValue, size,
         operand1Result.getAddress(), operand1Result.getType(), instructions);

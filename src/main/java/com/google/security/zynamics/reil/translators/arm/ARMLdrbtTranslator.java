@@ -50,7 +50,7 @@ public class ARMLdrbtTranslator extends ARMBaseTranslator {
 
     final String tmpAddress = resultPair.first();
 
-    instructions.add(ReilHelpers.createLdm(baseOffset++, dw, tmpAddress, bt, registerNodeValue));
+    instructions.add(ReilHelpers.createLdm(baseOffset+instructions.size(), dw, tmpAddress, bt, registerNodeValue));
   }
 
   /**

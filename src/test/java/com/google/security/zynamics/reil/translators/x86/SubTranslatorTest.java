@@ -80,7 +80,7 @@ public class SubTranslatorTest {
 
     interpreter.interpret(TestHelpers.createMapping(instructions), BigInteger.valueOf(0x100));
 
-    assertEquals(6, TestHelpers.filterNativeRegisters(interpreter.getDefinedRegisters()).size());
+    assertEquals(7, TestHelpers.filterNativeRegisters(interpreter.getDefinedRegisters()).size());
 
     assertEquals(BigInteger.valueOf(2), interpreter.getVariableValue("eax"));
     assertEquals(BigInteger.ONE, interpreter.getVariableValue("CF"));
@@ -116,7 +116,7 @@ public class SubTranslatorTest {
 
     interpreter.interpret(TestHelpers.createMapping(instructions), BigInteger.valueOf(0x100));
 
-    assertEquals(6, TestHelpers.filterNativeRegisters(interpreter.getDefinedRegisters()).size());
+    assertEquals(7, TestHelpers.filterNativeRegisters(interpreter.getDefinedRegisters()).size());
 
     assertEquals(BigInteger.valueOf(0xFFFFFFFFL), interpreter.getVariableValue("eax"));
     assertEquals(BigInteger.ONE, interpreter.getVariableValue("CF"));
@@ -152,7 +152,7 @@ public class SubTranslatorTest {
 
     interpreter.interpret(TestHelpers.createMapping(instructions), BigInteger.valueOf(0x100));
 
-    assertEquals(6, TestHelpers.filterNativeRegisters(interpreter.getDefinedRegisters()).size());
+    assertEquals(7, TestHelpers.filterNativeRegisters(interpreter.getDefinedRegisters()).size());
 
     assertEquals(BigInteger.valueOf(0x7FFFFFFFL), interpreter.getVariableValue("eax"));
     assertEquals(BigInteger.ZERO, interpreter.getVariableValue("CF"));
@@ -189,7 +189,7 @@ public class SubTranslatorTest {
 
     interpreter.interpret(TestHelpers.createMapping(instructions), BigInteger.valueOf(0x100));
 
-    assertEquals(7, TestHelpers.filterNativeRegisters(interpreter.getDefinedRegisters()).size());
+    assertEquals(8, TestHelpers.filterNativeRegisters(interpreter.getDefinedRegisters()).size());
 
     assertEquals(BigInteger.valueOf(0xFFFFF000L), interpreter.getVariableValue("eax"));
     assertEquals(BigInteger.valueOf(0x3000), interpreter.getVariableValue("ebx"));
@@ -227,7 +227,7 @@ public class SubTranslatorTest {
 
     interpreter.interpret(TestHelpers.createMapping(instructions), BigInteger.valueOf(0x100));
 
-    assertEquals(7, TestHelpers.filterNativeRegisters(interpreter.getDefinedRegisters()).size());
+    assertEquals(8, TestHelpers.filterNativeRegisters(interpreter.getDefinedRegisters()).size());
 
     assertEquals(BigInteger.valueOf(0xFFFFF000L), interpreter.getVariableValue("eax"));
     assertEquals(BigInteger.valueOf(0x3000), interpreter.getVariableValue("ebx"));
@@ -263,7 +263,7 @@ public class SubTranslatorTest {
 
     interpreter.interpret(TestHelpers.createMapping(instructions), BigInteger.valueOf(0x100));
 
-    assertEquals(6, TestHelpers.filterNativeRegisters(interpreter.getDefinedRegisters()).size());
+    assertEquals(7, TestHelpers.filterNativeRegisters(interpreter.getDefinedRegisters()).size());
 
     assertEquals(BigInteger.ZERO, interpreter.getVariableValue("eax"));
     assertEquals(BigInteger.ZERO, interpreter.getVariableValue("CF"));
@@ -298,7 +298,7 @@ public class SubTranslatorTest {
 
     interpreter.interpret(TestHelpers.createMapping(instructions), BigInteger.valueOf(0x100));
 
-    assertEquals(6, TestHelpers.filterNativeRegisters(interpreter.getDefinedRegisters()).size());
+    assertEquals(7, TestHelpers.filterNativeRegisters(interpreter.getDefinedRegisters()).size());
 
     assertEquals(BigInteger.ZERO, interpreter.getVariableValue("eax"));
     assertEquals(BigInteger.ZERO, interpreter.getVariableValue("CF"));

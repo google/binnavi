@@ -54,7 +54,7 @@ public class MultTranslator implements IInstructionTranslator {
 
     instructions.add(ReilHelpers.createAnd(offset++, qw, tempResult, dw,
         String.valueOf(0xFFFFFFFFL), dw, "LO"));
-    instructions.add(ReilHelpers.createBsh(offset, qw, tempResult, dw, String.valueOf(-32L), dw,
+    instructions.add(ReilHelpers.createBsh(offset++, qw, tempResult, dw, String.valueOf(-32L), dw,
         temporaryHiResult));
     instructions.add(ReilHelpers.createAnd(offset, dw, temporaryHiResult, dw,
         String.valueOf(0xFFFFFFFFL), dw, "HI"));

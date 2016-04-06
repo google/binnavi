@@ -94,7 +94,7 @@ public class DivTranslator implements IInstructionTranslator {
     // Write the result back and set the flags
     instructions
         .addAll(Helpers.writeDivResult(environment, offset++, divResult, modResult, size));
-
+    offset = baseOffset + instructions.size();
     // Undefine flags
     instructions.add(ReilHelpers.createUndef(offset++, OperandSize.BYTE, Helpers.AUXILIARY_FLAG));
     instructions.add(ReilHelpers.createUndef(offset++, OperandSize.BYTE, Helpers.CARRY_FLAG));

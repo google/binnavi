@@ -59,21 +59,21 @@ public class ARMQadd16Translator extends ARMBaseTranslator {
         final String sum1Sat = environment.getNextVariableString();
         final String sum2Sat = environment.getNextVariableString();
 
-        long baseOffset = offset;
+        long baseOffset = offset - instructions.size();
 
         // do the adds
-        instructions.add(ReilHelpers.createAdd(baseOffset++, dw, firstTwo[0], dw, secondTwo[0], dw,
-            sum1));
-        instructions.add(ReilHelpers.createAdd(baseOffset++, dw, firstTwo[1], dw, secondTwo[1], dw,
-            sum2));
+        instructions
+            .add(ReilHelpers.createAdd(baseOffset + instructions.size(), dw, firstTwo[0], dw, secondTwo[0], dw, sum1));
+        instructions
+            .add(ReilHelpers.createAdd(baseOffset + instructions.size(), dw, firstTwo[1], dw, secondTwo[1], dw, sum2));
 
         // Do the Sat
-        Helpers.signedSat(baseOffset, environment, instruction, instructions, dw, firstTwo[0], dw,
+        Helpers.signedSat(baseOffset + instructions.size(), environment, instruction, instructions, dw, firstTwo[0], dw,
             secondTwo[0], dw, sum1, addOperation, sum1Sat, 16L, "");
-        Helpers.signedSat(baseOffset, environment, instruction, instructions, dw, firstTwo[1], dw,
-            secondTwo[1], dw, sum2, addOperation, sum2Sat, 16L, "");
+        Helpers.signedSat(baseOffset + instructions.size(), environment, instruction, instructions, dw,
+            firstTwo[1], dw, secondTwo[1], dw, sum2, addOperation, sum2Sat, 16L, "");
 
-        return new String[] {sum1Sat, sum2Sat};
+        return new String[] { sum1Sat, sum2Sat };
       }
     }.generate(environment, baseOffset, 16, sourceRegister1, sourceRegister2, targetRegister,
         instructions);

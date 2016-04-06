@@ -56,8 +56,7 @@ public class BsfBsrTranslatorCommon {
   
     offset = baseOffset + instructions.size();
   
-    final OperandSize sourceSize = sourceResult.getSize();    
-    final List<ReilInstruction> tempInstructions = new ArrayList<>();
+    final OperandSize sourceSize = sourceResult.getSize();
   
     final String targetRegister = Helpers.getLeafValue(targetOperand.getRootNode());
     
@@ -67,11 +66,8 @@ public class BsfBsrTranslatorCommon {
         String.format("%d.%d", instruction.getAddress().toLong(), instructions.size() + 7);
     final String labelLoopEnd =
         String.format("%d.%d", instruction.getAddress().toLong(), instructions.size() + 12);
-    // TODO(thomasdullien): Clean up the use of tempInstructions.size() here, it is
-    // unclear what it is used for.
     final String labelEnd =
-        String.format("%d.%d", instruction.getAddress().toLong(), instructions.size()
-            + tempInstructions.size() + 12);
+        String.format("%d.%d", instruction.getAddress().toLong(), instructions.size() + 13);
   
     instructions.add(ReilHelpers.createJcc(offset++, sourceSize, sourceResult.getRegister(),
         OperandSize.ADDRESS, labelNotZero));
