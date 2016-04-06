@@ -163,9 +163,9 @@ public class StmwTranslatorTest {
         BigInteger.valueOf(interpreter.readMemoryDword(1020)));
     assertEquals(BigInteger.valueOf(0x77777777),
         BigInteger.valueOf(interpreter.readMemoryDword(1024)));
-    assertEquals(BigInteger.valueOf(0x88888888),
+    assertEquals(BigInteger.valueOf(0x88888888L),
         BigInteger.valueOf(interpreter.readMemoryDword(1028)));
-    assertEquals(BigInteger.valueOf(0x99999999),
+    assertEquals(BigInteger.valueOf(0x99999999L),
         BigInteger.valueOf(interpreter.readMemoryDword(1032)));
     assertEquals(BigInteger.valueOf(0x10101010),
         BigInteger.valueOf(interpreter.readMemoryDword(1036)));
@@ -207,7 +207,7 @@ public class StmwTranslatorTest {
         BigInteger.valueOf(interpreter.readMemoryDword(1108)));
     assertEquals(BigInteger.valueOf(0x29292929),
         BigInteger.valueOf(interpreter.readMemoryDword(1112)));
-    assertEquals(BigInteger.valueOf(0xFFFFFFFF),
+    assertEquals(BigInteger.valueOf(0xFFFFFFFFL),
         BigInteger.valueOf(interpreter.readMemoryDword(1116)));
 
     assertEquals(BigInteger.valueOf(120L), BigInteger.valueOf(interpreter.getMemorySize()));

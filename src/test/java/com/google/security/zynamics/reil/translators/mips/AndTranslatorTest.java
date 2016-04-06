@@ -60,9 +60,9 @@ public class AndTranslatorTest {
     // andi $3, $31, 0x0F0F
 
     interpreter.setRegister("$v1", BigInteger.ZERO, OperandSize.DWORD, ReilRegisterStatus.DEFINED);
-    interpreter.setRegister("$a1", BigInteger.valueOf(0x7ffff860L), OperandSize.DWORD,
+    interpreter.setRegister("$a1", BigInteger.valueOf(0x7FFFF860L), OperandSize.DWORD,
         ReilRegisterStatus.DEFINED);
-    interpreter.setRegister("$a2", BigInteger.valueOf(0x7ffff864L), OperandSize.DWORD,
+    interpreter.setRegister("$a2", BigInteger.valueOf(0x7FFFF864L), OperandSize.DWORD,
         ReilRegisterStatus.DEFINED);
 
     final MockOperandTree operandTree1 = new MockOperandTree();
@@ -89,9 +89,9 @@ public class AndTranslatorTest {
     // check correct outcome
 
     assertEquals(4, TestHelpers.filterNativeRegisters(interpreter.getDefinedRegisters()).size());
-    assertEquals(BigInteger.valueOf(0x7ffff860L), interpreter.getVariableValue("$v1"));
-    assertEquals(BigInteger.valueOf(0x7ffff860L), interpreter.getVariableValue("$a1"));
-    assertEquals(BigInteger.valueOf(0x7ffff864L), interpreter.getVariableValue("$a2"));
+    assertEquals(BigInteger.valueOf(0x7FFFF860L), interpreter.getVariableValue("$v1"));
+    assertEquals(BigInteger.valueOf(0x7FFFF860L), interpreter.getVariableValue("$a1"));
+    assertEquals(BigInteger.valueOf(0x7FFFF864L), interpreter.getVariableValue("$a2"));
 
     assertEquals(BigInteger.ZERO, BigInteger.valueOf(interpreter.getMemorySize()));
   }
@@ -101,7 +101,7 @@ public class AndTranslatorTest {
     // and $3, $31, 0x0F0F
 
     interpreter.setRegister("$a0", BigInteger.ZERO, OperandSize.DWORD, ReilRegisterStatus.DEFINED);
-    interpreter.setRegister("$s8", BigInteger.valueOf(0x7ffff85cL), OperandSize.DWORD,
+    interpreter.setRegister("$s8", BigInteger.valueOf(0x7FFFF85CL), OperandSize.DWORD,
         ReilRegisterStatus.DEFINED);
     interpreter.setRegister("$ra", BigInteger.valueOf(0x00400018L), OperandSize.DWORD,
         ReilRegisterStatus.DEFINED);
@@ -131,7 +131,7 @@ public class AndTranslatorTest {
 
     assertEquals(4, TestHelpers.filterNativeRegisters(interpreter.getDefinedRegisters()).size());
     assertEquals(BigInteger.valueOf(0x00400018L), interpreter.getVariableValue("$a0"));
-    assertEquals(BigInteger.valueOf(0x7ffff85cL), interpreter.getVariableValue("$s8"));
+    assertEquals(BigInteger.valueOf(0x7FFFF85CL), interpreter.getVariableValue("$s8"));
     assertEquals(BigInteger.valueOf(0x00400018L), interpreter.getVariableValue("$ra"));
     assertEquals(BigInteger.ZERO, BigInteger.valueOf(interpreter.getMemorySize()));
   }

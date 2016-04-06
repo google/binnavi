@@ -113,7 +113,7 @@ public class THUMBStrbTranslatorTest {
 
     assertEquals(BigInteger.valueOf((byte) 0xDEL),
         BigInteger.valueOf(interpreter.readMemoryByte(0x00000039L)));
-    assertEquals(BigInteger.valueOf(1), BigInteger.valueOf(interpreter.getMemorySize()));
+    assertEquals(BigInteger.ONE, BigInteger.valueOf(interpreter.getMemorySize()));
     assertEquals(9, TestHelpers.filterNativeRegisters(interpreter.getDefinedRegisters()).size());
   }
 }

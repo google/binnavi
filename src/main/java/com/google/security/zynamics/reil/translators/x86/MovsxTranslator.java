@@ -82,7 +82,7 @@ public class MovsxTranslator implements IInstructionTranslator {
     // Adjust the offset of the next REIL instruction.
     offset = baseOffset + instructions.size();
 
-    if (destSize == environment.getArchitectureSize()) {
+    if (destSize == Helpers.ArchitectureSize) {
       instructions.add(ReilHelpers.createStr(offset, destSize, extendedSign.getRegister(),
           destSize, destinationOperand));
     } else {

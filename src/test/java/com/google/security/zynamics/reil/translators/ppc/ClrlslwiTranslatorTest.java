@@ -100,7 +100,7 @@ public class ClrlslwiTranslatorTest {
 
     interpreter.interpret(TestHelpers.createMapping(instructions), BigInteger.valueOf(0x100L));
 
-    assertEquals(BigInteger.valueOf(0x2fe0L), interpreter.getVariableValue("%r0"));
+    assertEquals(BigInteger.valueOf(0x2FE0L), interpreter.getVariableValue("%r0"));
     assertEquals(BigInteger.valueOf(0x3039417FL), interpreter.getVariableValue("%r18"));
     assertEquals(BigInteger.ZERO, interpreter.getVariableValue("CR0LT"));
     assertEquals(BigInteger.ZERO, interpreter.getVariableValue("CR0GT"));

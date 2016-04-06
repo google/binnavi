@@ -60,9 +60,9 @@ public class RepeScasdTranslatorTest {
         ReilRegisterStatus.DEFINED);
     interpreter.setRegister("ecx", BigInteger.valueOf(0x4), OperandSize.DWORD,
         ReilRegisterStatus.DEFINED);
-    interpreter.setRegister("DF", BigInteger.valueOf(0), OperandSize.BYTE,
+    interpreter.setRegister("DF", BigInteger.ZERO, OperandSize.BYTE,
         ReilRegisterStatus.DEFINED);
-    interpreter.setRegister("ZF", BigInteger.valueOf(0), OperandSize.BYTE,
+    interpreter.setRegister("ZF", BigInteger.ZERO, OperandSize.BYTE,
         ReilRegisterStatus.DEFINED);
 
     interpreter.getMemory().store(0x1000, 0x78337878, 4);
@@ -80,7 +80,7 @@ public class RepeScasdTranslatorTest {
     assertEquals(BigInteger.valueOf(0x1004), interpreter.getVariableValue("edi"));
 
     assertEquals(BigInteger.valueOf(4L), BigInteger.valueOf(interpreter.getMemorySize()));
-    assertEquals(0x78337878, interpreter.getMemory().load(0x1000, 4));
+    assertEquals(BigInteger.valueOf(0x78337878), interpreter.getMemory().load(0x1000, 4));
   }
 
   @Test
@@ -91,9 +91,9 @@ public class RepeScasdTranslatorTest {
         ReilRegisterStatus.DEFINED);
     interpreter.setRegister("ecx", BigInteger.valueOf(0x4), OperandSize.DWORD,
         ReilRegisterStatus.DEFINED);
-    interpreter.setRegister("DF", BigInteger.valueOf(0), OperandSize.BYTE,
+    interpreter.setRegister("DF", BigInteger.ZERO, OperandSize.BYTE,
         ReilRegisterStatus.DEFINED);
-    interpreter.setRegister("ZF", BigInteger.valueOf(1), OperandSize.BYTE,
+    interpreter.setRegister("ZF", BigInteger.ONE, OperandSize.BYTE,
         ReilRegisterStatus.DEFINED);
 
     interpreter.getMemory().store(0x1000, 0x78337878, 4);
@@ -111,6 +111,6 @@ public class RepeScasdTranslatorTest {
     assertEquals(BigInteger.valueOf(0x1004), interpreter.getVariableValue("edi"));
 
     assertEquals(BigInteger.valueOf(4L), BigInteger.valueOf(interpreter.getMemorySize()));
-    assertEquals(0x78337878, interpreter.getMemory().load(0x1000, 4));
+    assertEquals(BigInteger.valueOf(0x78337878), interpreter.getMemory().load(0x1000, 4));
   }
 }

@@ -68,7 +68,7 @@ public class ARMSelTranslatorTest {
   @Test
   public void testSimpleRegister() throws InternalTranslationException, InterpreterException {
     interpreter.setRegister("R0", BigInteger.valueOf(0x0L), dw, ReilRegisterStatus.DEFINED);
-    interpreter.setRegister("R1", BigInteger.valueOf(0xed5f66aeL), dw, ReilRegisterStatus.DEFINED);
+    interpreter.setRegister("R1", BigInteger.valueOf(0xED5F66AEL), dw, ReilRegisterStatus.DEFINED);
     interpreter.setRegister("R2", BigInteger.valueOf(0x01FFC9E0L), dw, ReilRegisterStatus.DEFINED);
     interpreter.setRegister("CPSR_GE_0", BigInteger.ONE, dw, ReilRegisterStatus.DEFINED);
     interpreter.setRegister("CPSR_GE_1", BigInteger.ZERO, dw, ReilRegisterStatus.DEFINED);
@@ -96,8 +96,8 @@ public class ARMSelTranslatorTest {
 
     interpreter.interpret(TestHelpers.createMapping(instructions), BigInteger.valueOf(0x100L));
 
-    assertEquals(BigInteger.valueOf(0xb73f64afL), interpreter.getVariableValue("R0"));
-    assertEquals(BigInteger.valueOf(0xed5f66aeL), interpreter.getVariableValue("R1"));
+    assertEquals(BigInteger.valueOf(0xB73F64AFL), interpreter.getVariableValue("R0"));
+    assertEquals(BigInteger.valueOf(0xED5F66AEL), interpreter.getVariableValue("R1"));
     assertEquals(BigInteger.valueOf(0x01FFC9E0L), interpreter.getVariableValue("R2"));
     assertEquals(BigInteger.ONE, interpreter.getVariableValue("CPSR_GE_0"));
     assertEquals(BigInteger.ONE, interpreter.getVariableValue("CPSR_GE_0"));

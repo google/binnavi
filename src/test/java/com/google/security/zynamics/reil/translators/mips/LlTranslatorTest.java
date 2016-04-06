@@ -73,7 +73,7 @@ public class LlTranslatorTest {
     operandTree2.root.getChildren().get(0).m_children.add(new MockOperandTreeNode(
         ExpressionType.IMMEDIATE_INTEGER, String.valueOf(44L)));
 
-    interpreter.setMemory(0x0040002c, 0x340a0007L, 4);
+    interpreter.setMemory(0x0040002C, 0x340A0007L, 4);
 
     final List<MockOperandTree> operands = Lists.newArrayList(operandTree1, operandTree2);
 
@@ -86,7 +86,7 @@ public class LlTranslatorTest {
     // check correct outcome
 
     assertEquals(4, TestHelpers.filterNativeRegisters(interpreter.getDefinedRegisters()).size());
-    assertEquals(BigInteger.valueOf(0x340a0007L), interpreter.getVariableValue("$v2"));
+    assertEquals(BigInteger.valueOf(0x340A0007L), interpreter.getVariableValue("$v2"));
     assertEquals(BigInteger.valueOf(0x1L), interpreter.getVariableValue("LL"));
     assertEquals(BigInteger.valueOf(4L), BigInteger.valueOf(interpreter.getMemorySize()));
   }

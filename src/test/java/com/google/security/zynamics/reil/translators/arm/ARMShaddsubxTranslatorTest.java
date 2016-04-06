@@ -67,8 +67,8 @@ public class ARMShaddsubxTranslatorTest {
   @Test
   public void testSimpleRegister() throws InternalTranslationException, InterpreterException {
     interpreter.setRegister("R0", BigInteger.valueOf(0x0L), dw, ReilRegisterStatus.DEFINED);
-    interpreter.setRegister("R1", BigInteger.valueOf(0x8dd9ed12L), dw, ReilRegisterStatus.DEFINED);
-    interpreter.setRegister("R2", BigInteger.valueOf(0x01ffc9e0L), dw, ReilRegisterStatus.DEFINED);
+    interpreter.setRegister("R1", BigInteger.valueOf(0x8DD9ED12L), dw, ReilRegisterStatus.DEFINED);
+    interpreter.setRegister("R2", BigInteger.valueOf(0x01FFC9E0L), dw, ReilRegisterStatus.DEFINED);
     interpreter.setRegister("C", BigInteger.ZERO, bt, ReilRegisterStatus.DEFINED);
 
     final MockOperandTree operandTree1 = new MockOperandTree();
@@ -92,9 +92,9 @@ public class ARMShaddsubxTranslatorTest {
 
     interpreter.interpret(TestHelpers.createMapping(instructions), BigInteger.valueOf(0x100L));
 
-    assertEquals(BigInteger.valueOf(0xabdcf589L), interpreter.getVariableValue("R0"));
-    assertEquals(BigInteger.valueOf(0x8dd9ed12L), interpreter.getVariableValue("R1"));
-    assertEquals(BigInteger.valueOf(0x01ffc9e0L), interpreter.getVariableValue("R2"));
+    assertEquals(BigInteger.valueOf(0xABDCF589L), interpreter.getVariableValue("R0"));
+    assertEquals(BigInteger.valueOf(0x8DD9ED12L), interpreter.getVariableValue("R1"));
+    assertEquals(BigInteger.valueOf(0x01FFC9E0L), interpreter.getVariableValue("R2"));
     assertEquals(BigInteger.ZERO, interpreter.getVariableValue("C"));
 
     assertEquals(BigInteger.ZERO, BigInteger.valueOf(interpreter.getMemorySize()));
@@ -105,8 +105,8 @@ public class ARMShaddsubxTranslatorTest {
   public void testSimpleRegisterDifferentMnemonic() throws InternalTranslationException,
       InterpreterException {
     interpreter.setRegister("R0", BigInteger.valueOf(0x0L), dw, ReilRegisterStatus.DEFINED);
-    interpreter.setRegister("R1", BigInteger.valueOf(0x8dd9ed12L), dw, ReilRegisterStatus.DEFINED);
-    interpreter.setRegister("R2", BigInteger.valueOf(0x01ffc9e0L), dw, ReilRegisterStatus.DEFINED);
+    interpreter.setRegister("R1", BigInteger.valueOf(0x8DD9ED12L), dw, ReilRegisterStatus.DEFINED);
+    interpreter.setRegister("R2", BigInteger.valueOf(0x01FFC9E0L), dw, ReilRegisterStatus.DEFINED);
     interpreter.setRegister("C", BigInteger.ZERO, bt, ReilRegisterStatus.DEFINED);
 
     final MockOperandTree operandTree1 = new MockOperandTree();
@@ -130,9 +130,9 @@ public class ARMShaddsubxTranslatorTest {
 
     interpreter.interpret(TestHelpers.createMapping(instructions), BigInteger.valueOf(0x100L));
 
-    assertEquals(BigInteger.valueOf(0xabdcf589L), interpreter.getVariableValue("R0"));
-    assertEquals(BigInteger.valueOf(0x8dd9ed12L), interpreter.getVariableValue("R1"));
-    assertEquals(BigInteger.valueOf(0x01ffc9e0L), interpreter.getVariableValue("R2"));
+    assertEquals(BigInteger.valueOf(0xABDCF589L), interpreter.getVariableValue("R0"));
+    assertEquals(BigInteger.valueOf(0x8DD9ED12L), interpreter.getVariableValue("R1"));
+    assertEquals(BigInteger.valueOf(0x01FFC9E0L), interpreter.getVariableValue("R2"));
     assertEquals(BigInteger.ZERO, interpreter.getVariableValue("C"));
 
     assertEquals(BigInteger.ZERO, BigInteger.valueOf(interpreter.getMemorySize()));

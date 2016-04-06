@@ -27,6 +27,7 @@ import org.junit.runners.Suite.SuiteClasses;
     com.google.security.zynamics.reil.translators.arm.AllTests.class,
     com.google.security.zynamics.reil.translators.mips.AllTests.class,
     com.google.security.zynamics.reil.translators.ppc.AllTests.class,
+    com.google.security.zynamics.reil.translators.x64.AllTests.class,
     com.google.security.zynamics.reil.translators.x86.AllTests.class,
     com.google.security.zynamics.reil.algorithms.mono.AllTests.class,
     com.google.security.zynamics.reil.algorithms.mono2.AllTests.class})

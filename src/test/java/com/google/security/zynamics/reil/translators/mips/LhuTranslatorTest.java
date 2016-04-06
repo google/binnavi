@@ -73,7 +73,7 @@ public class LhuTranslatorTest {
     operandTree2.root.getChildren().get(0).m_children.add(new MockOperandTreeNode(
         ExpressionType.IMMEDIATE_INTEGER, String.valueOf(44L)));
 
-    interpreter.setMemory(0x0040002c, 0x340a0007L, 4);
+    interpreter.setMemory(0x0040002C, 0x340A0007L, 4);
 
     final List<MockOperandTree> operands = Lists.newArrayList(operandTree1, operandTree2);
 

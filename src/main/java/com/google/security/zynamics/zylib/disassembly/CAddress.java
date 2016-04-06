@@ -151,7 +151,7 @@ public class CAddress implements IAddress {
   public String toHexString() {
     // Long.toHexString() interprets its argument unsigned
     return Strings.padStart(Long.toHexString(m_address).toUpperCase(),
-        (m_address & 0x7fffffffffffffffL) < 0x100000000L ? 8 : 16, '0');
+        (m_address & 0x7FFFFFFFFFFFFFFFL) < 0x100000000L ? 8 : 16, '0');
   }
 
   @Override

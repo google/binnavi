@@ -56,7 +56,7 @@ public class MovswTranslatorTest {
         ReilRegisterStatus.DEFINED);
     interpreter.setRegister("edi", BigInteger.valueOf(0x2000), OperandSize.DWORD,
         ReilRegisterStatus.DEFINED);
-    interpreter.setRegister("DF", BigInteger.valueOf(0), OperandSize.BYTE,
+    interpreter.setRegister("DF", BigInteger.ZERO, OperandSize.BYTE,
         ReilRegisterStatus.DEFINED);
 
     interpreter.getMemory().store(0x1000, 0x98765432, 4);
@@ -74,7 +74,7 @@ public class MovswTranslatorTest {
     assertEquals(BigInteger.valueOf(0x2002), interpreter.getVariableValue("edi"));
 
     assertEquals(BigInteger.valueOf(6L), BigInteger.valueOf(interpreter.getMemorySize()));
-    assertEquals(0x5432, interpreter.getMemory().load(0x2000, 2));
+    assertEquals(BigInteger.valueOf(0x5432), interpreter.getMemory().load(0x2000, 2));
   }
 
   @Test
@@ -83,7 +83,7 @@ public class MovswTranslatorTest {
         ReilRegisterStatus.DEFINED);
     interpreter.setRegister("edi", BigInteger.valueOf(0x2000), OperandSize.DWORD,
         ReilRegisterStatus.DEFINED);
-    interpreter.setRegister("DF", BigInteger.valueOf(1), OperandSize.BYTE,
+    interpreter.setRegister("DF", BigInteger.ONE, OperandSize.BYTE,
         ReilRegisterStatus.DEFINED);
 
     interpreter.getMemory().store(0x1000, 0x98765432, 4);
@@ -101,6 +101,6 @@ public class MovswTranslatorTest {
     assertEquals(BigInteger.valueOf(0x1FFE), interpreter.getVariableValue("edi"));
 
     assertEquals(BigInteger.valueOf(6L), BigInteger.valueOf(interpreter.getMemorySize()));
-    assertEquals(0x5432, interpreter.getMemory().load(0x2000, 2));
+    assertEquals(BigInteger.valueOf(0x5432), interpreter.getMemory().load(0x2000, 2));
   }
 }

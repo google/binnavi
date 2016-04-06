@@ -65,7 +65,7 @@ public class BteqzTranslatorTest {
     final MockOperandTree operandTree3 = new MockOperandTree();
     operandTree3.root = new MockOperandTreeNode(ExpressionType.SIZE_PREFIX, "b4");
     operandTree3.root.m_children.add(new MockOperandTreeNode(ExpressionType.IMMEDIATE_INTEGER,
-        String.valueOf(0xcafebabeL)));
+        String.valueOf(0xCAFEBABEL)));
 
     final List<MockOperandTree> operands = Lists.newArrayList(operandTree3);
 
@@ -79,7 +79,7 @@ public class BteqzTranslatorTest {
 
     assertEquals(3, TestHelpers.filterNativeRegisters(interpreter.getDefinedRegisters()).size());
     assertEquals(BigInteger.valueOf(0x00400018L), interpreter.getVariableValue("$ra"));
-    assertEquals(BigInteger.valueOf(0x40002cL), interpreter.getVariableValue("$pc"));
+    assertEquals(BigInteger.valueOf(0x40002CL), interpreter.getVariableValue("$pc"));
     assertEquals(BigInteger.ZERO, BigInteger.valueOf(interpreter.getMemorySize()));
   }
 
@@ -93,7 +93,7 @@ public class BteqzTranslatorTest {
     final MockOperandTree operandTree3 = new MockOperandTree();
     operandTree3.root = new MockOperandTreeNode(ExpressionType.SIZE_PREFIX, "b4");
     operandTree3.root.m_children.add(new MockOperandTreeNode(ExpressionType.IMMEDIATE_INTEGER,
-        String.valueOf(0xcafebabeL)));
+        String.valueOf(0xCAFEBABEL)));
 
     final List<MockOperandTree> operands = Lists.newArrayList(operandTree3);
 
@@ -107,7 +107,7 @@ public class BteqzTranslatorTest {
 
     assertEquals(3, TestHelpers.filterNativeRegisters(interpreter.getDefinedRegisters()).size());
     assertEquals(BigInteger.valueOf(0x00400018L), interpreter.getVariableValue("$ra"));
-    assertEquals(BigInteger.valueOf(0xcafebabeL), interpreter.getVariableValue("$pc"));
+    assertEquals(BigInteger.valueOf(0xCAFEBABEL), interpreter.getVariableValue("$pc"));
     assertEquals(BigInteger.ZERO, BigInteger.valueOf(interpreter.getMemorySize()));
   }
 }

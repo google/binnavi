@@ -62,7 +62,7 @@ public class XaddTranslatorTest {
     interpreter.setRegister("CF", BigInteger.ZERO, OperandSize.BYTE, ReilRegisterStatus.DEFINED);
     interpreter.setRegister("eax", BigInteger.valueOf(0xFFFFFFFFL), OperandSize.DWORD,
         ReilRegisterStatus.DEFINED);
-    interpreter.setRegister("ebx", BigInteger.valueOf(1), OperandSize.DWORD,
+    interpreter.setRegister("ebx", BigInteger.ONE, OperandSize.DWORD,
         ReilRegisterStatus.DEFINED);
 
     final MockOperandTree operandTree1 = new MockOperandTree();
@@ -122,7 +122,7 @@ public class XaddTranslatorTest {
 
     assertEquals(7, TestHelpers.filterNativeRegisters(interpreter.getDefinedRegisters()).size());
 
-    assertEquals(BigInteger.valueOf(0), interpreter.getVariableValue("eax"));
+    assertEquals(BigInteger.ZERO, interpreter.getVariableValue("eax"));
     assertEquals(BigInteger.valueOf(0x80000000L), interpreter.getVariableValue("ebx"));
     assertEquals(BigInteger.ONE, interpreter.getVariableValue("CF"));
     assertEquals(BigInteger.ONE, interpreter.getVariableValue("OF"));
@@ -137,7 +137,7 @@ public class XaddTranslatorTest {
     interpreter.setRegister("CF", BigInteger.ZERO, OperandSize.BYTE, ReilRegisterStatus.DEFINED);
     interpreter.setRegister("eax", BigInteger.valueOf(0x1000), OperandSize.DWORD,
         ReilRegisterStatus.DEFINED);
-    interpreter.setRegister("ebx", BigInteger.valueOf(1), OperandSize.DWORD,
+    interpreter.setRegister("ebx", BigInteger.ONE, OperandSize.DWORD,
         ReilRegisterStatus.DEFINED);
     interpreter.setMemory(0x1000, 0x123, 4);
 
@@ -180,7 +180,7 @@ public class XaddTranslatorTest {
     interpreter.setRegister("CF", BigInteger.ZERO, OperandSize.BYTE, ReilRegisterStatus.DEFINED);
     interpreter.setRegister("eax", BigInteger.valueOf(0x7FFFFFFFL), OperandSize.DWORD,
         ReilRegisterStatus.DEFINED);
-    interpreter.setRegister("ebx", BigInteger.valueOf(1), OperandSize.DWORD,
+    interpreter.setRegister("ebx", BigInteger.ONE, OperandSize.DWORD,
         ReilRegisterStatus.DEFINED);
 
     final MockOperandTree operandTree1 = new MockOperandTree();

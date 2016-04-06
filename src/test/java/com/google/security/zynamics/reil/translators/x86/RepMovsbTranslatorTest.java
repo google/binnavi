@@ -61,7 +61,7 @@ public class RepMovsbTranslatorTest {
         ReilRegisterStatus.DEFINED);
     interpreter.setRegister("ecx", BigInteger.valueOf(0x3), OperandSize.DWORD,
         ReilRegisterStatus.DEFINED);
-    interpreter.setRegister("DF", BigInteger.valueOf(0), OperandSize.BYTE,
+    interpreter.setRegister("DF", BigInteger.ZERO, OperandSize.BYTE,
         ReilRegisterStatus.DEFINED);
 
     interpreter.getMemory().store(0x1000, 0x98765432, 4);
@@ -81,7 +81,7 @@ public class RepMovsbTranslatorTest {
     assertEquals(BigInteger.ZERO, interpreter.getVariableValue("ecx"));
 
     assertEquals(BigInteger.valueOf(7L), BigInteger.valueOf(interpreter.getMemorySize()));
-    assertEquals(0x765432, interpreter.getMemory().load(0x2000, 3));
+    assertEquals(BigInteger.valueOf(0x765432L), interpreter.getMemory().load(0x2000, 3));
   }
 
   @Test
@@ -94,7 +94,7 @@ public class RepMovsbTranslatorTest {
         ReilRegisterStatus.DEFINED);
     interpreter.setRegister("ecx", BigInteger.valueOf(0x3), OperandSize.DWORD,
         ReilRegisterStatus.DEFINED);
-    interpreter.setRegister("DF", BigInteger.valueOf(1), OperandSize.BYTE,
+    interpreter.setRegister("DF", BigInteger.ONE, OperandSize.BYTE,
         ReilRegisterStatus.DEFINED);
 
     interpreter.getMemory().store(0x1000, 0x98765432, 4);
@@ -115,6 +115,6 @@ public class RepMovsbTranslatorTest {
     assertEquals(BigInteger.ZERO, interpreter.getVariableValue("ecx"));
 
     assertEquals(BigInteger.valueOf(7L), BigInteger.valueOf(interpreter.getMemorySize()));
-    assertEquals(0x987654, interpreter.getMemory().load(0x2001, 3));
+    assertEquals(BigInteger.valueOf(0x987654L), interpreter.getMemory().load(0x2001, 3));
   }
 }

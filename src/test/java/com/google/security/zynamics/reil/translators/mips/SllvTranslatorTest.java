@@ -86,7 +86,7 @@ public class SllvTranslatorTest {
     // check correct outcome
 
     assertEquals(4, TestHelpers.filterNativeRegisters(interpreter.getDefinedRegisters()).size());
-    assertEquals(BigInteger.valueOf(0x00001c00L), interpreter.getVariableValue("$v1"));
+    assertEquals(BigInteger.valueOf(0x00001C00L), interpreter.getVariableValue("$v1"));
     assertEquals(BigInteger.valueOf(0x7L), interpreter.getVariableValue("$v2"));
     assertEquals(BigInteger.valueOf(10L), interpreter.getVariableValue("$v3"));
 

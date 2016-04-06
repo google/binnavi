@@ -25,6 +25,7 @@ import com.google.security.zynamics.reil.translators.InternalTranslationExceptio
 import com.google.security.zynamics.reil.translators.TranslationHelpers;
 import com.google.security.zynamics.reil.translators.TranslationResult;
 import com.google.security.zynamics.reil.translators.TranslationResultType;
+import com.google.security.zynamics.reil.translators.x86.Helpers;
 import com.google.security.zynamics.zylib.disassembly.IInstruction;
 import com.google.security.zynamics.zylib.disassembly.IOperandTree;
 
@@ -107,9 +108,8 @@ public class LeaTranslator implements IInstructionTranslator {
 
         final String truncatedValue = environment.getNextVariableString();
 
-        final OperandSize registerSize =
-            sourceInstructions.size() == 0 ? Helpers.getRegisterSize(sourceRegister) : environment
-                .getArchitectureSize();
+        final OperandSize registerSize = sourceInstructions.size() == 0
+            ? Helpers.getRegisterSize(sourceRegister) : Helpers.ArchitectureSize;
 
         // Add the truncating instruction
         instructions.add(ReilHelpers.createAnd(offset, registerSize, sourceRegister,

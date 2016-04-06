@@ -23,6 +23,7 @@ import com.google.security.zynamics.reil.translators.InternalTranslationExceptio
 import com.google.security.zynamics.reil.translators.TranslationHelpers;
 import com.google.security.zynamics.zylib.disassembly.IInstruction;
 
+import java.math.BigInteger;
 import java.util.List;
 
 public class ARMUBFXTranslator extends ARMBaseTranslator {
@@ -42,7 +43,7 @@ public class ARMUBFXTranslator extends ARMBaseTranslator {
 
     final Integer msb = (lsb + width) - 1;
     if (msb <= 31) {
-      final long mask = TranslationHelpers.generateOneMask(lsb, width, OperandSize.DWORD);
+      final BigInteger mask = TranslationHelpers.generateOneMask(lsb, width, OperandSize.DWORD);
       final String tempVar1 = environment.getNextVariableString();
 
       instructions.add(

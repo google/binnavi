@@ -74,7 +74,7 @@ public class SbTranslatorTest {
     operandTree2.root.getChildren().get(0).m_children.add(new MockOperandTreeNode(
         ExpressionType.IMMEDIATE_INTEGER, String.valueOf(0L)));
 
-    interpreter.setMemory(0x10000000, 0x340a0007L, 4);
+    interpreter.setMemory(0x10000000, 0x340A0007L, 4);
 
     final List<MockOperandTree> operands = Lists.newArrayList(operandTree1, operandTree2);
     final IInstruction instruction = new MockInstruction("sb", operands);

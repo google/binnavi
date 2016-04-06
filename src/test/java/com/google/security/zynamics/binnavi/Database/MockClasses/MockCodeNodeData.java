@@ -24,7 +24,7 @@ import com.google.security.zynamics.zylib.disassembly.CAddress;
 import com.google.security.zynamics.zylib.disassembly.IAddress;
 
 public final class MockCodeNodeData {
-  public IAddress address = new CAddress(BigInteger.valueOf(0));
+  public IAddress address = new CAddress(BigInteger.ZERO);
   public int borderColor = 0;
   public int color = 0;
   public byte[] data = new byte[] {(byte) 0x90};
@@ -39,7 +39,7 @@ public final class MockCodeNodeData {
   public int module = 1;
   public int nodeId = 0;
   public Integer operandPosition = null;
-  public IAddress parentFunction = new CAddress(BigInteger.valueOf(0));
+  public IAddress parentFunction = new CAddress(BigInteger.ZERO);
   public Integer parentId = 0;
   public CReference reference = null;
   public String replacement = null;

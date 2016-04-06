@@ -15,8 +15,6 @@ limitations under the License.
 */
 package com.google.security.zynamics.reil.translators;
 
-import com.google.security.zynamics.reil.OperandSize;
-
 
 public class StandardEnvironment implements ITranslationEnvironment {
 
@@ -25,11 +23,6 @@ public class StandardEnvironment implements ITranslationEnvironment {
   @Override
   public int generateNextVariable() {
     return nextVariable++;
-  }
-
-  @Override
-  public OperandSize getArchitectureSize() {
-    return OperandSize.DWORD;
   }
 
   @Override

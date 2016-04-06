@@ -63,7 +63,7 @@ public class StwbrxTranslatorTest {
 
   @Test
   public void testByte() throws InternalTranslationException, InterpreterException {
-    interpreter.setRegister("%r0", BigInteger.valueOf(0x3fff00ffL), OperandSize.DWORD,
+    interpreter.setRegister("%r0", BigInteger.valueOf(0x3FFF00FFL), OperandSize.DWORD,
         ReilRegisterStatus.DEFINED);
     interpreter.setRegister("%r1", BigInteger.valueOf(996), OperandSize.DWORD,
         ReilRegisterStatus.DEFINED);
@@ -92,10 +92,10 @@ public class StwbrxTranslatorTest {
 
     interpreter.interpret(TestHelpers.createMapping(instructions), BigInteger.valueOf(0x100L));
 
-    assertEquals(BigInteger.valueOf(0x3fff00ffL), interpreter.getVariableValue("%r0"));
+    assertEquals(BigInteger.valueOf(0x3FFF00FFL), interpreter.getVariableValue("%r0"));
     assertEquals(BigInteger.valueOf(996), interpreter.getVariableValue("%r1"));
     assertEquals(BigInteger.valueOf(4), interpreter.getVariableValue("%r2"));
-    assertEquals(BigInteger.valueOf(0xff00ff3f),
+    assertEquals(BigInteger.valueOf(0xFF00FF3FL),
         BigInteger.valueOf(interpreter.readMemoryDword(1000)));
     assertEquals(BigInteger.valueOf(4L), BigInteger.valueOf(interpreter.getMemorySize()));
     assertEquals(4, TestHelpers.filterNativeRegisters(interpreter.getDefinedRegisters()).size());

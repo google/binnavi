@@ -57,7 +57,7 @@ public class LoopTranslator implements IInstructionTranslator {
 
     final List<? extends IOperandTree> operands = instruction.getOperands();
 
-    final OperandSize archSize = environment.getArchitectureSize();
+    final OperandSize archSize = Helpers.ArchitectureSize;
     final OperandSize resultSize = TranslationHelpers.getNextSize(archSize);
 
     final String truncateMask = String.valueOf(TranslationHelpers.getAllBitsMask(archSize));

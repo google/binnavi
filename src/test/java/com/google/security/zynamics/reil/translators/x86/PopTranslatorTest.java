@@ -85,7 +85,7 @@ public class PopTranslatorTest {
         ReilRegisterStatus.DEFINED);
     interpreter.setRegister("esp", BigInteger.valueOf(0x2000), OperandSize.DWORD,
         ReilRegisterStatus.DEFINED);
-    interpreter.setRegister("dsbase", BigInteger.valueOf(0), OperandSize.DWORD,
+    interpreter.setRegister("dsbase", BigInteger.ZERO, OperandSize.DWORD,
         ReilRegisterStatus.DEFINED);
     
     interpreter.setMemory(0x2000, 0x123, 4);

@@ -87,7 +87,7 @@ public class XoriTranslatorTest {
     // check correct outcome
 
     assertEquals(3, TestHelpers.filterNativeRegisters(interpreter.getDefinedRegisters()).size());
-    assertEquals(BigInteger.valueOf(0x11223c4bL), interpreter.getVariableValue("$v1"));
+    assertEquals(BigInteger.valueOf(0x11223C4BL), interpreter.getVariableValue("$v1"));
     assertEquals(BigInteger.valueOf(0x11223344L), interpreter.getVariableValue("$ra"));
     assertEquals(BigInteger.ZERO, BigInteger.valueOf(interpreter.getMemorySize()));
   }
@@ -123,7 +123,7 @@ public class XoriTranslatorTest {
     // check correct outcome
 
     assertEquals(3, TestHelpers.filterNativeRegisters(interpreter.getDefinedRegisters()).size());
-    assertEquals(BigInteger.valueOf(0x556665bcL), interpreter.getVariableValue("$a0"));
+    assertEquals(BigInteger.valueOf(0x556665BCL), interpreter.getVariableValue("$a0"));
     assertEquals(BigInteger.valueOf(0x55667788L), interpreter.getVariableValue("$a3"));
     assertEquals(BigInteger.ZERO, BigInteger.valueOf(interpreter.getMemorySize()));
   }

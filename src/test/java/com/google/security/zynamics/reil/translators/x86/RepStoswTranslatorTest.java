@@ -59,7 +59,7 @@ public class RepStoswTranslatorTest {
         ReilRegisterStatus.DEFINED);
     interpreter.setRegister("ecx", BigInteger.valueOf(0x2), OperandSize.DWORD,
         ReilRegisterStatus.DEFINED);
-    interpreter.setRegister("DF", BigInteger.valueOf(0), OperandSize.BYTE,
+    interpreter.setRegister("DF", BigInteger.ZERO, OperandSize.BYTE,
         ReilRegisterStatus.DEFINED);
 
     final MockInstruction instruction =
@@ -75,7 +75,7 @@ public class RepStoswTranslatorTest {
     assertEquals(BigInteger.valueOf(0x1004), interpreter.getVariableValue("edi"));
 
     assertEquals(BigInteger.valueOf(4L), BigInteger.valueOf(interpreter.getMemorySize()));
-    assertEquals(0x56785678, interpreter.getMemory().load(0x1000, 4));
+    assertEquals(BigInteger.valueOf(0x56785678L), interpreter.getMemory().load(0x1000, 4));
   }
 
   @Test
@@ -84,7 +84,7 @@ public class RepStoswTranslatorTest {
         ReilRegisterStatus.DEFINED);
     interpreter.setRegister("edi", BigInteger.valueOf(0x1002), OperandSize.DWORD,
         ReilRegisterStatus.DEFINED);
-    interpreter.setRegister("DF", BigInteger.valueOf(1), OperandSize.BYTE,
+    interpreter.setRegister("DF", BigInteger.ONE, OperandSize.BYTE,
         ReilRegisterStatus.DEFINED);
     interpreter.setRegister("ecx", BigInteger.valueOf(0x2), OperandSize.DWORD,
         ReilRegisterStatus.DEFINED);
@@ -102,6 +102,6 @@ public class RepStoswTranslatorTest {
     assertEquals(BigInteger.valueOf(0x0FFE), interpreter.getVariableValue("edi"));
 
     assertEquals(BigInteger.valueOf(4L), BigInteger.valueOf(interpreter.getMemorySize()));
-    assertEquals(0x56785678, interpreter.getMemory().load(0x1000, 4));
+    assertEquals(BigInteger.valueOf(0x56785678L), interpreter.getMemory().load(0x1000, 4));
   }
 }

@@ -153,7 +153,7 @@ public class ImulTranslatorTest {
 
     interpreter.setRegister("ecx", BigInteger.valueOf(0xFFFF0020L), OperandSize.DWORD,
         ReilRegisterStatus.DEFINED);
-    interpreter.setRegister("edx", BigInteger.valueOf(0), OperandSize.DWORD,
+    interpreter.setRegister("edx", BigInteger.ZERO, OperandSize.DWORD,
         ReilRegisterStatus.DEFINED);
 
     interpreter.setMemory(12, 0x1234, 4);

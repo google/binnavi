@@ -100,7 +100,7 @@ public class SrawTranslatorTest {
 
     interpreter.interpret(TestHelpers.createMapping(instructions), BigInteger.valueOf(0x100L));
 
-    assertEquals(BigInteger.valueOf(0x1fL), interpreter.getVariableValue("%r0"));
+    assertEquals(BigInteger.valueOf(0x1FL), interpreter.getVariableValue("%r0"));
     assertEquals(BigInteger.valueOf(0x7FFFL), interpreter.getVariableValue("%r1"));
     assertEquals(BigInteger.valueOf(0xAL), interpreter.getVariableValue("%r2"));
     assertEquals(BigInteger.ZERO, interpreter.getVariableValue("CR0EQ"));
@@ -184,7 +184,7 @@ public class SrawTranslatorTest {
 
     interpreter.interpret(TestHelpers.createMapping(instructions), BigInteger.valueOf(0x100L));
 
-    assertEquals(BigInteger.valueOf(0xfffffe00L), interpreter.getVariableValue("%r0"));
+    assertEquals(BigInteger.valueOf(0xFFFFFE00L), interpreter.getVariableValue("%r0"));
     assertEquals(BigInteger.valueOf(0x80010000L), interpreter.getVariableValue("%r1"));
     assertEquals(BigInteger.valueOf(0x16L), interpreter.getVariableValue("%r2"));
     assertEquals(BigInteger.ZERO, interpreter.getVariableValue("CR0EQ"));

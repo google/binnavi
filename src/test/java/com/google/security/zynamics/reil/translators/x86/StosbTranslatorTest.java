@@ -56,7 +56,7 @@ public class StosbTranslatorTest {
         ReilRegisterStatus.DEFINED);
     interpreter.setRegister("edi", BigInteger.valueOf(0x1000), OperandSize.DWORD,
         ReilRegisterStatus.DEFINED);
-    interpreter.setRegister("DF", BigInteger.valueOf(0), OperandSize.BYTE,
+    interpreter.setRegister("DF", BigInteger.ZERO, OperandSize.BYTE,
         ReilRegisterStatus.DEFINED);
 
     final MockInstruction instruction =
@@ -72,7 +72,7 @@ public class StosbTranslatorTest {
     assertEquals(BigInteger.valueOf(0x1001), interpreter.getVariableValue("edi"));
 
     assertEquals(BigInteger.valueOf(1L), BigInteger.valueOf(interpreter.getMemorySize()));
-    assertEquals(0x78, interpreter.getMemory().load(0x1000, 1));
+    assertEquals(BigInteger.valueOf(0x78), interpreter.getMemory().load(0x1000, 1));
   }
 
   @Test
@@ -81,7 +81,7 @@ public class StosbTranslatorTest {
         ReilRegisterStatus.DEFINED);
     interpreter.setRegister("edi", BigInteger.valueOf(0x1000), OperandSize.DWORD,
         ReilRegisterStatus.DEFINED);
-    interpreter.setRegister("DF", BigInteger.valueOf(1), OperandSize.BYTE,
+    interpreter.setRegister("DF", BigInteger.ONE, OperandSize.BYTE,
         ReilRegisterStatus.DEFINED);
 
     final MockInstruction instruction =
@@ -97,6 +97,6 @@ public class StosbTranslatorTest {
     assertEquals(BigInteger.valueOf(0x0FFF), interpreter.getVariableValue("edi"));
 
     assertEquals(BigInteger.valueOf(1L), BigInteger.valueOf(interpreter.getMemorySize()));
-    assertEquals(0x78, interpreter.getMemory().load(0x1000, 1));
+    assertEquals(BigInteger.valueOf(0x78), interpreter.getMemory().load(0x1000, 1));
   }
 }

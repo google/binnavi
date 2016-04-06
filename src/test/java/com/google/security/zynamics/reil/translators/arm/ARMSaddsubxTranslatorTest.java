@@ -67,7 +67,7 @@ public class ARMSaddsubxTranslatorTest {
   @Test
   public void testSimpleRegister() throws InternalTranslationException, InterpreterException {
     interpreter.setRegister("R0", BigInteger.valueOf(0x0L), dw, ReilRegisterStatus.DEFINED);
-    interpreter.setRegister("R1", BigInteger.valueOf(0xed5f66aeL), dw, ReilRegisterStatus.DEFINED);
+    interpreter.setRegister("R1", BigInteger.valueOf(0xED5F66AEL), dw, ReilRegisterStatus.DEFINED);
     interpreter.setRegister("R2", BigInteger.valueOf(0x01FFC9E0L), dw, ReilRegisterStatus.DEFINED);
 
     final MockOperandTree operandTree1 = new MockOperandTree();
@@ -91,8 +91,8 @@ public class ARMSaddsubxTranslatorTest {
 
     interpreter.interpret(TestHelpers.createMapping(instructions), BigInteger.valueOf(0x100L));
 
-    assertEquals(BigInteger.valueOf(0xb73f64afL), interpreter.getVariableValue("R0"));
-    assertEquals(BigInteger.valueOf(0xed5f66aeL), interpreter.getVariableValue("R1"));
+    assertEquals(BigInteger.valueOf(0xB73F64AFL), interpreter.getVariableValue("R0"));
+    assertEquals(BigInteger.valueOf(0xED5F66AEL), interpreter.getVariableValue("R1"));
     assertEquals(BigInteger.valueOf(0x01FFC9E0L), interpreter.getVariableValue("R2"));
 
     assertEquals(BigInteger.ZERO, BigInteger.valueOf(interpreter.getMemorySize()));
@@ -103,7 +103,7 @@ public class ARMSaddsubxTranslatorTest {
   public void testSimpleRegisterDifferentMnemonic() throws InternalTranslationException,
       InterpreterException {
     interpreter.setRegister("R0", BigInteger.valueOf(0x0L), dw, ReilRegisterStatus.DEFINED);
-    interpreter.setRegister("R1", BigInteger.valueOf(0xed5f66aeL), dw, ReilRegisterStatus.DEFINED);
+    interpreter.setRegister("R1", BigInteger.valueOf(0xED5F66AEL), dw, ReilRegisterStatus.DEFINED);
     interpreter.setRegister("R2", BigInteger.valueOf(0x01FFC9E0L), dw, ReilRegisterStatus.DEFINED);
 
     final MockOperandTree operandTree1 = new MockOperandTree();
@@ -127,8 +127,8 @@ public class ARMSaddsubxTranslatorTest {
 
     interpreter.interpret(TestHelpers.createMapping(instructions), BigInteger.valueOf(0x100L));
 
-    assertEquals(BigInteger.valueOf(0xb73f64afL), interpreter.getVariableValue("R0"));
-    assertEquals(BigInteger.valueOf(0xed5f66aeL), interpreter.getVariableValue("R1"));
+    assertEquals(BigInteger.valueOf(0xB73F64AFL), interpreter.getVariableValue("R0"));
+    assertEquals(BigInteger.valueOf(0xED5F66AEL), interpreter.getVariableValue("R1"));
     assertEquals(BigInteger.valueOf(0x01FFC9E0L), interpreter.getVariableValue("R2"));
 
     assertEquals(BigInteger.ZERO, BigInteger.valueOf(interpreter.getMemorySize()));
@@ -139,7 +139,7 @@ public class ARMSaddsubxTranslatorTest {
   public void testSimpleRegisterTwo() throws InternalTranslationException, InterpreterException {
     interpreter.setRegister("R0", BigInteger.valueOf(0x0L), dw, ReilRegisterStatus.DEFINED);
     interpreter.setRegister("R1", BigInteger.valueOf(0x01FFC9E0L), dw, ReilRegisterStatus.DEFINED);
-    interpreter.setRegister("R2", BigInteger.valueOf(0x89ad936eL), dw, ReilRegisterStatus.DEFINED);
+    interpreter.setRegister("R2", BigInteger.valueOf(0x89AD936EL), dw, ReilRegisterStatus.DEFINED);
 
     final MockOperandTree operandTree1 = new MockOperandTree();
     operandTree1.root = new MockOperandTreeNode(ExpressionType.SIZE_PREFIX, "b4");
@@ -162,9 +162,9 @@ public class ARMSaddsubxTranslatorTest {
 
     interpreter.interpret(TestHelpers.createMapping(instructions), BigInteger.valueOf(0x100L));
 
-    assertEquals(BigInteger.valueOf(0x956d4033L), interpreter.getVariableValue("R0"));
+    assertEquals(BigInteger.valueOf(0x956D4033L), interpreter.getVariableValue("R0"));
     assertEquals(BigInteger.valueOf(0x01FFC9E0L), interpreter.getVariableValue("R1"));
-    assertEquals(BigInteger.valueOf(0x89ad936eL), interpreter.getVariableValue("R2"));
+    assertEquals(BigInteger.valueOf(0x89AD936EL), interpreter.getVariableValue("R2"));
 
     assertEquals(BigInteger.ZERO, BigInteger.valueOf(interpreter.getMemorySize()));
     assertEquals(8, TestHelpers.filterNativeRegisters(interpreter.getDefinedRegisters()).size());

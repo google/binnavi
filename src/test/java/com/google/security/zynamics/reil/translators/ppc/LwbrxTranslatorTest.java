@@ -108,7 +108,7 @@ public class LwbrxTranslatorTest {
         ReilRegisterStatus.DEFINED);
     interpreter.setRegister("%r2", BigInteger.valueOf(4), OperandSize.DWORD,
         ReilRegisterStatus.DEFINED);
-    interpreter.setMemory(1000, 0x00002d44L, 4);
+    interpreter.setMemory(1000, 0x00002D44L, 4);
 
     final MockOperandTree operandTree1 = new MockOperandTree();
     operandTree1.root = new MockOperandTreeNode(ExpressionType.SIZE_PREFIX, "byte");
@@ -133,7 +133,7 @@ public class LwbrxTranslatorTest {
     interpreter.interpret(TestHelpers.createMapping(instructions), BigInteger.valueOf(0x100L));
 
     assertEquals(BigInteger.valueOf(996), interpreter.getVariableValue("%r1"));
-    assertEquals(BigInteger.valueOf(0x442d0000L), interpreter.getVariableValue("%r0"));
+    assertEquals(BigInteger.valueOf(0x442D0000L), interpreter.getVariableValue("%r0"));
     assertEquals(BigInteger.valueOf(4), interpreter.getVariableValue("%r2"));
     assertEquals(BigInteger.valueOf(4L), BigInteger.valueOf(interpreter.getMemorySize()));
     assertEquals(4, TestHelpers.filterNativeRegisters(interpreter.getDefinedRegisters()).size());

@@ -90,13 +90,10 @@ public class LoopeTranslatorTest {
 
     translator.translate(environment, instruction2, instructions);
 
-    final HashMap<BigInteger, List<ReilInstruction>> mapping =
-        new HashMap<BigInteger, List<ReilInstruction>>();
 
-    mapping.put(BigInteger.valueOf(instructions.get(0).getAddress().toLong()), instructions);
-    mapping.put(BigInteger.valueOf(instructionsDec.get(0).getAddress().toLong()), instructionsDec);
+    instructions.addAll(0,instructionsDec);
 
-    interpreter.interpret(mapping, BigInteger.valueOf(0x100));
+    interpreter.interpret(TestHelpers.createMapping(instructions), BigInteger.valueOf(0x100));
 
     assertEquals(6, TestHelpers.filterNativeRegisters(interpreter.getDefinedRegisters()).size());
 

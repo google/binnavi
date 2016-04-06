@@ -68,7 +68,7 @@ public class ARMQsubTranslatorTest {
   @Test
   public void testSimpleRegister() throws InternalTranslationException, InterpreterException {
     interpreter.setRegister("R0", BigInteger.valueOf(0x0L), dw, ReilRegisterStatus.DEFINED);
-    interpreter.setRegister("R1", BigInteger.valueOf(0xec5e51faL), dw, ReilRegisterStatus.DEFINED);
+    interpreter.setRegister("R1", BigInteger.valueOf(0xEC5E51FAL), dw, ReilRegisterStatus.DEFINED);
     interpreter.setRegister("R2", BigInteger.valueOf(0x01FFC9E0L), dw, ReilRegisterStatus.DEFINED);
 
     final MockOperandTree operandTree1 = new MockOperandTree();
@@ -92,8 +92,8 @@ public class ARMQsubTranslatorTest {
 
     interpreter.interpret(TestHelpers.createMapping(instructions), BigInteger.valueOf(0x100L));
 
-    assertEquals(BigInteger.valueOf(0xea5e881aL), interpreter.getVariableValue("R0"));
-    assertEquals(BigInteger.valueOf(0xec5e51faL), interpreter.getVariableValue("R1"));
+    assertEquals(BigInteger.valueOf(0xEA5E881AL), interpreter.getVariableValue("R0"));
+    assertEquals(BigInteger.valueOf(0xEC5E51FAL), interpreter.getVariableValue("R1"));
     assertEquals(BigInteger.valueOf(0x01FFC9E0L), interpreter.getVariableValue("R2"));
 
     assertEquals(BigInteger.ZERO, BigInteger.valueOf(interpreter.getMemorySize()));

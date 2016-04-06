@@ -60,7 +60,7 @@ public class SubTranslatorTest {
     // Set carry but not overflow
 
     interpreter.setRegister("CF", BigInteger.ZERO, OperandSize.BYTE, ReilRegisterStatus.DEFINED);
-    interpreter.setRegister("eax", BigInteger.valueOf(1), OperandSize.DWORD,
+    interpreter.setRegister("eax", BigInteger.ONE, OperandSize.DWORD,
         ReilRegisterStatus.DEFINED);
 
     final MockOperandTree operandTree1 = new MockOperandTree();

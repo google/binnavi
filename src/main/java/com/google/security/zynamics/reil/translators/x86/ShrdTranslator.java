@@ -220,13 +220,13 @@ public class ShrdTranslator implements IInstructionTranslator {
 
     final String xoredMsb = environment.getNextVariableString();
     final String maskedMsb = environment.getNextVariableString();
-    final long msbMask = TranslationHelpers.getMsbMask(firstResult.getSize());
+    final String msbMask = TranslationHelpers.getMsbMask(firstResult.getSize());
     final long msbShift = TranslationHelpers.getShiftMsbLsbMask(firstResult.getSize());
 
     instructions.add(ReilHelpers.createXor(offset++, firstResult.getSize(), tempInput,
         firstResult.getSize(), shiftedIsolationResult, firstResult.getSize(), xoredMsb));
     instructions.add(ReilHelpers.createAnd(offset++, firstResult.getSize(), xoredMsb,
-        OperandSize.BYTE, String.valueOf(msbMask), OperandSize.BYTE, maskedMsb));
+        OperandSize.BYTE, msbMask, OperandSize.BYTE, maskedMsb));
     instructions.add(ReilHelpers.createBsh(offset++, firstResult.getSize(), maskedMsb,
         OperandSize.BYTE, String.valueOf(msbShift), OperandSize.BYTE, Helpers.OVERFLOW_FLAG));
 
@@ -245,10 +245,10 @@ public class ShrdTranslator implements IInstructionTranslator {
       final String operand = Helpers.getLeafValue(inputOperand.getRootNode());
 
       final String undefRegister =
-          Helpers.getOperandSize(inputOperand) == environment.getArchitectureSize() ? operand
+          Helpers.getOperandSize(inputOperand) == Helpers.ArchitectureSize ? operand
               : Helpers.getParentRegister(operand);
 
-      instructions.add(ReilHelpers.createUndef(offset++, environment.getArchitectureSize(),
+      instructions.add(ReilHelpers.createUndef(offset++, Helpers.ArchitectureSize,
           undefRegister));
     }
 

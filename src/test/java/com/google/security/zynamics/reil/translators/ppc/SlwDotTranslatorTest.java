@@ -98,7 +98,7 @@ public class SlwDotTranslatorTest {
 
     interpreter.interpret(TestHelpers.createMapping(instructions), BigInteger.valueOf(0x100L));
 
-    assertEquals(BigInteger.valueOf(0x1fffc00L), interpreter.getVariableValue("%r0"));
+    assertEquals(BigInteger.valueOf(0x1FFFC00L), interpreter.getVariableValue("%r0"));
     assertEquals(BigInteger.valueOf(0x7FFFL), interpreter.getVariableValue("%r1"));
     assertEquals(BigInteger.valueOf(0xAL), interpreter.getVariableValue("%r2"));
     assertEquals(BigInteger.ZERO, interpreter.getVariableValue("CR0EQ"));

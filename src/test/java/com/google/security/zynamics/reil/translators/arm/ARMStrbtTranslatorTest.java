@@ -113,7 +113,7 @@ public class ARMStrbtTranslatorTest {
 
     assertEquals(BigInteger.valueOf(0x46L),
         BigInteger.valueOf(interpreter.readMemoryByte(0x07FFFFDCL)));
-    assertEquals(BigInteger.valueOf(1), BigInteger.valueOf(interpreter.getMemorySize()));
+    assertEquals(BigInteger.ONE, BigInteger.valueOf(interpreter.getMemorySize()));
     assertEquals(9, TestHelpers.filterNativeRegisters(interpreter.getDefinedRegisters()).size());
   }
 }

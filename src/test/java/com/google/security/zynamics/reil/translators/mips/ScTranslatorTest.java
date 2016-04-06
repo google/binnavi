@@ -76,7 +76,7 @@ public class ScTranslatorTest {
     operandTree2.root.getChildren().get(0).m_children.add(new MockOperandTreeNode(
         ExpressionType.IMMEDIATE_INTEGER, String.valueOf(0L)));
 
-    interpreter.setMemory(0x10000000, 0x340a0007L, 4);
+    interpreter.setMemory(0x10000000, 0x340A0007L, 4);
 
     final List<MockOperandTree> operands = Lists.newArrayList(operandTree1, operandTree2);
     final IInstruction instruction = new MockInstruction("sc", operands);
@@ -88,7 +88,7 @@ public class ScTranslatorTest {
     assertEquals(4, TestHelpers.filterNativeRegisters(interpreter.getDefinedRegisters()).size());
     assertEquals(BigInteger.valueOf(0x1L), interpreter.getVariableValue("$v2"));
     assertEquals(BigInteger.valueOf(4L), BigInteger.valueOf(interpreter.getMemorySize()));
-    assertEquals(BigInteger.valueOf(0xFFFFFFF9),
+    assertEquals(BigInteger.valueOf(0xFFFFFFF9L),
         BigInteger.valueOf(interpreter.readMemoryDword(0x10000000)));
   }
 
@@ -113,7 +113,7 @@ public class ScTranslatorTest {
     operandTree2.root.getChildren().get(0).m_children.add(new MockOperandTreeNode(
         ExpressionType.IMMEDIATE_INTEGER, String.valueOf(0L)));
 
-    interpreter.setMemory(0x10000000, 0x340a0007L, 4);
+    interpreter.setMemory(0x10000000, 0x340A0007L, 4);
 
     final List<MockOperandTree> operands = Lists.newArrayList(operandTree1, operandTree2);
     final IInstruction instruction = new MockInstruction("sc", operands);
@@ -125,7 +125,7 @@ public class ScTranslatorTest {
     assertEquals(4, TestHelpers.filterNativeRegisters(interpreter.getDefinedRegisters()).size());
     assertEquals(BigInteger.valueOf(0x0L), interpreter.getVariableValue("$v2"));
     assertEquals(BigInteger.valueOf(4L), BigInteger.valueOf(interpreter.getMemorySize()));
-    assertEquals(BigInteger.valueOf(0x340a0007L),
+    assertEquals(BigInteger.valueOf(0x340A0007L),
         BigInteger.valueOf(interpreter.readMemoryDword(0x10000000)));
   }
 }

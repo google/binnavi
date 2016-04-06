@@ -94,7 +94,7 @@ public class SrwiDotTranslatorTest {
 
     interpreter.interpret(TestHelpers.createMapping(instructions), BigInteger.valueOf(0x100L));
 
-    assertEquals(BigInteger.valueOf(0x181ca0bL), interpreter.getVariableValue("%r0"));
+    assertEquals(BigInteger.valueOf(0x181CA0BL), interpreter.getVariableValue("%r0"));
     assertEquals(BigInteger.valueOf(0x3039417FL), interpreter.getVariableValue("%r18"));
     assertEquals(BigInteger.ZERO, interpreter.getVariableValue("CR0LT"));
     assertEquals(BigInteger.ONE, interpreter.getVariableValue("CR0GT"));

@@ -33,7 +33,7 @@ public class AndSimplifier {
   private static boolean isTruncateMask(final IValueElement value, final OperandSize size) {
     return (value instanceof Literal)
         && ((Literal) value).getValue().equals(
-            BigInteger.valueOf(TranslationHelpers.getAllBitsMask(size)));
+            TranslationHelpers.getAllBitsMask(size));
   }
 
   public static ValueTrackerElement simplifyAnd(final ReilInstruction instruction,

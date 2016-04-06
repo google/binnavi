@@ -68,8 +68,8 @@ public class ARMSsub16TranslatorTest {
   @Test
   public void testSimpleRegister() throws InternalTranslationException, InterpreterException {
     interpreter.setRegister("R0", BigInteger.valueOf(0x0L), dw, ReilRegisterStatus.DEFINED);
-    interpreter.setRegister("R1", BigInteger.valueOf(0x69ae6cb2L), dw, ReilRegisterStatus.DEFINED);
-    interpreter.setRegister("R2", BigInteger.valueOf(0x01ffc9e0L), dw, ReilRegisterStatus.DEFINED);
+    interpreter.setRegister("R1", BigInteger.valueOf(0x69AE6CB2L), dw, ReilRegisterStatus.DEFINED);
+    interpreter.setRegister("R2", BigInteger.valueOf(0x01FFC9E0L), dw, ReilRegisterStatus.DEFINED);
     interpreter.setRegister("C", BigInteger.ZERO, bt, ReilRegisterStatus.DEFINED);
 
     final MockOperandTree operandTree1 = new MockOperandTree();
@@ -93,9 +93,9 @@ public class ARMSsub16TranslatorTest {
 
     interpreter.interpret(TestHelpers.createMapping(instructions), BigInteger.valueOf(0x100L));
 
-    assertEquals(BigInteger.valueOf(0x67afa2d2L), interpreter.getVariableValue("R0"));
-    assertEquals(BigInteger.valueOf(0x69ae6cb2L), interpreter.getVariableValue("R1"));
-    assertEquals(BigInteger.valueOf(0x01ffc9e0L), interpreter.getVariableValue("R2"));
+    assertEquals(BigInteger.valueOf(0x67AFA2D2L), interpreter.getVariableValue("R0"));
+    assertEquals(BigInteger.valueOf(0x69AE6CB2L), interpreter.getVariableValue("R1"));
+    assertEquals(BigInteger.valueOf(0x01FFC9E0L), interpreter.getVariableValue("R2"));
     assertEquals(BigInteger.ZERO, interpreter.getVariableValue("C"));
 
     assertEquals(BigInteger.ZERO, BigInteger.valueOf(interpreter.getMemorySize()));

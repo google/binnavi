@@ -22,6 +22,7 @@ import com.google.security.zynamics.reil.ReilInstruction;
 import com.google.security.zynamics.zylib.disassembly.IInstruction;
 import com.google.security.zynamics.zylib.disassembly.IOperandTreeNode;
 
+import java.math.BigInteger;
 import java.util.List;
 
 /**
@@ -47,8 +48,8 @@ public class TranslationHelpers {
     Preconditions.checkNotNull(instructions, ErrorStrings.INSTRUCTIONS_ARGUMENT_ERROR);
   }
 
-  public static long generateOneMask(final int lsb, final int width, final OperandSize size) {
-    return generateZeroMask(lsb, width, size) ^ getAllBitsMask(size);
+  public static BigInteger generateOneMask(final int lsb, final int width, final OperandSize size) {
+    return generateZeroMask(lsb, width, size).xor(getAllBitsMask(size));
   }
 
   /**
@@ -59,21 +60,21 @@ public class TranslationHelpers {
    * @param size The size of the mask valid 4-64. In OperandSize.
    * @return The mask.
    */
-  public static long generateZeroMask(final int lsb, final int width, final OperandSize size) {
+  public static BigInteger generateZeroMask(final int lsb, final int width, final OperandSize size) {
     Preconditions.checkNotNull(size, "Size argument can not be null");
     Preconditions.checkPositionIndex(lsb, size.getBitSize() - 1);
     Preconditions.checkArgument(width >= 1);
     Preconditions.checkPositionIndex((lsb + width) - 1, size.getBitSize());
 
-    long mask = getAllBitsMask(size);
+    BigInteger mask = getAllBitsMask(size);
     final long msb = (lsb + width) - 1;
 
     final long xorBit = 1;
 
     for (long i = lsb; i <= msb; i++) {
-      mask = (mask ^ (xorBit << i));
+      mask = mask.xor(BigInteger.valueOf(xorBit << i));
     }
-    return mask & getAllBitsMask(size);
+    return mask.and(getAllBitsMask(size));
   }
 
   /**
@@ -82,17 +83,19 @@ public class TranslationHelpers {
    * @param size The given operand size
    * @return A mask where all bits are set
    */
-  public static long getAllBitsMask(final OperandSize size) {
+  public static BigInteger getAllBitsMask(final OperandSize size) {
 
     switch (size) {
       case BYTE:
-        return 255L;
+        return BigInteger.valueOf(255L);
       case WORD:
-        return 65535L;
+        return BigInteger.valueOf(65535L);
       case DWORD:
-        return 4294967295L;
+        return BigInteger.valueOf(4294967295L);
       case QWORD:
-        return 0xFFFFFFFFFFFFFFFFL;
+        return getUnsignedBigIntegerValue(0xFFFFFFFFFFFFFFFFL);
+      case OWORD:
+        return getUnsignedBigIntegerValue(0xFFFFFFFFFFFFFFFFL).shiftLeft(64).add(getUnsignedBigIntegerValue(0xFFFFFFFFFFFFFFFFL));
       default:
         break;
     }
@@ -109,8 +112,8 @@ public class TranslationHelpers {
    *
    * @return A mask of the form F..F0..0
    */
-  public static long getAllButMask(final OperandSize largerSize, final OperandSize smallerSize) {
-    return getAllBitsMask(largerSize) ^ getAllBitsMask(smallerSize);
+  public static BigInteger getAllButMask(final OperandSize largerSize, final OperandSize smallerSize) {
+    return getAllBitsMask(largerSize).xor(getAllBitsMask(smallerSize));
   }
 
   /**
@@ -120,17 +123,17 @@ public class TranslationHelpers {
    *
    * @return The mask that masks the MSB of values of that size
    */
-  public static long getMsbMask(final OperandSize size) {
+  public static String getMsbMask(final OperandSize size) {
 
     switch (size) {
       case BYTE:
-        return 128L;
+        return "128";
       case WORD:
-        return 32768L;
+        return "32768";
       case DWORD:
-        return 2147483648L;
+        return "2147483648";
       case QWORD:
-        return 0x8000000000000000L;
+        return "9223372036854775808"; //0x8000000000000000L;
       default:
         break;
     }
@@ -183,6 +186,17 @@ public class TranslationHelpers {
    */
   public static boolean isSizeExpression(final IOperandTreeNode expression) {
     return OperandSize.isSizeString(expression.getValue());
+  }
+  
+  public static BigInteger getUnsignedBigIntegerValue(long val)  {
+    BigInteger result= BigInteger.valueOf(val);
+    if(val < 0)
+    {
+      BigInteger t0 = BigInteger.valueOf(0xFFFFFFFFFFFFFFL);
+      BigInteger t1 = t0.multiply(BigInteger.valueOf(0x100L)).add(BigInteger.valueOf(0xff));
+      result = t1.and(result);
+    }
+    return result;
   }
 }
 

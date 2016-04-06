@@ -93,7 +93,7 @@ public class JccTranslator implements IInstructionTranslator {
     offset = baseOffset + instructions.size();
 
     instructions.add(ReilHelpers.createJcc(offset, condition.first(), condition.second(),
-        environment.getArchitectureSize(), jumpTarget));
+        Helpers.ArchitectureSize, jumpTarget));
   }
 
 }
