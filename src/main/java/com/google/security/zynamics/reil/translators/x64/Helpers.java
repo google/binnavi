@@ -138,36 +138,6 @@ public class Helpers {
   }
 
   /**
-   * Pushes a register onto the stack
-   *
-   * @param environment A valid translation environment
-   * @param baseOffset The next unused REIL offset
-   * @param register The name of the register to push
-   * @param size The size of the register (either WORD or DWORD)
-   * @param instructions A list of REIL instructions where the new REIL code is added
-   */
-//  private static void generateRegisterPush(final ITranslationEnvironment environment,
-//      final long baseOffset, final String register, final OperandSize size,
-//      final List<ReilInstruction> instructions) {
-//
-//    long offset = baseOffset;
-//
-//    final String pValue;
-//
-//    if (size == OperandSize.DWORD) {
-//      pValue = register;
-//    } else {
-//      pValue = environment.getNextVariableString();
-//
-//      instructions.add(ReilHelpers.createAnd(offset, OperandSize.DWORD, register, size, "65535",
-//          size, pValue));
-//      offset++;
-//    }
-//
-//    generatePush(environment, offset, pValue, size, instructions);
-//  }
-
-  /**
    * Generates code that generates sign masks for values
    *
    * @param environment A valid translation environment

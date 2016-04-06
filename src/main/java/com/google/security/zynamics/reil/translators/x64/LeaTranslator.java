@@ -167,11 +167,7 @@ public class LeaTranslator implements IInstructionTranslator {
     // Handling QWORD values is easier. Just add a STR
     // instruction that writes the loaded source value
     // into the destination register.
-
     instructions.add(ReilHelpers.createStr(offset, size, sourceRegister, size, destination));
-
-    // instructions.addAll(Helpers.writeBack(environment, offset, targetOperand, sourceRegister,
-    // size, null, TranslationResultType.REGISTER));
     } else {
       assert false;
     }

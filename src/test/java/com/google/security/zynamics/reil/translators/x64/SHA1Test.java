@@ -110,7 +110,6 @@ public class SHA1Test {
     
     interpreter.setMemory(0x7FFFFFFFDB38L, 0, 8);
     
-    //long state_base = 0x7FFFFFFFDDF0L;
     long state_base = 0x7FFFFFFFDBC0L;
     interpreter.setMemory(state_base, 0x67452301L, 4);
     interpreter.setMemory(state_base+4, 0xEFCDAB89L, 4);

@@ -91,19 +91,9 @@ public class SimpleFunctionTest {
     
     ReilTranslator<INaviInstruction> translator = new ReilTranslator<>();
     ReilFunction func = translator.translate(new StandardEnvironment(), sha_compress);
-    
-   // interpreter.setRegister("dsbase", BigInteger.ZERO, OperandSize.QWORD,
-   //      ReilRegisterStatus.DEFINED);
-    /*interpreter.setRegister("csbase", BigInteger.valueOf(0x33), OperandSize.QWORD,
-        ReilRegisterStatus.DEFINED);*/
-   interpreter.setRegister("ssbase", BigInteger.valueOf(/*0x7FFFFFFFDFA0L*/0), OperandSize.QWORD,
+
+   interpreter.setRegister("ssbase", BigInteger.ZERO, OperandSize.QWORD,
         ReilRegisterStatus.DEFINED);
-   /* interpreter.setRegister("fsbase", BigInteger.ZERO, OperandSize.QWORD,
-        ReilRegisterStatus.DEFINED);
-    interpreter.setRegister("esbase", BigInteger.ZERO, OperandSize.QWORD,
-        ReilRegisterStatus.DEFINED);
-    interpreter.setRegister("gsbase", BigInteger.ZERO, OperandSize.QWORD,
-        ReilRegisterStatus.DEFINED);*/
     
     interpreter.setRegister("rax", TranslationHelpers.getUnsignedBigIntegerValue(0x40060b), OperandSize.QWORD, ReilRegisterStatus.DEFINED);
     interpreter.setRegister("rbx", TranslationHelpers.getUnsignedBigIntegerValue(0), OperandSize.QWORD, ReilRegisterStatus.DEFINED);
@@ -113,17 +103,6 @@ public class SimpleFunctionTest {
     interpreter.setRegister("rdi", TranslationHelpers.getUnsignedBigIntegerValue(0x1a5), OperandSize.QWORD, ReilRegisterStatus.DEFINED);
     interpreter.setRegister("rbp", TranslationHelpers.getUnsignedBigIntegerValue(0x7FFFFFFFDEA0L), OperandSize.QWORD, ReilRegisterStatus.DEFINED);
     interpreter.setRegister("rsp", TranslationHelpers.getUnsignedBigIntegerValue(0x7FFFFFFFDE78L), OperandSize.QWORD, ReilRegisterStatus.DEFINED);
-//    interpreter.setRegister("r8",  TranslationHelpers.GetUnsignedBigIntegerValue(0x7FFFF7DD4DD0L), OperandSize.QWORD, ReilRegisterStatus.DEFINED);
-//    interpreter.setRegister("r9",  TranslationHelpers.GetUnsignedBigIntegerValue(0x7FFFF7DE9A20L), OperandSize.QWORD, ReilRegisterStatus.DEFINED);
-//    interpreter.setRegister("r10", TranslationHelpers.GetUnsignedBigIntegerValue(0x833L), OperandSize.QWORD, ReilRegisterStatus.DEFINED);
-//    interpreter.setRegister("r11", TranslationHelpers.GetUnsignedBigIntegerValue(0x7FFFF7A2F950L), OperandSize.QWORD, ReilRegisterStatus.DEFINED);
-//    interpreter.setRegister("r12", TranslationHelpers.GetUnsignedBigIntegerValue(0x400440L), OperandSize.QWORD, ReilRegisterStatus.DEFINED);
-//    interpreter.setRegister("r13", TranslationHelpers.GetUnsignedBigIntegerValue(0x7FFFFFFFDF80L), OperandSize.QWORD, ReilRegisterStatus.DEFINED);
-//    interpreter.setRegister("r14", TranslationHelpers.GetUnsignedBigIntegerValue(0), OperandSize.QWORD, ReilRegisterStatus.DEFINED);
-//    interpreter.setRegister("r15", TranslationHelpers.GetUnsignedBigIntegerValue(0), OperandSize.QWORD, ReilRegisterStatus.DEFINED);
-//    interpreter.setRegister("rip", TranslationHelpers.GetUnsignedBigIntegerValue(0x4005a5), OperandSize.QWORD, ReilRegisterStatus.DEFINED);
-
-    
     
     interpreter.setMemory(0x7FFFFFFFDE78L, 5, 8);
     
@@ -131,7 +110,6 @@ public class SimpleFunctionTest {
         TestHelpers.createMapping(
             Lists.newArrayList(func.getGraph().getNodes().get(0).getInstructions())),
         sha_compress.getAddress().toBigInteger());
-        //func.getGraph().getNodes().get(0).getAddress().toBigInteger());
     
     assertEquals(BigInteger.valueOf(502287),interpreter.getVariableValue("rax"));
     

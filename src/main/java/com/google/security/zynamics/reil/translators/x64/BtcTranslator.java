@@ -76,16 +76,10 @@ public class BtcTranslator implements IInstructionTranslator {
     offset = baseOffset + instructions.size();
 
     final String negatedIndex = environment.getNextVariableString();
-    // final String truncatedNegatedIndex = environment.getNextVariableString();
     final String shiftedTarget = environment.getNextVariableString();
-
-    // TODO: Due to a bug in the REIL BSH specification we can not truncate the result
-    // of the subtraction here. See the tests for an example of what goes wrong.
 
     instructions.add(ReilHelpers.createSub(offset++, OperandSize.BYTE, "0", sourceResult.getSize(),
         sourceResult.getRegister(), OperandSize.WORD, negatedIndex));
-    // instructions.add(ReilHelpers.createAnd(offset++, OperandSize.WORD, negatedIndex,
-    // OperandSize.BYTE, "255", OperandSize.BYTE, truncatedNegatedIndex));
     instructions.add(ReilHelpers.createBsh(offset++, targetResult.getSize(),
         targetResult.getRegister(), OperandSize.BYTE, negatedIndex, targetResult.getSize(),
         shiftedTarget));
