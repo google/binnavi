@@ -146,9 +146,9 @@ public final class MockView implements INaviView, ICallgraphView, IFlowgraphView
         null, false, sql));
 
     ((INaviCodeNode) nodes.get(0)).addInstruction(MockCreator.createInstructionWithOperand(function
-        .getAddress().toBigInteger().add(BigInteger.valueOf(0)), function.getModule(), sql), null);
+        .getAddress().toBigInteger().add(BigInteger.ZERO), function.getModule(), sql), null);
     ((INaviCodeNode) nodes.get(0)).addInstruction(MockCreator.createInstructionWithOperand(function
-        .getAddress().toBigInteger().add(BigInteger.valueOf(1)), function.getModule(), sql), null);
+        .getAddress().toBigInteger().add(BigInteger.ONE), function.getModule(), sql), null);
     ((INaviCodeNode) nodes.get(0)).addInstruction(MockCreator.createInstructionWithOperand(function
         .getAddress().toBigInteger().add(BigInteger.valueOf(2)), function.getModule(), sql), null);
 

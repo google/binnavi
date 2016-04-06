@@ -171,7 +171,7 @@ public class ReilInterpreter {
 
     if (firstValue.first() && secondValue.first()) {
       final boolean isMsbSet = !(secondValue.second()
-          .and(BigInteger.valueOf(1)
+          .and(BigInteger.ONE
               .shiftLeft(instruction.getSecondOperand().getSize().getBitSize() - 1))
           .equals(BigInteger.ZERO));
 

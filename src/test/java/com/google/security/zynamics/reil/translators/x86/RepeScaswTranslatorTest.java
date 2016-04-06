@@ -60,9 +60,9 @@ public class RepeScaswTranslatorTest {
         ReilRegisterStatus.DEFINED);
     interpreter.setRegister("ecx", BigInteger.valueOf(0x4), OperandSize.DWORD,
         ReilRegisterStatus.DEFINED);
-    interpreter.setRegister("DF", BigInteger.valueOf(0), OperandSize.BYTE,
+    interpreter.setRegister("DF", BigInteger.ZERO, OperandSize.BYTE,
         ReilRegisterStatus.DEFINED);
-    interpreter.setRegister("ZF", BigInteger.valueOf(0), OperandSize.BYTE,
+    interpreter.setRegister("ZF", BigInteger.ZERO, OperandSize.BYTE,
         ReilRegisterStatus.DEFINED);
 
     interpreter.getMemory().store(0x1000, 0x56781234, 4);
@@ -90,9 +90,9 @@ public class RepeScaswTranslatorTest {
         ReilRegisterStatus.DEFINED);
     interpreter.setRegister("ecx", BigInteger.valueOf(0x4), OperandSize.DWORD,
         ReilRegisterStatus.DEFINED);
-    interpreter.setRegister("DF", BigInteger.valueOf(0), OperandSize.BYTE,
+    interpreter.setRegister("DF", BigInteger.ZERO, OperandSize.BYTE,
         ReilRegisterStatus.DEFINED);
-    interpreter.setRegister("ZF", BigInteger.valueOf(1), OperandSize.BYTE,
+    interpreter.setRegister("ZF", BigInteger.ONE, OperandSize.BYTE,
         ReilRegisterStatus.DEFINED);
 
     interpreter.getMemory().store(0x1000, 0x56781234, 4);

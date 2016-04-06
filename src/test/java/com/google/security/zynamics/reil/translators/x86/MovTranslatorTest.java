@@ -88,7 +88,7 @@ public class MovTranslatorTest {
   public void testLoadWord() throws InternalTranslationException, InterpreterException {
     // mov ax, word [ebp + 5]
 
-    interpreter.setRegister("eax", BigInteger.valueOf(0), OperandSize.DWORD,
+    interpreter.setRegister("eax", BigInteger.ZERO, OperandSize.DWORD,
         ReilRegisterStatus.DEFINED);
     interpreter.setRegister("ebx", BigInteger.valueOf(5), OperandSize.DWORD,
         ReilRegisterStatus.DEFINED);

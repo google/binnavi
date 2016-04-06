@@ -81,7 +81,7 @@ public class BtcTranslatorTest {
 
     assertEquals(2, TestHelpers.filterNativeRegisters(interpreter.getDefinedRegisters()).size());
 
-    assertEquals(BigInteger.valueOf(1), interpreter.getVariableValue("CF"));
+    assertEquals(BigInteger.ONE, interpreter.getVariableValue("CF"));
     assertEquals(BigInteger.ZERO, interpreter.getMemory().load(0, 4));
 
     assertEquals(BigInteger.valueOf(4L), BigInteger.valueOf(interpreter.getMemorySize()));
@@ -112,7 +112,7 @@ public class BtcTranslatorTest {
 
     assertEquals(2, TestHelpers.filterNativeRegisters(interpreter.getDefinedRegisters()).size());
 
-    assertEquals(BigInteger.valueOf(1), interpreter.getVariableValue("CF"));
+    assertEquals(BigInteger.ONE, interpreter.getVariableValue("CF"));
     assertEquals(BigInteger.valueOf(0x7FFFFFFFFFFFFFFFL), interpreter.getMemory().load(0, 8));
 
     assertEquals(BigInteger.valueOf(8L), BigInteger.valueOf(interpreter.getMemorySize()));
@@ -142,7 +142,7 @@ public class BtcTranslatorTest {
 
     assertEquals(3, TestHelpers.filterNativeRegisters(interpreter.getDefinedRegisters()).size());
 
-    assertEquals(BigInteger.valueOf(1), interpreter.getVariableValue("CF"));
+    assertEquals(BigInteger.ONE, interpreter.getVariableValue("CF"));
     assertEquals(TranslationHelpers.getUnsignedBigIntegerValue(0xFFFFFFFF7FFFFFFFL), interpreter.getVariableValue("rax"));
 
     assertEquals(BigInteger.ZERO, BigInteger.valueOf(interpreter.getMemorySize()));
@@ -150,7 +150,7 @@ public class BtcTranslatorTest {
 
   @Test
   public void testRegister2() throws InternalTranslationException, InterpreterException {
-    interpreter.setRegister("rax", BigInteger.valueOf(0), OperandSize.QWORD,
+    interpreter.setRegister("rax", BigInteger.ZERO, OperandSize.QWORD,
         ReilRegisterStatus.DEFINED);
 
     final MockOperandTree operandTree1 = new MockOperandTree();
@@ -172,7 +172,7 @@ public class BtcTranslatorTest {
 
     assertEquals(3, TestHelpers.filterNativeRegisters(interpreter.getDefinedRegisters()).size());
 
-    assertEquals(BigInteger.valueOf(0), interpreter.getVariableValue("CF"));
+    assertEquals(BigInteger.ZERO, interpreter.getVariableValue("CF"));
     assertEquals(TranslationHelpers.getUnsignedBigIntegerValue(0x8000000000000000L), interpreter.getVariableValue("rax"));
 
     assertEquals(BigInteger.ZERO, BigInteger.valueOf(interpreter.getMemorySize()));

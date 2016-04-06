@@ -57,11 +57,11 @@ public final class CMemoryLoaderTest {
   @Test
   public void testRequest_Duplicate() throws DebugExceptionWrapper {
     // Request if the data does not exist
-    loader.requestMemory(new CAddress(BigInteger.valueOf(0)), 100);
+    loader.requestMemory(new CAddress(BigInteger.ZERO), 100);
     // assertEquals("READMEM-0-100;", debugger.requests);
 
     // Do not request duplicates
-    loader.requestMemory(new CAddress(BigInteger.valueOf(0)), 100);
+    loader.requestMemory(new CAddress(BigInteger.ZERO), 100);
     // assertEquals("READMEM-0-100;", debugger.requests);
   }
 
@@ -70,7 +70,7 @@ public final class CMemoryLoaderTest {
     debugger.getProcessManager().getMemory().store(0, new byte[100]);
 
     // Do not request if the data is here
-    loader.requestMemory(new CAddress(BigInteger.valueOf(0)), 100);
+    loader.requestMemory(new CAddress(BigInteger.ZERO), 100);
     assertEquals("", debugger.requests);
   }
 
@@ -80,7 +80,7 @@ public final class CMemoryLoaderTest {
     debugger.getProcessManager().getMemory().store(60, new byte[34]);
 
     // Request only the parts that aren't there
-    loader.requestMemory(new CAddress(BigInteger.valueOf(0)), 100);
+    loader.requestMemory(new CAddress(BigInteger.ZERO), 100);
     // assertEquals("READMEM-34-26;READMEM-94-6;", debugger.requests);
   }
 }

@@ -122,7 +122,7 @@ public class AdcTranslatorTest {
 
     assertEquals(6, TestHelpers.filterNativeRegisters(interpreter.getDefinedRegisters()).size());
 
-    assertEquals(BigInteger.valueOf(0), interpreter.getVariableValue("rax"));
+    assertEquals(BigInteger.ZERO, interpreter.getVariableValue("rax"));
     assertEquals(BigInteger.ONE, interpreter.getVariableValue("CF"));
     assertEquals(BigInteger.ZERO, interpreter.getVariableValue("OF"));
     assertEquals(BigInteger.ZERO, interpreter.getVariableValue("SF"));
@@ -161,7 +161,7 @@ public class AdcTranslatorTest {
 
     assertEquals(6, TestHelpers.filterNativeRegisters(interpreter.getDefinedRegisters()).size());
 
-    assertEquals(BigInteger.valueOf(0), interpreter.getVariableValue("rax"));
+    assertEquals(BigInteger.ZERO, interpreter.getVariableValue("rax"));
     assertEquals(BigInteger.ONE, interpreter.getVariableValue("CF"));
     assertEquals(BigInteger.ZERO, interpreter.getVariableValue("OF"));
     assertEquals(BigInteger.ZERO, interpreter.getVariableValue("SF"));
@@ -197,7 +197,7 @@ public class AdcTranslatorTest {
 
     assertEquals(6, TestHelpers.filterNativeRegisters(interpreter.getDefinedRegisters()).size());
 
-    assertEquals(BigInteger.valueOf(0), interpreter.getVariableValue("rax"));
+    assertEquals(BigInteger.ZERO, interpreter.getVariableValue("rax"));
     assertEquals(BigInteger.ONE, interpreter.getVariableValue("CF"));
     assertEquals(BigInteger.ONE, interpreter.getVariableValue("OF"));
     assertEquals(BigInteger.ZERO, interpreter.getVariableValue("SF"));

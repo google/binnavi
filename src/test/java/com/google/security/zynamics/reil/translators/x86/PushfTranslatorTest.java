@@ -57,17 +57,17 @@ public class PushfTranslatorTest {
   public void testPushL08() throws InternalTranslationException, InterpreterException {
     interpreter.setRegister("esp", BigInteger.valueOf(0x2000), OperandSize.DWORD,
         ReilRegisterStatus.DEFINED);
-    interpreter.setRegister("CF", BigInteger.valueOf(1), OperandSize.BYTE,
+    interpreter.setRegister("CF", BigInteger.ONE, OperandSize.BYTE,
         ReilRegisterStatus.DEFINED);
-    interpreter.setRegister("PF", BigInteger.valueOf(1), OperandSize.BYTE,
+    interpreter.setRegister("PF", BigInteger.ONE, OperandSize.BYTE,
         ReilRegisterStatus.DEFINED);
-    interpreter.setRegister("AF", BigInteger.valueOf(1), OperandSize.BYTE,
+    interpreter.setRegister("AF", BigInteger.ONE, OperandSize.BYTE,
         ReilRegisterStatus.DEFINED);
-    interpreter.setRegister("ZF", BigInteger.valueOf(1), OperandSize.BYTE,
+    interpreter.setRegister("ZF", BigInteger.ONE, OperandSize.BYTE,
         ReilRegisterStatus.DEFINED);
-    interpreter.setRegister("SF", BigInteger.valueOf(1), OperandSize.BYTE,
+    interpreter.setRegister("SF", BigInteger.ONE, OperandSize.BYTE,
         ReilRegisterStatus.DEFINED);
-    interpreter.setRegister("OF", BigInteger.valueOf(1), OperandSize.BYTE,
+    interpreter.setRegister("OF", BigInteger.ONE, OperandSize.BYTE,
         ReilRegisterStatus.DEFINED);
 
     final List<MockOperandTree> operands = new FilledList<MockOperandTree>();

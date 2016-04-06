@@ -1892,17 +1892,17 @@ public class PostgreSQLProviderTest extends ExpensiveBaseTest {
     final CAddressSpace addressSpace = getProvider().loadAddressSpaces(project).get(0);
     final INaviModule module = getProvider().loadModules().get(0);
 
-    getProvider().setImageBase(addressSpace, module, new CAddress(BigInteger.valueOf(0)));
+    getProvider().setImageBase(addressSpace, module, new CAddress(BigInteger.ZERO));
   }
 
   @Test(expected = NullPointerException.class)
   public void testSetImageBase2() throws CouldntSaveDataException {
-    getProvider().setImageBase(null, new MockModule(), new CAddress(BigInteger.valueOf(0)));
+    getProvider().setImageBase(null, new MockModule(), new CAddress(BigInteger.ZERO));
   }
 
   @Test(expected = IllegalStateException.class)
   public void testSetImageBase3() throws CouldntSaveDataException {
-    getProvider().setImageBase(new MockAddressSpace(), null, new CAddress(BigInteger.valueOf(0)));
+    getProvider().setImageBase(new MockAddressSpace(), null, new CAddress(BigInteger.ZERO));
   }
 
   @Test(expected = IllegalStateException.class)
@@ -1913,12 +1913,12 @@ public class PostgreSQLProviderTest extends ExpensiveBaseTest {
   @Test
   public void testSetImageBaseModule1() throws CouldntSaveDataException, CouldntLoadDataException {
     final INaviModule module = getProvider().loadModules().get(0);
-    getProvider().setImageBase(module, new CAddress(BigInteger.valueOf(0)));
+    getProvider().setImageBase(module, new CAddress(BigInteger.ZERO));
   }
 
   @Test(expected = NullPointerException.class)
   public void testSetImageBaseModule2() throws CouldntSaveDataException {
-    getProvider().setImageBase(null, new CAddress(BigInteger.valueOf(0)));
+    getProvider().setImageBase(null, new CAddress(BigInteger.ZERO));
   }
 
   @Test(expected = IllegalArgumentException.class)

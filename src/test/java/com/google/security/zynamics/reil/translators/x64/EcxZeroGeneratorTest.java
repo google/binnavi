@@ -55,7 +55,7 @@ public class EcxZeroGeneratorTest {
 
     final Pair<OperandSize, String> result = generator.generate(environment, 0x100, instructions);
 
-    interpreter.interpret(TestHelpers.createMapping(instructions), BigInteger.valueOf(1));
+    interpreter.interpret(TestHelpers.createMapping(instructions), BigInteger.ONE);
 
     assertEquals(BigInteger.ZERO, interpreter.getVariableValue(result.second()));
   }
@@ -66,7 +66,7 @@ public class EcxZeroGeneratorTest {
 
     final Pair<OperandSize, String> result = generator.generate(environment, 0x100, instructions);
 
-    interpreter.interpret(TestHelpers.createMapping(instructions), BigInteger.valueOf(1));
+    interpreter.interpret(TestHelpers.createMapping(instructions), BigInteger.ONE);
 
     assertEquals(BigInteger.ONE, interpreter.getVariableValue(result.second()));
   }

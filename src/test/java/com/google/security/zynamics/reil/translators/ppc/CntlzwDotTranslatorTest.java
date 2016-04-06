@@ -91,7 +91,7 @@ public class CntlzwDotTranslatorTest {
 
     interpreter.interpret(TestHelpers.createMapping(instructions), BigInteger.valueOf(0x100L));
 
-    assertEquals(BigInteger.valueOf(1), interpreter.getVariableValue("%r0"));
+    assertEquals(BigInteger.ONE, interpreter.getVariableValue("%r0"));
     assertEquals(BigInteger.valueOf(0x7FFFFFFFL), interpreter.getVariableValue("%r1"));
     assertEquals(BigInteger.ZERO, interpreter.getVariableValue("CR0EQ"));
     assertEquals(BigInteger.ZERO, interpreter.getVariableValue("CR0LT"));

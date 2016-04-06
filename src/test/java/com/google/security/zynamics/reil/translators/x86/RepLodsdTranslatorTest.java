@@ -60,7 +60,7 @@ public class RepLodsdTranslatorTest {
         ReilRegisterStatus.DEFINED);
     interpreter.setRegister("ecx", BigInteger.valueOf(0x1), OperandSize.DWORD,
         ReilRegisterStatus.DEFINED);
-    interpreter.setRegister("DF", BigInteger.valueOf(0), OperandSize.BYTE,
+    interpreter.setRegister("DF", BigInteger.ZERO, OperandSize.BYTE,
         ReilRegisterStatus.DEFINED);
 
     interpreter.getMemory().store(0x1000, 0x98765432, 4);
@@ -89,7 +89,7 @@ public class RepLodsdTranslatorTest {
         ReilRegisterStatus.DEFINED);
     interpreter.setRegister("ecx", BigInteger.valueOf(0x1), OperandSize.DWORD,
         ReilRegisterStatus.DEFINED);
-    interpreter.setRegister("DF", BigInteger.valueOf(1), OperandSize.BYTE,
+    interpreter.setRegister("DF", BigInteger.ONE, OperandSize.BYTE,
         ReilRegisterStatus.DEFINED);
 
     interpreter.getMemory().store(0x1000, 0x98765432, 4);
@@ -118,7 +118,7 @@ public class RepLodsdTranslatorTest {
         ReilRegisterStatus.DEFINED);
     interpreter.setRegister("ecx", BigInteger.valueOf(0x0), OperandSize.DWORD,
         ReilRegisterStatus.DEFINED);
-    interpreter.setRegister("DF", BigInteger.valueOf(1), OperandSize.BYTE,
+    interpreter.setRegister("DF", BigInteger.ONE, OperandSize.BYTE,
         ReilRegisterStatus.DEFINED);
 
     interpreter.getMemory().store(0x1000, 0x98765432, 4);
@@ -147,7 +147,7 @@ public class RepLodsdTranslatorTest {
         ReilRegisterStatus.DEFINED);
     interpreter.setRegister("ecx", BigInteger.valueOf(0x2), OperandSize.DWORD,
         ReilRegisterStatus.DEFINED);
-    interpreter.setRegister("DF", BigInteger.valueOf(0), OperandSize.BYTE,
+    interpreter.setRegister("DF", BigInteger.ZERO, OperandSize.BYTE,
         ReilRegisterStatus.DEFINED);
 
     interpreter.getMemory().store(0x1000, 0x98765432, 4);

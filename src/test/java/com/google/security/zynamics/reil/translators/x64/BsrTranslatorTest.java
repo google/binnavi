@@ -154,7 +154,7 @@ public class BsrTranslatorTest {
 
     assertEquals(4, TestHelpers.filterNativeRegisters(interpreter.getDefinedRegisters()).size());
 
-    assertEquals(BigInteger.valueOf(0), interpreter.getVariableValue("rax"));
+    assertEquals(BigInteger.ZERO, interpreter.getVariableValue("rax"));
     assertEquals(BigInteger.valueOf(0x00000001L), interpreter.getVariableValue("rbx"));
 
     assertEquals(BigInteger.ZERO, BigInteger.valueOf(interpreter.getMemorySize()));

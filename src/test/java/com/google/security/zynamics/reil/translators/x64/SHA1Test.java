@@ -93,9 +93,9 @@ public class SHA1Test {
     ReilTranslator<INaviInstruction> translator = new ReilTranslator<>();
     ReilFunction func = translator.translate(new StandardEnvironment(), sha_compress);
     
-    interpreter.setRegister("dsbase", BigInteger.valueOf(0), OperandSize.QWORD,
+    interpreter.setRegister("dsbase", BigInteger.ZERO, OperandSize.QWORD,
          ReilRegisterStatus.DEFINED);
-    interpreter.setRegister("ssbase", BigInteger.valueOf(0), OperandSize.QWORD,
+    interpreter.setRegister("ssbase", BigInteger.ZERO, OperandSize.QWORD,
         ReilRegisterStatus.DEFINED);
    
     

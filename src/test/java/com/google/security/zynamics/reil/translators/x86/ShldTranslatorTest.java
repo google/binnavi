@@ -200,7 +200,7 @@ public class ShldTranslatorTest {
     assertEquals(BigInteger.valueOf(0x80000000L), interpreter.getVariableValue("ebx"));
     assertEquals(BigInteger.valueOf(0L), interpreter.getVariableValue(Helpers.ZERO_FLAG));
     assertEquals(BigInteger.valueOf(0L), interpreter.getVariableValue(Helpers.CARRY_FLAG));
-    assertEquals(BigInteger.valueOf(0), interpreter.getVariableValue(Helpers.SIGN_FLAG));
+    assertEquals(BigInteger.ZERO, interpreter.getVariableValue(Helpers.SIGN_FLAG));
 
     assertEquals(BigInteger.ZERO, BigInteger.valueOf(interpreter.getMemorySize()));
   }

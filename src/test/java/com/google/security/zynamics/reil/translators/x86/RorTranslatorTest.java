@@ -56,7 +56,7 @@ public class RorTranslatorTest {
 
   @Test
   public void testSimple() throws InternalTranslationException, InterpreterException {
-    interpreter.setRegister("CF", BigInteger.valueOf(0), OperandSize.DWORD,
+    interpreter.setRegister("CF", BigInteger.ZERO, OperandSize.DWORD,
         ReilRegisterStatus.DEFINED);
     interpreter.setRegister("eax", BigInteger.valueOf(0x80000000L), OperandSize.DWORD,
         ReilRegisterStatus.DEFINED);
@@ -86,7 +86,7 @@ public class RorTranslatorTest {
 
   @Test
   public void testSimple2() throws InternalTranslationException, InterpreterException {
-    interpreter.setRegister("CF", BigInteger.valueOf(0), OperandSize.DWORD,
+    interpreter.setRegister("CF", BigInteger.ZERO, OperandSize.DWORD,
         ReilRegisterStatus.DEFINED);
     interpreter.setRegister("eax", BigInteger.valueOf(0x80000000L), OperandSize.DWORD,
         ReilRegisterStatus.DEFINED);

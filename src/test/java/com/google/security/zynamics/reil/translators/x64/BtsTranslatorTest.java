@@ -81,8 +81,8 @@ public class BtsTranslatorTest {
 
     assertEquals(2, TestHelpers.filterNativeRegisters(interpreter.getDefinedRegisters()).size());
 
-    assertEquals(BigInteger.valueOf(1), interpreter.getVariableValue("CF"));
-    assertEquals(BigInteger.valueOf(1), interpreter.getMemory().load(0, 4));
+    assertEquals(BigInteger.ONE, interpreter.getVariableValue("CF"));
+    assertEquals(BigInteger.ONE, interpreter.getMemory().load(0, 4));
 
     assertEquals(BigInteger.valueOf(4L), BigInteger.valueOf(interpreter.getMemorySize()));
   }
@@ -112,7 +112,7 @@ public class BtsTranslatorTest {
 
     assertEquals(2, TestHelpers.filterNativeRegisters(interpreter.getDefinedRegisters()).size());
 
-    assertEquals(BigInteger.valueOf(1), interpreter.getVariableValue("CF"));
+    assertEquals(BigInteger.ONE, interpreter.getVariableValue("CF"));
     assertEquals(BigInteger.valueOf(0xFFFFFFFFL), interpreter.getMemory().load(0, 4));
 
     assertEquals(BigInteger.valueOf(4L), BigInteger.valueOf(interpreter.getMemorySize()));
@@ -142,7 +142,7 @@ public class BtsTranslatorTest {
 
     assertEquals(3, TestHelpers.filterNativeRegisters(interpreter.getDefinedRegisters()).size());
 
-    assertEquals(BigInteger.valueOf(0), interpreter.getVariableValue("CF"));
+    assertEquals(BigInteger.ZERO, interpreter.getVariableValue("CF"));
     assertEquals(TranslationHelpers.getUnsignedBigIntegerValue(0xFFFFFFFFFFFFFFFFL), interpreter.getVariableValue("rax"));
 
     assertEquals(BigInteger.ZERO, BigInteger.valueOf(interpreter.getMemorySize()));

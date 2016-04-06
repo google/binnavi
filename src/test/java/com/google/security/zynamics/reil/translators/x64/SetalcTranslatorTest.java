@@ -52,7 +52,7 @@ public class SetalcTranslatorTest {
 
   @Test
   public void testCFCleared() throws InternalTranslationException, InterpreterException {
-    interpreter.setRegister("CF", BigInteger.valueOf(0), OperandSize.BYTE,
+    interpreter.setRegister("CF", BigInteger.ZERO, OperandSize.BYTE,
         ReilRegisterStatus.DEFINED);
     interpreter.setRegister("rax", BigInteger.valueOf(0x80808080L), OperandSize.QWORD,
         ReilRegisterStatus.DEFINED);
@@ -70,7 +70,7 @@ public class SetalcTranslatorTest {
 
   @Test
   public void testCFSet() throws InternalTranslationException, InterpreterException {
-    interpreter.setRegister("CF", BigInteger.valueOf(1), OperandSize.BYTE,
+    interpreter.setRegister("CF", BigInteger.ONE, OperandSize.BYTE,
         ReilRegisterStatus.DEFINED);
     interpreter.setRegister("rax", BigInteger.valueOf(0x80808080L), OperandSize.QWORD,
         ReilRegisterStatus.DEFINED);

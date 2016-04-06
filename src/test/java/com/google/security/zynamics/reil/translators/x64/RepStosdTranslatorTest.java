@@ -60,7 +60,7 @@ public class RepStosdTranslatorTest {
         ReilRegisterStatus.DEFINED);
     interpreter.setRegister("rcx", BigInteger.valueOf(0x1), OperandSize.DWORD,
         ReilRegisterStatus.DEFINED);
-    interpreter.setRegister("DF", BigInteger.valueOf(0), OperandSize.BYTE,
+    interpreter.setRegister("DF", BigInteger.ZERO, OperandSize.BYTE,
         ReilRegisterStatus.DEFINED);
 
     final MockInstruction instruction =
@@ -85,7 +85,7 @@ public class RepStosdTranslatorTest {
         ReilRegisterStatus.DEFINED);
     interpreter.setRegister("rdi", BigInteger.valueOf(0x1000), OperandSize.QWORD,
         ReilRegisterStatus.DEFINED);
-    interpreter.setRegister("DF", BigInteger.valueOf(1), OperandSize.BYTE,
+    interpreter.setRegister("DF", BigInteger.ONE, OperandSize.BYTE,
         ReilRegisterStatus.DEFINED);
     interpreter.setRegister("rcx", BigInteger.valueOf(0x1), OperandSize.QWORD,
         ReilRegisterStatus.DEFINED);

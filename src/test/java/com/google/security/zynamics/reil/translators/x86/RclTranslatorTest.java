@@ -57,9 +57,9 @@ public class RclTranslatorTest {
 
   @Test
   public void testSimple() throws InternalTranslationException, InterpreterException {
-    interpreter.setRegister("CF", BigInteger.valueOf(0), OperandSize.DWORD,
+    interpreter.setRegister("CF", BigInteger.ZERO, OperandSize.DWORD,
         ReilRegisterStatus.DEFINED);
-    interpreter.setRegister("edi", BigInteger.valueOf(1), OperandSize.DWORD,
+    interpreter.setRegister("edi", BigInteger.ONE, OperandSize.DWORD,
         ReilRegisterStatus.DEFINED);
 
     final MockOperandTree operandTree1 = new MockOperandTree();
@@ -90,9 +90,9 @@ public class RclTranslatorTest {
 
   @Test
   public void testUnmodified() throws InternalTranslationException, InterpreterException {
-    interpreter.setRegister("CF", BigInteger.valueOf(0), OperandSize.DWORD,
+    interpreter.setRegister("CF", BigInteger.ZERO, OperandSize.DWORD,
         ReilRegisterStatus.DEFINED);
-    interpreter.setRegister("edi", BigInteger.valueOf(1), OperandSize.DWORD,
+    interpreter.setRegister("edi", BigInteger.ONE, OperandSize.DWORD,
         ReilRegisterStatus.DEFINED);
 
     final MockOperandTree operandTree1 = new MockOperandTree();
@@ -116,16 +116,16 @@ public class RclTranslatorTest {
 
     assertEquals(3, TestHelpers.filterNativeRegisters(interpreter.getDefinedRegisters()).size());
 
-    assertEquals(BigInteger.valueOf(1), interpreter.getVariableValue("edi"));
+    assertEquals(BigInteger.ONE, interpreter.getVariableValue("edi"));
 
     assertEquals(BigInteger.ZERO, BigInteger.valueOf(interpreter.getMemorySize()));
   }
 
   @Test
   public void testWithCarry() throws InternalTranslationException, InterpreterException {
-    interpreter.setRegister("CF", BigInteger.valueOf(1), OperandSize.DWORD,
+    interpreter.setRegister("CF", BigInteger.ONE, OperandSize.DWORD,
         ReilRegisterStatus.DEFINED);
-    interpreter.setRegister("edi", BigInteger.valueOf(1), OperandSize.DWORD,
+    interpreter.setRegister("edi", BigInteger.ONE, OperandSize.DWORD,
         ReilRegisterStatus.DEFINED);
 
     final MockOperandTree operandTree1 = new MockOperandTree();

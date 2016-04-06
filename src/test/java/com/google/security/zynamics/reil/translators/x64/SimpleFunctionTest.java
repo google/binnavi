@@ -92,17 +92,17 @@ public class SimpleFunctionTest {
     ReilTranslator<INaviInstruction> translator = new ReilTranslator<>();
     ReilFunction func = translator.translate(new StandardEnvironment(), sha_compress);
     
-   // interpreter.setRegister("dsbase", BigInteger.valueOf(0), OperandSize.QWORD,
+   // interpreter.setRegister("dsbase", BigInteger.ZERO, OperandSize.QWORD,
    //      ReilRegisterStatus.DEFINED);
     /*interpreter.setRegister("csbase", BigInteger.valueOf(0x33), OperandSize.QWORD,
         ReilRegisterStatus.DEFINED);*/
    interpreter.setRegister("ssbase", BigInteger.valueOf(/*0x7FFFFFFFDFA0L*/0), OperandSize.QWORD,
         ReilRegisterStatus.DEFINED);
-   /* interpreter.setRegister("fsbase", BigInteger.valueOf(0), OperandSize.QWORD,
+   /* interpreter.setRegister("fsbase", BigInteger.ZERO, OperandSize.QWORD,
         ReilRegisterStatus.DEFINED);
-    interpreter.setRegister("esbase", BigInteger.valueOf(0), OperandSize.QWORD,
+    interpreter.setRegister("esbase", BigInteger.ZERO, OperandSize.QWORD,
         ReilRegisterStatus.DEFINED);
-    interpreter.setRegister("gsbase", BigInteger.valueOf(0), OperandSize.QWORD,
+    interpreter.setRegister("gsbase", BigInteger.ZERO, OperandSize.QWORD,
         ReilRegisterStatus.DEFINED);*/
     
     interpreter.setRegister("rax", TranslationHelpers.getUnsignedBigIntegerValue(0x40060b), OperandSize.QWORD, ReilRegisterStatus.DEFINED);
