@@ -99,7 +99,7 @@ public class SarTranslatorTest {
     interpreter.setRegister("OF", BigInteger.ZERO, OperandSize.DWORD, ReilRegisterStatus.UNDEFINED);
     interpreter.setRegister("SF", BigInteger.ZERO, OperandSize.DWORD, ReilRegisterStatus.UNDEFINED);
     interpreter.setRegister("ZF", BigInteger.ZERO, OperandSize.DWORD, ReilRegisterStatus.UNDEFINED);
-    interpreter.setRegister("rax", BigInteger.valueOf(0xFFFFFFFFl), OperandSize.QWORD,
+    interpreter.setRegister("rax", BigInteger.valueOf(0xFFFFFFFFL), OperandSize.QWORD,
         ReilRegisterStatus.DEFINED);
 
     final MockOperandTree operandTree1 = new MockOperandTree();
@@ -178,7 +178,7 @@ public class SarTranslatorTest {
     interpreter.setRegister("PF", BigInteger.ZERO, OperandSize.DWORD, ReilRegisterStatus.UNDEFINED);
     interpreter.setRegister("SF", BigInteger.ZERO, OperandSize.DWORD, ReilRegisterStatus.UNDEFINED);
     interpreter.setRegister("ZF", BigInteger.ZERO, OperandSize.DWORD, ReilRegisterStatus.UNDEFINED);
-    interpreter.setRegister("rax", BigInteger.valueOf(0xFFFFFFF7l), OperandSize.QWORD,
+    interpreter.setRegister("rax", BigInteger.valueOf(0xFFFFFFF7L), OperandSize.QWORD,
         ReilRegisterStatus.DEFINED);
 
     final MockOperandTree operandTree1 = new MockOperandTree();
@@ -333,7 +333,7 @@ public class SarTranslatorTest {
     interpreter.setRegister("PF", BigInteger.ZERO, OperandSize.DWORD, ReilRegisterStatus.UNDEFINED);
     interpreter.setRegister("SF", BigInteger.ZERO, OperandSize.DWORD, ReilRegisterStatus.UNDEFINED);
     interpreter.setRegister("ZF", BigInteger.ZERO, OperandSize.DWORD, ReilRegisterStatus.UNDEFINED);
-    interpreter.setRegister("rax", BigInteger.valueOf(0x1FFFFFFFFFFFFFFFl), OperandSize.QWORD,
+    interpreter.setRegister("rax", BigInteger.valueOf(0x1FFFFFFFFFFFFFFFL), OperandSize.QWORD,
         ReilRegisterStatus.DEFINED);
 
     final MockOperandTree operandTree1 = new MockOperandTree();
@@ -370,7 +370,7 @@ public class SarTranslatorTest {
     interpreter.setRegister("OF", BigInteger.ZERO, OperandSize.DWORD, ReilRegisterStatus.UNDEFINED);
     interpreter.setRegister("SF", BigInteger.ZERO, OperandSize.DWORD, ReilRegisterStatus.UNDEFINED);
     interpreter.setRegister("ZF", BigInteger.ZERO, OperandSize.DWORD, ReilRegisterStatus.UNDEFINED);
-    interpreter.setRegister("rax",TranslationHelpers.getUnsignedBigIntegerValue(0xFFFFFFFFFFFFFFFFl), OperandSize.QWORD,
+    interpreter.setRegister("rax",TranslationHelpers.getUnsignedBigIntegerValue(0xFFFFFFFFFFFFFFFFL), OperandSize.QWORD,
         ReilRegisterStatus.DEFINED);
 
     final MockOperandTree operandTree1 = new MockOperandTree();
@@ -388,7 +388,7 @@ public class SarTranslatorTest {
     interpreter.interpret(TestHelpers.createMapping(instructions), BigInteger.valueOf(0x100));
 
     assertEquals(5, TestHelpers.filterNativeRegisters(interpreter.getDefinedRegisters()).size());
-    assertEquals(TranslationHelpers.getUnsignedBigIntegerValue(0xFFFFFFFFFFFFFFFFl), interpreter.getVariableValue("rax"));
+    assertEquals(TranslationHelpers.getUnsignedBigIntegerValue(0xFFFFFFFFFFFFFFFFL), interpreter.getVariableValue("rax"));
     assertEquals(BigInteger.ONE, interpreter.getVariableValue("CF"));
     assertEquals(BigInteger.ZERO, interpreter.getVariableValue("ZF"));
     assertEquals(BigInteger.ONE, interpreter.getVariableValue("SF"));

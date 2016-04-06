@@ -92,7 +92,7 @@ public class SthTranslatorTest {
     interpreter.interpret(TestHelpers.createMapping(instructions), BigInteger.valueOf(0x100L));
 
     assertEquals(BigInteger.valueOf(996), interpreter.getVariableValue("%r1"));
-    assertEquals(BigInteger.valueOf(0xFF775678l),
+    assertEquals(BigInteger.valueOf(0xFF775678L),
         BigInteger.valueOf(interpreter.readMemoryDword(1000)));
     assertEquals(BigInteger.valueOf(0xFF77L), interpreter.getVariableValue("%r0"));
     assertEquals(BigInteger.valueOf(4L), BigInteger.valueOf(interpreter.getMemorySize()));

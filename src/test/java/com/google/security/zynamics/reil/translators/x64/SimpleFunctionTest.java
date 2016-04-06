@@ -96,7 +96,7 @@ public class SimpleFunctionTest {
    //      ReilRegisterStatus.DEFINED);
     /*interpreter.setRegister("csbase", BigInteger.valueOf(0x33), OperandSize.QWORD,
         ReilRegisterStatus.DEFINED);*/
-   interpreter.setRegister("ssbase", BigInteger.valueOf(/*0x7fffffffdfa0l*/0), OperandSize.QWORD,
+   interpreter.setRegister("ssbase", BigInteger.valueOf(/*0x7FFFFFFFDFA0L*/0), OperandSize.QWORD,
         ReilRegisterStatus.DEFINED);
    /* interpreter.setRegister("fsbase", BigInteger.valueOf(0), OperandSize.QWORD,
         ReilRegisterStatus.DEFINED);
@@ -111,21 +111,21 @@ public class SimpleFunctionTest {
     interpreter.setRegister("rdx", TranslationHelpers.getUnsignedBigIntegerValue(0x181), OperandSize.QWORD, ReilRegisterStatus.DEFINED);
     interpreter.setRegister("rsi", TranslationHelpers.getUnsignedBigIntegerValue(0x14e1), OperandSize.QWORD, ReilRegisterStatus.DEFINED);
     interpreter.setRegister("rdi", TranslationHelpers.getUnsignedBigIntegerValue(0x1a5), OperandSize.QWORD, ReilRegisterStatus.DEFINED);
-    interpreter.setRegister("rbp", TranslationHelpers.getUnsignedBigIntegerValue(0x7fffffffdea0l), OperandSize.QWORD, ReilRegisterStatus.DEFINED);
-    interpreter.setRegister("rsp", TranslationHelpers.getUnsignedBigIntegerValue(0x7fffffffde78l), OperandSize.QWORD, ReilRegisterStatus.DEFINED);
-//    interpreter.setRegister("r8",  TranslationHelpers.GetUnsignedBigIntegerValue(0x7ffff7dd4dd0l), OperandSize.QWORD, ReilRegisterStatus.DEFINED);
-//    interpreter.setRegister("r9",  TranslationHelpers.GetUnsignedBigIntegerValue(0x7ffff7de9a20l), OperandSize.QWORD, ReilRegisterStatus.DEFINED);
-//    interpreter.setRegister("r10", TranslationHelpers.GetUnsignedBigIntegerValue(0x833l), OperandSize.QWORD, ReilRegisterStatus.DEFINED);
-//    interpreter.setRegister("r11", TranslationHelpers.GetUnsignedBigIntegerValue(0x7ffff7a2f950l), OperandSize.QWORD, ReilRegisterStatus.DEFINED);
-//    interpreter.setRegister("r12", TranslationHelpers.GetUnsignedBigIntegerValue(0x400440l), OperandSize.QWORD, ReilRegisterStatus.DEFINED);
-//    interpreter.setRegister("r13", TranslationHelpers.GetUnsignedBigIntegerValue(0x7fffffffdf80l), OperandSize.QWORD, ReilRegisterStatus.DEFINED);
+    interpreter.setRegister("rbp", TranslationHelpers.getUnsignedBigIntegerValue(0x7FFFFFFFDEA0L), OperandSize.QWORD, ReilRegisterStatus.DEFINED);
+    interpreter.setRegister("rsp", TranslationHelpers.getUnsignedBigIntegerValue(0x7FFFFFFFDE78L), OperandSize.QWORD, ReilRegisterStatus.DEFINED);
+//    interpreter.setRegister("r8",  TranslationHelpers.GetUnsignedBigIntegerValue(0x7FFFF7DD4DD0L), OperandSize.QWORD, ReilRegisterStatus.DEFINED);
+//    interpreter.setRegister("r9",  TranslationHelpers.GetUnsignedBigIntegerValue(0x7FFFF7DE9A20L), OperandSize.QWORD, ReilRegisterStatus.DEFINED);
+//    interpreter.setRegister("r10", TranslationHelpers.GetUnsignedBigIntegerValue(0x833L), OperandSize.QWORD, ReilRegisterStatus.DEFINED);
+//    interpreter.setRegister("r11", TranslationHelpers.GetUnsignedBigIntegerValue(0x7FFFF7A2F950L), OperandSize.QWORD, ReilRegisterStatus.DEFINED);
+//    interpreter.setRegister("r12", TranslationHelpers.GetUnsignedBigIntegerValue(0x400440L), OperandSize.QWORD, ReilRegisterStatus.DEFINED);
+//    interpreter.setRegister("r13", TranslationHelpers.GetUnsignedBigIntegerValue(0x7FFFFFFFDF80L), OperandSize.QWORD, ReilRegisterStatus.DEFINED);
 //    interpreter.setRegister("r14", TranslationHelpers.GetUnsignedBigIntegerValue(0), OperandSize.QWORD, ReilRegisterStatus.DEFINED);
 //    interpreter.setRegister("r15", TranslationHelpers.GetUnsignedBigIntegerValue(0), OperandSize.QWORD, ReilRegisterStatus.DEFINED);
 //    interpreter.setRegister("rip", TranslationHelpers.GetUnsignedBigIntegerValue(0x4005a5), OperandSize.QWORD, ReilRegisterStatus.DEFINED);
 
     
     
-    interpreter.setMemory(0x7fffffffde78l, 5, 8);
+    interpreter.setMemory(0x7FFFFFFFDE78L, 5, 8);
     
     interpreter.interpret(
         TestHelpers.createMapping(

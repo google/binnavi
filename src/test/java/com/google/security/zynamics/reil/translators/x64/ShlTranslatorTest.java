@@ -142,7 +142,7 @@ public class ShlTranslatorTest {
 
     assertEquals(6, TestHelpers.filterNativeRegisters(interpreter.getDefinedRegisters()).size());
 
-    assertEquals(BigInteger.valueOf(0x80000000l), interpreter.getVariableValue("rax"));
+    assertEquals(BigInteger.valueOf(0x80000000L), interpreter.getVariableValue("rax"));
     assertEquals(BigInteger.ZERO, interpreter.getVariableValue("CF"));
     assertEquals(BigInteger.ONE, interpreter.getVariableValue("PF"));
     assertEquals(BigInteger.ZERO, BigInteger.valueOf(interpreter.getMemorySize()));

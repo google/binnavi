@@ -52,14 +52,14 @@ public class LodsqTranslatorTest {
 
   @Test
   public void testDFCleared() throws InternalTranslationException, InterpreterException {
-    interpreter.setRegister("rax", BigInteger.valueOf(0x123456789abcdefL), OperandSize.QWORD,
+    interpreter.setRegister("rax", BigInteger.valueOf(0x123456789ABCDEFL), OperandSize.QWORD,
         ReilRegisterStatus.DEFINED);
     interpreter.setRegister("rsi", BigInteger.valueOf(0x1000), OperandSize.QWORD,
         ReilRegisterStatus.DEFINED);
     interpreter.setRegister("DF", BigInteger.valueOf(0), OperandSize.BYTE,
         ReilRegisterStatus.DEFINED);
 
-    interpreter.getMemory().store(0x1000, 0xfedcba987654321L, 8);
+    interpreter.getMemory().store(0x1000, 0xFEDCBA987654321L, 8);
 
     final MockInstruction instruction =
         new MockInstruction("lodsq", new ArrayList<MockOperandTree>());
@@ -70,7 +70,7 @@ public class LodsqTranslatorTest {
 
     assertEquals(4, TestHelpers.filterNativeRegisters(interpreter.getDefinedRegisters()).size());
 
-    assertEquals(TranslationHelpers.getUnsignedBigIntegerValue(0xfedcba987654321L), interpreter.getVariableValue("rax"));
+    assertEquals(TranslationHelpers.getUnsignedBigIntegerValue(0xFEDCBA987654321L), interpreter.getVariableValue("rax"));
     assertEquals(BigInteger.valueOf(0x1008), interpreter.getVariableValue("rsi"));
 
     assertEquals(BigInteger.valueOf(8L), BigInteger.valueOf(interpreter.getMemorySize()));

@@ -54,7 +54,7 @@ public class RepeScasqTranslatorTest {
 
   @Test
   public void testSearchForwardZFClear() throws InternalTranslationException, InterpreterException {
-    interpreter.setRegister("rax", BigInteger.valueOf(0x1234567812345678l), OperandSize.QWORD,
+    interpreter.setRegister("rax", BigInteger.valueOf(0x1234567812345678L), OperandSize.QWORD,
         ReilRegisterStatus.DEFINED);
     interpreter.setRegister("rdi", BigInteger.valueOf(0x1000), OperandSize.QWORD,
         ReilRegisterStatus.DEFINED);
@@ -76,7 +76,7 @@ public class RepeScasqTranslatorTest {
 
     assertEquals(9, TestHelpers.filterNativeRegisters(interpreter.getDefinedRegisters()).size());
 
-    assertEquals(BigInteger.valueOf(0x1234567812345678l), interpreter.getVariableValue("rax"));
+    assertEquals(BigInteger.valueOf(0x1234567812345678L), interpreter.getVariableValue("rax"));
     assertEquals(BigInteger.valueOf(0x1008), interpreter.getVariableValue("rdi"));
 
     assertEquals(BigInteger.valueOf(8L), BigInteger.valueOf(interpreter.getMemorySize()));
@@ -84,7 +84,7 @@ public class RepeScasqTranslatorTest {
   
   @Test
   public void testSearchForward() throws InternalTranslationException, InterpreterException {
-    interpreter.setRegister("rax", BigInteger.valueOf(0x1234567812345678l), OperandSize.QWORD,
+    interpreter.setRegister("rax", BigInteger.valueOf(0x1234567812345678L), OperandSize.QWORD,
         ReilRegisterStatus.DEFINED);
     interpreter.setRegister("rdi", BigInteger.valueOf(0x1000), OperandSize.QWORD,
         ReilRegisterStatus.DEFINED);
@@ -95,8 +95,8 @@ public class RepeScasqTranslatorTest {
     interpreter.setRegister("ZF", BigInteger.valueOf(0), OperandSize.BYTE,
         ReilRegisterStatus.DEFINED);
 
-    interpreter.getMemory().store(0x1000, 0x1234567812345678l, 8);
-    interpreter.getMemory().store(0x1008, 0x1234567812345678l, 8);
+    interpreter.getMemory().store(0x1000, 0x1234567812345678L, 8);
+    interpreter.getMemory().store(0x1008, 0x1234567812345678L, 8);
     interpreter.getMemory().store(0x1010, 0x5678567812345678L, 8);
     final MockInstruction instruction =
         new MockInstruction("repe scasq", new ArrayList<MockOperandTree>());
@@ -107,7 +107,7 @@ public class RepeScasqTranslatorTest {
 
     assertEquals(9, TestHelpers.filterNativeRegisters(interpreter.getDefinedRegisters()).size());
 
-    assertEquals(BigInteger.valueOf(0x1234567812345678l), interpreter.getVariableValue("rax"));
+    assertEquals(BigInteger.valueOf(0x1234567812345678L), interpreter.getVariableValue("rax"));
     assertEquals(BigInteger.valueOf(0x1018), interpreter.getVariableValue("rdi"));
 
     assertEquals(BigInteger.valueOf(24L), BigInteger.valueOf(interpreter.getMemorySize()));

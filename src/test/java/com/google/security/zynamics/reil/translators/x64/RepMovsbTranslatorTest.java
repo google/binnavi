@@ -81,7 +81,7 @@ public class RepMovsbTranslatorTest {
     assertEquals(BigInteger.ZERO, interpreter.getVariableValue("rcx"));
 
     assertEquals(BigInteger.valueOf(7L), BigInteger.valueOf(interpreter.getMemorySize()));
-    assertEquals(BigInteger.valueOf(0x765432l), interpreter.getMemory().load(0x2000, 3));
+    assertEquals(BigInteger.valueOf(0x765432L), interpreter.getMemory().load(0x2000, 3));
   }
 
   @Test
@@ -115,6 +115,6 @@ public class RepMovsbTranslatorTest {
     assertEquals(BigInteger.ZERO, interpreter.getVariableValue("rcx"));
 
     assertEquals(BigInteger.valueOf(7L), BigInteger.valueOf(interpreter.getMemorySize()));
-    assertEquals(BigInteger.valueOf(0x987654l), interpreter.getMemory().load(0x2001, 3));
+    assertEquals(BigInteger.valueOf(0x987654L), interpreter.getMemory().load(0x2001, 3));
   }
 }

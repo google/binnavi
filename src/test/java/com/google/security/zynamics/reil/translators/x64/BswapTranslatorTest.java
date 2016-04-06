@@ -80,7 +80,7 @@ public class BswapTranslatorTest {
   }
   @Test
   public void testSimple64() throws InternalTranslationException, InterpreterException {
-    interpreter.setRegister("rax", BigInteger.valueOf(0x123456789abcde10L), OperandSize.QWORD,
+    interpreter.setRegister("rax", BigInteger.valueOf(0x123456789ABCDE10L), OperandSize.QWORD,
         ReilRegisterStatus.DEFINED);
 
     final MockOperandTree operandTree1 = new MockOperandTree();
@@ -98,7 +98,7 @@ public class BswapTranslatorTest {
 
     assertEquals(2, TestHelpers.filterNativeRegisters(interpreter.getDefinedRegisters()).size());
 
-    assertEquals(BigInteger.valueOf(0x10debc9a78563412L), interpreter.getVariableValue("rax"));
+    assertEquals(BigInteger.valueOf(0x10DEBC9A78563412L), interpreter.getVariableValue("rax"));
 
     assertEquals(BigInteger.ZERO, BigInteger.valueOf(interpreter.getMemorySize()));
   }

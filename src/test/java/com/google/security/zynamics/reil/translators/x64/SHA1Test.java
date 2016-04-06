@@ -99,26 +99,26 @@ public class SHA1Test {
         ReilRegisterStatus.DEFINED);
    
     
-    interpreter.setRegister("rax", TranslationHelpers.getUnsignedBigIntegerValue(0x7FFFFFFFDBC0l), OperandSize.QWORD, ReilRegisterStatus.DEFINED);
+    interpreter.setRegister("rax", TranslationHelpers.getUnsignedBigIntegerValue(0x7FFFFFFFDBC0L), OperandSize.QWORD, ReilRegisterStatus.DEFINED);
     interpreter.setRegister("rbx", TranslationHelpers.getUnsignedBigIntegerValue(0), OperandSize.QWORD, ReilRegisterStatus.DEFINED);
     interpreter.setRegister("rcx", TranslationHelpers.getUnsignedBigIntegerValue(0x38), OperandSize.QWORD, ReilRegisterStatus.DEFINED);
-    interpreter.setRegister("rdx", TranslationHelpers.getUnsignedBigIntegerValue(0x7FFFFFFFDB60l), OperandSize.QWORD, ReilRegisterStatus.DEFINED);
-    interpreter.setRegister("rsi", TranslationHelpers.getUnsignedBigIntegerValue(0x7FFFFFFFDB60l), OperandSize.QWORD, ReilRegisterStatus.DEFINED);
-    interpreter.setRegister("rdi", TranslationHelpers.getUnsignedBigIntegerValue(0x7FFFFFFFDBC0l), OperandSize.QWORD, ReilRegisterStatus.DEFINED);
-    interpreter.setRegister("rbp", TranslationHelpers.getUnsignedBigIntegerValue(0x7FFFFFFFDBB0l), OperandSize.QWORD, ReilRegisterStatus.DEFINED);
-    interpreter.setRegister("rsp", TranslationHelpers.getUnsignedBigIntegerValue(0x7FFFFFFFDB38l), OperandSize.QWORD, ReilRegisterStatus.DEFINED);
+    interpreter.setRegister("rdx", TranslationHelpers.getUnsignedBigIntegerValue(0x7FFFFFFFDB60L), OperandSize.QWORD, ReilRegisterStatus.DEFINED);
+    interpreter.setRegister("rsi", TranslationHelpers.getUnsignedBigIntegerValue(0x7FFFFFFFDB60L), OperandSize.QWORD, ReilRegisterStatus.DEFINED);
+    interpreter.setRegister("rdi", TranslationHelpers.getUnsignedBigIntegerValue(0x7FFFFFFFDBC0L), OperandSize.QWORD, ReilRegisterStatus.DEFINED);
+    interpreter.setRegister("rbp", TranslationHelpers.getUnsignedBigIntegerValue(0x7FFFFFFFDBB0L), OperandSize.QWORD, ReilRegisterStatus.DEFINED);
+    interpreter.setRegister("rsp", TranslationHelpers.getUnsignedBigIntegerValue(0x7FFFFFFFDB38L), OperandSize.QWORD, ReilRegisterStatus.DEFINED);
     
-    interpreter.setMemory(0x7FFFFFFFDB38l, 0, 8);
+    interpreter.setMemory(0x7FFFFFFFDB38L, 0, 8);
     
-    //long state_base = 0x7fffffffddf0l;
-    long state_base = 0x7FFFFFFFDBC0l;
-    interpreter.setMemory(state_base, 0x67452301l, 4);
-    interpreter.setMemory(state_base+4, 0xEFCDAB89l, 4);
-    interpreter.setMemory(state_base+8, 0x98BADCFEl, 4);
-    interpreter.setMemory(state_base+12, 0x10325476l, 4);
-    interpreter.setMemory(state_base+16, 0xC3D2E1F0l, 4);
+    //long state_base = 0x7FFFFFFFDDF0L;
+    long state_base = 0x7FFFFFFFDBC0L;
+    interpreter.setMemory(state_base, 0x67452301L, 4);
+    interpreter.setMemory(state_base+4, 0xEFCDAB89L, 4);
+    interpreter.setMemory(state_base+8, 0x98BADCFEL, 4);
+    interpreter.setMemory(state_base+12, 0x10325476L, 4);
+    interpreter.setMemory(state_base+16, 0xC3D2E1F0L, 4);
     
-    long message_base = 0x7FFFFFFFDB60l;
+    long message_base = 0x7FFFFFFFDB60L;
     interpreter.setMemory(message_base, 128, 1);
     for(int i = 1; i < 64; i++)
     {
@@ -128,11 +128,11 @@ public class SHA1Test {
     interpreter.interpret(func);
     
     assertNotEquals(0, interpreter.getMemorySize());
-    assertEquals(BigInteger.valueOf(0xDA39A3EEl), interpreter.getMemory().load(state_base, 4));
-    assertEquals(BigInteger.valueOf(0x5E6B4B0Dl), interpreter.getMemory().load(state_base+4, 4));
-    assertEquals(BigInteger.valueOf(0x3255BFEFl), interpreter.getMemory().load(state_base+8, 4));
-    assertEquals(BigInteger.valueOf(0x95601890l), interpreter.getMemory().load(state_base+12, 4));
-    assertEquals(BigInteger.valueOf(0xAFD80709l), interpreter.getMemory().load(state_base+16, 4));
+    assertEquals(BigInteger.valueOf(0xDA39A3EEL), interpreter.getMemory().load(state_base, 4));
+    assertEquals(BigInteger.valueOf(0x5E6B4B0DL), interpreter.getMemory().load(state_base+4, 4));
+    assertEquals(BigInteger.valueOf(0x3255BFEFL), interpreter.getMemory().load(state_base+8, 4));
+    assertEquals(BigInteger.valueOf(0x95601890L), interpreter.getMemory().load(state_base+12, 4));
+    assertEquals(BigInteger.valueOf(0xAFD80709L), interpreter.getMemory().load(state_base+16, 4));
     
     
     module.close();

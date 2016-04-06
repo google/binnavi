@@ -54,7 +54,7 @@ public class CwdTranslatorTest {
   public void testClearedBit() throws InternalTranslationException, InterpreterException {
     interpreter.setRegister("rax", BigInteger.valueOf(0x7FFF), OperandSize.QWORD,
         ReilRegisterStatus.DEFINED);
-    interpreter.setRegister("rdx", BigInteger.valueOf(0x1111111112345678l), OperandSize.QWORD,
+    interpreter.setRegister("rdx", BigInteger.valueOf(0x1111111112345678L), OperandSize.QWORD,
         ReilRegisterStatus.DEFINED);
 
     final MockInstruction instruction =

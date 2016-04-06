@@ -68,7 +68,7 @@ public class ARMRev16TranslatorTest {
   @Test
   public void testSimpleRegister() throws InternalTranslationException, InterpreterException {
     interpreter.setRegister("R0", BigInteger.valueOf(0x0L), dw, ReilRegisterStatus.DEFINED);
-    interpreter.setRegister("R1", BigInteger.valueOf(0x09aa16d2L), dw, ReilRegisterStatus.DEFINED);
+    interpreter.setRegister("R1", BigInteger.valueOf(0x09AA16D2L), dw, ReilRegisterStatus.DEFINED);
 
     final MockOperandTree operandTree1 = new MockOperandTree();
     operandTree1.root = new MockOperandTreeNode(ExpressionType.SIZE_PREFIX, "b4");
@@ -86,8 +86,8 @@ public class ARMRev16TranslatorTest {
 
     interpreter.interpret(TestHelpers.createMapping(instructions), BigInteger.valueOf(0x100L));
 
-    assertEquals(BigInteger.valueOf(0xaa09d216L), interpreter.getVariableValue("R0"));
-    assertEquals(BigInteger.valueOf(0x09aa16d2L), interpreter.getVariableValue("R1"));
+    assertEquals(BigInteger.valueOf(0xAA09D216L), interpreter.getVariableValue("R0"));
+    assertEquals(BigInteger.valueOf(0x09AA16D2L), interpreter.getVariableValue("R1"));
 
     assertEquals(BigInteger.ZERO, BigInteger.valueOf(interpreter.getMemorySize()));
     assertEquals(3, TestHelpers.filterNativeRegisters(interpreter.getDefinedRegisters()).size());

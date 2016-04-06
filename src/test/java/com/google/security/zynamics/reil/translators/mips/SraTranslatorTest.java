@@ -155,7 +155,7 @@ public class SraTranslatorTest {
 
     assertEquals(3, TestHelpers.filterNativeRegisters(interpreter.getDefinedRegisters()).size());
 
-    assertEquals(BigInteger.valueOf(0xc0003FFFL), interpreter.getVariableValue("$t0"));
+    assertEquals(BigInteger.valueOf(0xC0003FFFL), interpreter.getVariableValue("$t0"));
 
     assertEquals(BigInteger.ZERO, BigInteger.valueOf(interpreter.getMemorySize()));
   }

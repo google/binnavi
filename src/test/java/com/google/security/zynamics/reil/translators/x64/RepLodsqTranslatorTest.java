@@ -74,7 +74,7 @@ public class RepLodsqTranslatorTest {
 
     assertEquals(5, TestHelpers.filterNativeRegisters(interpreter.getDefinedRegisters()).size());
 
-    assertEquals(BigInteger.valueOf(0x98765432l), interpreter.getVariableValue("rax"));
+    assertEquals(BigInteger.valueOf(0x98765432L), interpreter.getVariableValue("rax"));
     assertEquals(BigInteger.valueOf(0x1008), interpreter.getVariableValue("rsi"));
     assertEquals(BigInteger.ZERO, interpreter.getVariableValue("rcx"));
 
@@ -103,7 +103,7 @@ public class RepLodsqTranslatorTest {
 
     assertEquals(5, TestHelpers.filterNativeRegisters(interpreter.getDefinedRegisters()).size());
 
-    assertEquals(BigInteger.valueOf(0x98765432l), interpreter.getVariableValue("rax"));
+    assertEquals(BigInteger.valueOf(0x98765432L), interpreter.getVariableValue("rax"));
     assertEquals(BigInteger.valueOf(0x0FF8), interpreter.getVariableValue("rsi"));
     assertEquals(BigInteger.ZERO, interpreter.getVariableValue("rcx"));
 
@@ -150,8 +150,8 @@ public class RepLodsqTranslatorTest {
     interpreter.setRegister("DF", BigInteger.valueOf(0), OperandSize.BYTE,
         ReilRegisterStatus.DEFINED);
 
-    interpreter.getMemory().store(0x1000, 0x98765432l, 8);
-    interpreter.getMemory().store(0x1008, 0x55555555l, 8);
+    interpreter.getMemory().store(0x1000, 0x98765432L, 8);
+    interpreter.getMemory().store(0x1008, 0x55555555L, 8);
 
     final MockInstruction instruction =
         new MockInstruction("rep lodsd", new ArrayList<MockOperandTree>());

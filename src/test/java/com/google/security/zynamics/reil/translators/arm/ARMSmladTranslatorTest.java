@@ -68,8 +68,8 @@ public class ARMSmladTranslatorTest {
   @Test
   public void testSimpleRegister() throws InternalTranslationException, InterpreterException {
     interpreter.setRegister("R0", BigInteger.valueOf(0x0L), dw, ReilRegisterStatus.DEFINED);
-    interpreter.setRegister("R1", BigInteger.valueOf(0x4b4cb266L), dw, ReilRegisterStatus.DEFINED);
-    interpreter.setRegister("R2", BigInteger.valueOf(0x01ffc9e0L), dw, ReilRegisterStatus.DEFINED);
+    interpreter.setRegister("R1", BigInteger.valueOf(0x4B4CB266L), dw, ReilRegisterStatus.DEFINED);
+    interpreter.setRegister("R2", BigInteger.valueOf(0x01FFC9E0L), dw, ReilRegisterStatus.DEFINED);
     interpreter.setRegister("R3", BigInteger.valueOf(0x00008002L), dw, ReilRegisterStatus.DEFINED);
     interpreter.setRegister("C", BigInteger.ZERO, bt, ReilRegisterStatus.DEFINED);
 
@@ -98,9 +98,9 @@ public class ARMSmladTranslatorTest {
 
     interpreter.interpret(TestHelpers.createMapping(instructions), BigInteger.valueOf(0x100L));
 
-    assertEquals(BigInteger.valueOf(0x10fefbf6L), interpreter.getVariableValue("R0"));
-    assertEquals(BigInteger.valueOf(0x4b4cb266L), interpreter.getVariableValue("R1"));
-    assertEquals(BigInteger.valueOf(0x01ffc9e0L), interpreter.getVariableValue("R2"));
+    assertEquals(BigInteger.valueOf(0x10FEFBF6L), interpreter.getVariableValue("R0"));
+    assertEquals(BigInteger.valueOf(0x4B4CB266L), interpreter.getVariableValue("R1"));
+    assertEquals(BigInteger.valueOf(0x01FFC9E0L), interpreter.getVariableValue("R2"));
     assertEquals(BigInteger.valueOf(0x00008002L), interpreter.getVariableValue("R3"));
     assertEquals(BigInteger.ZERO, interpreter.getVariableValue("C"));
 

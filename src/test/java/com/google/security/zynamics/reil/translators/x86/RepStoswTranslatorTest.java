@@ -75,7 +75,7 @@ public class RepStoswTranslatorTest {
     assertEquals(BigInteger.valueOf(0x1004), interpreter.getVariableValue("edi"));
 
     assertEquals(BigInteger.valueOf(4L), BigInteger.valueOf(interpreter.getMemorySize()));
-    assertEquals(BigInteger.valueOf(0x56785678l), interpreter.getMemory().load(0x1000, 4));
+    assertEquals(BigInteger.valueOf(0x56785678L), interpreter.getMemory().load(0x1000, 4));
   }
 
   @Test
@@ -102,6 +102,6 @@ public class RepStoswTranslatorTest {
     assertEquals(BigInteger.valueOf(0x0FFE), interpreter.getVariableValue("edi"));
 
     assertEquals(BigInteger.valueOf(4L), BigInteger.valueOf(interpreter.getMemorySize()));
-    assertEquals(BigInteger.valueOf(0x56785678l), interpreter.getMemory().load(0x1000, 4));
+    assertEquals(BigInteger.valueOf(0x56785678L), interpreter.getMemory().load(0x1000, 4));
   }
 }

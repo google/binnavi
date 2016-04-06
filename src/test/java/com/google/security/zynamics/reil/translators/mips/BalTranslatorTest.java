@@ -63,7 +63,7 @@ public class BalTranslatorTest {
     final MockOperandTree operandTree1 = new MockOperandTree();
     operandTree1.root = new MockOperandTreeNode(ExpressionType.SIZE_PREFIX, "b4");
     operandTree1.root.m_children.add(new MockOperandTreeNode(ExpressionType.IMMEDIATE_INTEGER,
-        String.valueOf(0xcafebabeL)));
+        String.valueOf(0xCAFEBABEL)));
 
     final List<MockOperandTree> operands = Lists.newArrayList(operandTree1);// , operandTree2,
                                                                             // operandTree3);
@@ -78,7 +78,7 @@ public class BalTranslatorTest {
 
     assertEquals(2, TestHelpers.filterNativeRegisters(interpreter.getDefinedRegisters()).size());
     assertEquals(BigInteger.valueOf(0x00400034L), interpreter.getVariableValue("$ra"));
-    assertEquals(BigInteger.valueOf(0xcafebabeL), interpreter.getVariableValue("$pc"));
+    assertEquals(BigInteger.valueOf(0xCAFEBABEL), interpreter.getVariableValue("$pc"));
     assertEquals(BigInteger.ZERO, BigInteger.valueOf(interpreter.getMemorySize()));
   }
 }

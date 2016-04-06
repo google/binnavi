@@ -59,7 +59,7 @@ public class MovsbTranslatorTest {
     interpreter.setRegister("DF", BigInteger.valueOf(0), OperandSize.BYTE,
         ReilRegisterStatus.DEFINED);
 
-    interpreter.getMemory().store(0x1000, 0x98765432l, 4);
+    interpreter.getMemory().store(0x1000, 0x98765432L, 4);
 
     final MockInstruction instruction =
         new MockInstruction("movsb", new ArrayList<MockOperandTree>());
@@ -86,7 +86,7 @@ public class MovsbTranslatorTest {
     interpreter.setRegister("DF", BigInteger.valueOf(1), OperandSize.BYTE,
         ReilRegisterStatus.DEFINED);
 
-    interpreter.getMemory().store(0x1000, 0x98765432l, 4);
+    interpreter.getMemory().store(0x1000, 0x98765432L, 4);
 
     final MockInstruction instruction =
         new MockInstruction("movsb", new ArrayList<MockOperandTree>());

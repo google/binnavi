@@ -74,7 +74,7 @@ public class MovsdTranslatorTest {
     assertEquals(BigInteger.valueOf(0x2004), interpreter.getVariableValue("edi"));
 
     assertEquals(BigInteger.valueOf(8L), BigInteger.valueOf(interpreter.getMemorySize()));
-    assertEquals(BigInteger.valueOf(0x98765432l), interpreter.getMemory().load(0x2000, 4));
+    assertEquals(BigInteger.valueOf(0x98765432L), interpreter.getMemory().load(0x2000, 4));
   }
 
   @Test
@@ -101,6 +101,6 @@ public class MovsdTranslatorTest {
     assertEquals(BigInteger.valueOf(0x1FFC), interpreter.getVariableValue("edi"));
 
     assertEquals(BigInteger.valueOf(8L), BigInteger.valueOf(interpreter.getMemorySize()));
-    assertEquals(BigInteger.valueOf(0x98765432l), interpreter.getMemory().load(0x2000, 4));
+    assertEquals(BigInteger.valueOf(0x98765432L), interpreter.getMemory().load(0x2000, 4));
   }
 }

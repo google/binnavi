@@ -53,12 +53,12 @@ public class ScasqTranslatorTest {
   public void testDFSet() throws InternalTranslationException, InterpreterException {
     interpreter.setRegister("DF", BigInteger.ONE, OperandSize.BYTE, ReilRegisterStatus.DEFINED);
 
-    interpreter.setRegister("rax", BigInteger.valueOf(0x123456789abcdefl), OperandSize.QWORD,
+    interpreter.setRegister("rax", BigInteger.valueOf(0x123456789ABCDEFL), OperandSize.QWORD,
         ReilRegisterStatus.DEFINED);
     interpreter.setRegister("rdi", BigInteger.valueOf(0x2000), OperandSize.QWORD,
         ReilRegisterStatus.DEFINED);
 
-    interpreter.getMemory().store(0x2000, 0x123456789abcdefl, 8);
+    interpreter.getMemory().store(0x2000, 0x123456789ABCDEFL, 8);
 
     final MockInstruction instruction =
         new MockInstruction("scasq", new ArrayList<MockOperandTree>());

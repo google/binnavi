@@ -53,7 +53,7 @@ public class CdqTranslatorTest {
 
   @Test
   public void testClearedBit() throws InternalTranslationException, InterpreterException {
-    interpreter.setRegister("rax", BigInteger.valueOf(0x7FFFFFFFFFFFFFFFl), OperandSize.QWORD,
+    interpreter.setRegister("rax", BigInteger.valueOf(0x7FFFFFFFFFFFFFFFL), OperandSize.QWORD,
         ReilRegisterStatus.DEFINED);
 
     final MockInstruction instruction =
@@ -65,7 +65,7 @@ public class CdqTranslatorTest {
 
     assertEquals(3, TestHelpers.filterNativeRegisters(interpreter.getDefinedRegisters()).size());
 
-    assertEquals(BigInteger.valueOf(0x7FFFFFFFFFFFFFFFl), interpreter.getVariableValue("rax"));
+    assertEquals(BigInteger.valueOf(0x7FFFFFFFFFFFFFFFL), interpreter.getVariableValue("rax"));
     assertEquals(BigInteger.ZERO, interpreter.getVariableValue("rdx"));
 
     assertEquals(BigInteger.ZERO, BigInteger.valueOf(interpreter.getMemorySize()));
@@ -73,7 +73,7 @@ public class CdqTranslatorTest {
 
   @Test
   public void testSetBit() throws InternalTranslationException, InterpreterException {
-    interpreter.setRegister("rax", TranslationHelpers.getUnsignedBigIntegerValue(0x8000000000000000l), OperandSize.QWORD,
+    interpreter.setRegister("rax", TranslationHelpers.getUnsignedBigIntegerValue(0x8000000000000000L), OperandSize.QWORD,
         ReilRegisterStatus.DEFINED);
 
     final MockInstruction instruction =
@@ -85,7 +85,7 @@ public class CdqTranslatorTest {
 
     assertEquals(3, TestHelpers.filterNativeRegisters(interpreter.getDefinedRegisters()).size());
 
-    assertEquals(TranslationHelpers.getUnsignedBigIntegerValue(0x8000000000000000l), interpreter.getVariableValue("rax"));
+    assertEquals(TranslationHelpers.getUnsignedBigIntegerValue(0x8000000000000000L), interpreter.getVariableValue("rax"));
     assertEquals(TranslationHelpers.getUnsignedBigIntegerValue(0xFFFFFFFFFFFFFFFFL), interpreter.getVariableValue("rdx"));
 
     assertEquals(BigInteger.ZERO, BigInteger.valueOf(interpreter.getMemorySize()));

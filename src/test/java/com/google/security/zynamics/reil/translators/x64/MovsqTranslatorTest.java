@@ -59,7 +59,7 @@ public class MovsqTranslatorTest {
     interpreter.setRegister("DF", BigInteger.valueOf(0), OperandSize.BYTE,
         ReilRegisterStatus.DEFINED);
 
-    interpreter.getMemory().store(0x1000, 0xfdecba98765432l, 8);
+    interpreter.getMemory().store(0x1000, 0xFDECBA98765432L, 8);
 
     final MockInstruction instruction =
         new MockInstruction("movsq", new ArrayList<MockOperandTree>());
@@ -74,7 +74,7 @@ public class MovsqTranslatorTest {
     assertEquals(BigInteger.valueOf(0x2008), interpreter.getVariableValue("rdi"));
 
     assertEquals(BigInteger.valueOf(0x10L), BigInteger.valueOf(interpreter.getMemorySize()));
-    assertEquals(TranslationHelpers.getUnsignedBigIntegerValue(0xfdecba98765432l), interpreter.getMemory().load(0x2000, 8));
+    assertEquals(TranslationHelpers.getUnsignedBigIntegerValue(0xFDECBA98765432L), interpreter.getMemory().load(0x2000, 8));
   }
 
   @Test
@@ -86,7 +86,7 @@ public class MovsqTranslatorTest {
     interpreter.setRegister("DF", BigInteger.valueOf(1), OperandSize.BYTE,
         ReilRegisterStatus.DEFINED);
 
-    interpreter.getMemory().store(0x1000, 0xfdecba98765432l, 8);
+    interpreter.getMemory().store(0x1000, 0xFDECBA98765432L, 8);
 
     final MockInstruction instruction =
         new MockInstruction("movsd", new ArrayList<MockOperandTree>());
@@ -101,6 +101,6 @@ public class MovsqTranslatorTest {
     assertEquals(BigInteger.valueOf(0x1FF8), interpreter.getVariableValue("rdi"));
 
     assertEquals(BigInteger.valueOf(0x10L), BigInteger.valueOf(interpreter.getMemorySize()));
-    assertEquals(TranslationHelpers.getUnsignedBigIntegerValue(0xfdecba98765432l), interpreter.getMemory().load(0x2000, 8));
+    assertEquals(TranslationHelpers.getUnsignedBigIntegerValue(0xFDECBA98765432L), interpreter.getMemory().load(0x2000, 8));
   }
 }

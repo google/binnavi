@@ -80,7 +80,7 @@ public class PushTranslatorTest {
     interpreter.interpret(TestHelpers.createMapping(instructions), BigInteger.valueOf(0x100));
 
     assertEquals(BigInteger.valueOf(8L), BigInteger.valueOf(interpreter.getMemorySize()));
-    assertEquals(BigInteger.valueOf(0x12345678l), interpreter.getMemory().load(0x12345670, 8));
+    assertEquals(BigInteger.valueOf(0x12345678L), interpreter.getMemory().load(0x12345670, 8));
     assertEquals(2, TestHelpers.filterNativeRegisters(interpreter.getDefinedRegisters()).size());
   }
 
@@ -200,7 +200,7 @@ public class PushTranslatorTest {
   }
   @Test
   public void testPushR64() throws InternalTranslationException, InterpreterException {
-    interpreter.setRegister("rax", BigInteger.valueOf(0x123456789abcdefL), OperandSize.QWORD,
+    interpreter.setRegister("rax", BigInteger.valueOf(0x123456789ABCDEFL), OperandSize.QWORD,
         ReilRegisterStatus.DEFINED);
 
     final MockOperandTree operandTree = new MockOperandTree();
@@ -218,7 +218,7 @@ public class PushTranslatorTest {
     assertEquals(BigInteger.valueOf(0x1FF8), interpreter.getVariableValue("rsp"));
 
     assertEquals(BigInteger.valueOf(8L), BigInteger.valueOf(interpreter.getMemorySize()));
-    assertEquals( BigInteger.valueOf(0x123456789abcdefL), interpreter.getMemory().load(0x1FF8, 8));
+    assertEquals( BigInteger.valueOf(0x123456789ABCDEFL), interpreter.getMemory().load(0x1FF8, 8));
     assertEquals(3, TestHelpers.filterNativeRegisters(interpreter.getDefinedRegisters()).size());
   }
 }

@@ -108,7 +108,7 @@ public class LhbrxTranslatorTest {
         ReilRegisterStatus.DEFINED);
     interpreter.setRegister("%r2", BigInteger.valueOf(4), OperandSize.DWORD,
         ReilRegisterStatus.DEFINED);
-    interpreter.setMemory(1000, 0x0000244dL, 4);
+    interpreter.setMemory(1000, 0x0000244DL, 4);
 
     final MockOperandTree operandTree1 = new MockOperandTree();
     operandTree1.root = new MockOperandTreeNode(ExpressionType.SIZE_PREFIX, "byte");

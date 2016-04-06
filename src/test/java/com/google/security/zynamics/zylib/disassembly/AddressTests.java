@@ -122,8 +122,8 @@ public final class AddressTests {
   @Test
   public void testToHexString() {
     // Test conversion
-    assertTrue(new CAddress(0x876543abL).toHexString().equalsIgnoreCase("876543ab"));
-    assertTrue(new CAddress(0xfedcba9876543210L).toHexString().equalsIgnoreCase("fedcba9876543210"));
+    assertTrue(new CAddress(0x876543ABL).toHexString().equalsIgnoreCase("876543ab"));
+    assertTrue(new CAddress(0xFEDCBA9876543210L).toHexString().equalsIgnoreCase("fedcba9876543210"));
 
     // Test left-padding with zeroes
     assertEquals(new CAddress(0x00000100L).toHexString().length(), 8);
@@ -137,7 +137,7 @@ public final class AddressTests {
     // and REIL rely on the assumption of the two methods always returning
     // the same result.
 
-    final CAddress small = new CAddress(0x876543abL);
+    final CAddress small = new CAddress(0x876543ABL);
     assertEquals(small.toString(), small.toHexString());
 
     final CAddress larger = new CAddress(0x100000000L);

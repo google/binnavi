@@ -61,7 +61,7 @@ public class XorTranslatorTest {
     interpreter.setRegister("$v1", BigInteger.ZERO, OperandSize.DWORD, ReilRegisterStatus.DEFINED);
     interpreter.setRegister("$ra", BigInteger.valueOf(0x11223344L), OperandSize.DWORD,
         ReilRegisterStatus.DEFINED);
-    interpreter.setRegister("$v2", BigInteger.valueOf(0x00000f0fL), OperandSize.DWORD,
+    interpreter.setRegister("$v2", BigInteger.valueOf(0x00000F0FL), OperandSize.DWORD,
         ReilRegisterStatus.DEFINED);
 
     final MockOperandTree operandTree1 = new MockOperandTree();
@@ -88,9 +88,9 @@ public class XorTranslatorTest {
     // check correct outcome
 
     assertEquals(4, TestHelpers.filterNativeRegisters(interpreter.getDefinedRegisters()).size());
-    assertEquals(BigInteger.valueOf(0x11223c4bL), interpreter.getVariableValue("$v1"));
+    assertEquals(BigInteger.valueOf(0x11223C4BL), interpreter.getVariableValue("$v1"));
     assertEquals(BigInteger.valueOf(0x11223344L), interpreter.getVariableValue("$ra"));
-    assertEquals(BigInteger.valueOf(0xf0fL), interpreter.getVariableValue("$v2"));
+    assertEquals(BigInteger.valueOf(0xF0FL), interpreter.getVariableValue("$v2"));
     assertEquals(BigInteger.ZERO, BigInteger.valueOf(interpreter.getMemorySize()));
   }
 
@@ -126,7 +126,7 @@ public class XorTranslatorTest {
     // check correct outcome
 
     assertEquals(4, TestHelpers.filterNativeRegisters(interpreter.getDefinedRegisters()).size());
-    assertEquals(BigInteger.valueOf(0x556665bcL), interpreter.getVariableValue("$a0"));
+    assertEquals(BigInteger.valueOf(0x556665BCL), interpreter.getVariableValue("$a0"));
     assertEquals(BigInteger.valueOf(0x55667788L), interpreter.getVariableValue("$a3"));
     assertEquals(BigInteger.valueOf(0x1234L), interpreter.getVariableValue("$v2"));
     assertEquals(BigInteger.ZERO, BigInteger.valueOf(interpreter.getMemorySize()));

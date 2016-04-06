@@ -192,7 +192,7 @@ public class TranslationHelpers {
     BigInteger result= BigInteger.valueOf(val);
     if(val < 0)
     {
-      BigInteger t0 = BigInteger.valueOf(0xffffffffffffffL);
+      BigInteger t0 = BigInteger.valueOf(0xFFFFFFFFFFFFFFL);
       BigInteger t1 = t0.multiply(BigInteger.valueOf(0x100L)).add(BigInteger.valueOf(0xff));
       result = t1.and(result);
     }

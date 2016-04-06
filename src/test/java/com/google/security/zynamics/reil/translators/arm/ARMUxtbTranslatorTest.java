@@ -68,7 +68,7 @@ public class ARMUxtbTranslatorTest {
   @Test
   public void testSimpleRegister() throws InternalTranslationException, InterpreterException {
     interpreter.setRegister("R0", BigInteger.valueOf(0x0L), dw, ReilRegisterStatus.DEFINED);
-    interpreter.setRegister("R1", BigInteger.valueOf(0x49ae30aaL), dw, ReilRegisterStatus.DEFINED);
+    interpreter.setRegister("R1", BigInteger.valueOf(0x49AE30AAL), dw, ReilRegisterStatus.DEFINED);
     interpreter.setRegister("C", BigInteger.ZERO, bt, ReilRegisterStatus.DEFINED);
 
     final MockOperandTree operandTree1 = new MockOperandTree();
@@ -87,8 +87,8 @@ public class ARMUxtbTranslatorTest {
 
     interpreter.interpret(TestHelpers.createMapping(instructions), BigInteger.valueOf(0x100L));
 
-    assertEquals(BigInteger.valueOf(0x000000aaL), interpreter.getVariableValue("R0"));
-    assertEquals(BigInteger.valueOf(0x49ae30aaL), interpreter.getVariableValue("R1"));
+    assertEquals(BigInteger.valueOf(0x000000AAL), interpreter.getVariableValue("R0"));
+    assertEquals(BigInteger.valueOf(0x49AE30AAL), interpreter.getVariableValue("R1"));
     assertEquals(BigInteger.ZERO, interpreter.getVariableValue("C"));
 
     assertEquals(BigInteger.ZERO, BigInteger.valueOf(interpreter.getMemorySize()));

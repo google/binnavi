@@ -112,7 +112,7 @@ public class BtTranslatorTest {
     assertEquals(2, TestHelpers.filterNativeRegisters(interpreter.getDefinedRegisters()).size());
 
     assertEquals(BigInteger.valueOf(1), interpreter.getVariableValue("CF"));
-    assertEquals(BigInteger.valueOf(0xFFFFFFFFl), interpreter.getMemory().load(0, 4));
+    assertEquals(BigInteger.valueOf(0xFFFFFFFFL), interpreter.getMemory().load(0, 4));
 
     assertEquals(BigInteger.valueOf(4L), BigInteger.valueOf(interpreter.getMemorySize()));
   }

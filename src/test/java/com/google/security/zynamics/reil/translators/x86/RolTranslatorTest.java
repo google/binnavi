@@ -58,7 +58,7 @@ public class RolTranslatorTest {
   public void testSimple() throws InternalTranslationException, InterpreterException {
     interpreter.setRegister("CF", BigInteger.valueOf(0), OperandSize.DWORD,
         ReilRegisterStatus.DEFINED);
-    interpreter.setRegister("eax", BigInteger.valueOf(0x80000000l), OperandSize.DWORD,
+    interpreter.setRegister("eax", BigInteger.valueOf(0x80000000L), OperandSize.DWORD,
         ReilRegisterStatus.DEFINED);
 
     final MockOperandTree operandTree1 = new MockOperandTree();
@@ -88,7 +88,7 @@ public class RolTranslatorTest {
   public void testSimple2() throws InternalTranslationException, InterpreterException {
     interpreter.setRegister("CF", BigInteger.valueOf(0), OperandSize.DWORD,
         ReilRegisterStatus.DEFINED);
-    interpreter.setRegister("eax", BigInteger.valueOf(0x80000000l), OperandSize.DWORD,
+    interpreter.setRegister("eax", BigInteger.valueOf(0x80000000L), OperandSize.DWORD,
         ReilRegisterStatus.DEFINED);
 
     final MockOperandTree operandTree1 = new MockOperandTree();

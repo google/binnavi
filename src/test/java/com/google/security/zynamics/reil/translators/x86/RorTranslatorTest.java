@@ -58,7 +58,7 @@ public class RorTranslatorTest {
   public void testSimple() throws InternalTranslationException, InterpreterException {
     interpreter.setRegister("CF", BigInteger.valueOf(0), OperandSize.DWORD,
         ReilRegisterStatus.DEFINED);
-    interpreter.setRegister("eax", BigInteger.valueOf(0x80000000l), OperandSize.DWORD,
+    interpreter.setRegister("eax", BigInteger.valueOf(0x80000000L), OperandSize.DWORD,
         ReilRegisterStatus.DEFINED);
 
     final MockOperandTree operandTree1 = new MockOperandTree();
@@ -79,7 +79,7 @@ public class RorTranslatorTest {
     interpreter.interpret(TestHelpers.createMapping(instructions), BigInteger.valueOf(0x100));
 
 
-    assertEquals(BigInteger.valueOf(0x40000000l), interpreter.getVariableValue("eax"));
+    assertEquals(BigInteger.valueOf(0x40000000L), interpreter.getVariableValue("eax"));
     assertEquals(BigInteger.ZERO, interpreter.getVariableValue("CF"));
     assertEquals(BigInteger.ZERO, interpreter.getVariableValue("OF"));
   }
@@ -88,7 +88,7 @@ public class RorTranslatorTest {
   public void testSimple2() throws InternalTranslationException, InterpreterException {
     interpreter.setRegister("CF", BigInteger.valueOf(0), OperandSize.DWORD,
         ReilRegisterStatus.DEFINED);
-    interpreter.setRegister("eax", BigInteger.valueOf(0x80000000l), OperandSize.DWORD,
+    interpreter.setRegister("eax", BigInteger.valueOf(0x80000000L), OperandSize.DWORD,
         ReilRegisterStatus.DEFINED);
 
     final MockOperandTree operandTree1 = new MockOperandTree();
@@ -109,7 +109,7 @@ public class RorTranslatorTest {
     interpreter.interpret(TestHelpers.createMapping(instructions), BigInteger.valueOf(0x100));
 
 
-    assertEquals(BigInteger.valueOf(0x400000l), interpreter.getVariableValue("eax"));
+    assertEquals(BigInteger.valueOf(0x400000L), interpreter.getVariableValue("eax"));
     assertEquals(BigInteger.ZERO, interpreter.getVariableValue("CF"));
   }
 }

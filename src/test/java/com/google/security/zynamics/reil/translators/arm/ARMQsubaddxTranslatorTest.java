@@ -67,7 +67,7 @@ public class ARMQsubaddxTranslatorTest {
   @Test
   public void testSimpleRegister() throws InternalTranslationException, InterpreterException {
     interpreter.setRegister("R0", BigInteger.valueOf(0x0L), dw, ReilRegisterStatus.DEFINED);
-    interpreter.setRegister("R1", BigInteger.valueOf(0x0f40cfa2L), dw, ReilRegisterStatus.DEFINED);
+    interpreter.setRegister("R1", BigInteger.valueOf(0x0F40CFA2L), dw, ReilRegisterStatus.DEFINED);
     interpreter.setRegister("R2", BigInteger.valueOf(0x01FFC9E0L), dw, ReilRegisterStatus.DEFINED);
 
     final MockOperandTree operandTree1 = new MockOperandTree();
@@ -91,8 +91,8 @@ public class ARMQsubaddxTranslatorTest {
 
     interpreter.interpret(TestHelpers.createMapping(instructions), BigInteger.valueOf(0x100L));
 
-    assertEquals(BigInteger.valueOf(0x4560d1a1L), interpreter.getVariableValue("R0"));
-    assertEquals(BigInteger.valueOf(0x0f40cfa2L), interpreter.getVariableValue("R1"));
+    assertEquals(BigInteger.valueOf(0x4560D1A1L), interpreter.getVariableValue("R0"));
+    assertEquals(BigInteger.valueOf(0x0F40CFA2L), interpreter.getVariableValue("R1"));
     assertEquals(BigInteger.valueOf(0x01FFC9E0L), interpreter.getVariableValue("R2"));
 
     assertEquals(BigInteger.ZERO, BigInteger.valueOf(interpreter.getMemorySize()));
@@ -103,7 +103,7 @@ public class ARMQsubaddxTranslatorTest {
   public void testSimpleRegisterDifferentMnemonic() throws InternalTranslationException,
       InterpreterException {
     interpreter.setRegister("R0", BigInteger.valueOf(0x0L), dw, ReilRegisterStatus.DEFINED);
-    interpreter.setRegister("R1", BigInteger.valueOf(0x0f40cfa2L), dw, ReilRegisterStatus.DEFINED);
+    interpreter.setRegister("R1", BigInteger.valueOf(0x0F40CFA2L), dw, ReilRegisterStatus.DEFINED);
     interpreter.setRegister("R2", BigInteger.valueOf(0x01FFC9E0L), dw, ReilRegisterStatus.DEFINED);
 
     final MockOperandTree operandTree1 = new MockOperandTree();
@@ -127,8 +127,8 @@ public class ARMQsubaddxTranslatorTest {
 
     interpreter.interpret(TestHelpers.createMapping(instructions), BigInteger.valueOf(0x100L));
 
-    assertEquals(BigInteger.valueOf(0x4560d1a1L), interpreter.getVariableValue("R0"));
-    assertEquals(BigInteger.valueOf(0x0f40cfa2L), interpreter.getVariableValue("R1"));
+    assertEquals(BigInteger.valueOf(0x4560D1A1L), interpreter.getVariableValue("R0"));
+    assertEquals(BigInteger.valueOf(0x0F40CFA2L), interpreter.getVariableValue("R1"));
     assertEquals(BigInteger.valueOf(0x01FFC9E0L), interpreter.getVariableValue("R2"));
 
     assertEquals(BigInteger.ZERO, BigInteger.valueOf(interpreter.getMemorySize()));
