@@ -20,7 +20,7 @@ import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
 
 @RunWith(Suite.class)
-@SuiteClasses({HelpersTest.class, AboveGeneratorTest.class, AdcTranslatorTest.class,
+@SuiteClasses({ HelpersTest.class, AboveGeneratorTest.class, AdcTranslatorTest.class,
     AddTranslatorTest.class, AndTranslatorTest.class, BelowEqualGeneratorTest.class,
     BelowGeneratorTest.class, BsfTranslatorTest.class, BswapTranslatorTest.class,
     BsrTranslatorTest.class, BtTranslatorTest.class, BtcTranslatorTest.class,
@@ -43,11 +43,12 @@ import org.junit.runners.Suite.SuiteClasses;
     RepLodsdTranslatorTest.class, RepMovsbTranslatorTest.class, RepStosbTranslatorTest.class,
     RepStoswTranslatorTest.class, RepStosdTranslatorTest.class, RepeCmpsbTranslatorTest.class,
     RepeScasbTranslatorTest.class, RepeScaswTranslatorTest.class, RepeScasdTranslatorTest.class,
-    RepneCmpsbTranslatorTest.class, RetnTranslatorTest.class, ScasbTranslatorTest.class,
-    ScaswTranslatorTest.class, ScasdTranslatorTest.class, SetalcTranslatorTest.class,
-    ShldTranslatorTest.class, ShlTranslatorTest.class, ShrTranslatorTest.class,
-    StosbTranslatorTest.class, StoswTranslatorTest.class, StosdTranslatorTest.class,
-    SubTranslatorTest.class, XaddTranslatorTest.class, XorTranslatorTest.class})
+    RepneCmpsbTranslatorTest.class, RetnTranslatorTest.class, RolTranslatorTest.class,
+    RorTranslatorTest.class, ScasbTranslatorTest.class, ScaswTranslatorTest.class,
+    ScasdTranslatorTest.class, SetalcTranslatorTest.class, ShldTranslatorTest.class,
+    ShlTranslatorTest.class, ShrTranslatorTest.class, StosbTranslatorTest.class,
+    StoswTranslatorTest.class, StosdTranslatorTest.class, SubTranslatorTest.class,
+    XaddTranslatorTest.class, XorTranslatorTest.class })
 public class AllTests {
 
 }

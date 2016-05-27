@@ -59,7 +59,7 @@ public class ARMLdrtTranslator extends ARMBaseTranslator {
     final String rotResult2 = environment.getNextVariableString();
     final String tmpData1 = environment.getNextVariableString();
     final String tmpRotResult = environment.getNextVariableString();
-
+    baseOffset = baseOffset + instructions.size();
     instructions.add(ReilHelpers.createLdm(baseOffset++, dw, tmpAddress, dw, tmpData1));
 
     // get rotate * 8

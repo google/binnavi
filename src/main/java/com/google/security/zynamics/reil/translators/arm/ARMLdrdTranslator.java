@@ -59,6 +59,7 @@ public class ARMLdrdTranslator extends ARMBaseTranslator {
     final int registerNum = Helpers.getRegisterIndex(registerNodeValue);
 
     if (((registerNum % 2) == 0) && (registerNum != 14)) {
+      baseOffset = baseOffset + instructions.size();
       instructions.add(ReilHelpers.createLdm(baseOffset++, dw, tmpAddress, dw, registerNodeValue));
       instructions.add(ReilHelpers.createAdd(
           baseOffset++, dw, tmpAddress, bt, String.valueOf(4), dw, tmpAddress2));

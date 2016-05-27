@@ -53,21 +53,23 @@ public class ARMQaddsubxTranslator extends ARMBaseTranslator {
         final String diff1Sat = environment.getNextVariableString();
         final String sum1Sat = environment.getNextVariableString();
 
-        long baseOffset = offset;
+        long baseOffset = offset - instructions.size();
 
         // do the adds
-        instructions.add(ReilHelpers.createAdd(baseOffset++, dw, firstTwo[1], dw, secondTwo[0], dw,
-            sum1));
-        instructions.add(ReilHelpers.createSub(baseOffset++, dw, firstTwo[0], dw, secondTwo[1], dw,
-            diff1));
+        instructions.add(ReilHelpers.createAdd(baseOffset + instructions.size(), dw, firstTwo[1],
+            dw, secondTwo[0], dw, sum1));
+        instructions.add(ReilHelpers.createSub(baseOffset + instructions.size(), dw, firstTwo[0],
+            dw, secondTwo[1], dw, diff1));
 
         // Do the Sat
-        Helpers.signedSat(baseOffset, environment, instruction, instructions, dw, firstTwo[1], dw,
+        Helpers.signedSat(baseOffset + instructions.size(), environment, instruction, 
+            instructions, dw, firstTwo[1], dw,
             secondTwo[0], dw, sum1, "ADD", sum1Sat, 16L, "");
-        Helpers.signedSat(baseOffset, environment, instruction, instructions, dw, firstTwo[0], dw,
+        Helpers.signedSat(baseOffset + instructions.size(), environment, instruction, 
+            instructions, dw, firstTwo[0], dw,
             secondTwo[1], dw, diff1, "SUB", diff1Sat, 16L, "");
 
-        return new String[] {diff1Sat, sum1Sat};
+        return new String[] { diff1Sat, sum1Sat };
       }
     }.generate(environment, baseOffset, 16, sourceRegister1, sourceRegister2, targetRegister,
         instructions);
@@ -78,8 +80,8 @@ public class ARMQaddsubxTranslator extends ARMBaseTranslator {
    * 
    * Operation:
    * 
-   * if ConditionPassed(cond) then Rd[31:16] = SignedSat(Rn[31:16] + Rm[15:0], 16) Rd[15:0] =
-   * SignedSat(Rn[15:0] - Rm[31:16], 16)
+   * if ConditionPassed(cond) then Rd[31:16] = SignedSat(Rn[31:16] + Rm[15:0],
+   * 16) Rd[15:0] = SignedSat(Rn[15:0] - Rm[31:16], 16)
    */
   @Override
   public void translate(final ITranslationEnvironment environment, final IInstruction instruction,

@@ -81,9 +81,69 @@ public class RorTranslatorTest {
 
     assertEquals(BigInteger.valueOf(0x40000000l), interpreter.getVariableValue("eax"));
     assertEquals(BigInteger.ZERO, interpreter.getVariableValue("CF"));
+    assertEquals(BigInteger.ONE, interpreter.getVariableValue("OF"));
+  }
+  
+  @Test
+  public void testSimpleOF() throws InternalTranslationException, InterpreterException {
+    interpreter.setRegister("CF", BigInteger.valueOf(0), OperandSize.DWORD,
+        ReilRegisterStatus.DEFINED);
+    interpreter.setRegister("eax", BigInteger.valueOf(0x80000001l), OperandSize.DWORD,
+        ReilRegisterStatus.DEFINED);
+
+    final MockOperandTree operandTree1 = new MockOperandTree();
+    operandTree1.root = new MockOperandTreeNode(ExpressionType.SIZE_PREFIX, "dword");
+    operandTree1.root.m_children.add(new MockOperandTreeNode(ExpressionType.REGISTER, "eax"));
+
+    final MockOperandTree operandTree2 = new MockOperandTree();
+    operandTree2.root = new MockOperandTreeNode(ExpressionType.SIZE_PREFIX, "byte");
+    operandTree2.root.m_children
+        .add(new MockOperandTreeNode(ExpressionType.IMMEDIATE_INTEGER, "1"));
+
+    final List<MockOperandTree> operands = Lists.newArrayList(operandTree1, operandTree2);
+
+    final IInstruction instruction = new MockInstruction("rol", operands);
+
+    translator.translate(environment, instruction, instructions);
+
+    interpreter.interpret(TestHelpers.createMapping(instructions), BigInteger.valueOf(0x100));
+
+
+    assertEquals(BigInteger.valueOf(0xC0000000l), interpreter.getVariableValue("eax"));
+    assertEquals(BigInteger.ONE, interpreter.getVariableValue("CF"));
     assertEquals(BigInteger.ZERO, interpreter.getVariableValue("OF"));
   }
+  
+  @Test
+  public void testSimpleOF2() throws InternalTranslationException, InterpreterException {
+    interpreter.setRegister("CF", BigInteger.valueOf(0), OperandSize.DWORD,
+        ReilRegisterStatus.DEFINED);
+    interpreter.setRegister("eax", BigInteger.valueOf(0x80000010l), OperandSize.DWORD,
+        ReilRegisterStatus.DEFINED);
 
+    final MockOperandTree operandTree1 = new MockOperandTree();
+    operandTree1.root = new MockOperandTreeNode(ExpressionType.SIZE_PREFIX, "dword");
+    operandTree1.root.m_children.add(new MockOperandTreeNode(ExpressionType.REGISTER, "eax"));
+
+    final MockOperandTree operandTree2 = new MockOperandTree();
+    operandTree2.root = new MockOperandTreeNode(ExpressionType.SIZE_PREFIX, "byte");
+    operandTree2.root.m_children
+        .add(new MockOperandTreeNode(ExpressionType.IMMEDIATE_INTEGER, "1"));
+
+    final List<MockOperandTree> operands = Lists.newArrayList(operandTree1, operandTree2);
+
+    final IInstruction instruction = new MockInstruction("rol", operands);
+
+    translator.translate(environment, instruction, instructions);
+
+    interpreter.interpret(TestHelpers.createMapping(instructions), BigInteger.valueOf(0x100));
+
+
+    assertEquals(BigInteger.valueOf(0x40000008l), interpreter.getVariableValue("eax"));
+    assertEquals(BigInteger.ZERO, interpreter.getVariableValue("CF"));
+    assertEquals(BigInteger.ONE, interpreter.getVariableValue("OF"));
+  }
+  
   @Test
   public void testSimple2() throws InternalTranslationException, InterpreterException {
     interpreter.setRegister("CF", BigInteger.valueOf(0), OperandSize.DWORD,

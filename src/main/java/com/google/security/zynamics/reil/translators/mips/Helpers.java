@@ -31,30 +31,22 @@ public class Helpers {
   private static int registerSize = 32;
 
   private static void generateDelayBranchInternal(final List<ReilInstruction> instructions,
-      final long baseOffset,
-      final OperandSize conditionSize,
-      final String conditionOperand,
-      final OperandSize targetSize,
-      final IOperandTreeNode targetOperand,
-      final String[] meta) {
+      final long baseOffset, final OperandSize conditionSize, final String conditionOperand,
+      final OperandSize targetSize, final IOperandTreeNode targetOperand, final String[] meta) {
     long offset = baseOffset;
 
     if (targetOperand.getType() != ExpressionType.REGISTER) {
       instructions.add(
           ReilHelpers.createStr(offset++, conditionSize, conditionOperand, conditionSize, "t254"));
-      instructions.add(ReilHelpers.createJcc(offset,
-          conditionSize,
-          "t254",
-          targetSize,
-          targetOperand.getValue(),
-          meta));
+      instructions.add(ReilHelpers.createJcc(offset, conditionSize, "t254", targetSize,
+          targetOperand.getValue(), meta));
     } else {
       instructions.add(ReilHelpers.createStr(offset++, targetSize, targetOperand.getValue(),
           targetSize, "t255"));
       instructions.add(
           ReilHelpers.createStr(offset++, conditionSize, conditionOperand, conditionSize, "t254"));
-      instructions.add(
-          ReilHelpers.createJcc(offset, conditionSize, "t254", targetSize, "t255", meta));
+      instructions
+          .add(ReilHelpers.createJcc(offset, conditionSize, "t254", targetSize, "t255", meta));
     }
   }
 
@@ -127,20 +119,15 @@ public class Helpers {
 
     instructions.add(
         ReilHelpers.createXor(offset, size, value, size, signMask.second(), size, toggledSign));
-    instructions.add(ReilHelpers.createSub(offset + 1,
-        size,
-        toggledSign,
-        size,
-        signMask.second(),
-        size,
-        absValue));
+    instructions.add(ReilHelpers.createSub(offset + 1, size, toggledSign, size, signMask.second(),
+        size, absValue));
 
     return new Pair<String, String>(signMask.first(), absValue);
   }
 
   /**
-   * generates the REIL instructions for a branch with a delay slot as found in the MIPS32
-   * architecture.
+   * generates the REIL instructions for a branch with a delay slot as found in
+   * the MIPS32 architecture.
    *
    * @param instructions
    * @param baseOffset
@@ -214,17 +201,17 @@ public class Helpers {
     final String toggleMask = environment.getNextVariableString();
     final String xoredSigns = environment.getNextVariableString();
 
-    long baseOffset = offset;
+    long baseOffset = offset - instructions.size();
 
     // get the absolute Value of the operands
-    final Pair<String, String> abs1 =
-        generateAbs(environment, baseOffset, firstOperand, firstOperandSize, instructions);
-    final Pair<String, String> abs2 =
-        generateAbs(environment, baseOffset, secondOperand, secondOperandSize, instructions);
+    final Pair<String, String> abs1 = generateAbs(environment, baseOffset + instructions.size(),
+        firstOperand, firstOperandSize, instructions);
+    final Pair<String, String> abs2 = generateAbs(environment, baseOffset + instructions.size(),
+        secondOperand, secondOperandSize, instructions);
 
     final String firstAbs = abs1.second();
     final String secondAbs = abs2.second();
-
+    baseOffset = offset + instructions.size();
     // compute the multiplication
     instructions.add(ReilHelpers.createMul(baseOffset++,
         firstOperandSize,

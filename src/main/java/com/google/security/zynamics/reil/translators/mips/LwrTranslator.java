@@ -63,7 +63,7 @@ public class LwrTranslator implements IInstructionTranslator {
 
     instructions.add(ReilHelpers.createAnd(offset++, dw, extendedValue, dw,
         String.valueOf(0xFFFFFFFCL), dw, address));
-    instructions.add(ReilHelpers.createLdm(offset, dw, address, dw, memoryContent));
+    instructions.add(ReilHelpers.createLdm(offset++, dw, address, dw, memoryContent));
 
     instructions.add(ReilHelpers.createAnd(offset++, dw, extendedValue, dw, String.valueOf(3L), dw,
         lastTwoAddressBits));
