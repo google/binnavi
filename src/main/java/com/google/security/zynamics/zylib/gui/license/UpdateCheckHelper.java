@@ -39,7 +39,7 @@ public class UpdateCheckHelper {
   /**
    * Base URL prefix for the update check mechanism. Make sure it does not end with a slash.
    */
-  public static String UPDATE_CHECK_BASE_URL = "http://www.zynamics.com/updates";
+  public static String UPDATE_CHECK_BASE_URL = "https://www.zynamics.com/updates";
 
   private UpdateCheckHelper() {
     // Static methods only
