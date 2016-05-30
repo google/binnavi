@@ -40,8 +40,8 @@
     </fileset>
   </path>
   <path id="yfileswrap.class.path">
-    <fileset id="yfileswrap.jar" dir="${zynamics.dir}/lib/">
-      <include name="yfileswrap-obfuscated.jar"/>
+    <fileset id="yfileswrap.build.jars" dir="${project.dir}/target/dependency">
+      <include name="yfileswrap-obfuscated-6.1.jar"/>
     </fileset>
   </path>
   <path id="zylib.class.path">
@@ -223,7 +223,7 @@
     <jar destfile="${out.dir}/binnavi-all.jar" basedir="${build.dir}">
       <zipgroupfileset refid="binnavi.build.jars"/>
       <zipgroupfileset refid="guava.build.jars"/>
-      <zipgroupfileset refid="yfileswrap.jar"/>
+      <zipgroupfileset refid="yfileswrap.build.jars"/>
       <zipgroupfileset refid="zylib.jar"/>
       <zipgroupfileset refid="reil.jar"/>
       <zipgroupfileset dir="${out.dir}" includes="binnavi.jar"/>

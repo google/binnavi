@@ -1,6 +1,9 @@
 jdk:
   - oraclejdk8
+
 sudo: false
+
 script:
   - mvn dependency:copy-dependencies
   - ant build-binnavi-fat-jar
+
