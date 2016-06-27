@@ -84,6 +84,8 @@ running somewhere accessible to you. You can launch BinNavi as follows:
 
     java -jar target/binnavi-all.jar
 
+*Note: HiDPI displays may not scale properly with Java 8. Use Java 9 if this is an issue for you.*
+
 ## Importing the project into Eclipse
 
 Loading the code into Eclipse for further development requires a little bit of
