@@ -2,9 +2,6 @@
 
 Copyright 2011-2016 Google Inc.
 
-Disclaimer: This is not an official Google product (experimental or otherwise),
-it is just code that happens to be owned by Google.
-
 ## Introduction
 
 BinNavi is a binary analysis IDE - an environment that allows users to inspect,
