@@ -189,6 +189,10 @@ public class OperandGraph extends DirectedGraph<OperandGraphNode, OperandGraphEd
         continue;
       }
 
+      //don't link self-dependency
+      if(search.getInstruction() == instruction)
+        continue;
+
       if (ReilHelpers.writesThirdOperand(instruction.getMnemonicCode())
           && instruction.getThirdOperand().getValue().equals(value)) {
         final List<OperandGraphNode> nodes = graphMap.get(block).first();
