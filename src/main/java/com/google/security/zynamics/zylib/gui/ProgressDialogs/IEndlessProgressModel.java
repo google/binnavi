@@ -18,7 +18,8 @@ package com.google.security.zynamics.zylib.gui.ProgressDialogs;
 public interface IEndlessProgressModel {
   void addProgressListener(IEndlessProgressListener listener);
 
-  void closeRequested();
+  default void closeRequested() {
+  }
 
   void removeProgressListener(IEndlessProgressListener listener);
 }

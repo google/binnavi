@@ -53,11 +53,6 @@ public abstract class CStandardHelperThread extends Thread implements IStandardP
     m_listeners.addListener(listener);
   }
 
-  @Override
-  public void closeRequested() {
-    // Do nothing
-  }
-
   public Exception getException() {
     return m_exception;
   }

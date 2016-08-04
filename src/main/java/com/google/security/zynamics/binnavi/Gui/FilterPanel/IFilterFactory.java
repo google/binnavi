@@ -34,7 +34,8 @@ public interface IFilterFactory<T> {
    */
   IFilter<T> createFilter(String text) throws RecognitionException;
 
-  void dispose();
+  default void dispose() {
+  }
 
   /**
    * Returns the optional filter component that is shown next to the filter text field above
@@ -42,5 +43,7 @@ public interface IFilterFactory<T> {
    * 
    * @return The filter component or null.
    */
-  IFilterComponent<T> getFilterComponent();
+  default IFilterComponent<T> getFilterComponent() {
+    return null;
+  }
 }

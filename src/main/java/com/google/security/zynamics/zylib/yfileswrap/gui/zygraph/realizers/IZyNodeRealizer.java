@@ -60,7 +60,18 @@ public interface IZyNodeRealizer {
 
   boolean isVisible();
 
-  int positionToRow(double y);
+  default int positionToRow(double y) {
+    // TODO: This does not really work because line heights are not constant.
+
+    final ZyLabelContent content = getNodeContent();
+
+    final Rectangle2D contentBounds = getNodeContent().getBounds();
+    final double yratio = getHeight() / contentBounds.getHeight();
+
+    final int row = (int) ((y / yratio - content.getPaddingTop()) / content.getLineHeight());
+
+    return row >= content.getLineCount() ? -1 : row;
+  }
 
   void regenerate();
 
@@ -68,7 +79,11 @@ public interface IZyNodeRealizer {
 
   void repaint();
 
-  double rowToPosition(int line);
+  default double rowToPosition(int row) {
+    final ZyLabelContent content = getNodeContent();
+
+    return content.getPaddingTop() + row * content.getLineHeight();
+  }
 
   void setFillColor(Color color);
 
@@ -88,5 +103,12 @@ public interface IZyNodeRealizer {
 
   void setY(double y);
 
-  void updateContentSelectionColor();
+  default void updateContentSelectionColor() {
+    // TODO: This is kind of a hack, should be improved
+    final ZyLabelContent content = getNodeContent();
+
+    if (content.isSelectable()) {
+      content.updateContentSelectionColor(getFillColor(), isSelected());
+    }
+  }
 }

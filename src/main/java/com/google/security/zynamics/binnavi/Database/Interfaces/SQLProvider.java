@@ -29,6 +29,13 @@ import com.google.security.zynamics.binnavi.Database.Exceptions.CouldntUpdateDat
 import com.google.security.zynamics.binnavi.Database.Exceptions.InvalidDatabaseException;
 import com.google.security.zynamics.binnavi.Database.NodeParser.OperandTree;
 import com.google.security.zynamics.binnavi.Database.NodeParser.OperandTreeNode;
+import com.google.security.zynamics.binnavi.Database.PostgreSQL.Functions.PostgreSQLInstructionFunctions;
+import com.google.security.zynamics.binnavi.Database.PostgreSQL.Functions.PostgreSQLNodeFunctions;
+import com.google.security.zynamics.binnavi.Database.PostgreSQL.Functions.PostgreSQLSectionFunctions;
+import com.google.security.zynamics.binnavi.Database.PostgreSQL.Functions.PostgreSQLTypeFunctions;
+import com.google.security.zynamics.binnavi.Database.PostgreSQL.Loaders.PostgreSQLFunctionsLoader;
+import com.google.security.zynamics.binnavi.Database.PostgreSQL.Loaders.PostgreSQLModuleFlowgraphsLoader;
+import com.google.security.zynamics.binnavi.Database.PostgreSQL.Loaders.PostgreSQLProjectFlowgraphsLoader;
 import com.google.security.zynamics.binnavi.Gui.GraphWindows.CommentDialogs.Interfaces.IComment;
 import com.google.security.zynamics.binnavi.Gui.Users.Interfaces.IUser;
 import com.google.security.zynamics.binnavi.Tagging.CTag;
@@ -126,8 +133,10 @@ public interface SQLProvider extends AddressSpaceConfigurationBackend, AddressSp
    *
    * @throws CouldntSaveDataException Thrown if the reference could not be created.
    */
-  void addReference(INaviOperandTreeNode node, final IAddress address, final ReferenceType type)
-      throws CouldntSaveDataException;
+  default void addReference(INaviOperandTreeNode node, final IAddress address, final ReferenceType type)
+      throws CouldntSaveDataException {
+    PostgreSQLInstructionFunctions.addReference(this, node, address, type);
+  }
 
   /**
    * Adds a user to the database.
@@ -163,8 +172,11 @@ public interface SQLProvider extends AddressSpaceConfigurationBackend, AddressSp
    *
    * @throws CouldntSaveDataException If the global comment could not be saved in the database.
    */
-  Integer appendFunctionNodeComment(INaviFunctionNode functionNode, String commentText,
-      Integer userId) throws CouldntSaveDataException;
+  default Integer appendFunctionNodeComment(INaviFunctionNode functionNode, String commentText,
+      Integer userId) throws CouldntSaveDataException {
+    return PostgreSQLNodeFunctions.appendLocalFunctionNodeComment(this, functionNode, commentText,
+        userId);
+  }
 
   /**
    * Appends a global comment to a code node.
@@ -177,8 +189,10 @@ public interface SQLProvider extends AddressSpaceConfigurationBackend, AddressSp
    *
    * @throws CouldntSaveDataException If the global comment could not be saved in the database.
    */
-  Integer appendGlobalCodeNodeComment(INaviCodeNode codeNode, String commentText, Integer userId)
-      throws CouldntSaveDataException;
+  default Integer appendGlobalCodeNodeComment(INaviCodeNode codeNode, String commentText, Integer userId)
+      throws CouldntSaveDataException {
+    return PostgreSQLNodeFunctions.appendGlobalCodeNodeComment(this, codeNode, commentText, userId);
+  }
 
   /**
    * Appends a global comment to an edge.
@@ -206,8 +220,11 @@ public interface SQLProvider extends AddressSpaceConfigurationBackend, AddressSp
    *
    * @throws CouldntSaveDataException If the global comment could not be saved in the database.
    */
-  Integer appendGlobalInstructionComment(INaviInstruction instruction, String commentText,
-      Integer userId) throws CouldntSaveDataException;
+  default Integer appendGlobalInstructionComment(INaviInstruction instruction, String commentText,
+      Integer userId) throws CouldntSaveDataException {
+    return PostgreSQLInstructionFunctions.appendGlobalInstructionComment(this, instruction,
+        commentText, userId);
+  }
 
   /**
    * Appends a group node comment to a group node.
@@ -234,8 +251,10 @@ public interface SQLProvider extends AddressSpaceConfigurationBackend, AddressSp
    *
    * @throws CouldntSaveDataException If the global comment could not be saved in the database.
    */
-  Integer appendLocalCodeNodeComment(INaviCodeNode codeNode, String commentText, Integer userId)
-      throws CouldntSaveDataException;
+  default Integer appendLocalCodeNodeComment(INaviCodeNode codeNode, String commentText, Integer userId)
+      throws CouldntSaveDataException {
+    return PostgreSQLNodeFunctions.appendLocalCodeNodeComment(this, codeNode, commentText, userId);
+  }
 
   /**
    * Appends a local comment to an edge.
@@ -263,8 +282,11 @@ public interface SQLProvider extends AddressSpaceConfigurationBackend, AddressSp
    *
    * @throws CouldntSaveDataException If the global comment could not be saved in the database.
    */
-  Integer appendLocalInstructionComment(INaviCodeNode codeNode, INaviInstruction instruction,
-      String commentText, Integer userId) throws CouldntSaveDataException;
+  default Integer appendLocalInstructionComment(INaviCodeNode codeNode, INaviInstruction instruction,
+      String commentText, Integer userId) throws CouldntSaveDataException {
+    return PostgreSQLInstructionFunctions.appendLocalInstructionComment(this, codeNode, instruction,
+        commentText, userId);
+  }
 
   /**
    * Appends a comment to the given section in the given module.
@@ -395,13 +417,22 @@ public interface SQLProvider extends AddressSpaceConfigurationBackend, AddressSp
    * @return The id of the section in the database.
    * @throws CouldntSaveDataException Thrown if the section could not be stored in the database.
    */
-  int createSection(int moduleId,
+  default int createSection(int moduleId,
       String name,
       Integer commentId,
       BigInteger startAddress,
       BigInteger endAddress,
       SectionPermission permission,
-      byte[] data) throws CouldntSaveDataException;
+      byte[] data) throws CouldntSaveDataException {
+    return PostgreSQLSectionFunctions.createSection(getConnection().getConnection(),
+        moduleId,
+        name,
+        commentId,
+        startAddress,
+        endAddress,
+        permission,
+        data);
+  }
 
   /**
    * Creates a new tag.
@@ -461,12 +492,20 @@ public interface SQLProvider extends AddressSpaceConfigurationBackend, AddressSp
    * @throws CouldntSaveDataException Thrown if the type could not be created.
    * @see BaseType
    */
-  int createType(int moduleId,
+  default int createType(int moduleId,
       String name,
       int size,
       Integer childPointerTypeId,
       boolean signed,
-      BaseTypeCategory category) throws CouldntSaveDataException;
+      BaseTypeCategory category) throws CouldntSaveDataException {
+    return PostgreSQLTypeFunctions.createType(getConnection().getConnection(),
+        moduleId,
+        name,
+        size,
+        childPointerTypeId,
+        signed,
+        category);
+  }
 
   /**
    * Creates a new type instance in the database.
@@ -481,12 +520,20 @@ public interface SQLProvider extends AddressSpaceConfigurationBackend, AddressSp
    * @return Returns the id of the created type instance.
    * @throws CouldntSaveDataException
    */
-  int createTypeInstance(int moduleId,
+  default int createTypeInstance(int moduleId,
       String name,
       Integer commentId,
       int typeId,
       int sectionId,
-      long sectionOffset) throws CouldntSaveDataException;
+      long sectionOffset) throws CouldntSaveDataException {
+    return PostgreSQLTypeFunctions.createTypeInstance(getConnection().getConnection(),
+        moduleId,
+        name,
+        commentId,
+        typeId,
+        sectionId,
+        sectionOffset);
+  }
 
   /**
    * Creates a type instance reference in the database.
@@ -498,8 +545,15 @@ public interface SQLProvider extends AddressSpaceConfigurationBackend, AddressSp
    * @param typeInstanceId The id of the referred type instance.
    * @throws CouldntSaveDataException Thrown if the reference could not be written to the database.
    */
-  void createTypeInstanceReference(int moduleId, long address, int position, int expressionId,
-      int typeInstanceId) throws CouldntSaveDataException;
+  default void createTypeInstanceReference(int moduleId, long address, int position, int expressionId,
+      int typeInstanceId) throws CouldntSaveDataException {
+    PostgreSQLTypeFunctions.createTypeInstanceReference(getConnection().getConnection(),
+        moduleId,
+        address,
+        position,
+        expressionId,
+        typeInstanceId);
+  }
 
   /**
    * @param module The module that contains the member.
@@ -513,13 +567,21 @@ public interface SQLProvider extends AddressSpaceConfigurationBackend, AddressSp
    * @return The id of the added record.
    * @throws CouldntSaveDataException Thrown if the member couldn't be saved to the database.
    */
-  int createTypeMember(INaviModule module,
+  default int createTypeMember(INaviModule module,
       int containingTypeId,
       int baseTypeId,
       String name,
       Optional<Integer> offset,
       Optional<Integer> numberOfElements,
-      Optional<Integer> argumentIndex) throws CouldntSaveDataException;
+      Optional<Integer> argumentIndex) throws CouldntSaveDataException {
+    return PostgreSQLTypeFunctions.createTypeMember(getConnection().getConnection(),
+        containingTypeId,
+        offset,
+        name,
+        baseTypeId,
+        numberOfElements,
+        module);
+  }
 
   /**
    * Writes a new type substitution to the database, that associates an operand tree node with the
@@ -534,13 +596,22 @@ public interface SQLProvider extends AddressSpaceConfigurationBackend, AddressSp
    * @param address The address of the instruction that is annotated with this type substitution.
    * @param module The module where this type substitution belongs to.
    */
-  void createTypeSubstitution(int treeNodeId,
+  default void createTypeSubstitution(int treeNodeId,
       final int baseTypeId,
       final List<Integer> memberPath,
       final int position,
       final int offset,
       final IAddress address,
-      final INaviModule module) throws CouldntSaveDataException;
+      final INaviModule module) throws CouldntSaveDataException {
+    PostgreSQLTypeFunctions.createTypeSubstitution(getConnection().getConnection(),
+        treeNodeId,
+        baseTypeId,
+        memberPath,
+        position,
+        offset,
+        address,
+        module);
+  }
 
   /**
    * Creates a new module view by copying an existing view.
@@ -706,7 +777,9 @@ public interface SQLProvider extends AddressSpaceConfigurationBackend, AddressSp
    * @param module The module that contains the member.
    * @throws CouldntDeleteException Thrown if the member could not be deleted.
    */
-  void deleteMember(TypeMember member, INaviModule module) throws CouldntDeleteException;
+  default void deleteMember(TypeMember member, INaviModule module) throws CouldntDeleteException {
+    PostgreSQLTypeFunctions.deleteMember(getConnection().getConnection(), member, module);
+  }
 
   /**
    * Deletes a module from the database.
@@ -744,8 +817,10 @@ public interface SQLProvider extends AddressSpaceConfigurationBackend, AddressSp
    *
    * @throws CouldntDeleteException Thrown if the reference could not be deleted.
    */
-  void deleteReference(COperandTreeNode node, IAddress address, ReferenceType type)
-      throws CouldntDeleteException;
+  default void deleteReference(COperandTreeNode operandTreeNode, IAddress target, ReferenceType type)
+      throws CouldntDeleteException {
+    PostgreSQLInstructionFunctions.deleteReference(this, operandTreeNode, target, type);
+  }
 
   /**
    * Deletes a {@link Section} in the database.
@@ -814,7 +889,9 @@ public interface SQLProvider extends AddressSpaceConfigurationBackend, AddressSp
    * @param module The module that contains the base type.
    * @throws CouldntDeleteException Thrown if the base type could not be deleted.
    */
-  void deleteType(BaseType baseType, INaviModule module) throws CouldntDeleteException;
+  default void deleteType(BaseType baseType, INaviModule module) throws CouldntDeleteException {
+    PostgreSQLTypeFunctions.deleteType(getConnection().getConnection(), baseType, module);
+  }
 
   /**
    * Delete a {@link TypeInstance} from the database.
@@ -866,8 +943,11 @@ public interface SQLProvider extends AddressSpaceConfigurationBackend, AddressSp
    *
    * @throws CouldntDeleteException Thrown if the type substitution couldn't be deleted.
    */
-  void deleteTypeSubstitution(INaviModule module, TypeSubstitution typeSubstitution)
-      throws CouldntDeleteException;
+  default void deleteTypeSubstitution(INaviModule module, TypeSubstitution typeSubstitution)
+      throws CouldntDeleteException {
+    PostgreSQLTypeFunctions.deleteTypeSubstitution(getConnection().getConnection(), module,
+        typeSubstitution);
+  }
 
   /**
    * Delete a user from the database.
@@ -1307,11 +1387,15 @@ public interface SQLProvider extends AddressSpaceConfigurationBackend, AddressSp
    */
   DebuggerTemplateManager loadDebuggers() throws CouldntLoadDataException;
 
-  ImmutableNaviViewConfiguration loadFlowGraphInformation(final INaviModule module,
-      final Integer viewId) throws CouldntLoadDataException;
+  default ImmutableNaviViewConfiguration loadFlowGraphInformation(final INaviModule module,
+      final Integer viewId) throws CouldntLoadDataException {
+    return PostgreSQLModuleFlowgraphsLoader.loadFlowGraphInformation(this, module, viewId);
+  }
 
-  ImmutableNaviViewConfiguration loadFlowGraphInformation(final INaviProject project,
-      final Integer viewId) throws CouldntLoadDataException;
+  default ImmutableNaviViewConfiguration loadFlowGraphInformation(final INaviProject project,
+      final Integer viewId) throws CouldntLoadDataException {
+    return PostgreSQLProjectFlowgraphsLoader.loadFlowGraphInformation(this, project, viewId);
+  }
 
   /**
    * Loads the custom flow graph views of a given module. Note that this function only loads the
@@ -1349,8 +1433,10 @@ public interface SQLProvider extends AddressSpaceConfigurationBackend, AddressSp
    *
    * @throws CouldntLoadDataException Thrown if the functions could not be loaded.
    */
-  List<INaviFunction> loadFunctions(INaviModule module, final List<IFlowgraphView> views)
-      throws CouldntLoadDataException;
+  default List<INaviFunction> loadFunctions(INaviModule module, final List<IFlowgraphView> views)
+      throws CouldntLoadDataException {
+    return PostgreSQLFunctionsLoader.loadFunctions(this, module, views);
+  }
 
   /**
    * Loads the non-native mixed-graph views of a module.
@@ -1725,7 +1811,9 @@ public interface SQLProvider extends AddressSpaceConfigurationBackend, AddressSp
    *
    * @throws CouldntSaveDataException Thrown if the tag could not be removed from the node.
    */
-  void removeTagFromNode(INaviViewNode node, int tagId) throws CouldntSaveDataException;
+  default void removeTagFromNode(INaviViewNode node, int tagId) throws CouldntSaveDataException {
+    PostgreSQLNodeFunctions.untagNode(this, node, tagId);
+  }
 
   /**
    * Forwards a function to another function.
@@ -1785,7 +1873,9 @@ public interface SQLProvider extends AddressSpaceConfigurationBackend, AddressSp
    *
    * @throws CouldntSaveDataException Thrown if the node could not be tagged.
    */
-  void saveTagToNode(INaviViewNode node, int tagId) throws CouldntSaveDataException;
+  default void saveTagToNode(INaviViewNode node, int tagId) throws CouldntSaveDataException {
+    PostgreSQLNodeFunctions.tagNode(this, node, tagId);
+  }
 
   /**
    * Changes the description of a tag.
@@ -1866,8 +1956,10 @@ public interface SQLProvider extends AddressSpaceConfigurationBackend, AddressSp
    *
    * @throws CouldntSaveDataException Thrown if the replacement string could not be updated.
    */
-  void setGlobalReplacement(INaviOperandTreeNode operandTreeNode, String replacement)
-      throws CouldntSaveDataException;
+  default void setGlobalReplacement(INaviOperandTreeNode operandTreeNode, String replacement)
+      throws CouldntSaveDataException {
+    PostgreSQLInstructionFunctions.setGlobalReplacement(this, operandTreeNode, replacement);
+  }
 
   /**
    * Changes the host of an existing debugger template.
@@ -1979,8 +2071,10 @@ public interface SQLProvider extends AddressSpaceConfigurationBackend, AddressSp
    *
    * @throws CouldntSaveDataException Thrown if the replacement string could not be updated.
    */
-  void setReplacement(COperandTreeNode operandTreeNode, String replacement)
-      throws CouldntSaveDataException;
+  default void setReplacement(COperandTreeNode operandTreeNode, String replacement)
+      throws CouldntSaveDataException {
+    PostgreSQLInstructionFunctions.setReplacement(this, operandTreeNode, replacement);
+  }
 
   /**
    * Changes the name of a given section.
@@ -1990,7 +2084,10 @@ public interface SQLProvider extends AddressSpaceConfigurationBackend, AddressSp
    * @param name The new section name.
    * @throws CouldntSaveDataException Thrown if the name could not be written to the database.
    */
-  void setSectionName(int moduleId, int sectionId, String name) throws CouldntSaveDataException;
+  default void setSectionName(int moduleId, int sectionId, String name) throws CouldntSaveDataException {
+    PostgreSQLSectionFunctions.setSectionName(this.getConnection().getConnection(), moduleId,
+        sectionId, name);
+  }
 
   /**
    * Stars a module.
@@ -2054,13 +2151,22 @@ public interface SQLProvider extends AddressSpaceConfigurationBackend, AddressSp
    * @throws CouldntSaveDataException Thrown if the changed member could not be written to the
    *         database.
    */
-  void updateMember(TypeMember member,
+  default void updateMember(TypeMember member,
       String newName,
       BaseType newBaseType,
-      Optional<Integer> newOffset,
+      Optional<Integer> newoffset,
       Optional<Integer> newNumberOfElements,
       Optional<Integer> newArgumentIndex,
-      INaviModule module) throws CouldntSaveDataException;
+      INaviModule module) throws CouldntSaveDataException {
+    PostgreSQLTypeFunctions.updateTypeMember(getConnection().getConnection(),
+        member,
+        newName,
+        newBaseType,
+        newoffset,
+        newNumberOfElements,
+        newArgumentIndex,
+        module);
+  }
 
   /**
    * Updates the offsets of a list of members in the database.
@@ -2076,9 +2182,16 @@ public interface SQLProvider extends AddressSpaceConfigurationBackend, AddressSp
    * @throws CouldntSaveDataException Thrown if the member offsets could not be written to the
    *         database.
    */
-  void updateMemberOffsets(List<Integer> updatedMembers, int delta,
+  default void updateMemberOffsets(List<Integer> updatedMembers, int delta,
       List<Integer> implicitlyUpdatedMembers, int implicitDelta, INaviModule module)
-      throws CouldntSaveDataException;
+      throws CouldntSaveDataException {
+    PostgreSQLTypeFunctions.updateMemberOffsets(getConnection().getConnection(),
+        updatedMembers,
+        delta,
+        implicitlyUpdatedMembers,
+        implicitDelta,
+        module);
+  }
 
   /**
    * Updates an existing type in the database.
@@ -2090,8 +2203,15 @@ public interface SQLProvider extends AddressSpaceConfigurationBackend, AddressSp
    * @param module The module that contains the given base type.
    * @throws CouldntSaveDataException Thrown if the base type could not be updated.
    */
-  void updateType(BaseType baseType, String name, int size, boolean isSigned, INaviModule module)
-      throws CouldntSaveDataException;
+  default void updateType(BaseType baseType, String name, int size, boolean isSigned, INaviModule module)
+      throws CouldntSaveDataException {
+    PostgreSQLTypeFunctions.updateType(getConnection().getConnection(),
+        baseType,
+        name,
+        size,
+        isSigned,
+        module);
+  }
 
   /**
    * Updates the given type substitution in the database.
@@ -2105,8 +2225,16 @@ public interface SQLProvider extends AddressSpaceConfigurationBackend, AddressSp
    * @throws CouldntSaveDataException Thrown if the type substitution could not be updated in the
    *         database.
    */
-  void updateTypeSubstitution(TypeSubstitution substitution, BaseType baseType,
-      List<Integer> memberPath, int offset, INaviModule module) throws CouldntSaveDataException;
+  default void updateTypeSubstitution(TypeSubstitution substitution, BaseType baseType,
+      List<Integer> memberPath, int offset, INaviModule module) throws CouldntSaveDataException {
+    PostgreSQLTypeFunctions.updateTypeSubstitution(getConnection().getConnection(),
+        substitution,
+        baseType,
+        memberPath,
+        substitution.getPosition(),
+        offset,
+        module);
+  }
 
   /**
    * Writes a module setting to the database.

@@ -157,11 +157,6 @@ public abstract class CViewsTable extends CAbstractTreeTable<INaviView> implemen
   }
 
   @Override
-  public int getNameColumn() {
-    return 0;
-  }
-
-  @Override
   public CAbstractTreeViewsTableModel getTreeTableModel() {
     return viewsTableModel;
   }

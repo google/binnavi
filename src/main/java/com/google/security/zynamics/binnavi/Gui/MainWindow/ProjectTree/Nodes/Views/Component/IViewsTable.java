@@ -29,7 +29,9 @@ public interface IViewsTable {
    * 
    * @return The view name column index.
    */
-  int getNameColumn();
+  default int getNameColumn() {
+    return 0;
+  }
 
   /**
    * Returns the view from the given unsorted index.

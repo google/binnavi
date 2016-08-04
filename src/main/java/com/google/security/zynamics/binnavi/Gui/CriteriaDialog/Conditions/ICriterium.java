@@ -37,7 +37,8 @@ public interface ICriterium extends IAbstractCriterium {
    */
   ICachedCriterium createCachedCriterium();
 
-  void dispose();
+  default void dispose() {
+  }
 
   /**
    * Returns the description of the criterium.

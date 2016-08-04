@@ -35,10 +35,6 @@ public abstract class CAbstractCriterium implements ICriterium {
     m_listeners.addListener(listener);
   }
 
-  @Override
-  public void dispose() {
-  }
-
   /**
    * Notifies listeners that the criterium changed.
    */

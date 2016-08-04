@@ -59,10 +59,6 @@ public abstract class CEndlessHelperThread extends Thread implements IEndlessPro
     m_listeners.addListener(listener);
   }
 
-  @Override
-  public void closeRequested() {
-  }
-
   public Exception getException() {
     return m_exception;
   }
