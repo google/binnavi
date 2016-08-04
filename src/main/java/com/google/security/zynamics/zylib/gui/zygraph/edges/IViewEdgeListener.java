@@ -18,27 +18,39 @@ package com.google.security.zynamics.zylib.gui.zygraph.edges;
 import java.awt.Color;
 
 public interface IViewEdgeListener {
-  void addedBend(IViewEdge<?> edge, CBend path);
+  default void addedBend(IViewEdge<?> edge, CBend path) {
+  }
 
-  void changedColor(CViewEdge<?> edge, Color color);
+  default void changedColor(CViewEdge<?> edge, Color color) {
+  }
 
-  void changedSelection(IViewEdge<?> edge, boolean selected);
+  default void changedSelection(IViewEdge<?> edge, boolean selected) {
+  }
 
-  void changedSourceX(CViewEdge<?> edge, double sourceX);
+  default void changedSourceX(CViewEdge<?> edge, double sourceX) {
+  }
 
-  void changedSourceY(CViewEdge<?> edge, double sourceY);
+  default void changedSourceY(CViewEdge<?> edge, double sourceY) {
+  }
 
-  void changedTargetX(CViewEdge<?> edge, double targetX);
+  default void changedTargetX(CViewEdge<?> edge, double targetX) {
+  }
 
-  void changedTargetY(CViewEdge<?> edge, double targetY);
+  default void changedTargetY(CViewEdge<?> edge, double targetY) {
+  }
 
-  void changedType(CViewEdge<?> edge, EdgeType type);
+  default void changedType(CViewEdge<?> edge, EdgeType type) {
+  }
 
-  void changedVisibility(IViewEdge<?> edge, boolean visibility);
+  default void changedVisibility(IViewEdge<?> edge, boolean visibility) {
+  }
 
-  void clearedBends(IViewEdge<?> edge);
+  default void clearedBends(IViewEdge<?> edge) {
+  }
 
-  void insertedBend(IViewEdge<?> edge, int index, CBend path);
+  default void insertedBend(IViewEdge<?> edge, int index, CBend path) {
+  }
 
-  void removedBend(CViewEdge<?> edge, int index, CBend path);
+  default void removedBend(CViewEdge<?> edge, int index, CBend path) {
+  }
 }

@@ -162,13 +162,4 @@ public abstract class CDefaultFilterCreator<T, WrapperType> implements IFilterFa
 
     return null;
   }
-
-  @Override
-  public void dispose() {
-  }
-
-  @Override
-  public IFilterComponent<T> getFilterComponent() {
-    return null;
-  }
 }

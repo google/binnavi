@@ -18,7 +18,9 @@ package com.google.security.zynamics.zylib.gui.ProgressDialogs;
 public interface IStandardProgressModel {
   void addProgressListener(IStandardProgressListener listener);
 
-  void closeRequested();
+  default void closeRequested() {
+    // Do nothing
+  }
 
   void removeProgressListener(IStandardProgressListener listener);
 }

@@ -159,27 +159,6 @@ implements IZyNodeRealizer {
   }
 
   /**
-   * Converts a y coordinate into a line number of the node content.
-   *
-   * @param y The y coordinate.
-   * @return The number of the line shown at the y address or -1 if there is no line at the given
-   *         coordinates.
-   */
-  @Override
-  public int positionToRow(final double y) {
-    // TODO: This does not really work because line heights are not constant.
-
-    final ZyLabelContent content = getNodeContent();
-
-    final Rectangle2D contentBounds = getNodeContent().getBounds();
-    final double yratio = getHeight() / contentBounds.getHeight();
-
-    final int row = (int) ((y / yratio - content.getPaddingTop()) / content.getLineHeight());
-
-    return row >= content.getLineCount() ? -1 : row;
-  }
-
-  /**
    * Regenerates the content of the realizer.
    */
   @Override
@@ -215,13 +194,6 @@ implements IZyNodeRealizer {
   @Override
   public void removeListener(final IZyNodeRealizerListener<?> listener) {
     m_listeners.removeListener(listener);
-  }
-
-  @Override
-  public double rowToPosition(final int row) {
-    final ZyLabelContent content = getNodeContent();
-
-    return content.getPaddingTop() + row * content.getLineHeight();
   }
 
   @Override
@@ -320,16 +292,6 @@ implements IZyNodeRealizer {
           CUtilityFunctions.logException(exception);
         }
       }
-    }
-  }
-
-  @Override
-  public void updateContentSelectionColor() {
-    // TODO: This is kind of a hack, should be improved
-    final ZyLabelContent content = getNodeContent();
-
-    if (content.isSelectable()) {
-      content.updateContentSelectionColor(getFillColor(), isSelected());
     }
   }
 }

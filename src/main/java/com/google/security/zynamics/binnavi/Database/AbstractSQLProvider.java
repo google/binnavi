@@ -15,7 +15,6 @@ limitations under the License.
 */
 package com.google.security.zynamics.binnavi.Database;
 
-import com.google.common.base.Optional;
 import com.google.common.base.Preconditions;
 import com.google.common.base.Predicate;
 import com.google.common.collect.ImmutableBiMap;
@@ -35,9 +34,7 @@ import com.google.security.zynamics.binnavi.Database.PostgreSQL.Functions.Postgr
 import com.google.security.zynamics.binnavi.Database.PostgreSQL.Functions.PostgreSQLDataFunctions;
 import com.google.security.zynamics.binnavi.Database.PostgreSQL.Functions.PostgreSQLEdgeFunctions;
 import com.google.security.zynamics.binnavi.Database.PostgreSQL.Functions.PostgreSQLFunctionFunctions;
-import com.google.security.zynamics.binnavi.Database.PostgreSQL.Functions.PostgreSQLInstructionFunctions;
 import com.google.security.zynamics.binnavi.Database.PostgreSQL.Functions.PostgreSQLModuleFunctions;
-import com.google.security.zynamics.binnavi.Database.PostgreSQL.Functions.PostgreSQLNodeFunctions;
 import com.google.security.zynamics.binnavi.Database.PostgreSQL.Functions.PostgreSQLProjectFunctions;
 import com.google.security.zynamics.binnavi.Database.PostgreSQL.Functions.PostgreSQLRawModuleFunctions;
 import com.google.security.zynamics.binnavi.Database.PostgreSQL.Functions.PostgreSQLSectionFunctions;
@@ -49,7 +46,6 @@ import com.google.security.zynamics.binnavi.Database.PostgreSQL.Functions.Postgr
 import com.google.security.zynamics.binnavi.Database.PostgreSQL.Functions.PostgresSQLDebuggerFunctions;
 import com.google.security.zynamics.binnavi.Database.PostgreSQL.Loaders.PostgreSQLAddressSpaceLoader;
 import com.google.security.zynamics.binnavi.Database.PostgreSQL.Loaders.PostgreSQLCallgraphLoader;
-import com.google.security.zynamics.binnavi.Database.PostgreSQL.Loaders.PostgreSQLFunctionsLoader;
 import com.google.security.zynamics.binnavi.Database.PostgreSQL.Loaders.PostgreSQLModuleCallgraphsLoader;
 import com.google.security.zynamics.binnavi.Database.PostgreSQL.Loaders.PostgreSQLModuleFlowgraphsLoader;
 import com.google.security.zynamics.binnavi.Database.PostgreSQL.Loaders.PostgreSQLModuleMixedGraphsLoader;
@@ -67,39 +63,27 @@ import com.google.security.zynamics.binnavi.debug.debugger.DebuggerTemplate;
 import com.google.security.zynamics.binnavi.debug.debugger.DebuggerTemplateManager;
 import com.google.security.zynamics.binnavi.debug.models.trace.TraceList;
 import com.google.security.zynamics.binnavi.disassembly.CCallgraph;
-import com.google.security.zynamics.binnavi.disassembly.COperandTreeNode;
 import com.google.security.zynamics.binnavi.disassembly.CProject;
 import com.google.security.zynamics.binnavi.disassembly.UnrelocatedAddress;
 import com.google.security.zynamics.binnavi.disassembly.ICallgraphView;
 import com.google.security.zynamics.binnavi.disassembly.IFlowgraphView;
 import com.google.security.zynamics.binnavi.disassembly.INaviAddressSpace;
-import com.google.security.zynamics.binnavi.disassembly.INaviCodeNode;
 import com.google.security.zynamics.binnavi.disassembly.INaviEdge;
 import com.google.security.zynamics.binnavi.disassembly.INaviFunction;
-import com.google.security.zynamics.binnavi.disassembly.INaviFunctionNode;
-import com.google.security.zynamics.binnavi.disassembly.INaviInstruction;
 import com.google.security.zynamics.binnavi.disassembly.INaviModule;
-import com.google.security.zynamics.binnavi.disassembly.INaviOperandTreeNode;
 import com.google.security.zynamics.binnavi.disassembly.INaviProject;
 import com.google.security.zynamics.binnavi.disassembly.INaviRawModule;
 import com.google.security.zynamics.binnavi.disassembly.INaviViewNode;
 import com.google.security.zynamics.binnavi.disassembly.AddressSpaces.CAddressSpace;
 import com.google.security.zynamics.binnavi.disassembly.Modules.CModule;
-import com.google.security.zynamics.binnavi.disassembly.types.BaseType;
-import com.google.security.zynamics.binnavi.disassembly.types.BaseTypeCategory;
 import com.google.security.zynamics.binnavi.disassembly.types.RawBaseType;
 import com.google.security.zynamics.binnavi.disassembly.types.RawTypeInstance;
 import com.google.security.zynamics.binnavi.disassembly.types.RawTypeMember;
 import com.google.security.zynamics.binnavi.disassembly.types.RawTypeSubstitution;
 import com.google.security.zynamics.binnavi.disassembly.types.Section;
-import com.google.security.zynamics.binnavi.disassembly.types.SectionPermission;
-import com.google.security.zynamics.binnavi.disassembly.types.TypeMember;
-import com.google.security.zynamics.binnavi.disassembly.types.TypeSubstitution;
 import com.google.security.zynamics.binnavi.disassembly.views.CView;
 import com.google.security.zynamics.binnavi.disassembly.views.INaviView;
-import com.google.security.zynamics.binnavi.disassembly.views.ImmutableNaviViewConfiguration;
 import com.google.security.zynamics.zylib.disassembly.IAddress;
-import com.google.security.zynamics.zylib.disassembly.ReferenceType;
 import com.google.security.zynamics.zylib.general.Pair;
 import com.google.security.zynamics.zylib.types.graphs.MutableDirectedGraph;
 import com.google.security.zynamics.zylib.types.lists.IFilledList;
@@ -109,7 +93,6 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.math.BigInteger;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Date;
@@ -346,55 +329,15 @@ public abstract class AbstractSQLProvider implements SQLProvider {
   }
 
   @Override
-  public void addReference(final INaviOperandTreeNode node, final IAddress address,
-      final ReferenceType type) throws CouldntSaveDataException {
-    PostgreSQLInstructionFunctions.addReference(this, node, address, type);
-  }
-
-  @Override
-  public Integer appendFunctionNodeComment(final INaviFunctionNode functionNode,
-      final String commentText, final Integer userId) throws CouldntSaveDataException {
-    return PostgreSQLNodeFunctions.appendLocalFunctionNodeComment(this, functionNode, commentText,
-        userId);
-  }
-
-  @Override
-  public Integer appendGlobalCodeNodeComment(final INaviCodeNode codeNode, final String commentText,
-      final Integer userId) throws CouldntSaveDataException {
-    return PostgreSQLNodeFunctions.appendGlobalCodeNodeComment(this, codeNode, commentText, userId);
-  }
-
-  @Override
   public Integer appendGlobalEdgeComment(final INaviEdge edge, final String commentText,
       final Integer userId) throws CouldntSaveDataException {
     return PostgreSQLEdgeFunctions.appendGlobalEdgeComment(this, edge, commentText, userId);
   }
 
   @Override
-  public Integer appendGlobalInstructionComment(final INaviInstruction instruction,
-      final String commentText, final Integer userId) throws CouldntSaveDataException {
-    return PostgreSQLInstructionFunctions.appendGlobalInstructionComment(this, instruction,
-        commentText, userId);
-  }
-
-  @Override
-  public Integer appendLocalCodeNodeComment(final INaviCodeNode codeNode, final String commentText,
-      final Integer userId) throws CouldntSaveDataException {
-    return PostgreSQLNodeFunctions.appendLocalCodeNodeComment(this, codeNode, commentText, userId);
-  }
-
-  @Override
   public Integer appendLocalEdgeComment(final INaviEdge edge, final String commentText,
       final Integer userId) throws CouldntSaveDataException {
     return PostgreSQLEdgeFunctions.appendLocalEdgeComment(this, edge, commentText, userId);
-  }
-
-  @Override
-  public Integer appendLocalInstructionComment(final INaviCodeNode codeNode,
-      final INaviInstruction instruction, final String commentText, final Integer userId)
-      throws CouldntSaveDataException {
-    return PostgreSQLInstructionFunctions.appendLocalInstructionComment(this, codeNode, instruction,
-        commentText, userId);
   }
 
   @Override
@@ -440,102 +383,6 @@ public abstract class AbstractSQLProvider implements SQLProvider {
   }
 
   @Override
-  public int createSection(final int moduleId,
-      final String name,
-      final Integer commentId,
-      final BigInteger startAddress,
-      final BigInteger endAddress,
-      final SectionPermission permission,
-      final byte[] data) throws CouldntSaveDataException {
-    return PostgreSQLSectionFunctions.createSection(getConnection().getConnection(),
-        moduleId,
-        name,
-        commentId,
-        startAddress,
-        endAddress,
-        permission,
-        data);
-  }
-
-  @Override
-  public int createType(final int moduleId,
-      final String name,
-      final int size,
-      final Integer childPointerTypeId,
-      final boolean signed,
-      final BaseTypeCategory category) throws CouldntSaveDataException {
-    return PostgreSQLTypeFunctions.createType(getConnection().getConnection(),
-        moduleId,
-        name,
-        size,
-        childPointerTypeId,
-        signed,
-        category);
-  }
-
-  @Override
-  public int createTypeInstance(final int moduleId,
-      final String name,
-      final Integer commentId,
-      final int typeId,
-      final int sectionId,
-      final long sectionOffset) throws CouldntSaveDataException {
-    return PostgreSQLTypeFunctions.createTypeInstance(getConnection().getConnection(),
-        moduleId,
-        name,
-        commentId,
-        typeId,
-        sectionId,
-        sectionOffset);
-  }
-
-  @Override
-  public void createTypeInstanceReference(final int moduleId, final long address,
-      final int position, final int expressionId, final int typeInstanceId)
-      throws CouldntSaveDataException {
-    PostgreSQLTypeFunctions.createTypeInstanceReference(getConnection().getConnection(),
-        moduleId,
-        address,
-        position,
-        expressionId,
-        typeInstanceId);
-  }
-
-  @Override
-  public int createTypeMember(final INaviModule module,
-      final int containingTypeId,
-      final int baseTypeId,
-      final String name,
-      final Optional<Integer> offset,
-      final Optional<Integer> numberOfElements, Optional<Integer> argumentIndex) throws CouldntSaveDataException {
-    return PostgreSQLTypeFunctions.createTypeMember(getConnection().getConnection(),
-        containingTypeId,
-        offset,
-        name,
-        baseTypeId,
-        numberOfElements,
-        module);
-  }
-
-  @Override
-  public void createTypeSubstitution(final int treeNodeId,
-      final int baseTypeId,
-      final List<Integer> memberPath,
-      final int position,
-      final int offset,
-      final IAddress address,
-      final INaviModule module) throws CouldntSaveDataException {
-    PostgreSQLTypeFunctions.createTypeSubstitution(getConnection().getConnection(),
-        treeNodeId,
-        baseTypeId,
-        memberPath,
-        position,
-        offset,
-        address,
-        module);
-  }
-
-  @Override
   public void deleteAddressSpace(final INaviAddressSpace addressSpace)
       throws CouldntDeleteException {
     PostgreSQLAddressSpaceFunctions.deleteAddressSpace(this, addressSpace);
@@ -547,12 +394,6 @@ public abstract class AbstractSQLProvider implements SQLProvider {
   }
 
   @Override
-  public void deleteMember(final TypeMember member, final INaviModule module)
-      throws CouldntDeleteException {
-    PostgreSQLTypeFunctions.deleteMember(getConnection().getConnection(), member, module);
-  }
-
-  @Override
   public void deleteProject(final INaviProject project) throws CouldntDeleteException {
     PostgreSQLProjectFunctions.deleteProject(this, project);
   }
@@ -560,12 +401,6 @@ public abstract class AbstractSQLProvider implements SQLProvider {
   @Override
   public void deleteRawModule(final INaviRawModule module) throws CouldntDeleteException {
     PostgreSQLRawModuleFunctions.deleteRawModule(this, module);
-  }
-
-  @Override
-  public void deleteReference(final COperandTreeNode operandTreeNode, final IAddress target,
-      final ReferenceType type) throws CouldntDeleteException {
-    PostgreSQLInstructionFunctions.deleteReference(this, operandTreeNode, target, type);
   }
 
   @Override
@@ -581,19 +416,6 @@ public abstract class AbstractSQLProvider implements SQLProvider {
   @Override
   public void deleteTrace(final TraceList trace) throws CouldntDeleteException {
     PostgreSQLTraceFunctions.deleteTrace(this, trace);
-  }
-
-  @Override
-  public void deleteType(final BaseType baseType, final INaviModule module)
-      throws CouldntDeleteException {
-    PostgreSQLTypeFunctions.deleteType(getConnection().getConnection(), baseType, module);
-  }
-
-  @Override
-  public void deleteTypeSubstitution(final INaviModule module,
-      final TypeSubstitution typeSubstitution) throws CouldntDeleteException {
-    PostgreSQLTypeFunctions.deleteTypeSubstitution(getConnection().getConnection(), module,
-        typeSubstitution);
   }
 
   @Override
@@ -753,18 +575,6 @@ public abstract class AbstractSQLProvider implements SQLProvider {
   }
 
   @Override
-  public ImmutableNaviViewConfiguration loadFlowGraphInformation(final INaviModule module,
-      final Integer viewId) throws CouldntLoadDataException {
-    return PostgreSQLModuleFlowgraphsLoader.loadFlowGraphInformation(this, module, viewId);
-  }
-
-  @Override
-  public ImmutableNaviViewConfiguration loadFlowGraphInformation(final INaviProject project,
-      final Integer viewId) throws CouldntLoadDataException {
-    return PostgreSQLProjectFlowgraphsLoader.loadFlowGraphInformation(this, project, viewId);
-  }
-
-  @Override
   public ImmutableList<IFlowgraphView> loadFlowgraphs(final CModule module)
       throws CouldntLoadDataException {
     return PostgreSQLModuleFlowgraphsLoader.loadFlowgraphs(this, module, getViewTagManager(),
@@ -776,12 +586,6 @@ public abstract class AbstractSQLProvider implements SQLProvider {
       throws CouldntLoadDataException {
     return PostgreSQLProjectFlowgraphsLoader.loadFlowgraphs(this, project, getViewTagManager(),
         nodeTagManager);
-  }
-
-  @Override
-  public List<INaviFunction> loadFunctions(final INaviModule module,
-      final List<IFlowgraphView> views) throws CouldntLoadDataException {
-    return PostgreSQLFunctionsLoader.loadFunctions(this, module, views);
   }
 
   @Override
@@ -913,12 +717,6 @@ public abstract class AbstractSQLProvider implements SQLProvider {
   }
 
   @Override
-  public void removeTagFromNode(final INaviViewNode node, final int tagId)
-      throws CouldntSaveDataException {
-    PostgreSQLNodeFunctions.untagNode(this, node, tagId);
-  }
-
-  @Override
   public void forwardFunction(final INaviFunction source, final INaviFunction target)
       throws CouldntSaveDataException {
     PostgreSQLFunctionFunctions.resolveFunction(this, source, target);
@@ -928,12 +726,6 @@ public abstract class AbstractSQLProvider implements SQLProvider {
   public void saveSettings(final CView view, final Map<String, String> settings)
       throws CouldntSaveDataException {
     PostgreSQLViewFunctions.saveSettings(this, view, settings);
-  }
-
-  @Override
-  public void saveTagToNode(final INaviViewNode node, final int tagId)
-      throws CouldntSaveDataException {
-    PostgreSQLNodeFunctions.tagNode(this, node, tagId);
   }
 
   @Override
@@ -982,12 +774,6 @@ public abstract class AbstractSQLProvider implements SQLProvider {
   public void setFileBase(final INaviModule module, final IAddress addr)
       throws CouldntSaveDataException {
     PostgreSQLModuleFunctions.setFileBase(this, module, addr);
-  }
-
-  @Override
-  public void setGlobalReplacement(final INaviOperandTreeNode operandTreeNode,
-      final String replacement) throws CouldntSaveDataException {
-    PostgreSQLInstructionFunctions.setGlobalReplacement(this, operandTreeNode, replacement);
   }
 
   @Override
@@ -1065,19 +851,6 @@ public abstract class AbstractSQLProvider implements SQLProvider {
   }
 
   @Override
-  public void setReplacement(final COperandTreeNode operandTreeNode, final String replacement)
-      throws CouldntSaveDataException {
-    PostgreSQLInstructionFunctions.setReplacement(this, operandTreeNode, replacement);
-  }
-
-  @Override
-  public void setSectionName(final int moduleId, final int sectionId, final String name)
-      throws CouldntSaveDataException {
-    PostgreSQLSectionFunctions.setSectionName(this.getConnection().getConnection(), moduleId,
-        sectionId, name);
-  }
-
-  @Override
   public void setStared(final INaviModule module, final boolean isStared)
       throws CouldntSaveDataException {
     PostgreSQLModuleFunctions.starModule(this, module, isStared);
@@ -1100,60 +873,6 @@ public abstract class AbstractSQLProvider implements SQLProvider {
   @Override
   public void tagView(final INaviView view, final CTag tag) throws CouldntSaveDataException {
     PostgreSQLViewFunctions.tagView(this, view, tag);
-  }
-
-  @Override
-  public void updateMember(final TypeMember member,
-      final String newName,
-      final BaseType newBaseType,
-      final Optional<Integer> newoffset,
-      final Optional<Integer> newNumberOfElements,
-      final Optional<Integer> newArgumentIndex,
-      final INaviModule module) throws CouldntSaveDataException {
-    PostgreSQLTypeFunctions.updateTypeMember(getConnection().getConnection(),
-        member,
-        newName,
-        newBaseType,
-        newoffset,
-        newNumberOfElements,
-        newArgumentIndex,
-        module);
-  }
-
-  @Override
-  public void updateMemberOffsets(final List<Integer> updatedMembers, final int delta,
-      final List<Integer> implicitlyUpdatedMembers, final int implicitDelta,
-      final INaviModule module) throws CouldntSaveDataException {
-    PostgreSQLTypeFunctions.updateMemberOffsets(getConnection().getConnection(),
-        updatedMembers,
-        delta,
-        implicitlyUpdatedMembers,
-        implicitDelta,
-        module);
-  }
-
-  @Override
-  public void updateType(final BaseType baseType, final String name, final int size,
-      final boolean isSigned, final INaviModule module) throws CouldntSaveDataException {
-    PostgreSQLTypeFunctions.updateType(getConnection().getConnection(),
-        baseType,
-        name,
-        size,
-        isSigned,
-        module);
-  }
-
-  @Override
-  public void updateTypeSubstitution(final TypeSubstitution substitution, final BaseType baseType,
-      final List<Integer> memberPath, final int offset, final INaviModule module)
-      throws CouldntSaveDataException {
-    PostgreSQLTypeFunctions.updateTypeSubstitution(getConnection().getConnection(),
-        substitution,
-        baseType,
-        memberPath,
-        substitution.getPosition(),
-        offset,
-        module);
   }
 
   @Override
