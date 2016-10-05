@@ -69,9 +69,8 @@ public final class CommandlineOptions {
    * @param pluginName Name of the batch plugin.
    */
   public void setBatchPlugin(final String pluginName) {
-    Preconditions.checkNotNull(pluginName, "IE00843: Plugin name argument can not be null");
-
-    m_batchPlugin = pluginName;
+    m_batchPlugin = Preconditions.checkNotNull(
+        pluginName, "IE00843: Plugin name argument can not be null");
   }
 
   /**
