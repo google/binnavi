@@ -61,9 +61,9 @@ import org.junit.runners.Suite.SuiteClasses;
     PostgreSQLTypeInstanceFunctionsTests.class,
     PostgreSQLSectionFunctionsTests.class,
     PostgreSQLProviderTestTeardown.class,
-    PostgreSQLProviderTestDestroy.class,
     PostgreSQLUserFunctionsTests.class,
-    PostgreSQLNotificationProviderTest.class})
+    PostgreSQLNotificationProviderTest.class,
+    PostgreSQLProviderTestDestroy.class})
 public class PostgreSQLAllTests {
 
 }

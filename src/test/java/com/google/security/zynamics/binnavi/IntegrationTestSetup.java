@@ -167,7 +167,7 @@ public class IntegrationTestSetup {
       }
 
       final File testDataDir = new File(
-          "./third_party/zynamics/javatests/com/google/security/zynamics/binnavi/testdata/"
+          "./bin/com/google/security/zynamics/binnavi/testdata/"
               + databaseName + "/");
 
       final CopyManager manager = new CopyManager((BaseConnection) connection);

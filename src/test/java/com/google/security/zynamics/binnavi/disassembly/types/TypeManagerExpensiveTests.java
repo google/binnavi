@@ -142,15 +142,17 @@ public class TypeManagerExpensiveTests extends ExpensiveBaseTest {
     final TypeManager manager = module.getTypeManager();
     final BaseType baseType = manager.createAtomicType(TypeName, 32, true);
     final BaseType containingType = manager.createAtomicType(CompoundTypeName, 0, false);
-    final TypeMember member = manager.appendMember(containingType, baseType, MemberName);
-    final List<RawTypeMember> foundMembers =
-        findRawMembers(MemberName, getProvider().loadTypeMembers(module));
-    Assert.assertTrue(foundMembers.size() == 1);
-    matchMember(member, foundMembers.get(0));
-
-    manager.deleteMember(member);
-    manager.deleteType(containingType);
-    manager.deleteType(baseType);
+    try {
+      final TypeMember member = manager.appendMember(containingType, baseType, MemberName);
+      final List<RawTypeMember> foundMembers =
+          findRawMembers(MemberName, getProvider().loadTypeMembers(module));
+      Assert.assertTrue(foundMembers.size() == 1);
+      matchMember(member, foundMembers.get(0));
+      manager.deleteMember(member);
+    } finally {
+      manager.deleteType(containingType);
+      manager.deleteType(baseType);
+    }
   }
 
   private void testCreateType(final INaviModule module) throws CouldntLoadDataException,
@@ -164,9 +166,12 @@ public class TypeManagerExpensiveTests extends ExpensiveBaseTest {
     Assert.assertNull(createdType.pointedToBy());
     Assert.assertTrue(createdType.getPointerLevel() == 0);
     Assert.assertNull(createdType.pointsTo());
-    matchType(createdType,
-        findSingleRawType(createdType.getName(), getProvider().loadTypes(module)));
-    manager.deleteType(createdType);
+    try {
+      matchType(createdType,
+          findSingleRawType(createdType.getName(), getProvider().loadTypes(module)));
+    } finally {
+      manager.deleteType(createdType);
+    }
   }
 
   private void testCreateTypeSubstitution(final INaviModule module) throws CouldntSaveDataException,
@@ -197,17 +202,20 @@ public class TypeManagerExpensiveTests extends ExpensiveBaseTest {
     final TypeManager manager = module.getTypeManager();
     final BaseType baseType = manager.createAtomicType(TypeName, 32, true);
     final BaseType compoundType = manager.createAtomicType(CompoundTypeName, 0, false);
-    final TypeMember member0 = manager.appendMember(compoundType, baseType, MemberName);
-    final TypeMember member1 = manager.appendMember(compoundType, baseType, MemberName1);
-    final TypeMember member2 = manager.appendMember(compoundType, baseType, MemberName2);
-    manager.deleteMember(member0);
-    Assert.assertTrue(indexOfMember(compoundType, member0) == -1);
-    Assert.assertTrue(indexOfMember(compoundType, member1) != -1);
-    Assert.assertTrue(indexOfMember(compoundType, member2) != -1);
-    final List<RawTypeMember> rawMembers = getProvider().loadTypeMembers(module);
-    Assert.assertTrue(findRawMembers(MemberName, rawMembers).isEmpty());
-    manager.deleteType(baseType);
-    manager.deleteType(compoundType);
+    try {
+      final TypeMember member0 = manager.appendMember(compoundType, baseType, MemberName);
+      final TypeMember member1 = manager.appendMember(compoundType, baseType, MemberName1);
+      final TypeMember member2 = manager.appendMember(compoundType, baseType, MemberName2);
+      manager.deleteMember(member0);
+      Assert.assertTrue(indexOfMember(compoundType, member0) == -1);
+      Assert.assertTrue(indexOfMember(compoundType, member1) != -1);
+      Assert.assertTrue(indexOfMember(compoundType, member2) != -1);
+      final List<RawTypeMember> rawMembers = getProvider().loadTypeMembers(module);
+      Assert.assertTrue(findRawMembers(MemberName, rawMembers).isEmpty());
+    } finally {
+      manager.deleteType(baseType);
+      manager.deleteType(compoundType);
+    }
   }
 
   private void testDeleteMember(final INaviModule module) throws CouldntSaveDataException,
@@ -215,13 +223,16 @@ public class TypeManagerExpensiveTests extends ExpensiveBaseTest {
     final TypeManager manager = module.getTypeManager();
     final BaseType baseType = manager.createAtomicType(TypeName, 32, true);
     final BaseType compoundType = manager.createAtomicType(CompoundTypeName, 0, false);
-    final TypeMember member = manager.appendMember(compoundType, baseType, MemberName);
-    manager.deleteMember(member);
-    Assert.assertTrue(compoundType.getMemberCount() == 0);
-    final List<RawTypeMember> rawMembers = getProvider().loadTypeMembers(module);
-    Assert.assertTrue(findRawMembers(MemberName, rawMembers).isEmpty());
-    manager.deleteType(baseType);
-    manager.deleteType(compoundType);
+    try {
+      final TypeMember member = manager.appendMember(compoundType, baseType, MemberName);
+      manager.deleteMember(member);
+      Assert.assertTrue(compoundType.getMemberCount() == 0);
+      final List<RawTypeMember> rawMembers = getProvider().loadTypeMembers(module);
+      Assert.assertTrue(findRawMembers(MemberName, rawMembers).isEmpty());
+    } finally {
+      manager.deleteType(baseType);
+      manager.deleteType(compoundType);
+    }
   }
 
   private void testDeleteType(final INaviModule module) throws CouldntSaveDataException,

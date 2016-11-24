@@ -3450,75 +3450,30 @@ ALTER FUNCTION public.load_expression_type_instances(moduleid integer) OWNER TO 
 
 COMMENT ON FUNCTION load_expression_type_instances(moduleid integer) IS 'The function retrieves all expression type instances for a given module.';
 
-
 --
--- Name: load_function_information(integer); Type: FUNCTION; Schema: public; Owner: postgres
---
-
-CREATE FUNCTION load_function_information(moduleid integer) RETURNS TABLE(view_id integer, address bigint, name text, original_name text, description text, bbcount bigint, edgecount bigint, incount bigint, outcount bigint, global_comment integer, type function_type, parent_module_name text, parent_module_id integer, parent_module_function integer, stack_frame integer)
-    LANGUAGE sql
-    AS $_$
-
-WITH function_block_count AS (
-  SELECT function, count(nt.id) AS bbcount FROM bn_views AS vt
-    LEFT JOIN bn_function_views AS fvt ON vt.id = fvt.view_id
-    LEFT JOIN bn_nodes AS nt ON nt.view_id = vt.id
-    WHERE fvt.module_id = $1
-    GROUP BY fvt.function
-), function_edge_count AS (
-  SELECT function, count(et.id) AS edgecount FROM bn_views AS vt
-    LEFT JOIN bn_function_views AS fvt ON vt.id = fvt.view_id
-    LEFT JOIN bn_nodes AS nt ON nt.view_id = vt.id
-    LEFT JOIN bn_edges AS et ON source_node_id = nt.id
-    WHERE fvt.module_id = $1
-    GROUP BY function
-), function_in_count AS (
-  SELECT function, COUNT(source_node_id) AS incount FROM bn_views AS vt
-    JOIN bn_nodes AS nt ON nt.view_id = vt.id
-    JOIN bn_function_nodes AS fnt ON nt.id = fnt.node_id
-    LEFT JOIN bn_edges ON target_node_id = fnt.node_id
-    WHERE vt.type = 'native' AND module_id = $1
-    GROUP BY function
-), function_out_count AS (
-  SELECT function, COUNT(target_node_id) AS outcount FROM bn_views AS vt
-    JOIN bn_nodes AS nt ON nt.view_id = vt.id
-    JOIN bn_function_nodes AS fnt ON nt.id = fnt.node_id
-    LEFT JOIN bn_edges ON source_node_id = fnt.node_id
-    WHERE vt.type = 'native' and module_id = $1
-    GROUP BY function
-)
-SELECT view_id, ft.address, name, original_name, description,
-bc.bbcount, ec.edgecount, ic.incount, oc.outcount,
- comment_id AS global_comment, type, parent_module_name,
- parent_module_id, parent_module_function, stack_frame FROM bn_functions AS ft
- JOIN bn_function_views AS fviews ON fviews.module_id = ft.module_id
-  AND function = ft.address
- JOIN function_block_count AS bc ON bc.function = ft.address
- JOIN function_edge_count AS ec ON ec.function = ft.address
- JOIN function_in_count AS ic ON ic.function = ft.address
- JOIN function_out_count AS oc ON oc.function = ft.address
- WHERE ft.module_id = $1
- ORDER BY ft.address
-
-$_$;
-
-
-ALTER FUNCTION public.load_function_information(moduleid integer) OWNER TO postgres;
-
---
--- Name: FUNCTION load_function_information(moduleid integer); Type: COMMENT; Schema: public; Owner: postgres
+-- load_function_information(IN moduleid integer, IN address bigint)
 --
 
-COMMENT ON FUNCTION load_function_information(moduleid integer) IS 'This function provides the information about all view / function information stored in the database under a specific module id.';
-
-
---
--- Name: load_function_information(integer, bigint); Type: FUNCTION; Schema: public; Owner: postgres
---
-
-CREATE FUNCTION load_function_information(moduleid integer, address bigint) RETURNS TABLE(view_id integer, address bigint, name text, original_name text, description text, bbcount bigint, edgecount bigint, incount bigint, outcount bigint, global_comment integer, type function_type, parent_module_name text, parent_module_id integer, parent_module_function integer)
-    LANGUAGE sql
-    AS $_$
+CREATE OR REPLACE FUNCTION load_function_information(IN moduleid integer, IN address bigint)
+  RETURNS TABLE(
+    view_id integer,
+    address bigint,
+    name text,
+    original_name text,
+    description text,
+    bbcount bigint,
+    edgecount bigint,
+    incount bigint,
+    outcount bigint,
+    global_comment integer,
+    type function_type,
+    parent_module_name text,
+    parent_module_id integer,
+    parent_module_function integer,
+    stack_frame integer,
+    prototype integer)
+  LANGUAGE SQL AS
+$$
 
 WITH function_block_count AS (
   SELECT function, count(nt.id) AS bbcount FROM bn_views AS vt
@@ -3560,17 +3515,85 @@ bc.bbcount, ec.edgecount, ic.incount, oc.outcount,
  JOIN function_out_count AS oc ON oc.function = ft.address
  WHERE ft.module_id = $1 AND ft.address = $2
 
-$_$;
-
+$$;
 
 ALTER FUNCTION public.load_function_information(moduleid integer, address bigint) OWNER TO postgres;
 
+COMMENT ON FUNCTION load_function_information(IN moduleid integer, IN address bigint)
+  IS 'This function provides the information about a single view / function information stored in the database.';
+
 --
--- Name: FUNCTION load_function_information(moduleid integer, address bigint); Type: COMMENT; Schema: public; Owner: postgres
+-- load_function_information(IN moduleid integer)
 --
 
-COMMENT ON FUNCTION load_function_information(moduleid integer, address bigint) IS 'This function provides the information about a single view / function information stored in the database.';
+CREATE OR REPLACE FUNCTION load_function_information(IN moduleid integer)
+  RETURNS TABLE(
+    view_id integer,
+    address bigint,
+    name text,
+    original_name text,
+    description text,
+    bbcount bigint,
+    edgecount bigint,
+    incount bigint,
+    outcount bigint,
+    global_comment integer,
+    type function_type,
+    parent_module_name text,
+    parent_module_id integer,
+    parent_module_function integer,
+    stack_frame integer,
+    prototype integer) AS
+$$
 
+WITH function_block_count AS (
+  SELECT function, count(nt.id) AS bbcount FROM bn_views AS vt
+    LEFT JOIN bn_function_views AS fvt ON vt.id = fvt.view_id
+    LEFT JOIN bn_nodes AS nt ON nt.view_id = vt.id
+    WHERE fvt.module_id = $1
+    GROUP BY fvt.function
+), function_edge_count AS (
+  SELECT function, count(et.id) AS edgecount FROM bn_views AS vt
+    LEFT JOIN bn_function_views AS fvt ON vt.id = fvt.view_id
+    LEFT JOIN bn_nodes AS nt ON nt.view_id = vt.id
+    LEFT JOIN bn_edges AS et ON source_node_id = nt.id
+    WHERE fvt.module_id = $1
+    GROUP BY function
+), function_in_count AS (
+  SELECT function, COUNT(source_node_id) AS incount FROM bn_views AS vt
+    JOIN bn_nodes AS nt ON nt.view_id = vt.id
+    JOIN bn_function_nodes AS fnt ON nt.id = fnt.node_id
+    LEFT JOIN bn_edges ON target_node_id = fnt.node_id
+    WHERE vt.type = 'native' AND module_id = $1
+    GROUP BY function
+), function_out_count AS (
+  SELECT function, COUNT(target_node_id) AS outcount FROM bn_views AS vt
+    JOIN bn_nodes AS nt ON nt.view_id = vt.id
+    JOIN bn_function_nodes AS fnt ON nt.id = fnt.node_id
+    LEFT JOIN bn_edges ON source_node_id = fnt.node_id
+    WHERE vt.type = 'native' and module_id = $1
+    GROUP BY function
+)
+SELECT view_id, ft.address, name, original_name, description,
+bc.bbcount, ec.edgecount, ic.incount, oc.outcount,
+ comment_id AS global_comment, type, parent_module_name,
+ parent_module_id, parent_module_function, stack_frame, prototype FROM bn_functions AS ft
+ JOIN bn_function_views AS fviews ON fviews.module_id = ft.module_id
+  AND function = ft.address
+ JOIN function_block_count AS bc ON bc.function = ft.address
+ JOIN function_edge_count AS ec ON ec.function = ft.address
+ JOIN function_in_count AS ic ON ic.function = ft.address
+ JOIN function_out_count AS oc ON oc.function = ft.address
+ WHERE ft.module_id = $1
+ ORDER BY ft.address
+
+$$
+  LANGUAGE SQL;
+
+ALTER FUNCTION public.load_function_information(moduleid integer) OWNER TO postgres;
+
+COMMENT ON FUNCTION load_function_information(IN moduleid integer)
+  IS 'This function provides the information about all view / function information stored in the database under a specific module id.';
 
 --
 -- Name: load_global_variables(integer); Type: FUNCTION; Schema: public; Owner: postgres
@@ -5625,6 +5648,7 @@ CREATE TABLE bn_functions (
     parent_module_id integer,
     parent_module_function integer,
     stack_frame integer,
+    prototype integer,
     comment_id integer
 );
 
