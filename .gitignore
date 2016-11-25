@@ -31,6 +31,7 @@ binnavi.map
 *.ipr
 *.iws
 .idea/
+out/
 
 # Gradle
 .gradletasknamecache

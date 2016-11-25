@@ -1,0 +1,23 @@
+task buildYFilesWrapperJar(
+	description: 'Builds the yfiles-wrapper-jar.'
+) << {
+    print "Warning: Build target not yet implemented."
+}
+
+task buildReilJar(
+	description: 'Builds the reli-jar.'
+) << {
+    print "Warning: Build target not yet implemented."
+}
+
+task buildZyLibJar(
+	description: 'Builds the zylib-jar.'
+) << {
+    print "Warning: Build target not yet implemented."
+}
+
+task buildBinNaviJar(
+	description: 'Builds the binnavi-jar.'
+) << {
+    print "Warning: Build target not yet implemented."
+}

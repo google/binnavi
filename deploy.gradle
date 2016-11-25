@@ -1,0 +1,20 @@
+apply plugin: 'maven-publish'
+
+group = 'com.google.security.zynamics.binnavi'
+
+
+publishing {
+    publications {
+        mavenJava(MavenPublication) {
+            from components.java
+        }
+    }
+}
+publishing {
+    repositories {
+        maven {
+            // change to point to custom repo
+            url "$buildDir/repo"
+        }
+    }
+}
