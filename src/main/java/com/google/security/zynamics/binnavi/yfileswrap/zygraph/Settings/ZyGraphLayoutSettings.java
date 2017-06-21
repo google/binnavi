@@ -82,7 +82,7 @@ public final class ZyGraphLayoutSettings implements ILayoutSettings {
    * Listeners that are notified about changes in the graph settings.
    */
   private final ListenerProvider<IZyGraphLayoutSettingsListener> m_listeners =
-      new ListenerProvider<IZyGraphLayoutSettingsListener>();
+      new ListenerProvider<>();
 
   /**
    * Contains settings for circular layouting.

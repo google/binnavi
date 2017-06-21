@@ -44,7 +44,7 @@ public final class Tag implements ApiObject<ITreeNode<CTag>> {
   /**
    * Child tags of the tag.
    */
-  private final List<Tag> m_children = new ArrayList<Tag>();
+  private final List<Tag> m_children = new ArrayList<>();
 
   /**
    * Listener that forwards changes in the internal tag object to the API tag object.
@@ -54,7 +54,7 @@ public final class Tag implements ApiObject<ITreeNode<CTag>> {
   /**
    * Listeners that are notified about changes in the API tag object.
    */
-  private final ListenerProvider<ITagListener> m_listeners = new ListenerProvider<ITagListener>();
+  private final ListenerProvider<ITagListener> m_listeners = new ListenerProvider<>();
 
   /**
    * Creates a new API tag object backed by an internal tag object.

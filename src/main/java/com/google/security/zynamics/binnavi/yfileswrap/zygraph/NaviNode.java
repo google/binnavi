@@ -39,12 +39,12 @@ public final class NaviNode extends ZyGraphNode<INaviViewNode> implements IGraph
   /**
    * Parents of the node.
    */
-  private final List<NaviNode> m_parents = new ArrayList<NaviNode>();
+  private final List<NaviNode> m_parents = new ArrayList<>();
 
   /**
    * Children of the node.
    */
-  private final List<NaviNode> m_children = new ArrayList<NaviNode>();
+  private final List<NaviNode> m_children = new ArrayList<>();
 
   /**
    * Creates a new node object.

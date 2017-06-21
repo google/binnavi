@@ -46,7 +46,7 @@ public final class CDebuggerComboModel implements ComboBoxModel<CDebuggerTemplat
    * Listeners that are notified about changes in the model.
    */
   private final ListenerProvider<ListDataListener> modelListeners =
-      new ListenerProvider<ListDataListener>();
+      new ListenerProvider<>();
 
   /**
    * Listener that keeps track of changes in the debugger container.
@@ -58,7 +58,7 @@ public final class CDebuggerComboModel implements ComboBoxModel<CDebuggerTemplat
    * Elements that are displayed in the combobox.
    */
   private final List<CDebuggerTemplateWrapper> comboboxElements =
-      new ArrayList<CDebuggerTemplateWrapper>();
+      new ArrayList<>();
 
   /**
    * Creates a new debugger combobox model object.

@@ -47,7 +47,7 @@ public final class CTutorial {
    * Listeners that are notified about changes in the tutorial.
    */
   private final ListenerProvider<ITutorialListener> m_listeners =
-      new ListenerProvider<ITutorialListener>();
+      new ListenerProvider<>();
 
   /**
    * Keeps track of the currently active step.

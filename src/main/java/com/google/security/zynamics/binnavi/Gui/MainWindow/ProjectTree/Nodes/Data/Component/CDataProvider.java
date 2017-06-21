@@ -42,7 +42,7 @@ public final class CDataProvider implements IDataProvider {
    * Listeners that are notified about changes in the provided data.
    */
   private final ListenerProvider<IDataChangedListener> m_listeners =
-      new ListenerProvider<IDataChangedListener>();
+      new ListenerProvider<>();
 
   /**
    * Listener that updates the provided data when the underlying module data changes.

@@ -36,7 +36,7 @@ public abstract class FunctionTreeNode extends IconNode implements IFilterableNo
    * Cache node visibility in order to improve performance
    */
   private final Map<FunctionTreeNode, Boolean> m_cachedVisibility =
-      new HashMap<FunctionTreeNode, Boolean>();
+      new HashMap<>();
 
   /**
    * Let subclasses get the current filter for this node

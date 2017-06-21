@@ -47,7 +47,7 @@ public final class CTraceContainer {
    * Listeners that are notified about changes in traces.
    */
   private final ListenerProvider<ITraceContainerListener> m_listeners =
-      new ListenerProvider<ITraceContainerListener>();
+      new ListenerProvider<>();
 
   /**
    * Synchronizes changes in the traces with the database.

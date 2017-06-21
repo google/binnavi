@@ -62,7 +62,7 @@ public class PostgreSQLNotificationProvider {
   /**
    * The set of channels for which we want to receive notifications.
    */
-  private final Set<NotificationChannel> m_channels = new HashSet<NotificationChannel>();
+  private final Set<NotificationChannel> m_channels = new HashSet<>();
 
   /**
    * The scheduler used to periodically schedule the poll task for the database notifications.
@@ -89,13 +89,13 @@ public class PostgreSQLNotificationProvider {
    * Listeners that are notified about changes in the notification provider.
    */
   private final ListenerProvider<PostgreSQLNotificationListener> m_listeners =
-      new ListenerProvider<PostgreSQLNotificationListener>();
+      new ListenerProvider<>();
 
   /**
    * Keeps track of all notification providers. One for each database.
    */
   private static Map<SQLProvider, PostgreSQLNotificationProvider> m_notificationProviders =
-      new HashMap<SQLProvider, PostgreSQLNotificationProvider>();
+      new HashMap<>();
 
   /**
    * Connects this notification provider to a specific connection.
@@ -297,7 +297,7 @@ public class PostgreSQLNotificationProvider {
 
   private class CNotificationQueuePoller implements Runnable {
     private final Set<NotificationChannel> m_currentListenedChannels =
-        new HashSet<NotificationChannel>();
+        new HashSet<>();
 
     public CNotificationQueuePoller() {}
 

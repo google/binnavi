@@ -73,7 +73,7 @@ public final class AddressSpace implements ApiObject<INaviAddressSpace> {
    * Listeners that are notified about changes in the address space.
    */
   private final ListenerProvider<IAddressSpaceListener> m_listeners =
-      new ListenerProvider<IAddressSpaceListener>();
+      new ListenerProvider<>();
 
   /**
    * Keeps the API address space object synchronized with the internal address space object.

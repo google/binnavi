@@ -38,7 +38,7 @@ public final class CDatabaseDebuggerContainer implements IDebuggerContainer {
   /**
    * Listener wrappers that are notified about events in the debugger.
    */
-  private final List<ListenerWrapper> m_wrappers = new ArrayList<ListenerWrapper>();
+  private final List<ListenerWrapper> m_wrappers = new ArrayList<>();
 
   /**
    * Creates a new container object.

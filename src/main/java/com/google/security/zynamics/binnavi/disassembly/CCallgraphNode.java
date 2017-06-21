@@ -32,12 +32,12 @@ public final class CCallgraphNode implements ICallgraphNode {
   /**
    * Parents of the Call graph node in the Call graph it belongs to.
    */
-  private final List<ICallgraphNode> m_parents = new ArrayList<ICallgraphNode>();
+  private final List<ICallgraphNode> m_parents = new ArrayList<>();
 
   /**
    * Children of the Call graph node in the Call graph it belongs to.
    */
-  private final List<ICallgraphNode> m_children = new ArrayList<ICallgraphNode>();
+  private final List<ICallgraphNode> m_children = new ArrayList<>();
 
   /**
    * Creates a new Call graph node object.

@@ -63,7 +63,7 @@ public class NodeCache {
     }
   }
 
-  private static Map<SQLProvider, NodeCache> caches = new HashMap<SQLProvider, NodeCache>();
+  private static Map<SQLProvider, NodeCache> caches = new HashMap<>();
 
   Cache<Integer, INaviViewNode> nodeByIdCache = CacheBuilder.newBuilder().weakValues().build();
   Cache<NodeIdentifier, List<Integer>> addressModuleIdNodeIdsCache =

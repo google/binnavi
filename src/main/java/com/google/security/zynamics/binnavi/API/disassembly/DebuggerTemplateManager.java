@@ -45,7 +45,7 @@ public final class DebuggerTemplateManager {
    * Listeners that are notified about changes in the debugger template manager.
    */
   private final ListenerProvider<IDebuggerTemplateManagerListener> m_listeners =
-      new ListenerProvider<IDebuggerTemplateManagerListener>();
+      new ListenerProvider<>();
 
   /**
    * Keeps the API debugger template object synchronized with the internal debugger template object.

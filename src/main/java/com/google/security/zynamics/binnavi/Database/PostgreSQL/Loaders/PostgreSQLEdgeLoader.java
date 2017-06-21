@@ -92,7 +92,7 @@ public final class PostgreSQLEdgeLoader {
       throws CouldntLoadDataException {
     final String query = "SELECT * FROM load_view_edges(" + view.getConfiguration().getId() + ")";
 
-    List<CBend> currentPaths = new ArrayList<CBend>();
+    List<CBend> currentPaths = new ArrayList<>();
     final Map<Integer, INaviEdge> commentIdToEdge = new HashMap<Integer, INaviEdge>();
     final Map<Integer, INaviEdge> edgeIdToEdge = new HashMap<Integer, INaviEdge>();
 

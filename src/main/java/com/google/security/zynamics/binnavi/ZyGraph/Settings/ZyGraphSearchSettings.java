@@ -54,7 +54,7 @@ public final class ZyGraphSearchSettings {
    * Listeners that are notified about changes in the graph settings.
    */
   private final ListenerProvider<IZyGraphSearchSettingsListener> m_listeners =
-      new ListenerProvider<IZyGraphSearchSettingsListener>();
+      new ListenerProvider<>();
 
   /**
    * Creates a new settings object backed by graph settings from the configuration file.

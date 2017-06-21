@@ -74,7 +74,7 @@ public final class CIdbSelectionDialog extends JDialog {
   /**
    * Files selected by the user for importing.
    */
-  private final IFilledList<File> m_selectedFiles = new FilledList<File>();
+  private final IFilledList<File> m_selectedFiles = new FilledList<>();
 
   /**
    * Used to navigate through the available drives.

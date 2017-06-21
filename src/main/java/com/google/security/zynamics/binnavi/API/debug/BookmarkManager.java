@@ -42,13 +42,13 @@ public final class BookmarkManager {
   /**
    * Bookmarks managed by this manager.
    */
-  private final List<Bookmark> m_bookmarks = new ArrayList<Bookmark>();
+  private final List<Bookmark> m_bookmarks = new ArrayList<>();
 
   /**
    * Listeners that are notified about changes in the bookmark manager.
    */
   private final ListenerProvider<IBookmarkManagerListener> m_listeners =
-      new ListenerProvider<IBookmarkManagerListener>();
+      new ListenerProvider<>();
 
   /**
    * Keeps the API bookmark manager synchronized with the internal bookmark manager.

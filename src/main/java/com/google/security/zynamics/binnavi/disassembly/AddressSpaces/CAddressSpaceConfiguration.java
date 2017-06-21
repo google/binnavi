@@ -37,7 +37,7 @@ public final class CAddressSpaceConfiguration {
    * Listeners that are notified about changes in the address space.
    */
   private final ListenerProvider<IAddressSpaceConfigurationListener> m_listeners =
-      new ListenerProvider<IAddressSpaceConfigurationListener>();
+      new ListenerProvider<>();
 
   /**
    * The address space the configuration belongs to.

@@ -74,14 +74,14 @@ public class EdgeCache {
     }
   }
 
-  private static Map<SQLProvider, EdgeCache> caches = new HashMap<SQLProvider, EdgeCache>();
+  private static Map<SQLProvider, EdgeCache> caches = new HashMap<>();
 
   /**
    * The edges by id cache stores weak values of the actual edges to evict them from the cache when
    * no further references exist which reference them.
    * https://code.google.com/p/guava-libraries/wiki/CachesExplained
    */
-  Cache<Integer, INaviEdge> edgesByIdCache = CacheBuilder.newBuilder().weakValues().build();
+   Cache<Integer, INaviEdge> edgesByIdCache = CacheBuilder.newBuilder().weakValues().build();
 
   /**
    * The edge address to edge id cache is stores a list of the edge ids. This cache can in the
@@ -89,7 +89,7 @@ public class EdgeCache {
    * node ids. Therefore we are leaking memory here. An alternative approach here would be to do the
    * evictions manually.
    */
-  Cache<EdgeIdentifier, List<Integer>> edgeAddressToEdgeIdsCache =
+   Cache<EdgeIdentifier, List<Integer>> edgeAddressToEdgeIdsCache =
       CacheBuilder.newBuilder().build();
 
   private SQLProvider provider;

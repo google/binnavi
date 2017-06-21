@@ -65,7 +65,7 @@ public final class CGraphWindow extends JFrame implements IGraphContainerWindow 
    * Listeners that are notified about opening and closing graph tabs.
    */
   private final ListenerProvider<IGraphWindowListener> m_graphPanelListener =
-      new ListenerProvider<IGraphWindowListener>();
+      new ListenerProvider<>();
 
   /**
    * Listener that updates the window when something in a view changed.

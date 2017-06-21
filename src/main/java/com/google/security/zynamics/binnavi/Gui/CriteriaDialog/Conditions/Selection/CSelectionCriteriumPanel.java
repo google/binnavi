@@ -36,7 +36,7 @@ public final class CSelectionCriteriumPanel extends JPanel {
   /**
    * Allows the user to select the selection state.
    */
-  private final JComboBox<SelectionState> selectionStateBox = new JComboBox<SelectionState>();
+  private final JComboBox<SelectionState> selectionStateBox = new JComboBox<>();
 
   /**
    * Updates the GUI on user input.

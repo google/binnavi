@@ -36,13 +36,13 @@ public final class CCriteriumCache {
    * Cached trees for later reuse.
    */
   private final IFilledList<CCachedExpressionTree> m_trees =
-      new FilledList<CCachedExpressionTree>();
+      new FilledList<>();
 
   /**
    * Listeners that are notified about changed in the criterium cache.
    */
   private final ListenerProvider<ICriteriumCacheListener> m_listeners =
-      new ListenerProvider<ICriteriumCacheListener>();
+      new ListenerProvider<>();
 
   /**
    * Adds a new expression tree to the cache.

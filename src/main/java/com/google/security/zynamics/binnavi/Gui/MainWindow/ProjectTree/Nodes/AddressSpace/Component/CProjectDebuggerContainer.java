@@ -38,7 +38,7 @@ public final class CProjectDebuggerContainer implements IDebuggerContainer {
   /**
    * Listeners notified about changes in the project.
    */
-  private final List<IProjectListener> m_wrappers = new ArrayList<IProjectListener>();
+  private final List<IProjectListener> m_wrappers = new ArrayList<>();
 
   /**
    * Creates a new container object.

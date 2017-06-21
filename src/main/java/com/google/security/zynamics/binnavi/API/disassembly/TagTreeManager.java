@@ -46,7 +46,7 @@ public final class TagTreeManager {
   /**
    * Keeps track of all internal tag objects and their corresponding API objects.
    */
-  private final Map<ITreeNode<CTag>, Tag> m_allTags = new HashMap<ITreeNode<CTag>, Tag>();
+  private final Map<ITreeNode<CTag>, Tag> m_allTags = new HashMap<>();
 
   /**
    * Listener that forwards events of the internal tag manager to the API tag manager.
@@ -57,7 +57,7 @@ public final class TagTreeManager {
    * Listeners that are notified about changes in the API tag manager object.
    */
   private final ListenerProvider<ITagTreeManagerListener> m_listeners =
-      new ListenerProvider<ITagTreeManagerListener>();
+      new ListenerProvider<>();
 
   // / @cond INTERNAL
   /**

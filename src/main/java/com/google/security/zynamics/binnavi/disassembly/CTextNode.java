@@ -44,7 +44,7 @@ public final class CTextNode extends CNaviViewNode implements INaviTextNode {
    * Listeners that are notified about changes in the text node.
    */
   private final ListenerProvider<INaviTextNodeListener> m_listeners =
-      new ListenerProvider<INaviTextNodeListener>();
+      new ListenerProvider<>();
 
 
   /**

@@ -29,7 +29,7 @@ public final class CCriteriumTree implements IAbstractCriteriumTree {
    * Listeners that are notified about changes in the criterium tree.
    */
   private final ListenerProvider<ICriteriumTreeListener> m_listeners =
-      new ListenerProvider<ICriteriumTreeListener>();
+      new ListenerProvider<>();
 
   /**
    * Root node of the criterium tree.

@@ -51,7 +51,7 @@ public final class GraphSearcher {
   /**
    * List of current search results.
    */
-  private final List<SearchResult> m_results = new ArrayList<SearchResult>();
+  private final List<SearchResult> m_results = new ArrayList<>();
 
   /**
    * Flag that indicates whether search options changed in a way that makes a new search necessary.

@@ -35,13 +35,13 @@ public final class CGlobalProgressManager {
   /**
    * Managed operations.
    */
-  private final List<IProgressOperation> m_operations = new ArrayList<IProgressOperation>();
+  private final List<IProgressOperation> m_operations = new ArrayList<>();
 
   /**
    * Listeners that are notified about changes in the manager.
    */
   private final ListenerProvider<IGlobalProgressManagerListener> m_listeners =
-      new ListenerProvider<IGlobalProgressManagerListener>();
+      new ListenerProvider<>();
 
   /**
    * Private constructor because this class is a singleton.

@@ -46,7 +46,7 @@ public final class CFunctionFilterDialog extends JDialog {
    * Listeners that are notified about changes in the dialog options.
    */
   private final ListenerProvider<IFilterDialogListener> m_listeners =
-      new ListenerProvider<IFilterDialogListener>();
+      new ListenerProvider<>();
 
   /**
    * Creates a new function filter dialog.

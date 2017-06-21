@@ -32,13 +32,13 @@ public final class CCodeBookmarkManager implements Iterable<CCodeBookmark> {
   /**
    * List of managed code bookmarks.
    */
-  private final List<CCodeBookmark> m_bookmarks = new ArrayList<CCodeBookmark>();
+  private final List<CCodeBookmark> m_bookmarks = new ArrayList<>();
 
   /**
    * Listener objects that are notified about changes in the code bookmark manager.
    */
   private final ListenerProvider<ICodeBookmarkManagerListener> m_listeners =
-      new ListenerProvider<ICodeBookmarkManagerListener>();
+      new ListenerProvider<>();
 
   /**
    * Adds a new code bookmark to the code bookmark manager.

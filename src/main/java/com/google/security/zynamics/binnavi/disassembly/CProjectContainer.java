@@ -78,7 +78,7 @@ public final class CProjectContainer implements IViewContainer {
    * Listeners that are notified about changes in the view container.
    */
   private final ListenerProvider<IViewContainerListener> m_listeners =
-      new ListenerProvider<IViewContainerListener>();
+      new ListenerProvider<>();
 
   /**
    * Forwards project events to the view container listeners.
@@ -108,7 +108,7 @@ public final class CProjectContainer implements IViewContainer {
    * The active debuggers for each address space.
    */
   private final Map<INaviAddressSpace, IDebugger> m_activeDebuggers =
-      new HashMap<INaviAddressSpace, IDebugger>();
+      new HashMap<>();
 
   private final IAddressSpaceContentListener m_internalContentListener =
       new InternalAddressSpaceContentListener();

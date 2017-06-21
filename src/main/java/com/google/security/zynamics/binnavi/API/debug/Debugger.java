@@ -114,7 +114,7 @@ public final class Debugger implements ApiObject<IDebugger> {
    * Listeners that are notified about changes in the debugger.
    */
   private final ListenerProvider<IDebuggerListener> m_listeners =
-      new ListenerProvider<IDebuggerListener>();
+      new ListenerProvider<>();
 
   // / @cond INTERNAL
   /**

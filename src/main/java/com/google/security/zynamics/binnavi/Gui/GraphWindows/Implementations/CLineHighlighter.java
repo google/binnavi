@@ -35,7 +35,7 @@ public final class CLineHighlighter {
   /**
    * List of instructions in the current graph which are highlighted.
    */
-  private final Set<IInstruction> m_highlightedInstructions = new HashSet<IInstruction>();
+  private final Set<IInstruction> m_highlightedInstructions = new HashSet<>();
 
   /**
    * Highlights or unhighlights a line in a code node.

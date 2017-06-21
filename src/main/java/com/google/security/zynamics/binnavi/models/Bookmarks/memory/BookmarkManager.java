@@ -34,13 +34,13 @@ public final class BookmarkManager implements Iterable<CBookmark> {
   /**
    * List of currently active bookmarks.
    */
-  private final List<CBookmark> m_bookmarks = new ArrayList<CBookmark>();
+  private final List<CBookmark> m_bookmarks = new ArrayList<>();
 
   /**
    * Listeners that want to be informed about status changes in the bookmark manager.
    */
   private final ListenerProvider<IBookmarkManagerListener> m_listeners =
-      new ListenerProvider<IBookmarkManagerListener>();
+      new ListenerProvider<>();
 
   /**
    * Adds a bookmark to the list of active bookmarks.

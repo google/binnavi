@@ -57,7 +57,7 @@ public final class ZyGraphEdgeSettings {
    * Listeners that are notified about changes in the graph settings.
    */
   private final ListenerProvider<IZyGraphEdgeSettingsListener> listeners =
-      new ListenerProvider<IZyGraphEdgeSettingsListener>();
+      new ListenerProvider<>();
 
   /**
    * Creates a new settings object backed by graph settings from the configuration file.

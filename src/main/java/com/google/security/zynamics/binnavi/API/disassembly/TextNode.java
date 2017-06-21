@@ -44,7 +44,7 @@ public final class TextNode extends ViewNode {
    * Listeners that are notified about changes in the text node.
    */
   private final ListenerProvider<ITextNodeListener> m_listeners =
-      new ListenerProvider<ITextNodeListener>();
+      new ListenerProvider<>();
 
   /**
    * Keeps the API text node object synchronized with the internal text node object.

@@ -45,7 +45,7 @@ public final class Bookmark implements ApiObject<CBookmark> {
    * Listeners that are notified about changes in the bookmark.
    */
   private final ListenerProvider<IBookmarkListener> m_listeners =
-      new ListenerProvider<IBookmarkListener>();
+      new ListenerProvider<>();
 
   /**
    * Creates a new API bookmark object.

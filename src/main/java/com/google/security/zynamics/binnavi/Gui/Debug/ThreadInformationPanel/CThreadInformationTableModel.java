@@ -53,7 +53,7 @@ public class CThreadInformationTableModel extends AbstractTableModel {
   /**
    * Threads currently shown in the table.
    */
-  private final List<TargetProcessThread> m_threads = new ArrayList<TargetProcessThread>();
+  private final List<TargetProcessThread> m_threads = new ArrayList<>();
 
   /**
    * Updates the table on changes to the thread.

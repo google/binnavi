@@ -33,7 +33,7 @@ public final class CCircularPanel extends CAbstractSettingsPanel {
   /**
    * Used to select the concrete circular layout style.
    */
-  private final JComboBox<String> m_cbCircularLayoutStyle = new JComboBox<String>();
+  private final JComboBox<String> m_cbCircularLayoutStyle = new JComboBox<>();
 
   /**
    * Used to select the minimum distance between nodes.

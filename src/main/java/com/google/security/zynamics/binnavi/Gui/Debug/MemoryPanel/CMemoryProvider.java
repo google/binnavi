@@ -48,7 +48,7 @@ public final class CMemoryProvider implements IDataProvider, IMemoryListener {
    * Listeners that are notified about changes in the available memory data.
    */
   private final ListenerProvider<IDataChangedListener> m_listeners =
-      new ListenerProvider<IDataChangedListener>();
+      new ListenerProvider<>();
 
   /**
    * Debugger from which the memory is read.

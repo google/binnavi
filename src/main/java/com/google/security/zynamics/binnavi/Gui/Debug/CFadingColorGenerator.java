@@ -29,7 +29,7 @@ public class CFadingColorGenerator<T> {
   /**
    * Objects and their fade color.
    */
-  private final Map<T, Color> m_objects = new HashMap<T, Color>();
+  private final Map<T, Color> m_objects = new HashMap<>();
 
   /**
    * Returns the color to be used to display a given object.

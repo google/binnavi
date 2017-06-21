@@ -66,7 +66,7 @@ public final class TypeInstanceContainer {
    * Stores a mapping of the internal {@link TypeInstanceAddress} to its {@link TypeInstance}.
    */
   private final TreeMap<TypeInstanceAddress, TypeInstance> instancesByAddress =
-      new TreeMap<TypeInstanceAddress, TypeInstance>();
+      new TreeMap<>();
 
   /**
    * The {@link TypeInstanceContainerBackend} used to store and retrieve {@link TypeInstance}
@@ -78,7 +78,7 @@ public final class TypeInstanceContainer {
    * The listener which is informed of changes in the {@link TypeInstanceContainer}.
    */
   private final ListenerProvider<TypeInstanceContainerListener> listeners =
-      new ListenerProvider<TypeInstanceContainerListener>();
+      new ListenerProvider<>();
 
   /**
    * Creates a new {@link TypeInstanceContainer}. Only the {@link TypeInstance} are loaded in this

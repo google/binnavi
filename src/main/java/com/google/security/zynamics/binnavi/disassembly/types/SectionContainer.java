@@ -39,7 +39,7 @@ public class SectionContainer {
   /**
    * A {@link Map} for fast lookup of section id to {@link Section}.
    */
-  private final Map<Integer, Section> sectionsById = new HashMap<Integer, Section>();
+  private final Map<Integer, Section> sectionsById = new HashMap<>();
 
   /**
    * The {@link SectionContainerBackend} used to access the database with.

@@ -119,7 +119,7 @@ public final class CDebuggerChooserPanel extends JPanel {
    * Listeners that are notified about changes in the debugger configuration.
    */
   private final ListenerProvider<IDebuggerChooserPanelListener> m_listeners =
-      new ListenerProvider<IDebuggerChooserPanelListener>();
+      new ListenerProvider<>();
 
   /**
    * Creates a new panel object.

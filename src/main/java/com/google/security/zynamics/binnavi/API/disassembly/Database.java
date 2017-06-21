@@ -56,12 +56,12 @@ public final class Database implements ApiObject<IDatabase> {
   /**
    * Modules stored in the database.
    */
-  private final List<Module> m_modules = new ArrayList<Module>();
+  private final List<Module> m_modules = new ArrayList<>();
 
   /**
    * Projects stored in the database.
    */
-  private final List<Project> m_projects = new ArrayList<Project>();
+  private final List<Project> m_projects = new ArrayList<>();
 
   /**
    * View tag manager of the database.
@@ -82,7 +82,7 @@ public final class Database implements ApiObject<IDatabase> {
    * Listeners that are notified about changes in the database.
    */
   private final ListenerProvider<IDatabaseListener> m_listeners =
-      new ListenerProvider<IDatabaseListener>();
+      new ListenerProvider<>();
 
   /**
    * Keeps the API database object synchronized with the internal database object.

@@ -98,7 +98,7 @@ public final class CViewGraphSynchronizer {
    * Listeners that are notified about changes in the graph.
    */
   private final ListenerProvider<INaviGraphListener> m_listeners =
-      new ListenerProvider<INaviGraphListener>();
+      new ListenerProvider<>();
 
   /**
    * Synchronizes the visible edges with relevant edge visibility events.
@@ -126,7 +126,7 @@ public final class CViewGraphSynchronizer {
    * TODO: Remove listeners again if count drops to 0.
    */
   private final Map<INaviModule, Integer> m_cachedModuleListeners =
-      new HashMap<INaviModule, Integer>();
+      new HashMap<>();
 
   /**
    * Used to synchronize relevant changes in modules with graph nodes.
@@ -138,7 +138,7 @@ public final class CViewGraphSynchronizer {
    *
    * TODO: Remove listeners again if count drops to 0.
    */
-  private final Map<CTag, Integer> m_cachedTagListeners = new HashMap<CTag, Integer>();
+  private final Map<CTag, Integer> m_cachedTagListeners = new HashMap<>();
 
   /**
    * Synchronizes relevant changes in tags with the visible nodes.
@@ -148,7 +148,7 @@ public final class CViewGraphSynchronizer {
   /**
    * Keeps track of the currently selected nodes.
    */
-  private final Set<NaviNode> m_selectedNodes = new HashSet<NaviNode>();
+  private final Set<NaviNode> m_selectedNodes = new HashSet<>();
 
   /**
    * Creates a new object that synchronizes between a raw view and a visible graph.

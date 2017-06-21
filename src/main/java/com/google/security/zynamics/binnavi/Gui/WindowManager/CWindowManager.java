@@ -43,12 +43,12 @@ public final class CWindowManager implements Iterable<CGraphWindow> {
    * Listeners notified about changes in graph windows.
    */
   private final ListenerProvider<IWindowManagerListener> m_listeners =
-      new ListenerProvider<IWindowManagerListener>();
+      new ListenerProvider<>();
 
   /**
    * Open graph windows.
    */
-  private final List<CGraphWindow> m_graphs = new ArrayList<CGraphWindow>();
+  private final List<CGraphWindow> m_graphs = new ArrayList<>();
 
   /**
    * Used to synchronize the window manager with the open graph windows.

@@ -41,7 +41,7 @@ public final class CGraphSearchResultsCursor {
   /**
    * List of current search results, pruned to one search result per result object.
    */
-  private final List<SearchResult> m_reducedResults = new ArrayList<SearchResult>();
+  private final List<SearchResult> m_reducedResults = new ArrayList<>();
 
   /**
    * List of unfiltered current results.
