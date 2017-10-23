@@ -76,7 +76,7 @@ public final class CGraphPanelSynchronizer {
   /**
    * Extension objects that add menu items to the context menu of code nodes.
    */
-  private final List<ICodeNodeExtension> m_codeNodeExtensions = new ArrayList<ICodeNodeExtension>();
+  private final List<ICodeNodeExtension> m_codeNodeExtensions = new ArrayList<>();
 
   /**
    * Creates a new synchronizer object.

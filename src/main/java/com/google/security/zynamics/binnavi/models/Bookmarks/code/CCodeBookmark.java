@@ -45,7 +45,7 @@ public final class CCodeBookmark {
    * Listeners that are notified about changes in the code bookmark.
    */
   private final ListenerProvider<ICodeBookmarkListener> m_listeners =
-      new ListenerProvider<ICodeBookmarkListener>();
+      new ListenerProvider<>();
 
   /**
    * Creates a new code bookmark.

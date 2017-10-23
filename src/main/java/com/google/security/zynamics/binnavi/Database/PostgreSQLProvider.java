@@ -109,7 +109,7 @@ public class PostgreSQLProvider extends AbstractSQLProvider {
    * listeners} which want to get informed about changes in the provider.
    */
   private final ListenerProvider<SQLProviderListener> listeners =
-      new ListenerProvider<SQLProviderListener>();
+      new ListenerProvider<>();
 
   /**
    * Determines whether a column with a given name exists in a given table.

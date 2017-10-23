@@ -38,7 +38,7 @@ import javax.swing.JScrollPane;
  */
 public class CExceptionSettingsPanel extends JPanel {
   private final Map<JComboBox<String>, DebuggerException> m_comboboxMap =
-      new HashMap<JComboBox<String>, DebuggerException>();
+      new HashMap<>();
 
   public CExceptionSettingsPanel(final DebuggerOptions options) {
     super(new BorderLayout());

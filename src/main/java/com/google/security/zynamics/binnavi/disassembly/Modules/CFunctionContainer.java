@@ -47,7 +47,7 @@ public final class CFunctionContainer {
   /**
    * Address => Function map for fast lookup of functions by address.
    */
-  private final Map<IAddress, INaviFunction> m_functionMap = new HashMap<IAddress, INaviFunction>();
+  private final Map<IAddress, INaviFunction> m_functionMap = new HashMap<>();
 
   /**
    * The functions of the module.

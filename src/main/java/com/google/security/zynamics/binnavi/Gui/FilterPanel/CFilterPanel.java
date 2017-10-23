@@ -58,7 +58,7 @@ public final class CFilterPanel<T> extends JPanel {
    * Listeners that are notified about changes in the filter.
    */
   private final ListenerProvider<IFilterPanelListener<T>> m_listeners =
-      new ListenerProvider<IFilterPanelListener<T>>();
+      new ListenerProvider<>();
 
   /**
    * Creates the filter from the user input.

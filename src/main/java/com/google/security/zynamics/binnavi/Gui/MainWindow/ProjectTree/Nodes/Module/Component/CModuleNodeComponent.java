@@ -124,7 +124,7 @@ public final class CModuleNodeComponent extends CAbstractNodeComponent {
   private final IModuleListener internalModuleListener = new InternalModuleListener();
 
   private static final Map<INaviModule, CModuleNodeComponent> lookup =
-      new HashMap<INaviModule, CModuleNodeComponent>();
+      new HashMap<>();
 
   /**
    * Creates a new component object.

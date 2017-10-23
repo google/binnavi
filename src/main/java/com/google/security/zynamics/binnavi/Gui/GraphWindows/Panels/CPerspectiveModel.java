@@ -32,13 +32,13 @@ public final class CPerspectiveModel {
    * Listeners that are notified about changes in the active perspective.
    */
   private final ListenerProvider<IPerspectiveModelListener> m_listeners =
-      new ListenerProvider<IPerspectiveModelListener>();
+      new ListenerProvider<>();
 
   /**
    * Models for the individual perspectives.
    */
   private final Map<PerspectiveType, Object> m_models =
-      new EnumMap<PerspectiveType, Object>(PerspectiveType.class);
+      new EnumMap<>(PerspectiveType.class);
 
   /**
    * Creates a new perspective model.

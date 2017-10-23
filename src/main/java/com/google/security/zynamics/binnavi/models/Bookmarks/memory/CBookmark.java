@@ -40,7 +40,7 @@ public final class CBookmark {
    * Listeners that are notified about changes in the bookmarks.
    */
   private final ListenerProvider<IBookmarkListener> m_listeners =
-      new ListenerProvider<IBookmarkListener>();
+      new ListenerProvider<>();
 
   /**
    * Creates a new bookmark object.

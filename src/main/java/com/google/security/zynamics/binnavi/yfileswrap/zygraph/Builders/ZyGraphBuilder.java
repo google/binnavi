@@ -47,19 +47,19 @@ public final class ZyGraphBuilder {
    * YNode -> NaviNode mapping of the created nodes
    */
   private final LinkedHashMap<Node, NaviNode> m_ynodeToNodeMap =
-      new LinkedHashMap<Node, NaviNode>();
+      new LinkedHashMap<>();
 
   /**
    * YEdge -> NaviEdge mapping of the created edges
    */
   private final LinkedHashMap<Edge, NaviEdge> m_yedgeToEdgeMap =
-      new LinkedHashMap<Edge, NaviEdge>();
+      new LinkedHashMap<>();
 
   /**
    * Listeners that are notified about the progress of graph creation.
    */
   private final ListenerProvider<IGraphBuilderListener> m_listeners =
-      new ListenerProvider<IGraphBuilderListener>();
+      new ListenerProvider<>();
 
   /**
    * Reports graph building events to listeners.

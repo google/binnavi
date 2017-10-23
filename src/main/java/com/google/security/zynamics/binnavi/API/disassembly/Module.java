@@ -109,7 +109,7 @@ public class Module implements ApiObject<INaviModule>, ViewContainer {
    * Listeners that are notified about changes in the module.
    */
   private final ListenerProvider<IModuleListener> m_listeners =
-      new ListenerProvider<IModuleListener>();
+      new ListenerProvider<>();
 
   /**
    * Keeps the API module object synchronized with the internal module object.
@@ -120,7 +120,7 @@ public class Module implements ApiObject<INaviModule>, ViewContainer {
    * For performance reasons we keep a map between internal function objects and API function
    * objects.
    */
-  private final Map<INaviFunction, Function> m_functionMap = new HashMap<INaviFunction, Function>();
+  private final Map<INaviFunction, Function> m_functionMap = new HashMap<>();
 
   private final ITraceContainerListener m_traceListener = new InternalTraceListener();
 

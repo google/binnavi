@@ -36,12 +36,12 @@ public final class ReilBlock implements IGraphNode<ReilBlock>, Iterable<ReilInst
   /**
    * Parent blocks of the block.
    */
-  private final List<ReilBlock> m_parents = new ArrayList<ReilBlock>();
+  private final List<ReilBlock> m_parents = new ArrayList<>();
 
   /**
    * Children of the block.
    */
-  private final List<ReilBlock> m_children = new ArrayList<ReilBlock>();
+  private final List<ReilBlock> m_children = new ArrayList<>();
 
   // / @cond INTERNAL
   /**

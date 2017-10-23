@@ -54,7 +54,7 @@ public final class CTagTreeManager implements IDatabaseObject, ITagTreeManager {
    * List of listeners that are notified about changes in the tag manager.
    */
   private final ListenerProvider<ITagTreeManagerListener> m_listeners =
-      new ListenerProvider<ITagTreeManagerListener>();
+      new ListenerProvider<>();
 
   /**
    * Creates a new tag manager object.

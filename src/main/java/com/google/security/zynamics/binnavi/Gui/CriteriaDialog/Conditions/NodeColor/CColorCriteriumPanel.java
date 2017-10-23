@@ -63,7 +63,7 @@ public final class CColorCriteriumPanel extends JPanel {
   /**
    * Color panels for all colors of a graph.
    */
-  private final List<ColorPanel> m_colorPanels = new ArrayList<ColorPanel>();
+  private final List<ColorPanel> m_colorPanels = new ArrayList<>();
 
   /**
    * Updates the GUI on user input.

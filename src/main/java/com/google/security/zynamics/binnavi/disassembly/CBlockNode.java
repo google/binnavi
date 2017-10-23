@@ -33,17 +33,17 @@ public final class CBlockNode implements IBlockNode {
   /**
    * Parents of the block node in the function it belongs to.
    */
-  private final List<IBlockNode> m_parents = new ArrayList<IBlockNode>();
+  private final List<IBlockNode> m_parents = new ArrayList<>();
 
   /**
    * Children of the block node in the function it belongs to.
    */
-  private final List<IBlockNode> m_children = new ArrayList<IBlockNode>();
+  private final List<IBlockNode> m_children = new ArrayList<>();
 
   /**
    * The edges that lead from the block node to its children.
    */
-  private final List<CFunctionEdge> m_outgoingEdges = new ArrayList<CFunctionEdge>();
+  private final List<CFunctionEdge> m_outgoingEdges = new ArrayList<>();
 
   /**
    * Creates a new block node object.

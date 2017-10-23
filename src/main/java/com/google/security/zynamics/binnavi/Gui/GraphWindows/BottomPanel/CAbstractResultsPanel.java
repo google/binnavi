@@ -38,7 +38,7 @@ public abstract class CAbstractResultsPanel extends JPanel implements IResultsPa
    * Listeners that are notified about changes in the results panel.
    */
   private final ListenerProvider<IResultsPanelListener> m_listeners =
-      new ListenerProvider<IResultsPanelListener>();
+      new ListenerProvider<>();
 
   /**
    * Creates a new panel object.

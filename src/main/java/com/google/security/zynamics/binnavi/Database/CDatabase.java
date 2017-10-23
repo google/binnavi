@@ -75,7 +75,7 @@ public final class CDatabase implements IDatabase, IDatabaseObject {
    * The list of listeners that are notified about changes in the database.
    */
   private final ListenerProvider<IDatabaseListener> listeners =
-      new ListenerProvider<IDatabaseListener>();
+      new ListenerProvider<>();
 
   /**
    * The SQL provider that is used to communicate with the database. If the database is not

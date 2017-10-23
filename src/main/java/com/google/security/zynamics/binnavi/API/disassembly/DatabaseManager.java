@@ -43,13 +43,13 @@ public final class DatabaseManager implements Iterable<Database>, ApiObject<IDat
   /**
    * Managed databases.
    */
-  private final List<Database> m_databases = new ArrayList<Database>();
+  private final List<Database> m_databases = new ArrayList<>();
 
   /**
    * Listeners that are notified about changes in the database manager.
    */
   private final ListenerProvider<IDatabaseManagerListener> m_listeners =
-      new ListenerProvider<IDatabaseManagerListener>();
+      new ListenerProvider<>();
 
   /**
    * Keeps the API database manager object synchronized with the internal database manager object.

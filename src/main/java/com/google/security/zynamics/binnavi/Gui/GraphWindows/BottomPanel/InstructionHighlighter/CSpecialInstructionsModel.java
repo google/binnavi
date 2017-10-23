@@ -30,18 +30,18 @@ public final class CSpecialInstructionsModel {
   /**
    * List of special instructions found in the search.
    */
-  private final List<CSpecialInstruction> m_instructions = new ArrayList<CSpecialInstruction>();
+  private final List<CSpecialInstruction> m_instructions = new ArrayList<>();
 
   /**
    * Listeners that are notified about changes in the model.
    */
   private final ListenerProvider<ISpecialInstructionsModelListener> m_listeners =
-      new ListenerProvider<ISpecialInstructionsModelListener>();
+      new ListenerProvider<>();
 
   /**
    * List of available special instruction descriptions.
    */
-  private final List<ITypeDescription> m_descriptions = new ArrayList<ITypeDescription>();
+  private final List<ITypeDescription> m_descriptions = new ArrayList<>();
 
   /**
    * Creates a new model object.

@@ -51,13 +51,13 @@ public final class CodeNode extends ViewNode {
   /**
    * Instructions of the code node.
    */
-  private final List<Instruction> m_instructions = new ArrayList<Instruction>();
+  private final List<Instruction> m_instructions = new ArrayList<>();
 
   /**
    * Listeners that are notified about changes in the code node.
    */
   private final ListenerProvider<ICodeNodeListener> m_listeners =
-      new ListenerProvider<ICodeNodeListener>();
+      new ListenerProvider<>();
 
   /**
    * Keeps the API code node synchronized with the internal code node.
@@ -68,7 +68,7 @@ public final class CodeNode extends ViewNode {
    * REIL translator used to translate the code node to REIL.
    */
   private final ReilTranslator<INaviInstruction> m_translator =
-      new ReilTranslator<INaviInstruction>();
+      new ReilTranslator<>();
 
   /**
    * REIL graph of the code node.
@@ -217,7 +217,7 @@ public final class CodeNode extends ViewNode {
       throws com.google.security.zynamics.binnavi.API.disassembly.CouldntSaveDataException,
       com.google.security.zynamics.binnavi.API.disassembly.CouldntLoadDataException {
 
-    List<IComment> currentComments = new ArrayList<IComment>();
+    List<IComment> currentComments = new ArrayList<>();
 
     try {
       currentComments = m_node.getComments().appendLocalCodeNodeComment(comment);

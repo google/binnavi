@@ -33,7 +33,7 @@ public final class CCriteriumTreeNode implements ICriteriumTreeNode {
   /**
    * Children of the node.
    */
-  private final List<CCriteriumTreeNode> m_children = new ArrayList<CCriteriumTreeNode>();
+  private final List<CCriteriumTreeNode> m_children = new ArrayList<>();
 
   /**
    * Criterium represented by this node.

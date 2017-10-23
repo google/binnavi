@@ -39,13 +39,13 @@ public final class ZyGraphBuilderManager {
    * Currently active builders.
    */
   private final Map<INaviView, ZyGraphBuilder> m_builders =
-      new HashMap<INaviView, ZyGraphBuilder>();
+      new HashMap<>();
 
   /**
    * Listeners that are notified about changes in the managed builders.
    */
   private final ListenerProvider<IGraphBuilderManagerListener> m_listeners =
-      new ListenerProvider<IGraphBuilderManagerListener>();
+      new ListenerProvider<>();
 
   /**
    * Private constructor => Singleton.

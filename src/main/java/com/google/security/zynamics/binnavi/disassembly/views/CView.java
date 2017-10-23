@@ -74,7 +74,7 @@ public final class CView implements INaviView, ICallgraphView, IFlowgraphView {
    * List of listeners that are notified about changes in the view.
    */
   private final ListenerProvider<INaviViewListener> m_listeners =
-      new ListenerProvider<INaviViewListener>();
+      new ListenerProvider<>();
 
   /**
    * The number of basic blocks in the view. This variable is only used until the view is loaded.

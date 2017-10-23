@@ -50,7 +50,7 @@ public final class CProject implements INaviProject {
    * List of listeners that are notified about changes in the project.
    */
   private final ListenerProvider<IProjectListener> m_listeners =
-      new ListenerProvider<IProjectListener>();
+      new ListenerProvider<>();
 
   /**
    * Number of address spaces in the project. This variable is only used until the project is

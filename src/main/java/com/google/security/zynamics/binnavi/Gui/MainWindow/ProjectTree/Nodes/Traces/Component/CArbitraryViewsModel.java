@@ -84,7 +84,7 @@ public final class CArbitraryViewsModel extends CAbstractTreeViewsTableModel {
   /**
    * Views shown in the table.
    */
-  private final IFilledList<INaviView> m_views = new FilledList<INaviView>();
+  private final IFilledList<INaviView> m_views = new FilledList<>();
 
   @Override
   public void delete() {

@@ -40,7 +40,7 @@ public final class ThreadRegisterValues implements Iterable<Register> {
   /**
    * Register values of the thread.
    */
-  private final List<Register> m_values = new ArrayList<Register>();
+  private final List<Register> m_values = new ArrayList<>();
 
   /**
    * Creates a new thread register values object.

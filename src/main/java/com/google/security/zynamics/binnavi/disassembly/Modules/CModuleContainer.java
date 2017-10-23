@@ -66,7 +66,7 @@ public final class CModuleContainer implements IViewContainer {
    * Listeners that are notified about changes in the view container.
    */
   private final ListenerProvider<IViewContainerListener> m_listeners =
-      new ListenerProvider<IViewContainerListener>();
+      new ListenerProvider<>();
 
   /**
    * Forwards module events to the view container listeners.

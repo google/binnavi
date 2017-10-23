@@ -40,7 +40,7 @@ public final class CGraphWindowHotkeyTableModel extends AbstractTableModel {
   /**
    * Data shown in the table.
    */
-  private static final ArrayList<Object[]> hotKeys = new ArrayList<Object[]>();
+  private static final ArrayList<Object[]> hotKeys = new ArrayList<>();
 
   /**
    * Splits a title string into two cells.

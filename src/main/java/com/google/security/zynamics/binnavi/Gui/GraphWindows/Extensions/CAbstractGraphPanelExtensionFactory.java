@@ -27,7 +27,7 @@ public final class CAbstractGraphPanelExtensionFactory {
    * List of registered extension creator objects.
    */
   private static final List<IGraphPanelExtensionCreator> m_creators =
-      new ArrayList<IGraphPanelExtensionCreator>();
+      new ArrayList<>();
 
   /**
    * You are not supposed to instantiate this class.

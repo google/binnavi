@@ -28,7 +28,7 @@ public abstract class CAbstractReplacement implements INaviReplacement {
    * Listeners that are notified about changes in the operand.
    */
   private final ListenerProvider<INaviReplacementListener> m_listeners =
-      new ListenerProvider<INaviReplacementListener>();
+      new ListenerProvider<>();
 
   /**
    * Notifies all listeners that the replacement changed.

@@ -36,14 +36,14 @@ public final class CRegisterProvider implements IRegisterModel {
    * client.
    */
   private final ListenerProvider<IRegistersChangedListener> reglisteners =
-      new ListenerProvider<IRegistersChangedListener>();
+      new ListenerProvider<>();
 
   /**
    * Listeners that are notified about changes in the register values that come from user input in
    * the GUI.
    */
   private final ListenerProvider<IDataEnteredListener> enterlisteners =
-      new ListenerProvider<IDataEnteredListener>();
+      new ListenerProvider<>();
 
   /**
    * Register information that is currently displayed in the register view.

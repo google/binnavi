@@ -33,12 +33,12 @@ public final class FunctionBlock implements IGraphNode<FunctionBlock> {
   /**
    * Children of the block in the graph where the block resides.
    */
-  private final List<FunctionBlock> m_children = new ArrayList<FunctionBlock>();
+  private final List<FunctionBlock> m_children = new ArrayList<>();
 
   /**
    * Parents of the block in the graph where the block resides.
    */
-  private final List<FunctionBlock> m_parents = new ArrayList<FunctionBlock>();
+  private final List<FunctionBlock> m_parents = new ArrayList<>();
 
   // / @cond INTERNAL
   /**

@@ -47,7 +47,7 @@ public final class OperandExpression implements ApiObject<INaviOperandTreeNode> 
   /**
    * Child nodes of the operand expression.
    */
-  private final List<OperandExpression> m_children = new ArrayList<OperandExpression>();
+  private final List<OperandExpression> m_children = new ArrayList<>();
 
   /**
    * Parent node of the operand expression.
@@ -57,7 +57,7 @@ public final class OperandExpression implements ApiObject<INaviOperandTreeNode> 
   /**
    * Outgoing references of the operand expression.
    */
-  private final List<Reference> m_references = new ArrayList<Reference>();
+  private final List<Reference> m_references = new ArrayList<>();
 
   /**
    * Keeps the API operand expression object synchronized with the internal operand expression
@@ -70,7 +70,7 @@ public final class OperandExpression implements ApiObject<INaviOperandTreeNode> 
    * Listeners that are notified about changes in the operand expression.
    */
   private final ListenerProvider<IOperandExpressionListener> m_listeners =
-      new ListenerProvider<IOperandExpressionListener>();
+      new ListenerProvider<>();
 
   // / @cond INTERNAL
   /**

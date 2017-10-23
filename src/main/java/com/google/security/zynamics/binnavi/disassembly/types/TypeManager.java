@@ -67,9 +67,9 @@ public class TypeManager {
 
   private final TypesContainer typesContainer;
   private final ListenerProvider<TypeChangedListener> typeListeners =
-      new ListenerProvider<TypeChangedListener>();
+      new ListenerProvider<>();
   private final ListenerProvider<TypeSubstitutionChangedListener> substitutionListeners =
-      new ListenerProvider<TypeSubstitutionChangedListener>();
+      new ListenerProvider<>();
   private final TypeManagerBackend backend;
 
   /**
@@ -1180,13 +1180,13 @@ public class TypeManager {
   }
 
   private final class TypesContainer {
-    private final Set<BaseType> types = new LinkedHashSet<BaseType>();
-    private final Map<String, BaseType> typesByName = new HashMap<String, BaseType>();
-    private final Map<Integer, BaseType> typesById = new HashMap<Integer, BaseType>();
-    private final ArrayList<BaseType> stableTypeList = new ArrayList<BaseType>();
+    private final Set<BaseType> types = new LinkedHashSet<>();
+    private final Map<String, BaseType> typesByName = new HashMap<>();
+    private final Map<Integer, BaseType> typesById = new HashMap<>();
+    private final ArrayList<BaseType> stableTypeList = new ArrayList<>();
     private final HashMultimap<BaseType, TypeSubstitution> substitutionsByType =
         HashMultimap.create();
-    private final Map<Integer, TypeMember> memberById = new HashMap<Integer, TypeMember>();
+    private final Map<Integer, TypeMember> memberById = new HashMap<>();
     private final TypeDependenceGraph dependenceGraph;
 
     public TypesContainer(final List<RawBaseType> rawBaseTypes,

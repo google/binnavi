@@ -77,7 +77,7 @@ public final class CMemoryViewerSynchronizer {
    * Listeners that are notified about changes in the memory viewer synchronizer.
    */
   private final ListenerProvider<IMemoryViewerSynchronizerListener> m_listeners =
-      new ListenerProvider<IMemoryViewerSynchronizerListener>();
+      new ListenerProvider<>();
 
   /**
    * Synchronizes the debug perspective model with the hex viewer.

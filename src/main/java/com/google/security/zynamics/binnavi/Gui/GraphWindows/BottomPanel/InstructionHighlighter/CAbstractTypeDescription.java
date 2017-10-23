@@ -45,7 +45,7 @@ public abstract class CAbstractTypeDescription implements ITypeDescription {
    * Listeners that are notified about changes in the description.
    */
   private final ListenerProvider<ITypeDescriptionListener> m_listeners =
-      new ListenerProvider<ITypeDescriptionListener>();
+      new ListenerProvider<>();
 
   /**
    * Creates a new description object.

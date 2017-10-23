@@ -44,7 +44,7 @@ public final class ViewEdge extends DefaultEdge<ViewNode> implements ApiObject<I
    * Listeners that are notified about changes in the edge.
    */
   private final ListenerProvider<IViewEdgeListener> m_listeners =
-      new ListenerProvider<IViewEdgeListener>();
+      new ListenerProvider<>();
 
   // / @cond INTERNAL
   /**
