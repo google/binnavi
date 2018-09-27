@@ -82,7 +82,7 @@ public class TreeHelpers {
     expandAll(tree, new TreePath(root), expand);
   }
 
-  // the functions getExpansionState(...) and restoreExpanstionState(...)
+  // the functions getExpansionState(...) and restoreExpansionState(...)
   // can be used to keep the JTree expansion state when subtree folders were
   // moved by drag and drop see the example an the web site mentioned below
   // Swing: Retaining JTree Expansion State
