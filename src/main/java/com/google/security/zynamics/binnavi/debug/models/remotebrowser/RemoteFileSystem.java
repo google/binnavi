@@ -28,6 +28,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.xml.XMLConstants;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
@@ -146,6 +147,7 @@ public final class RemoteFileSystem {
     final List<RemoteDirectory> directories = new ArrayList<>();
     final List<RemoteFile> files = new ArrayList<>();
     final DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+    factory.setFeature(XMLConstants.FEATURE_SECURE_PROCESSING, true);
     final DocumentBuilder builder = factory.newDocumentBuilder();
     final Document document = builder.parse(new ByteArrayInputStream(data, 0, data.length));
     final NodeList nodes = document.getFirstChild().getChildNodes();
