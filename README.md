@@ -118,7 +118,7 @@ in the near future.
 
 ## Building BinNavi with Gradle
 
-*Please note that at current the Maven build is the authorative build system for BinNavi. 
+*Please note that at current the Maven build is the authoritative build system for BinNavi. 
 Gradle is purely experimental and is likely to change.*
 
 You can build BinNavi with gradle by running the following:
