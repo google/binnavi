@@ -18,8 +18,6 @@ package com.google.security.zynamics.zylib.general;
 import java.awt.Color;
 import java.awt.event.KeyEvent;
 
-import javax.xml.bind.DatatypeConverter;
-
 import com.google.common.base.CharMatcher;
 import com.google.common.base.Preconditions;
 
@@ -131,7 +129,13 @@ public final class Convert {
    * @return The converted byte array.
    */
   public static byte[] hexStringToBytes(final String hexString) {
-    return DatatypeConverter.parseHexBinary(hexString);
+    byte[] val = new byte[hexString.length() / 2];
+    for (int i = 0; i < val.length; i++) {
+      int index = i * 2;
+      int j = Integer.parseInt(hexString.substring(index, index + 2), 16);
+      val[i] = (byte) j;
+    }
+    return val;
   }
 
   /**

@@ -117,7 +117,10 @@ public final class CModuleContainerNode extends CProjectTreeNode<Object> {
   @SuppressWarnings("unchecked")
   @Override
   public TreeNode getChildAt(final int index) {
-    final ArrayList<CModuleNode> sortedChildren = new ArrayList<CModuleNode>(children);
+	final ArrayList<CModuleNode> sortedChildren = new ArrayList<CModuleNode>();
+	for (TreeNode node : children) {
+		sortedChildren.add((CModuleNode)node);
+	}    
 
     if (sortByName) {
       Collections.sort(sortedChildren, new Comparator<CModuleNode>() {
