@@ -15,13 +15,13 @@
   <path id="binnavi.class.path">
     <fileset id="binnavi.build.jars" dir="${project.dir}/target/dependency">
       <include name="antlr-runtime-3.2.jar"/>
-      <include name="batik-awt-util-1.8.jar"/>
-      <include name="batik-css-1.8.jar"/>
-      <include name="batik-dom-1.8.jar"/>
-      <include name="batik-ext-1.8.jar"/>
-      <include name="batik-svggen-1.8.jar"/>
-      <include name="batik-util-1.8.jar"/>
-      <include name="batik-xml-1.8.jar"/>
+      <include name="batik-awt-util-1.12.jar"/>
+      <include name="batik-css-1.12.jar"/>
+      <include name="batik-dom-1.12.jar"/>
+      <include name="batik-ext-1.12.jar"/>
+      <include name="batik-svggen-1.12.jar"/>
+      <include name="batik-util-1.12.jar"/>
+      <include name="batik-xml-1.12.jar"/>
       <include name="javax.inject-1.jar"/>
       <include name="jide-oss-3.6.9.jar"/>
       <include name="jython-standalone-2.5.3.jar"/>
