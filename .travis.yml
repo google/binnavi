@@ -1,7 +1,7 @@
+dist: bionic
+
 jdk:
   - openjdk11
-
-sudo: false
 
 script:
   - mvn dependency:copy-dependencies
