@@ -10,6 +10,8 @@
   <property name="staging.dir" location="${out.dir}/staging"/>
   <property name="resources.dir" location="${build.dir}/com/google/security/zynamics/binnavi/data"/>
   <property name="zynamics.dir" location="${project.dir}/src/main/java/com/google/security/zynamics"/>
+  <property name="ant.build.javac.source" value="11"/>
+  <property name="ant.build.javac.target" value="11"/>
 
   <!-- Path and fileset definitions needed for the targets below -->
   <path id="binnavi.class.path">
