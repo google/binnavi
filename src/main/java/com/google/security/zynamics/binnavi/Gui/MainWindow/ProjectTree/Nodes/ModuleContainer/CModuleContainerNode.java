@@ -17,15 +17,6 @@ package com.google.security.zynamics.binnavi.Gui.MainWindow.ProjectTree.Nodes.Mo
 
 
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-
-import javax.swing.Icon;
-import javax.swing.ImageIcon;
-import javax.swing.JTree;
-import javax.swing.tree.TreeNode;
-
 import com.google.common.base.Preconditions;
 import com.google.security.zynamics.binnavi.CMain;
 import com.google.security.zynamics.binnavi.Database.CDatabaseListenerAdapter;
@@ -37,6 +28,13 @@ import com.google.security.zynamics.binnavi.Gui.MainWindow.ProjectTree.Nodes.Mod
 import com.google.security.zynamics.binnavi.Gui.MainWindow.ProjectTree.Nodes.ModuleContainer.Component.CModuleContainerComponent;
 import com.google.security.zynamics.binnavi.disassembly.INaviModule;
 import com.google.security.zynamics.binnavi.disassembly.Modules.CModuleContainer;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
+import javax.swing.JTree;
+import javax.swing.tree.TreeNode;
 
 /**
  * Represents module container nodes in the project tree.
@@ -117,10 +115,10 @@ public final class CModuleContainerNode extends CProjectTreeNode<Object> {
   @SuppressWarnings("unchecked")
   @Override
   public TreeNode getChildAt(final int index) {
-	final ArrayList<CModuleNode> sortedChildren = new ArrayList<CModuleNode>();
-	for (TreeNode node : children) {
-		sortedChildren.add((CModuleNode)node);
-	}    
+    final ArrayList<CModuleNode> sortedChildren = new ArrayList<>();
+    for (TreeNode node : children) {
+      sortedChildren.add((CModuleNode) node);
+    }
 
     if (sortByName) {
       Collections.sort(sortedChildren, new Comparator<CModuleNode>() {
