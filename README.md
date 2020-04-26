@@ -9,7 +9,10 @@ navigate, edit, and annotate control-flow-graphs of disassembled code, do the
 same for the callgraph of the executable, collect and combine execution traces,
 and generally keep track of analysis results among a group of analysts.
 
-## Complications from a third-party dependency
+**Note: The BinNavi project is no longer under active development.**
+
+
+## Commercial third-party dependency
 
 BinNavi uses a commercial third-party graph visualisation library (yFiles) for
 displaying and laying out graphs. This library is immensely powerful, and not
